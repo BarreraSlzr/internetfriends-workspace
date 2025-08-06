@@ -1,0 +1,29 @@
+{
+  "name": "@internetfriends/workspace",
+  "version": "1.0.0", 
+  "description": "InternetFriends Production Workspace - Bun + TypeScript + Zod + Next.js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "cd production-landing && bun run dev",
+    "build": "cd production-landing && bun run build",
+    "start": "cd production-landing && bun run start", 
+    "lint": "cd production-landing && bun run lint",
+    "test": "cd production-landing && bun run test",
+    "test:playwright": "cd production-landing && bun run test:playwright",
+    "typecheck": "cd production-landing && bun run typecheck",
+    "deploy:staging": "cd production-landing && vercel",
+    "deploy:prod": "cd production-landing && vercel --prod",
+    "debug:browser": "cd production-landing && bun run debug:browser",
+    "debug:hotreload": "cd production-landing && bun run debug:hotreload",
+    "schema:validate": "cd production-landing && bun run schema:validate",
+    "setup": "bun install && cd production-landing && bun install",
+    "clean": "rm -rf production-landing/node_modules production-landing/.next"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "bun": ">=1.2.0"
+  }
+}

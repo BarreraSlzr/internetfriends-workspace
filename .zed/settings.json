@@ -1,0 +1,47 @@
+{
+  "assistant": {
+    "default_model": {
+      "provider": "openai",
+      "model": "qwen-3-coder-32b-instruct"
+    },
+    "version": "2"
+  },
+  "language_models": {
+    "openai": {
+      "version": "1",
+      "api_url": "https://api.cerebras.ai/v1",
+      "available_models": [
+        {
+          "name": "qwen-3-coder-32b-instruct",
+          "display_name": "Qwen 3 Coder 32B (Cerebras)",
+          "max_tokens": 131000
+        }
+      ]
+    }
+  },
+  "auto_save": "on_focus_change",
+  "format_on_save": "on",
+  "tab_size": 2,
+  "hard_tabs": false,
+  "show_whitespaces": "selection",
+  "terminal": {
+    "shell": {
+      "program": "/bin/zsh"
+    }
+  },
+  "git": {
+    "inline_blame": {
+      "enabled": true
+    }
+  },
+  "languages": {
+    "TypeScript": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "JavaScript": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    }
+  }
+}
