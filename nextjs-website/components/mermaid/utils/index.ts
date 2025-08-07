@@ -42,32 +42,34 @@ export function extractDiagramTitle(code: string, index: number): string {
   }
 
   // Try to get diagram type from first line
-  const firstLine = code.split('\n')[0].trim();
-  const typeMatch = firstLine.match(/^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|gantt|pie|journey|erDiagram|gitgraph|requirement)/i);
+  const firstLine = code.split("\n")[0].trim();
+  const typeMatch = firstLine.match(
+    /^(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|gantt|pie|journey|erDiagram|gitgraph|requirement)/i,
+  );
 
   if (typeMatch) {
     const type = typeMatch[1];
     switch (type.toLowerCase()) {
-      case 'graph':
-      case 'flowchart':
+      case "graph":
+      case "flowchart":
         return `Flowchart ${index + 1}`;
-      case 'sequencediagram':
+      case "sequencediagram":
         return `Sequence Diagram ${index + 1}`;
-      case 'classdiagram':
+      case "classdiagram":
         return `Class Diagram ${index + 1}`;
-      case 'statediagram':
+      case "statediagram":
         return `State Diagram ${index + 1}`;
-      case 'gantt':
+      case "gantt":
         return `Gantt Chart ${index + 1}`;
-      case 'pie':
+      case "pie":
         return `Pie Chart ${index + 1}`;
-      case 'journey':
+      case "journey":
         return `User Journey ${index + 1}`;
-      case 'erdiagram':
+      case "erdiagram":
         return `ER Diagram ${index + 1}`;
-      case 'gitgraph':
+      case "gitgraph":
         return `Git Graph ${index + 1}`;
-      case 'requirement':
+      case "requirement":
         return `Requirement Diagram ${index + 1}`;
       default:
         return `${type} Diagram ${index + 1}`;
@@ -87,7 +89,7 @@ export function processMermaidMarkdown(content: string): {
   const diagrams = extractMermaidDiagrams(content);
 
   // Remove Mermaid blocks from content
-  const processedContent = content.replace(/```mermaid\n[\s\S]*?\n```/g, '');
+  const processedContent = content.replace(/```mermaid\n[\s\S]*?\n```/g, "");
 
   return {
     processedContent,
@@ -105,26 +107,39 @@ export function validateMermaidSyntax(code: string): {
   const errors: string[] = [];
 
   if (!code || code.trim().length === 0) {
-    errors.push('Diagram code is empty');
+    errors.push("Diagram code is empty");
     return { isValid: false, errors };
   }
 
-  const lines = code.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+  const lines = code
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
 
   if (lines.length === 0) {
-    errors.push('No valid diagram content found');
+    errors.push("No valid diagram content found");
     return { isValid: false, errors };
   }
 
   const firstLine = lines[0];
   const supportedTypes = [
-    'graph', 'flowchart', 'sequenceDiagram', 'classDiagram',
-    'stateDiagram', 'gantt', 'pie', 'journey', 'erDiagram',
-    'gitgraph', 'requirement', 'mindmap', 'timeline'
+    "graph",
+    "flowchart",
+    "sequenceDiagram",
+    "classDiagram",
+    "stateDiagram",
+    "gantt",
+    "pie",
+    "journey",
+    "erDiagram",
+    "gitgraph",
+    "requirement",
+    "mindmap",
+    "timeline",
   ];
 
-  const hasValidType = supportedTypes.some(type =>
-    firstLine.toLowerCase().startsWith(type.toLowerCase())
+  const hasValidType = supportedTypes.some((type) =>
+    firstLine.toLowerCase().startsWith(type.toLowerCase()),
   );
 
   if (!hasValidType) {
@@ -140,17 +155,17 @@ export function validateMermaidSyntax(code: string): {
 /**
  * Generate Mermaid configuration based on theme
  */
-export function getMermaidConfig(theme: 'light' | 'dark' = 'light') {
+export function getMermaidConfig(theme: "light" | "dark" = "light") {
   const baseConfig = {
     startOnLoad: false,
-    theme: theme === 'dark' ? 'dark' : 'default',
+    theme: (theme === "dark" ? "dark" : "default") as "dark" | "default",
     themeVariables: {
-      fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
-      fontSize: '14px',
+      fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+      fontSize: "14px",
     },
     flowchart: {
       htmlLabels: true,
-      curve: 'basis',
+      curve: "basis",
       padding: 10,
     },
     sequence: {
@@ -171,51 +186,49 @@ export function getMermaidConfig(theme: 'light' | 'dark' = 'light') {
   };
 
   // Theme-specific customizations
-  if (theme === 'dark') {
-    baseConfig.themeVariables = {
+  if (theme === "dark") {
+    (baseConfig.themeVariables as any) = {
       ...baseConfig.themeVariables,
-      primaryColor: '#3b82f6',
-      primaryTextColor: '#ffffff',
-      primaryBorderColor: '#1e40af',
-      lineColor: '#6b7280',
-      secondaryColor: '#1f2937',
-      tertiaryColor: '#374151',
-      background: '#111827',
-      mainBkg: '#1f2937',
-      secondBkg: '#374151',
-      tertiaryBkg: '#4b5563',
+      primaryTextColor: "#ffffff",
+      primaryBorderColor: "#1e40af",
+      lineColor: "#6b7280",
+      secondaryColor: "#1f2937",
+      tertiaryColor: "#374151",
+      background: "#111827",
+      mainBkg: "#1f2937",
+      secondBkg: "#374151",
+      tertiaryBkg: "#4b5563",
     };
   } else {
-    baseConfig.themeVariables = {
+    (baseConfig.themeVariables as any) = {
       ...baseConfig.themeVariables,
-      primaryColor: '#3b82f6',
-      primaryTextColor: '#ffffff',
-      primaryBorderColor: '#1e40af',
-      lineColor: '#d1d5db',
-      secondaryColor: '#f9fafb',
-      tertiaryColor: '#f3f4f6',
-      background: '#ffffff',
-      mainBkg: '#ffffff',
-      secondBkg: '#f9fafb',
-      tertiaryBkg: '#f3f4f6',
+      primaryTextColor: "#ffffff",
+      primaryBorderColor: "#1e40af",
+      lineColor: "#d1d5db",
+      secondaryColor: "#f9fafb",
+      tertiaryColor: "#f3f4f6",
+      background: "#ffffff",
+      mainBkg: "#ffffff",
+      secondBkg: "#f9fafb",
+      tertiaryBkg: "#f3f4f6",
     };
   }
 
-  return baseConfig;
+  return baseConfig as any;
 }
 
 /**
  * Clean and sanitize Mermaid code
  */
 export function sanitizeMermaidCode(code: string): string {
-  if (!code) return '';
+  if (!code) return "";
 
   // Remove potentially dangerous HTML/JS content
   const cleaned = code
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<iframe[^>]*>[\s\S]*?<\/iframe>/gi, '')
-    .replace(/javascript:/gi, '')
-    .replace(/on\w+\s*=/gi, '');
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<iframe[^>]*>[\s\S]*?<\/iframe>/gi, "")
+    .replace(/javascript:/gi, "")
+    .replace(/on\w+\s*=/gi, "");
 
   return cleaned.trim();
 }
@@ -225,21 +238,21 @@ export function sanitizeMermaidCode(code: string): string {
  */
 export function getFileTypeDisplayName(fileType: string): string {
   const typeMap: Record<string, string> = {
-    'markdown': 'Markdown',
-    'md': 'Markdown',
-    'json': 'JSON',
-    'yaml': 'YAML',
-    'yml': 'YAML',
-    'typescript': 'TypeScript',
-    'ts': 'TypeScript',
-    'tsx': 'TSX',
-    'javascript': 'JavaScript',
-    'js': 'JavaScript',
-    'jsx': 'JSX',
-    'text': 'Text',
-    'txt': 'Text',
-    'mermaid': 'Mermaid',
-    'mmd': 'Mermaid',
+    markdown: "Markdown",
+    md: "Markdown",
+    json: "JSON",
+    yaml: "YAML",
+    yml: "YAML",
+    typescript: "TypeScript",
+    ts: "TypeScript",
+    tsx: "TSX",
+    javascript: "JavaScript",
+    js: "JavaScript",
+    jsx: "JSX",
+    text: "Text",
+    txt: "Text",
+    mermaid: "Mermaid",
+    mmd: "Mermaid",
   };
 
   return typeMap[fileType.toLowerCase()] || fileType;
@@ -250,7 +263,7 @@ export function getFileTypeDisplayName(fileType: string): string {
  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number
+  wait: number,
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout;
 
@@ -268,7 +281,7 @@ export function debounce<T extends (...args: any[]) => any>(
 /**
  * Generate a unique ID for diagram instances
  */
-export function generateDiagramId(prefix: string = 'mermaid'): string {
+export function generateDiagramId(prefix: string = "mermaid"): string {
   return `${prefix}-${Math.random().toString(36).substr(2, 9)}-${Date.now()}`;
 }
 
@@ -276,14 +289,14 @@ export function generateDiagramId(prefix: string = 'mermaid'): string {
  * Check if the current environment supports Mermaid
  */
 export function isMermaidSupported(): boolean {
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return false; // Server-side rendering
   }
 
   // Check if the browser supports the features we need
   return !!(
-    window.requestAnimationFrame &&
-    document.querySelector &&
-    document.createElement
+    typeof window.requestAnimationFrame === "function" &&
+    typeof document.querySelector === "function" &&
+    typeof document.createElement === "function"
   );
 }

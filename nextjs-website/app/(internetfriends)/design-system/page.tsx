@@ -289,7 +289,7 @@ function DesignSystemFlow() {
                 <ButtonAtomic size="sm" variant="primary">
                   Primary
                 </ButtonAtomic>
-                <ButtonAtomic size="sm" variant="glass">
+                <ButtonAtomic size="sm" variant="ghost">
                   Glass
                 </ButtonAtomic>
               </div>

@@ -1,9 +1,9 @@
 // InternetFriends Button Component Types
 // Type definitions for the atomic button component
 
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { VariantProps } from 'class-variance-authority';
-import { buttonVariants } from './button.atomic';
+import { ButtonHTMLAttributes, ReactNode } from "react";
+import { VariantProps } from "class-variance-authority";
+import { buttonVariants } from "./button.atomic";
 
 // Base button props extending HTML button attributes
 export interface ButtonAtomicProps
@@ -13,10 +13,10 @@ export interface ButtonAtomicProps
   className?: string;
 
   /** Button variant */
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
 
   /** Button size */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
 
   /** Loading state - shows spinner and disables button */
   loading?: boolean;
@@ -37,10 +37,10 @@ export interface ButtonAtomicProps
   children?: ReactNode;
 
   /** Test identifier for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
 
   /** Button type attribute */
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
 
   /** Click handler */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -62,8 +62,8 @@ export interface ButtonAtomicProps
 }
 
 // Button variant types for external consumption
-export type ButtonVariant = NonNullable<ButtonAtomicProps['variant']>;
-export type ButtonSize = NonNullable<ButtonAtomicProps['size']>;
+export type ButtonVariant = NonNullable<ButtonAtomicProps["variant"]>;
+export type ButtonSize = NonNullable<ButtonAtomicProps["size"]>;
 
 // Button state interface
 export interface ButtonState {
@@ -134,22 +134,30 @@ export interface ButtonTheme {
 // Button accessibility props
 export interface ButtonA11yProps {
   /** ARIA label for screen readers */
-  'aria-label'?: string;
+  "aria-label"?: string;
 
   /** ARIA described by */
-  'aria-describedby'?: string;
+  "aria-describedby"?: string;
 
   /** ARIA pressed state for toggle buttons */
-  'aria-pressed'?: boolean;
+  "aria-pressed"?: boolean;
 
   /** ARIA expanded state for disclosure buttons */
-  'aria-expanded'?: boolean;
+  "aria-expanded"?: boolean;
 
   /** ARIA controls - ID of element controlled by button */
-  'aria-controls'?: string;
+  "aria-controls"?: string;
 
   /** ARIA has popup */
-  'aria-haspopup'?: boolean | 'false' | 'true' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog';
+  "aria-haspopup"?:
+    | boolean
+    | "false"
+    | "true"
+    | "menu"
+    | "listbox"
+    | "tree"
+    | "grid"
+    | "dialog";
 
   /** Role override */
   role?: string;
@@ -159,7 +167,9 @@ export interface ButtonA11yProps {
 }
 
 // Extended button props with accessibility
-export interface ButtonAtomicA11yProps extends ButtonAtomicProps, ButtonA11yProps {}
+export interface ButtonAtomicA11yProps
+  extends Omit<ButtonAtomicProps, "aria-expanded" | "aria-pressed">,
+    ButtonA11yProps {}
 
 // Button group props for when buttons are grouped together
 export interface ButtonGroupProps {
@@ -167,7 +177,7 @@ export interface ButtonGroupProps {
   children: ReactNode;
 
   /** Group orientation */
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
 
   /** Attached buttons (no spacing) */
   attached?: boolean;
@@ -182,7 +192,7 @@ export interface ButtonGroupProps {
   className?: string;
 
   /** Test identifier */
-  'data-testid'?: string;
+  "data-testid"?: string;
 }
 
 // Button configuration for form integration
@@ -208,9 +218,12 @@ export interface ButtonFormConfig {
 
 // Complete button props with all extensions
 export interface ButtonAtomicCompleteProps
-  extends ButtonAtomicProps,
-          ButtonA11yProps,
-          ButtonFormConfig {}
+  extends Omit<
+      ButtonAtomicProps,
+      "aria-expanded" | "aria-pressed" | "formAction"
+    >,
+    ButtonA11yProps,
+    ButtonFormConfig {}
 
 // Button event handlers interface
 export interface ButtonEventHandlers {
@@ -243,36 +256,27 @@ export type ButtonRenderProp = (props: ButtonRenderProps) => ReactNode;
 
 // Type guards
 export const isButtonVariant = (value: string): value is ButtonVariant => {
-  return ['primary', 'secondary', 'outline', 'ghost', 'link'].includes(value);
+  return ["primary", "secondary", "outline", "ghost", "link"].includes(value);
 };
 
 export const isButtonSize = (value: string): value is ButtonSize => {
-  return ['xs', 'sm', 'md', 'lg', 'xl'].includes(value);
+  return ["xs", "sm", "md", "lg", "xl"].includes(value);
 };
 
 // Default props
-export const BUTTON_DEFAULTS: Required<Pick<ButtonAtomicProps, 'variant' | 'size' | 'type' | 'loading' | 'disabled' | 'fullWidth'>> = {
-  variant: 'primary',
-  size: 'md',
-  type: 'button',
+export const BUTTON_DEFAULTS: Required<
+  Pick<
+    ButtonAtomicProps,
+    "variant" | "size" | "type" | "loading" | "disabled" | "fullWidth"
+  >
+> = {
+  variant: "primary",
+  size: "md",
+  type: "button",
   loading: false,
   disabled: false,
   fullWidth: false,
 };
 
-// Export all types
-export type {
-  ButtonAtomicProps as default,
-  ButtonVariant,
-  ButtonSize,
-  ButtonState,
-  ButtonTheme,
-  ButtonA11yProps,
-  ButtonAtomicA11yProps,
-  ButtonGroupProps,
-  ButtonFormConfig,
-  ButtonAtomicCompleteProps,
-  ButtonEventHandlers,
-  ButtonRenderProps,
-  ButtonRenderProp,
-};
+// Export all types - no duplicate exports
+export type { ButtonAtomicProps as default };

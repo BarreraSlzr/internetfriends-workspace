@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Menu, X, ChevronDown } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ButtonAtomic } from '@/components/atomic/button';
-import { HeaderAtomic } from '@/components/atomic/header';
-import { NavigationMolecularProps } from './types';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ButtonAtomic } from "@/components/atomic/button";
+import { HeaderAtomic } from "@/components/atomic/header";
+import { NavigationMolecularProps } from "./types";
 
 export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
   items,
   logo,
   actions,
   className,
-  variant = 'transparent',
-  mobileBreakpoint = 'lg',
+  variant = "transparent",
+  mobileBreakpoint = "lg",
   showMobileToggle = true,
   activeItem,
   onItemClick,
@@ -31,29 +31,29 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   // Close mobile menu on escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         setIsMobileMenuOpen(false);
         setOpenDropdown(null);
       }
     };
 
     if (isMobileMenuOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = '';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
@@ -77,10 +77,10 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
           <button
             onClick={() => toggleDropdown(item.id)}
             className={cn(
-              'flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors duration-200',
-              'hover:text-if-primary focus:outline-none focus:text-if-primary',
-              isActive ? 'text-if-primary' : 'text-foreground',
-              mobile && 'w-full justify-between text-left'
+              "flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors duration-200",
+              "hover:text-if-primary focus:outline-none focus:text-if-primary",
+              isActive ? "text-if-primary" : "text-foreground",
+              mobile && "w-full justify-between text-left",
             )}
             aria-expanded={openDropdown === item.id}
           >
@@ -90,8 +90,8 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
             </span>
             <ChevronDown
               className={cn(
-                'w-4 h-4 transition-transform duration-200',
-                openDropdown === item.id && 'rotate-180'
+                "w-4 h-4 transition-transform duration-200",
+                openDropdown === item.id && "rotate-180",
               )}
             />
           </button>
@@ -100,8 +100,9 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
           {openDropdown === item.id && (
             <div
               className={cn(
-                'absolute top-full left-0 mt-1 min-w-[200px] bg-glass-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-glass z-50',
-                mobile && 'relative top-0 mt-2 shadow-none border-l-2 border-l-if-primary bg-transparent ml-4'
+                "absolute top-full left-0 mt-1 min-w-[200px] bg-glass-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-glass z-50",
+                mobile &&
+                  "relative top-0 mt-2 shadow-none border-l-2 border-l-if-primary bg-transparent ml-4",
               )}
             >
               {item.children.map((child: any) => (
@@ -110,9 +111,9 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
                   href={child.href}
                   onClick={() => handleItemClick(child)}
                   className={cn(
-                    'block px-4 py-2 text-sm text-foreground hover:bg-if-primary-light hover:text-if-primary transition-colors duration-200',
-                    'first:rounded-t-compact-md last:rounded-b-compact-md',
-                    child.disabled && 'opacity-50 cursor-not-allowed'
+                    "block px-4 py-2 text-sm text-foreground hover:bg-if-primary-light hover:text-if-primary transition-colors duration-200",
+                    "first:rounded-t-compact-md last:rounded-b-compact-md",
+                    child.disabled && "opacity-50 cursor-not-allowed",
                   )}
                 >
                   <div className="flex items-center gap-2">
@@ -143,14 +144,14 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
         href={item.href}
         onClick={() => handleItemClick(item)}
         className={cn(
-          'flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200',
-          'hover:text-if-primary focus-dashed',
-          isActive ? 'text-if-primary' : 'text-foreground',
-          item.disabled && 'opacity-50 cursor-not-allowed',
-          mobile && 'w-full'
+          "flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200",
+          "hover:text-if-primary focus-dashed",
+          isActive ? "text-if-primary" : "text-foreground",
+          item.disabled && "opacity-50 cursor-not-allowed",
+          mobile && "w-full",
         )}
-        target={item.external ? '_blank' : undefined}
-        rel={item.external ? 'noopener noreferrer' : undefined}
+        target={item.external ? "_blank" : undefined}
+        rel={item.external ? "noopener noreferrer" : undefined}
       >
         {item.icon && <item.icon className="w-4 h-4" />}
         <span>{item.label}</span>
@@ -165,30 +166,30 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
 
   return (
     <HeaderAtomic
-      transparent={variant === 'transparent'}
-      className={cn('navigation-molecular', className)}
+      transparent={variant === "transparent"}
+      className={cn("navigation-molecular", className)}
       {...props}
     >
       {/* Logo */}
       <div className="flex items-center">
         {logo && (
           <Link
-            href={logo.href || '/'}
+            href={logo.href || "/"}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity focus-dashed"
             onClick={() => logo.onClick?.()}
           >
             {logo.src ? (
               <img
                 src={logo.src}
-                alt={logo.alt || 'Logo'}
+                alt={logo.alt || "Logo"}
                 width={logo.width || 32}
                 height={logo.height || 32}
-                className={cn('object-contain', logo.className)}
+                className={cn("object-contain", logo.className)}
               />
             ) : (
               <div className="w-8 h-8 bg-if-primary rounded-compact-sm flex items-center justify-center">
                 <span className="text-white font-bold text-sm">
-                  {logo.text?.[0] || 'L'}
+                  {logo.text?.[0] || "L"}
                 </span>
               </div>
             )}
@@ -203,14 +204,11 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
 
       {/* Desktop Navigation */}
       <nav
-        className={cn(
-          'hidden items-center space-x-1',
-          {
-            'lg:flex': mobileBreakpoint === 'lg',
-            'md:flex': mobileBreakpoint === 'md',
-            'sm:flex': mobileBreakpoint === 'sm',
-          }
-        )}
+        className={cn("hidden items-center space-x-1", {
+          "lg:flex": mobileBreakpoint === "lg",
+          "md:flex": mobileBreakpoint === "md",
+          "sm:flex": mobileBreakpoint === "sm",
+        })}
       >
         {items.map((item) => renderNavigationItem(item))}
       </nav>
@@ -220,14 +218,11 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
         {/* Desktop Actions */}
         {actions && (
           <div
-            className={cn(
-              'hidden items-center gap-2',
-              {
-                'lg:flex': mobileBreakpoint === 'lg',
-                'md:flex': mobileBreakpoint === 'md',
-                'sm:flex': mobileBreakpoint === 'sm',
-              }
-            )}
+            className={cn("hidden items-center gap-2", {
+              "lg:flex": mobileBreakpoint === "lg",
+              "md:flex": mobileBreakpoint === "md",
+              "sm:flex": mobileBreakpoint === "sm",
+            })}
           >
             {actions}
           </div>
@@ -237,17 +232,14 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
         {showMobileToggle && (
           <ButtonAtomic
             variant="ghost"
-            size="icon"
-            className={cn(
-              'flex',
-              {
-                'lg:hidden': mobileBreakpoint === 'lg',
-                'md:hidden': mobileBreakpoint === 'md',
-                'sm:hidden': mobileBreakpoint === 'sm',
-              }
-            )}
+            size="sm"
+            className={cn("flex", {
+              "lg:hidden": mobileBreakpoint === "lg",
+              "md:hidden": mobileBreakpoint === "md",
+              "sm:hidden": mobileBreakpoint === "sm",
+            })}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? (
               <X className="w-5 h-5" />
@@ -274,7 +266,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
                   {logo?.src ? (
                     <img
                       src={logo.src}
-                      alt={logo.alt || 'Logo'}
+                      alt={logo.alt || "Logo"}
                       width={24}
                       height={24}
                       className="object-contain"
@@ -282,17 +274,17 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
                   ) : (
                     <div className="w-6 h-6 bg-if-primary rounded-compact-sm flex items-center justify-center">
                       <span className="text-white font-bold text-xs">
-                        {logo?.text?.[0] || 'L'}
+                        {logo?.text?.[0] || "L"}
                       </span>
                     </div>
                   )}
                   <span className="font-medium text-foreground">
-                    {logo?.text || 'Menu'}
+                    {logo?.text || "Menu"}
                   </span>
                 </div>
                 <ButtonAtomic
                   variant="ghost"
-                  size="icon"
+                  size="sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="w-8 h-8"
                 >
@@ -308,9 +300,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
               {/* Mobile Actions */}
               {actions && (
                 <div className="p-4 border-t border-glass-border">
-                  <div className="space-y-2">
-                    {actions}
-                  </div>
+                  <div className="space-y-2">{actions}</div>
                 </div>
               )}
             </div>
@@ -321,4 +311,4 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
   );
 };
 
-NavigationMolecular.displayName = 'NavigationMolecular';
+NavigationMolecular.displayName = "NavigationMolecular";

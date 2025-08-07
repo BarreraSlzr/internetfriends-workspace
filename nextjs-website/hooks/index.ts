@@ -4,12 +4,7 @@
 import React from "react";
 
 // Theme hooks (currently implemented)
-export {
-  useTheme,
-  useColorScheme,
-  useThemeClassName,
-  useThemeStyles,
-} from "./use-theme";
+export { useTheme } from "./use-theme";
 
 // Export hook types
 export type { UseThemeReturn, UseColorSchemeReturn } from "../types/theme";
@@ -79,7 +74,7 @@ export const useStableCallback = <T extends (...args: any[]) => any>(
 };
 
 export const useConstant = <T>(fn: () => T): T => {
-  const ref = React.useRef<{ value: T }>();
+  const ref = React.useRef<{ value: T } | undefined>(undefined);
 
   if (!ref.current) {
     ref.current = { value: fn() };

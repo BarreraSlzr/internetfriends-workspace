@@ -1,11 +1,11 @@
 // InternetFriends Theme System Types
 // Comprehensive type definitions for the theme system and design tokens
 
-import { COLORS, DESIGN_TOKENS } from '../constants';
+import { COLORS, DESIGN_TOKENS } from "../constants";
 
 // Base theme types
-export type ThemeMode = 'light' | 'dark' | 'system';
-export type ColorScheme = 'light' | 'dark';
+export type ThemeMode = "light" | "dark" | "system";
+export type ColorScheme = "light" | "dark";
 
 // Theme configuration interface
 export interface ThemeConfig {
@@ -104,10 +104,10 @@ export interface Typography {
     base: string;
     lg: string;
     xl: string;
-    '2xl': string;
-    '3xl': string;
-    '4xl': string;
-    '5xl': string;
+    "2xl": string;
+    "3xl": string;
+    "4xl": string;
+    "5xl": string;
   };
 
   /** Font weights */
@@ -136,23 +136,23 @@ export interface Typography {
 
 // Spacing system types
 export interface Spacing {
-  xs: string;    // 4px
-  sm: string;    // 8px
-  md: string;    // 12px
-  lg: string;    // 16px
-  xl: string;    // 20px
-  '2xl': string; // 24px
-  '3xl': string; // 32px
-  '4xl': string; // 40px
-  '5xl': string; // 48px
+  xs: string; // 4px
+  sm: string; // 8px
+  md: string; // 12px
+  lg: string; // 16px
+  xl: string; // 20px
+  "2xl": string; // 24px
+  "3xl": string; // 32px
+  "4xl": string; // 40px
+  "5xl": string; // 48px
 }
 
 // Border radius system
 export interface BorderRadius {
-  xs: string;   // 4px - Ultra compact
-  sm: string;   // 6px - Small compact
-  md: string;   // 8px - Medium compact
-  lg: string;   // 12px - Large (max for backgrounds)
+  xs: string; // 4px - Ultra compact
+  sm: string; // 6px - Small compact
+  md: string; // 8px - Medium compact
+  lg: string; // 12px - Large (max for backgrounds)
 }
 
 // Shadow system types
@@ -229,7 +229,7 @@ export interface Breakpoints {
   md: string;
   lg: string;
   xl: string;
-  '2xl': string;
+  "2xl": string;
 }
 
 // Complete theme tokens interface
@@ -383,7 +383,10 @@ export interface ThemeUtils {
   /** Convert theme tokens to CSS custom properties */
   toCSSProperties: (tokens: ThemeTokens) => CSSCustomProperties;
   /** Get responsive value for current breakpoint */
-  getResponsiveValue: <T>(value: T | Record<string, T>, breakpoint: string) => T;
+  getResponsiveValue: <T>(
+    value: T | Record<string, T>,
+    breakpoint: string,
+  ) => T;
   /** Create theme-aware class name */
   createClassName: (base: string, variants?: Record<string, boolean>) => string;
   /** Generate color variations */
@@ -407,7 +410,10 @@ export interface ThemeProviderProps {
 }
 
 // Hook return types
-export interface UseThemeReturn extends ThemeContextValue {}
+export interface UseThemeReturn extends ThemeContextValue {
+  /** Whether the theme has been mounted on the client */
+  mounted: boolean;
+}
 
 export interface UseColorSchemeReturn {
   /** Current color scheme */
@@ -528,11 +534,11 @@ export type BreakpointKey = keyof Breakpoints;
 
 // Type guards
 export const isThemeMode = (value: string): value is ThemeMode => {
-  return ['light', 'dark', 'system'].includes(value);
+  return ["light", "dark", "system"].includes(value);
 };
 
 export const isColorScheme = (value: string): value is ColorScheme => {
-  return ['light', 'dark'].includes(value);
+  return ["light", "dark"].includes(value);
 };
 
 // Theme constants types
