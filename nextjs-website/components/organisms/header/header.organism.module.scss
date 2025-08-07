@@ -1,8 +1,7 @@
 // InternetFriends Header Organism Styles
 // SCSS module for comprehensive site header component
 
-@use '../../../styles/design-tokens' as tokens;
-@use '../../../styles/mixins' as mixins;
+@use "../../../styles/mixins" as mixins;
 
 .headerOrganism {
   // Base header styles
@@ -72,7 +71,7 @@
   }
 
   // Responsive layout adaptations
-  @include mixins.breakpoint-down('md') {
+  @include mixins.breakpoint-down("md") {
     --header-height: 3.5rem; // Smaller on mobile
   }
 }
@@ -113,7 +112,7 @@
   padding: 0 var(--container-padding, 1rem);
   height: 100%;
 
-  @include mixins.breakpoint-up('lg') {
+  @include mixins.breakpoint-up("lg") {
     padding: 0 var(--container-padding-lg, 2rem);
   }
 }
@@ -133,7 +132,7 @@
     flex: 1;
     justify-content: center;
 
-    @include mixins.breakpoint-down('lg') {
+    @include mixins.breakpoint-down("lg") {
       display: none; // Hide center nav on mobile
     }
   }
@@ -188,7 +187,7 @@
     font-weight: 600;
     color: var(--color-text-primary);
 
-    @include mixins.breakpoint-down('sm') {
+    @include mixins.breakpoint-down("sm") {
       display: none; // Hide text on very small screens
     }
   }
@@ -339,14 +338,14 @@
 
     // Hide desktop-only actions on mobile
     &.desktopOnly {
-      @include mixins.breakpoint-down('lg') {
+      @include mixins.breakpoint-down("lg") {
         display: none;
       }
     }
 
     // Hide mobile-only actions on desktop
     &.mobileOnly {
-      @include mixins.breakpoint-up('lg') {
+      @include mixins.breakpoint-up("lg") {
         display: none;
       }
     }
@@ -361,7 +360,7 @@
     width: 20rem;
     max-width: 100%;
 
-    @include mixins.breakpoint-down('md') {
+    @include mixins.breakpoint-down("md") {
       width: 100%;
     }
   }
@@ -449,7 +448,7 @@
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
 
-  @include mixins.breakpoint-up('lg') {
+  @include mixins.breakpoint-up("lg") {
     display: none;
   }
 }

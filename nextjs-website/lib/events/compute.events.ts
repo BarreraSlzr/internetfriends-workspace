@@ -67,8 +67,8 @@ export const ComputeJobSchema = z.object({
   type: ComputeJobTypeSchema,
   priority: JobPrioritySchema.default("normal"),
   status: JobStatusSchema.default("pending"),
-  payload: z.record(z.any()).optional(),
-  requiredResources: z.record(ResourceTypeSchema, z.number()).optional(),
+  payload: z.record(z.string(), z.any()).optional(),
+  requiredResources: z.record(z.string(), z.number()).optional(),
   maxRetries: z.number().default(3),
   timeoutMs: z.number().default(30000),
   createdAt: z.date(),
@@ -78,7 +78,7 @@ export const ComputeJobSchema = z.object({
   sessionId: z.string().optional(),
   correlationId: z.string().optional(),
   tags: z.array(z.string()).optional(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
 });
 
 export type ComputeJob = z.infer<typeof ComputeJobSchema>;
@@ -102,9 +102,9 @@ export const JobResultSchema = z.object({
   result: z.any().optional(),
   error: z.string().optional(),
   processingTime: z.number(),
-  resourcesUsed: z.record(ResourceTypeSchema, z.number()).optional(),
+  resourcesUsed: z.record(z.string(), z.number()).optional(),
   retryCount: z.number(),
-  metadata: z.record(z.string()).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
 });
 
 export type JobResult = z.infer<typeof JobResultSchema>;
@@ -113,7 +113,7 @@ export type JobResult = z.infer<typeof JobResultSchema>;
 export const ComputeConfigSchema = z.object({
   maxConcurrentJobs: z.number().default(10),
   maxQueueSize: z.number().default(1000),
-  resourceLimits: z.record(ResourceTypeSchema, z.number()).default({
+  resourceLimits: z.record(z.string(), z.number()).default({
     cpu: 80, // 80% max CPU usage
     memory: 85, // 85% max memory usage
     gpu: 90, // 90% max GPU usage
@@ -123,7 +123,7 @@ export const ComputeConfigSchema = z.object({
     api_tokens: 1000,
     cache_memory: 512, // MB
   }),
-  priorityWeights: z.record(JobPrioritySchema, z.number()).default({
+  priorityWeights: z.record(z.string(), z.number()).default({
     background: 1,
     normal: 2,
     high: 4,
@@ -151,13 +151,17 @@ class ComputeJobQueue {
     const index = this.findInsertIndex(job);
     this.jobs.splice(index, 0, job);
 
-    emit("compute.job_queued", {
-      jobId: job.id,
-      type: job.type,
-      priority: job.priority,
-      queuePosition: index,
-      queueSize: this.jobs.length,
-    }, { correlationId: job.correlationId });
+    emit(
+      "compute.job_queued",
+      {
+        jobId: job.id,
+        type: job.type,
+        priority: job.priority,
+        queuePosition: index,
+        queueSize: this.jobs.length,
+      },
+      { correlationId: job.correlationId },
+    );
   }
 
   dequeue(): ComputeJob | null {
@@ -193,7 +197,7 @@ class ComputeJobQueue {
 
   cancelJob(jobId: string): boolean {
     // Remove from queue
-    const queueIndex = this.jobs.findIndex(j => j.id === jobId);
+    const queueIndex = this.jobs.findIndex((j) => j.id === jobId);
     if (queueIndex !== -1) {
       this.jobs.splice(queueIndex, 1);
       return true;
@@ -228,8 +232,10 @@ class ComputeJobQueue {
         return i;
       }
 
-      if (jobPriorityValue === queueJobPriority &&
-          job.createdAt < this.jobs[i].createdAt) {
+      if (
+        jobPriorityValue === queueJobPriority &&
+        job.createdAt < this.jobs[i].createdAt
+      ) {
         return i;
       }
     }
@@ -270,8 +276,11 @@ class ResourceMonitor {
     return new Map(this.resources);
   }
 
-  checkResourceAvailability(required: Record<ResourceType, number>): boolean {
+  checkResourceAvailability(
+    required: Partial<Record<ResourceType, number>>,
+  ): boolean {
     for (const [type, amount] of Object.entries(required)) {
+      if (amount === undefined) continue;
       const resource = this.resources.get(type as ResourceType);
       if (!resource || resource.available < amount) {
         return false;
@@ -280,7 +289,10 @@ class ResourceMonitor {
     return true;
   }
 
-  allocateResources(jobId: string, required: Record<ResourceType, number>): boolean {
+  allocateResources(
+    jobId: string,
+    required: Partial<Record<ResourceType, number>>,
+  ): boolean {
     // Check availability first
     if (!this.checkResourceAvailability(required)) {
       return false;
@@ -305,12 +317,19 @@ class ResourceMonitor {
     return true;
   }
 
-  releaseResources(jobId: string, allocated: Record<ResourceType, number>): void {
+  releaseResources(
+    jobId: string,
+    allocated: Partial<Record<ResourceType, number>>,
+  ): void {
     for (const [type, amount] of Object.entries(allocated)) {
+      if (amount === undefined) continue;
       const resource = this.resources.get(type as ResourceType);
       if (resource) {
         resource.reserved = Math.max(0, resource.reserved - amount);
-        resource.available = Math.min(resource.max - resource.current, resource.max - resource.reserved);
+        resource.available = Math.min(
+          resource.max - resource.current,
+          resource.max - resource.reserved,
+        );
         resource.utilization = resource.current / resource.max;
       }
     }
@@ -324,8 +343,14 @@ class ResourceMonitor {
 
   private initializeResources(): void {
     const resourceTypes: ResourceType[] = [
-      "cpu", "memory", "gpu", "storage", "network",
-      "database_connections", "api_tokens", "cache_memory"
+      "cpu",
+      "memory",
+      "gpu",
+      "storage",
+      "network",
+      "database_connections",
+      "api_tokens",
+      "cache_memory",
     ];
 
     for (const type of resourceTypes) {
@@ -351,12 +376,16 @@ class ResourceMonitor {
 
       // Emit resource usage events if utilization is high
       if (resource.utilization > 0.8) {
-        emit("compute.resource_high_usage", {
-          resourceType: type,
-          utilization: resource.utilization,
-          current: resource.current,
-          max: resource.max,
-        }, { priority: "high" });
+        emit(
+          "compute.resource_high_usage",
+          {
+            resourceType: type,
+            utilization: resource.utilization,
+            current: resource.current,
+            max: resource.max,
+          },
+          { priority: "high" },
+        );
       }
     }
   }
@@ -381,7 +410,11 @@ class ResourceMonitor {
     const spikeChance = Math.random();
 
     if (spikeChance > 0.9) {
-      return Math.min(this.getMaxResource(type), baseUsage * this.getMaxResource(type) + Math.random() * 0.4 * this.getMaxResource(type));
+      return Math.min(
+        this.getMaxResource(type),
+        baseUsage * this.getMaxResource(type) +
+          Math.random() * 0.4 * this.getMaxResource(type),
+      );
     }
 
     return baseUsage * this.getMaxResource(type);
@@ -455,7 +488,7 @@ export class ComputeEventManager {
   async submitJob(
     type: ComputeJobType,
     payload?: any,
-    options: Partial<ComputeJob> = {}
+    options: Partial<ComputeJob> = {},
   ): Promise<string> {
     const job: ComputeJob = ComputeJobSchema.parse({
       id: crypto.randomUUID(),
@@ -471,13 +504,20 @@ export class ComputeEventManager {
     }
 
     // Check resource availability
-    if (job.requiredResources && !this.resourceMonitor.checkResourceAvailability(job.requiredResources)) {
+    if (
+      job.requiredResources &&
+      !this.resourceMonitor.checkResourceAvailability(job.requiredResources)
+    ) {
       job.status = "failed";
-      emit("compute.job_failed", {
-        jobId: job.id,
-        error: "Insufficient resources",
-        requiredResources: job.requiredResources,
-      }, { correlationId: job.correlationId, priority: "high" });
+      emit(
+        "compute.job_failed",
+        {
+          jobId: job.id,
+          error: "Insufficient resources",
+          requiredResources: job.requiredResources,
+        },
+        { correlationId: job.correlationId, priority: "high" },
+      );
 
       throw new Error("Insufficient resources for job");
     }
@@ -485,12 +525,16 @@ export class ComputeEventManager {
     this.jobQueue.enqueue(job);
     this.metrics.totalJobs++;
 
-    emit("compute.job_submitted", {
-      jobId: job.id,
-      type: job.type,
-      priority: job.priority,
-      queueSize: this.jobQueue.getQueueSize(),
-    }, { correlationId: job.correlationId });
+    emit(
+      "compute.job_submitted",
+      {
+        jobId: job.id,
+        type: job.type,
+        priority: job.priority,
+        queueSize: this.jobQueue.getQueueSize(),
+      },
+      { correlationId: job.correlationId },
+    );
 
     return job.id;
   }
@@ -500,10 +544,14 @@ export class ComputeEventManager {
     const cancelled = this.jobQueue.cancelJob(jobId);
 
     if (cancelled) {
-      emit("compute.job_cancelled", {
-        jobId,
-        timestamp: Date.now(),
-      }, { correlationId: jobId });
+      emit(
+        "compute.job_cancelled",
+        {
+          jobId,
+          timestamp: Date.now(),
+        },
+        { correlationId: jobId },
+      );
     }
 
     return cancelled;
@@ -515,7 +563,9 @@ export class ComputeEventManager {
       isRunning: this.isRunning,
       queueSize: this.jobQueue.getQueueSize(),
       runningJobs: this.jobQueue.getRunningCount(),
-      resourceUsage: Object.fromEntries(this.resourceMonitor.getAllResourceUsage()),
+      resourceUsage: Object.fromEntries(
+        this.resourceMonitor.getAllResourceUsage(),
+      ),
       metrics: this.metrics,
       config: this.config,
     };
@@ -530,7 +580,7 @@ export class ComputeEventManager {
       if (!job) break;
 
       // Process job asynchronously
-      this.executeJob(job).catch(error => {
+      this.executeJob(job).catch((error) => {
         console.error(`Job ${job.id} execution failed:`, error);
       });
     }
@@ -539,24 +589,31 @@ export class ComputeEventManager {
   // Execute individual job
   private async executeJob(job: ComputeJob): Promise<void> {
     const startTime = Date.now();
-    let allocatedResources: Record<ResourceType, number> = {};
+    let allocatedResources: Partial<Record<ResourceType, number>> = {};
 
     try {
       // Allocate resources
       if (job.requiredResources) {
-        const allocated = this.resourceMonitor.allocateResources(job.id, job.requiredResources);
+        const allocated = this.resourceMonitor.allocateResources(
+          job.id,
+          job.requiredResources,
+        );
         if (!allocated) {
           throw new Error("Failed to allocate resources");
         }
         allocatedResources = job.requiredResources;
       }
 
-      emit("compute.job_started", {
-        jobId: job.id,
-        type: job.type,
-        startedAt: job.startedAt,
-        allocatedResources,
-      }, { correlationId: job.correlationId });
+      emit(
+        "compute.job_started",
+        {
+          jobId: job.id,
+          type: job.type,
+          startedAt: job.startedAt,
+          allocatedResources,
+        },
+        { correlationId: job.correlationId },
+      );
 
       // Get handler for job type
       const handler = this.jobHandlers.get(job.type);
@@ -568,7 +625,7 @@ export class ComputeEventManager {
       const result = await Promise.race([
         handler(job),
         new Promise((_, reject) =>
-          setTimeout(() => reject(new Error("Job timeout")), job.timeoutMs)
+          setTimeout(() => reject(new Error("Job timeout")), job.timeoutMs),
         ),
       ]);
 
@@ -580,13 +637,16 @@ export class ComputeEventManager {
       this.metrics.completedJobs++;
       this.updateAverageProcessingTime(processingTime);
 
-      emit("compute.job_completed", {
-        jobId: job.id,
-        result,
-        processingTime,
-        resourcesUsed: allocatedResources,
-      }, { correlationId: job.correlationId });
-
+      emit(
+        "compute.job_completed",
+        {
+          jobId: job.id,
+          result,
+          processingTime,
+          resourcesUsed: allocatedResources,
+        },
+        { correlationId: job.correlationId },
+      );
     } catch (error) {
       // Job failed
       const processingTime = Date.now() - startTime;
@@ -595,13 +655,16 @@ export class ComputeEventManager {
 
       this.metrics.failedJobs++;
 
-      emit("compute.job_failed", {
-        jobId: job.id,
-        error: error instanceof Error ? error.message : String(error),
-        processingTime,
-        resourcesUsed: allocatedResources,
-      }, { correlationId: job.correlationId, priority: "high" });
-
+      emit(
+        "compute.job_failed",
+        {
+          jobId: job.id,
+          error: error instanceof Error ? error.message : String(error),
+          processingTime,
+          resourcesUsed: allocatedResources,
+        },
+        { correlationId: job.correlationId, priority: "high" },
+      );
     } finally {
       // Release resources
       if (Object.keys(allocatedResources).length > 0) {
@@ -625,7 +688,7 @@ export class ComputeEventManager {
     });
 
     // Handle resource events
-    on("compute.resource_high_usage", (event) => {
+    on("compute.resource_high_usage", (event: any) => {
       // Implement auto-scaling or load balancing logic
       if (this.config.enableAutoScaling) {
         this.handleHighResourceUsage(event.data);
@@ -639,11 +702,15 @@ export class ComputeEventManager {
 
     if (utilization > 0.9) {
       // Critical resource usage - pause low priority jobs
-      emit("compute.system_overload", {
-        resourceType,
-        utilization,
-        action: "pause_low_priority_jobs",
-      }, { priority: "critical" });
+      emit(
+        "compute.system_overload",
+        {
+          resourceType,
+          utilization,
+          action: "pause_low_priority_jobs",
+        },
+        { priority: "critical" },
+      );
     }
   }
 
@@ -651,7 +718,8 @@ export class ComputeEventManager {
   private updateAverageProcessingTime(newTime: number): void {
     const totalCompleted = this.metrics.completedJobs;
     this.metrics.averageProcessingTime =
-      ((this.metrics.averageProcessingTime * (totalCompleted - 1)) + newTime) / totalCompleted;
+      (this.metrics.averageProcessingTime * (totalCompleted - 1) + newTime) /
+      totalCompleted;
   }
 }
 
@@ -661,61 +729,109 @@ export const computeManager = new ComputeEventManager();
 // Convenience functions for common compute operations
 export const ComputeOperations = {
   // AI Operations
-  async runAIInference(model: string, input: any, options: Partial<ComputeJob> = {}): Promise<string> {
-    return await computeManager.submitJob("ai.inference", {
-      model,
-      input,
-    }, {
-      priority: "high",
-      timeoutMs: 60000,
-      requiredResources: { gpu: 50, memory: 1024 },
-      ...options,
-    });
+  async runAIInference(
+    model: string,
+    input: any,
+    options: Partial<ComputeJob> = {},
+  ): Promise<string> {
+    return await computeManager.submitJob(
+      "ai.inference",
+      {
+        model,
+        input,
+      },
+      {
+        priority: "high",
+        timeoutMs: 60000,
+        requiredResources: { gpu: 50, memory: 1024 } as Partial<
+          Record<ResourceType, number>
+        >,
+        ...options,
+      },
+    );
   },
 
-  async processData(data: any, operation: string, options: Partial<ComputeJob> = {}): Promise<string> {
-    return await computeManager.submitJob("data.processing", {
-      data,
-      operation,
-    }, {
-      priority: "normal",
-      requiredResources: { cpu: 25, memory: 512 },
-      ...options,
-    });
+  async processData(
+    data: any,
+    operation: string,
+    options: Partial<ComputeJob> = {},
+  ): Promise<string> {
+    return await computeManager.submitJob(
+      "data.processing",
+      {
+        data,
+        operation,
+      },
+      {
+        priority: "normal",
+        requiredResources: { cpu: 25, memory: 512 } as Partial<
+          Record<ResourceType, number>
+        >,
+        ...options,
+      },
+    );
   },
 
-  async optimizeImage(imageData: any, options: Partial<ComputeJob> = {}): Promise<string> {
-    return await computeManager.submitJob("image.optimization", {
-      imageData,
-    }, {
-      priority: "normal",
-      timeoutMs: 30000,
-      requiredResources: { cpu: 30, memory: 256 },
-      ...options,
-    });
+  async optimizeImage(
+    imageData: any,
+    options: Partial<ComputeJob> = {},
+  ): Promise<string> {
+    return await computeManager.submitJob(
+      "image.optimization",
+      {
+        imageData,
+      },
+      {
+        priority: "normal",
+        timeoutMs: 30000,
+        requiredResources: { cpu: 30, memory: 256 } as Partial<
+          Record<ResourceType, number>
+        >,
+        ...options,
+      },
+    );
   },
 
-  async runTests(testSuite: string, options: Partial<ComputeJob> = {}): Promise<string> {
-    return await computeManager.submitJob("test.execution", {
-      testSuite,
-    }, {
-      priority: "normal",
-      timeoutMs: 120000,
-      requiredResources: { cpu: 40, memory: 1024 },
-      ...options,
-    });
+  async runTests(
+    testSuite: string,
+    options: Partial<ComputeJob> = {},
+  ): Promise<string> {
+    return await computeManager.submitJob(
+      "test.execution",
+      {
+        testSuite,
+      },
+      {
+        priority: "normal",
+        timeoutMs: 120000,
+        requiredResources: { cpu: 40, memory: 1024 } as Partial<
+          Record<ResourceType, number>
+        >,
+        ...options,
+      },
+    );
   },
 
-  async executeQuery(query: string, database: string, options: Partial<ComputeJob> = {}): Promise<string> {
-    return await computeManager.submitJob("database.query", {
-      query,
-      database,
-    }, {
-      priority: "high",
-      timeoutMs: 15000,
-      requiredResources: { database_connections: 1, memory: 128 },
-      ...options,
-    });
+  async executeQuery(
+    query: string,
+    database: string,
+    options: Partial<ComputeJob> = {},
+  ): Promise<string> {
+    return await computeManager.submitJob(
+      "database.query",
+      {
+        query,
+        database,
+      },
+      {
+        priority: "high",
+        timeoutMs: 15000,
+        requiredResources: { database_connections: 1, memory: 128 } as Partial<
+          Record<ResourceType, number>
+        >,
+        ...options,
+      },
+    );
   },
 };
 
@@ -724,12 +840,15 @@ if (typeof window === "undefined") {
   computeManager.start();
 
   // Register default handlers
-  computeManager.registerJobHandler("test.execution", async (job: ComputeJob) => {
-    // Example: Run tests using bun
-    const { testSuite } = job.payload;
-    // Implementation would call actual test runner
-    return { success: true, testsRun: 42, passed: 40, failed: 2 };
-  });
+  computeManager.registerJobHandler(
+    "test.execution",
+    async (job: ComputeJob) => {
+      // Example: Run tests using bun
+      const { testSuite } = job.payload || {};
+      // Implementation would call actual test runner
+      return { success: true, testsRun: 42, passed: 40, failed: 2 };
+    },
+  );
 
   // Graceful shutdown
   process.on("SIGINT", () => computeManager.stop());

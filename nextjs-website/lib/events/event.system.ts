@@ -22,8 +22,15 @@ export const EventTypeSchema = z.enum([
   "compute.job_started",
   "compute.job_completed",
   "compute.job_failed",
+  "compute.job_queued",
+  "compute.job_submitted",
+  "compute.job_cancelled",
   "compute.resource_allocated",
   "compute.resource_released",
+  "compute.resource_high_usage",
+  "compute.system_started",
+  "compute.system_stopped",
+  "compute.system_overload",
 
   // UI/UX events
   "ui.page_load",
@@ -69,8 +76,8 @@ export const BaseEventSchema = z.object({
   priority: EventPrioritySchema.default("normal"),
   timestamp: z.date(),
   source: z.string(),
-  data: z.record(z.any()).optional(),
-  metadata: z.record(z.string()).optional(),
+  data: z.record(z.string(), z.any()).optional(),
+  metadata: z.record(z.string(), z.string()).optional(),
   correlationId: z.string().optional(),
   userId: z.string().optional(),
   sessionId: z.string().optional(),
@@ -161,7 +168,7 @@ export class InternetFriendsEventSystem {
   private eventQueue = new EventQueue();
   private stats: EventSystemStats;
   private isRunning = false;
-  private processInterval: Timer | null = null;
+  private processInterval: NodeJS.Timeout | null = null;
   private startTime = Date.now();
 
   constructor() {

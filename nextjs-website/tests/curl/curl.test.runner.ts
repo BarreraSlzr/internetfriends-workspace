@@ -9,27 +9,31 @@ const CurlTestConfigSchema = z.object({
   name: z.string(),
   url: z.string(),
   method: z.enum(["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS", "HEAD"]),
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.string(), z.string()).optional(),
   body: z.string().optional(),
+  data: z.string().optional(),
   timeout: z.number().default(10000),
-  expectedStatus: z.number().default(200),
-  expectedHeaders: z.record(z.string()).optional(),
+  expectedStatus: z.union([z.number(), z.array(z.number())]).default(200),
+  expectedHeaders: z.record(z.string(), z.string()).optional(),
   expectedBody: z.string().optional(),
   bodyContains: z.array(z.string()).optional(),
   followRedirects: z.boolean().default(true),
   insecure: z.boolean().default(false),
   retries: z.number().default(3),
   retryDelay: z.number().default(1000),
+  validator: z.any().optional(),
+  condition: z.any().optional(),
+  concurrent: z.number().optional(),
 });
 
-type CurlTestConfig = z.infer<typeof CurlTestConfigSchema>;
+export type CurlTestConfig = z.infer<typeof CurlTestConfigSchema>;
 
 // Test Result Schema
 const CurlTestResultSchema = z.object({
   name: z.string(),
   success: z.boolean(),
   status: z.number().optional(),
-  headers: z.record(z.string()).optional(),
+  headers: z.record(z.string(), z.string()).optional(),
   body: z.string().optional(),
   responseTime: z.number(),
   error: z.string().optional(),
@@ -45,11 +49,14 @@ export class CurlTestRunner {
   private defaultHeaders: Record<string, string>;
   private verbose: boolean;
 
-  constructor(baseUrl: string = "http://localhost:3000", verbose: boolean = false) {
+  constructor(
+    baseUrl: string = "http://localhost:3000",
+    verbose: boolean = false,
+  ) {
     this.baseUrl = baseUrl;
     this.defaultHeaders = {
       "User-Agent": "InternetFriends-Test-Runner/1.0",
-      "Accept": "application/json, text/html, */*",
+      Accept: "application/json, text/html, */*",
       "Accept-Encoding": "gzip, deflate",
     };
     this.verbose = verbose;
@@ -57,7 +64,9 @@ export class CurlTestRunner {
 
   // Build curl command from test config
   private buildCurlCommand(config: CurlTestConfig): string {
-    const url = config.url.startsWith("http") ? config.url : `${this.baseUrl}${config.url}`;
+    const url = config.url.startsWith("http")
+      ? config.url
+      : `${this.baseUrl}${config.url}`;
 
     let cmd = `curl -s -w "\\n%{http_code}\\n%{time_total}\\n" -X ${config.method}`;
 
@@ -68,8 +77,9 @@ export class CurlTestRunner {
     }
 
     // Add body for POST/PUT/PATCH
-    if (config.body && ["POST", "PUT", "PATCH"].includes(config.method)) {
-      cmd += ` -d '${config.body}'`;
+    const bodyData = config.data || config.body;
+    if (bodyData && ["POST", "PUT", "PATCH"].includes(config.method)) {
+      cmd += ` -d '${bodyData}'`;
     }
 
     // Add options
@@ -102,7 +112,7 @@ export class CurlTestRunner {
         const lines = output.trim().split("\n");
 
         // Parse curl output (body, status, time)
-        const responseTime = Math.round((Date.now() - startTime));
+        const responseTime = Math.round(Date.now() - startTime);
         const timeTotal = parseFloat(lines[lines.length - 1]) * 1000;
         const status = parseInt(lines[lines.length - 2]);
         const body = lines.slice(0, -2).join("\n");
@@ -122,9 +132,13 @@ export class CurlTestRunner {
         };
 
         // Validate response
-        if (config.expectedStatus && status !== config.expectedStatus) {
+        const expectedStatuses = Array.isArray(config.expectedStatus)
+          ? config.expectedStatus
+          : [config.expectedStatus];
+
+        if (config.expectedStatus && !expectedStatuses.includes(status)) {
           result.success = false;
-          result.error = `Expected status ${config.expectedStatus}, got ${status}`;
+          result.error = `Expected status ${expectedStatuses.join(" or ")}, got ${status}`;
         }
 
         if (config.bodyContains) {
@@ -143,7 +157,6 @@ export class CurlTestRunner {
         }
 
         return result;
-
       } catch (error) {
         if (attempt === config.retries) {
           return {
@@ -157,10 +170,12 @@ export class CurlTestRunner {
         }
 
         if (this.verbose) {
-          console.log(`  ⚠️  Attempt ${attempt} failed, retrying in ${config.retryDelay}ms...`);
+          console.log(
+            `  ⚠️  Attempt ${attempt} failed, retrying in ${config.retryDelay}ms...`,
+          );
         }
 
-        await new Promise(resolve => setTimeout(resolve, config.retryDelay));
+        await new Promise((resolve) => setTimeout(resolve, config.retryDelay));
       }
     }
 
@@ -178,14 +193,27 @@ export class CurlTestRunner {
     const results: CurlTestResult[] = [];
 
     for (const config of configs) {
-      const result = await this.runTest(config);
-      results.push(result);
+      if (config.concurrent && config.concurrent > 1) {
+        // Handle concurrent tests
+        const concurrentResults = await Promise.all(
+          Array(config.concurrent)
+            .fill(null)
+            .map(() => this.runTest(config)),
+        );
+        results.push(...concurrentResults);
+      } else {
+        const result = await this.runTest(config);
+        results.push(result);
+      }
 
       if (this.verbose) {
-        const status = result.success ? "✅" : "❌";
-        console.log(`${status} ${result.name} (${result.responseTime}ms)`);
-        if (!result.success && result.error) {
-          console.log(`     Error: ${result.error}`);
+        const lastResult = results[results.length - 1];
+        const status = lastResult.success ? "✅" : "❌";
+        console.log(
+          `${status} ${lastResult.name} (${lastResult.responseTime}ms)`,
+        );
+        if (!lastResult.success && lastResult.error) {
+          console.log(`     Error: ${lastResult.error}`);
         }
       }
     }
@@ -195,9 +223,10 @@ export class CurlTestRunner {
 
   // Generate test report
   generateReport(results: CurlTestResult[]): string {
-    const passed = results.filter(r => r.success).length;
+    const passed = results.filter((r) => r.success).length;
     const failed = results.length - passed;
-    const avgResponseTime = results.reduce((sum, r) => sum + r.responseTime, 0) / results.length;
+    const avgResponseTime =
+      results.reduce((sum, r) => sum + r.responseTime, 0) / results.length;
 
     let report = "# InternetFriends Curl Test Report\n\n";
     report += `**Summary:** ${passed}/${results.length} tests passed\n`;
@@ -207,8 +236,8 @@ export class CurlTestRunner {
     if (failed > 0) {
       report += "## Failed Tests\n\n";
       results
-        .filter(r => !r.success)
-        .forEach(result => {
+        .filter((r) => !r.success)
+        .forEach((result) => {
           report += `### ❌ ${result.name}\n`;
           report += `- **Status:** ${result.status || "N/A"}\n`;
           report += `- **Response Time:** ${result.responseTime}ms\n`;
@@ -218,7 +247,7 @@ export class CurlTestRunner {
     }
 
     report += "## All Test Results\n\n";
-    results.forEach(result => {
+    results.forEach((result) => {
       const status = result.success ? "✅" : "❌";
       report += `${status} **${result.name}** (${result.responseTime}ms)\n`;
     });
@@ -307,18 +336,28 @@ export const InternetFriendsTestSuites = {
 // CLI Runner
 export async function runCurlTests(
   suite: keyof typeof InternetFriendsTestSuites = "healthCheck",
-  verbose: boolean = false
+  verbose: boolean = false,
 ) {
   const runner = new CurlTestRunner("http://localhost:3000", verbose);
-  const tests = InternetFriendsTestSuites[suite];
+  const rawTests = InternetFriendsTestSuites[suite];
+
+  // Transform tests to include required properties
+  const tests: CurlTestConfig[] = rawTests.map((test: any) => ({
+    ...test,
+    timeout: test.timeout || 10000,
+    followRedirects: test.followRedirects ?? true,
+    insecure: test.insecure ?? false,
+    retries: test.retries || 3,
+    retryDelay: test.retryDelay || 1000,
+  }));
 
   console.log(`🧪 Running ${suite} test suite (${tests.length} tests)...`);
-  console.log("=" .repeat(50));
+  console.log("=".repeat(50));
 
   const results = await runner.runTests(tests);
   const report = runner.generateReport(results);
 
-  console.log("\n" + "=" .repeat(50));
+  console.log("\n" + "=".repeat(50));
   console.log(report);
 
   // Write report to file
@@ -327,7 +366,7 @@ export async function runCurlTests(
   console.log(`📊 Report saved to: ${reportPath}`);
 
   // Exit with error code if any tests failed
-  const failedCount = results.filter(r => !r.success).length;
+  const failedCount = results.filter((r) => !r.success).length;
   if (failedCount > 0) {
     console.log(`\n❌ ${failedCount} tests failed`);
     process.exit(1);
@@ -340,7 +379,8 @@ export async function runCurlTests(
 // Run if called directly
 if (import.meta.main) {
   const args = process.argv.slice(2);
-  const suite = (args[0] as keyof typeof InternetFriendsTestSuites) || "healthCheck";
+  const suite =
+    (args[0] as keyof typeof InternetFriendsTestSuites) || "healthCheck";
   const verbose = args.includes("--verbose") || args.includes("-v");
 
   await runCurlTests(suite, verbose);

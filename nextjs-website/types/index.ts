@@ -4,9 +4,11 @@
 // Re-export all specific type modules
 export * from "./components";
 export * from "./theme";
-export * from "./api";
-export * from "./navigation";
+
 export * from "./forms";
+
+// Explicit imports for types used in this file
+import { ContactFormData, NewsletterFormData } from "./forms";
 
 // Global utility types
 export type Prettify<T> = {
@@ -182,7 +184,8 @@ export interface ContactFormEvent extends AnalyticsEvent {
   properties: {
     form_type: string;
     success: boolean;
-    errors?: string[];
+    error_count?: number;
+    error_messages?: string;
   };
 }
 

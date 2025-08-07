@@ -1,45 +1,45 @@
 // InternetFriends Internationalization Configuration
 // Complete i18n setup with context and utilities
 
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
 // Supported locales
 export const LOCALES = {
   en: {
-    code: 'en',
-    name: 'English',
-    flag: '🇺🇸',
-    dir: 'ltr' as const,
+    code: "en",
+    name: "English",
+    flag: "🇺🇸",
+    dir: "ltr" as const,
     default: true,
   },
   es: {
-    code: 'es',
-    name: 'Español',
-    flag: '🇪🇸',
-    dir: 'ltr' as const,
+    code: "es",
+    name: "Español",
+    flag: "🇪🇸",
+    dir: "ltr" as const,
     default: false,
   },
   fr: {
-    code: 'fr',
-    name: 'Français',
-    flag: '🇫🇷',
-    dir: 'ltr' as const,
+    code: "fr",
+    name: "Français",
+    flag: "🇫🇷",
+    dir: "ltr" as const,
     default: false,
   },
 } as const;
 
 export type SupportedLocale = keyof typeof LOCALES;
-export type LocaleConfig = typeof LOCALES[SupportedLocale];
+export type LocaleConfig = (typeof LOCALES)[SupportedLocale];
 
 // Default locale
-export const DEFAULT_LOCALE: SupportedLocale = 'en';
+export const DEFAULT_LOCALE: SupportedLocale = "en";
 
 // Get default locale from browser or fallback
 export function getDefaultLocale(): SupportedLocale {
-  if (typeof window === 'undefined') return DEFAULT_LOCALE;
+  if (typeof window === "undefined") return DEFAULT_LOCALE;
 
   try {
-    const browserLocale = navigator.language.split('-')[0] as SupportedLocale;
+    const browserLocale = navigator.language.split("-")[0] as SupportedLocale;
     return LOCALES[browserLocale] ? browserLocale : DEFAULT_LOCALE;
   } catch {
     return DEFAULT_LOCALE;
@@ -47,11 +47,11 @@ export function getDefaultLocale(): SupportedLocale {
 }
 
 // Locale storage key
-export const LOCALE_STORAGE_KEY = 'if_locale';
+export const LOCALE_STORAGE_KEY = "if_locale";
 
 // Get stored locale
 export function getStoredLocale(): SupportedLocale | null {
-  if (typeof window === 'undefined') return null;
+  if (typeof window === "undefined") return null;
 
   try {
     const stored = localStorage.getItem(LOCALE_STORAGE_KEY);
@@ -67,7 +67,7 @@ export function getStoredLocale(): SupportedLocale | null {
 
 // Store locale
 export function storeLocale(locale: SupportedLocale): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     localStorage.setItem(LOCALE_STORAGE_KEY, locale);
@@ -328,7 +328,10 @@ export interface I18nContextType {
   translations: Translations;
   setLocale: (locale: SupportedLocale) => void;
   t: (key: string, params?: Record<string, string | number>) => string;
-  formatMessage: (key: string, params?: Record<string, string | number>) => string;
+  formatMessage: (
+    key: string,
+    params?: Record<string, string | number>,
+  ) => string;
   isLoading: boolean;
   error: string | null;
 }
@@ -341,7 +344,7 @@ export function useI18n(): I18nContextType {
   const context = useContext(I18nContext);
 
   if (!context) {
-    throw new Error('useI18n must be used within an I18nProvider');
+    throw new Error("useI18n must be used within an I18nProvider");
   }
 
   return context;
@@ -349,14 +352,17 @@ export function useI18n(): I18nContextType {
 
 // Translation utility function
 export function createTranslationFunction(translations: Translations) {
-  return function t(key: string, params?: Record<string, string | number>): string {
+  return function t(
+    key: string,
+    params?: Record<string, string | number>,
+  ): string {
     try {
       // Navigate nested object using dot notation
-      const keys = key.split('.');
+      const keys = key.split(".");
       let value: any = translations;
 
       for (const k of keys) {
-        if (value && typeof value === 'object' && k in value) {
+        if (value && typeof value === "object" && k in value) {
           value = value[k];
         } else {
           console.warn(`Translation key not found: ${key}`);
@@ -364,16 +370,19 @@ export function createTranslationFunction(translations: Translations) {
         }
       }
 
-      if (typeof value !== 'string') {
+      if (typeof value !== "string") {
         console.warn(`Translation value is not a string: ${key}`);
         return key;
       }
 
       // Replace parameters if provided
       if (params) {
-        return value.replace(/\{\{(\w+)\}\}/g, (match: string, param: string) => {
-          return params[param] !== undefined ? String(params[param]) : match;
-        });
+        return value.replace(
+          /\{\{(\w+)\}\}/g,
+          (match: string, param: string) => {
+            return params[param] !== undefined ? String(params[param]) : match;
+          },
+        );
       }
 
       return value;
@@ -385,7 +394,9 @@ export function createTranslationFunction(translations: Translations) {
 }
 
 // Load translations for a specific locale
-export async function loadTranslations(locale: SupportedLocale): Promise<Translations> {
+export async function loadTranslations(
+  locale: SupportedLocale,
+): Promise<Translations> {
   try {
     // Dynamic import of translation file
     const translations = await import(`./locales/${locale}/common.json`);
@@ -396,11 +407,13 @@ export async function loadTranslations(locale: SupportedLocale): Promise<Transla
     // Fallback to English if locale fails to load
     if (locale !== DEFAULT_LOCALE) {
       try {
-        const fallbackTranslations = await import(`./locales/${DEFAULT_LOCALE}/common.json`);
+        const fallbackTranslations = await import(
+          `./locales/${DEFAULT_LOCALE}/common.json`
+        );
         return fallbackTranslations.default;
       } catch (fallbackError) {
-        console.error('Failed to load fallback translations:', fallbackError);
-        throw new Error('Failed to load any translations');
+        console.error("Failed to load fallback translations:", fallbackError);
+        throw new Error("Failed to load any translations");
       }
     }
 
@@ -409,12 +422,15 @@ export async function loadTranslations(locale: SupportedLocale): Promise<Transla
 }
 
 // Format date according to locale
-export function formatDate(date: Date, locale: SupportedLocale = DEFAULT_LOCALE): string {
+export function formatDate(
+  date: Date,
+  locale: SupportedLocale = DEFAULT_LOCALE,
+): string {
   try {
     return new Intl.DateTimeFormat(locale, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     }).format(date);
   } catch {
     return date.toLocaleDateString();
@@ -422,7 +438,10 @@ export function formatDate(date: Date, locale: SupportedLocale = DEFAULT_LOCALE)
 }
 
 // Format number according to locale
-export function formatNumber(number: number, locale: SupportedLocale = DEFAULT_LOCALE): string {
+export function formatNumber(
+  number: number,
+  locale: SupportedLocale = DEFAULT_LOCALE,
+): string {
   try {
     return new Intl.NumberFormat(locale).format(number);
   } catch {
@@ -433,12 +452,12 @@ export function formatNumber(number: number, locale: SupportedLocale = DEFAULT_L
 // Format currency according to locale
 export function formatCurrency(
   amount: number,
-  currency: string = 'USD',
-  locale: SupportedLocale = DEFAULT_LOCALE
+  currency: string = "USD",
+  locale: SupportedLocale = DEFAULT_LOCALE,
 ): string {
   try {
     return new Intl.NumberFormat(locale, {
-      style: 'currency',
+      style: "currency",
       currency,
     }).format(amount);
   } catch {
@@ -448,12 +467,13 @@ export function formatCurrency(
 
 // Check if locale is RTL
 export function isRTL(locale: SupportedLocale): boolean {
-  return LOCALES[locale]?.dir === 'rtl';
+  const localeConfig = LOCALES[locale];
+  return localeConfig ? localeConfig.dir === "rtl" : false;
 }
 
 // Get opposite direction
-export function getOppositeDirection(locale: SupportedLocale): 'ltr' | 'rtl' {
-  return isRTL(locale) ? 'ltr' : 'rtl';
+export function getOppositeDirection(locale: SupportedLocale): "ltr" | "rtl" {
+  return isRTL(locale) ? "ltr" : "rtl";
 }
 
 // Validate locale
@@ -463,7 +483,7 @@ export function isValidLocale(locale: string): locale is SupportedLocale {
 
 // Get locale from URL path
 export function getLocaleFromPath(path: string): SupportedLocale | null {
-  const segments = path.split('/').filter(Boolean);
+  const segments = path.split("/").filter(Boolean);
   const potentialLocale = segments[0];
 
   if (potentialLocale && isValidLocale(potentialLocale)) {
@@ -474,9 +494,12 @@ export function getLocaleFromPath(path: string): SupportedLocale | null {
 }
 
 // Remove locale from path
-export function removeLocaleFromPath(path: string, locale: SupportedLocale): string {
+export function removeLocaleFromPath(
+  path: string,
+  locale: SupportedLocale,
+): string {
   if (path.startsWith(`/${locale}`)) {
-    return path.slice(`/${locale}`.length) || '/';
+    return path.slice(`/${locale}`.length) || "/";
   }
   return path;
 }
@@ -487,5 +510,5 @@ export function addLocaleToPath(path: string, locale: SupportedLocale): string {
     return path; // Don't add default locale to URL
   }
 
-  return `/${locale}${path === '/' ? '' : path}`;
+  return `/${locale}${path === "/" ? "" : path}`;
 }

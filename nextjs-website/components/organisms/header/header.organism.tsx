@@ -1,15 +1,31 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, createContext, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  createContext,
+  useContext,
+} from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { Menu, X, Search, Globe, Sun, Moon, Monitor, ChevronDown } from "lucide-react";
+import {
+  Menu,
+  X,
+  Search,
+  Globe,
+  Sun,
+  Moon,
+  Monitor,
+  ChevronDown,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { HeaderAtomic } from "@/components/atomic/header";
 import { ButtonAtomic } from "@/components/atomic/button";
 import { NavigationMolecular } from "@/components/molecular/navigation";
 import { useTheme } from "@/hooks/use-theme";
 import { useI18n } from "@/i18n";
+import { LOCALES } from "@/i18n/config";
 import {
   HeaderOrganismProps,
   HeaderState,
@@ -53,17 +69,19 @@ const SkipToMainContent: React.FC<{ selector: string }> = ({ selector }) => {
         styles.skipToMain,
         "sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4",
         "z-50 bg-if-primary text-white px-4 py-2 rounded-compact-sm",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
       )}
       onClick={handleSkipToMain}
     >
-      {t("accessibility.skipToMain", "Skip to main content")}
+      {t("accessibility.skipToMain")}
     </Link>
   );
 };
 
 // Theme toggle component
-const ThemeToggle: React.FC<{ config?: HeaderOrganismProps['themeToggle'] }> = ({ config }) => {
+const ThemeToggle: React.FC<{
+  config?: HeaderOrganismProps["themeToggle"];
+}> = ({ config }) => {
   const { theme, setTheme, isDark, isLight } = useTheme();
   const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
@@ -71,19 +89,19 @@ const ThemeToggle: React.FC<{ config?: HeaderOrganismProps['themeToggle'] }> = (
   const themeOptions = [
     {
       value: "light" as const,
-      label: config?.lightLabel || t("theme.light", "Light"),
+      label: config?.lightLabel || t("theme.light"),
       icon: Sun,
       active: isLight,
     },
     {
       value: "dark" as const,
-      label: config?.darkLabel || t("theme.dark", "Dark"),
+      label: config?.darkLabel || t("theme.dark"),
       icon: Moon,
       active: isDark,
     },
     {
       value: "system" as const,
-      label: config?.systemLabel || t("theme.system", "System"),
+      label: config?.systemLabel || t("theme.system"),
       icon: Monitor,
       active: theme.mode === "system",
     },
@@ -101,13 +119,15 @@ const ThemeToggle: React.FC<{ config?: HeaderOrganismProps['themeToggle'] }> = (
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        aria-label={t("theme.toggle", "Toggle theme")}
+        aria-label={t("theme.toggleTheme")}
         className={cn("gap-2", config?.buttonProps?.className)}
         {...config?.buttonProps}
       >
         {activeTheme?.icon && <activeTheme.icon className="w-4 h-4" />}
         {config?.showLabels && <span>{activeTheme?.label}</span>}
-        <ChevronDown className={cn("w-3 h-3 transition-transform", isOpen && "rotate-180")} />
+        <ChevronDown
+          className={cn("w-3 h-3 transition-transform", isOpen && "rotate-180")}
+        />
       </ButtonAtomic>
 
       {isOpen && (
@@ -129,7 +149,7 @@ const ThemeToggle: React.FC<{ config?: HeaderOrganismProps['themeToggle'] }> = (
                   "w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors",
                   "hover:bg-if-primary-light hover:text-if-primary",
                   "first:rounded-t-compact-md last:rounded-b-compact-md",
-                  option.active && "bg-if-primary-light text-if-primary"
+                  option.active && "bg-if-primary-light text-if-primary",
                 )}
               >
                 <option.icon className="w-4 h-4" />
@@ -147,13 +167,18 @@ const ThemeToggle: React.FC<{ config?: HeaderOrganismProps['themeToggle'] }> = (
 };
 
 // Language selector component
-const LanguageSelector: React.FC<{ config?: HeaderOrganismProps['languageSelector'] }> = ({ config }) => {
-  const { currentLocale, setLocale, availableLocales, t } = useI18n();
+const LanguageSelector: React.FC<{
+  config?: HeaderOrganismProps["languageSelector"];
+}> = ({ config }) => {
+  const { locale: currentLocale, setLocale, t } = useI18n();
+  const availableLocales = Object.values(LOCALES);
   const [isOpen, setIsOpen] = useState(false);
 
   if (!config?.show || availableLocales.length <= 1) return null;
 
-  const currentLang = availableLocales.find((lang) => lang.code === currentLocale);
+  const currentLang = availableLocales.find(
+    (lang) => lang.code === currentLocale,
+  );
 
   return (
     <div className="relative">
@@ -163,7 +188,7 @@ const LanguageSelector: React.FC<{ config?: HeaderOrganismProps['languageSelecto
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-haspopup="true"
-        aria-label={t("language.selector", "Select language")}
+        aria-label={t("language.selectLanguage")}
         className={cn("gap-2", config?.buttonProps?.className)}
         {...config?.buttonProps}
       >
@@ -172,8 +197,12 @@ const LanguageSelector: React.FC<{ config?: HeaderOrganismProps['languageSelecto
           <span className="text-lg">{currentLang.flag}</span>
         )}
         {config?.showNames && <span>{currentLang?.name}</span>}
-        {config?.showCodesOnly && <span className="uppercase">{currentLang?.code}</span>}
-        <ChevronDown className={cn("w-3 h-3 transition-transform", isOpen && "rotate-180")} />
+        {config?.showCodesOnly && (
+          <span className="uppercase">{currentLang?.code}</span>
+        )}
+        <ChevronDown
+          className={cn("w-3 h-3 transition-transform", isOpen && "rotate-180")}
+        />
       </ButtonAtomic>
 
       {isOpen && (
@@ -184,7 +213,7 @@ const LanguageSelector: React.FC<{ config?: HeaderOrganismProps['languageSelecto
             aria-hidden="true"
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
-            {availableLocales.map((lang) => (
+            {availableLocales.map((lang: any) => (
               <button
                 key={lang.code}
                 onClick={() => {
@@ -195,12 +224,15 @@ const LanguageSelector: React.FC<{ config?: HeaderOrganismProps['languageSelecto
                   "w-full flex items-center gap-3 px-4 py-2 text-sm transition-colors",
                   "hover:bg-if-primary-light hover:text-if-primary",
                   "first:rounded-t-compact-md last:rounded-b-compact-md",
-                  lang.code === currentLocale && "bg-if-primary-light text-if-primary"
+                  lang.code === currentLocale &&
+                    "bg-if-primary-light text-if-primary",
                 )}
               >
                 {lang.flag && <span className="text-lg">{lang.flag}</span>}
                 <span>{lang.name}</span>
-                <span className="text-xs opacity-75 uppercase ml-auto">{lang.code}</span>
+                <span className="text-xs opacity-75 uppercase ml-auto">
+                  {lang.code}
+                </span>
               </button>
             ))}
           </div>
@@ -219,7 +251,11 @@ const HeaderActions: React.FC<{ actions?: HeaderAction[] }> = ({ actions }) => {
       {actions.map((action) => {
         if (action.href) {
           return (
-            <Link key={action.id} href={action.href} target={action.external ? "_blank" : undefined}>
+            <Link
+              key={action.id}
+              href={action.href}
+              target={action.external ? "_blank" : undefined}
+            >
               <ButtonAtomic
                 variant={action.variant || "primary"}
                 size={action.size || "sm"}
@@ -228,7 +264,7 @@ const HeaderActions: React.FC<{ actions?: HeaderAction[] }> = ({ actions }) => {
                 className={cn(
                   action.desktopOnly && "hidden lg:flex",
                   action.mobileOnly && "lg:hidden",
-                  action.buttonProps?.className
+                  action.buttonProps?.className,
                 )}
                 {...action.buttonProps}
               >
@@ -250,7 +286,7 @@ const HeaderActions: React.FC<{ actions?: HeaderAction[] }> = ({ actions }) => {
             className={cn(
               action.desktopOnly && "hidden lg:flex",
               action.mobileOnly && "lg:hidden",
-              action.buttonProps?.className
+              action.buttonProps?.className,
             )}
             {...action.buttonProps}
           >
@@ -264,7 +300,9 @@ const HeaderActions: React.FC<{ actions?: HeaderAction[] }> = ({ actions }) => {
 };
 
 // Announcement bar component
-const AnnouncementBar: React.FC<{ config?: HeaderOrganismProps['announcement'] }> = ({ config }) => {
+const AnnouncementBar: React.FC<{
+  config?: HeaderOrganismProps["announcement"];
+}> = ({ config }) => {
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -292,7 +330,7 @@ const AnnouncementBar: React.FC<{ config?: HeaderOrganismProps['announcement'] }
         "w-full px-4 py-2 border-b text-sm text-center relative",
         variantStyles[config.variant || "info"],
         config.onClick && "cursor-pointer hover:opacity-80",
-        config.className
+        config.className,
       )}
       onClick={config.onClick}
     >
@@ -330,9 +368,9 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   children,
   skipToMain = HEADER_DEFAULTS.skipToMain,
   mainContentSelector = HEADER_DEFAULTS.mainContentSelector,
-  'data-testid': testId,
+  "data-testid": testId,
   id,
-  'aria-label': ariaLabel,
+  "aria-label": ariaLabel,
   ...props
 }) => {
   const pathname = usePathname();
@@ -359,12 +397,13 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
     const updateScrollState = () => {
       const scrollY = window.scrollY;
       const isSticky = scrollY > (sticky.offset || 0);
-      const isHidden = sticky.hideOnScroll && scrollY > lastScrollY && scrollY > 100;
+      const isHidden =
+        sticky.hideOnScroll && scrollY > lastScrollY && scrollY > 100;
 
       setHeaderState((prev) => ({
         ...prev,
         isSticky,
-        isHidden,
+        isHidden: isHidden || false,
         scrollPosition: scrollY,
       }));
 
@@ -387,11 +426,17 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   const contextValue: HeaderContextValue = {
     ...headerState,
     toggleMobileMenu: () =>
-      setHeaderState((prev) => ({ ...prev, isMobileMenuOpen: !prev.isMobileMenuOpen })),
+      setHeaderState((prev) => ({
+        ...prev,
+        isMobileMenuOpen: !prev.isMobileMenuOpen,
+      })),
     closeMobileMenu: () =>
       setHeaderState((prev) => ({ ...prev, isMobileMenuOpen: false })),
     toggleSearch: () =>
-      setHeaderState((prev) => ({ ...prev, isSearchActive: !prev.isSearchActive })),
+      setHeaderState((prev) => ({
+        ...prev,
+        isSearchActive: !prev.isSearchActive,
+      })),
     setSearchQuery: (query: string) =>
       setHeaderState((prev) => ({ ...prev, searchQuery: query })),
     dismissAnnouncement: () =>
@@ -415,9 +460,11 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   // Combined navigation props
   const navigationProps = {
     ...navigation,
+    items: navigation?.items || [],
     logo,
     className: cn(navigation?.className),
-    variant: variant === "transparent" ? "transparent" : "default",
+    variant:
+      variant === "transparent" ? ("transparent" as const) : ("solid" as const),
     mobileBreakpoint: responsive?.mobileBreakpoint,
     showMobileToggle: responsive?.showMobileToggle,
   };
@@ -432,25 +479,32 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
           sticky?.enabled && "sticky top-0",
           headerState.isSticky && sticky?.stickyClassName,
           headerState.isHidden && "transform -translate-y-full",
-          variant === "glass" && "bg-glass-bg-header backdrop-blur-glass border-b border-glass-border",
+          variant === "glass" &&
+            "bg-glass-bg-header backdrop-blur-glass border-b border-glass-border",
           variant === "solid" && "bg-background border-b border-border",
-          variant === "transparent" && !headerState.isSticky && "bg-transparent",
-          variant === "transparent" && headerState.isSticky && "bg-glass-bg-header backdrop-blur-glass",
-          className
+          variant === "transparent" &&
+            !headerState.isSticky &&
+            "bg-transparent",
+          variant === "transparent" &&
+            headerState.isSticky &&
+            "bg-glass-bg-header backdrop-blur-glass",
+          className,
         )}
         style={{
           transitionDuration: sticky?.transitionDuration,
         }}
         data-testid={testId}
         id={id}
-        aria-label={ariaLabel || t("navigation.main", "Main navigation")}
+        aria-label={ariaLabel || t("accessibility.skipToContent")}
         {...props}
       >
         {/* Skip to main content */}
         {skipToMain && <SkipToMainContent selector={mainContentSelector} />}
 
         {/* Announcement bar */}
-        {headerState.isAnnouncementVisible && <AnnouncementBar config={announcement} />}
+        {headerState.isAnnouncementVisible && (
+          <AnnouncementBar config={announcement} />
+        )}
 
         {/* Main header content */}
         <div className="container mx-auto px-4 h-full flex items-center justify-between">
@@ -500,7 +554,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
                 variant="ghost"
                 size="sm"
                 onClick={contextValue.toggleSearch}
-                aria-label={t("search.toggle", "Toggle search")}
+                aria-label={t("common.search")}
                 className="hidden md:flex"
               >
                 <Search className="w-4 h-4" />

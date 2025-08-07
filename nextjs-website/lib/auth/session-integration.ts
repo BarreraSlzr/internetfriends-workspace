@@ -10,12 +10,12 @@ export const UserAuthSchema = z.object({
   username: z.string().min(3).max(30),
   displayName: z.string().min(1).max(100),
   avatar: z.string().url().optional(),
-  
+
   // Authentication methods
   hasPassword: z.boolean(),
   hasWebAuthn: z.boolean(),
   has2FA: z.boolean(),
-  
+
   // Timestamps
   createdAt: z.date(),
   updatedAt: z.date(),
@@ -31,13 +31,13 @@ export const SessionSchema = z.object({
   token: z.string(),
   expiresAt: z.date(),
   createdAt: z.date(),
-  
+
   // Security metadata
   ipAddress: z.string().optional(),
   userAgent: z.string().optional(),
   country: z.string().length(2).optional(), // ISO country code
   city: z.string().optional(),
-  
+
   // Session flags
   isActive: z.boolean().default(true),
   revokedAt: z.date().optional(),
@@ -51,13 +51,18 @@ export const InternetFriendsUserSchema = UserAuthSchema.extend({
   // Platform-specific fields
   plan: z.enum(["free", "pro", "enterprise"]).default("free"),
   credits: z.number().min(0).default(0),
-  
+
   // Preferences
-  preferences: z.object({
-    theme: z.enum(["light", "dark", "system"]).default("system"),
-    language: z.string().default("en"),
-  }).default({}),
-  
+  preferences: z
+    .object({
+      theme: z.enum(["light", "dark", "system"]).default("system"),
+      language: z.string().default("en"),
+    })
+    .default({
+      theme: "system",
+      language: "en",
+    }),
+
   // InternetFriends specific data
   projects: z.array(z.string().uuid()).default([]),
   achievements: z.array(z.string()).default([]),
@@ -71,5 +76,7 @@ export const createSessionToken = () => {
 };
 
 export const isSessionValid = (session: Session): boolean => {
-  return session.isActive && session.expiresAt > new Date() && !session.revokedAt;
+  return (
+    session.isActive && session.expiresAt > new Date() && !session.revokedAt
+  );
 };

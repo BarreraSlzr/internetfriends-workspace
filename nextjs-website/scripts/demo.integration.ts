@@ -3,11 +3,14 @@
 // Showcases the power of curl testing + event-driven compute system
 
 import { z } from "zod";
-import { CurlTestRunner, InternetFriendsTestSuites } from "../tests/curl/curl.test.runner";
+import {
+  CurlTestRunner,
+  InternetFriendsTestSuites,
+} from "../tests/curl/curl.test.runner";
 import {
   ComputeEventManager,
   ComputeOperations,
-  computeManager
+  computeManager,
 } from "../lib/events/compute.events";
 import {
   eventSystem,
@@ -17,7 +20,7 @@ import {
   EventType,
   UIEvents,
   APIEvents,
-  ComputeEvents
+  ComputeEvents,
 } from "../lib/events/event.system";
 
 // Demo Configuration
@@ -25,7 +28,14 @@ const DEMO_CONFIG = {
   baseUrl: process.env.DEMO_BASE_URL || "http://localhost:3000",
   verbose: true,
   duration: 30000, // 30 seconds demo
-  phases: ["setup", "curl_testing", "event_processing", "compute_jobs", "integration", "teardown"],
+  phases: [
+    "setup",
+    "curl_testing",
+    "event_processing",
+    "compute_jobs",
+    "integration",
+    "teardown",
+  ],
 };
 
 // Demo Statistics Collector
@@ -48,8 +58,17 @@ class DemoStatsCollector {
   }
 
   generateReport(): string {
-    const { httpRequests, eventsEmitted, computeJobs, totalDuration, successfulOperations, errors } = this.stats;
-    const successRate = ((successfulOperations / (successfulOperations + errors)) * 100).toFixed(2);
+    const {
+      httpRequests,
+      eventsEmitted,
+      computeJobs,
+      totalDuration,
+      successfulOperations,
+      errors,
+    } = this.stats;
+    const successRateValue =
+      (successfulOperations / (successfulOperations + errors)) * 100;
+    const successRate = successRateValue.toFixed(2);
 
     return `
 # InternetFriends Integration Demo Report
@@ -67,14 +86,15 @@ class DemoStatsCollector {
 - **Events per second:** ${(eventsEmitted / (totalDuration / 1000)).toFixed(2)}
 - **Jobs per second:** ${(computeJobs / (totalDuration / 1000)).toFixed(2)}
 
-## Integration Health: ${successRate > 90 ? '🟢 Excellent' : successRate > 70 ? '🟡 Good' : '🔴 Needs Attention'}
+## Integration Health: ${successRateValue > 90 ? "🟢 Excellent" : successRateValue > 70 ? "🟡 Good" : "🔴 Needs Attention"}
 `;
   }
 }
 
 // Event Monitor for Demo
 class DemoEventMonitor {
-  private eventLog: Array<{ type: EventType; timestamp: number; data: any }> = [];
+  private eventLog: Array<{ type: EventType; timestamp: number; data: any }> =
+    [];
   private handlerIds: string[] = [];
 
   start() {
@@ -92,22 +112,32 @@ class DemoEventMonitor {
     this.handlerIds.push(globalHandlerId);
 
     // Monitor specific compute events
-    const computeHandlerId = eventSystem.on("compute.job_completed", (event) => {
-      console.log(`  ✅ Job ${event.data.jobId} completed in ${event.data.processingTime}ms`);
-    });
+    const computeHandlerId = eventSystem.on(
+      "compute.job_completed",
+      (event: any) => {
+        console.log(
+          `  ✅ Job ${event.data.jobId} completed in ${event.data.processingTime}ms`,
+        );
+      },
+    );
 
     this.handlerIds.push(computeHandlerId);
 
     // Monitor API events
-    const apiHandlerId = eventSystem.on("api.request_complete", (event) => {
-      console.log(`  🌐 ${event.data.method} ${event.data.url} → ${event.data.status} (${event.data.responseTime}ms)`);
-    });
+    const apiHandlerId = eventSystem.on(
+      "api.request_complete",
+      (event: any) => {
+        console.log(
+          `  🌐 ${event.data.method} ${event.data.url} → ${event.data.status} (${event.data.responseTime}ms)`,
+        );
+      },
+    );
 
     this.handlerIds.push(apiHandlerId);
   }
 
   stop() {
-    this.handlerIds.forEach(id => eventSystem.off(id));
+    this.handlerIds.forEach((id) => eventSystem.off(id));
     this.handlerIds = [];
     console.log("📡 Event monitoring stopped");
   }
@@ -116,7 +146,9 @@ class DemoEventMonitor {
     return this.eventLog.length;
   }
 
-  getRecentEvents(count: number = 10): Array<{ type: EventType; timestamp: number; data: any }> {
+  getRecentEvents(
+    count: number = 10,
+  ): Array<{ type: EventType; timestamp: number; data: any }> {
     return this.eventLog.slice(-count);
   }
 }
@@ -129,7 +161,10 @@ class InternetFriendsIntegrationDemo {
   private startTime: number = 0;
 
   constructor() {
-    this.curlRunner = new CurlTestRunner(DEMO_CONFIG.baseUrl, DEMO_CONFIG.verbose);
+    this.curlRunner = new CurlTestRunner(
+      DEMO_CONFIG.baseUrl,
+      DEMO_CONFIG.verbose,
+    );
     this.statsCollector = new DemoStatsCollector();
     this.eventMonitor = new DemoEventMonitor();
   }
@@ -138,7 +173,7 @@ class InternetFriendsIntegrationDemo {
     this.startTime = Date.now();
 
     console.log("🚀 InternetFriends Integration Demo Starting...");
-    console.log("=" .repeat(60));
+    console.log("=".repeat(60));
 
     try {
       for (const phase of DEMO_CONFIG.phases) {
@@ -155,7 +190,7 @@ class InternetFriendsIntegrationDemo {
 
   private async runPhase(phase: string): Promise<void> {
     console.log(`\n🔄 Phase: ${phase.toUpperCase()}`);
-    console.log("-" .repeat(40));
+    console.log("-".repeat(40));
 
     switch (phase) {
       case "setup":
@@ -195,7 +230,7 @@ class InternetFriendsIntegrationDemo {
     console.log("  ✅ Event monitoring active");
 
     // Register demo job handlers
-    computeManager.registerJobHandler("demo.http_test", async (job) => {
+    computeManager.registerJobHandler("api.request", async (job: any) => {
       await this.sleep(Math.random() * 500 + 100); // 100-600ms processing time
       return {
         url: job.payload.url,
@@ -204,7 +239,7 @@ class InternetFriendsIntegrationDemo {
       };
     });
 
-    computeManager.registerJobHandler("demo.data_processing", async (job) => {
+    computeManager.registerJobHandler("data.processing", async (job: any) => {
       const items = job.payload.items || 100;
       await this.sleep(items * 2); // 2ms per item
       return {
@@ -221,8 +256,18 @@ class InternetFriendsIntegrationDemo {
     console.log("🌐 Running curl-based HTTP tests...");
 
     try {
-      // Run health check tests
-      const healthResults = await this.curlRunner.runTests(InternetFriendsTestSuites.healthCheck);
+      // Run health check tests with default properties
+      const healthCheckTests = InternetFriendsTestSuites.healthCheck.map(
+        (test: any) => ({
+          ...test,
+          timeout: test.timeout || 10000,
+          followRedirects: test.followRedirects ?? true,
+          insecure: test.insecure ?? false,
+          retries: test.retries || 3,
+          retryDelay: test.retryDelay || 1000,
+        }),
+      );
+      const healthResults = await this.curlRunner.runTests(healthCheckTests);
 
       for (const result of healthResults) {
         if (result.success) {
@@ -234,7 +279,7 @@ class InternetFriendsIntegrationDemo {
             result.curlCommand.split('"').slice(-1)[0] || "/",
             result.status || 200,
             result.responseTime,
-            crypto.randomUUID()
+            crypto.randomUUID(),
           );
         } else {
           this.statsCollector.increment("errors");
@@ -243,8 +288,9 @@ class InternetFriendsIntegrationDemo {
       }
 
       console.log(`  ✅ Completed ${healthResults.length} HTTP tests`);
-      console.log(`  📊 Success rate: ${healthResults.filter(r => r.success).length}/${healthResults.length}`);
-
+      console.log(
+        `  📊 Success rate: ${healthResults.filter((r) => r.success).length}/${healthResults.length}`,
+      );
     } catch (error) {
       console.log("  ❌ Curl testing failed:", error);
       this.statsCollector.increment("errors");
@@ -260,11 +306,20 @@ class InternetFriendsIntegrationDemo {
     // Emit various events rapidly
     for (let i = 0; i < eventCount; i++) {
       if (i % 10 === 0) {
-        UIEvents.interaction("click", `button-${i}`, `user-${i}`, `session-${i}`);
+        UIEvents.interaction(
+          "click",
+          `button-${i}`,
+          `user-${i}`,
+          `session-${i}`,
+        );
       } else if (i % 7 === 0) {
         ComputeEvents.jobStarted(`job-${i}`, { type: "test" });
         await this.sleep(10);
-        ComputeEvents.jobCompleted(`job-${i}`, { result: "success" }, Math.random() * 100);
+        ComputeEvents.jobCompleted(
+          `job-${i}`,
+          { result: "success" },
+          Math.random() * 100,
+        );
       } else {
         emit("system.health_check", { iteration: i });
       }
@@ -280,7 +335,9 @@ class InternetFriendsIntegrationDemo {
 
     console.log(`  ✅ Emitted ${eventCount} events`);
     console.log(`  📊 Processed ${processedEvents} total events`);
-    console.log(`  ⚡ Event processing ratio: ${(processedEvents / eventCount).toFixed(2)}x`);
+    console.log(
+      `  ⚡ Event processing ratio: ${(processedEvents / eventCount).toFixed(2)}x`,
+    );
 
     this.statsCollector.increment("successfulOperations");
   }
@@ -292,13 +349,17 @@ class InternetFriendsIntegrationDemo {
 
     // Submit HTTP test jobs
     for (let i = 0; i < 5; i++) {
-      const jobPromise = computeManager.submitJob("demo.http_test", {
-        url: `http://localhost:3000/test-${i}`,
-        method: "GET",
-      }, {
-        priority: i % 2 === 0 ? "high" : "normal",
-        correlationId: `http-test-${i}`,
-      });
+      const jobPromise = computeManager.submitJob(
+        "api.request",
+        {
+          url: `http://localhost:3000/test-${i}`,
+          method: "GET",
+        },
+        {
+          priority: i % 2 === 0 ? "high" : "normal",
+          correlationId: `http-test-${i}`,
+        },
+      );
 
       jobPromises.push(jobPromise);
       this.statsCollector.increment("computeJobs");
@@ -306,13 +367,17 @@ class InternetFriendsIntegrationDemo {
 
     // Submit data processing jobs
     for (let i = 0; i < 3; i++) {
-      const jobPromise = computeManager.submitJob("demo.data_processing", {
-        items: (i + 1) * 50,
-        operation: "transform",
-      }, {
-        priority: "normal",
-        correlationId: `data-proc-${i}`,
-      });
+      const jobPromise = computeManager.submitJob(
+        "data.processing",
+        {
+          items: (i + 1) * 50,
+          operation: "transform",
+        },
+        {
+          priority: "normal",
+          correlationId: `data-proc-${i}`,
+        },
+      );
 
       jobPromises.push(jobPromise);
       this.statsCollector.increment("computeJobs");
@@ -327,7 +392,9 @@ class InternetFriendsIntegrationDemo {
 
     // Check compute system status
     const status = computeManager.getStatus();
-    console.log(`  📊 Queue: ${status.queueSize}, Running: ${status.runningJobs}`);
+    console.log(
+      `  📊 Queue: ${status.queueSize}, Running: ${status.runningJobs}`,
+    );
     console.log(`  📈 Total jobs processed: ${status.metrics.completedJobs}`);
 
     this.statsCollector.increment("successfulOperations");
@@ -348,22 +415,37 @@ class InternetFriendsIntegrationDemo {
         name: "Integration Test Request",
         url: "/",
         method: "GET",
+        timeout: 10000,
         expectedStatus: 200,
+        followRedirects: true,
+        insecure: false,
+        retries: 3,
+        retryDelay: 1000,
       });
 
       if (httpResult.success) {
         // 3. API event based on HTTP result
-        APIEvents.requestComplete("GET", "/", httpResult.status!, httpResult.responseTime, workflowId);
+        APIEvents.requestComplete(
+          "GET",
+          "/",
+          httpResult.status!,
+          httpResult.responseTime,
+          workflowId,
+        );
 
         // 4. Trigger compute job based on request
-        const computeJobId = await computeManager.submitJob("demo.data_processing", {
-          userId: "demo-user",
-          requestId: workflowId,
-          items: 200,
-        }, {
-          priority: "high",
-          correlationId: workflowId,
-        });
+        const computeJobId = await computeManager.submitJob(
+          "data.processing",
+          {
+            userId: "demo-user",
+            requestId: workflowId,
+            items: 200,
+          },
+          {
+            priority: "high",
+            correlationId: workflowId,
+          },
+        );
 
         // 5. Wait for compute completion
         await this.sleep(500);
@@ -372,7 +454,9 @@ class InternetFriendsIntegrationDemo {
         UIEvents.componentRender("dashboard", Date.now() - this.startTime);
 
         console.log(`  ✅ Completed integration workflow: ${workflowId}`);
-        console.log(`  🔗 HTTP (${httpResult.responseTime}ms) → Compute (${computeJobId.slice(0, 8)}...)`);
+        console.log(
+          `  🔗 HTTP (${httpResult.responseTime}ms) → Compute (${computeJobId.slice(0, 8)}...)`,
+        );
 
         this.statsCollector.increment("httpRequests");
         this.statsCollector.increment("computeJobs");
@@ -381,7 +465,6 @@ class InternetFriendsIntegrationDemo {
       } else {
         throw new Error(`HTTP request failed: ${httpResult.error}`);
       }
-
     } catch (error) {
       console.log(`  ❌ Integration workflow failed:`, error);
       this.statsCollector.increment("errors");
@@ -410,9 +493,9 @@ class InternetFriendsIntegrationDemo {
     const totalDuration = Date.now() - this.startTime;
     this.statsCollector.increment("totalDuration", totalDuration);
 
-    console.log("\n" + "=" .repeat(60));
+    console.log("\n" + "=".repeat(60));
     console.log("📊 FINAL DEMO REPORT");
-    console.log("=" .repeat(60));
+    console.log("=".repeat(60));
 
     const report = this.statsCollector.generateReport();
     console.log(report);
@@ -426,7 +509,7 @@ class InternetFriendsIntegrationDemo {
     const recentEvents = this.eventMonitor.getRecentEvents(5);
     if (recentEvents.length > 0) {
       console.log("\n🔍 Recent Events:");
-      recentEvents.forEach(event => {
+      recentEvents.forEach((event) => {
         const timeAgo = Date.now() - event.timestamp;
         console.log(`  • ${event.type} (${timeAgo}ms ago)`);
       });
@@ -436,7 +519,7 @@ class InternetFriendsIntegrationDemo {
   }
 
   private async sleep(ms: number): Promise<void> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 }
 
@@ -446,7 +529,9 @@ async function main() {
   const options = {
     verbose: args.includes("--verbose") || args.includes("-v"),
     quick: args.includes("--quick") || args.includes("-q"),
-    baseUrl: args.find(arg => arg.startsWith("--url="))?.split("=")[1] || DEMO_CONFIG.baseUrl,
+    baseUrl:
+      args.find((arg) => arg.startsWith("--url="))?.split("=")[1] ||
+      DEMO_CONFIG.baseUrl,
   };
 
   if (options.verbose) {
@@ -460,7 +545,12 @@ async function main() {
   // Adjust demo duration for quick mode
   if (options.quick) {
     DEMO_CONFIG.duration = 10000; // 10 seconds
-    DEMO_CONFIG.phases = ["setup", "curl_testing", "event_processing", "teardown"];
+    DEMO_CONFIG.phases = [
+      "setup",
+      "curl_testing",
+      "event_processing",
+      "teardown",
+    ];
   }
 
   // Update base URL if provided
@@ -486,7 +576,9 @@ if (import.meta.main) {
     }
     console.log(`✅ Server accessible at ${DEMO_CONFIG.baseUrl}`);
   } catch (error) {
-    console.log(`⚠️  Warning: Server may not be running at ${DEMO_CONFIG.baseUrl}`);
+    console.log(
+      `⚠️  Warning: Server may not be running at ${DEMO_CONFIG.baseUrl}`,
+    );
     console.log("   Start server with: bun run dev");
     console.log("   Demo will continue but HTTP tests may fail\n");
   }

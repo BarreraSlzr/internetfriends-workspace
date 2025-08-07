@@ -159,17 +159,17 @@ export interface ButtonA11yProps {
     | "grid"
     | "dialog";
 
-  /** Role override */
-  role?: string;
-
   /** Tab index override */
   tabIndex?: number;
 }
 
 // Extended button props with accessibility
 export interface ButtonAtomicA11yProps
-  extends Omit<ButtonAtomicProps, "aria-expanded" | "aria-pressed">,
-    ButtonA11yProps {}
+  extends Omit<ButtonAtomicProps, "aria-expanded" | "aria-pressed" | "role">,
+    ButtonA11yProps {
+  /** Role override */
+  role?: string;
+}
 
 // Button group props for when buttons are grouped together
 export interface ButtonGroupProps {
@@ -220,10 +220,13 @@ export interface ButtonFormConfig {
 export interface ButtonAtomicCompleteProps
   extends Omit<
       ButtonAtomicProps,
-      "aria-expanded" | "aria-pressed" | "formAction"
+      "aria-expanded" | "aria-pressed" | "formAction" | "role"
     >,
     ButtonA11yProps,
-    ButtonFormConfig {}
+    ButtonFormConfig {
+  /** Role override */
+  role?: string;
+}
 
 // Button event handlers interface
 export interface ButtonEventHandlers {

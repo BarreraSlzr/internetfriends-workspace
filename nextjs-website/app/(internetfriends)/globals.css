@@ -1,36 +1,12 @@
+/* Import InternetFriends Design Tokens */
+@import "../../styles/design-tokens.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    /* InternetFriends Design Tokens */
-    /* Primary brand colors */
-    --if-primary: #3b82f6;
-    --if-primary-hover: #2563eb;
-    --if-primary-light: rgba(59, 130, 246, 0.08);
-    --if-primary-active: rgba(59, 130, 246, 0.12);
-
-    /* Glass morphism system */
-    --glass-bg-header: rgba(255, 255, 255, 0.85);
-    --glass-bg-header-scrolled: rgba(255, 255, 255, 0.92);
-    --glass-border: rgba(255, 255, 255, 0.12);
-    --glass-border-enhanced: rgba(255, 255, 255, 0.18);
-    --glass-border-outset: rgba(59, 130, 246, 0.15);
-
-    /* Compact border radius system */
-    --radius-xs: 0.25rem; /* 4px - Ultra compact */
-    --radius-sm: 0.375rem; /* 6px - Small compact */
-    --radius-md: 0.5rem; /* 8px - Medium compact */
-    --radius-lg: 0.75rem; /* 12px - Large (max for backgrounds) */
-
-    /* Light mode colors - "Coin of Value" system */
-    --color-text-primary: #111827;
-    --color-text-contrast: #000000;
-    --color-bg-primary: #ffffff;
-    --color-bg-glass: rgba(255, 255, 255, 0.95);
-    --color-border-focus: #60a5fa;
-
     /* Tailwind/shadcn integration */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -73,19 +49,6 @@
   }
 
   .dark {
-    /* Dark mode - "Coin of Value" system */
-    --color-text-primary: #ffffff;
-    --color-text-contrast: #ffffff;
-    --color-bg-primary: #111827;
-    --color-bg-glass: rgba(17, 24, 39, 0.95);
-    --color-border-focus: #60a5fa;
-
-    /* Glass morphism adjustments for dark mode */
-    --glass-bg-header: rgba(17, 24, 39, 0.85);
-    --glass-bg-header-scrolled: rgba(17, 24, 39, 0.92);
-    --glass-border: rgba(59, 130, 246, 0.12);
-    --glass-border-enhanced: rgba(59, 130, 246, 0.18);
-
     /* Tailwind/shadcn dark mode */
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -285,8 +248,10 @@
   input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
   textarea:focus,
   select:focus {
-    @apply ring-if-primary/50 border-if-primary;
+    @apply border-if-primary;
     box-shadow: 0 0 0 3px var(--if-primary-light);
+    outline: 2px solid var(--if-primary);
+    outline-offset: 2px;
   }
 
   /* Custom scrollbars */

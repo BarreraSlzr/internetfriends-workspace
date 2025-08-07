@@ -1,9 +1,9 @@
 // InternetFriends Header Organism Types
 // Comprehensive type definitions for the site header component
 
-import { ReactNode } from 'react';
-import { NavigationMolecularProps } from '@/components/molecular/navigation/types';
-import { ButtonAtomicProps } from '@/components/atomic/button/types';
+import { ReactNode } from "react";
+import { NavigationMolecularProps } from "@/components/molecular/navigation/types";
+import { ButtonAtomicProps } from "@/components/atomic/button/types";
 
 // Logo configuration
 export interface HeaderLogoConfig {
@@ -30,7 +30,7 @@ export interface ThemeToggleConfig {
   /** Show theme toggle button */
   show?: boolean;
   /** Theme toggle position */
-  position?: 'left' | 'right' | 'mobile-only';
+  position?: "left" | "right" | "mobile-only";
   /** Custom toggle button props */
   buttonProps?: Partial<ButtonAtomicProps>;
   /** Show theme labels */
@@ -48,7 +48,7 @@ export interface LanguageSelectorConfig {
   /** Show language selector */
   show?: boolean;
   /** Language selector position */
-  position?: 'left' | 'right' | 'mobile-only';
+  position?: "left" | "right" | "mobile-only";
   /** Show language flags */
   showFlags?: boolean;
   /** Show language names */
@@ -74,9 +74,9 @@ export interface HeaderAction {
   /** External link */
   external?: boolean;
   /** Button variant */
-  variant?: ButtonAtomicProps['variant'];
+  variant?: ButtonAtomicProps["variant"];
   /** Button size */
-  size?: ButtonAtomicProps['size'];
+  size?: ButtonAtomicProps["size"];
   /** Disabled state */
   disabled?: boolean;
   /** Loading state */
@@ -86,7 +86,7 @@ export interface HeaderAction {
   /** Show only on mobile */
   mobileOnly?: boolean;
   /** Hide on certain screen sizes */
-  hideOn?: Array<'xs' | 'sm' | 'md' | 'lg' | 'xl'>;
+  hideOn?: Array<"xs" | "sm" | "md" | "lg" | "xl">;
   /** Custom button props */
   buttonProps?: Partial<ButtonAtomicProps>;
 }
@@ -102,7 +102,7 @@ export interface HeaderSearchConfig {
   /** Search results handler */
   onResults?: (results: any[]) => void;
   /** Search position */
-  position?: 'left' | 'center' | 'right';
+  position?: "left" | "center" | "right";
   /** Show search suggestions */
   showSuggestions?: boolean;
   /** Search keyboard shortcut */
@@ -118,7 +118,7 @@ export interface HeaderAnnouncementConfig {
   /** Announcement content */
   content?: ReactNode;
   /** Announcement variant */
-  variant?: 'info' | 'warning' | 'success' | 'error';
+  variant?: "info" | "warning" | "success" | "error";
   /** Dismissible announcement */
   dismissible?: boolean;
   /** Auto-hide after duration (ms) */
@@ -148,17 +148,17 @@ export interface HeaderStickyConfig {
 // Header responsive behavior
 export interface HeaderResponsiveConfig {
   /** Mobile breakpoint */
-  mobileBreakpoint?: 'sm' | 'md' | 'lg';
+  mobileBreakpoint?: "sm" | "md" | "lg";
   /** Show mobile menu toggle */
   showMobileToggle?: boolean;
   /** Mobile menu position */
-  mobileMenuPosition?: 'left' | 'right' | 'full';
+  mobileMenuPosition?: "left" | "right" | "full";
   /** Mobile menu overlay */
   mobileMenuOverlay?: boolean;
   /** Desktop layout */
-  desktopLayout?: 'spread' | 'center' | 'compact';
+  desktopLayout?: "spread" | "center" | "compact";
   /** Mobile layout */
-  mobileLayout?: 'stacked' | 'inline' | 'minimal';
+  mobileLayout?: "stacked" | "inline" | "minimal";
 }
 
 // Main header organism props
@@ -167,7 +167,7 @@ export interface HeaderOrganismProps {
   logo?: HeaderLogoConfig;
 
   /** Navigation configuration (extends molecular navigation) */
-  navigation?: Omit<NavigationMolecularProps, 'logo'>;
+  navigation?: Omit<NavigationMolecularProps, "logo">;
 
   /** Header actions array */
   actions?: HeaderAction[];
@@ -191,10 +191,10 @@ export interface HeaderOrganismProps {
   responsive?: HeaderResponsiveConfig;
 
   /** Header variant */
-  variant?: 'default' | 'transparent' | 'solid' | 'glass';
+  variant?: "default" | "transparent" | "solid" | "glass";
 
   /** Header size */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 
   /** Additional CSS classes */
   className?: string;
@@ -203,13 +203,13 @@ export interface HeaderOrganismProps {
   children?: ReactNode;
 
   /** Test identifier */
-  'data-testid'?: string;
+  "data-testid"?: string;
 
   /** Header ID */
   id?: string;
 
   /** ARIA label for accessibility */
-  'aria-label'?: string;
+  "aria-label"?: string;
 
   /** Skip to main content link */
   skipToMain?: boolean;
@@ -285,67 +285,56 @@ export interface HeaderUtils {
 export const HEADER_DEFAULTS: Required<
   Pick<
     HeaderOrganismProps,
-    'variant' | 'size' | 'skipToMain' | 'mainContentSelector'
+    "variant" | "size" | "skipToMain" | "mainContentSelector"
   >
 > = {
-  variant: 'default',
-  size: 'md',
+  variant: "default",
+  size: "md",
   skipToMain: true,
-  mainContentSelector: '#main-content',
+  mainContentSelector: "#main-content",
 };
 
-export const HEADER_STICKY_DEFAULTS: Required<HeaderStickyConfig> = {
+export const HEADER_STICKY_DEFAULTS: Required<
+  Omit<HeaderStickyConfig, "stickyContent">
+> & { stickyContent: ReactNode | null } = {
   enabled: true,
   offset: 0,
-  stickyContent: undefined,
-  transitionDuration: '300ms',
-  stickyClassName: '',
+  stickyContent: null,
+  transitionDuration: "300ms",
+  stickyClassName: "",
   hideOnScroll: false,
 };
 
 export const HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
-  mobileBreakpoint: 'lg',
+  mobileBreakpoint: "lg",
   showMobileToggle: true,
-  mobileMenuPosition: 'right',
+  mobileMenuPosition: "right",
   mobileMenuOverlay: true,
-  desktopLayout: 'spread',
-  mobileLayout: 'stacked',
+  desktopLayout: "spread",
+  mobileLayout: "stacked",
 };
 
 // Type guards
 export const isHeaderAction = (value: any): value is HeaderAction => {
   return (
-    typeof value === 'object' &&
+    typeof value === "object" &&
     value !== null &&
-    typeof value.id === 'string' &&
-    typeof value.label === 'string'
+    typeof value.id === "string" &&
+    typeof value.label === "string"
   );
 };
 
 export const isHeaderVariant = (
-  value: string
-): value is HeaderOrganismProps['variant'] => {
-  return ['default', 'transparent', 'solid', 'glass'].includes(value);
+  value: string | undefined,
+): value is HeaderOrganismProps["variant"] => {
+  return (
+    value !== undefined &&
+    ["default", "transparent", "solid", "glass"].includes(value)
+  );
 };
 
 export const isHeaderSize = (
-  value: string
-): value is HeaderOrganismProps['size'] => {
-  return ['sm', 'md', 'lg'].includes(value);
-};
-
-// Export all types
-export type {
-  HeaderOrganismProps as default,
-  HeaderLogoConfig,
-  ThemeToggleConfig,
-  LanguageSelectorConfig,
-  HeaderAction,
-  HeaderSearchConfig,
-  HeaderAnnouncementConfig,
-  HeaderStickyConfig,
-  HeaderResponsiveConfig,
-  HeaderState,
-  HeaderContextValue,
-  HeaderUtils,
+  value: string | undefined,
+): value is HeaderOrganismProps["size"] => {
+  return value !== undefined && ["sm", "md", "lg"].includes(value);
 };
