@@ -36,7 +36,7 @@ interface Project {
   githubUrl?: string;
   featured?: boolean;
   createdAt: Date;
-  updatedAt: Date;
+  _updatedAt: Date;
   startDate?: Date;
   progress?: number;
   metrics?: {
@@ -67,7 +67,7 @@ interface ProjectShowcaseProps {
   infiniteScroll?: boolean;
   itemsPerPage?: number;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
@@ -110,7 +110,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
 
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const isInView = useInView(containerRef, { _once: true, _margin: "-100px" });
 
   // Sort Options
   const sortOptions: Array<{ value: SortOption; label: string }> = [
@@ -308,7 +308,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
       completed: completedProjects,
       active: activeProjects,
       completionRate:
-        totalProjects > 0 ? (completedProjects / totalProjects) * 100 : 0,
+        totalProjects > 0 ? (completedProjects / totalProjects) * _100 : 0,
       totalViews,
     };
   }, [filteredProjects]);
@@ -319,8 +319,8 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        _staggerChildren: 0.1,
+        _delayChildren: 0.2,
       },
     },
   };
@@ -333,7 +333,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: [0.4, 0, 0.2, 1],
+        _ease: [0.4, 0, 0.2, 1],
       },
     },
   };
@@ -361,7 +361,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
             type="text"
             placeholder="Search projects..."
             value={activeFilters.search}
-            onChange={(e) => handleFilterChange({ search: e.target.value })}
+            onChange={(_e) => handleFilterChange({ search: e.target.value })}
             className={styles.searchInput}
           />
           <span className={styles.searchIcon}>🔍</span>
@@ -374,12 +374,12 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           <label className={styles.filterLabel}>Category:</label>
           <select
             value={activeFilters.category}
-            onChange={(e) => handleFilterChange({ category: e.target.value })}
+            onChange={(_e) => handleFilterChange({ category: e.target.value })}
             className={styles.filterSelect}
           >
             <option value="all">All Categories</option>
             {categories.map((category) => (
-              <option key={category} value={category}>
+              < key={index}option key={category} value={category}>
                 {category}
               </option>
             ))}
@@ -392,7 +392,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         <label className={styles.filterLabel}>Status:</label>
         <select
           value={activeFilters.status}
-          onChange={(e) =>
+          onChange={(_e) =>
             handleFilterChange({
               status: e.target.value as ProjectFilter["status"],
             })
@@ -401,7 +401,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         >
           <option value="all">All Status</option>
           {Object.entries(statusConfig).map(([status, config]) => (
-            <option key={status} value={status}>
+            < key={config]}option key={status} value={status}>
               {config.icon} {config.label}
             </option>
           ))}
@@ -413,11 +413,11 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         <label className={styles.filterLabel}>Technologies:</label>
         <div className={styles.technologyFilter}>
           {allTechnologies.slice(0, 8).map((tech) => (
-            <label key={tech} className={styles.technologyTag}>
+            < key={index}label key={tech} className={styles.technologyTag}>
               <input
                 type="checkbox"
                 checked={activeFilters.technology?.includes(tech) || false}
-                onChange={(e) => {
+                onChange={(_e) => {
                   const currentTech = activeFilters.technology || [];
                   const newTech = e.target.checked
                     ? [...currentTech, tech]
@@ -437,14 +437,14 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
     <div className={styles.controls}>
       {/* Sort Options */}
       <div className={styles.sortContainer}>
-        <label className={styles.sortLabel}>Sort by:</label>
+        <label className={styles.sortLabel}>Sort _by:</label>
         <select
           value={currentSort}
-          onChange={(e) => handleSortChange(e.target.value as SortOption)}
+          onChange={(_e) => handleSortChange(e.target.value as SortOption)}
           className={styles.sortSelect}
         >
           {sortOptions.map((option) => (
-            <option key={option.value} value={option.value}>
+            < key={index}option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
@@ -454,7 +454,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
       {/* View Mode Toggle */}
       <div className={styles.viewModeToggle}>
         {viewModeOptions.map((option) => (
-          <button
+          < key={index}button
             key={option.value}
             onClick={() => handleViewModeChange(option.value)}
             className={`
@@ -507,14 +507,14 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         className={`
           ${styles.projectCard}
           ${styles[currentViewMode]}
-          ${isHovered ? styles.hovered : ""}
+          ${isHovered ? styles._hovered : ""}
         `}
         variants={projectVariants}
-        whileHover="hover"
+        _whileHover="hover"
         onClick={() => handleProjectClick(project)}
         onMouseEnter={() => handleProjectHover(project)}
         onMouseLeave={() => handleProjectHover(null)}
-        layout={animateOnScroll}
+        _layout={animateOnScroll}
       >
         {/* Project Image */}
         <div className={styles.projectImage}>
@@ -551,7 +551,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
             <div
               className={styles.projectStatus}
               style={{
-                backgroundColor: `${statusInfo.color}20`,
+                _backgroundColor: `${statusInfo.color}20`,
                 color: statusInfo.color,
               }}
             >
@@ -565,7 +565,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           {/* Technologies */}
           <div className={styles.projectTechnologies}>
             {project.technologies?.slice(0, 3).map((tech: string) => (
-              <span key={tech} className={styles.techBadge}>
+              < key={index}span key={tech} className={styles.techBadge}>
                 {tech}
               </span>
             ))}
@@ -604,7 +604,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
                 <div className={styles.progressBar}>
                   <div
                     className={styles.progressFill}
-                    style={{ width: `${project.progress}%` }}
+                    style={{ _width: `${project.progress}%` }}
                   />
                 </div>
               </div>
@@ -636,7 +636,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
                 Math.abs(page - currentPage) <= 2,
             )
             .map((page, index, array) => (
-              <React.Fragment key={page}>
+              < key={index, array}React.Fragment key={page}>
                 {index > 0 && array[index - 1] !== page - 1 && (
                   <span className={styles.paginationEllipsis}>...</span>
                 )}
@@ -677,11 +677,11 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
 
   return (
     <motion.div
-      ref={containerRef}
+      _ref={containerRef}
       className={`${styles.container} ${className || ""}`}
       variants={containerVariants}
-      initial="hidden"
-      animate={animateOnScroll ? (isInView ? "visible" : "hidden") : "visible"}
+      _initial="hidden"
+      _animate={animateOnScroll ? (isInView ? "visible" : "hidden") : "visible"}
       {...props}
     >
       {/* Header */}

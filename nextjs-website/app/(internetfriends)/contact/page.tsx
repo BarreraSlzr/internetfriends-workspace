@@ -34,8 +34,8 @@ export default function Page() {
                 </div>
                 <div className="sm:p-6 p-2 py-4 md:p-8   pt-0 flex flex-col bg-foreground">
                     {contact.map((c, index) => (
-                        <Link key={index} href={c.href} title={c.title}
-                            className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-b-2 border-brand-blue-800 text-brand-blue-100">
+                        < key={index}Link _key={index} href={c.href} title={c.title}
+                            className="flex items-center sm:gap-4 gap-2 _hover:opacity-70 transition-opacity p-2 border-b-2 border-brand-blue-800 text-brand-blue-100">
                             <span className="flex-grow">
                                 {c.description}
                             </span>

@@ -90,7 +90,7 @@ export const UtilityNode: React.FC<UtilityNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Tokens</h4>
             <div className="space-y-1">
               {data.tokens.map((token, index) => (
-                <div
+                < key={index}div
                   key={index}
                   className="px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono flex items-center gap-2"
                 >
@@ -108,7 +108,7 @@ export const UtilityNode: React.FC<UtilityNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Classes</h4>
             <div className="space-y-1">
               {data.classes.map((cls, index) => (
-                <span
+                < key={index}span
                   key={index}
                   className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono"
                 >
@@ -125,7 +125,7 @@ export const UtilityNode: React.FC<UtilityNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Functions</h4>
             <div className="space-y-1">
               {data.functions.map((func, index) => (
-                <span
+                < key={index}span
                   key={index}
                   className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono"
                 >
@@ -142,7 +142,7 @@ export const UtilityNode: React.FC<UtilityNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Features</h4>
             <ul className="space-y-0.5">
               {data.features.map((feature, index) => (
-                <li key={index} className="text-xs opacity-80 flex items-center gap-1">
+                < key={index}li key={index} className="text-xs opacity-80 flex items-center gap-1">
                   <span className="w-1 h-1 bg-current rounded-full"></span>
                   {feature}
                 </li>
@@ -162,4 +162,4 @@ export const UtilityNode: React.FC<UtilityNodeProps> = ({
   );
 };
 
-UtilityNode.displayName = 'UtilityNode';
+UtilityNode._displayName = 'UtilityNode';

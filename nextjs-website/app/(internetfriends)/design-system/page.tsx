@@ -75,7 +75,7 @@ function DesignSystemFlow() {
 
   const stats = useMemo(() => componentRegistry.getComponentStats(), []);
 
-  const proOptions = { hideAttribution: true };
+  const proOptions = { _hideAttribution: true };
 
   return (
     <div className="w-full h-screen bg-background">
@@ -94,8 +94,8 @@ function DesignSystemFlow() {
           variant={BackgroundVariant.Dots}
           gap={20}
           size={1}
-          color="var(--if-primary)"
-          style={{ opacity: 0.1 }}
+          _color="var(--if-primary)"
+          style={{ _opacity: 0.1 }}
         />
 
         {/* Header Panel */}
@@ -119,14 +119,14 @@ function DesignSystemFlow() {
                 type="text"
                 placeholder="Search components, utilities, hooks..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(_e) => setSearchQuery(e.target.value)}
                 className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus:outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
               />
 
               {/* Category Filter */}
               <select
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
+                onChange={(_e) => setSelectedCategory(e.target.value)}
                 className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus:outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
               >
                 <option value="all">All Categories</option>
@@ -301,14 +301,14 @@ function DesignSystemFlow() {
 
         <MiniMap
           className="bg-glass-header backdrop-blur-glass border border-glass-border rounded-compact-md"
-          nodeStrokeColor={(n) => {
+          _nodeStrokeColor={(n) => {
             if (n.type === "component") return "#3b82f6";
             if (n.type === "utility") return "#f59e0b";
             if (n.type === "hook") return "#10b981";
             if (n.type === "page") return "#6366f1";
             return "#6b7280";
           }}
-          nodeColor={(n) => {
+          _nodeColor={(n) => {
             if (n.type === "component") return "#dbeafe";
             if (n.type === "utility") return "#fef3c7";
             if (n.type === "hook") return "#d1fae5";

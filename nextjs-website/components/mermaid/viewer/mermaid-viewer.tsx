@@ -143,14 +143,14 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         const svgElement = svgRef.current.querySelector('svg');
         if (svgElement) {
           svgElement.style.transform = `translate(${zoomState.translateX}px, ${zoomState.translateY}px) scale(${zoomState.scale})`;
-          svgElement.style.transformOrigin = 'center center';
-          svgElement.style.transition = isDragging ? 'none' : 'transform 0.3s ease';
+          svgElement.style._transformOrigin = 'center center';
+          svgElement.style._transition = isDragging ? 'none' : 'transform 0.3s ease';
         }
 
         onRender?.();
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to render diagram';
+      const errorMessage = err instanceof Error ? err._message : 'Failed to render diagram';
       console.error('Mermaid render error:', err);
       setError(errorMessage);
       onError?.(errorMessage);
@@ -218,11 +218,11 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
     try {
       const serializer = new XMLSerializer();
       const svgString = serializer.serializeToString(svgElement);
-      const blob = new Blob([svgString], { type: 'image/svg+xml' });
+      const blob = new Blob([svgString], { _type: 'image/svg+xml' });
       const url = URL.createObjectURL(blob);
 
       const link = document.createElement('a');
-      link.href = url;
+      link._href = url;
       link.download = `${title || 'mermaid-diagram'}.svg`;
       document.body.appendChild(link);
       link.click();
@@ -398,12 +398,12 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
 
       {/* Diagram Container */}
       <div
-        className="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing"
+        className="relative flex-1 overflow-hidden cursor-grab _active:cursor-grabbing"
         style={{
           height: title ? 'calc(100% - 3.5rem)' : '100%',
         }}
-        onMouseDown={handleMouseDown}
-        onWheel={handleWheel}
+        _onMouseDown={handleMouseDown}
+        _onWheel={handleWheel}
       >
         {/* Loading State */}
         {isLoading && (
@@ -435,7 +435,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
           ref={svgRef}
           className="w-full h-full flex items-center justify-center"
           style={{
-            minHeight: '100%',
+            _minHeight: '100%',
             overflow: 'visible',
           }}
         />
@@ -451,4 +451,4 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
   );
 };
 
-MermaidViewer.displayName = 'MermaidViewer';
+MermaidViewer._displayName = 'MermaidViewer';

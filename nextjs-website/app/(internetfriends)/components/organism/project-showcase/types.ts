@@ -36,7 +36,7 @@ export type SortDirection = "asc" | "desc";
 // Base interfaces
 export interface ProjectLink {
   type: "github" | "demo" | "documentation" | "website" | "download";
-  url: string;
+  _url: string;
   label?: string;
 }
 
@@ -62,7 +62,7 @@ export interface ProjectTechnology {
 export interface ProjectTeamMember {
   id: string;
   name: string;
-  role: string;
+  _role: string;
   avatar?: string;
   profileUrl?: string;
 }
@@ -70,27 +70,27 @@ export interface ProjectTeamMember {
 export interface Project {
   id: string;
   name: string;
-  description: string;
+  _description: string;
   longDescription?: string;
   status: ProjectStatus;
   category: ProjectCategory;
   priority: ProjectPriority;
   tags: string[];
-  technologies: string[];
-  techStack: ProjectTechnology[];
-  links: ProjectLink[];
+  _technologies: string[];
+  _techStack: ProjectTechnology[];
+  _links: ProjectLink[];
   metrics: ProjectMetrics;
   team: ProjectTeamMember[];
   thumbnail?: string;
-  images: string[];
+  _images: string[];
   video?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  _createdAt: Date;
+  _updatedAt: Date;
   completionDate?: Date;
   startDate?: Date;
   progress: number; // 0-100
   featured: boolean;
-  private: boolean;
+  _private: boolean;
   archived: boolean;
   license?: string;
   documentation?: string;
@@ -101,21 +101,21 @@ export interface Project {
 export interface ProjectFilters {
   status: ProjectStatus[];
   category: ProjectCategory[];
-  technology: string[];
+  _technology: string[];
   tags: string[];
   priority: ProjectPriority[];
   featured?: boolean;
   archived?: boolean;
   dateRange?: {
-    start: Date;
-    end: Date;
+    _start: Date;
+    _end: Date;
   };
   search: string;
 }
 
 export interface ProjectSort {
   field: SortOption;
-  direction: SortDirection;
+  _direction: SortDirection;
 }
 
 // Component props
@@ -166,17 +166,17 @@ export interface ProjectCardProps {
 export interface ProjectFiltersProps {
   filters: ProjectFilters;
   onFiltersChange: (filters: ProjectFilters) => void;
-  onClearFilters: () => void;
-  availableCategories: ProjectCategory[];
-  availableTechnologies: string[];
-  availableTags: string[];
+  _onClearFilters: () => void;
+  _availableCategories: ProjectCategory[];
+  _availableTechnologies: string[];
+  _availableTags: string[];
   className?: string;
 }
 
 export interface ProjectSortProps {
   sort: ProjectSort;
   onSortChange: (sort: ProjectSort) => void;
-  options: SortOption[];
+  _options: SortOption[];
   className?: string;
 }
 
@@ -194,8 +194,8 @@ export interface ProjectToolbarProps {
   onSortChange: (sort: ProjectSort) => void;
   searchQuery: string;
   onSearchChange: (query: string) => void;
-  projectCount: number;
-  selectedCount: number;
+  _projectCount: number;
+  _selectedCount: number;
   onBulkAction?: (action: string, projects: Project[]) => void;
   enableViewToggle?: boolean;
   enableSort?: boolean;
@@ -221,8 +221,8 @@ export interface ProjectGridProps {
 
 export interface ProjectDetailModalProps {
   project: Project | null;
-  isOpen: boolean;
-  onClose: () => void;
+  _isOpen: boolean;
+  _onClose: () => void;
   onEdit?: (project: Project) => void;
   onDelete?: (project: Project) => void;
   onShare?: (project: Project) => void;
@@ -232,8 +232,8 @@ export interface ProjectDetailModalProps {
 // Event types
 export interface ProjectEvent {
   type: "click" | "edit" | "delete" | "share" | "filter" | "sort" | "search" | "view_change";
-  data: any;
-  timestamp: Date;
+  _data: unknown;
+  _timestamp: Date;
   userId?: string;
 }
 
@@ -241,10 +241,10 @@ export interface ProjectEvent {
 export interface ProjectsApiResponse {
   projects: Project[];
   total: number;
-  page: number;
-  limit: number;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
+  _page: number;
+  _limit: number;
+  _hasNextPage: boolean;
+  _hasPreviousPage: boolean;
   filters: ProjectFilters;
   sort: ProjectSort;
 }
@@ -256,59 +256,59 @@ export interface ProjectApiResponse {
 }
 
 // Utility types
-export type ProjectMap = Record<string, Project>;
-export type TechnologyMap = Record<string, ProjectTechnology>;
-export type CategoryMap = Record<ProjectCategory, Project[]>;
+export type _ProjectMap = Record<string, Project>;
+export type _TechnologyMap = Record<string, ProjectTechnology>;
+export type _CategoryMap = Record<ProjectCategory, Project[]>;
 
 // Configuration interfaces
 export interface ProjectShowcaseConfig {
-  defaultViewMode: ViewMode;
-  defaultSort: ProjectSort;
-  enabledFeatures: {
+  _defaultViewMode: ViewMode;
+  _defaultSort: ProjectSort;
+  _enabledFeatures: {
     filters: boolean;
     search: boolean;
     sort: boolean;
-    viewToggle: boolean;
+    _viewToggle: boolean;
     metrics: boolean;
     progress: boolean;
     team: boolean;
-    actions: boolean;
+    _actions: boolean;
   };
-  pagination: {
-    enabled: boolean;
-    pageSize: number;
-    showSizeSelector: boolean;
+  _pagination: {
+    _enabled: boolean;
+    _pageSize: number;
+    _showSizeSelector: boolean;
   };
   grid: {
-    columns: {
-      xs: number;
-      sm: number;
-      md: number;
-      lg: number;
-      xl: number;
+    _columns: {
+      _xs: number;
+      _sm: number;
+      _md: number;
+      _lg: number;
+      _xl: number;
     };
-    gap: string;
+    _gap: string;
   };
 }
 
 export interface ProjectTheme {
-  colors: {
-    cardBackground: string;
-    cardBorder: string;
-    cardHover: string;
-    statusColors: Record<ProjectStatus, string>;
-    priorityColors: Record<ProjectPriority, string>;
-    categoryColors: Record<ProjectCategory, string>;
+  _colors: {
+    _cardBackground: string;
+    _cardBorder: string;
+    _cardHover: string;
+    _statusColors: Record<ProjectStatus, string>;
+    _priorityColors: Record<ProjectPriority, string>;
+    _categoryColors: Record<ProjectCategory, string>;
   };
-  spacing: {
-    cardPadding: string;
-    cardGap: string;
-    sectionGap: string;
+  _spacing: {
+    _cardPadding: string;
+    _cardGap: string;
+    _sectionGap: string;
   };
-  typography: {
-    titleSize: string;
-    descriptionSize: string;
-    metaSize: string;
+  _typography: {
+    _titleSize: string;
+    _descriptionSize: string;
+    _metaSize: string;
   };
 }
 
@@ -321,11 +321,11 @@ export interface FilterOption {
 
 export interface SearchResult {
   project: Project;
-  score: number;
-  matches: {
+  _score: number;
+  _matches: {
     field: string;
     value: string;
-    highlight: string;
+    _highlight: string;
   }[];
 }
 
@@ -341,10 +341,10 @@ export interface BulkOperation {
 
 export interface ProjectStats {
   total: number;
-  byStatus: Record<ProjectStatus, number>;
-  byCategory: Record<ProjectCategory, number>;
-  byPriority: Record<ProjectPriority, number>;
-  completionRate: number;
-  averageProgress: number;
-  recentActivity: number;
+  _byStatus: Record<ProjectStatus, number>;
+  _byCategory: Record<ProjectCategory, number>;
+  _byPriority: Record<ProjectPriority, number>;
+  _completionRate: number;
+  _averageProgress: number;
+  _recentActivity: number;
 }

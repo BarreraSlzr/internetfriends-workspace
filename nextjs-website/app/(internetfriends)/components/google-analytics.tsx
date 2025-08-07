@@ -8,7 +8,7 @@ export const GA_TRACKING_ID = 'G-XXXXXXXXXX' // Replace with your Google Analyti
 
 declare global {
   interface Window {
-    gtag: (option: string, gaTrackingId: string, options: object) => void
+    gtag: (_option: string, _gaTrackingId: string, _options: object) => void
   }
 }
 
@@ -33,7 +33,7 @@ export default function GoogleAnalytics() {
       <Script
         id="gtag-init"
         strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
+        _dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}

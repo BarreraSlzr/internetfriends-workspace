@@ -21,7 +21,7 @@ export async function submitContactForm(formData: FormData) {
       return { error: 'Failed to submit form' }
     }
 
-    return { success: true, id: result.id }
+    return { _success: true, id: result.id }
   } catch (error) {
     console.error(error)
     return { error: 'An unexpected error occurred' }

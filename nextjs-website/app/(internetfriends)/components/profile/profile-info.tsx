@@ -8,9 +8,9 @@ import { format } from "date-fns";
 import { cardCss } from "./profile-card";
 import { Availability } from "../availability";
 
-export const ProfileInfo = () => {
+export const _ProfileInfo = () => {
     const currentDate = new TZDate(Date.now(), curriculum.contactInfo.localTime);
-    const timeFormatted = format(currentDate, 'hh:mm aa');
+    const timeFormatted = format(currentDate, '_hh:mm aa');
 
     return (
         <>

@@ -20,7 +20,7 @@ export const FunnelsPlanSchema = z.object({
         z.object({
           order: z.number().int(),
           action: z.string(),
-          details: z.record(z.any()).optional(),
+          details: z.record(z.string(), z.any()).optional(),
         })
       ),
       owner: z.string(),
@@ -59,4 +59,4 @@ export const CommitMetadataSchema = z.object({
   canonicalization: z.string(),
   tag_summary: z.string(), // e.g., "ml_dataset_canonical_analysis"
   dataset_insights: z.string(), // Optionally, further parse this if needed
-}); 
+});

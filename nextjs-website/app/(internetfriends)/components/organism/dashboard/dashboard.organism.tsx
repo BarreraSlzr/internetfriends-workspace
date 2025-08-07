@@ -29,7 +29,7 @@ interface DashboardProps {
   showActivity?: boolean;
   showAnalytics?: boolean;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface MetricCard {
@@ -222,9 +222,9 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
   // Computed Values
   const formattedLastUpdate = useMemo(() => {
     return lastUpdate.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
+      _hour: "2-digit",
+      _minute: "2-digit",
+      _second: "2-digit",
     });
   }, [lastUpdate]);
 
@@ -236,7 +236,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       y: 0,
       transition: {
         duration: 0.6,
-        staggerChildren: 0.1,
+        _staggerChildren: 0.1,
       },
     },
   };
@@ -259,15 +259,15 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       animate="visible"
     >
       {metrics.map((metric) => (
-        <motion.div
+        < key={index}motion.div
           key={metric.id}
           className={styles.metricCard}
           variants={itemVariants}
           onClick={() => handleMetricClick(metric)}
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+          _whileHover={{ scale: 1.02 }}
+          _whileTap={{ scale: 0.98 }}
         >
-          <div className={styles.metricIcon} style={{ color: metric.color }}>
+          <div className={styles.metricIcon} _style={{ color: metric.color }}>
             {metric.icon}
           </div>
           <div className={styles.metricContent}>
@@ -294,13 +294,13 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       <h3 className={styles.sectionTitle}>Recent Activity</h3>
       <div className={styles.activityList}>
         {activities.map((activity, index) => (
-          <motion.div
+          < key={index}motion.div
             key={activity.id}
             className={`${styles.activityItem} ${styles[`severity-${activity.severity}`]}`}
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            transition={{ delay: index * 0.1 }}
+            transition={{ _delay: index * 0.1 }}
           >
             <div className={styles.activityIcon}>{activity.icon}</div>
             <div className={styles.activityContent}>
@@ -390,7 +390,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
           <h1 className={styles.title}>InternetFriends Dashboard</h1>
           <div className={styles.headerActions}>
             <span className={styles.lastUpdate}>
-              Last updated: {formattedLastUpdate}
+              Last _updated: {formattedLastUpdate}
             </span>
             <button
               onClick={handleRefresh}
@@ -406,7 +406,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       {/* Navigation Tabs */}
       <nav className={styles.navigation}>
         {tabs.map((tab) => (
-          <button
+          < key={index}button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={`${styles.tab} ${activeTab === tab.id ? styles.active : ""}`}
@@ -420,7 +420,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
 
       {/* Main Content */}
       <main className={styles.content}>
-        <AnimatePresence mode="wait">
+        <AnimatePresence _mode="wait">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, x: 20 }}

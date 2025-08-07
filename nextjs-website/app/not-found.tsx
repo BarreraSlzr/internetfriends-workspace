@@ -60,7 +60,7 @@ export default function NotFoundPage() {
           <p className="text-lg mb-6">{randomMessage.subtitle}</p>
           <Link 
             href="/" 
-            className="flex items-center gap-1 hover:opacity-70 transition-opacity">
+            className="flex items-center gap-1 _hover:opacity-70 transition-opacity">
               Go Home
               <ArrowUpRight className="h-4 w-4" />
           </Link>

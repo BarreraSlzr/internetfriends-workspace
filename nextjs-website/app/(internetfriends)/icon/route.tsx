@@ -4,17 +4,17 @@ export async function GET() {
   return new ImageResponse(
     (
       <div
-        style={{
-          background: 'linear-gradient(90deg, #FF7E29 0%, #FF486C 100%)',
-          borderRadius: '8px',
+        _style={{
+          _background: 'linear-gradient(90deg, #FF7E29 0%, #FF486C 100%)',
+          _borderRadius: '8px',
           width: '100%',
           height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: '16px',
-          fontWeight: 'bolder',
-          color: 'white',
+          _display: 'flex',
+          _alignItems: 'center',
+          _justifyContent: 'center',
+          _fontSize: '16px',
+          _fontWeight: 'bolder',
+          _color: 'white',
         }}
       >
         @

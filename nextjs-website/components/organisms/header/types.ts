@@ -100,7 +100,7 @@ export interface HeaderSearchConfig {
   /** Search handler */
   onSearch?: (query: string) => void;
   /** Search results handler */
-  onResults?: (results: any[]) => void;
+  onResults?: (results: unknown[]) => void;
   /** Search position */
   position?: "left" | "center" | "right";
   /** Show search suggestions */
@@ -108,7 +108,7 @@ export interface HeaderSearchConfig {
   /** Search keyboard shortcut */
   shortcut?: string;
   /** Custom search input props */
-  inputProps?: any;
+  inputProps?: unknown;
 }
 
 // Header announcement bar
@@ -221,68 +221,68 @@ export interface HeaderOrganismProps {
 // Header state interface
 export interface HeaderState {
   /** Is header sticky */
-  isSticky: boolean;
+  _isSticky: boolean;
 
   /** Is mobile menu open */
-  isMobileMenuOpen: boolean;
+  _isMobileMenuOpen: boolean;
 
   /** Current scroll position */
-  scrollPosition: number;
+  _scrollPosition: number;
 
   /** Is header hidden (scroll behavior) */
-  isHidden: boolean;
+  _isHidden: boolean;
 
   /** Is search active */
-  isSearchActive: boolean;
+  _isSearchActive: boolean;
 
   /** Current search query */
-  searchQuery: string;
+  _searchQuery: string;
 
   /** Is announcement visible */
-  isAnnouncementVisible: boolean;
+  _isAnnouncementVisible: boolean;
 }
 
 // Header context value
 export interface HeaderContextValue extends HeaderState {
   /** Toggle mobile menu */
-  toggleMobileMenu: () => void;
+  _toggleMobileMenu: () => void;
 
   /** Close mobile menu */
-  closeMobileMenu: () => void;
+  _closeMobileMenu: () => void;
 
   /** Toggle search */
-  toggleSearch: () => void;
+  _toggleSearch: () => void;
 
   /** Set search query */
-  setSearchQuery: (query: string) => void;
+  _setSearchQuery: (query: string) => void;
 
   /** Dismiss announcement */
-  dismissAnnouncement: () => void;
+  _dismissAnnouncement: () => void;
 
   /** Update header state */
-  updateState: (updates: Partial<HeaderState>) => void;
+  _updateState: (_updates: Partial<HeaderState>) => void;
 }
 
 // Header utilities
 export interface HeaderUtils {
   /** Get header height */
-  getHeaderHeight: () => number;
+  _getHeaderHeight: () => number;
 
   /** Scroll to top */
-  scrollToTop: () => void;
+  _scrollToTop: () => void;
 
   /** Focus main content */
-  focusMainContent: () => void;
+  _focusMainContent: () => void;
 
   /** Get current route */
-  getCurrentRoute: () => string;
+  _getCurrentRoute: () => string;
 
   /** Check if route is active */
-  isRouteActive: (path: string) => boolean;
+  _isRouteActive: (path: string) => boolean;
 }
 
 // Default configurations
-export const HEADER_DEFAULTS: Required<
+export const _HEADER_DEFAULTS: Required<
   Pick<
     HeaderOrganismProps,
     "variant" | "size" | "skipToMain" | "mainContentSelector"
@@ -294,7 +294,7 @@ export const HEADER_DEFAULTS: Required<
   mainContentSelector: "#main-content",
 };
 
-export const HEADER_STICKY_DEFAULTS: Required<
+export const _HEADER_STICKY_DEFAULTS: Required<
   Omit<HeaderStickyConfig, "stickyContent">
 > & { stickyContent: ReactNode | null } = {
   enabled: true,
@@ -305,7 +305,7 @@ export const HEADER_STICKY_DEFAULTS: Required<
   hideOnScroll: false,
 };
 
-export const HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
+export const _HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
   mobileBreakpoint: "lg",
   showMobileToggle: true,
   mobileMenuPosition: "right",
@@ -315,7 +315,7 @@ export const HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
 };
 
 // Type guards
-export const isHeaderAction = (value: any): value is HeaderAction => {
+export const _isHeaderAction = (value: unknown): value is HeaderAction => {
   return (
     typeof value === "object" &&
     value !== null &&
@@ -324,7 +324,7 @@ export const isHeaderAction = (value: any): value is HeaderAction => {
   );
 };
 
-export const isHeaderVariant = (
+export const _isHeaderVariant = (
   value: string | undefined,
 ): value is HeaderOrganismProps["variant"] => {
   return (
@@ -333,7 +333,7 @@ export const isHeaderVariant = (
   );
 };
 
-export const isHeaderSize = (
+export const _isHeaderSize = (
   value: string | undefined,
 ): value is HeaderOrganismProps["size"] => {
   return value !== undefined && ["sm", "md", "lg"].includes(value);

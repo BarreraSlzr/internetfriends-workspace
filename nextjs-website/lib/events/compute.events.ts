@@ -46,7 +46,7 @@ export const JobPrioritySchema = z.enum([
   "real_time",
 ]);
 
-export type JobPriority = z.infer<typeof JobPrioritySchema>;
+export type _JobPriority = z.infer<typeof JobPrioritySchema>;
 
 // Job Status
 export const JobStatusSchema = z.enum([
@@ -59,7 +59,7 @@ export const JobStatusSchema = z.enum([
   "timeout",
 ]);
 
-export type JobStatus = z.infer<typeof JobStatusSchema>;
+export type _JobStatus = z.infer<typeof JobStatusSchema>;
 
 // Compute Job Schema
 export const ComputeJobSchema = z.object({
@@ -69,15 +69,15 @@ export const ComputeJobSchema = z.object({
   status: JobStatusSchema.default("pending"),
   payload: z.record(z.string(), z.any()).optional(),
   requiredResources: z.record(z.string(), z.number()).optional(),
-  maxRetries: z.number().default(3),
+  _maxRetries: z.number().default(3),
   timeoutMs: z.number().default(30000),
   createdAt: z.date(),
   startedAt: z.date().optional(),
   completedAt: z.date().optional(),
-  userId: z.string().optional(),
-  sessionId: z.string().optional(),
+  _userId: z.string().optional(),
+  _sessionId: z.string().optional(),
   correlationId: z.string().optional(),
-  tags: z.array(z.string()).optional(),
+  _tags: z.array(z.string()).optional(),
   metadata: z.record(z.string(), z.string()).optional(),
 });
 
@@ -103,11 +103,11 @@ export const JobResultSchema = z.object({
   error: z.string().optional(),
   processingTime: z.number(),
   resourcesUsed: z.record(z.string(), z.number()).optional(),
-  retryCount: z.number(),
+  _retryCount: z.number(),
   metadata: z.record(z.string(), z.string()).optional(),
 });
 
-export type JobResult = z.infer<typeof JobResultSchema>;
+export type _JobResult = z.infer<typeof JobResultSchema>;
 
 // Compute System Configuration
 export const ComputeConfigSchema = z.object({
@@ -123,7 +123,7 @@ export const ComputeConfigSchema = z.object({
     api_tokens: 1000,
     cache_memory: 512, // MB
   }),
-  priorityWeights: z.record(z.string(), z.number()).default({
+  _priorityWeights: z.record(z.string(), z.number()).default({
     background: 1,
     normal: 2,
     high: 4,
@@ -131,7 +131,7 @@ export const ComputeConfigSchema = z.object({
     real_time: 16,
   }),
   enableAutoScaling: z.boolean().default(true),
-  metricsRetentionMs: z.number().default(3600000), // 1 hour
+  _metricsRetentionMs: z.number().default(3600000), // 1 hour
 });
 
 export type ComputeConfig = z.infer<typeof ComputeConfigSchema>;
@@ -157,7 +157,7 @@ class ComputeJobQueue {
         jobId: job.id,
         type: job.type,
         priority: job.priority,
-        queuePosition: index,
+        _queuePosition: index,
         queueSize: this.jobs.length,
       },
       { correlationId: job.correlationId },
@@ -434,7 +434,7 @@ export class ComputeEventManager {
     completedJobs: 0,
     failedJobs: 0,
     averageProcessingTime: 0,
-    throughputPerSecond: 0,
+    _throughputPerSecond: 0,
   };
 
   constructor(config: Partial<ComputeConfig> = {}) {
@@ -475,7 +475,7 @@ export class ComputeEventManager {
 
     emit("compute.system_stopped", {
       totalJobs: this.metrics.totalJobs,
-      uptime: Date.now(),
+      _uptime: Date.now(),
     });
   }
 
@@ -487,7 +487,7 @@ export class ComputeEventManager {
   // Submit job
   async submitJob(
     type: ComputeJobType,
-    payload?: any,
+    payload?: unknown,
     options: Partial<ComputeJob> = {},
   ): Promise<string> {
     const job: ComputeJob = ComputeJobSchema.parse({
@@ -563,7 +563,7 @@ export class ComputeEventManager {
       isRunning: this.isRunning,
       queueSize: this.jobQueue.getQueueSize(),
       runningJobs: this.jobQueue.getRunningCount(),
-      resourceUsage: Object.fromEntries(
+      _resourceUsage: Object.fromEntries(
         this.resourceMonitor.getAllResourceUsage(),
       ),
       metrics: this.metrics,
@@ -588,7 +588,7 @@ export class ComputeEventManager {
 
   // Execute individual job
   private async executeJob(job: ComputeJob): Promise<void> {
-    const startTime = Date.now();
+    const _startTime = Date.now();
     let allocatedResources: Partial<Record<ResourceType, number>> = {};
 
     try {
@@ -659,7 +659,7 @@ export class ComputeEventManager {
         "compute.job_failed",
         {
           jobId: job.id,
-          error: error instanceof Error ? error.message : String(error),
+          error: error instanceof Error ? error._message : String(error),
           processingTime,
           resourcesUsed: allocatedResources,
         },
@@ -688,7 +688,7 @@ export class ComputeEventManager {
     });
 
     // Handle resource events
-    on("compute.resource_high_usage", (event: any) => {
+    on("compute.resource_high_usage", (event: unknown) => {
       // Implement auto-scaling or load balancing logic
       if (this.config.enableAutoScaling) {
         this.handleHighResourceUsage(event.data);
@@ -697,7 +697,7 @@ export class ComputeEventManager {
   }
 
   // Handle high resource usage
-  private handleHighResourceUsage(data: any): void {
+  private handleHighResourceUsage(data: unknown): void {
     const { resourceType, utilization } = data;
 
     if (utilization > 0.9) {
@@ -707,7 +707,7 @@ export class ComputeEventManager {
         {
           resourceType,
           utilization,
-          action: "pause_low_priority_jobs",
+          _action: "pause_low_priority_jobs",
         },
         { priority: "critical" },
       );
@@ -727,11 +727,11 @@ export class ComputeEventManager {
 export const computeManager = new ComputeEventManager();
 
 // Convenience functions for common compute operations
-export const ComputeOperations = {
+export const _ComputeOperations = {
   // AI Operations
   async runAIInference(
     model: string,
-    input: any,
+    input: unknown,
     options: Partial<ComputeJob> = {},
   ): Promise<string> {
     return await computeManager.submitJob(
@@ -752,7 +752,7 @@ export const ComputeOperations = {
   },
 
   async processData(
-    data: any,
+    data: unknown,
     operation: string,
     options: Partial<ComputeJob> = {},
   ): Promise<string> {
@@ -773,7 +773,7 @@ export const ComputeOperations = {
   },
 
   async optimizeImage(
-    imageData: any,
+    imageData: unknown,
     options: Partial<ComputeJob> = {},
   ): Promise<string> {
     return await computeManager.submitJob(
@@ -843,10 +843,10 @@ if (typeof window === "undefined") {
   computeManager.registerJobHandler(
     "test.execution",
     async (job: ComputeJob) => {
-      // Example: Run tests using bun
+      // _Example: Run tests using bun
       const { testSuite } = job.payload || {};
       // Implementation would call actual test runner
-      return { success: true, testsRun: 42, passed: 40, failed: 2 };
+      return { success: true, _testsRun: 42, _passed: 40, failed: 2 };
     },
   );
 

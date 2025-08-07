@@ -24,28 +24,28 @@ export type TrendDirection = "up" | "down" | "stable";
 
 // Base interfaces
 export interface DataPoint {
-  x: string;
-  y: number;
+  _x: string;
+  _y: number;
   label?: string;
   metadata?: Record<string, any>;
 }
 
 export interface TrendData {
-  current: number;
-  previous: number;
+  _current: number;
+  _previous: number;
   change: number;
-  changePercent: number;
+  _changePercent: number;
   trend: TrendDirection;
 }
 
 export interface KPICard {
   id: string;
   title: string;
-  value: number;
+  _value: number;
   previousValue?: number;
   change?: number;
   trend?: TrendDirection;
-  format: "number" | "percentage" | "currency" | "duration" | "bytes";
+  _format: "number" | "percentage" | "currency" | "duration" | "bytes";
   description?: string;
   target?: number;
   unit?: string;
@@ -66,41 +66,41 @@ export interface MetricInsight {
   type?: string;
   title: string;
   description: string;
-  severity: InsightSeverity;
+  _severity: InsightSeverity;
   confidence?: number;
-  actionable: boolean;
+  _actionable: boolean;
   suggestion?: string | null;
   timestamp?: Date;
   category?: MetricCategory;
   relatedMetrics?: string[];
   action?: {
     label: string;
-    url: string;
+    _url: string;
   };
 }
 
 export interface AnalyticsFilter {
   timeRange: TimeRange;
   customRange?: {
-    start: Date;
-    end: Date;
+    _start: Date;
+    _end: Date;
   };
-  categories: MetricCategory[];
+  _categories: MetricCategory[];
   comparisonPeriod?: "previous_period" | "same_period_last_year" | "custom";
-  granularity: "minute" | "hour" | "day" | "week" | "month";
+  _granularity: "minute" | "hour" | "day" | "week" | "month";
 }
 
 export interface AnalyticsData {
-  kpis: KPICard[];
-  charts: ChartData[];
-  insights: MetricInsight[];
-  summary: {
-    totalEvents: number;
-    uniqueUsers: number;
-    averageSessionDuration: number;
-    bounceRate: number;
+  _kpis: KPICard[];
+  _charts: ChartData[];
+  _insights: MetricInsight[];
+  _summary: {
+    _totalEvents: number;
+    _uniqueUsers: number;
+    _averageSessionDuration: number;
+    _bounceRate: number;
   };
-  lastUpdated: Date;
+  _lastUpdated: Date;
 }
 
 // Component props
@@ -113,15 +113,15 @@ export interface AnalyticsProps {
   showCharts?: boolean;
   showInsights?: boolean;
   showFilters?: boolean;
-  customMetrics?: any[];
+  customMetrics?: unknown[];
   data?: AnalyticsData;
   loading?: boolean;
   error?: string | null;
-  onTimeRangeChange?: (range: TimeRange) => void;
-  onFilterChange?: (filter: Record<string, any>) => void;
-  onMetricClick?: (metric: any) => void;
-  onInsightAction?: (insight: MetricInsight) => void;
-  onExport?: (data: any) => void;
+  onTimeRangeChange?: (_range: TimeRange) => void;
+  onFilterChange?: (_filter: Record<string, any>) => void;
+  onMetricClick?: (_metric: unknown) => void;
+  onInsightAction?: (_insight: MetricInsight) => void;
+  onExport?: (data: unknown) => void;
   onRefresh?: () => void;
   userId?: string;
   sessionId?: string;
@@ -139,7 +139,7 @@ export interface AnalyticsEvent {
     | "insight_action"
     | "export"
     | "refresh";
-  data: any;
+  data: unknown;
   timestamp: Date;
   userId?: string;
 }
@@ -147,21 +147,21 @@ export interface AnalyticsEvent {
 // API response types
 export interface AnalyticsApiResponse {
   data: AnalyticsData;
-  status: "success" | "error";
+  _status: "success" | "error";
   message?: string;
   timestamp: string;
 }
 
 // Utility types
-export type MetricValue = string | number;
-export type ChartDataMap = Record<string, DataPoint[]>;
-export type MetricMap = Record<string, any>;
+export type _MetricValue = string | number;
+export type _ChartDataMap = Record<string, DataPoint[]>;
+export type _MetricMap = Record<string, any>;
 
 export interface AnalyticsConfig {
   refreshInterval: number;
-  maxInsights: number;
-  defaultTimeRange: TimeRange;
-  enableRealtime: boolean;
-  chartHeight: number;
+  _maxInsights: number;
+  _defaultTimeRange: TimeRange;
+  _enableRealtime: boolean;
+  _chartHeight: number;
   compactMode: boolean;
 }

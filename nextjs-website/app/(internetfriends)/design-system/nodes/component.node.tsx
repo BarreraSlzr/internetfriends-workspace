@@ -85,7 +85,7 @@ export const ComponentNode: React.FC<ComponentNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Props</h4>
             <div className="flex flex-wrap gap-1">
               {data.props.map((prop, index) => (
-                <span
+                < key={index}span
                   key={index}
                   className="px-2 py-0.5 bg-white/60 rounded-compact-xs text-xs font-mono"
                 >
@@ -102,7 +102,7 @@ export const ComponentNode: React.FC<ComponentNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Uses</h4>
             <div className="flex flex-wrap gap-1">
               {data.composition.map((comp, index) => (
-                <span
+                < key={index}span
                   key={index}
                   className="px-2 py-0.5 bg-white/80 rounded-compact-xs text-xs"
                 >
@@ -119,7 +119,7 @@ export const ComponentNode: React.FC<ComponentNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Features</h4>
             <ul className="space-y-0.5">
               {data.features.map((feature, index) => (
-                <li key={index} className="text-xs opacity-80 flex items-center gap-1">
+                < key={index}li key={index} className="text-xs opacity-80 flex items-center gap-1">
                   <span className="w-1 h-1 bg-current rounded-full"></span>
                   {feature}
                 </li>
@@ -139,4 +139,4 @@ export const ComponentNode: React.FC<ComponentNodeProps> = ({
   );
 };
 
-ComponentNode.displayName = 'ComponentNode';
+ComponentNode._displayName = 'ComponentNode';

@@ -30,7 +30,7 @@ export function CustomCard({
         className
       )}
     >
-      {showGrid && <GridBackground size={gridSize} />}
+      {showGrid && <GridBackground _size={gridSize} />}
       <div className="space-y-2 sm:space-y-4 relative z-10">
         <p className="text-sm font-medium opacity-80">{subtitle}</p>
         <h2 className="text-3xl font-bold leading-tight">{title}</h2>

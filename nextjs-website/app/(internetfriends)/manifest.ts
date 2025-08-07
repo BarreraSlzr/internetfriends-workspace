@@ -6,16 +6,16 @@ export default function manifest(): MetadataRoute.Manifest {
     name: content.companyName,
     short_name: content.companyNameShort,
     description: content.hero.description,
-    start_url: '/',
-    display: 'standalone',
-    background_color: '#FF7E29',
-    theme_color: '#FF486C',
+    _start_url: '/',
+    _display: 'standalone',
+    _background_color: '#FF7E29',
+    _theme_color: '#FF486C',
     icons: [
       {
         src: '/icon/192',
         sizes: '192x192',
         type: 'image/png',
-        purpose: 'any',
+        _purpose: 'any',
       },
       {
         src: '/icon/384',
@@ -28,9 +28,9 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/png',
       },
     ],
-    orientation: 'portrait',
-    categories: ['business', 'productivity', 'marketing'],
-    shortcuts: [
+    _orientation: 'portrait',
+    _categories: ['business', 'productivity', 'marketing'],
+    _shortcuts: [
       {
         name: 'Contact Us',
         short_name: 'Contact',
@@ -46,7 +46,7 @@ export default function manifest(): MetadataRoute.Manifest {
         icons: [{ src: '/icon/96.png', sizes: '96x96' }],
       },
     ],
-    // screenshots: [
+    // _screenshots: [
     //   {
     //     src: '/screenshot1.png',
     //     sizes: '1170x2532',
@@ -60,8 +60,8 @@ export default function manifest(): MetadataRoute.Manifest {
     //     label: 'Enterprise Solutions page',
     //   },
     // ],
-    prefer_related_applications: false,
-    // related_applications: [
+    _prefer_related_applications: false,
+    // _related_applications: [
     //   {
     //     platform: 'play',
     //     url: 'https://play.google.com/store/apps/details?id=com.hiredigital.app',
@@ -72,18 +72,18 @@ export default function manifest(): MetadataRoute.Manifest {
     //     url: 'https://apps.apple.com/app/hiredigital/id123456789',
     //   },
     // ],
-    // share_target: {
-    //   action: '/share-target',
-    //   method: 'POST',
-    //   enctype: 'multipart/form-data',
-    //   params: {
+    // _share_target: {
+    //   _action: '/share-target',
+    //   _method: 'POST',
+    //   _enctype: 'multipart/form-data',
+    //   _params: {
     //     title: 'title',
     //     text: 'text',
     //     url: 'url',
-    //     files: [
+    //     _files: [
     //       {
     //         name: 'media',
-    //         accept: ['image/*', 'video/*'],
+    //         _accept: ['image/*', 'video/*'],
     //       },
     //     ],
     //   },

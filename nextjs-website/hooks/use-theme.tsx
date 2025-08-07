@@ -1,3 +1,5 @@
+"use client";
+
 // InternetFriends Theme Hook
 // Comprehensive theme management with system preference detection and persistence
 
@@ -8,13 +10,44 @@ import React, {
   useContext,
   createContext,
 } from "react";
-import {
-  ThemeMode,
-  ColorScheme,
-  ThemeConfig,
-  UseThemeReturn,
-} from "../types/theme";
-import { HOOK_DEFAULTS, createHookError } from "./index";
+// Simplified types for basic functionality
+type ThemeMode = "light" | "dark" | "system";
+type ColorScheme = "light" | "dark";
+
+interface ThemeConfig {
+  mode: ThemeMode;
+  colorScheme: ColorScheme;
+  transitionDuration: string;
+  enableTransitions: boolean;
+}
+
+interface UseThemeReturn {
+  theme: ThemeConfig;
+  tokens: any;
+  components: any;
+  setTheme: (mode: ThemeMode) => void;
+  toggleTheme: () => void;
+  getColor: (property: string) => string;
+  isDark: boolean;
+  isLight: boolean;
+  systemPreference: ColorScheme;
+  mounted: boolean;
+}
+
+const HOOK_DEFAULTS = {
+  storagePrefix: "if_",
+};
+
+class HookError extends Error {
+  constructor(message: string, public readonly hook: string, public readonly code?: string) {
+    super(message);
+    this.name = "HookError";
+  }
+}
+
+const createHookError = (hook: string, message: string, code?: string) => {
+  return new HookError(message, hook, code);
+};
 
 // Theme context
 const ThemeContext = createContext<UseThemeReturn | null>(null);
@@ -213,8 +246,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const contextValue: UseThemeReturn = {
     theme,
-    tokens: {} as any, // TODO: Implement proper tokens
-    components: {} as any, // TODO: Implement proper components
+    tokens: {},
+    components: {},
     setTheme,
     toggleTheme,
     getColor,

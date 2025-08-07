@@ -1,3 +1,5 @@
+@use "sass:map";
+
 // InternetFriends Design System Variables
 // SCSS variables for consistent styling across the application
 
@@ -228,9 +230,9 @@ $button-variants: (
   ),
   "secondary": (
     "background": transparent,
-    "background-hover": map-get($colors-light, "bg-secondary"),
-    "color": map-get($colors-light, "text-primary"),
-    "border": map-get($colors-light, "border-primary"),
+    "background-hover": map.get($colors-light, "bg-secondary"),
+    "color": map.get($colors-light, "text-primary"),
+    "border": map.get($colors-light, "border-primary"),
   ),
 );
 
@@ -239,8 +241,8 @@ $header-height: 4rem; // 64px
 $sidebar-width: 16rem; // 256px
 $sidebar-collapsed: 4rem; // 64px
 $footer-height: auto;
-$container-padding: map-get($spacing, "lg");
-$container-max-width: map-get($container-sizes, "xl");
+$container-padding: map.get($spacing, "lg");
+$container-max-width: map.get($container-sizes, "xl");
 
 // Touch Targets (for mobile accessibility)
 $touch-target-min: 44px;

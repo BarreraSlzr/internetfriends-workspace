@@ -9,9 +9,9 @@ export interface IMotionDivProps extends MotionProps{
 export default function MotionDiv ({children, transition, className}: React.PropsWithChildren<IMotionDivProps>) {
   return (
     <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4, ease: 'easeOut', ...transition }}
+    _initial={{ opacity: 0, y: 10 }}
+    _animate={{ opacity: 1, y: 0 }}
+    transition={{ _duration: 0.4, _ease: 'easeOut', ...transition }}
     className={className}
     >
         {children}      

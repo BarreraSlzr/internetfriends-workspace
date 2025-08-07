@@ -198,8 +198,8 @@ describe("Atomic Components Unit Tests", () => {
       // Find the current project directory
       const cwd = process.cwd();
 
-      // Check if globals.css exists (it may not in the current structure)
-      const cssPath = path.join(cwd, "app/(internetfriends)/globals.css");
+      // Check design-tokens.css directly since globals.css imports it
+      const cssPath = path.join(cwd, "styles/design-tokens.css");
       if (!fs.existsSync(cssPath)) {
         // Skip this test if CSS file doesn't exist yet
         expect(true).toBe(true);

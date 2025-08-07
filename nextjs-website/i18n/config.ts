@@ -16,14 +16,14 @@ export const LOCALES = {
     code: "es",
     name: "Español",
     flag: "🇪🇸",
-    dir: "ltr" as const,
+    dir: "ltr" as "ltr" | "rtl",
     default: false,
   },
   fr: {
     code: "fr",
     name: "Français",
     flag: "🇫🇷",
-    dir: "ltr" as const,
+    dir: "ltr" as "ltr" | "rtl",
     default: false,
   },
 } as const;
@@ -467,8 +467,9 @@ export function formatCurrency(
 
 // Check if locale is RTL
 export function isRTL(locale: SupportedLocale): boolean {
-  const localeConfig = LOCALES[locale];
-  return localeConfig ? localeConfig.dir === "rtl" : false;
+  const localeData = LOCALES[locale];
+  if (!localeData) return false;
+  return localeData.dir === "rtl";
 }
 
 // Get opposite direction

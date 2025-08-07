@@ -1,8 +1,8 @@
 import { CVData } from "./type";
 
 export const curriculum: CVData = {
-    professionalPosition: 'Senior Software Engineer',
-    jobExperiences: [
+    _professionalPosition: 'Senior Software Engineer',
+    _jobExperiences: [
       {
         title: 'Software Engineer II',
         description: 'Responsible for tech consulting, planning, developing and maintaining web applications.',
@@ -66,7 +66,7 @@ export const curriculum: CVData = {
         endDate: 'Feb. 2018'
       }
     ],
-    skills: [
+    _skills: [
       { id: 1, name: 'JavaScript', popularity: 90 },
       { id: 2, name: 'TypeScript', popularity: 80 },
       { id: 3, name: 'React', popularity: 85 },
@@ -94,24 +94,24 @@ export const curriculum: CVData = {
       { id: 25, name: 'Embrace newest tech', popularity: 69 },
       { id: 25, name: 'Tech Consultor', popularity: 72 },
     ],
-    contactInfo: {
-      email: 'BarreraSlzr@gmail.com',
-      phone: '+52 (33) 1165-4324',
-      fullname: 'Emmanuel Barrera Salazar',
-      timezone: 'UTC-5',
-      isOnline: true,
-      bio: "Full Stack Software Developer with experience in building and maintaining web applications using modern technologies like Java, TypeScript, React, and NodeJS. Skilled in cloud infrastructure, data engineering, and AI systems, with a proven ability to deliver high-quality solutions collaboratively and independently.",
-      urls: [
+    _contactInfo: {
+      _email: 'BarreraSlzr@gmail.com',
+      _phone: '+52 (33) 1165-4324',
+      _fullname: 'Emmanuel Barrera Salazar',
+      _timezone: 'UTC-5',
+      _isOnline: true,
+      _bio: "Full Stack Software Developer with experience in building and maintaining web applications using modern technologies like Java, TypeScript, React, and NodeJS. Skilled in cloud infrastructure, data engineering, and AI systems, with a proven ability to deliver high-quality solutions collaboratively and independently.",
+      _urls: [
         { title: 'Website', url: 'https://BarreraSlzr.InternetFriends.xyz', icon: 'web' },
         { title: 'LinkedIn', url: 'https://www.linkedin.com/in/barreraslzr/', icon: 'linkedin' },
         { title: 'GitHub', url: 'https://github.com/barreraslzr', icon: 'github' },
         { title: 'WhatsApp', url: 'https://wa.me/+523311654324', icon: 'whatsapp' }
       ],
-      height: "178 cm",
-      sex: "Male",
-      nationality: "Mexican",
-      location: "Worldwide - Remote",
-      localTime: "America/Mexico_City",
-      availability: "Partial Availability"
+      _height: "178 cm",
+      _sex: "Male",
+      _nationality: "Mexican",
+      _location: "Worldwide - Remote",
+      _localTime: "America/Mexico_City",
+      _availability: "Partial Availability"
     }
   };

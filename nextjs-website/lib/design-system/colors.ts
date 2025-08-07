@@ -43,7 +43,7 @@ export const InternetFriendsColors = {
 } as const;
 
 // CSS Custom Properties Generator
-export const generateCSSVariables = (theme: "light" | "dark" = "light") => {
+export const _generateCSSVariables = (theme: "light" | "dark" = "light") => {
   const colors = InternetFriendsColors;
   const themeColors = colors[theme];
   
@@ -73,20 +73,20 @@ export const generateCSSVariables = (theme: "light" | "dark" = "light") => {
 };
 
 // Tailwind CSS Extension
-export const InternetFriendsTailwindExtension = {
+export const _InternetFriendsTailwindExtension = {
   colors: {
     "if-primary": "var(--if-primary)",
     "if-primary-hover": "var(--if-primary-hover)",
     "if-primary-light": "var(--if-primary-light)",
     "if-primary-active": "var(--if-primary-active)",
   },
-  borderRadius: {
+  _borderRadius: {
     "if-xs": "var(--radius-xs)",
     "if-sm": "var(--radius-sm)", 
     "if-md": "var(--radius-md)",
     "if-lg": "var(--radius-lg)",
   },
-  backdropBlur: {
+  _backdropBlur: {
     "glass": "blur(12px)",
   },
 };

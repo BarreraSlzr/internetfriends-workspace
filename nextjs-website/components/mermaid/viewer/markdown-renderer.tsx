@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useMemo } from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { MermaidViewer } from './mermaid-viewer';
 import { extractMermaidDiagrams, extractDiagramTitle, processMermaidMarkdown } from '../utils';
@@ -53,10 +54,10 @@ function simpleMarkdownToHTML(markdown: string): string {
     .replace(/\*(.*?)\*/g, '<em class="italic text-muted-foreground">$1</em>')
 
     // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary hover:text-primary/80 underline underline-offset-2 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-primary _hover:text-primary/80 underline underline-offset-2 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>')
 
     // Images
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" class="max-w-full h-auto rounded-md border border-border my-4" loading="lazy" />')
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<Image src="$2" alt="$1" width={100} height={100} />')
 
     // Unordered lists
     .replace(/^\- (.*$)/gm, '<li class="ml-6 mb-1 text-foreground list-disc">$1</li>')
@@ -109,7 +110,7 @@ function processContentByFileType(content: string, fileType: string, fileName?: 
         const parsed = JSON.parse(content);
         const formatted = JSON.stringify(parsed, null, 2);
         return `# ${displayName}\n\n\`\`\`json\n${formatted}\n\`\`\``;
-      } catch (e) {
+      } catch (_e) {
         return `# ${displayName} (Parse Error)\n\n\`\`\`json\n${content}\n\`\`\``;
       }
 
@@ -211,7 +212,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
             {hasDiagrams && (
               <div className="space-y-6">
                 {diagramsWithTitles.map((diagram, index) => (
-                  <div key={`diagram-${index}`} className="bg-card border border-border rounded-lg overflow-hidden">
+                  < key={index}div key={`diagram-${index}`} className="bg-card border border-border rounded-lg overflow-hidden">
                     <MermaidViewer
                       code={diagram.code}
                       title={showDiagramTitles ? diagram.title : undefined}
@@ -241,7 +242,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 
             {/* Inline diagrams with titles */}
             {hasDiagrams && diagramsWithTitles.map((diagram, index) => (
-              <div key={`inline-diagram-${index}`} className="space-y-3">
+              < key={index}div key={`inline-diagram-${index}`} className="space-y-3">
                 {showDiagramTitles && (
                   <h4 className="text-base font-medium text-foreground border-b border-border pb-2">
                     {diagram.title}
@@ -276,7 +277,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
 
             {/* Simple Mermaid diagrams */}
             {hasDiagrams && diagramsWithTitles.map((diagram, index) => (
-              <div key={`simple-diagram-${index}`} className="bg-muted/20 border border-border rounded-lg overflow-hidden">
+              < key={index}div key={`simple-diagram-${index}`} className="bg-muted/20 border border-border rounded-lg overflow-hidden">
                 <MermaidViewer
                   code={diagram.code}
                   title={showDiagramTitles ? diagram.title : undefined}
@@ -302,7 +303,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       )}
       data-testid={testId}
       data-mode={mode}
-      data-diagrams-count={diagramsWithTitles.length}
+      data-diagrams-_count={diagramsWithTitles.length}
     >
       {renderContent()}
     </div>

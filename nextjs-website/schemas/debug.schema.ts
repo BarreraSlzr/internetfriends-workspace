@@ -1,415 +1,144 @@
-// BOM: schemas/debug.schema.ts
-/**
- * Debug V2 Zod Schemas
- * @module schemas/debug.schema
- * 
- * Zod validation schemas for the v2 debug system:
- * - Context validation schemas
- * - Configuration validation schemas
- * - Result validation schemas
- * - Schema registry validation
- */
-import { z } from 'zod';
-import type {
-  DebugV2ContextType,
-  DebugV2Status,
-  DebugV2Format,
-  DebugV2Theme,
-  DebugV2Operation,
-  DebugV2Context,
-  DebugV2Options,
-  DebugV2Result,
-  DebugV2Schema,
-  DebugV2SchemaRegistry,
-  DebugV2OperationConfig
-} from '../types/debug/debug.type';
+import { z } from "zod";
 
-// ============================================================================
-// CORE TYPE SCHEMAS
-// ============================================================================
-
-/**
- * Debug context type schema
- */
-export const DebugV2ContextTypeSchema = z.enum([
-  'progress', 'error', 'warning', 'success', 'summary', 'step', 'iteration',
-  'xyz', 'style', 'context', 'footprint', 'canonical', 'replication', 'validation',
-  'sla', 'form', 'console', 'audit', 'performance', 'security'
+// Debug levels for categorizing log entries
+export const DebugLevelSchema = z.enum([
+  "error",
+  "warn",
+  "info",
+  "debug",
+  "trace"
 ]);
 
-/**
- * Debug status schema
- */
-export const DebugV2StatusSchema = z.enum([
-  'success', 'failed', 'pending', 'retry', 'warning', 'info'
-]);
-
-/**
- * Debug format schema
- */
-export const DebugV2FormatSchema = z.enum([
-  'cli', 'md', 'mdx', 'react', 'json', 'form', 'xyz', 'yaml', 'html'
-]);
-
-/**
- * Debug theme schema
- */
-export const DebugV2ThemeSchema = z.enum([
-  'default', 'minimal', 'rich', 'debug', 'production', 'development'
-]);
-
-/**
- * Debug operation schema
- */
-export const DebugV2OperationSchema = z.enum([
-  'sla', 'form', 'console', 'all', 'xyz', 'audit', 'performance'
-]);
-
-// ============================================================================
-// CONTEXT SCHEMAS
-// ============================================================================
-
-/**
- * XYZ integration context schema
- */
-export const DebugV2XYZContextSchema = z.object({
-  operation: z.string().optional(),
-  params: z.record(z.unknown()).optional(),
-  result: z.unknown().optional(),
-  footprint: z.string().optional(),
-  module: z.string().optional(),
-  function: z.string().optional(),
-  line: z.number().optional()
+// Debug context for tracking request/session information
+export const DebugV2ContextSchema = z.object({
+  requestId: z.string().uuid().optional(),
+  sessionId: z.string().optional(),
+  userId: z.string().optional(),
+  timestamp: z.date().default(() => new Date()),
+  component: z.string().optional(),
+  method: z.string().optional(),
+  level: DebugLevelSchema.default("info"),
 });
 
-/**
- * Style context schema
- */
-export const DebugV2StyleContextSchema = z.object({
-  format: DebugV2FormatSchema.optional(),
-  theme: DebugV2ThemeSchema.optional(),
-  colors: z.boolean().optional(),
-  emojis: z.boolean().optional(),
-  structured: z.boolean().optional(),
-  compact: z.boolean().optional(),
-  verbose: z.boolean().optional()
-});
-
-/**
- * Canonical context schema
- */
-export const DebugV2CanonicalContextSchema = z.object({
-  hash: z.string().optional(),
-  content: z.string().optional(),
-  structure: z.record(z.unknown()).optional(),
-  dependencies: z.array(z.string()).optional(),
-  validation: z.object({
-    success: z.boolean(),
-    errors: z.array(z.string()),
-    warnings: z.array(z.string())
-  }).optional()
-});
-
-/**
- * Performance context schema
- */
-export const DebugV2PerformanceContextSchema = z.object({
-  startTime: z.number(),
-  endTime: z.number().optional(),
-  duration: z.number().optional(),
-  memoryUsage: z.object({
-    heapUsed: z.number(),
-    heapTotal: z.number(),
-    external: z.number()
-  }).optional(),
-  cpuUsage: z.object({
-    user: z.number(),
-    system: z.number()
-  }).optional(),
-  metrics: z.record(z.number()).optional()
-});
-
-/**
- * Security context schema
- */
-export const DebugV2SecurityContextSchema = z.object({
-  level: z.enum(['low', 'medium', 'high', 'critical']),
-  category: z.enum(['authentication', 'authorization', 'data', 'network', 'system']),
-  threat: z.string().optional(),
-  mitigation: z.string().optional(),
-  cve: z.string().optional(),
-  severity: z.enum(['info', 'warning', 'error', 'critical'])
-});
-
-/**
- * Base debug context schema
- */
-export const DebugV2BaseContextSchema = z.object({
-  type: DebugV2ContextTypeSchema,
-  message: z.string(),
-  timestamp: z.string().datetime(),
-  phase: z.string().optional(),
-  step: z.string().optional(),
-  file: z.string().optional(),
-  status: DebugV2StatusSchema.optional(),
-  metadata: z.record(z.unknown()).optional(),
-  duration: z.number().optional(),
-  retryCount: z.number().optional(),
-  suggestions: z.array(z.string()).optional(),
-  nextAction: z.string().optional()
-});
-
-/**
- * Complete debug context schema
- */
-export const DebugV2ContextSchema = DebugV2BaseContextSchema.extend({
-  xyzContext: DebugV2XYZContextSchema.optional(),
-  style: DebugV2StyleContextSchema.optional(),
-  canonical: DebugV2CanonicalContextSchema.optional(),
-  performance: DebugV2PerformanceContextSchema.optional(),
-  security: DebugV2SecurityContextSchema.optional()
-});
-
-// ============================================================================
-// CONFIGURATION SCHEMAS
-// ============================================================================
-
-/**
- * Debug options schema
- */
+// Debug options for configuring behavior
 export const DebugV2OptionsSchema = z.object({
-  format: DebugV2FormatSchema,
-  verbose: z.boolean().optional(),
-  streamLimit: z.number().positive().optional(),
-  includeFrontmatter: z.boolean().optional(),
-  snapshotMode: z.boolean().optional(),
-  multipartForm: z.boolean().optional(),
-  
-  // XYZ Integration
-  xyzIntegration: z.boolean().optional(),
-  xyzParams: z.record(z.unknown()).optional(),
-  
-  // Style Options
-  style: DebugV2StyleContextSchema.optional(),
-  
-  // Performance Options
-  enablePerformance: z.boolean().optional(),
-  enableMemoryTracking: z.boolean().optional(),
-  
-  // Security Options
-  enableSecurityAudit: z.boolean().optional(),
-  securityLevel: z.enum(['low', 'medium', 'high', 'critical']).optional(),
-  
-  // Output Options
-  outputPath: z.string().optional(),
-  outputFormat: DebugV2FormatSchema.optional(),
-  includeMetadata: z.boolean().optional(),
-  includeStackTraces: z.boolean().optional()
+  enabled: z.boolean().default(true),
+  logLevel: DebugLevelSchema.default("info"),
+  includeStack: z.boolean().default(false),
+  maxEntries: z.number().positive().default(1000),
+  persistToStorage: z.boolean().default(false),
 });
 
-/**
- * Debug operation configuration schema
- */
-export const DebugV2OperationConfigSchema = z.object({
-  operation: DebugV2OperationSchema,
-  format: DebugV2FormatSchema.optional(),
-  showCriticalOnly: z.boolean().optional(),
-  includeOutputs: z.boolean().optional(),
-  assert: z.boolean().optional(),
-  validate: z.boolean().optional(),
-  timeout: z.number().positive().optional(),
-  retries: z.number().nonnegative().optional()
+// Performance metrics for debugging
+export const DebugV2MetricsSchema = z.object({
+  executionTime: z.number().min(0).optional(),
+  memoryUsage: z.number().min(0).optional(),
+  cpuUsage: z.number().min(0).max(100).optional(),
+  requestCount: z.number().min(0).default(0),
+  errorCount: z.number().min(0).default(0),
+  lastUpdated: z.date().default(() => new Date()),
 });
 
-// ============================================================================
-// RESULT SCHEMAS
-// ============================================================================
-
-/**
- * Debug validation result schema
- */
-export const DebugV2ValidationResultSchema = z.object({
-  success: z.boolean(),
-  errors: z.array(z.string()),
-  warnings: z.array(z.string()),
-  assertions: z.array(z.object({
-    name: z.string(),
-    passed: z.boolean(),
-    message: z.string().optional()
-  }))
+// Debug entry for individual log items
+export const DebugV2EntrySchema = z.object({
+  id: z.string().uuid().default(() => crypto.randomUUID()),
+  timestamp: z.date().default(() => new Date()),
+  level: DebugLevelSchema,
+  message: z.string(),
+  context: DebugV2ContextSchema.optional(),
+  data: z.any().optional(),
+  stack: z.string().optional(),
+  tags: z.array(z.string()).default([]),
 });
 
-/**
- * Debug result schema
- */
-export const DebugV2ResultSchema = z.object({
-  output: z.string(),
-  format: DebugV2FormatSchema,
-  frontmatter: z.record(z.unknown()).optional(),
-  metadata: z.record(z.unknown()).optional(),
-  suggestions: z.array(z.string()).optional(),
-  nextAction: z.string().optional(),
-  
-  // XYZ Integration
-  xyzResult: z.unknown().optional(),
-  xyzFootprint: z.string().optional(),
-  
-  // Performance
-  performance: DebugV2PerformanceContextSchema.optional(),
-  
-  // Security
-  security: DebugV2SecurityContextSchema.optional(),
-  
-  // Validation
-  validation: DebugV2ValidationResultSchema.optional()
-});
-
-/**
- * Debug orchestrator state schema
- */
-export const DebugV2OrchestratorStateSchema = z.object({
-  label: z.string(),
-  version: z.string(),
-  contexts: z.array(DebugV2ContextSchema),
-  options: DebugV2OptionsSchema,
-  streamBuffer: z.array(z.string()),
-  processingTime: z.number(),
-  success: z.boolean(),
-  errors: z.array(z.string()),
-  warnings: z.array(z.string()),
-  timestamp: z.string().datetime()
-});
-
-// ============================================================================
-// SCHEMA REGISTRY SCHEMAS
-// ============================================================================
-
-/**
- * Debug schema validation rule schema
- */
-export const DebugV2SchemaValidationRuleSchema = z.object({
-  field: z.string(),
-  rule: z.string(),
-  message: z.string()
-});
-
-/**
- * Debug schema example schema
- */
-export const DebugV2SchemaExampleSchema = z.object({
+// Debug session for grouping related entries
+export const DebugV2SessionSchema = z.object({
+  id: z.string().uuid().default(() => crypto.randomUUID()),
   name: z.string(),
-  context: DebugV2ContextSchema
+  startTime: z.date().default(() => new Date()),
+  endTime: z.date().optional(),
+  entries: z.array(DebugV2EntrySchema).default([]),
+  metrics: DebugV2MetricsSchema.default({
+    requestCount: 0,
+    errorCount: 0,
+    lastUpdated: new Date(),
+  }),
+  status: z.enum(["active", "completed", "failed"]).default("active"),
 });
 
-/**
- * Debug schema definition schema
- */
-export const DebugV2SchemaDefinitionSchema = z.object({
-  name: z.string(),
-  version: z.string(),
-  description: z.string(),
-  contextTypes: z.array(DebugV2ContextTypeSchema),
-  requiredFields: z.array(z.string()),
-  optionalFields: z.array(z.string()),
-  validationRules: z.array(DebugV2SchemaValidationRuleSchema),
-  examples: z.array(DebugV2SchemaExampleSchema)
+// Debug configuration for system-wide settings
+export const DebugV2ConfigSchema = z.object({
+  globalLevel: DebugLevelSchema.default("info"),
+  enabledComponents: z.array(z.string()).default([]),
+  disabledComponents: z.array(z.string()).default([]),
+  maxSessions: z.number().positive().default(50),
+  autoCleanup: z.boolean().default(true),
+  cleanupInterval: z.number().positive().default(3600000), // 1 hour
 });
 
-/**
- * Debug schema registry schema
- */
-export const DebugV2SchemaRegistrySchema = z.object({
-  version: z.string(),
-  timestamp: z.string().datetime(),
-  schemas: z.record(DebugV2SchemaDefinitionSchema),
-  defaultSchema: z.string(),
-  validationEnabled: z.boolean()
+// Debug report for comprehensive system analysis
+export const DebugV2ReportSchema = z.object({
+  id: z.string().uuid().default(() => crypto.randomUUID()),
+  generatedAt: z.date().default(() => new Date()),
+  title: z.string(),
+  description: z.string().optional(),
+  timeRange: z.object({
+    start: z.date(),
+    end: z.date(),
+  }),
+  sessions: z.array(DebugV2SessionSchema).default([]),
+  summary: z.object({
+    totalEntries: z.number().default(0),
+    errorCount: z.number().default(0),
+    warningCount: z.number().default(0),
+    averageExecutionTime: z.number().default(0),
+    mostActiveComponent: z.string().optional(),
+  }).default({
+    totalEntries: 0,
+    errorCount: 0,
+    warningCount: 0,
+    averageExecutionTime: 0,
+  }),
+  recommendations: z.array(z.string()).default([]),
 });
 
-// ============================================================================
-// UTILITY SCHEMAS
-// ============================================================================
+// Export types
+export type DebugLevel = z.infer<typeof DebugLevelSchema>;
+export type DebugV2Context = z.infer<typeof DebugV2ContextSchema>;
+export type DebugV2Options = z.infer<typeof DebugV2OptionsSchema>;
+export type DebugV2Metrics = z.infer<typeof DebugV2MetricsSchema>;
+export type DebugV2Entry = z.infer<typeof DebugV2EntrySchema>;
+export type DebugV2Session = z.infer<typeof DebugV2SessionSchema>;
+export type DebugV2Config = z.infer<typeof DebugV2ConfigSchema>;
+export type DebugV2Report = z.infer<typeof DebugV2ReportSchema>;
 
-/**
- * Debug context filter schema
- */
-export const DebugV2ContextFilterSchema = z.function()
-  .args(DebugV2ContextSchema)
-  .returns(z.boolean());
+// Utility functions for creating debug entries
+export const createDebugEntry = (
+  level: DebugLevel,
+  message: string,
+  context?: Partial<DebugV2Context>,
+  data?: any
+): DebugV2Entry => {
+  return DebugV2EntrySchema.parse({
+    level,
+    message,
+    context: context ? DebugV2ContextSchema.parse(context) : undefined,
+    data,
+  });
+};
 
-/**
- * Debug context transformer schema
- */
-export const DebugV2ContextTransformerSchema = z.function()
-  .args(DebugV2ContextSchema)
-  .returns(DebugV2ContextSchema);
+export const createDebugSession = (name: string): DebugV2Session => {
+  return DebugV2SessionSchema.parse({ name });
+};
 
-/**
- * Debug output formatter schema
- */
-export const DebugV2OutputFormatterSchema = z.function()
-  .args(DebugV2ContextSchema, DebugV2OptionsSchema)
-  .returns(z.string());
-
-/**
- * Debug assertion schema
- */
-export const DebugV2AssertionSchema = z.function()
-  .args(DebugV2ContextSchema)
-  .returns(z.boolean());
-
-// ============================================================================
-// VALIDATION FUNCTIONS
-// ============================================================================
-
-/**
- * Validate debug context
- */
-export function validateDebugV2Context(context: unknown): DebugV2Context {
-  return DebugV2ContextSchema.parse(context);
-}
-
-/**
- * Validate debug options
- */
-export function validateDebugV2Options(options: unknown): DebugV2Options {
-  return DebugV2OptionsSchema.parse(options);
-}
-
-/**
- * Validate debug result
- */
-export function validateDebugV2Result(result: unknown): DebugV2Result {
-  return DebugV2ResultSchema.parse(result);
-}
-
-/**
- * Validate debug schema registry
- */
-export function validateDebugV2SchemaRegistry(registry: unknown): DebugV2SchemaRegistry {
-  return DebugV2SchemaRegistrySchema.parse(registry);
-}
-
-/**
- * Validate debug operation config
- */
-export function validateDebugV2OperationConfig(config: unknown): DebugV2OperationConfig {
-  return DebugV2OperationConfigSchema.parse(config);
-}
-
-// ============================================================================
-// SCHEMA EXPORTS
-// ============================================================================
-
-export {
-  DebugV2ContextTypeSchema as ContextType,
-  DebugV2StatusSchema as Status,
-  DebugV2FormatSchema as Format,
-  DebugV2ThemeSchema as Theme,
-  DebugV2OperationSchema as Operation,
-  DebugV2ContextSchema as Context,
-  DebugV2OptionsSchema as Options,
-  DebugV2ResultSchema as Result,
-  DebugV2SchemaDefinitionSchema as Schema,
-  DebugV2SchemaRegistrySchema as SchemaRegistry
-}; 
+// Default export
+export const DebugSchemas = {
+  Level: DebugLevelSchema,
+  Context: DebugV2ContextSchema,
+  Options: DebugV2OptionsSchema,
+  Metrics: DebugV2MetricsSchema,
+  Entry: DebugV2EntrySchema,
+  Session: DebugV2SessionSchema,
+  Config: DebugV2ConfigSchema,
+  Report: DebugV2ReportSchema,
+};

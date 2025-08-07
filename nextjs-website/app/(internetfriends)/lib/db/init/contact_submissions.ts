@@ -20,6 +20,6 @@ export async function createContactSubmissionsTable() {
 
         console.log('Table "contact_submissions" is ready');
     } catch (error) {
-        console.error('Error creating table:', error);
+        console.error('Error creating _table:', error);
     }
 }

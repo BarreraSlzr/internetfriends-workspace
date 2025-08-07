@@ -36,10 +36,10 @@ export const AIModelSchema = z.object({
 export type AIModel = z.infer<typeof AIModelSchema>;
 
 // Cerebras Integration (from workspace setup)
-export const CerebrasModelSchema = AIModelSchema.extend({
+export const _CerebrasModelSchema = AIModelSchema.extend({
   provider: z.literal("cerebras"),
-  apiKey: z.string().optional(),
-  apiUrl: z.string().url().default("https://api.cerebras.ai/v1"),
+  _apiKey: z.string().optional(),
+  _apiUrl: z.string().url().default("https://api.cerebras.ai/v1"),
 
   // Cerebras-specific features
   tokensPerSecond: z.number().default(2000), // Ultra-fast inference
@@ -56,7 +56,7 @@ export const CerebrasModelSchema = AIModelSchema.extend({
 // Compute Task Schema
 export const ComputeTaskSchema = z.object({
   id: z.string().uuid(),
-  userId: z.string().uuid(),
+  _userId: z.string().uuid(),
 
   // Task definition
   type: z.enum([
@@ -70,48 +70,48 @@ export const ComputeTaskSchema = z.object({
     "optimization",
   ]),
 
-  input: z.object({
+  _input: z.object({
     content: z.string(),
-    language: z.string().optional(),
-    context: z.record(z.string(), z.unknown()).optional(),
-    instructions: z.string().optional(),
+    _language: z.string().optional(),
+    _context: z.record(z.string(), z.unknown()).optional(),
+    _instructions: z.string().optional(),
   }),
 
   // Execution config
   modelId: z.string(),
   maxTokens: z.number().positive().default(4000),
-  temperature: z.number().min(0).max(2).default(0.7),
+  _temperature: z.number().min(0).max(2).default(0.7),
 
   // State
-  status: z.enum(["pending", "running", "completed", "failed", "cancelled"]),
+  _status: z.enum(["pending", "running", "completed", "failed", "cancelled"]),
 
   // Results
-  output: z
+  _output: z
     .object({
       content: z.string().optional(),
-      metadata: z.record(z.string(), z.unknown()).optional(),
-      usage: z
+      _metadata: z.record(z.string(), z.unknown()).optional(),
+      _usage: z
         .object({
-          inputTokens: z.number().optional(),
-          outputTokens: z.number().optional(),
-          totalTokens: z.number().optional(),
-          cost: z.number().optional(),
+          _inputTokens: z.number().optional(),
+          _outputTokens: z.number().optional(),
+          _totalTokens: z.number().optional(),
+          _cost: z.number().optional(),
         })
         .optional(),
     })
     .optional(),
 
   // Timing
-  startedAt: z.date().optional(),
-  completedAt: z.date().optional(),
-  executionTimeMs: z.number().optional(),
+  _startedAt: z.date().optional(),
+  _completedAt: z.date().optional(),
+  _executionTimeMs: z.number().optional(),
 
   // Error handling
-  error: z
+  _error: z
     .object({
-      message: z.string(),
-      code: z.string().optional(),
-      retryable: z.boolean().default(false),
+      _message: z.string(),
+      _code: z.string().optional(),
+      _retryable: z.boolean().default(false),
     })
     .optional(),
 
@@ -119,7 +119,7 @@ export const ComputeTaskSchema = z.object({
   updatedAt: z.date(),
 });
 
-export type ComputeTask = z.infer<typeof ComputeTaskSchema>;
+export type _ComputeTask = z.infer<typeof ComputeTaskSchema>;
 
 // Compute Engine Configuration
 export const ComputeEngineSchema = z.object({
@@ -127,20 +127,20 @@ export const ComputeEngineSchema = z.object({
   name: z.string(),
 
   // Resource limits
-  maxConcurrentTasks: z.number().positive().default(5),
-  maxQueueSize: z.number().positive().default(100),
-  timeoutMs: z.number().positive().default(30000),
+  _maxConcurrentTasks: z.number().positive().default(5),
+  _maxQueueSize: z.number().positive().default(100),
+  _timeoutMs: z.number().positive().default(30000),
 
   // Model routing
-  defaultModel: z.string(),
-  modelRouting: z.record(z.string(), z.string()).optional(), // task type -> model id
+  _defaultModel: z.string(),
+  _modelRouting: z.record(z.string(), z.string()).optional(), // task type -> model id
 
   // Cost management
-  budgetLimits: z
+  _budgetLimits: z
     .object({
-      daily: z.number().min(0).optional(),
-      monthly: z.number().min(0).optional(),
-      perTask: z.number().min(0).optional(),
+      _daily: z.number().min(0).optional(),
+      _monthly: z.number().min(0).optional(),
+      _perTask: z.number().min(0).optional(),
     })
     .optional(),
 
@@ -164,10 +164,10 @@ export const ComputeEngineSchema = z.object({
   updatedAt: z.date(),
 });
 
-export type ComputeEngine = z.infer<typeof ComputeEngineSchema>;
+export type _ComputeEngine = z.infer<typeof ComputeEngineSchema>;
 
 // Pre-configured AI Models for InternetFriends
-export const InternetFriendsModels: Record<string, AIModel> = {
+export const _InternetFriendsModels: Record<string, AIModel> = {
   "cerebras-qwen-coder": {
     id: "cerebras-qwen-coder",
     name: "Qwen 3 Coder 32B (Cerebras)",

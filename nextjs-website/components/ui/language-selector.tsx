@@ -121,7 +121,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         {isOpen && (
           <div className="absolute right-0 top-full mt-1 w-48 bg-popover border border-border rounded-md shadow-lg z-50 py-1">
             {availableLocales.map((localeConfig) => (
-              <button
+              < key={index}button
                 key={localeConfig.code}
                 onClick={() => handleLocaleChange(localeConfig.code)}
                 className={cn(
@@ -197,7 +197,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
             {t('language.selectLanguage')}
           </div>
           {availableLocales.map((localeConfig) => (
-            <button
+            < key={index}button
               key={localeConfig.code}
               onClick={() => handleLocaleChange(localeConfig.code)}
               className={cn(
@@ -226,6 +226,6 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   );
 };
 
-LanguageSelector.displayName = 'LanguageSelector';
+LanguageSelector._displayName = 'LanguageSelector';
 
 export default LanguageSelector;

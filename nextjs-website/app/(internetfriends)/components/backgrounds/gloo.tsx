@@ -39,8 +39,8 @@ export function BgGoo({
   color3 = [235/255, 64/255, 240/255]
 }) {
   const [, inView] = useInView({
-    triggerOnce: true,
-    rootMargin: '200px 0px',
+    _triggerOnce: true,
+    _rootMargin: '200px 0px',
   })
   const containerRef = useRef<HTMLDivElement>(null)
   const [size, setSize] = useState({ width: 0, height: 0 })
@@ -62,7 +62,7 @@ export function BgGoo({
   const vertexShaderSource = `
     attribute vec2 position;
     void main() {
-        gl_Position = vec4(position, 0.0, 1.0);
+        _gl_Position = vec4(position, 0.0, 1.0);
     }
   `
 
@@ -91,7 +91,7 @@ export function BgGoo({
     }
     vec3 col = mix(mix(uColor1, uColor2, 1.0-sin(p.x)), uColor3, cos(p.y+p.x));
     col *= uTint;
-    gl_FragColor = vec4(col, 1.0);
+    _gl_FragColor = vec4(col, 1.0);
   }
 `;
 
@@ -117,7 +117,7 @@ export function BgGoo({
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
-    const gl = canvas.getContext("webgl", { preserveDrawingBuffer: still }) ||
+    const gl = canvas.getContext("webgl", { _preserveDrawingBuffer: still }) ||
                (canvas.getContext("experimental-webgl") as WebGLRenderingContext)
 
     if (!gl) {
@@ -200,15 +200,15 @@ export function BgGoo({
 
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
-  }, inView ? 1000 / 60 : undefined);
+  }, inView ? 1000 / _60 : undefined);
 
   return (
     <motion.div
       ref={containerRef}
       className="w-full h-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      _initial={{ opacity: 0 }}
+      _animate={{ opacity: 1 }}
+      _transition={{ _duration: 1, _ease: "easeOut" }}
     >
       <canvas
         ref={canvasRef}

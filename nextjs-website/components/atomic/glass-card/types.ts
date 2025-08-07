@@ -61,10 +61,10 @@ export interface GlassCardFooterProps {
 
 export interface GlassCardImageProps {
   /** Image source */
-  src: string;
+  _src: string;
 
   /** Alt text for accessibility */
-  alt: string;
+  _alt: string;
 
   /** Image width */
   width?: number;

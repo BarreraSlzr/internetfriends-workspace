@@ -26,20 +26,20 @@ export default function HeroText({ children = <DefaultHero />, className }: Prop
             <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
                 <NoiseFilter className='mix-blend-hue'/>
                 <BgGoo
-                    speed={0.3}
-                    resolution={2.0}
-                    depth={2}
-                    seed={0.4}
-                    color1={randomColors[0]}
-                    color2={randomColors[1]}
-                    color3={randomColors[2]}
+                    _speed={0.3}
+                    _resolution={2.0}
+                    _depth={2}
+                    _seed={0.4}
+                    _color1={randomColors[0]}
+                    _color2={randomColors[1]}
+                    _color3={randomColors[2]}
                 />
             </div>
             <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, ease: 'easeOut' }}
-                className="relative sm:px-6 px-2 md:px-8 py-12 max-w-4xl text-white">
+                _initial={{ opacity: 0, y: 10 }}
+                _animate={{ opacity: 1, y: 0 }}
+                _transition={{ _duration: 0.4, _ease: 'easeOut' }}
+                className="relative _sm:px-6 px-2 md:px-8 py-12 max-w-4xl text-white">
                 {children}
             </motion.div>
         </section>

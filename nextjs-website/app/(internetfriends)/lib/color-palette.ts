@@ -1,5 +1,5 @@
 type ColorPalette = {
-    [colorName: string]: number[];
+    [_colorName: string]: number[];
 };
 
 const r = {

@@ -1,7 +1,7 @@
-export const platformUrls: { [key: string]: string } = {
+export const platformUrls: { [_key: string]: string } = {
     github: 'https://github.com/Internet-Friends',
     x: 'https://x.com/friends_xyz',
-    instagram: 'https://www.instagram.com/internetfriendsxyz?igsh=amtucW40ZjJ6MnJ2',
+    instagram: 'https://www.instagram.com/internetfriendsxyz?_igsh=amtucW40ZjJ6MnJ2',
 }
 
 export const platformNames = Object.keys(platformUrls)

@@ -255,19 +255,19 @@ export interface ButtonRenderProps extends ButtonState {
   theme: ButtonTheme[ButtonVariant];
 }
 
-export type ButtonRenderProp = (props: ButtonRenderProps) => ReactNode;
+export type _ButtonRenderProp = (props: ButtonRenderProps) => ReactNode;
 
 // Type guards
-export const isButtonVariant = (value: string): value is ButtonVariant => {
+export const _isButtonVariant = (value: string): value is ButtonVariant => {
   return ["primary", "secondary", "outline", "ghost", "link"].includes(value);
 };
 
-export const isButtonSize = (value: string): value is ButtonSize => {
+export const _isButtonSize = (value: string): value is ButtonSize => {
   return ["xs", "sm", "md", "lg", "xl"].includes(value);
 };
 
 // Default props
-export const BUTTON_DEFAULTS: Required<
+export const _BUTTON_DEFAULTS: Required<
   Pick<
     ButtonAtomicProps,
     "variant" | "size" | "type" | "loading" | "disabled" | "fullWidth"

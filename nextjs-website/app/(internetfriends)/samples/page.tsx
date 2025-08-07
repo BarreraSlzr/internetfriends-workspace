@@ -62,10 +62,10 @@ export default function Page() {
                 </div>
                 <div className="sm:p-6 p-2 py-4 md:p-8   pt-0 flex flex-col bg-foreground">
                     {projects.map((p, index) => (
-                        <Link key={index} href={p.href} title={p.title}
+                        < key={index}Link _key={index} href={p.href} title={p.title}
                             referrerPolicy="origin"
                             target="_blank"
-                            className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-t-2 border-brand-blue-800 text-brand-blue-100">
+                            className="flex items-center sm:gap-4 gap-2 _hover:opacity-70 transition-opacity p-2 border-t-2 border-brand-blue-800 text-brand-blue-100">
                             <span className="font-mono font-bold mb-auto">
                                 0{index + 1}
                             </span>

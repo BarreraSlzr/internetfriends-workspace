@@ -7,7 +7,7 @@ export async function upsertContactSubmission(data: ContactFormData, id?: string
       .updateTable('contact_submissions')
       .set({
         ...data,
-        updated_at: new Date().toISOString(),
+        _updated_at: new Date().toISOString(),
       })
       .where('id', '=', id)
       .returning(['id'])

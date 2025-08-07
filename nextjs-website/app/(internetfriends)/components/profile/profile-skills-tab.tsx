@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { cardCss } from "./profile-card";
 
-export const ProfileSkillsTab = () => {
+export const _ProfileSkillsTab = () => {
     return (
         <div className="flex flex-col gap-2">
             <div className={cardCss}>
@@ -10,7 +10,7 @@ export const ProfileSkillsTab = () => {
             </div>
             <div className={`${cardCss} flex flex-row flex-wrap gap-2`}>
                 {curriculum.skills.sort((a, b) => b.popularity - a.popularity).map((skill, index) => (
-                    <Badge key={`skill-${index}`} className="bg-brand-blue-100 text-brand-blue-800 hover:text-blue-100">
+                    < key={index}Badge _key={`skill-${index}`} className="bg-brand-blue-100 text-brand-blue-800 _hover:text-blue-100">
                         {skill?.name}
                     </Badge>
                 ))}

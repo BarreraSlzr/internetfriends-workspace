@@ -16,7 +16,7 @@ export const ProfileMoreTab = () => {
     return (
         <div className="grid grid-cols-2 gap-2">
             {moreInfo.map((info, index) => (
-                <div key={index} className={cardCss}>
+                < key={index}div _key={index} className={cardCss}>
                     <p className="font-medium">{info.label}</p>
                     {info.isLink ? (
                         <Link

@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "@/app/(internetfriends)/globals.css";
 import GoogleAnalytics from "@/app/(internetfriends)/components/google-analytics";
+import { ThemeProvider } from "@/hooks/use-theme";
 import content from '@/app/(internetfriends)/content.json'
 
 
@@ -19,18 +20,18 @@ const geistMono = Geist_Mono({
 });
 
 
-export const metadata: Metadata = {
-  metadataBase: new URL(content.siteConfig.url),
+export const _metadata: Metadata = {
+  _metadataBase: new URL(content.siteConfig.url),
   title: {
     default: `${content.companyName} | ${content.hero.title}`,
-    template: `%s | ${content.companyName}`,
+    _template: `%s | ${content.companyName}`,
   },
   description: `Discover ${content.companyName}: ${content.hero.description}. Located at ${content.companyInfo.address2}. Making ${content.companyInfo.address1}.`,
   keywords: [`${content.companyName}`, 'internet friends', ...content.navigation, ...content.keywords],
-  authors: [{ name: content.companyName }],
+  _authors: [{ _name: content.companyName }],
   creator: content.companyName,
-  publisher: content.companyName,
-  icons: {
+  _publisher: content.companyName,
+  _icons: {
     icon: [
       { url: '/icon' },
       { url: '/icon/32', sizes: '32x32', type: 'image/png' },
@@ -38,40 +39,40 @@ export const metadata: Metadata = {
       { url: '/icon/72', sizes: '72x72', type: 'image/png' },
       { url: '/icon/96', sizes: '96x96', type: 'image/png' },
     ],
-    apple: [
+    _apple: [
       { url: '/600x600.jpg' },
       { url: '/600x600.jpg', sizes: '180x180', type: 'image/jpeg' },
     ],
   },
   manifest: '/manifest.json',
-  openGraph: {
+  _openGraph: {
     type: 'website',
-    locale: 'en_US',
+    _locale: 'en_US',
     url: content.siteConfig.url,
-    siteName: content.companyName,
+    _siteName: content.companyName,
     title: `${content.companyName} | ${content.hero.description}`,
     description: `Learn more about ${content.companyName}.`,
     images: [
       {
         url: '/600x600.jpg',
         width: 600,
-        height: 600,
-        alt: `${content.companyName} logo`,
+        _height: 600,
+        _alt: `${content.companyName} logo`,
       },
     ],
   },
-  twitter: {
-    card: 'summary_large_image',
-    site: content.siteConfig.twitterHandle,
+  _twitter: {
+    _card: 'summary_large_image',
+    _site: content.siteConfig.twitterHandle,
     creator: content.siteConfig.twitterHandle,
     title: `${content.companyName} | ${content.hero.title}`,
     description: `Discover ${content.companyName}: ${content.hero.description}.`,
     images: ['/600x600.jpg'],
   },
-  robots: {
+  _robots: {
     index: true,
     follow: true,
-    googleBot: {
+    _googleBot: {
       index: true,
       follow: true,
       'max-video-preview': -1,
@@ -84,21 +85,21 @@ export const metadata: Metadata = {
   //   yandex: 'your-yandex-verification-code',
   //   yahoo: 'your-yahoo-verification-code',
   // },
-  alternates: {
-    canonical: content.siteConfig.url,
-    languages: {
+  _alternates: {
+    _canonical: content.siteConfig.url,
+    _languages: {
       'en-US': '/en-US',
       'es-ES': '/es-ES',
     },
   },
-  category: 'technology',
+  _category: 'technology',
 };
 
-export const viewport: Viewport = {
+export const _viewport: Viewport = {
   width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+  _initialScale: 1,
+  _maximumScale: 1,
+  _userScalable: false,
 };
 
 export default function RootLayout({
@@ -107,15 +108,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html _lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Suspense fallback='Loading'>
-          {children}
-          <SpeedInsights/>
-          <Analytics />
-          <GoogleAnalytics />
-        </Suspense>
+        <ThemeProvider>
+          <Suspense _fallback='Loading'>
+            {children}
+            <SpeedInsights/>
+            <Analytics />
+            <GoogleAnalytics />
+          </Suspense>
+        </ThemeProvider>
       </body>
     </html>
   );

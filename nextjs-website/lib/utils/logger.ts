@@ -2,7 +2,7 @@ type LogLevel = 'info' | 'warn' | 'error'
 
 export function log(message: string, level: LogLevel = 'info', metadata?: object) {
   const logEntry = {
-    timestamp: new Date().toISOString(),
+    _timestamp: new Date().toISOString(),
     level,
     message,
     ...metadata,

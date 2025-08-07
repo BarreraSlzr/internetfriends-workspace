@@ -38,7 +38,7 @@ type HealthResponse = {
 };
 
 // System start time for uptime calculation
-const startTime = Date.now();
+const _startTime = Date.now();
 
 // Helper function to get memory usage
 function getMemoryUsage() {
@@ -122,7 +122,7 @@ async function checkDatabase(): Promise<{
 async function checkEventSystem(): Promise<{
   status: "pass" | "fail" | "warn";
   message: string;
-  data: any;
+  data: unknown;
 }> {
   try {
     const isHealthy = await eventSystem.healthCheck();
@@ -223,7 +223,7 @@ async function checkFileSystem(): Promise<{
 }
 
 // Main health check handler
-export async function GET(request: NextRequest) {
+export async function GET(_request: NextRequest) {
   const requestId = crypto.randomUUID();
   const startTime = Date.now();
 
@@ -262,7 +262,7 @@ export async function GET(request: NextRequest) {
               message: "Health check failed to run",
               data: {},
             },
-      externalServices:
+      _externalServices:
         externalServicesCheck.status === "fulfilled"
           ? externalServicesCheck.value
           : {
@@ -270,7 +270,7 @@ export async function GET(request: NextRequest) {
               message: "Health check failed to run",
               duration: 0,
             },
-      fileSystem:
+      _fileSystem:
         fileSystemCheck.status === "fulfilled"
           ? fileSystemCheck.value
           : {
@@ -379,7 +379,7 @@ export async function GET(request: NextRequest) {
 }
 
 // OPTIONS handler for CORS
-export async function OPTIONS(request: NextRequest) {
+export async function OPTIONS(_request: NextRequest) {
   return new NextResponse(null, {
     status: 200,
     headers: {

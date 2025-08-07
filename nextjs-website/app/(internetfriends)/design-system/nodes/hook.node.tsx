@@ -59,7 +59,7 @@ export const HookNode: React.FC<HookNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Parameters</h4>
             <div className="space-y-1">
               {data.parameters.map((param, index) => (
-                <span
+                < key={index}span
                   key={index}
                   className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono"
                 >
@@ -92,7 +92,7 @@ export const HookNode: React.FC<HookNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Examples</h4>
             <div className="space-y-1">
               {data.examples.map((example, index) => (
-                <code
+                < key={index}code
                   key={index}
                   className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono text-emerald-800"
                 >
@@ -109,7 +109,7 @@ export const HookNode: React.FC<HookNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Dependencies</h4>
             <div className="flex flex-wrap gap-1">
               {data.dependencies.map((dep, index) => (
-                <span
+                < key={index}span
                   key={index}
                   className="px-2 py-0.5 bg-white/80 rounded-compact-xs text-xs"
                 >
@@ -131,4 +131,4 @@ export const HookNode: React.FC<HookNodeProps> = ({
   );
 };
 
-HookNode.displayName = 'HookNode';
+HookNode._displayName = 'HookNode';

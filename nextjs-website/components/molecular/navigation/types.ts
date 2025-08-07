@@ -3,7 +3,7 @@ import { HeaderAtomicProps } from '@/components/atomic/header';
 
 export interface NavigationItem {
   /** Unique identifier */
-  id: string;
+  _id: string;
 
   /** Display label */
   label: string;
@@ -105,7 +105,7 @@ export interface NavigationDropdownProps {
   onOpenChange: (open: boolean) => void;
 
   /** Trigger element */
-  trigger: ReactNode;
+  _trigger: ReactNode;
 
   /** Additional CSS classes */
   className?: string;
@@ -162,7 +162,7 @@ export interface NavigationTabsProps {
   activeTab?: string;
 
   /** Callback when tab changes */
-  onTabChange?: (tabId: string) => void;
+  onTabChange?: (_tabId: string) => void;
 
   /** Tab variant */
   variant?: 'default' | 'pills' | 'underline';

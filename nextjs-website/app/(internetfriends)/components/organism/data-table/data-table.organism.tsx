@@ -33,7 +33,7 @@ interface SortConfig {
 }
 
 interface FilterConfig {
-  value: any;
+  value: unknown;
   type: string;
 }
 
@@ -49,12 +49,12 @@ interface PaginationConfig {
 }
 
 interface SelectionConfig {
-  enabled: boolean;
-  multiple: boolean;
+  _enabled: boolean;
+  _multiple: boolean;
 }
 
 interface DataTableProps {
-  data: any[];
+  data: unknown[];
   columns: TableColumn[];
   loading?: boolean;
   error?: string | null;
@@ -68,7 +68,7 @@ interface DataTableProps {
   stickyHeader?: boolean;
   zebra?: boolean;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 type TableRow = any;
@@ -118,7 +118,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   // Initialize column visibility
   useEffect(() => {
     const initialVisibility = columns.reduce(
-      (acc: any, col: any) => {
+      (acc: unknown, col: unknown) => {
         acc[col.key] = col.visible !== false;
         return acc;
       },
@@ -168,7 +168,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     // Apply search
     if (searchTerm) {
       result = result.filter((row) =>
-        columns.some((col: any) => {
+        columns.some((col: unknown) => {
           if (!columnVisibility[col.key]) return false;
           const value = row[col.key];
           return String(value).toLowerCase().includes(searchTerm.toLowerCase());
@@ -249,7 +249,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   );
 
   const handleFilter = useCallback(
-    (columnKey: string, value: any, type: string = "text") => {
+    (columnKey: string, value: unknown, type: string = "text") => {
       if (!filterable) return;
 
       const newFilters = {
@@ -370,7 +370,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
         className={`
           ${styles.headerCell}
           ${sortable && column.sortable !== false ? styles.sortable : ""}
-          ${isSorted ? styles.sorted : ""}
+          ${isSorted ? styles._sorted : ""}
           ${column.align ? styles[`align-${column.align}`] : ""}
         `}
         onClick={() => column.sortable !== false && handleSort(column.key)}
@@ -404,12 +404,12 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     return (
       <div
         className={styles.filterContainer}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(_e) => e.stopPropagation()}
       >
         <input
           type="text"
           value={filterValue}
-          onChange={(e) => handleFilter(column.key, e.target.value, "text")}
+          onChange={(_e) => handleFilter(column.key, e.target.value, "text")}
           placeholder={`Filter ${column.header}...`}
           className={styles.filterInput}
         />
@@ -418,7 +418,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   };
 
   // Render table cell
-  const renderCell = (row: TableRow, column: TableColumn, rowIndex: number) => {
+  const renderCell = (row: TableRow, column: TableColumn, _rowIndex: number) => {
     const value = row[column.key];
     let displayValue = value;
 
@@ -457,7 +457,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     // Calculate page range
     const maxVisiblePages = 7;
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);
@@ -491,10 +491,10 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             ⟨
           </button>
           {pages.map((page) => (
-            <button
+            < key={index}button
               key={page}
               onClick={() => handlePageChange(page)}
-              className={`${styles.paginationButton} ${page === currentPage ? styles.active : ""}`}
+              className={`${styles.paginationButton} ${page === currentPage ? styles._active : ""}`}
             >
               {page}
             </button>
@@ -519,7 +519,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
         <div className={styles.pageSizeSelector}>
           <select
             value={pageSize}
-            onChange={(e) => setPageSize(Number(e.target.value))}
+            onChange={(_e) => setPageSize(Number(e.target.value))}
             className={styles.pageSizeSelect}
           >
             <option value={10}>10 per page</option>
@@ -538,7 +538,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.02,
+        _staggerChildren: 0.02,
       },
     },
   };
@@ -548,7 +548,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.3 },
+      transition: { _duration: 0.3 },
     },
   };
 
@@ -585,7 +585,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(e) => handleSearch(e.target.value)}
+                onChange={(_e) => handleSearch(e.target.value)}
                 placeholder="Search table..."
                 className={styles.searchInput}
               />
@@ -636,8 +636,8 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             ${stickyHeader ? styles.stickyHeader : ""}
           `}
           variants={containerVariants}
-          initial="hidden"
-          animate="visible"
+          _initial="hidden"
+          _animate="visible"
         >
           {/* Table Header */}
           <thead ref={headerRef} className={styles.header}>
@@ -650,7 +650,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                       selectedRows.size === visibleData.length &&
                       visibleData.length > 0
                     }
-                    onChange={(e) => handleSelectAll(e.target.checked)}
+                    onChange={(_e) => handleSelectAll(e.target.checked)}
                     className={styles.selectCheckbox}
                   />
                 </th>
@@ -699,12 +699,12 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                 </tr>
               ) : (
                 visibleData.map((row, index) => (
-                  <motion.tr
+                  < key={index}motion.tr
                     key={row.id}
                     className={`
                       ${styles.row}
                       ${selectedRows.has(row.id) ? styles.selected : ""}
-                      ${onRowClick ? styles.clickable : ""}
+                      ${onRowClick ? styles._clickable : ""}
                     `}
                     variants={rowVariants}
                     onClick={() => handleRowClick(row, index)}
@@ -714,11 +714,11 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                         <input
                           type="checkbox"
                           checked={selectedRows.has(row.id)}
-                          onChange={(e) =>
+                          onChange={(_e) =>
                             handleRowSelect(row.id, e.target.checked)
                           }
                           className={styles.selectCheckbox}
-                          onClick={(e) => e.stopPropagation()}
+                          onClick={(_e) => e.stopPropagation()}
                         />
                       </td>
                     )}

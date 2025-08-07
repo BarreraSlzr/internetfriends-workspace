@@ -20,13 +20,13 @@ export interface ComponentProp {
   name: string;
   type: string;
   required: boolean;
-  defaultValue?: any;
+  defaultValue?: unknown;
   description: string;
 }
 
 export interface ComponentExample {
   name: string;
-  code: string;
+  _code: string;
   description?: string;
 }
 
@@ -60,10 +60,10 @@ export interface CSSClass {
 
 export interface UtilityFunction {
   name: string;
-  signature: string;
+  _signature: string;
   description: string;
   parameters?: FunctionParameter[];
-  returnType: string;
+  _returnType: string;
 }
 
 export interface FunctionParameter {
@@ -412,7 +412,7 @@ export class ComponentRegistry {
           optional: true,
         },
       ],
-      returns: "{ isScrolled: boolean, scrollY: number }",
+      returns: "{ _isScrolled: boolean, _scrollY: number }",
       usage: "Header scroll state management and scroll-based animations",
       dependencies: ["react"],
       status: "planned",
@@ -672,7 +672,7 @@ export class ComponentRegistry {
   getComponentStats() {
     const components = this.getAllComponents();
     return {
-      total: components.length,
+      _total: components.length,
       atomic: components.filter((c) => c.category === "atomic").length,
       molecular: components.filter((c) => c.category === "molecular").length,
       organism: components.filter((c) => c.category === "organism").length,
@@ -684,4 +684,4 @@ export class ComponentRegistry {
 }
 
 // Singleton instance
-export const componentRegistry = new ComponentRegistry();
+export const _componentRegistry = new ComponentRegistry();

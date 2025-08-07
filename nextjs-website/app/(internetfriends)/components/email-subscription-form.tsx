@@ -21,7 +21,7 @@ export function EmailSubscriptionForm({url, children}: PropsWithChildren<{url: s
                     type="email"
                     placeholder="Enter your email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(_e) => setEmail(e.target.value)}
                     required
                     className="w-full pr-24 h-11 bg-amber-200/50 border-amber-300"
                 />

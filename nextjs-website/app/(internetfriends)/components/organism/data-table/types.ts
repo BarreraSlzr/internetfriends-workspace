@@ -40,7 +40,7 @@ export interface TableColumn {
   hideable?: boolean;
   pinned?: "left" | "right" | false;
   align?: "left" | "center" | "right";
-  render?: (value: any, row: TableRow, index: number) => React.ReactNode;
+  render?: (value: unknown, row: TableRow, index: number) => React.ReactNode;
   accessor?: (row: TableRow) => any;
   className?: string;
   headerClassName?: string;
@@ -48,18 +48,18 @@ export interface TableColumn {
 
 export interface TableRow {
   id: string | number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface SortConfig {
   column: string;
-  direction: SortDirection;
+  _direction: SortDirection;
 }
 
 export interface FilterConfig {
   column: string;
   type: FilterType;
-  value: any;
+  value: unknown;
   operator?: "equals" | "contains" | "startsWith" | "endsWith" | "gt" | "gte" | "lt" | "lte" | "between" | "in" | "notIn";
 }
 
@@ -72,12 +72,12 @@ export interface PaginationConfig {
 }
 
 export interface ColumnVisibility {
-  [columnKey: string]: boolean;
+  [_columnKey: string]: boolean;
 }
 
 export interface TableState {
   data: TableRow[];
-  filteredData: TableRow[];
+  _filteredData: TableRow[];
   sortConfig: SortConfig;
   filters: FilterConfig[];
   pagination: PaginationConfig;
@@ -96,7 +96,7 @@ export interface DataTableOrganismProps {
   loading?: boolean;
   error?: string | null;
   selectionMode?: SelectionMode;
-  onSelectionChange?: (selectedIds: (string | number)[]) => void;
+  onSelectionChange?: (_selectedIds: (string | number)[]) => void;
   onRowClick?: (row: TableRow, index: number) => void;
   onRowDoubleClick?: (row: TableRow, index: number) => void;
   onSort?: (sortConfig: SortConfig) => void;
@@ -155,8 +155,8 @@ export interface TableBodyProps {
 
 export interface TablePaginationProps {
   pagination: PaginationConfig;
-  onPageChange: (page: number) => void;
-  onPageSizeChange: (pageSize: number) => void;
+  _onPageChange: (page: number) => void;
+  _onPageSizeChange: (pageSize: number) => void;
   showSizeSelector?: boolean;
   className?: string;
 }
@@ -164,21 +164,21 @@ export interface TablePaginationProps {
 export interface TableFiltersProps {
   columns: TableColumn[];
   filters: FilterConfig[];
-  onFiltersChange: (filters: FilterConfig[]) => void;
-  onClearFilters: () => void;
+  _onFiltersChange: (filters: FilterConfig[]) => void;
+  _onClearFilters: () => void;
   className?: string;
 }
 
 export interface TableToolbarProps {
   searchQuery: string;
-  onSearchChange: (query: string) => void;
+  _onSearchChange: (query: string) => void;
   selectedCount: number;
   totalCount: number;
   onExport?: (format: "csv" | "json" | "xlsx") => void;
   onRefresh?: () => void;
   onColumnToggle?: () => void;
   density: DensityMode;
-  onDensityChange: (density: DensityMode) => void;
+  _onDensityChange: (density: DensityMode) => void;
   enableSearch?: boolean;
   enableExport?: boolean;
   enableRefresh?: boolean;
@@ -190,7 +190,7 @@ export interface TableToolbarProps {
 export interface ColumnToggleProps {
   columns: TableColumn[];
   columnVisibility: ColumnVisibility;
-  onVisibilityChange: (visibility: ColumnVisibility) => void;
+  _onVisibilityChange: (_visibility: ColumnVisibility) => void;
   className?: string;
 }
 
@@ -219,24 +219,24 @@ export interface BulkAction {
 // Filter option interfaces
 export interface FilterOption {
   label: string;
-  value: any;
+  value: unknown;
 }
 
 export interface NumberRangeFilter {
-  min: number;
-  max: number;
+  _min: number;
+  _max: number;
 }
 
 export interface DateRangeFilter {
-  start: Date;
-  end: Date;
+  _start: Date;
+  _end: Date;
 }
 
 // Event types
 export interface TableEvent {
   type: "sort" | "filter" | "select" | "search" | "export" | "row_click" | "row_double_click";
-  data: any;
-  timestamp: Date;
+  data: unknown;
+  _timestamp: Date;
   userId?: string;
 }
 
@@ -246,52 +246,52 @@ export interface TableApiResponse {
   total: number;
   page: number;
   pageSize: number;
-  hasNextPage: boolean;
-  hasPreviousPage: boolean;
+  _hasNextPage: boolean;
+  _hasPreviousPage: boolean;
 }
 
 // Utility types
-export type TableData = TableRow[];
-export type ColumnConfig = Omit<TableColumn, 'render'>;
-export type SortableColumns = Record<string, boolean>;
-export type FilterableColumns = Record<string, FilterType>;
+export type _TableData = TableRow[];
+export type _ColumnConfig = Omit<TableColumn, 'render'>;
+export type _SortableColumns = Record<string, boolean>;
+export type _FilterableColumns = Record<string, FilterType>;
 
 // Configuration interfaces
 export interface TableConfig {
-  defaultPageSize: number;
+  _defaultPageSize: number;
   pageSizeOptions: number[];
-  maxPageSize: number;
-  enableVirtualization: boolean;
+  _maxPageSize: number;
+  _enableVirtualization: boolean;
   stickyHeader: boolean;
-  stickyColumns: boolean;
-  resizableColumns: boolean;
-  sortableColumns: boolean;
-  filterableColumns: boolean;
-  searchableColumns: boolean;
-  exportFormats: ("csv" | "json" | "xlsx")[];
-  densityOptions: DensityMode[];
+  _stickyColumns: boolean;
+  _resizableColumns: boolean;
+  _sortableColumns: boolean;
+  _filterableColumns: boolean;
+  _searchableColumns: boolean;
+  _exportFormats: ("csv" | "json" | "xlsx")[];
+  _densityOptions: DensityMode[];
   selectionMode: SelectionMode;
 }
 
 export interface TableTheme {
-  colors: {
-    headerBackground: string;
-    headerText: string;
-    rowBackground: string;
-    rowBackgroundAlt: string;
-    rowText: string;
-    border: string;
-    selectedRow: string;
-    hoverRow: string;
+  _colors: {
+    _headerBackground: string;
+    _headerText: string;
+    _rowBackground: string;
+    _rowBackgroundAlt: string;
+    _rowText: string;
+    _border: string;
+    _selectedRow: string;
+    _hoverRow: string;
   };
-  spacing: {
-    cellPadding: string;
-    rowHeight: string;
-    headerHeight: string;
+  _spacing: {
+    _cellPadding: string;
+    _rowHeight: string;
+    _headerHeight: string;
   };
-  typography: {
-    fontSize: string;
-    fontWeight: string;
-    lineHeight: string;
+  _typography: {
+    _fontSize: string;
+    _fontWeight: string;
+    _lineHeight: string;
   };
 }

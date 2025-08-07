@@ -34,7 +34,7 @@ export function CardDescriptionToggle({ description }: CardDescriptionToggleProp
 
   return (
     <div 
-    // onTouchStart={handleTouch}
+    // _onTouchStart={handleTouch}
     >
       <p className={cn(
         "text-lg opacity-90 transition-all duration-300",

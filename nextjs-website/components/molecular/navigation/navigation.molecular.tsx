@@ -57,7 +57,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
     };
   }, [isMobileMenuOpen]);
 
-  const handleItemClick = (item: any) => {
+  const handleItemClick = (item: unknown) => {
     onItemClick?.(item);
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
@@ -67,7 +67,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
     setOpenDropdown(openDropdown === itemId ? null : itemId);
   };
 
-  const renderNavigationItem = (item: any, mobile = false) => {
+  const renderNavigationItem = (item: unknown, mobile = false) => {
     const isActive = activeItem === item.id || item.active;
     const hasDropdown = item.children && item.children.length > 0;
 
@@ -105,14 +105,14 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
                   "relative top-0 mt-2 shadow-none border-l-2 border-l-if-primary bg-transparent ml-4",
               )}
             >
-              {item.children.map((child: any) => (
-                <Link
+              {item.children.map((child: unknown) => (
+                < key={index}Link
                   key={child.id}
                   href={child.href}
                   onClick={() => handleItemClick(child)}
                   className={cn(
                     "block px-4 py-2 text-sm text-foreground hover:bg-if-primary-light hover:text-if-primary transition-colors duration-200",
-                    "first:rounded-t-compact-md last:rounded-b-compact-md",
+                    "_first:rounded-t-compact-md _last:rounded-b-compact-md",
                     child.disabled && "opacity-50 cursor-not-allowed",
                   )}
                 >
@@ -311,4 +311,4 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
   );
 };
 
-NavigationMolecular.displayName = "NavigationMolecular";
+NavigationMolecular._displayName = "NavigationMolecular";

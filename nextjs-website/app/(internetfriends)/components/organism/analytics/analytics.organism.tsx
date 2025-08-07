@@ -58,9 +58,9 @@ interface MetricInsight {
 
 interface AnalyticsFilter {
   timeRange: TimeRange;
-  customRange?: { start: Date; end: Date };
-  categories: string[];
-  granularity: "minute" | "hour" | "day" | "week" | "month";
+  customRange?: { _start: Date; _end: Date };
+  _categories: string[];
+  _granularity: "minute" | "hour" | "day" | "week" | "month";
 }
 
 interface AnalyticsProps {
@@ -72,14 +72,14 @@ interface AnalyticsProps {
   showCharts?: boolean;
   showInsights?: boolean;
   showFilters?: boolean;
-  customMetrics?: any[];
+  customMetrics?: unknown[];
   onTimeRangeChange?: (range: TimeRange) => void;
-  onFilterChange?: (filter: Record<string, any>) => void;
-  onExport?: (data: any) => void;
+  onFilterChange?: (_filter: Record<string, any>) => void;
+  onExport?: (data: unknown) => void;
   userId?: string;
   sessionId?: string;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
@@ -287,7 +287,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       UIEvents.pageLoad("analytics", performance.now(), userId);
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "Failed to load analytics data",
+        err instanceof Error ? err._message : "Failed to load analytics data",
       );
     } finally {
       setLoading(false);
@@ -319,8 +319,8 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     [onTimeRangeChange, userId, sessionId],
   );
 
-  const handleFilterChange = useCallback(
-    (filterId: string, value: any) => {
+  const _handleFilterChange = useCallback(
+    (filterId: string, value: unknown) => {
       const newFilters = { ...activeFilters, [filterId]: value };
       setActiveFilters(newFilters);
       onFilterChange?.(newFilters);
@@ -341,7 +341,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       insights,
       timeRange: selectedTimeRange,
       filters: activeFilters,
-      timestamp: new Date(),
+      _timestamp: new Date(),
     };
 
     onExport?.(exportData);
@@ -369,8 +369,8 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
         return new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
-          minimumFractionDigits: 0,
-          maximumFractionDigits: 0,
+          _minimumFractionDigits: 0,
+          _maximumFractionDigits: 0,
         }).format(value);
       case "percentage":
         return `${value.toFixed(2)}%`;
@@ -389,7 +389,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     change: number,
     trend: "up" | "down" | "stable",
   ) => {
-    const absChange = Math.abs(change);
+    const _absChange = Math.abs(change);
     const isPositive = change > 0;
 
     return {
@@ -410,13 +410,13 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       <motion.div
         key={kpi.id}
         className={styles.kpiCard}
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
+        _whileHover={{ scale: 1.02 }}
+        _whileTap={{ scale: 0.98 }}
         layout
       >
         <div
           className={styles.kpiIcon}
-          style={{ backgroundColor: `${kpi.color}20` }}
+          style={{ _backgroundColor: `${kpi.color}20` }}
         >
           <span style={{ color: kpi.color }}>{kpi.icon || "📊"}</span>
         </div>
@@ -519,7 +519,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
         <p className={styles.insightDescription}>{insight.description}</p>
         {insight.actionable && insight.suggestion && (
           <div className={styles.insightSuggestion}>
-            <strong>Suggestion:</strong> {insight.suggestion}
+            <strong>_Suggestion:</strong> {insight.suggestion}
           </div>
         )}
       </motion.div>
@@ -532,7 +532,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        _staggerChildren: 0.1,
       },
     },
   };
@@ -576,20 +576,20 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
             <div className={styles.timeRangeSelector}>
               <select
                 value={selectedTimeRange}
-                onChange={(e) =>
+                onChange={(_e) =>
                   handleTimeRangeChange(e.target.value as TimeRange)
                 }
                 className={styles.timeRangeSelect}
               >
                 {timeRangeOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
+                  < key={index}option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}
               </select>
             </div>
             <div className={styles.lastUpdate}>
-              Last updated: {lastUpdate.toLocaleTimeString()}
+              Last _updated: {lastUpdate.toLocaleTimeString()}
             </div>
             <button
               onClick={handleRefresh}
@@ -660,7 +660,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
             className={styles.loadingOverlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            _exit={{ opacity: 0 }}
           >
             <div className={styles.loadingSpinner}>
               <div className={styles.spinner}></div>

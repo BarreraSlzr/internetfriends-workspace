@@ -37,7 +37,7 @@ export function ContactForm() {
     }
 
     return (
-        <form ref={formRef} action={handleSubmit} className="w-full space-y-6">
+        <form _ref={formRef} _action={handleSubmit} className="w-full space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="space-y-1">
                     <label htmlFor="first_name" className="block text-sm font-medium">
@@ -116,7 +116,7 @@ export function ContactForm() {
                         </SelectTrigger>
                         <SelectContent>
                             {START_DATE_OPTIONS.map((option) => (
-                                <SelectItem key={option} value={option}>
+                                < key={index}SelectItem key={option} value={option}>
                                     {option}
                                 </SelectItem>
                             ))}
@@ -138,7 +138,7 @@ export function ContactForm() {
                         </SelectTrigger>
                         <SelectContent>
                             {BUDGET_OPTIONS.map((option) => (
-                                <SelectItem key={option} value={option}>
+                                < key={index}SelectItem key={option} value={option}>
                                     {option}
                                 </SelectItem>
                             ))}
@@ -157,8 +157,8 @@ export function ContactForm() {
                     aria-label="Project Scope Description"
                     required
                     defaultValue={searchParams.get('project_scope') || ''}
-                    rows={6}
-                    maxLength={2000}
+                    _rows={6}
+                    _maxLength={2000}
                     className="bg-transparent border border-brand-blue-800 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:border-brand-blue-100 resize-none rounded-none"
                     placeholder="Maximum of 2000 characters."
                 />
@@ -166,7 +166,7 @@ export function ContactForm() {
             <div className="flex justify-end">
                 <Button
                     type="submit"
-                    className="flex items-center gap-2 text-brand-blue-200 bg-foreground border-2 border-brand-blue-800 px-8 py-3 rounded-sm hover:opacity-90 transition-opacity"
+                    className="flex items-center gap-2 text-brand-blue-200 bg-foreground border-2 border-brand-blue-800 px-8 py-3 rounded-sm _hover:opacity-90 transition-opacity"
                 >
                     {`🎉 Let's make magic happen!`}
                     <ArrowUpRight className="h-4 w-4" />

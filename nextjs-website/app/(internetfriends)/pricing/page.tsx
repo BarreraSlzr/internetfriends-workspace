@@ -22,14 +22,14 @@ export default function Page() {
                 </div>
                 <div className="sm:p-6 p-2 py-4 md:p-8   pt-0 flex flex-col bg-foreground">
                     {engagementOptions.map((option, index) => (
-                        <div key={index}
-                            className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-t-2 border-brand-blue-800 text-brand-blue-100">
+                        < key={index}div _key={index}
+                            className="flex items-center sm:gap-4 gap-2 _hover:opacity-70 transition-opacity p-2 border-t-2 border-brand-blue-800 text-brand-blue-100">
                             <span className="font-mono font-bold mb-auto">
                                 0{index + 1}
                             </span>
                             <div className="flex flex-col flex-grow">
                                 <span className="flex-grow flex flex-row gap-2 justify-between">
-                                    <Badge variant='outline' className="text-nowrap border-2 border-brand-blue-800 text-brand-blue">
+                                    <Badge _variant='outline' className="text-nowrap border-2 border-brand-blue-800 text-brand-blue">
                                         {option.duration}
                                     </Badge>
                                     <span className="font-mono font-bold">

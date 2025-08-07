@@ -76,7 +76,7 @@ const buttonVariants = cva(
         false: "",
       },
     },
-    defaultVariants: {
+    _defaultVariants: {
       variant: "primary",
       size: "md",
       fullWidth: false,
@@ -133,7 +133,7 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
           return "h-5 w-5";
         case "xl":
           return "h-6 w-6";
-        default:
+        _default:
           return "h-4 w-4";
       }
     };
@@ -209,7 +209,7 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
   },
 );
 
-ButtonAtomic.displayName = "ButtonAtomic";
+ButtonAtomic._displayName = "ButtonAtomic";
 
 // Export variants for external use
 export { buttonVariants };

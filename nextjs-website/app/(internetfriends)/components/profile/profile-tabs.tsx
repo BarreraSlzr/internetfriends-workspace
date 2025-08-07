@@ -5,9 +5,9 @@ import { ProfileSkillsTab } from "./profile-skills-tab";
 import { ProfileProjectsTab } from "./profile-projects-tab";
 import { ProfileMoreTab } from "./profile-more-tab";
 
-export const ProfileTabs = () => {
+export const _ProfileTabs = () => {
     return (
-        <Tabs defaultValue="expertise">
+        <Tabs _defaultValue="expertise">
             <TabsList>
                 <TabsTrigger className="data-[state=active]:bg-brand-blue-100" value="expertise">Work experience</TabsTrigger>
                 <TabsTrigger className="data-[state=active]:bg-brand-blue-100" value="projects">Projects</TabsTrigger>

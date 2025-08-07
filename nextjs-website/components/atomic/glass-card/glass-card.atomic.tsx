@@ -70,4 +70,4 @@ export const GlassCardAtomic: React.FC<GlassCardAtomicProps> = ({
   );
 };
 
-GlassCardAtomic.displayName = "GlassCardAtomic";
+GlassCardAtomic._displayName = "GlassCardAtomic";

@@ -16,7 +16,7 @@ import {
   Phone
 } from "lucide-react";
 
-const HeaderDemoPage: React.FC = () => {
+const HeaderDemoPage: React._FC = () => {
   // Demo navigation items
   const navigationItems = [
     {
@@ -35,7 +35,7 @@ const HeaderDemoPage: React.FC = () => {
       id: "services",
       label: "Services",
       href: "#",
-      children: [
+      _children: [
         {
           id: "web-dev",
           label: "Web Development",
@@ -71,7 +71,7 @@ const HeaderDemoPage: React.FC = () => {
       label: "Search",
       icon: <Search className="w-4 h-4" />,
       variant: "ghost" as const,
-      mobileOnly: true,
+      _mobileOnly: true,
       onClick: () => console.log("Mobile search clicked"),
     },
     {
@@ -86,7 +86,7 @@ const HeaderDemoPage: React.FC = () => {
       label: "Favorites",
       icon: <Heart className="w-4 h-4" />,
       variant: "ghost" as const,
-      desktopOnly: true,
+      _desktopOnly: true,
       onClick: () => console.log("Favorites clicked"),
     },
     {
@@ -109,33 +109,33 @@ const HeaderDemoPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       {/* Header Organism Demo */}
       <HeaderOrganism
-        logo={{
+        _logo={{
           text: "InternetFriends",
           href: "/",
-          width: 32,
-          height: 32,
+          _width: 32,
+          _height: 32,
         }}
         navigation={{
           items: navigationItems,
-          activeItem: "home",
+          _activeItem: "home",
         }}
         actions={headerActions}
-        themeToggle={{
+        _themeToggle={{
           show: true,
-          showLabels: true,
+          _showLabels: true,
           position: "right",
         }}
-        languageSelector={{
+        _languageSelector={{
           show: true,
-          showFlags: true,
-          showNames: false,
+          _showFlags: true,
+          _showNames: false,
           position: "right",
         }}
         search={{
           show: true,
           placeholder: "Search documentation...",
-          shortcut: "⌘K",
-          onSearch: (query) => console.log("Search:", query),
+          _shortcut: "⌘K",
+          _onSearch: (query) => console.log("Search:", query),
         }}
         announcement={{
           show: true,
@@ -151,14 +151,14 @@ const HeaderDemoPage: React.FC = () => {
           dismissible: true,
         }}
         sticky={{
-          enabled: true,
-          hideOnScroll: false,
-          transitionDuration: "300ms",
+          _enabled: true,
+          _hideOnScroll: false,
+          _transitionDuration: "300ms",
         }}
         responsive={{
-          mobileBreakpoint: "lg",
-          showMobileToggle: true,
-          mobileMenuPosition: "right",
+          _mobileBreakpoint: "lg",
+          _showMobileToggle: true,
+          _mobileMenuPosition: "right",
         }}
         variant="glass"
         size="md"
@@ -238,7 +238,7 @@ const HeaderDemoPage: React.FC = () => {
                   2
                 </span>
                 <div>
-                  <strong>Language Selector:</strong> Try switching between available languages using the globe icon
+                  <strong>Language _Selector:</strong> Try switching between available languages using the globe icon
                 </div>
               </div>
 
@@ -247,7 +247,7 @@ const HeaderDemoPage: React.FC = () => {
                   3
                 </span>
                 <div>
-                  <strong>Mobile Navigation:</strong> Resize the window or use mobile device to see the responsive menu
+                  <strong>Mobile _Navigation:</strong> Resize the window or use mobile device to see the responsive menu
                 </div>
               </div>
 
@@ -265,7 +265,7 @@ const HeaderDemoPage: React.FC = () => {
                   5
                 </span>
                 <div>
-                  <strong>Announcement Bar:</strong> Notice the dismissible announcement at the top of the header
+                  <strong>Announcement _Bar:</strong> Notice the dismissible announcement at the top of the header
                 </div>
               </div>
             </div>
@@ -273,8 +273,8 @@ const HeaderDemoPage: React.FC = () => {
 
           {/* Spacer content for scroll demo */}
           <div className="mt-32 space-y-8">
-            {Array.from({ length: 10 }, (_, i) => (
-              <div key={i} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
+            {Array.from({ _length: 10 }, (_, i) => (
+              <div _key={i} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
                 <h3 className="text-lg font-semibold mb-2">Demo Content Section {i + 1}</h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   This is placeholder content to demonstrate the sticky header behavior.
