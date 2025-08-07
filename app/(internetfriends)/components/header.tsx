@@ -5,6 +5,7 @@ import content from "../content.json";
 import NoiseFilter from "./backgrounds/noise-filter-div";
 import { getRandomColors } from "../lib/color-palette";
 import { BgGoo } from "./backgrounds/gloo";
+import { ThemeToggle } from "@/components/atomic/theme-toggle";
 
 export default function Header() {
   const randomColors = getRandomColors();
@@ -36,13 +37,16 @@ export default function Header() {
         </div>
       </Link>
 
-      <Link
-        href="/samples"
-        className="flex items-center gap-1 hover:opacity-70 transition-opacity"
-      >
-        {content.headerLink}
-        <ArrowUpRight className="h-4 w-4" />
-      </Link>
+      <div className="flex items-center gap-4">
+        <ThemeToggle size="sm" variant="minimal" />
+        <Link
+          href="/samples"
+          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+        >
+          {content.headerLink}
+          <ArrowUpRight className="h-4 w-4" />
+        </Link>
+      </div>
     </header>
   );
 }
