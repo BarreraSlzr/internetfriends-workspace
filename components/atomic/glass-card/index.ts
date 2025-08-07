@@ -1,4 +1,4 @@
-export { GlassCardAtomic } from './glass-card.atomic';
+export { GlassCardAtomic } from "./glass-card.atomic";
 export type {
   GlassCardAtomicProps,
   GlassCardHeaderProps,
@@ -6,4 +6,4 @@ export type {
   GlassCardFooterProps,
   GlassCardImageProps,
   GlassCardActionsProps,
-} from './types';
+} from "./types";

@@ -23,7 +23,6 @@ export interface HeaderLogoConfig {
   onClick?: () => void;
   /** Additional CSS classes */
   className?: string;
-}
 
 // Theme toggle configuration
 export interface ThemeToggleConfig {
@@ -41,7 +40,6 @@ export interface ThemeToggleConfig {
   darkLabel?: string;
   /** Custom system mode label */
   systemLabel?: string;
-}
 
 // Language selector configuration
 export interface LanguageSelectorConfig {
@@ -57,14 +55,15 @@ export interface LanguageSelectorConfig {
   showCodesOnly?: boolean;
   /** Custom selector button props */
   buttonProps?: Partial<ButtonAtomicProps>;
-}
 
 // Header actions configuration
 export interface HeaderAction {
   /** Unique action ID */
   id: string;
+
   /** Action label */
   label: string;
+
   /** Action icon component */
   icon?: ReactNode;
   /** Action click handler */
@@ -76,7 +75,7 @@ export interface HeaderAction {
   /** Button variant */
   variant?: ButtonAtomicProps["variant"];
   /** Button size */
-  size?: ButtonAtomicProps["size"];
+  size?: ButtonAtomicProps['size"];
   /** Disabled state */
   disabled?: boolean;
   /** Loading state */
@@ -86,10 +85,9 @@ export interface HeaderAction {
   /** Show only on mobile */
   mobileOnly?: boolean;
   /** Hide on certain screen sizes */
-  hideOn?: Array<"xs" | "sm" | "md" | "lg" | "xl">;
+  hideOn?: Array<"xs" | 'sm" | "md" | "lg" | "xl">;
   /** Custom button props */
   buttonProps?: Partial<ButtonAtomicProps>;
-}
 
 // Search configuration
 export interface HeaderSearchConfig {
@@ -99,8 +97,10 @@ export interface HeaderSearchConfig {
   placeholder?: string;
   /** Search handler */
   onSearch?: (query: string) => void;
+
   /** Search results handler */
   onResults?: (results: unknown[]) => void;
+
   /** Search position */
   position?: "left" | "center" | "right";
   /** Show search suggestions */
@@ -109,7 +109,6 @@ export interface HeaderSearchConfig {
   shortcut?: string;
   /** Custom search input props */
   inputProps?: unknown;
-}
 
 // Header announcement bar
 export interface HeaderAnnouncementConfig {
@@ -118,7 +117,7 @@ export interface HeaderAnnouncementConfig {
   /** Announcement content */
   content?: ReactNode;
   /** Announcement variant */
-  variant?: "info" | "warning" | "success" | "error";
+  variant?: "info" | "warning" | 'success" | "error";
   /** Dismissible announcement */
   dismissible?: boolean;
   /** Auto-hide after duration (ms) */
@@ -127,7 +126,6 @@ export interface HeaderAnnouncementConfig {
   onClick?: () => void;
   /** Custom announcement props */
   className?: string;
-}
 
 // Header sticky behavior
 export interface HeaderStickyConfig {
@@ -143,12 +141,11 @@ export interface HeaderStickyConfig {
   stickyClassName?: string;
   /** Hide header when scrolling down */
   hideOnScroll?: boolean;
-}
 
 // Header responsive behavior
 export interface HeaderResponsiveConfig {
   /** Mobile breakpoint */
-  mobileBreakpoint?: "sm" | "md" | "lg";
+  mobileBreakpoint?: 'sm" | "md" | "lg";
   /** Show mobile menu toggle */
   showMobileToggle?: boolean;
   /** Mobile menu position */
@@ -156,10 +153,9 @@ export interface HeaderResponsiveConfig {
   /** Mobile menu overlay */
   mobileMenuOverlay?: boolean;
   /** Desktop layout */
-  desktopLayout?: "spread" | "center" | "compact";
+  desktopLayout?: 'spread" | "center" | "compact";
   /** Mobile layout */
-  mobileLayout?: "stacked" | "inline" | "minimal";
-}
+  mobileLayout?: 'stacked" | "inline" | "minimal";
 
 // Main header organism props
 export interface HeaderOrganismProps {
@@ -191,10 +187,10 @@ export interface HeaderOrganismProps {
   responsive?: HeaderResponsiveConfig;
 
   /** Header variant */
-  variant?: "default" | "transparent" | "solid" | "glass";
+  variant?: "default" | "transparent" | 'solid" | "glass";
 
   /** Header size */
-  size?: "sm" | "md" | "lg";
+  size?: 'sm" | "md" | "lg";
 
   /** Additional CSS classes */
   className?: string;
@@ -216,7 +212,6 @@ export interface HeaderOrganismProps {
 
   /** Main content selector for skip link */
   mainContentSelector?: string;
-}
 
 // Header state interface
 export interface HeaderState {
@@ -239,8 +234,7 @@ export interface HeaderState {
   _searchQuery: string;
 
   /** Is announcement visible */
-  _isAnnouncementVisible: boolean;
-}
+  _isAnnouncementVisible: boolean;,
 
 // Header context value
 export interface HeaderContextValue extends HeaderState {
@@ -260,8 +254,7 @@ export interface HeaderContextValue extends HeaderState {
   _dismissAnnouncement: () => void;
 
   /** Update header state */
-  _updateState: (_updates: Partial<HeaderState>) => void;
-}
+  _updateState: (_updates: Partial<HeaderState>) => void;,
 
 // Header utilities
 export interface HeaderUtils {
@@ -278,24 +271,24 @@ export interface HeaderUtils {
   _getCurrentRoute: () => string;
 
   /** Check if route is active */
-  _isRouteActive: (path: string) => boolean;
-}
+  _isRouteActive: (path: string) => boolean;,
 
 // Default configurations
 export const _HEADER_DEFAULTS: Required<
+
   Pick<
     HeaderOrganismProps,
-    "variant" | "size" | "skipToMain" | "mainContentSelector"
+    "variant" | 'size" | 'skipToMain" | "mainContentSelector"
   >
 > = {
   variant: "default",
   size: "md",
   skipToMain: true,
   mainContentSelector: "#main-content",
-};
 
 export const _HEADER_STICKY_DEFAULTS: Required<
-  Omit<HeaderStickyConfig, "stickyContent">
+
+  Omit<HeaderStickyConfig, 'stickyContent">
 > & { stickyContent: ReactNode | null } = {
   enabled: true,
   offset: 0,
@@ -303,38 +296,34 @@ export const _HEADER_STICKY_DEFAULTS: Required<
   transitionDuration: "300ms",
   stickyClassName: "",
   hideOnScroll: false,
-};
 
 export const _HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
+
   mobileBreakpoint: "lg",
   showMobileToggle: true,
   mobileMenuPosition: "right",
   mobileMenuOverlay: true,
-  desktopLayout: "spread",
-  mobileLayout: "stacked",
-};
+  desktopLayout: 'spread",
+  mobileLayout: 'stacked",
 
 // Type guards
 export const __isHeaderAction = (value: unknown): value is HeaderAction => {
   return (
     typeof value === "object" &&
     value !== null &&
-    typeof value.id === "string" &&
-    typeof value.label === "string"
+    typeof value.id === 'string" &&
+    typeof value.label === 'string"
   );
-};
 
 export const __isHeaderVariant = (
   value: string | undefined,
 ): value is HeaderOrganismProps["variant"] => {
   return (
     value !== undefined &&
-    ["default", "transparent", "solid", "glass"].includes(value)
+    ["default", "transparent", 'solid", "glass"].includes(value)
   );
-};
 
 export const __isHeaderSize = (
   value: string | undefined,
-): value is HeaderOrganismProps["size"] => {
-  return value !== undefined && ["sm", "md", "lg"].includes(value);
-};
+): value is HeaderOrganismProps['size"] => {
+  return value !== undefined && ['sm", "md", "lg"].includes(value);

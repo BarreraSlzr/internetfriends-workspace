@@ -4,7 +4,7 @@
 import { z } from "zod";
 
 // InternetFriends Schema Definitions
-export const UserSchema = z.object({
+export const UserSchema = z.object({)
   id: z.string().uuid(),
   email: z.string().email(),
   name: z.string().min(1),
@@ -13,7 +13,7 @@ export const UserSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const ProjectSchema = z.object({
+export const ProjectSchema = z.object({)
   id: z.string().uuid(),
   name: z.string().min(1),
   description: z.string(),
@@ -25,7 +25,7 @@ export const ProjectSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const _APIResponseSchema = z.object({
+export const _APIResponseSchema = z.object({)
   success: z.boolean(),
   data: z.unknown(),
   error: z.string().optional(),
@@ -49,8 +49,7 @@ async function validateSchemas() {
     console.log("✅ User Schema validation passed");
   } catch (error) {
     console.log("❌ User Schema validation failed: ", error);
-  }
-  
+
   // Test Project Schema
   try {
 
@@ -59,6 +58,7 @@ async function validateSchemas() {
       description: "Next.js landing page for InternetFriends platform",
       status: "active",
       owner: {
+
         id: "123e4567-e89b-12d3-a456-426614174000",
         email: "owner@internetfriends.xyz", 
         name: "Project Owner",
@@ -73,11 +73,8 @@ async function validateSchemas() {
     console.log("✅ Project Schema validation passed");
   } catch (error) {
     console.log("❌ Project Schema validation failed: ", error);
-  }
-  
+
   console.log("🎯 Schema validation complete!");
-}
 
 if (import.meta.main) {
   validateSchemas().catch(console.error);
-}

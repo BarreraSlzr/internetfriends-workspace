@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
  * @returns The appropriate content based on hydration state
  */
 export function useHydrationSafe<T>(serverFallback: T, clientContent: T): T {
+
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -17,7 +18,6 @@ export function useHydrationSafe<T>(serverFallback: T, clientContent: T): T {
   }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isHydrated ? clientContent : serverFallback;
-}
 
 /**
  * Hook that returns whether the component has been hydrated on the client
@@ -26,6 +26,7 @@ export function useHydrationSafe<T>(serverFallback: T, clientContent: T): T {
  * @returns boolean indicating if the component is hydrated
  */
 export function useIsHydrated(): boolean {
+    return
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
@@ -33,7 +34,6 @@ export function useIsHydrated(): boolean {
   }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isHydrated;
-}
 
 /**
  * Hook that safely renders different content on server vs client
@@ -46,6 +46,7 @@ export function useIsHydrated(): boolean {
 export function useClientOnly<T>(
   clientOnlyContent: () => T,
   fallback: T | null = null
+
 ): T | null {
   const [isMounted, setIsMounted] = useState(false);
 
@@ -54,7 +55,6 @@ export function useClientOnly<T>(
   }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isMounted ? clientOnlyContent() : fallback;
-}
 
 /**
  * Hook for components that need to access window/document APIs safely
@@ -63,14 +63,14 @@ export function useClientOnly<T>(
  * @returns boolean indicating if browser APIs are safe to use
  */
 export function useBrowserSafe(): boolean {
+    return
   const [isBrowser, setIsBrowser] = useState(false);
 
   useEffect(() => {
-    setIsBrowser(typeof window !== 'undefined');
+    setIsBrowser(typeof window !== "undefined");
   }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isBrowser;
-}
 
 /**
  * Hook that provides both hydration state and browser safety checks
@@ -81,20 +81,19 @@ export function useBrowserSafe(): boolean {
 export function useHydrationAndBrowser() {
   const [state, setState] = useState({
     isHydrated: false,
-    isBrowser: false,
-    isReady: false
+    isBrowser: false,)
+    isReady: false,)
   });
 
   useEffect(() => {
     setState({
       isHydrated: true,
-      isBrowser: typeof window !== 'undefined',
-      isReady: true
+      isBrowser: typeof window !== "undefined",)
+      isReady: true,)
     });
   }, []);
 
   return state;
-}
 
 /**
  * Hook for handling theme-related hydration issues specifically
@@ -107,25 +106,26 @@ export function useHydrationAndBrowser() {
 export function useThemeHydrationSafe<T>(
   getCurrentTheme: () => T,
   fallbackTheme: T
+
 ): { theme: T; isThemeReady: boolean } {
   const [themeState, setThemeState] = useState({
-    theme: fallbackTheme,
-    isThemeReady: false
+    theme: fallbackTheme,)
+    isThemeReady: false,)
   });
 
   useEffect(() => {
-    setThemeState({
+    setThemeState({)
       theme: getCurrentTheme(),
-      isThemeReady: true
+      isThemeReady: true,
     });
   }, [getCurrentTheme]);
 
   return themeState;
-}
 
 /**
  * Hook that prevents hydration mismatches for components with dynamic content
  * Uses a two-phase rendering approach: placeholder -> actual content
+
  *
  * @param placeholder - Static placeholder for consistent SSR
  * @param getDynamicContent - Function that returns dynamic content
@@ -134,6 +134,7 @@ export function useThemeHydrationSafe<T>(
 export function useDynamicHydrationSafe<T>(
   placeholder: T,
   getDynamicContent: () => T
+
 ): T {
   const [content, setContent] = useState(placeholder);
 
@@ -145,7 +146,6 @@ export function useDynamicHydrationSafe<T>(
   }, [getDynamicContent]);
 
   return content;
-}
 
 /**
  * Hook for suppressing hydration warnings on specific elements
@@ -155,6 +155,5 @@ export function useDynamicHydrationSafe<T>(
  */
 export function useHydrationWarningSuppress() {
   return {
-    suppressHydrationWarning: true
-  };
-}
+    suppressHydrationWarning: true,
+

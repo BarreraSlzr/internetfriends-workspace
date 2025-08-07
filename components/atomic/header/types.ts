@@ -18,7 +18,6 @@ export interface HeaderAtomicProps extends HTMLAttributes<HTMLElement> {
 
   /** Callback fired when scroll state changes */
   onScrollChange?: (_isScrolled: boolean) => void;
-}
 
 export interface HeaderNavigationProps {
   /** Navigation items to display */
@@ -35,7 +34,6 @@ export interface HeaderNavigationProps {
 
   /** Additional CSS classes */
   className?: string;
-}
 
 export interface NavigationItem {
   /** Unique identifier */
@@ -61,7 +59,6 @@ export interface NavigationItem {
 
   /** External link indicator */
   external?: boolean;
-}
 
 export interface HeaderLogoProps {
   /** Logo image source */
@@ -84,7 +81,6 @@ export interface HeaderLogoProps {
 
   /** Text to display if no image provided */
   text?: string;
-}
 
 export interface HeaderActionsProps {
   /** Action buttons/components to display */
@@ -92,18 +88,16 @@ export interface HeaderActionsProps {
 
   /** Additional CSS classes */
   className?: string;
-}
 
 export interface ThemeToggleProps {
   /** Current theme */
-  theme?: 'light' | 'dark' | 'system';
+  theme?: "light" | "dark" | "system";
 
   /** Callback when theme changes */
-  onThemeChange?: (theme: 'light' | 'dark' | 'system') => void;
+  onThemeChange?: (theme: "light" | "dark" | "system") => void;
 
   /** Size variant */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 
   /** Additional CSS classes */
   className?: string;
-}

@@ -3,7 +3,7 @@
 import { z } from "zod";
 
 // Gesture Configuration Schema
-export const GestureConfigSchema = z.object({
+export const GestureConfigSchema = z.object({)
   enabled: z.boolean(),
   sensitivity: z.number().min(0.1).max(2.0),
   threshold: z.number().min(10).max(100),
@@ -14,11 +14,11 @@ export type GestureConfig = z.infer<typeof GestureConfigSchema>;
 
 // Default Gesture Configuration
 export const _defaultGestureConfig: GestureConfig = {
+
   enabled: true,
   sensitivity: 1.0,
   threshold: 50,
   debounceMs: 150,
-};
 
 // Touch Gesture Types
 export type SwipeDirection = "up" | "down" | "left" | "right";
@@ -26,22 +26,26 @@ export type PinchType = "in" | "out";
 
 export interface SwipeGesture {
   _direction: SwipeDirection;
+
   _distance: number;
+
   _velocity: number;
+
   _startPoint: { x: number; y: number };
   _endPoint: { x: number; y: number };
-}
 
 export interface PinchGesture {
   type: PinchType;
+
   scale: number;
+
   _center: { x: number; y: number };
-}
 
 // Focus Management for Accessibility
 export const __FocusKeyPatterns = {
   // Keyboard navigation
   navigation: {
+
     _next: ["Tab"],
     _previous: ["Shift+Tab"],
     _activate: ["Enter", "Space"],
@@ -49,6 +53,7 @@ export const __FocusKeyPatterns = {
   },
   // Vim-style navigation (for power users)
   _vim: {
+
     up: ["k", "ArrowUp"],
     down: ["j", "ArrowDown"],
     left: ["h", "ArrowLeft"],
@@ -56,6 +61,7 @@ export const __FocusKeyPatterns = {
   },
   // Modal/Dialog controls
   _modal: {
+
     _close: ["Escape", "Meta+w"],
     _confirm: ["Enter", "Meta+Enter"],
     _cancel: ["Escape"],
@@ -66,24 +72,28 @@ export const __FocusKeyPatterns = {
 export const __AnimationPresets = {
   // Glass morphism transitions
   _glassTransition: {
+
     duration: 300,
     easing: "cubic-bezier(0.4, 0, 0.2, 1)",
   },
   
   // Micro-interactions
   _microInteraction: {
+
     duration: 150,
     easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
   },
   
   // Page transitions
   _pageTransition: {
+
     duration: 500,
     easing: "cubic-bezier(0.33, 1, 0.68, 1)",
   },
   
   // Focus indicators (dashed borders like Mermaid viewer)
   _focusIndicator: {
+
     duration: 200,
     _borderStyle: "2px dashed var(--color-border-focus)",
     easing: "ease-in-out",
@@ -103,6 +113,7 @@ export const Breakpoints = {
 export const __ComponentStates = {
   // Interactive states
   _interactive: {
+
     _idle: "opacity-100 transform-none",
     hover: "opacity-90 transform-scale-105",
     active: "opacity-80 transform-scale-95",
@@ -112,6 +123,7 @@ export const __ComponentStates = {
   
   // Loading states
   _loading: {
+
     _skeleton: "animate-pulse bg-gray-200",
     _spinner: "animate-spin",
     shimmer: "animate-shimmer bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200",
@@ -119,6 +131,7 @@ export const __ComponentStates = {
   
   // Validation states
   _validation: {
+
     _success: "border-green-500 text-green-700",
     _error: "border-red-500 text-red-700",
     _warning: "border-yellow-500 text-yellow-700",

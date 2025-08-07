@@ -16,8 +16,8 @@ type TimeRange =
   | "last_30_days"
   | "last_90_days"
   | "custom";
-type ChartType = "line" | "bar" | "area" | "pie" | "donut" | "scatter";
-type TrendDirection = "up" | "down" | "stable";
+type ChartType = "line" | "bar" | "area" | "pie" | "donut" | 'scatter";
+type TrendDirection = "up" | "down" | 'stable";
 
 interface DataPoint {
   x: string;
@@ -378,7 +378,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
 
   const getChangeIndicator = (
     change: number,
-    trend: "up" | "down" | "stable",
+    trend: "up" | "down" | 'stable",
   ) => {
 
     const isPositive = change > 0;
@@ -394,7 +394,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   const renderKPICard = (kpi: KPICard) => {
     const changeInfo = getChangeIndicator(
       kpi.change || 0,
-      kpi.trend || "stable",
+      kpi.trend || 'stable",
     );
 
     return (

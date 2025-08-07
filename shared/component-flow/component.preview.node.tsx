@@ -7,11 +7,13 @@ import { ComponentPreviewNodeData } from "./types";
 
 interface ResizeHandle {
   width: number;
+
   height: number;
-  isResizing: boolean;
-}
+
+  isResizing: boolean;,
 
 export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>> = ({
+
   data,
   selected,
   id
@@ -19,7 +21,7 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
   const [dimensions, setDimensions] = useState<ResizeHandle>({
     width: data.initialWidth || 400,
     height: data.initialHeight || 300,
-    isResizing: false
+    isResizing: false,
   });
 
   const [showProps, setShowProps] = useState(false);
@@ -41,19 +43,17 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
       setDimensions(prev => ({
         ...prev,
         width: newWidth,
-        height: newHeight,
-        isResizing: true
+        height: newHeight,)
+        isResizing: true,)
       }));
-    };
 
     const handleMouseUp = () => {
       setDimensions(prev => ({ ...prev, isResizing: false }));
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
   }, [dimensions.width, dimensions.height]);
 
   // Render the component with current props
@@ -68,18 +68,19 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
     } catch (error) {
       return (
         <div className={styles.errorState}>
-          <span>Component Error:</span>
-          <code>{error instanceof Error ? error.message : 'Unknown error'}</code>
+          <span>Component Error: </span>
+
+          <code>{error instanceof Error ? error.message : "Unknown error"}</code>
         </div>
       );
-    }
+
   }, [data.component, data.defaultProps, propOverrides]);
 
   // Handle prop value changes
   const handlePropChange = useCallback((key: string, value: unknown) => {
     setPropOverrides(prev => ({
-      ...prev,
-      [key]: value
+      ...prev,)
+      [key]: value)
     }));
   }, []);
 
@@ -94,7 +95,7 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
 
   return (
     <div
-      className={`${styles.previewNode}${selected ? styles.selected : ''}`}
+      className={"${styles.previewNode}${selected ? styles.selected : ""}"}
       data-component-id={id}
       data-component-name={data.componentName}
     >
@@ -106,7 +107,7 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
         id="props-input"
       />
       <Handle
-        type="source"
+        type='source"
         position={Position.Right}
         className={styles.handleOutput}
         id="component-output"
@@ -121,7 +122,7 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
 
         <div className={styles.controls}>
           <button
-            className={`${styles.controlBtn}${showProps ? styles.active : ''}`}
+            className={"${styles.controlBtn}${showProps ? styles.active : ""}"}
             onClick={() => setShowProps(!showProps)}
             title="Toggle Props Panel"
           >
@@ -147,29 +148,29 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
                   {prop.required && <span className={styles.required}>*</span>}
                 </label>
 
-                {prop.type === 'boolean' ? (
+                {prop.type === "boolean" ? (
                   <input
                     type="checkbox"
                     checked={propOverrides[prop.name] || false}
                     onChange={(e) => handlePropChange(prop.name, e.target.checked)}
                     className={styles.propInput}
                   />
-                ) : prop.type === 'select' && prop.options ? (
+                ) : prop.type === 'select" && prop.options ? (
                   <select
-                    value={propOverrides[prop.name] || prop.defaultValue || ''}
+                    value={propOverrides[prop.name] || prop.defaultValue || ""}
                     onChange={(e) => handlePropChange(prop.name, e.target.value)}
                     className={styles.propSelect}
                   >
-                    {prop.options.map(option => (
-                      <option key={option} value={option}>{option}</option>
+                    {prop.options.map(option => ()
+                      <option key={option} value={option}>{option}</option>)
                     ))}
                   </select>
                 ) : (
                   <input
-                    type={prop.type === 'number' ? 'number' : 'text'}
-                    value={propOverrides[prop.name] || prop.defaultValue || ''}
+                    type={prop.type === "number" ? "number" : "text"}
+                    value={propOverrides[prop.name] || prop.defaultValue || ""}
                     onChange={(e) => {
-                      const value = prop.type === 'number'
+                      const value = prop.type === "number"
                         ? parseInt(e.target.value)
                         : e.target.value;
                       handlePropChange(prop.name, value);
@@ -192,10 +193,10 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
 
       {/* Component Preview Area */}
       <div
-        className={`${styles.previewArea}${getBreakpointClass()}`}
+        className={"${styles.previewArea}${getBreakpointClass()}"}
         style={{
           width: dimensions.width,
-          height: dimensions.height
+          height: dimensions.height,
         }}
         data-width={dimensions.width}
         data-height={dimensions.height}
@@ -217,14 +218,13 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
       {/* Footer with metadata */}
       <div className={styles.footer}>
         <div className={styles.metadata}>
-          <span>Theme: {data.theme || 'system'}</span>
-          <span>Locale: {data.locale || 'en'}</span>
+          <span>Theme: {data.theme || 'system"}</span>
+          <span>Locale: {data.locale || "en"}</span>
           {data.version && <span>v{data.version}</span>}
         </div>
       </div>
     </div>
   );
-};
 
 // Export for component registry
 export default ComponentPreviewNode;

@@ -59,7 +59,6 @@ export interface ButtonAtomicProps
 
   /** Key down handler */
   onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
-}
 
 // Button variant types for external consumption
 export type ButtonVariant = NonNullable<ButtonAtomicProps["variant"]>;
@@ -81,55 +80,73 @@ export interface ButtonState {
 
   /** Is button pressed/active */
   pressed: boolean;
-}
 
 // Button theme configuration
 export interface ButtonTheme {
   /** Primary variant colors */
   primary: {
+
     background: string;
+
     backgroundHover: string;
+
     backgroundActive: string;
+
     color: string;
+
     border: string;
-  };
 
   /** Secondary variant colors */
   secondary: {
+
     background: string;
+
     backgroundHover: string;
+
     backgroundActive: string;
+
     color: string;
+
     border: string;
-  };
 
   /** Outline variant colors */
   outline: {
+
     background: string;
+
     backgroundHover: string;
+
     backgroundActive: string;
+
     color: string;
+
     border: string;
-  };
 
   /** Ghost variant colors */
   ghost: {
+
     background: string;
+
     backgroundHover: string;
+
     backgroundActive: string;
+
     color: string;
+
     border: string;
-  };
 
   /** Link variant colors */
   link: {
+
     background: string;
+
     backgroundHover: string;
+
     backgroundActive: string;
+
     color: string;
+
     border: string;
-  };
-}
 
 // Button accessibility props
 export interface ButtonA11yProps {
@@ -161,7 +178,6 @@ export interface ButtonA11yProps {
 
   /** Tab index override */
   tabIndex?: number;
-}
 
 // Extended button props with accessibility
 export interface ButtonAtomicA11yProps
@@ -169,7 +185,6 @@ export interface ButtonAtomicA11yProps
     ButtonA11yProps {
   /** Role override */
   role?: string;
-}
 
 // Button group props for when buttons are grouped together
 export interface ButtonGroupProps {
@@ -193,7 +208,6 @@ export interface ButtonGroupProps {
 
   /** Test identifier */
   "data-testid"?: string;
-}
 
 // Button configuration for form integration
 export interface ButtonFormConfig {
@@ -214,7 +228,6 @@ export interface ButtonFormConfig {
 
   /** Form validation bypass */
   formNoValidate?: boolean;
-}
 
 // Complete button props with all extensions
 export interface ButtonAtomicCompleteProps
@@ -226,22 +239,30 @@ export interface ButtonAtomicCompleteProps
     ButtonFormConfig {
   /** Role override */
   role?: string;
-}
 
 // Button event handlers interface
 export interface ButtonEventHandlers {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
   onDoubleClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
   onMouseDown?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
   onMouseUp?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
   onMouseEnter?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
   onMouseLeave?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+
   onFocus?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+
   onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+
   onKeyDown?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+
   onKeyUp?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
+
   onKeyPress?: (event: React.KeyboardEvent<HTMLButtonElement>) => void;
-}
 
 // Button render prop types
 export interface ButtonRenderProps extends ButtonState {
@@ -253,21 +274,19 @@ export interface ButtonRenderProps extends ButtonState {
 
   /** Button theme colors */
   theme: ButtonTheme[ButtonVariant];
-}
 
 export type _ButtonRenderProp = (props: ButtonRenderProps) => ReactNode;
 
 // Type guards
 export const _isButtonVariant = (value: unknown): value is ButtonVariant => {
   return ["primary", "secondary", "outline", "ghost", "link"].includes(value);
-};
 
 export const _isButtonSize = (value: unknown): value is ButtonSize => {
   return ["xs", "sm", "md", "lg", "xl"].includes(value);
-};
 
 // Default props
 export const BUTTON_DEFAULTS: Required<
+
   Pick<
     ButtonAtomicProps,
     "variant" | "size" | "type" | "loading" | "disabled" | "fullWidth"
@@ -279,7 +298,6 @@ export const BUTTON_DEFAULTS: Required<
   loading: false,
   disabled: false,
   fullWidth: false,
-};
 
 // Export all types - no duplicate exports
 export type { ButtonAtomicProps as default };

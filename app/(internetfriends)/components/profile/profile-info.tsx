@@ -10,15 +10,16 @@ import { Availability } from "../availability";
 
 export const _ProfileInfo = () => {
   const currentDate = new TZDate(Date.now(), curriculum.contactInfo.localTime);
-  const timeFormatted = format(currentDate, "hh:mm aa");
+  const timeFormatted = format(currentDate, "hh: mm aa");
 
   return (
     <>
-      <MotionDiv className={`${_cardCss}`}>
+      <MotionDiv className={"${_cardCss}"}>
         <div className="grid grid-cols-2 gap-2">
           <Avatar className="rounded-md">
             <AvatarImage
-              src="https://github.com/BarreraSlzr.png"
+              src="https: //github.com/BarreraSlzr.png"
+
               alt="@BarreraSlzr"
             />
             <AvatarFallback>EB</AvatarFallback>
@@ -45,4 +46,3 @@ export const _ProfileInfo = () => {
       </MotionDiv>
     </>
   );
-};

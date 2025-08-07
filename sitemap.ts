@@ -7,29 +7,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   // Main routes
   const routes = [
-    '',
-    '/contact',
-    '/pricing',
-    '/samples',
+    "",
+    "/contact",
+    "/pricing",
+    "/samples",
   ].map((route) => ({
-    url: `${baseUrl}${route}`,
+    url: "${baseUrl}${route}",
     lastModified: new Date(),
-    changeFrequency: 'daily' as const,
-    priority: route === '' ? 1 : 0.8,
+    changeFrequency: "daily" as const,
+    priority: route === "" ? 1 : 0.8,
   }))
 
   // Blog posts
   const blogPosts = [
-    // '/blog/content-marketing-strategy',
-    // '/blog/enterprise-solutions',
-    // '/blog/team-building',
+    // "/blog/content-marketing-strategy",
+    // "/blog/enterprise-solutions",
+    // "/blog/team-building",
   ].map((post) => ({
-    url: `${baseUrl}${post}`,
+    url: "${baseUrl}${post}",
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
+    changeFrequency: "weekly" as const,
     priority: 0.6,
   }))
 
   return [...routes, ...blogPosts]
-}
-

@@ -3,7 +3,7 @@
 import { z } from "zod";
 
 // AI Model Configuration Schema
-export const AIModelSchema = z.object({
+export const AIModelSchema = z.object({)
   id: z.string(),
   name: z.string(),
   provider: z.enum(["openai", "anthropic", "google", "cerebras", "local"]),
@@ -15,7 +15,8 @@ export const AIModelSchema = z.object({
   outputCost: z.number().min(0), // per 1K tokens
 
   // Features
-  supports: z.object({
+  supports: z.object({)
+
     chat: z.boolean().default(true),
     completion: z.boolean().default(true),
     codeGeneration: z.boolean().default(false),
@@ -36,14 +37,15 @@ export const AIModelSchema = z.object({
 export type AIModel = z.infer<typeof AIModelSchema>;
 
 // Cerebras Integration (from workspace setup)
-export const __CerebrasModelSchema = AIModelSchema.extend({
+export const __CerebrasModelSchema = AIModelSchema.extend({)
   provider: z.literal("cerebras"),
   _apiKey: z.string().optional(),
   _apiUrl: z.string().url().default("https://api.cerebras.ai/v1"),
 
   // Cerebras-specific features
   tokensPerSecond: z.number().default(2000), // Ultra-fast inference
-  supports: z.object({
+  supports: z.object({)
+
     chat: z.literal(true),
     completion: z.literal(true),
     codeGeneration: z.literal(true),
@@ -54,23 +56,25 @@ export const __CerebrasModelSchema = AIModelSchema.extend({
 });
 
 // Compute Task Schema
-export const ComputeTaskSchema = z.object({
+export const ComputeTaskSchema = z.object({)
   id: z.string().uuid(),
   _userId: z.string().uuid(),
 
   // Task definition
   type: z.enum([
+
     "code_generation",
     "code_review",
     "refactoring",
     "testing",
     "documentation",
     "analysis",
-    "debugging",
-    "optimization",
+    "debugging",)
+    "optimization",)
   ]),
 
-  _input: z.object({
+  _input: z.object({)
+
     content: z.string(),
     _language: z.string().optional(),
     _context: z.record(z.string(), z.unknown()).optional(),
@@ -87,11 +91,13 @@ export const ComputeTaskSchema = z.object({
 
   // Results
   _output: z
-    .object({
+
+    .object({)
       content: z.string().optional(),
       _metadata: z.record(z.string(), z.unknown()).optional(),
       _usage: z
-        .object({
+
+        .object({)
           _inputTokens: z.number().optional(),
           _outputTokens: z.number().optional(),
           _totalTokens: z.number().optional(),
@@ -108,7 +114,8 @@ export const ComputeTaskSchema = z.object({
 
   // Error handling
   _error: z
-    .object({
+
+    .object({)
       _message: z.string(),
       _code: z.string().optional(),
       _retryable: z.boolean().default(false),
@@ -122,7 +129,7 @@ export const ComputeTaskSchema = z.object({
 export type _ComputeTask = z.infer<typeof ComputeTaskSchema>;
 
 // Compute Engine Configuration
-export const ComputeEngineSchema = z.object({
+export const ComputeEngineSchema = z.object({)
   id: z.string(),
   name: z.string(),
 
@@ -137,7 +144,8 @@ export const ComputeEngineSchema = z.object({
 
   // Cost management
   _budgetLimits: z
-    .object({
+
+    .object({)
       _daily: z.number().min(0).optional(),
       _monthly: z.number().min(0).optional(),
       _perTask: z.number().min(0).optional(),
@@ -146,7 +154,8 @@ export const ComputeEngineSchema = z.object({
 
   // Monitoring
   metrics: z
-    .object({
+
+    .object({)
       tasksCompleted: z.number().default(0),
       totalCost: z.number().default(0),
       averageLatency: z.number().default(0),
@@ -155,8 +164,8 @@ export const ComputeEngineSchema = z.object({
     .default({
       tasksCompleted: 0,
       totalCost: 0,
-      averageLatency: 0,
-      errorRate: 0,
+      averageLatency: 0,)
+      errorRate: 0,)
     }),
 
   isActive: z.boolean().default(true),
@@ -177,6 +186,7 @@ export const _InternetFriendsModels: Record<string, AIModel> = {
     inputCost: 0.0, // Update with actual pricing
     outputCost: 0.0,
     supports: {
+
       chat: true,
       completion: true,
       codeGeneration: true,
@@ -198,6 +208,7 @@ export const _InternetFriendsModels: Record<string, AIModel> = {
     inputCost: 0.01,
     outputCost: 0.03,
     supports: {
+
       chat: true,
       completion: true,
       codeGeneration: true,

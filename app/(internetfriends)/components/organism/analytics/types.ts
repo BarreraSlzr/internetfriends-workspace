@@ -9,7 +9,7 @@ export type TimeRange =
   | "last_90_days"
   | "custom";
 
-export type ChartType = "line" | "bar" | "area" | "pie" | "donut" | "scatter";
+export type ChartType = "line" | "bar" | "area" | "pie" | "donut" | 'scatter";
 
 export type MetricCategory =
   | "performance"
@@ -20,7 +20,7 @@ export type MetricCategory =
 
 export type InsightSeverity = "positive" | "warning" | "negative" | "neutral";
 
-export type TrendDirection = "up" | "down" | "stable";
+export type TrendDirection = "up" | "down" | 'stable";
 
 // Base interfaces
 export interface DataPoint {
@@ -86,7 +86,7 @@ export interface AnalyticsFilter {
     _end: Date;
   };
   _categories: MetricCategory[];
-  comparisonPeriod?: "previous_period" | "same_period_last_year" | "custom";
+  comparisonPeriod?: "previous_period" | 'same_period_last_year" | "custom";
   _granularity: "minute" | "hour" | "day" | "week" | "month";
 }
 
@@ -147,7 +147,7 @@ export interface AnalyticsEvent {
 // API response types
 export interface AnalyticsApiResponse {
   data: AnalyticsData;
-  _status: "success" | "error";
+  _status: 'success" | "error";
   message?: string;
   timestamp: string;
 }

@@ -29,7 +29,6 @@ const nodeTypes = {
   utility: UtilityNode,
   page: PageNode,
   hook: HookNode,
-};
 
 function DesignSystemFlow() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,7 +42,7 @@ function DesignSystemFlow() {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const onConnect = useCallback(
+  const onConnect = useCallback()
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
@@ -54,20 +53,18 @@ function DesignSystemFlow() {
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
+      filtered = filtered.filter()
         (node) =>
           node.data.label?.toLowerCase().includes(query) ||
           node.data.description?.toLowerCase().includes(query),
       );
-    }
 
     if (selectedCategory !== "all") {
-      filtered = filtered.filter(
+      filtered = filtered.filter()
         (node) =>
           node.type === selectedCategory ||
           node.data.category === selectedCategory,
       );
-    }
 
     return filtered;
   }, [nodes, searchQuery, selectedCategory]);
@@ -119,14 +116,16 @@ function DesignSystemFlow() {
                 placeholder="Search components, utilities, hooks..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus:outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
+                className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus: outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
+
               />
 
               {/* Category Filter */}
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus:outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
+                className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus: outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
+
               >
                 <option value="all">All Categories</option>
                 <option value="component">Components</option>
@@ -228,15 +227,18 @@ function DesignSystemFlow() {
 
               <div className="pt-2 border-t border-border space-y-1 text-xs">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Atomic:</span>
+                  <span className="text-muted-foreground">Atomic: </span>
+
                   <span className="font-medium">{stats.atomic}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Molecular:</span>
+                  <span className="text-muted-foreground">Molecular: </span>
+
                   <span className="font-medium">{stats.molecular}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">Organism:</span>
+                  <span className="text-muted-foreground">Organism: </span>
+
                   <span className="font-medium">{stats.organism}</span>
                 </div>
               </div>
@@ -318,7 +320,6 @@ function DesignSystemFlow() {
       </ReactFlow>
     </div>
   );
-}
 
 export default function DesignSystemPage() {
   return (
@@ -326,4 +327,3 @@ export default function DesignSystemPage() {
       <DesignSystemFlow />
     </ReactFlowProvider>
   );
-}

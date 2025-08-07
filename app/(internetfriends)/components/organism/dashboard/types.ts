@@ -6,21 +6,21 @@ export type DashboardTab =
   | "analytics"
   | "projects"
   | "performance"
-  | "settings";
+  | 'settings";
 
-export type MetricTrend = "up" | "down" | "stable";
+export type MetricTrend = "up" | "down" | 'stable";
 
-export type ActivitySeverity = "info" | "success" | "warning" | "error";
+export type ActivitySeverity = "info" | 'success" | "warning" | "error";
 
 export type ActivityType =
   | "user_login"
   | "user_logout"
-  | "system_alert"
+  | 'system_alert"
   | "deployment"
   | "compute_job"
   | "api_call"
   | "database_query"
-  | "security_event"
+  | 'security_event"
   | "performance_alert";
 
 // Base Dashboard Props
@@ -86,7 +86,7 @@ export interface ActivityAction {
   label: string;
   _action: () => void;
   icon?: string;
-  variant?: "primary" | "secondary" | "danger";
+  variant?: "primary" | 'secondary" | "danger";
   disabled?: boolean;
 }
 
@@ -301,7 +301,7 @@ export interface DashboardEvent {
     | "metric_click"
     | "activity_click"
     | "refresh"
-    | "settings_change";
+    | 'settings_change";
   data: unknown;
   timestamp: Date;
   userId?: string;

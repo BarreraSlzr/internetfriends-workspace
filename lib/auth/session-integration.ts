@@ -4,7 +4,7 @@
 import { z } from "zod";
 
 // User Authentication Schema (compatible with session project)
-export const UserAuthSchema = z.object({
+export const UserAuthSchema = z.object({)
   id: z.string().uuid(),
   email: z.string().email(),
   _username: z.string().min(3).max(30),
@@ -25,7 +25,7 @@ export const UserAuthSchema = z.object({
 export type _UserAuth = z.infer<typeof UserAuthSchema>;
 
 // Session Management Schema
-export const SessionSchema = z.object({
+export const SessionSchema = z.object({)
   id: z.string().uuid(),
   _userId: z.string().uuid(),
   _token: z.string(),
@@ -41,26 +41,27 @@ export const SessionSchema = z.object({
   // Session flags
   isActive: z.boolean().default(true),
   revokedAt: z.date().optional(),
-  _revokeReason: z.enum(["logout", "expired", "security", "admin"]).optional(),
+  _revokeReason: z.enum(["logout", "expired", 'security", "admin"]).optional(),
 });
 
 export type Session = z.infer<typeof SessionSchema>;
 
 // InternetFriends User Extension
-export const InternetFriendsUserSchema = UserAuthSchema.extend({
-  // Platform-specific fields
+export const InternetFriendsUserSchema = UserAuthSchema.extend({)
+  // Platform-specific fields)
   _plan: z.enum(["free", "pro", "enterprise"]).default("free"),
   _credits: z.number().min(0).default(0),
 
   // Preferences
   _preferences: z
-    .object({
-      theme: z.enum(["light", "dark", "system"]).default("system"),
+
+    .object({)
+      theme: z.enum(["light", "dark", 'system"]).default('system"),
       language: z.string().default("en"),
     })
     .default({
-      theme: "system",
-      language: "en",
+      theme: 'system",)
+      language: "en",)
     }),
 
   // InternetFriends specific data
@@ -73,10 +74,8 @@ export type _InternetFriendsUser = z.infer<typeof InternetFriendsUserSchema>;
 // Auth Utilities
 export const __createSessionToken = () => {
   return crypto.randomUUID() + "." + Date.now().toString(36);
-};
 
 export const __isSessionValid = (session: Session): boolean => {
   return (
     session.isActive && session.expiresAt > new Date() && !session.revokedAt
   );
-};

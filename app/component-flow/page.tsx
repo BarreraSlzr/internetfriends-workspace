@@ -12,14 +12,15 @@ import "@/shared/styles/design-tokens.css";
 import styles from "./component-flow.page.module.scss";
 
 // Dynamically import React Flow to avoid SSR issues
-const ComponentFlowWorkspace = dynamic(
+const ComponentFlowWorkspace = dynamic()
   () =>
-    import("@/shared/component-flow/component.flow.workspace").then(
+    import("@/shared/component-flow/component.flow.workspace").then()
       (mod) => mod.ComponentFlowWorkspaceProvider,
     ),
-  {
+{
     ssr: false,
     loading: () => (
+
       <div className={styles.loading}>Loading Component Flow...</div>
     ),
   },
@@ -27,19 +28,18 @@ const ComponentFlowWorkspace = dynamic(
 
 interface ComponentFlowPageProps {
   searchParams?: Promise<{
-    theme?: "light" | "dark" | "system";
-    mode?: "demo" | "development" | "showcase";
+    theme?: "light" | "dark" | 'system";
+    mode?: "demo" | "development" | 'showcase";
   }>;
-}
 
-export default function ComponentFlowPage({
-  searchParams,
+export default function ComponentFlowPage({)
+  searchParams,)
 }: ComponentFlowPageProps) {
   const resolvedSearchParams = await searchParams;
   const [isInitialized, setIsInitialized] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<
-    "light" | "dark" | "system"
-  >(resolvedSearchParams?.theme || "system");
+    "light" | "dark" | 'system"
+  >(resolvedSearchParams?.theme || 'system");
   const [mode, setMode] = useState(resolvedSearchParams?.mode || "demo");
   const [stats, setStats] = useState(componentRegistry.getStats());
 
@@ -54,15 +54,12 @@ export default function ComponentFlowPage({
         setStats(componentRegistry.getStats());
         setIsInitialized(true);
 
-        console.log(
-          "🚀 Component Flow initialized with",
-          stats.totalComponents,
-          "components",
+        console.log("🚀 Component Flow initialized with",
+          stats.totalComponents,)
+          "components",)
         );
       } catch (error) {
         console.error("Failed to initialize components: ", error);
-      }
-    };
 
     initializeComponents();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -71,22 +68,23 @@ export default function ComponentFlowPage({
   const registerDemoComponents = () => {
     // Demo Button Component
     const DemoButton: React.FC<any> = ({
+
       variant = "primary",
       children = "Button",
       ...props
     }) => (
       <button
-        className={`demo-button demo-button--${variant}`}
+        className={"demo-button demo-button--${variant}"}
         {...props}
         style={{
           padding: "0.5rem 1rem",
           borderRadius: "var(--radius-md, 0.5rem)",
-          border:
-            variant === "primary"
+          border: variant === "primary"
+
               ? "none"
               : "1px solid var(--border-primary, #e5e7eb)",
-          background:
-            variant === "primary"
+          background: variant === "primary"
+
               ? "var(--if-primary, #3b82f6)"
               : "var(--bg-primary, #fff)",
           color:
@@ -111,28 +109,29 @@ export default function ComponentFlowPage({
 
     // Demo Card Component
     const DemoCard: React.FC<any> = ({
+
       title = "Card Title",
       children = "Card content goes here...",
       variant = "default",
       ...props
     }) => (
       <div
-        className={`demo-card demo-card--${variant}`}
+        className={"demo-card demo-card--${variant}"}
         {...props}
         style={{
           padding: "1rem",
           borderRadius: "var(--radius-lg, 0.75rem)",
-          border:
-            variant === "glass"
+          border: variant === "glass"
+
               ? "1px solid rgba(255, 255, 255, 0.18)"
               : "1px solid var(--border-primary, #e5e7eb)",
-          background:
-            variant === "glass"
+          background: variant === "glass"
+
               ? "rgba(255, 255, 255, 0.85)"
               : "var(--bg-primary, #fff)",
           backdropFilter: variant === "glass" ? "blur(12px)" : "none",
-          boxShadow:
-            variant === "elevated"
+          boxShadow: variant === "elevated"
+
               ? "0 10px 15px -3px rgba(0, 0, 0, 0.1)"
               : "none",
         }}
@@ -162,6 +161,7 @@ export default function ComponentFlowPage({
 
     // Demo Input Component
     const DemoInput: React.FC<any> = ({
+
       placeholder = "Enter text...",
       type = "text",
       ...props
@@ -194,11 +194,12 @@ export default function ComponentFlowPage({
 
     // Register components
     componentRegistry.registerComponents([
-      {
+    {
         id: "demo-button",
         path: "demo/button.tsx",
         component: DemoButton,
         metadata: {
+
           componentName: "DemoButton",
           componentType: "atomic",
           component: DemoButton,
@@ -206,73 +207,81 @@ export default function ComponentFlowPage({
           tags: ["button", "interactive", "demo"],
           defaultProps: { variant: "primary", children: "Click me" },
           availableProps: [
-            {
+
+          {
               name: "variant",
-              type: "select",
-              options: ["primary", "secondary", "ghost"],
+              type: 'select",
+              options: ["primary", 'secondary", "ghost"],
               defaultValue: "primary",
             },
-            { name: "children", type: "string", defaultValue: "Button" },
+            { name: "children", type: 'string", defaultValue: "Button" },
             { name: "disabled", type: "boolean", defaultValue: false },
           ],
           initialWidth: 200,
           initialHeight: 100,
           documentation: {
+
             description: "A demo button component showcasing InternetFriends design system",
             examples: [
-              {
+
+            {
                 title: "Primary Button",
                 props: { variant: "primary", children: "Primary" },
               },
-              {
+            {
                 title: "Secondary Button",
-                props: { variant: "secondary", children: "Secondary" },
+                props: { variant: 'secondary", children: "Secondary" },
               },
             ],
           },
         },
       },
-      {
+    {
         id: "demo-card",
         path: "demo/card.tsx",
         component: DemoCard,
         metadata: {
+
           componentName: "DemoCard",
           componentType: "molecular",
           component: DemoCard,
           category: "layout",
           tags: ["card", "container", "demo"],
           defaultProps: {
+
             variant: "default",
             title: "Sample Card",
             children: "This is a demo card component.",
           },
           availableProps: [
-            {
+
+          {
               name: "variant",
-              type: "select",
+              type: 'select",
               options: ["default", "glass", "elevated"],
               defaultValue: "default",
             },
-            { name: "title", type: "string", defaultValue: "Card Title" },
-            {
+            { name: "title", type: 'string", defaultValue: "Card Title" },
+          {
               name: "children",
-              type: "string",
+              type: 'string",
               defaultValue: "Card content...",
             },
           ],
           initialWidth: 300,
           initialHeight: 200,
           documentation: {
+
             description: "A flexible card component with glass morphism and elevation variants",
           },
         },
       },
-      {
+    {
         id: "demo-input",
         path: "demo/input.tsx",
         component: DemoInput,
         metadata: {
+
           componentName: "DemoInput",
           componentType: "atomic",
           component: DemoInput,
@@ -280,15 +289,16 @@ export default function ComponentFlowPage({
           tags: ["input", "form", "demo"],
           defaultProps: { type: "text", placeholder: "Type here..." },
           availableProps: [
-            {
+
+          {
               name: "type",
-              type: "select",
+              type: 'select",
               options: ["text", "email", "password", "number"],
               defaultValue: "text",
             },
-            {
+          {
               name: "placeholder",
-              type: "string",
+              type: 'string",
               defaultValue: "Enter text...",
             },
             { name: "disabled", type: "boolean", defaultValue: false },
@@ -296,28 +306,25 @@ export default function ComponentFlowPage({
           initialWidth: 250,
           initialHeight: 80,
           documentation: {
+
             description: "A form input with focus states and accessibility support",
           },
-        },
-      },
+        },)
+      },)
     ]);
-  };
 
   const handleWorkspaceChange = (
     nodes: ComponentPreviewNodeType[],
     edges: unknown[],
   ) => {
     console.log("Workspace updated: ", {
-      nodes: nodes.length,
-      edges: edges.length,
+      nodes: nodes.length,)
+      edges: edges.length,)
     });
-  };
 
   const handleNodeSelect = (node: ComponentPreviewNodeType | null) => {
     if (node) {
       console.log("Selected component:", node.data.componentName);
-    }
-  };
 
   if (!isInitialized) {
     return (
@@ -328,7 +335,6 @@ export default function ComponentFlowPage({
         </div>
       </div>
     );
-  }
 
   return (
     <div className={styles.container} data-theme={selectedTheme}>
@@ -342,20 +348,22 @@ export default function ComponentFlowPage({
 
           <div className={styles.controls}>
             <div className={styles.controlGroup}>
-              <label>Theme:</label>
+              <label>Theme: </label>
+
               <select
                 value={selectedTheme}
                 onChange={(e) => setSelectedTheme(e.target.value as any)}
                 className={styles.select}
               >
-                <option value="system">System</option>
+                <option value='system">System</option>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
               </select>
             </div>
 
             <div className={styles.controlGroup}>
-              <label>Mode:</label>
+              <label>Mode: </label>
+
               <select
                 value={mode}
                 onChange={(e) => setMode(e.target.value)}
@@ -363,7 +371,7 @@ export default function ComponentFlowPage({
               >
                 <option value="demo">Demo</option>
                 <option value="development">Development</option>
-                <option value="showcase">Showcase</option>
+                <option value='showcase">Showcase</option>
               </select>
             </div>
           </div>
@@ -410,8 +418,7 @@ export default function ComponentFlowPage({
           <h3>🚀 Welcome to Component Flow!</h3>
           <p>
             This is your visual component development workspace. here's what you {/* TODO: Fix unescaped entities - use &apos; &quot; &lt; &gt; &amp; */}
-            can do:
-          </p>
+            can do: </p>
 
           <ul className={styles.featureList}>
             <li>
@@ -419,29 +426,35 @@ export default function ComponentFlowPage({
               available components
             </li>
             <li>
-              <strong>🎯 Add Components:</strong> Click any component in the
+              <strong>🎯 Add Components: </strong> Click any component in the
+
               library to add it to the workspace
             </li>
             <li>
-              <strong>🔧 Edit Props:</strong> Click the gear icon on any
+              <strong>🔧 Edit Props: </strong> Click the gear icon on any
+
               component to modify its properties
             </li>
             <li>
-              <strong>📱 Test Responsive:</strong> Drag the resize handle to
+              <strong>📱 Test Responsive: </strong> Drag the resize handle to
+
               test responsive behavior
             </li>
             <li>
-              <strong>🔗 Connect Flow:</strong> Drag from output handles to
+              <strong>🔗 Connect Flow: </strong> Drag from output handles to
+
               input handles to create data flows
             </li>
             <li>
-              <strong>💾 Export:</strong> Save your workspace configuration for
+              <strong>💾 Export: </strong> Save your workspace configuration for
+
               later use
             </li>
           </ul>
 
           <div className={styles.patternInfo}>
-            <h4>Design Patterns Available:</h4>
+            <h4>Design Patterns Available: </h4>
+
             <div className={styles.patternList}>
               {Object.entries(patterns).map(([key, pattern]) => (
                 <div key={key} className={styles.patternItem}>
@@ -455,4 +468,3 @@ export default function ComponentFlowPage({
       )}
     </div>
   );
-}

@@ -9,6 +9,7 @@ export const InternetFriendsColors = {
   
   // Glass morphism system
   glass: {
+
     header: "rgba(255, 255, 255, 0.85)",
     headerScrolled: "rgba(255, 255, 255, 0.92)",
     border: "rgba(255, 255, 255, 0.12)",
@@ -18,6 +19,7 @@ export const InternetFriendsColors = {
   
   // Compact border radius system (InternetFriends)
   radius: {
+
     xs: "0.25rem",   // 4px - Ultra compact
     sm: "0.375rem",  // 6px - Small compact
     md: "0.5rem",    // 8px - Medium compact
@@ -26,6 +28,7 @@ export const InternetFriendsColors = {
   
   // Theme-aware colors
   light: {
+
     textPrimary: "#111827",        // Dark text on light
     textContrast: "#000000",       // Maximum contrast
     bgPrimary: "#ffffff",          // Pure white
@@ -34,6 +37,7 @@ export const InternetFriendsColors = {
   },
   
   dark: {
+
     textPrimary: "#ffffff",        // White text on dark
     textContrast: "#ffffff",       // Maximum contrast
     bgPrimary: "#111827",          // Dark background
@@ -69,24 +73,24 @@ export const __generateCSSVariables = (theme: "light" | "dark" = "light") => {
     "--color-bg-primary": themeColors.bgPrimary,
     "--color-bg-glass": themeColors.bgGlass,
     "--color-border-focus": themeColors.borderFocus,
-  };
-};
 
 // Tailwind CSS Extension
 export const __InternetFriendsTailwindExtension = {
   colors: {
+
     "if-primary": "var(--if-primary)",
     "if-primary-hover": "var(--if-primary-hover)",
     "if-primary-light": "var(--if-primary-light)",
     "if-primary-active": "var(--if-primary-active)",
   },
   _borderRadius: {
+
     "if-xs": "var(--radius-xs)",
     "if-sm": "var(--radius-sm)", 
     "if-md": "var(--radius-md)",
     "if-lg": "var(--radius-lg)",
   },
   _backdropBlur: {
+
     "glass": "blur(12px)",
   },
-};

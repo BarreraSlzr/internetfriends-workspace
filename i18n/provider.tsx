@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useContext, useState, useEffect, useCallback } from "react";
 import {
@@ -16,15 +16,16 @@ import {
 
 export interface I18nProviderProps {
   children: React.ReactNode;
+
   defaultLocale?: SupportedLocale;
   initialTranslations?: Translations;
-}
 
 /**
  * InternetFriends I18n Provider
  * Provides internationalization context to the entire application
  */
 export const I18nProvider: React.FC<I18nProviderProps> = ({
+
   children,
   defaultLocale,
   initialTranslations,
@@ -47,8 +48,8 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
       const newTranslations = await loadTranslations(targetLocale);
       setTranslations(newTranslations);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to load translations';
-      console.error('Translation loading error:', err);
+      const errorMessage = err instanceof Error ? err.message : "Failed to load translations";
+      console.error("Translation loading error:", err);
       setError(errorMessage);
 
       // Try to load default locale as fallback
@@ -56,21 +57,20 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
         try {
           const fallbackTranslations = await loadTranslations(DEFAULT_LOCALE);
           setTranslations(fallbackTranslations);
-          setError(`Failed to load ${targetLocale} translations, using English as fallback`);
+          setError("Failed to load ${targetLocale} translations, using English as fallback");
         } catch (fallbackErr) {
-          console.error('Fallback translation loading error:', fallbackErr);
-        }
-      }
+          console.error("Fallback translation loading error:", fallbackErr);
+
     } finally {
       setIsLoading(false);
-    }
+
   }, []);
 
   // Initialize translations on mount
   useEffect(() => {
     if (!translations) {
       loadLocaleTranslations(locale);
-    }
+
   }, [locale, translations, loadLocaleTranslations]);
 
   // Set locale and load new translations
@@ -82,23 +82,21 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
       storeLocale(newLocale);
 
       // Update document language
-      if (typeof document !== 'undefined') {
+      if (typeof document !== "undefined") {
         document.documentElement.lang = newLocale;
-      }
 
       await loadLocaleTranslations(newLocale);
     } catch (err) {
-      console.error('Locale change error:', err);
-      setError('Failed to change language');
-    }
+      console.error("Locale change error:", err);
+      setError("Failed to change language");
+
   }, [locale, loadLocaleTranslations]);
 
   // Create translation function
   const t = useCallback((key: string, params?: Record<string, string | number>) => {
     if (!translations) {
-      console.warn('Translations not loaded yet, returning key:', key);
+      console.warn("Translations not loaded yet, returning key:", key);
       return key;
-    }
 
     const translateFn = createTranslationFunction(translations);
     return translateFn(key, params);
@@ -111,6 +109,7 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
 
   // Context value
   const contextValue: I18nContextType = {
+
     locale,
     translations: translations || ({} as Translations),
     setLocale,
@@ -118,7 +117,6 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
     formatMessage,
     isLoading,
     error,
-  };
 
   // Show loading state
   if (isLoading && !translations) {
@@ -130,7 +128,6 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
         </div>
       </div>
     );
-  }
 
   // Show error state
   if (error && !translations) {
@@ -146,34 +143,32 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm hover:bg-primary/90 transition-colors"
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md text-sm hover: bg-primary/90 transition-colors"
+
           >
             Reload Page
           </button>
         </div>
       </div>
     );
-  }
 
   return (
     <I18nContext.Provider value={contextValue}>
       {children}
     </I18nContext.Provider>
   );
-};
 
 /**
  * Hook to use i18n context
  */
 export function useI18n(): I18nContextType {
+    return
   const context = useContext(I18nContext);
 
   if (!context) {
-    throw new Error('useI18n must be used within an I18nProvider');
-  }
+    throw new Error("useI18n must be used within an I18nProvider");
 
   return context;
-}
 
 /**
  * Hook to get only translation function (lighter than full context)
@@ -185,8 +180,6 @@ export function useTranslation() {
     t,
     locale,
     isLoading,
-  };
-}
 
 /**
  * Hook to get locale management functions
@@ -199,24 +192,21 @@ export function useLocale() {
     setLocale,
     isLoading,
     error,
-  };
-}
 
 /**
  * Higher-order component to wrap components with i18n
  */
 export function withI18n<T extends object>(Component: React.ComponentType<T>) {
+
   const WrappedComponent = (props: T) => {
     return (
       <I18nProvider>
         <Component {...props} />
       </I18nProvider>
     );
-  };
 
-  WrappedComponent.displayName = `withI18n(${Component.displayName || Component.name})`;
+  WrappedComponent.displayName = "withI18n(${Component.displayName || Component.name})";
 
   return WrappedComponent;
-}
 
 export default I18nProvider;

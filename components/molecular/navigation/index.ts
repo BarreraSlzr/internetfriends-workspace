@@ -1,4 +1,4 @@
-export { NavigationMolecular } from './navigation.molecular';
+export { NavigationMolecular } from "./navigation.molecular";
 export type {
   NavigationMolecularProps,
   NavigationItem,
@@ -7,4 +7,4 @@ export type {
   MobileMenuProps,
   NavigationBreadcrumbProps,
   NavigationTabsProps,
-} from './types';
+} from "./types";

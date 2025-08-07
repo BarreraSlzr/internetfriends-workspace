@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const BaseEventSchema = z.object({
+export const BaseEventSchema = z.object({)
   type: z.string(),
   timestamp: z.string(),
   audience: z.string().optional(),
@@ -9,6 +9,7 @@ export const BaseEventSchema = z.object({
 });
 
 // Example: Brand-specific extension
-export const _FriendsXYZEventSchema = BaseEventSchema.extend({
-  // brand-specific fields here
+
+export const _FriendsXYZEventSchema = BaseEventSchema.extend({)
+  // brand-specific fields here)
 }); 

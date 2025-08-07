@@ -27,7 +27,7 @@ export type SortOption =
   | "name"
   | "created_date"
   | "updated_date"
-  | "status"
+  | 'status"
   | "priority"
   | "completion";
 
@@ -231,7 +231,7 @@ export interface ProjectDetailModalProps {
 
 // Event types
 export interface ProjectEvent {
-  type: "click" | "edit" | "delete" | "share" | "filter" | "sort" | "search" | "view_change";
+  type: "click" | "edit" | "delete" | 'share" | "filter" | 'sort" | 'search" | "view_change";
   _data: unknown;
   _timestamp: Date;
   userId?: string;
@@ -251,7 +251,7 @@ export interface ProjectsApiResponse {
 
 export interface ProjectApiResponse {
   project: Project;
-  status: "success" | "error";
+  status: 'success" | "error";
   message?: string;
 }
 

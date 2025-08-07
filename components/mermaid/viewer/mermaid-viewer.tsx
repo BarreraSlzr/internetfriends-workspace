@@ -23,6 +23,7 @@ import {
 export interface MermaidViewerProps {
   /** Mermaid diagram code */
   code: string;
+
   /** Optional title for the diagram */
   title?: string;
   /** Container height */
@@ -41,19 +42,21 @@ export interface MermaidViewerProps {
   loading?: boolean;
   /** Error callback */
   onError?: (error: string) => void;
+
   /** Success callback */
   onRender?: () => void;
   /** Test identifier */
   "data-testid"?: string;
-}
 
 export interface ZoomState {
   scale: number;
+
   translateX: number;
-  translateY: number;
-}
+
+  translateY: number;,
 
 export const MermaidViewer: React.FC<MermaidViewerProps> = ({
+
   code,
   title,
   height = "400px",
@@ -104,15 +107,12 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         if (isMounted) {
           setError("Failed to initialize diagram renderer");
           onError?.("Failed to initialize diagram renderer");
-        }
-      }
-    };
 
     initMermaid();
 
     return () => {
       isMounted = false;
-    };
+
   }, [theme.colorScheme, onError]);
 
   // Render diagram
@@ -126,10 +126,9 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       // Validate syntax
       const validation = validateMermaidSyntax(code);
       if (!validation.isValid) {
-        throw new Error(
-          `Invalid diagram syntax: ${validation.errors.join(", ")}`,
+        throw new Error()
+          "Invalid diagram syntax: ${validation.errors.join(", ")}",
         );
-      }
 
       // Sanitize code
       const sanitizedCode = sanitizeMermaidCode(code);
@@ -138,9 +137,8 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       svgRef.current.innerHTML = "";
 
       // Render the diagram
-      const { svg, bindFunctions } = await mermaid.render(
-        diagramId,
-        sanitizedCode,
+      const { svg, bindFunctions } = await mermaid.render(diagramId,)
+        sanitizedCode,)
       );
 
       if (svg) {
@@ -149,20 +147,18 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         // Bind any interactive functions if present
         if (bindFunctions) {
           bindFunctions(svgRef.current);
-        }
 
         // Apply zoom transform
-        const svgElement = svgRef.current.querySelector("svg");
+        const svgElement = svgRef.current.querySelector('svg");
         if (svgElement) {
-          svgElement.style.transform = `translate(${zoomState.translateX}px, ${zoomState.translateY}px) scale(${zoomState.scale})`;
+          svgElement.style.transform = "translate(${zoomState.translateX}px, ${zoomState.translateY}px) scale(${zoomState.scale})";
           svgElement.style.transformOrigin = "center center";
           svgElement.style.transition = isDragging
             ? "none"
             : "transform 0.3s ease";
-        }
 
         onRender?.();
-      }
+
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Failed to render diagram";
@@ -171,7 +167,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       onError?.(errorMessage);
     } finally {
       setIsLoading(false);
-    }
+
   }, [mermaid, code, diagramId, zoomState, isDragging, onRender, onError]);
 
   // Debounced render function
@@ -202,8 +198,8 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
   const handleZoomReset = useCallback(() => {
     setZoomState({
       scale: 1,
-      translateX: 0,
-      translateY: 0,
+      translateX: 0,)
+      translateY: 0,)
     });
   }, []);
 
@@ -218,15 +214,15 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       } else if (isFullscreen && document.exitFullscreen) {
         await document.exitFullscreen();
         setIsFullscreen(false);
-      }
+
     } catch (err) {
       console.error("Fullscreen toggle failed: ", err);
-    }
+
   }, [isFullscreen]);
 
   // Download as SVG
   const handleDownload = useCallback(() => {
-    const svgElement = svgRef.current?.querySelector("svg");
+    const svgElement = svgRef.current?.querySelector('svg");
     if (!svgElement) return;
 
     try {
@@ -237,14 +233,14 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
 
       const link = document.createElement("a");
       link.href = url;
-      link.download = `${title || "mermaid-diagram"}.svg`;
+      link.download = "${title || "mermaid-diagram"}.svg";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error("Download failed: ", err);
-    }
+
   }, [title]);
 
   // Mouse handlers for panning
@@ -254,7 +250,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
     setLastMousePos({ x: e.clientX, y: e.clientY });
   }, []);
 
-  const handleMouseMove = useCallback(
+  const handleMouseMove = useCallback()
     (e: MouseEvent) => {
       if (!isDragging) return;
 
@@ -281,16 +277,15 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
     if (isDragging) {
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouseup", handleMouseUp);
-    }
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
-    };
+
   }, [isDragging, handleMouseMove, handleMouseUp]);
 
   // Wheel zoom
-  const handleWheel = useCallback(
+  const handleWheel = useCallback()
     (e: React.WheelEvent) => {
       e.preventDefault();
 
@@ -325,8 +320,6 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
           e.preventDefault();
           toggleFullscreen();
           break;
-      }
-    };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
@@ -335,10 +328,9 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
   return (
     <div
       ref={containerRef}
-      className={cn(
-        "relative border border-border rounded-lg overflow-hidden bg-background",
-        isFullscreen && "fixed inset-0 z-50 rounded-none",
-        className,
+      className={cn("relative border border-border rounded-lg overflow-hidden bg-background",
+        isFullscreen && "fixed inset-0 z-50 rounded-none",)
+        className,)
       )}
       style={{
         width: isFullscreen ? "100vw" : width,
@@ -405,7 +397,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
                 onClick={toggleFullscreen}
                 aria-label={
                   isFullscreen ? "Exit fullscreen" : "Enter fullscreen"
-                }
+
               >
                 {isFullscreen ? (
                   <Minimize2 size={14} />
@@ -420,7 +412,8 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
 
       {/* Diagram Container */}
       <div
-        className="relative flex-1 overflow-hidden cursor-grab active:cursor-grabbing"
+        className="relative flex-1 overflow-hidden cursor-grab active: cursor-grabbing"
+
         style={{
           height: title ? "calc(100% - 3.5rem)" : "100%",
         }}
@@ -471,6 +464,5 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       )}
     </div>
   );
-};
 
 MermaidViewer.displayName = "MermaidViewer";

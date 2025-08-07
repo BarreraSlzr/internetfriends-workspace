@@ -1,8 +1,8 @@
 import { BaseFormSchema } from "./form.schema";
 import { z } from "zod";
 
-export const PRFormSchema = BaseFormSchema.extend({
-  // PR-specific fields
+export const PRFormSchema = BaseFormSchema.extend({)
+  // PR-specific fields)
   pr_number: z.string(),
   branch: z.string(),
   target_branch: z.string(),

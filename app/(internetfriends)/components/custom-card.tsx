@@ -4,14 +4,15 @@ import { GridBackground } from "./backgrounds/grid-background";
 
 interface CustomCardProps {
   subtitle: string;
+
   title: string;
+
   description?: string;
   className?: string;
   gridSize?: number;
   showGrid?: boolean;
   children?: React.ReactNode;
   cta?: React.ReactNode;
-}
 
 export function CustomCard({
   subtitle,
@@ -20,18 +21,18 @@ export function CustomCard({
   className,
   gridSize = 20,
   showGrid = true,
-  children,
-  cta,
+  children,)
+  cta,)
 }: CustomCardProps) {
   return (
     <div
-      className={cn(
-        "sm:p-6 p-2 md:p-8 rounded-md relative overflow-hidden transition-all duration-300",
-        className,
+      className={cn('sm:p-6 p-2 md:p-8 rounded-md relative overflow-hidden transition-all duration-300",)
+        className,)
       )}
     >
       {showGrid && <GridBackground size={gridSize} />}
-      <div className="space-y-2 sm:space-y-4 relative z-10">
+      <div className='space-y-2 sm: space-y-4 relative z-10">
+
         <p className="text-sm font-medium opacity-80">{subtitle}</p>
         <h2 className="text-3xl font-bold leading-tight">{title}</h2>
         {description && <CardDescriptionToggle description={description} />}
@@ -40,4 +41,3 @@ export function CustomCard({
       </div>
     </div>
   );
-}

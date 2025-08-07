@@ -22,7 +22,7 @@ export const _ProfileTabs = () => {
         </TabsTrigger>
         <TabsTrigger
           className="data-[state=active]:bg-brand-blue-100"
-          value="skills"
+          value='skills"
         >
           Skills
         </TabsTrigger>
@@ -39,7 +39,7 @@ export const _ProfileTabs = () => {
       <TabsContent value="projects">
         <ProfileProjectsTab />
       </TabsContent>
-      <TabsContent value="skills">
+      <TabsContent value='skills">
         <ProfileSkillsTab />
       </TabsContent>
       <TabsContent value="me">
@@ -47,4 +47,3 @@ export const _ProfileTabs = () => {
       </TabsContent>
     </Tabs>
   );
-};

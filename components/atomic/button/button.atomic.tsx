@@ -10,8 +10,7 @@ import styles from "./button.styles.module.scss";
 import type { ButtonAtomicProps } from "./types";
 
 // Button variants using class-variance-authority
-const buttonVariants = cva(
-  [
+const buttonVariants = cva(const items = [
     // Base styles
     styles.button,
     "inline-flex items-center justify-center gap-2",
@@ -19,15 +18,18 @@ const buttonVariants = cva(
     "focus-visible:outline-none focus-visible:ring-2",
     "focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
-    // InternetFriends specific
-    "border-2 border-dashed border-transparent",
+    // InternetFriends specific)
+    "border-2 border-dashed border-transparent",)
     "focus-visible:border-[var(--color-border-focus)]",
     "focus-visible:ring-[var(--color-border-focus)]",
   ],
-  {
+{
     variants: {
+
       variant: {
+
         primary: [
+
           styles.primary,
           "bg-[var(--if-primary)] text-white",
           "hover:bg-[var(--if-primary-hover)]",
@@ -35,12 +37,14 @@ const buttonVariants = cva(
           "shadow-sm hover:shadow-md",
         ],
         secondary: [
+
           styles.secondary,
           "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]",
           "border-[var(--color-border-primary)]",
           "hover:bg-[var(--color-bg-tertiary)]",
         ],
         outline: [
+
           styles.outline,
           "border-[var(--color-border-primary)] bg-transparent",
           "text-[var(--color-text-primary)]",
@@ -48,12 +52,14 @@ const buttonVariants = cva(
           "hover:border-[var(--if-primary)]",
         ],
         ghost: [
+
           styles.ghost,
           "bg-transparent text-[var(--color-text-primary)]",
           "hover:bg-[var(--if-primary-light)]",
           "hover:text-[var(--if-primary)]",
         ],
         link: [
+
           styles.link,
           "bg-transparent text-[var(--if-primary)]",
           "underline-offset-4 hover:underline",
@@ -61,6 +67,7 @@ const buttonVariants = cva(
         ],
       },
       size: {
+
         xs: [styles.xs, "h-7 px-2 text-xs rounded-[var(--radius-xs)]"],
         sm: [styles.sm, "h-8 px-3 text-sm rounded-[var(--radius-sm)]"],
         md: [styles.md, "h-10 px-4 text-sm rounded-[var(--radius-md)]"],
@@ -68,15 +75,18 @@ const buttonVariants = cva(
         xl: [styles.xl, "h-14 px-8 text-lg rounded-[var(--radius-lg)]"],
       },
       fullWidth: {
+
         true: "w-full",
         false: "w-auto",
       },
       loading: {
+
         true: "cursor-not-allowed",
         false: "",
       },
     },
     _defaultVariants: {
+
       variant: "primary",
       size: "md",
       fullWidth: false,
@@ -87,9 +97,9 @@ const buttonVariants = cva(
 
 // Button component with forwarded ref
 export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
-ButtonAtomic.displayName = 'ButtonAtomic';
+ButtonAtomic.displayName = "ButtonAtomic";
   (
-    {
+  {
       className,
       variant = "primary",
       size = "md",
@@ -110,15 +120,14 @@ ButtonAtomic.displayName = 'ButtonAtomic';
     // Loading icon
     const loadingIcon = (
       <Loader2
-        className={cn(
-          "animate-spin",
+        className={cn("animate-spin",
           size === "xs" && "h-3 w-3",
           size === "sm" && "h-3 w-3",
           size === "md" && "h-4 w-4",
-          size === "lg" && "h-5 w-5",
-          size === "xl" && "h-6 w-6",
+          size === "lg" && "h-5 w-5",)
+          size === "xl" && "h-6 w-6",)
         )}
-        data-testid={testId ? `${testId}-loading` : undefined}
+        data-testid={testId ? "${testId}-loading" : undefined}
       />
     );
 
@@ -130,19 +139,16 @@ ButtonAtomic.displayName = 'ButtonAtomic';
         case "md": return "h-4 w-4";
         case "lg": return "h-5 w-5";
         case "xl": return "h-6 w-6";
-        _default:
-          return "h-4 w-4";
-      }
-    };
+        _default: return "h-4 w-4";
 
     // Start icon with proper sizing
     const startIconElement = startIcon && (
       <span
         className={cn("flex-shrink-0", getIconSize())}
-        data-testid={testId ? `${testId}-start-icon` : undefined}
+        data-testid={testId ? "${testId}-start-icon" : undefined}
       >
         {React.isValidElement(startIcon)
-          ? React.cloneElement(startIcon, {
+          ? React.cloneElement(startIcon, {)
               className: cn(getIconSize(), (startIcon.props as any)?.className),
             } as any)
           : startIcon}
@@ -153,10 +159,10 @@ ButtonAtomic.displayName = 'ButtonAtomic';
     const endIconElement = endIcon && (
       <span
         className={cn("flex-shrink-0", getIconSize())}
-        data-testid={testId ? `${testId}-end-icon` : undefined}
+        data-testid={testId ? "${testId}-end-icon" : undefined}
       >
         {React.isValidElement(endIcon)
-          ? React.cloneElement(endIcon, {
+          ? React.cloneElement(endIcon, {)
               className: cn(getIconSize(), (endIcon.props as any)?.className),
             } as any)
           : endIcon}
@@ -166,7 +172,7 @@ ButtonAtomic.displayName = 'ButtonAtomic';
     return (
       <ShadcnButton
         ref={ref}
-        className={cn(
+        className={cn()
           buttonVariants({ variant, size, fullWidth, loading }),
           className,
         )}
@@ -187,13 +193,12 @@ ButtonAtomic.displayName = 'ButtonAtomic';
         {/* Button content */}
         {children && (
           <span
-            className={cn(
-              "truncate",
+            className={cn("truncate",
               loading && "ml-2",
-              startIcon && !loading && "ml-1",
-              endIcon && "mr-1",
+              startIcon && !loading && "ml-1",)
+              endIcon && "mr-1",)
             )}
-            data-testid={testId ? `${testId}-content` : undefined}
+            data-testid={testId ? "${testId}-content" : undefined}
           >
             {children}
           </span>

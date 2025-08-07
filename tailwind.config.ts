@@ -1,15 +1,20 @@
 import animate from "tailwindcss-animate";
 
 const config: Config = {
+
   content: [
+
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  darkMode: ["class", '[data-theme="dark"]'],
+  darkMode: ["class", "[data-theme='dark']"],
   theme: {
+
     extend: {
+
       colors: {
+
         // InternetFriends brand colors
         "if-primary": "var(--if-primary)",
         "if-primary-hover": "var(--if-primary-hover)",
@@ -31,6 +36,7 @@ const config: Config = {
 
         // Glass morphism colors
         glass: {
+
           header: "var(--glass-bg-header)",
           "header-scrolled": "var(--glass-bg-header-scrolled)",
           border: "var(--glass-border)",
@@ -40,10 +46,12 @@ const config: Config = {
 
         // Coin of value system colors
         text: {
+
           primary: "var(--color-text-primary)",
           contrast: "var(--color-text-contrast)",
         },
         bg: {
+
           primary: "var(--color-bg-primary)",
           glass: "var(--color-bg-glass)",
         },
@@ -53,30 +61,37 @@ const config: Config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
+
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
         popover: {
+
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
         primary: {
+
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
+
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
         muted: {
+
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
+
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
         },
         destructive: {
+
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
         },
@@ -84,6 +99,7 @@ const config: Config = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         chart: {
+
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
           "3": "hsl(var(--chart-3))",
@@ -93,6 +109,7 @@ const config: Config = {
       },
 
       borderRadius: {
+
         // InternetFriends compact radius system
         "compact-xs": "var(--radius-xs)", // 4px
         "compact-sm": "var(--radius-sm)", // 6px
@@ -107,6 +124,7 @@ const config: Config = {
       },
 
       spacing: {
+
         // Compact spacing system (0.25rem increments)
         "0.5": "0.125rem", // 2px
         "1.5": "0.375rem", // 6px
@@ -117,10 +135,12 @@ const config: Config = {
       },
 
       backdropBlur: {
+
         glass: "12px",
       },
 
       animation: {
+
         "glass-float": "glass-float 6s ease-in-out infinite",
         tilt: "tilt 10s infinite linear",
         "fade-in": "fade-in 0.5s ease-out",
@@ -129,6 +149,7 @@ const config: Config = {
       },
 
       keyframes: {
+
         "glass-float": {
           "0%, 100%": {
             transform: "translateY(0px)",
@@ -138,6 +159,7 @@ const config: Config = {
           },
         },
         tilt: {
+
           "0%, 50%, 100%": {
             transform: "rotate(0deg)",
           },
@@ -179,6 +201,7 @@ const config: Config = {
       },
 
       boxShadow: {
+
         glass: "0 4px 20px rgba(0, 0, 0, 0.08)",
         "glass-hover": "0 8px 32px rgba(0, 0, 0, 0.12)",
         "if-primary": "0 4px 12px rgba(59, 130, 246, 0.25)",
@@ -186,13 +209,17 @@ const config: Config = {
       },
 
       fontFamily: {
+
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "Menlo", "Monaco", "monospace"],
       },
 
       typography: {
+
         DEFAULT: {
+
           css: {
+
             maxWidth: "none",
             color: "var(--color-text-primary)",
             "--tw-prose-body": "var(--color-text-primary)",
@@ -217,11 +244,12 @@ const config: Config = {
     },
   },
   plugins: [
+
     animate,
     // Custom plugin for InternetFriends utilities
     function ({ addUtilities, addComponents, theme }: unknown) {
-      addComponents({
-        ".glass-morphism": {
+      addComponents({)
+        ".glass-morphism": {)
           "backdrop-filter": "blur(12px)",
           "-webkit-backdrop-filter": "blur(12px)",
           border: "1px solid var(--glass-border)",
@@ -274,18 +302,18 @@ const config: Config = {
           },
           "&::-webkit-scrollbar-track": {
             background: "transparent",
-          },
-          "&::-webkit-scrollbar-thumb": {
+          },)
+          "&::-webkit-scrollbar-thumb": {)
             background: "var(--if-primary)",
             "border-radius": "var(--radius-lg)",
           },
-          "&::-webkit-scrollbar-thumb:hover": {
+          "&::-webkit-scrollbar-thumb: hover": {
+
             background: "var(--if-primary-hover)",
           },
         },
       });
     },
   ],
-};
 
 export default config;

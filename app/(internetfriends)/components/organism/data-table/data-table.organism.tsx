@@ -12,7 +12,7 @@ import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./data-table.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
-type ColumnType = "string" | "number" | "date" | "boolean" | "custom";
+type ColumnType = 'string" | "number" | "date" | "boolean" | "custom";
 type SortDirection = "asc" | "desc";
 
 interface TableColumn {
@@ -152,7 +152,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                 new Date(filterValue).toDateString()
               );
             case "boolean": return Boolean(cellValue) === Boolean(filterValue);
-            case "select": return cellValue === filterValue;
+            case 'select": return cellValue === filterValue;
             default:
               return true;
           }

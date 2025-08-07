@@ -12,19 +12,23 @@ export default function Page() {
     <main>
       <Header />
       <HeroText>
-        <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
+        <h1 className="text-5xl font-bold sm: pb-6 pb-4 md:pb-8">
+
           {content.pricing.title}
         </h1>
-        <div className="sm:p-6 p-2 py-4 md:p-8   flex flex-col bg-foreground text-brand-blue-100">
+        <div className='sm: p-6 p-2 py-4 md:p-8   flex flex-col bg-foreground text-brand-blue-100">
+
           <p className="text-lg mb-2 max-w-2xl">
             {content.pricing.description}
           </p>
         </div>
-        <div className="sm:p-6 p-2 py-4 md:p-8   pt-0 flex flex-col bg-foreground">
+        <div className='sm: p-6 p-2 py-4 md:p-8   pt-0 flex flex-col bg-foreground">
+
           {engagementOptions.map((option, index) => (
             <div
               key={option.title || index}
-              className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-t-2 border-brand-blue-800 text-brand-blue-100"
+              className="flex items-center sm: gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-t-2 border-brand-blue-800 text-brand-blue-100"
+
             >
               <span className="font-mono font-bold mb-auto">0{index + 1}</span>
               <div className="flex flex-col flex-grow">
@@ -53,4 +57,3 @@ export default function Page() {
       <CompanyInfo />
     </main>
   );
-}

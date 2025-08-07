@@ -35,15 +35,12 @@ export const _HOOK_DEFAULTS = {
 
 // Hook error types
 export class HookError extends Error {
-  constructor(
-    message: string,
-    public readonly hook: string,
-    public readonly code?: string,
+  constructor(message: string,
+    public readonly hook: string,)
+    public readonly code?: string,)
   ) {
     super(message);
     this.name = "HookError";
-  }
-}
 
 // Hook utilities
 export const _createHookError = (
@@ -52,10 +49,10 @@ export const _createHookError = (
   code?: string,
 ) => {
   return new HookError(message, hook, code);
-};
 
 // Common hook patterns
 export const _useStableCallback = <T extends (...args: unknown[]) => any>(
+
   callback: T,
 ): T => {
   const ref = React.useRef<T>(callback);
@@ -64,39 +61,34 @@ export const _useStableCallback = <T extends (...args: unknown[]) => any>(
     ref.current = callback;
   });
 
-  return React.useMemo(
+  return React.useMemo()
     () =>
       ((...args: unknown[]) => {
         return ref.current(...args);
       }) as T,
     [],
   );
-};
 
 export const _useConstant = <T>(fn: () => T): T => {
   const ref = React.useRef<{ value: T } | undefined>(undefined);
 
   if (!ref.current) {
     ref.current = { value: fn() };
-  }
 
   return ref.current.value;
-};
 
 // Hook composition utilities
 export const _composeHooks = <T extends Record<string, unknown>>(
   ...hooks: Array<() => Partial<T>>
+
 ): (() => T) => {
   return () => {
     const results = hooks.map((hook) => hook());
     return Object.assign({}, ...results) as T;
-  };
-};
 
 // Hook testing utilities (for development)
 export const _createMockHook = <T>(mockValue: T) => {
   return () => mockValue;
-};
 
 // Re-export React hooks for convenience
 export {

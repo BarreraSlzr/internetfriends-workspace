@@ -8,7 +8,7 @@ test.describe("Atomic Components", () => {
   });
 
   test.describe("ButtonAtomic", () => {
-    test("should render primary button correctly", async ({ page }) => {
+    test('should render primary button correctly", async ({ page }) => {
       const primaryButton = page.getByRole("button", { name: "Primary" });
       await expect(primaryButton).toBeVisible();
 
@@ -16,7 +16,7 @@ test.describe("Atomic Components", () => {
       await expect(primaryButton).toHaveClass(/btn-if-primary/);
     });
 
-    test("should render glass button correctly", async ({ page }) => {
+    test('should render glass button correctly", async ({ page }) => {
       const glassButton = page.getByRole("button", { name: "Glass" });
       await expect(glassButton).toBeVisible();
 
@@ -24,7 +24,7 @@ test.describe("Atomic Components", () => {
       await expect(glassButton).toHaveClass(/glass-card/);
     });
 
-    test("should be clickable and interactive", async ({ page }) => {
+    test('should be clickable and interactive", async ({ page }) => {
       const primaryButton = page.getByRole("button", { name: "Primary" });
 
       // Should be clickable
@@ -37,7 +37,7 @@ test.describe("Atomic Components", () => {
       await expect(primaryButton).toBeEnabled();
     });
 
-    test("should have proper focus states", async ({ page }) => {
+    test('should have proper focus states", async ({ page }) => {
       const primaryButton = page.getByRole("button", { name: "Primary" });
 
       // Focus the button
@@ -49,7 +49,7 @@ test.describe("Atomic Components", () => {
   });
 
   test.describe("GlassCardAtomic", () => {
-    test("should render glass cards correctly", async ({ page }) => {
+    test('should render glass cards correctly", async ({ page }) => {
       const glassCard = page.locator(".glass-card").first();
       await expect(glassCard).toBeVisible();
 
@@ -64,7 +64,7 @@ test.describe("Atomic Components", () => {
       expect(hasGlassEffect).toBe(true);
     });
 
-    test("should have proper border radius", async ({ page }) => {
+    test('should have proper border radius", async ({ page }) => {
 
 
       const borderRadius = await page.evaluate(() => {
@@ -78,7 +78,7 @@ test.describe("Atomic Components", () => {
       expect(borderRadius).toMatch(/0\.75rem|12px/);
     });
 
-    test("should respond to hover interactions", async ({ page }) => {
+    test('should respond to hover interactions", async ({ page }) => {
       const glassCard = page.locator(".glass-card").first();
 
       // Hover over the card
@@ -98,7 +98,7 @@ test.describe("Atomic Components", () => {
   });
 
   test.describe("HeaderAtomic", () => {
-    test("should have glass morphism styling", async ({ page }) => {
+    test('should have glass morphism styling", async ({ page }) => {
       // Look for header elements with glass styling
       const glassHeader = page.locator(".glass-header").first();
       await expect(glassHeader).toBeVisible();
@@ -114,7 +114,7 @@ test.describe("Atomic Components", () => {
       expect(hasBackdrop).toBe(true);
     });
 
-    test("should be responsive", async ({ page }) => {
+    test('should be responsive", async ({ page }) => {
       // Test mobile viewport
       await page.setViewportSize({ width: 375, height: 667 });
 
@@ -130,7 +130,7 @@ test.describe("Atomic Components", () => {
 
 test.describe("Molecular Components", () => {
   test.describe("NavigationMolecular", () => {
-    test("should handle component composition", async ({ page }) => {
+    test('should handle component composition", async ({ page }) => {
       await page.goto("/design-system");
 
       // Check that navigation nodes show composition relationships
@@ -142,7 +142,7 @@ test.describe("Molecular Components", () => {
       await expect(compositionText).toBeVisible();
     });
 
-    test("should display proper features", async ({ page }) => {
+    test('should display proper features", async ({ page }) => {
       await page.goto("/design-system");
 
       const navigationNode = page.locator('[data-id="navigation-molecular"]');
@@ -156,7 +156,7 @@ test.describe("Molecular Components", () => {
 });
 
 test.describe("Component Integration", () => {
-  test("should show component relationships in React Flow", async ({ page }) => {
+  test('should show component relationships in React Flow", async ({ page }) => {
     await page.goto("/design-system");
 
     // Wait for React Flow to load
@@ -167,11 +167,11 @@ test.describe("Component Integration", () => {
     expect(await edges.count()).toBeGreaterThan(0);
 
     // Should have composition edges (solid lines)
-    const compositionEdges = page.locator('.react-flow__edge[data-testid*= "smoothstep"]');
+    const compositionEdges = page.locator('.react-flow__edge[data-testid*= 'smoothstep"]');
     expect(await compositionEdges.count()).toBeGreaterThan(0);
   });
 
-  test("should maintain component hierarchy", async ({ page }) => {
+  test('should maintain component hierarchy", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check atomic components are positioned correctly
@@ -185,7 +185,7 @@ test.describe("Component Integration", () => {
 });
 
 test.describe("Design System Validation", () => {
-  test("should apply consistent styling across components", async ({ page }) => {
+  test('should apply consistent styling across components", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check for consistent border radius usage
@@ -197,7 +197,7 @@ test.describe("Design System Validation", () => {
     expect(primaryElements.length).toBeGreaterThan(0);
   });
 
-  test("should have consistent spacing system", async ({ page }) => {
+  test('should have consistent spacing system", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check for consistent padding/margin classes
@@ -205,7 +205,7 @@ test.describe("Design System Validation", () => {
     expect(spacingElements.length).toBeGreaterThan(0);
   });
 
-  test("should implement glass morphism consistently", async ({ page }) => {
+  test('should implement glass morphism consistently", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check all glass elements have backdrop-filter
@@ -222,7 +222,7 @@ test.describe("Design System Validation", () => {
 });
 
 test.describe("Component Props and Variants", () => {
-  test("should handle button variants correctly", async ({ page }) => {
+  test('should handle button variants correctly", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check different button variants exist
@@ -239,7 +239,7 @@ test.describe("Component Props and Variants", () => {
     expect(primaryClass).not.toBe(glassClass);
   });
 
-  test("should validate component prop types", async ({ page }) => {
+  test('should validate component prop types", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check component registry shows proper prop types
@@ -257,7 +257,7 @@ test.describe("Component Props and Variants", () => {
 });
 
 test.describe("Accessibility Testing", () => {
-  test("should have proper ARIA attributes", async ({ page }) => {
+  test('should have proper ARIA attributes", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check buttons have proper roles
@@ -272,7 +272,7 @@ test.describe("Accessibility Testing", () => {
     }
   });
 
-  test("should support keyboard navigation", async ({ page }) => {
+  test('should support keyboard navigation", async ({ page }) => {
     await page.goto("/design-system");
 
     // Test tab navigation
@@ -283,7 +283,7 @@ test.describe("Accessibility Testing", () => {
     await expect(focusedElement).toBeVisible();
   });
 
-  test("should have proper color contrast", async ({ page }) => {
+  test('should have proper color contrast", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check text elements have sufficient contrast
@@ -302,7 +302,7 @@ test.describe("Accessibility Testing", () => {
 });
 
 test.describe("Performance Testing", () => {
-  test("should load components efficiently", async ({ page }) => {
+  test('should load components efficiently", async ({ page }) => {
     const startTime = Date.now();
 
     await page.goto("/design-system");
@@ -314,7 +314,7 @@ test.describe("Performance Testing", () => {
     expect(loadTime).toBeLessThan(5000);
   });
 
-  test("should handle multiple component instances", async ({ page }) => {
+  test('should handle multiple component instances", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check multiple nodes render without performance issues

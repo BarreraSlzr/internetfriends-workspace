@@ -7,7 +7,7 @@ export const ProfileMoreTab = () => {
   const moreInfo = [
     { label: "Height", value: curriculum.contactInfo.height || "N/A" },
     { label: "Sex", value: curriculum.contactInfo.sex || "N/A" },
-    {
+  {
       label: "Nationality",
       value: curriculum.contactInfo.nationality || "N/A",
     },
@@ -22,12 +22,12 @@ export const ProfileMoreTab = () => {
           <p className="font-medium">{info.label}</p>
           {info.isLink ? (
             <Link
-              title={`Send email to ${info.value}`}
-              href={`mailto:${info.value}`}
+              title={"Send email to ${info.value}"}
+              href={"mailto:${info.value}"}
               className="flex space-x-2"
             >
               {info.value}
-              <ArrowUpRight className="size-4" />
+              <ArrowUpRight className='size-4" />
             </Link>
           ) : (
             <p className="text-black">{info.value}</p>
@@ -36,6 +36,5 @@ export const ProfileMoreTab = () => {
       ))}
     </div>
   );
-};
 
 export default ProfileMoreTab;

@@ -2,7 +2,7 @@
 // Main export file for all internationalization functionality
 
 // Provider and hooks
-export { I18nProvider, useI18n, useTranslation, useLocale, withI18n } from './provider';
+export { I18nProvider, useI18n, useTranslation, useLocale, withI18n } from "./provider";
 
 // Configuration and utilities
 export {
@@ -24,7 +24,7 @@ export {
   getLocaleFromPath,
   removeLocaleFromPath,
   addLocaleToPath,
-} from './config';
+} from "./config";
 
 // Types
 export type {
@@ -32,7 +32,7 @@ export type {
   LocaleConfig,
   Translations,
   I18nContextType,
-} from './config';
+} from "./config";
 
 // Default export
-export { I18nProvider as default } from './provider';
+export { I18nProvider as default } from "./provider";

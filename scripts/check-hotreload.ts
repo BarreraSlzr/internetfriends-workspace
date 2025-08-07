@@ -8,22 +8,21 @@ let lastReloadTime = Date.now();
 let changeCount = 0;
 
 function logChange(filename: string) {
+
   changeCount++;
   const now = Date.now();
   const timeSinceLastReload = now - lastReloadTime;
   
-  console.log(`📝 [${new Date().toLocaleTimeString()}] File changed: ${filename}`);
-  console.log(`⏱️  Time since last reload: ${timeSinceLastReload}ms`);
-  console.log(`📊 Changes detected: ${changeCount}`);
+  console.log("📝 [${new Date().toLocaleTimeString()}] File changed: ${filename}");
+  console.log("⏱️  Time since last reload: ${timeSinceLastReload}ms");
+  console.log("📊 Changes detected: ${changeCount}");
   
   if (timeSinceLastReload > 5000) {
     console.log("⚠️  Hot reload might not be working properly");
     console.log("💡 Check Next.js console for errors");
-  }
-  
+
   lastReloadTime = now;
   console.log("---");
-}
 
 async function checkHotReload() {
   console.log("🔥 InternetFriends Hot Reload Checker");
@@ -39,30 +38,29 @@ async function checkHotReload() {
   // Watch app directory
   watch(appDir, { recursive: true }, (eventType, filename) => {
     if (filename && !filename.includes("node_modules")) {
-      logChange(`app/${filename}`);
-    }
+      logChange("app/${filename}");
+
   });
   
   // Watch components directory  
   watch(componentsDir, { recursive: true }, (eventType, filename) => {
     if (filename && !filename.includes("node_modules")) {
-      logChange(`components/${filename}`);
-    }
+      logChange("components/${filename}");
+
   });
   
   // Check dev server connection
   setInterval(async () => {
     try {
-      const response = await fetch("http://localhost:3000");
+      const response = await fetch("http: //localhost:3000");
+
       if (!response.ok) {
         console.log("❌ Dev server connection lost");
-      }
+
     } catch {
       console.log("❌ Cannot connect to dev server");
-    }
+
   }, 10000);
-}
 
 if (import.meta.main) {
   checkHotReload().catch(console.error);
-}

@@ -2,9 +2,9 @@
 // Central exports for all shared utilities, patterns, and integrations
 
 // Component Flow System
-export { ComponentPreviewNode } from './component-flow/component.preview.node';
-export { ComponentFlowWorkspaceProvider, ComponentFlowWorkspace } from './component-flow/component.flow.workspace';
-export { componentRegistry, registerInternetFriendsComponents, createComponentEntry } from './component-flow/component.registry';
+export { ComponentPreviewNode } from "./component-flow/component.preview.node";
+export { ComponentFlowWorkspaceProvider, ComponentFlowWorkspace } from "./component-flow/component.flow.workspace";
+export { componentRegistry, registerInternetFriendsComponents, createComponentEntry } from "./component-flow/component.registry";
 export type {
   ComponentPreviewNodeData,
   ComponentProp,
@@ -34,7 +34,7 @@ export type {
   ComponentFlowEventHandler,
   PropValidator,
   ComponentTransformer,
-} from './component-flow/types';
+} from "./component-flow/types";
 
 // Design System Patterns
 export {
@@ -51,14 +51,14 @@ export {
   MDXPatternIntegration,
   MicrofrontendPatternIntegration,
   DataPipelinePatternIntegration,
-} from './patterns/design-system.patterns';
+} from "./patterns/design-system.patterns";
 export type {
   InternetFriendsTheme,
   ComponentPattern,
   MDXComponentConfig,
   MicrofrontendModule,
   DataPipelineSchema,
-} from './patterns/design-system.patterns';
+} from "./patterns/design-system.patterns";
 
 // Integration Utilities
 export {
@@ -68,12 +68,14 @@ export {
   I18nIntegrationUtility,
   DataPipelineIntegrationUtility,
   StreamlinedDevelopmentOrchestrator,
-} from './utilities/integration.utilities';
+} from "./utilities/integration.utilities";
 
 // Utility functions for quick access
 export const createComponent = createComponentEntry;
-export const getTheme = (name: 'light' | 'dark') => themes[name];
-export const getPattern = (name: 'button' | 'input' | 'card' | 'modal') => patterns[name];
+export const getTheme = (name: "light" | "dark") => themes[name];
+
+export const getPattern = (name: "button" | "input" | "card" | "modal") => patterns[name];
+
 export const registry = componentRegistry;
 
 // Re-export commonly used types
@@ -93,15 +95,15 @@ export default {
 
   // Quick access functions
   createComponent: createComponentEntry,
-  getTheme: (name: 'light' | 'dark') => themes[name],
-  getPattern: (name: 'button' | 'input' | 'card' | 'modal') => patterns[name],
+  getTheme: (name: "light" | "dark") => themes[name],
+  getPattern: (name: "button" | "input" | "card" | "modal") => patterns[name],
 
   // Component Flow System
   ComponentFlowWorkspace: ComponentFlowWorkspaceProvider,
 
   // Initialization helpers
   init: {
+
     registerComponents: registerInternetFriendsComponents,
     setupTheme: (theme: InternetFriendsTheme) => PatternUtility.applyTheme(theme),
   },
-};

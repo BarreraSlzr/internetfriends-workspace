@@ -102,7 +102,16 @@ export const bounceEffect = String.raw`vec2 effect(vec2 p, float i, float time) 
   );
 }`;
 
-export const _effectFunctions = [
+export const zoomEffect = String.raw`vec2 effect(vec2 p, float i, float time) {
+  float common = sin(time * speed);
+  float zoom = pow(2.0, common);
+  return vec2(
+    p.x * zoom,
+    p.y * zoom
+  );
+}`;
+
+export const effectFunctions = [
   defaultEffect,
   spiralEffect,
   waveEffect,
@@ -113,5 +122,5 @@ export const _effectFunctions = [
   oscillateEffect,
   fractalEffect,
   swirlEffect,
-  bounceEffect
+  bounceEffect,
 ];

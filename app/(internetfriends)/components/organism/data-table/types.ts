@@ -17,12 +17,12 @@ export type FilterType =
   | "text"
   | "number"
   | "date"
-  | "select"
+  | 'select"
   | "multiselect"
   | "range"
   | "boolean";
 
-export type SelectionMode = "none" | "single" | "multiple";
+export type SelectionMode = "none" | 'single" | "multiple";
 
 export type DensityMode = "compact" | "normal" | "comfortable";
 
@@ -60,7 +60,7 @@ export interface FilterConfig {
   column: string;
   type: FilterType;
   value: unknown;
-  operator?: "equals" | "contains" | "startsWith" | "endsWith" | "gt" | "gte" | "lt" | "lte" | "between" | "in" | "notIn";
+  operator?: "equals" | "contains" | 'startsWith" | "endsWith" | "gt" | "gte" | "lt" | "lte" | "between" | "in" | "notIn";
 }
 
 export interface PaginationConfig {
@@ -201,7 +201,7 @@ export interface TableAction {
   icon?: string;
   onClick: (row: TableRow) => void;
   disabled?: (row: TableRow) => boolean;
-  variant?: "primary" | "secondary" | "danger";
+  variant?: "primary" | 'secondary" | "danger";
   tooltip?: string;
 }
 
@@ -211,7 +211,7 @@ export interface BulkAction {
   icon?: string;
   onClick: (selectedRows: TableRow[]) => void;
   disabled?: (selectedRows: TableRow[]) => boolean;
-  variant?: "primary" | "secondary" | "danger";
+  variant?: "primary" | 'secondary" | "danger";
   requiresConfirmation?: boolean;
   confirmationMessage?: string;
 }
@@ -234,7 +234,7 @@ export interface DateRangeFilter {
 
 // Event types
 export interface TableEvent {
-  type: "sort" | "filter" | "select" | "search" | "export" | "row_click" | "row_double_click";
+  type: 'sort" | "filter" | 'select" | 'search" | "export" | "row_click" | "row_double_click";
   data: unknown;
   _timestamp: Date;
   userId?: string;

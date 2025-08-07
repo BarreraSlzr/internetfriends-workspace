@@ -4,41 +4,56 @@ import { eventSystem, APIEvents } from "../../../lib/events/event.system";
 // Type definitions for health check response
 type HealthResponse = {
   status: "healthy" | "degraded" | "unhealthy";
+
   timestamp: string;
+
   uptime: number;
+
   version: string;
+
   environment: string;
+
   checks: Record<
+
     string,
-    {
+  {
       status: "pass" | "fail" | "warn";
+
       message: string;
+
       duration?: number;
       data?: Record<string, any>;
-    }
+
   >;
   metrics: {
+
     memory: {
+
       used: number;
+
       total: number;
-      percentage: number;
-    };
+
+      percentage: number;,
+
     cpu: {
+
       usage: number;
-      loadAverage: number[];
-    };
+
+      loadAverage: number[];,
+
     eventSystem: {
+
       status: boolean;
+
       totalEvents: number;
+
       queueSize: number;
-      activeHandlers: number;
-    };
-  };
-  requestId: string;
-};
+
+      activeHandlers: number;,
+
+  requestId: string;,
 
 // System start time for uptime calculation
-
 
 // Helper function to get memory usage
 function getMemoryUsage() {
@@ -51,20 +66,17 @@ function getMemoryUsage() {
       used: usedMemory,
       total: totalMemory,
       percentage: (usedMemory / totalMemory) * 100,
-    };
-  }
 
   return {
     used: 0,
     total: 0,
     percentage: 0,
-  };
-}
 
 // Helper function to get CPU usage (simplified)
 async function getCpuUsage(): Promise<{
   usage: number;
-  loadAverage: number[];
+
+  loadAverage: number[];,
 }> {
   if (typeof process !== "undefined" && process.cpuUsage) {
     const usage = process.cpuUsage();
@@ -76,26 +88,23 @@ async function getCpuUsage(): Promise<{
         usage: total / 1000000, // Convert to milliseconds
         loadAverage:
           typeof os.loadavg === "function" ? os.loadavg() : [0, 0, 0],
-      };
+
     } catch {
       return {
         usage: total / 1000000,
         loadAverage: [0, 0, 0],
-      };
-    }
-  }
 
   return {
     usage: 0,
     loadAverage: [0, 0, 0],
-  };
-}
 
 // Individual health checks
 async function checkDatabase(): Promise<{
   status: "pass" | "fail" | "warn";
+
   message: string;
-  duration: number;
+
+  duration: number;,
 }> {
   const startTime = Date.now();
 
@@ -108,21 +117,20 @@ async function checkDatabase(): Promise<{
       status: "pass",
       message: "Database connection successful",
       duration,
-    };
+
   } catch (error) {
     const duration = Date.now() - startTime;
     return {
       status: "fail",
-      message: `Database connection failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+      message: "Database connection failed: ${error instanceof Error ? error.message : "Unknown error"}",
       duration,
-    };
-  }
-}
 
 async function checkEventSystem(): Promise<{
   status: "pass" | "fail" | "warn";
+
   message: string;
-  data: unknown;
+
+  data: unknown;,
 }> {
   try {
     const isHealthy = await eventSystem.healthCheck();
@@ -133,35 +141,30 @@ async function checkEventSystem(): Promise<{
         status: "fail",
         message: "Event system is unhealthy",
         data: stats,
-      };
-    }
 
     if (stats.queueSize > 1000) {
       return {
         status: "warn",
         message: "Event system queue is getting large",
         data: stats,
-      };
-    }
 
     return {
       status: "pass",
       message: "Event system is healthy",
       data: stats,
-    };
+
   } catch (error) {
     return {
       status: "fail",
-      message: `Event system check failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+      message: "Event system check failed: ${error instanceof Error ? error.message : "Unknown error"}",
       data: {},
-    };
-  }
-}
 
 async function checkExternalServices(): Promise<{
   status: "pass" | "fail" | "warn";
+
   message: string;
-  duration: number;
+
+  duration: number;,
 }> {
   const startTime = Date.now();
 
@@ -177,27 +180,23 @@ async function checkExternalServices(): Promise<{
         status: "warn",
         message: "External services responding slowly",
         duration,
-      };
-    }
 
     return {
       status: "pass",
       message: "All external services are responding",
       duration,
-    };
+
   } catch (error) {
     const duration = Date.now() - startTime;
     return {
       status: "fail",
-      message: `External services check failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+      message: "External services check failed: ${error instanceof Error ? error.message : "Unknown error"}",
       duration,
-    };
-  }
-}
 
 async function checkFileSystem(): Promise<{
   status: "pass" | "fail" | "warn";
-  message: string;
+
+  message: string;,
 }> {
   try {
     // Simulate filesystem check - in production, you might check disk space, write permissions, etc.
@@ -207,23 +206,19 @@ async function checkFileSystem(): Promise<{
       return {
         status: "fail",
         message: "Filesystem is not writable",
-      };
-    }
 
     return {
       status: "pass",
       message: "Filesystem is accessible and writable",
-    };
+
   } catch (error) {
     return {
       status: "fail",
-      message: `Filesystem check failed: ${error instanceof Error ? error.message : "Unknown error"}`,
-    };
-  }
-}
+      message: "Filesystem check failed: ${error instanceof Error ? error.message : "Unknown error"}",
 
 // Main health check handler
 export async function GET(__request: NextRequest) {
+
   const requestId = crypto.randomUUID();
   const startTime = Date.now();
 
@@ -237,7 +232,7 @@ export async function GET(__request: NextRequest) {
       eventSystemCheck,
       externalServicesCheck,
       fileSystemCheck,
-    ] = await Promise.allSettled([
+    ] = await Promise.allSettled([)
       checkDatabase(),
       checkEventSystem(),
       checkExternalServices(),
@@ -246,55 +241,54 @@ export async function GET(__request: NextRequest) {
 
     // Process check results
     const checks: Record<string, unknown> = {
-      database:
-        databaseCheck.status === "fulfilled"
+      database: databaseCheck.status === "fulfilled"
+
           ? databaseCheck.value
           : {
               status: "fail",
               message: "Health check failed to run",
               duration: 0,
             },
-      eventSystem:
-        eventSystemCheck.status === "fulfilled"
+      eventSystem: eventSystemCheck.status === "fulfilled"
+
           ? eventSystemCheck.value
           : {
               status: "fail",
               message: "Health check failed to run",
               data: {},
             },
-      _externalServices:
-        externalServicesCheck.status === "fulfilled"
+      _externalServices: externalServicesCheck.status === "fulfilled"
+
           ? externalServicesCheck.value
           : {
               status: "fail",
               message: "Health check failed to run",
               duration: 0,
             },
-      _fileSystem:
-        fileSystemCheck.status === "fulfilled"
+      _fileSystem: fileSystemCheck.status === "fulfilled"
+
           ? fileSystemCheck.value
           : {
               status: "fail",
               message: "Health check failed to run",
             },
-    };
 
     // Determine overall system status
-    const hasFailures = Object.values(checks).some(
+    const hasFailures = Object.values(checks).some()
       (check) => check.status === "fail",
     );
-    const hasWarnings = Object.values(checks).some(
+    const hasWarnings = Object.values(checks).some()
       (check) => check.status === "warn",
     );
 
     let overallStatus: "healthy" | "degraded" | "unhealthy";
+
     if (hasFailures) {
       overallStatus = "unhealthy";
     } else if (hasWarnings) {
       overallStatus = "degraded";
     } else {
       overallStatus = "healthy";
-    }
 
     // Get system metrics
     const memory = getMemoryUsage();
@@ -303,6 +297,7 @@ export async function GET(__request: NextRequest) {
 
     // Build response
     const response: HealthResponse = {
+
       status: overallStatus,
       timestamp: new Date().toISOString(),
       uptime: Date.now() - startTime,
@@ -310,9 +305,11 @@ export async function GET(__request: NextRequest) {
       environment: process.env.NODE_ENV || "development",
       checks,
       metrics: {
+
         memory,
         cpu,
         eventSystem: {
+
           status: eventStats.uptime > 0,
           totalEvents: eventStats.totalEvents,
           queueSize: eventStats.queueSize,
@@ -320,7 +317,6 @@ export async function GET(__request: NextRequest) {
         },
       },
       requestId,
-    };
 
     // Determine HTTP status code
     const httpStatus =
@@ -332,22 +328,22 @@ export async function GET(__request: NextRequest) {
 
     // Emit API request complete event
     const responseTime = Date.now() - startTime;
-    APIEvents.requestComplete(
-      "GET",
+    APIEvents.requestComplete("GET",
       "/api/health",
       httpStatus,
-      responseTime,
-      requestId,
+      responseTime,)
+      requestId,)
     );
 
     return NextResponse.json(response, {
       status: httpStatus,
       headers: {
+
         "Content-Type": "application/json",
         "Cache-Control": "no-cache, no-store, must-revalidate",
         "X-Request-ID": requestId,
-        "X-Response-Time": `${responseTime}ms`,
-      },
+        "X-Response-Time": "${responseTime}ms",)
+      },)
     });
   } catch (error) {
     const responseTime = Date.now() - startTime;
@@ -365,30 +361,29 @@ export async function GET(__request: NextRequest) {
       environment: process.env.NODE_ENV || "development",
       error: errorMessage,
       requestId,
-    };
 
     return NextResponse.json(errorResponse, {
       status: 500,
       headers: {
+
         "Content-Type": "application/json",
         "X-Request-ID": requestId,
-        "X-Response-Time": `${responseTime}ms`,
-      },
+        "X-Response-Time": "${responseTime}ms",)
+      },)
     });
-  }
-}
 
 // OPTIONS handler for CORS
 export async function OPTIONS(__request: NextRequest) {
+
   return new NextResponse(null, {
     status: 200,
     headers: {
+
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, OPTIONS",
       "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      "Access-Control-Max-Age": "86400",
-    },
+      "Access-Control-Max-Age": "86400",)
+    },)
   });
-}
 
 // Schema removed to comply with Next.js API route requirements

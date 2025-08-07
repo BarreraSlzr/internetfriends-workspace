@@ -6,14 +6,15 @@ export const _ProfileExpertiseTab = () => {
   return (
     <div className="flex flex-col gap-2">
       {curriculum.jobExperiences.map((job, index) => (
-        <div key={`experience-${index}`} className={_cardCss}>
+        <div key={"experience-${index}"} className={_cardCss}>
           <div className="flex flex-row flex-wrap justify-between">
             <p className="font-medium">
               {job.title} | {job.razonSocial}
             </p>
             <Badge
               variant="outline"
-              className="text-gray-700 hover:bg-gray-300 text-sm font-semibold mr-2 px-2.5 py-0.5"
+              className="text-gray-700 hover: bg-gray-300 text-sm font-semibold mr-2 px-2.5 py-0.5"
+
             >
               {job.startDate} - {job.endDate || "Present"}
             </Badge>
@@ -23,4 +24,3 @@ export const _ProfileExpertiseTab = () => {
       ))}
     </div>
   );
-};

@@ -12,238 +12,224 @@ import { existsSync, readFileSync } from "fs";
 
 interface QuickCheckResult {
   name: string;
+
   passed: boolean;
+
   message: string;
   duration: number;
 }
 
 class QuickValidator {
-  private verbose = process.argv.includes('--verbose');
+  private verbose = process.argv.includes("--verbose");
   private results: QuickCheckResult[] = [];
 
   constructor() {
-    console.log('⚡ Quick Validation - InternetFriends Design System\n');
-  }
+    console.log("⚡ Quick Validation - InternetFriends Design System\n");
 
-  private log(message: string, type: 'info' | 'success' | 'error' | 'warning' = 'info') {
+  private log(message: string, type: "info" | 'success" | "error" | "warning" = "info") {
+
     const icons = {
-      info: 'ℹ️',
-      success: '✅',
-      error: '❌',
-      warning: '⚠️'
-    };
+      info: "ℹ️",
+      success: "✅",
+      error: "❌",
+      warning: "⚠️",
 
     const colors = {
-      info: '\x1b[36m',
-      success: '\x1b[32m',
-      error: '\x1b[31m',
-      warning: '\x1b[33m',
-      reset: '\x1b[0m'
-    };
+      info: "\x1b[36m",
+      success: "\x1b[32m",
+      error: "\x1b[31m",
+      warning: "\x1b[33m",
+      reset: "\x1b[0m",
 
-    if (this.verbose || type !== 'info') {
-      console.log(`${icons[type]} ${colors[type]}${message}${colors.reset}`);
-    }
-  }
+    if (this.verbose || type !== "info") {
+      console.log("${icons[type]} ${colors[type]}${message}${colors.reset}");
 
   private async runCheck(name: string, checkFn: () => Promise<boolean> | boolean): Promise<QuickCheckResult> {
+
     const startTime = Date.now();
 
     try {
-      this.log(`Checking ${name}...`, 'info');
+      this.log("Checking ${name}...", "info");
       const passed = await checkFn();
       const duration = Date.now() - startTime;
 
       const result: QuickCheckResult = {
+
         name,
         passed,
-        message: passed ? 'OK' : 'Failed',
+        message: passed ? "OK" : "Failed",
         duration
-      };
 
-      this.log(`${name}: ${result.message} (${duration}ms)`, passed ? 'success' : 'error');
+      this.log("${name}: ${result.message} (${duration}ms)", passed ? 'success" : "error");
       this.results.push(result);
       return result;
     } catch (error: unknown) {
+
       const duration = Date.now() - startTime;
       const result: QuickCheckResult = {
+
         name,
         passed: false,
-        message: error.message || 'Error occurred',
+        message: error.message || "Error occurred",
         duration
-      };
 
-      this.log(`${name}: ${result.message} (${duration}ms)`, 'error');
+      this.log("${name}: ${result.message} (${duration}ms)", "error");
       this.results.push(result);
       return result;
-    }
-  }
 
   private runCommand(command: string, timeout = 15000): { success: boolean; output: string } {
     try {
       const output = execSync(command, {
-        encoding: 'utf8',
-        timeout,
-        stdio: 'pipe'
+        encoding: "utf8",
+        timeout,)
+        stdio: "pipe",)
       });
       return { success: true, output };
     } catch (error: unknown) {
-      return { success: false, output: error.message || 'Command failed' };
-    }
-  }
+
+      return { success: false, output: error.message || "Command failed" };
 
   async validateEssentialFiles(): Promise<void> {
     const essentialFiles = [
-      'package.json',
-      'tsconfig.json',
-      'tailwind.config.ts',
-      'app/(internetfriends)/globals.css',
-      'components/atomic/index.ts',
-      'lib/utils/index.ts'
+      "package.json",
+      "tsconfig.json",
+      "tailwind.config.ts",
+      "app/(internetfriends)/globals.css",
+      "components/atomic/index.ts",
+      "lib/utils/index.ts"
     ];
 
     for (const file of essentialFiles) {
-      await this.runCheck(`File: ${file}`, () => existsSync(file));
-    }
-  }
+      await this.runCheck("File: ${file}", () => existsSync(file));
 
   async validateTypeScript(): Promise<void> {
-    await this.runCheck('TypeScript compilation', () => {
-      const { success, output } = this.runCommand('bunx tsc --noEmit');
+    await this.runCheck("TypeScript compilation", () => {
+      const { success, output } = this.runCommand("bunx tsc --noEmit");
       if (!success && this.verbose) {
-        console.log(`TypeScript errors:\n${output}`);
-      }
+        console.log("TypeScript errors:\n${output}");
+
       return success;
     });
-  }
 
   async validateLinting(): Promise<void> {
-    await this.runCheck('ESLint validation', () => {
-      const { success, output } = this.runCommand('bunx eslint .');
+    await this.runCheck("ESLint validation", () => {
+      const { success, output } = this.runCommand("bunx eslint .");
       if (!success && this.verbose) {
-        console.log(`ESLint errors:\n${output}`);
-      }
+        console.log("ESLint errors:\n${output}");
+
       return success;
     });
-  }
 
   async validateDesignTokens(): Promise<void> {
-    await this.runCheck('Design tokens', () => {
+    await this.runCheck("Design tokens", () => {
       try {
-        const css = readFileSync('app/(internetfriends)/globals.css', 'utf8');
+        const css = readFileSync("app/(internetfriends)/globals.css", "utf8");
         const requiredTokens = [
-          '--if-primary',
-          '--glass-bg-header',
-          '--radius-lg',
-          '--color-text-primary',
-          '--color-bg-glass'
+          "--if-primary",
+          "--glass-bg-header",
+          "--radius-lg",
+          "--color-text-primary",
+          "--color-bg-glass"
         ];
         return requiredTokens.every(token => css.includes(token));
       } catch {
         return false;
-      }
+
     });
-  }
 
   async validateComponentStructure(): Promise<void> {
     const componentChecks = [
-      {
-        name: 'Atomic components index',
+    {
+        name: "Atomic components index",
         check: () => {
-          const index = readFileSync('components/atomic/index.ts', 'utf8');
-          return index.includes('HeaderAtomic') &&
-                 index.includes('ButtonAtomic') &&
-                 index.includes('GlassCardAtomic');
-        }
+          const index = readFileSync("components/atomic/index.ts", "utf8");
+          return index.includes("HeaderAtomic") &&
+                 index.includes("ButtonAtomic") &&
+                 index.includes("GlassCardAtomic");
+
       },
-      {
-        name: 'Component registry',
+    {
+        name: "Component registry",
         check: () => {
-          const registryPath = 'app/(internetfriends)/design-system/registry/component.registry.ts';
+          const registryPath = "app/(internetfriends)/design-system/registry/component.registry.ts";
           if (!existsSync(registryPath)) return false;
-          const registry = readFileSync(registryPath, 'utf8');
-          return registry.includes('ComponentRegistry') && registry.includes('componentRegistry');
-        }
+          const registry = readFileSync(registryPath, "utf8");
+          return registry.includes("ComponentRegistry") && registry.includes("componentRegistry");
+
       },
-      {
-        name: 'Utils function',
+    {
+        name: "Utils function",
         check: () => {
-          const utils = readFileSync('lib/utils/index.ts', 'utf8');
-          return utils.includes('cn') && utils.includes('clsx') && utils.includes('twMerge');
-        }
-      }
+          const utils = readFileSync("lib/utils/index.ts", "utf8");
+          return utils.includes("cn") && utils.includes("clsx") && utils.includes("twMerge");
+
     ];
 
     for (const { name, check } of componentChecks) {
       await this.runCheck(name, check);
-    }
-  }
 
   async validatePackageStructure(): Promise<void> {
-    await this.runCheck('Package.json structure', () => {
+    await this.runCheck("Package.json structure", () => {
       try {
-        const pkg = JSON.parse(readFileSync('package.json', 'utf8'));
-        const requiredScripts = ['dev', 'build', 'lint', 'typecheck'];
-        const requiredDeps = ['react', 'next', 'reactflow', 'tailwindcss'];
+        const pkg = JSON.parse(readFileSync("package.json", "utf8"));
+        const requiredScripts = ["dev", "build", "lint", "typecheck"];
+        const requiredDeps = ["react", "next", "reactflow", "tailwindcss"];
 
         return requiredScripts.every(script => pkg.scripts && pkg.scripts[script]) &&
-               requiredDeps.every(dep =>
+               requiredDeps.every(dep =>)
                  (pkg.dependencies && pkg.dependencies[dep]) ||
                  (pkg.devDependencies && pkg.devDependencies[dep])
                );
       } catch {
         return false;
-      }
+
     });
-  }
 
   async validateTailwindConfig(): Promise<void> {
-    await this.runCheck('Tailwind CSS compilation', () => {
-      const { success } = this.runCommand(
-        'bunx tailwindcss -i ./app/(internetfriends)/globals.css -o ./temp-check.css',
+    await this.runCheck("Tailwind CSS compilation", () => {
+      const { success } = this.runCommand()
+        "bunx tailwindcss -i ./app/(internetfriends)/globals.css -o ./temp-check.css",
         10000
       );
 
       if (success) {
         try {
-          execSync('rm -f ./temp-check.css');
+          execSync("rm -f ./temp-check.css");
         } catch {}
-      }
 
       return success;
     });
-  }
 
   generateSummary(): boolean {
+    return
     const passed = this.results.filter(r => r.passed).length;
     const total = this.results.length;
     const allPassed = passed === total;
     const duration = this.results.reduce((sum, r) => sum + r.duration, 0);
 
-    console.log('\n' + '='.repeat(40));
-    console.log('⚡ QUICK VALIDATION SUMMARY');
-    console.log('='.repeat(40));
+    console.log("\n" + "=".repeat(40));
+    console.log("⚡ QUICK VALIDATION SUMMARY");
+    console.log("=".repeat(40));
 
     if (allPassed) {
-      this.log(`🎉 All ${total} checks passed! (${duration}ms)`, 'success');
-      this.log('✨ Ready for development!', 'success');
+      this.log("🎉 All ${total} checks passed! (${duration}ms)", 'success");
+      this.log("✨ Ready for development!", 'success");
     } else {
-      this.log(`💥 ${total - passed} of ${total} checks failed (${duration}ms)`, 'error');
+      this.log("💥 ${total - passed} of ${total} checks failed (${duration}ms)", "error");
 
       // Show failed checks
       const failed = this.results.filter(r => !r.passed);
-      console.log('\nFailed checks:');
-      failed.forEach(result => {
-        console.log(`❌ ${result.name}: ${result.message}`);
+      console.log("\nFailed checks: ");
+
+      failed.forEach(result => {)
+        console.log("❌ ${result.name}: ${result.message}");
       });
 
-      console.log('\n💡 Run with --verbose for more details');
-      console.log('🔧 Run "bun run validate:fix" to attempt auto-fixes');
-    }
+      console.log("\n💡 Run with --verbose for more details");
+      console.log("🔧 Run "bun run validate: fix" to attempt auto-fixes");,
 
-    console.log('='.repeat(40));
+    console.log("=".repeat(40));
     return allPassed;
-  }
 
   async run(): Promise<boolean> {
     const startTime = Date.now();
@@ -262,24 +248,20 @@ class QuickValidator {
       const totalTime = Date.now() - startTime;
 
       if (success) {
-        this.log(`\n🚀 Quick validation completed successfully in ${totalTime}ms`, 'success');
+        this.log("\n🚀 Quick validation completed successfully in ${totalTime}ms", 'success");
       } else {
-        this.log(`\n⛔ Quick validation failed in ${totalTime}ms`, 'error');
-      }
+        this.log("\n⛔ Quick validation failed in ${totalTime}ms", "error");
 
       return success;
     } catch (error: unknown) {
-      this.log(`❌ Quick validation crashed: ${error.message}`, 'error');
+
+      this.log("❌ Quick validation crashed: ${error.message}", "error");
       return false;
-    }
-  }
-}
 
 // Run if called directly
 if (import.meta.main) {
   const validator = new QuickValidator();
   const success = await validator.run();
   process.exit(success ? 0 : 1);
-}
 
 export { QuickValidator };

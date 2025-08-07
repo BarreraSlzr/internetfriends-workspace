@@ -6,29 +6,31 @@ import { cn } from "@/lib/utils";
 
 interface HookNodeData {
   label: string;
+
   description: string;
+
   returns?: string;
   parameters?: string[];
   dependencies?: string[];
-}
 
 interface HookNodeProps {
   data: HookNodeData;
+
   isConnectable: boolean;
+
   selected: boolean;
-}
 
 const HookNode: React.FC<HookNodeProps> = ({
+
   data,
   isConnectable,
   selected,
 }) => {
   return (
     <div
-      className={cn(
-        "min-w-[240px] max-w-[300px] bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 text-emerald-900 rounded-compact-lg shadow-glass transition-all duration-200",
-        selected && "ring-2 ring-if-primary ring-offset-2",
-        "hover:shadow-glass-hover hover:scale-[1.02]",
+      className={cn("min-w-[240px] max-w-[300px] bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 text-emerald-900 rounded-compact-lg shadow-glass transition-all duration-200",
+        selected && "ring-2 ring-if-primary ring-offset-2",)
+        "hover:shadow-glass-hover hover:scale-[1.02]",)
       )}
     >
       <Handle
@@ -52,7 +54,8 @@ const HookNode: React.FC<HookNodeProps> = ({
 
         {data.returns && (
           <div className="mb-2">
-            <h4 className="text-xs font-semibold mb-1">Returns:</h4>
+            <h4 className="text-xs font-semibold mb-1">Returns: </h4>
+
             <code className="text-xs bg-white/30 px-1 rounded font-mono">
               {data.returns}
             </code>
@@ -61,7 +64,8 @@ const HookNode: React.FC<HookNodeProps> = ({
 
         {data.parameters && data.parameters.length > 0 && (
           <div className="mb-2">
-            <h4 className="text-xs font-semibold mb-1">Parameters:</h4>
+            <h4 className="text-xs font-semibold mb-1">Parameters: </h4>
+
             <div className="text-xs space-y-1">
               {data.parameters.map((param, index) => (
                 <div key={index} className="font-mono bg-white/20 px-1 rounded">
@@ -81,7 +85,6 @@ const HookNode: React.FC<HookNodeProps> = ({
       />
     </div>
   );
-};
 
 export { HookNode };
 export type { HookNodeData };

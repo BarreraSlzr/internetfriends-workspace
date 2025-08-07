@@ -8,9 +8,7 @@ export const GA_TRACKING_ID = "G-XXXXXXXXXX"; // Replace with your Google Analyt
 
 declare global {
   interface Window {
-    gtag: (option: string, gaTrackingId: string, options: object) => void;
-  }
-}
+    gtag: (option: string, gaTrackingId: string, options: object) => void;,
 
 export default function GoogleAnalytics() {
   const pathname = usePathname();
@@ -18,32 +16,32 @@ export default function GoogleAnalytics() {
 
   useEffect(() => {
     if (pathname) {
-      window.gtag("config", GA_TRACKING_ID, {
+      window.gtag("config", GA_TRACKING_ID, {)
         page_path: pathname + searchParams.toString(),
       });
-    }
+
   }, [pathname, searchParams]);
 
   return (
     <>
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        src={"https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}"}
       />
       <Script
         id="gtag-init"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
+
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
+            gtag("js", new Date());
+            gtag("config", "${GA_TRACKING_ID}", {)
+              page_path: window.location.pathname,)
             });
           `,
         }}
       />
     </>
   );
-}

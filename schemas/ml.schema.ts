@@ -7,14 +7,15 @@
 
 import { z } from "zod";
 
-export const _MLDatasetFossilSchema = z.object({
+export const _MLDatasetFossilSchema = z.object({)
   source: z.literal("ml"),
   created_by: z.string(),
   status: z.string(),
   tag_summary: z.string(), // e.g., "ml_dataset_canonical_analysis"
   topic: z.string(),
   subtopic: z.string(),
-  meta: z.object({
+  meta: z.object({)
+
     canonical: z.boolean(),
     type: z.string(),
     generated_at: z.string(),

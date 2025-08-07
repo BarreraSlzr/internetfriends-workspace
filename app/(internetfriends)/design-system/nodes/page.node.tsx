@@ -6,28 +6,30 @@ import { cn } from "@/lib/utils";
 
 interface PageNodeData {
   label: string;
+
   description: string;
+
   route?: string;
   components?: string[];
-}
 
 interface PageNodeProps {
   data: PageNodeData;
+
   isConnectable: boolean;
+
   selected: boolean;
-}
 
 const PageNode: React.FC<PageNodeProps> = ({
+
   data,
   isConnectable,
   selected,
 }) => {
   return (
     <div
-      className={cn(
-        "min-w-[280px] max-w-[320px] bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 text-indigo-900 rounded-compact-lg shadow-glass transition-all duration-200",
-        selected && "ring-2 ring-if-primary ring-offset-2",
-        "hover:shadow-glass-hover hover:scale-[1.02]",
+      className={cn("min-w-[280px] max-w-[320px] bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 text-indigo-900 rounded-compact-lg shadow-glass transition-all duration-200",
+        selected && "ring-2 ring-if-primary ring-offset-2",)
+        "hover:shadow-glass-hover hover:scale-[1.02]",)
       )}
     >
       <Handle
@@ -51,7 +53,8 @@ const PageNode: React.FC<PageNodeProps> = ({
 
         {data.route && (
           <div className="mb-2">
-            <h4 className="text-xs font-semibold mb-1">Route:</h4>
+            <h4 className="text-xs font-semibold mb-1">Route: </h4>
+
             <code className="text-xs bg-white/30 px-1 rounded font-mono">
               {data.route}
             </code>
@@ -60,7 +63,8 @@ const PageNode: React.FC<PageNodeProps> = ({
 
         {data.components && data.components.length > 0 && (
           <div>
-            <h4 className="text-xs font-semibold mb-1">Uses Components:</h4>
+            <h4 className="text-xs font-semibold mb-1">Uses Components: </h4>
+
             <div className="flex flex-wrap gap-1">
               {data.components.map((component, index) => (
                 <span
@@ -83,7 +87,6 @@ const PageNode: React.FC<PageNodeProps> = ({
       />
     </div>
   );
-};
 
 export { PageNode };
 export type { PageNodeData };

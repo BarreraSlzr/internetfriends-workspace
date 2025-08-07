@@ -31,15 +31,15 @@ const messages = [
     main: "Page not found.",
     subtitle: "A great opportunity to explore business automation!",
   },
-  {
+{
     main: "Missing in action.",
     subtitle: "Maybe it's busy creating creative solutions for you.",
   },
-  {
+{
     main: "Content unavailable.",
     subtitle: "It might be waiting for distribution!",
   },
-  {
+{
     main: "This page is taking a creative break.",
     subtitle: "Let's brainstorm your next big idea!",
   },
@@ -60,7 +60,8 @@ export default function NotFoundPage() {
         <p className="text-lg mb-6">{randomMessage.subtitle}</p>
         <Link
           href="/"
-          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+          className="flex items-center gap-1 hover: opacity-70 transition-opacity"
+
         >
           Go Home
           <ArrowUpRight className="h-4 w-4" />
@@ -75,4 +76,3 @@ export default function NotFoundPage() {
       <CompanyInfo />
     </main>
   );
-}

@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("InternetFriends Landing Page", () => {
-  test("should load homepage", async ({ page }) => {
+  test('should load homepage", async ({ page }) => {
     await page.goto("/");
     
     // Check page loads
@@ -11,7 +11,7 @@ test.describe("InternetFriends Landing Page", () => {
     await expect(page.locator("h1")).toBeVisible();
   });
   
-  test("should have working navigation", async ({ page }) => {
+  test('should have working navigation", async ({ page }) => {
     await page.goto("/");
     
     // Test navigation links (adjust selectors based on your actual nav)
@@ -19,7 +19,7 @@ test.describe("InternetFriends Landing Page", () => {
     await expect(navLinks.first()).toBeVisible();
   });
   
-  test("should be responsive on mobile", async ({ page }) => {
+  test('should be responsive on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto("/");
     
@@ -27,7 +27,7 @@ test.describe("InternetFriends Landing Page", () => {
     await expect(page.locator("body")).toBeVisible();
   });
   
-  test("should have fast loading times", async ({ page }) => {
+  test('should have fast loading times", async ({ page }) => {
     const startTime = Date.now();
     await page.goto("/");
     const loadTime = Date.now() - startTime;
@@ -36,7 +36,7 @@ test.describe("InternetFriends Landing Page", () => {
     expect(loadTime).toBeLessThan(3000);
   });
   
-  test("should handle hot reload", async ({ page }) => {
+  test('should handle hot reload", async ({ page }) => {
     await page.goto("/");
     
     // Wait for page to be fully loaded

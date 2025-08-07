@@ -15,23 +15,30 @@ import {
 // Event-driven types matching the micro-ux-explorer
 interface ExplorerEvent {
   type: "EXPLORE" | "SCAN" | "ANALYZE" | "TRANSPORT" | "UI_UPDATE";
+
   timestamp: string;
+
   data: unknown;
+
   metadata?: {
     source: string;
+
     transportable: boolean;
+
     ui_ready: boolean;
-  };
-}
 
 interface ProjectNode {
   name: string;
+
   path: string;
+
   type: "file" | "directory";
+
   size?: number;
   extension?: string;
   children?: ProjectNode[];
   metadata: {
+
     lastModified?: Date;
     isConfig?: boolean;
     isComponent?: boolean;
@@ -39,70 +46,93 @@ interface ProjectNode {
     isTest?: boolean;
     complexity?: "simple" | "moderate" | "complex";
     importance?: "low" | "medium" | "high" | "critical";
-  };
-}
 
 interface TreeViewData {
   id: string;
+
   label: string;
+
   type: "file" | "directory";
+
   indent: number;
+
   icon: string;
+
   metadata: ProjectNode["metadata"];
+
   children?: TreeViewData[];
   expandable: boolean;
+
   ui_props: {
+
     className: string;
+
     style: { paddingLeft: string };
-  };
-}
 
 interface GridViewData {
   id: string;
+
   name: string;
+
   type: string;
+
   importance: string;
+
   complexity: string;
+
   size?: number;
   lastModified?: Date;
   ui_props: {
+
     className: string;
+
     badge: string;
-  };
-}
 
 interface TransportableUIData {
   tree_view: TreeViewData[];
+
   grid_view: GridViewData[];
+
   graph_data: {
+
     nodes: Array<{
+
       id: string;
+
       label: string;
+
       type: string;
+
       group: string;
+
       importance: string;
+
       size: number;
+
       color: string;
     }>;
     edges: Array<{
+
       from: string;
+
       to: string;
+
       arrows: string;
     }>;
-  };
-}
 
 type ViewMode = "tree" | "grid" | "graph";
 
 interface ProjectExplorerProps {
   initialData?: TransportableUIData;
   onNodeSelect?: (node: TreeViewData | GridViewData) => void;
+
   onEventGenerated?: (event: ExplorerEvent) => void;
+
   className?: string;
-}
 
 // Event-driven micro UX component
 export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
+
   initialData,
   onNodeSelect,
   onEventGenerated,
@@ -120,20 +150,20 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
   // Event creation utility
   const createEvent = (type: ExplorerEvent["type"], data: unknown) => {
     const event: ExplorerEvent = {
+
       type,
       timestamp: new Date().toISOString(),
       data,
       metadata: {
+
         source: "project-explorer-client",
         transportable: true,
         ui_ready: true,
       },
-    };
 
     setEventHistory((prev) => [...prev, event]);
     onEventGenerated?.(event);
     return event;
-  };
 
   // Load data from micro-ux-explorer via API or direct import
   const loadProjectData = async () => {
@@ -146,23 +176,21 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
         const explorerData = await response.json();
         setData(explorerData.transportable_ui_data);
         createEvent("UI_UPDATE", {
-          action: "data_loaded",
-          data_size: explorerData.statistics?.totalFiles || 0,
+          action: "data_loaded",)
+          data_size: explorerData.statistics?.totalFiles || 0,)
         });
-      }
+
     } catch (error) {
       console.error("Failed to load project data: ", error);
       createEvent("UI_UPDATE", {
-        action: "loading_failed",
-        error: error.message,
+        action: "loading_failed",)
+        error: error.message,)
       });
-    }
-  };
 
   useEffect(() => {
     if (!data) {
       loadProjectData();
-    }
+
   }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Filter data based on search query
@@ -185,19 +213,17 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
           ...node,
           children: node.children ? filterTreeNodes(node.children) : undefined,
         }));
-    };
 
     const filterGridNodes = (nodes: GridViewData[]): GridViewData[] => {
       return nodes.filter((node) =>
         node.name.toLowerCase().includes(searchQuery.toLowerCase()),
       );
-    };
 
     return {
       ...data,
       tree_view: filterTreeNodes(data.tree_view),
       grid_view: filterGridNodes(data.grid_view),
-    };
+
   }, [data, searchQuery]);
 
   // Handle node selection
@@ -209,10 +235,9 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
     onNodeSelect?.(nodeData);
     createEvent("UI_UPDATE", {
       action: "node_selected",
-      node_id: nodeId,
-      node_type: nodeData.type,
+      node_id: nodeId,)
+      node_type: nodeData.type,)
     });
-  };
 
   // Handle node expansion
   const toggleNodeExpansion = (nodeId: string) => {
@@ -221,14 +246,13 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
       newExpanded.delete(nodeId);
     } else {
       newExpanded.add(nodeId);
-    }
+
     setExpandedNodes(newExpanded);
     createEvent("UI_UPDATE", {
-      action: "node_toggled",
-      node_id: nodeId,
+      action: "node_toggled",)
+      node_id: nodeId,)
       expanded: newExpanded.has(nodeId),
     });
-  };
 
   // Get importance badge color
   const getImportanceBadge = (importance: string) => {
@@ -236,20 +260,14 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
       case "critical": return "bg-red-500 text-white";
       case "high": return "bg-amber-500 text-white";
       case "medium": return "bg-blue-500 text-white";
-      default:
-        return "bg-gray-400 text-white";
-    }
-  };
+      default: return "bg-gray-400 text-white";
 
   // Get complexity indicator
   const getComplexityIndicator = (complexity: string) => {
     switch (complexity) {
       case "complex": return "⚡";
       case "moderate": return "⚖️";
-      default:
-        return "○";
-    }
-  };
+      default: return "○";
 
   // Render tree node
   const renderTreeNode = (node: TreeViewData) => {
@@ -260,7 +278,8 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
       <div key={node.id} className="select-none">
         <div
           className={`
-            flex items-center py-1 px-2 hover:bg-blue-50 cursor-pointer rounded
+            flex items-center py-1 px-2 hover: bg-blue-50 cursor-pointer rounded
+
             ${isSelected ? "bg-blue-100 border-l-2 border-blue-500" : ""}
             ${node.ui_props.className}
           `}
@@ -273,7 +292,8 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
                 e.stopPropagation();
                 toggleNodeExpansion(node.id);
               }}
-              className="mr-1 p-0.5 hover:bg-gray-200 rounded"
+              className="mr-1 p-0.5 hover: bg-gray-200 rounded"
+
             >
               {isExpanded ? (
                 <ChevronDown size={14} />
@@ -314,7 +334,6 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
         )}
       </div>
     );
-  };
 
   // Render grid item
   const renderGridItem = (item: GridViewData) => {
@@ -325,7 +344,8 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
         key={item.id}
         className={`
           p-3 border rounded-lg cursor-pointer transition-all duration-200
-          hover:shadow-md hover:border-blue-300
+          hover: shadow-md hover:border-blue-300
+
           ${isSelected ? "bg-blue-50 border-blue-500 shadow-md" : "bg-white border-gray-200"}
           ${item.ui_props.className}
         `}
@@ -361,21 +381,19 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
         )}
       </div>
     );
-  };
 
   if (!filteredData) {
     return (
-      <div className={`flex items-center justify-center h-64 ${className}`}>
+      <div className={"flex items-center justify-center h-64 ${className}"}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
           <p className="mt-2 text-gray-600">Loading project structure...</p>
         </div>
       </div>
     );
-  }
 
   return (
-    <div className={`bg-white rounded-lg border border-gray-200 ${className}`}>
+    <div className={"bg-white rounded-lg border border-gray-200 ${className}"}>
       {/* Header with controls */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-between mb-3">
@@ -419,7 +437,8 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
             placeholder="Search files and directories..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus: ring-2 focus:ring-blue-500 focus:border-transparent"
+
           />
         </div>
       </div>
@@ -433,7 +452,8 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
         )}
 
         {viewMode === "grid" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 md: grid-cols-2 lg:grid-cols-3 gap-3">
+
             {filteredData.grid_view.map((item) => renderGridItem(item))}
           </div>
         )}
@@ -453,6 +473,5 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
       </div>
     </div>
   );
-};
 
 export default ProjectExplorerAtomic;

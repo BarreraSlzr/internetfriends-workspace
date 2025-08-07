@@ -24,7 +24,7 @@ export interface NavigationItem {
   badge?: string;
 
   /** Badge variant */
-  badgeVariant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+  badgeVariant?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
 
   /** External link indicator */
   external?: boolean;
@@ -37,7 +37,6 @@ export interface NavigationItem {
 
   /** Custom click handler */
   onClick?: () => void;
-}
 
 export interface NavigationLogo {
   /** Logo image source */
@@ -63,9 +62,8 @@ export interface NavigationLogo {
 
   /** Text to display if no image provided */
   text?: string;
-}
 
-export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, 'children'> {
+export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, "children"> {
   /** Navigation items to display */
   items: NavigationItem[];
 
@@ -76,10 +74,10 @@ export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, 'child
   actions?: ReactNode;
 
   /** Visual variant of the navigation */
-  variant?: 'transparent' | 'solid' | 'glass';
+  variant?: "transparent" | "solid" | "glass";
 
   /** Breakpoint for mobile menu toggle */
-  mobileBreakpoint?: 'sm' | 'md' | 'lg';
+  mobileBreakpoint?: "sm" | "md" | "lg";
 
   /** Whether to show mobile menu toggle */
   showMobileToggle?: boolean;
@@ -92,7 +90,6 @@ export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, 'child
 
   /** Additional CSS classes */
   className?: string;
-}
 
 export interface NavigationDropdownProps {
   /** Dropdown items */
@@ -111,11 +108,10 @@ export interface NavigationDropdownProps {
   className?: string;
 
   /** Alignment of dropdown */
-  align?: 'start' | 'center' | 'end';
+  align?: "start" | "center" | "end";
 
   /** Side of dropdown */
-  side?: 'top' | 'right' | 'bottom' | 'left';
-}
+  side?: "top" | "right" | "bottom" | "left";
 
 export interface MobileMenuProps {
   /** Whether mobile menu is open */
@@ -137,12 +133,11 @@ export interface MobileMenuProps {
   className?: string;
 
   /** Animation variant */
-  animation?: 'slide' | 'fade' | 'scale';
-}
+  animation?: "slide" | "fade" | "scale";
 
 export interface NavigationBreadcrumbProps {
   /** Breadcrumb items */
-  items: Omit<NavigationItem, 'children'>[];
+  items: Omit<NavigationItem, "children">[];
 
   /** Separator component */
   separator?: ReactNode;
@@ -152,11 +147,10 @@ export interface NavigationBreadcrumbProps {
 
   /** Additional CSS classes */
   className?: string;
-}
 
 export interface NavigationTabsProps {
   /** Tab items */
-  items: Omit<NavigationItem, 'children'>[];
+  items: Omit<NavigationItem, "children">[];
 
   /** Currently active tab */
   activeTab?: string;
@@ -165,14 +159,13 @@ export interface NavigationTabsProps {
   onTabChange?: (_tabId: string) => void;
 
   /** Tab variant */
-  variant?: 'default' | 'pills' | 'underline';
+  variant?: "default" | "pills" | "underline";
 
   /** Size variant */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 
   /** Additional CSS classes */
   className?: string;
 
   /** Whether tabs should be scrollable on mobile */
   scrollable?: boolean;
-}

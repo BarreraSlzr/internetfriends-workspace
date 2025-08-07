@@ -10,6 +10,7 @@ import { HeaderAtomic } from "@/components/atomic/header";
 import { NavigationMolecularProps } from "./types";
 
 export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
+
   items,
   logo,
   actions,
@@ -29,8 +30,6 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMobileMenuOpen(false);
-      }
-    };
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -42,31 +41,26 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
       if (e.key === "Escape") {
         setIsMobileMenuOpen(false);
         setOpenDropdown(null);
-      }
-    };
 
     if (isMobileMenuOpen) {
       document.addEventListener("keydown", handleEscape);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
-    }
 
     return () => {
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "";
-    };
+
   }, [isMobileMenuOpen]);
 
   const handleItemClick = (item: unknown) => {
     onItemClick?.(item);
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
-  };
 
   const toggleDropdown = (itemId: string) => {
     setOpenDropdown(openDropdown === itemId ? null : itemId);
-  };
 
   const renderNavigationItem = (item: unknown, mobile = false) => {
     const isActive = activeItem === item.id || item.active;
@@ -75,13 +69,13 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
     if (hasDropdown) {
       return (
         <div className key={item.id} className="relative group"> // TODO: Review duplicate props
+
           <button
             onClick={() => toggleDropdown(item.id)}
-            className={cn(
-              "flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors duration-200",
+            className={cn("flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors duration-200",
               "hover:text-if-primary focus:outline-none focus:text-if-primary",
-              isActive ? "text-if-primary" : "text-foreground",
-              mobile && "w-full justify-between text-left",
+              isActive ? "text-if-primary" : "text-foreground",)
+              mobile && "w-full justify-between text-left",)
             )}
             aria-expanded={openDropdown === item.id}
           >
@@ -90,9 +84,8 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
               {item.label}
             </span>
             <ChevronDown
-              className={cn(
-                "w-4 h-4 transition-transform duration-200",
-                openDropdown === item.id && "rotate-180",
+              className={cn("w-4 h-4 transition-transform duration-200",)
+                openDropdown === item.id && "rotate-180",)
               )}
             />
           </button>
@@ -100,19 +93,19 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
           {/* Dropdown Menu */}
           {openDropdown === item.id && (
             <div
-              className={cn(
-                "absolute top-full left-0 mt-1 min-w-[200px] bg-glass-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-glass z-50",
-                mobile &&
-                  "relative top-0 mt-2 shadow-none border-l-2 border-l-if-primary bg-transparent ml-4",
+              className={cn("absolute top-full left-0 mt-1 min-w-[200px] bg-glass-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-glass z-50",
+                mobile &&)
+                  "relative top-0 mt-2 shadow-none border-l-2 border-l-if-primary bg-transparent ml-4",)
               )}
             >
               {item.children.map((child: unknown) => (
+
                 <Link href key={child.id} href={child.href} // TODO: Review duplicate props
+
                   onClick={() => handleItemClick(child)}
-                  className={cn(
-                    "block px-4 py-2 text-sm text-foreground hover:bg-if-primary-light hover:text-if-primary transition-colors duration-200",
-                    "_first:rounded-t-compact-md _last:rounded-b-compact-md",
-                    child.disabled && "opacity-50 cursor-not-allowed",
+                  className={cn("block px-4 py-2 text-sm text-foreground hover:bg-if-primary-light hover:text-if-primary transition-colors duration-200",
+                    "_first:rounded-t-compact-md _last:rounded-b-compact-md",)
+                    child.disabled && "opacity-50 cursor-not-allowed",)
                   )}
                 >
                   <div className="flex items-center gap-2">
@@ -135,17 +128,16 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
           )}
         </div>
       );
-    }
 
     return (
       <Link href key={item.id} href={item.href} // TODO: Review duplicate props
+
         onClick={() => handleItemClick(item)}
-        className={cn(
-          "flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200",
+        className={cn("flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200",
           "hover:text-if-primary focus-dashed",
           isActive ? "text-if-primary" : "text-foreground",
-          item.disabled && "opacity-50 cursor-not-allowed",
-          mobile && "w-full",
+          item.disabled && "opacity-50 cursor-not-allowed",)
+          mobile && "w-full",)
         )}
         target={item.external ? "_blank" : undefined}
         rel={item.external ? "noopener noreferrer" : undefined}
@@ -159,7 +151,6 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
         )}
       </Link>
     );
-  };
 
   return (
     <HeaderAtomic
@@ -172,7 +163,8 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
         {logo && (
           <Link
             href={logo.href || "/"}
-            className="flex items-center gap-2 hover:opacity-80 transition-opacity focus-dashed"
+            className="flex items-center gap-2 hover: opacity-80 transition-opacity focus-dashed"
+
             onClick={() => logo.onClick?.()}
           >
             {logo.src ? (
@@ -203,8 +195,8 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
       <nav
         className={cn("hidden items-center space-x-1", {
           "lg:flex": mobileBreakpoint === "lg",
-          "md:flex": mobileBreakpoint === "md",
-          "sm:flex": mobileBreakpoint === "sm",
+          "md:flex": mobileBreakpoint === "md",)
+          "sm:flex": mobileBreakpoint === "sm",)
         })}
       >
         {items.map((item) => renderNavigationItem(item))}
@@ -217,8 +209,8 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
           <div
             className={cn("hidden items-center gap-2", {
               "lg:flex": mobileBreakpoint === "lg",
-              "md:flex": mobileBreakpoint === "md",
-              "sm:flex": mobileBreakpoint === "sm",
+              "md:flex": mobileBreakpoint === "md",)
+              "sm:flex": mobileBreakpoint === "sm",)
             })}
           >
             {actions}
@@ -232,8 +224,8 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
             size="sm"
             className={cn("flex", {
               "lg:hidden": mobileBreakpoint === "lg",
-              "md:hidden": mobileBreakpoint === "md",
-              "sm:hidden": mobileBreakpoint === "sm",
+              "md:hidden": mobileBreakpoint === "md",)
+              "sm:hidden": mobileBreakpoint === "sm",)
             })}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
@@ -306,6 +298,5 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
       )}
     </HeaderAtomic>
   );
-};
 
 NavigationMolecular._displayName = "NavigationMolecular";

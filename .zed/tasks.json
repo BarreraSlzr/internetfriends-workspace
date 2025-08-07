@@ -102,39 +102,35 @@
       "tags": ["quality", "validation"]
     },
     {
-      "label": "⚡ Quick Validate",
+      "label": "⚡ Basic Validate",
       "command": "bun",
-      "args": ["run", "validate:quick"],
+      "args": ["run", "lint", "--quiet"],
       "use_new_terminal": false,
-      "tags": ["quality", "validation", "quick"]
+      "tags": ["quality", "validation", "basic"]
     },
     {
-      "label": "🔧 Fix Unused Variables",
+      "label": "🔧 Fix Critical Syntax",
       "command": "bun",
-      "args": ["scripts/fix-unused-variables-safe.ts"],
+      "args": ["scripts/fix-specific-syntax.ts"],
       "use_new_terminal": false,
-      "tags": ["quality", "fix", "cleanup"]
+      "tags": ["quality", "fix", "critical"]
     },
     {
-      "label": "🔧 Fix Any Types",
-      "command": "bun",
-      "args": ["scripts/fix-any-types.ts"],
+      "label": "🔧 Repair Corrupted Files",
+      "command": "sh",
+      "args": [
+        "-c",
+        "git checkout HEAD -- scripts/validate-quick.ts scripts/fix-*.ts"
+      ],
       "use_new_terminal": false,
-      "tags": ["quality", "fix", "typescript"]
+      "tags": ["recovery", "repair"]
     },
     {
-      "label": "🔧 Fix React Issues",
+      "label": "🔧 Check Syntax Errors",
       "command": "bun",
-      "args": ["scripts/fix-react-issues.ts"],
+      "args": ["run", "typecheck", "--noEmit", "--skipLibCheck"],
       "use_new_terminal": false,
-      "tags": ["quality", "fix", "react"]
-    },
-    {
-      "label": "🔧 Final Cleanup",
-      "command": "bun",
-      "args": ["scripts/final-cleanup.ts"],
-      "use_new_terminal": false,
-      "tags": ["quality", "fix", "comprehensive"]
+      "tags": ["quality", "check", "typescript"]
     },
     {
       "label": "🚀 Demo Integration",
@@ -223,18 +219,41 @@
       "tags": ["monitoring", "health"]
     },
     {
-      "label": "🔍 Project Explorer",
-      "command": "bun",
-      "args": ["scripts/micro-ux-explorer.ts", "--output", "tree"],
+      "label": "🔍 File Structure",
+      "command": "find",
+      "args": [
+        ".",
+        "-name",
+        "*.ts",
+        "-o",
+        "-name",
+        "*.tsx",
+        "|",
+        "head",
+        "-20"
+      ],
       "use_new_terminal": false,
-      "tags": ["explore", "project"]
+      "tags": ["explore", "basic"]
     },
     {
-      "label": "📋 Project Summary",
-      "command": "bun",
-      "args": ["scripts/project-summary.ts"],
+      "label": "📋 Quick Status",
+      "command": "sh",
+      "args": [
+        "-c",
+        "echo 'TypeScript files:' && find . -name '*.ts' -o -name '*.tsx' | wc -l && echo 'Errors:' && bun run lint --quiet --format compact | wc -l"
+      ],
       "use_new_terminal": false,
-      "tags": ["summary", "project"]
+      "tags": ["status", "quick"]
+    },
+    {
+      "label": "🚨 Recovery Mode",
+      "command": "sh",
+      "args": [
+        "-c",
+        "git status && echo '--- Checking for corrupted files ---' && bun run typecheck 2>&1 | head -10"
+      ],
+      "use_new_terminal": true,
+      "tags": ["recovery", "debug"]
     }
   ]
 }

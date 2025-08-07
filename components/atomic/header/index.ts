@@ -1,4 +1,4 @@
-export { HeaderAtomic } from './header.atomic';
+export { HeaderAtomic } from "./header.atomic";
 export type {
   HeaderAtomicProps,
   HeaderNavigationProps,
@@ -6,4 +6,4 @@ export type {
   HeaderLogoProps,
   HeaderActionsProps,
   ThemeToggleProps,
-} from './types';
+} from "./types";

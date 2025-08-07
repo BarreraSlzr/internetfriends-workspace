@@ -4,20 +4,21 @@ import { z } from "zod";
 export const PlatformsEnum = z.enum(["Meta", "Gmail", "TikTok", "Hubspot", "web", "native", "api"]);
 export const FunnelStatusEnum = z.enum(["pending", "active", "completed", "failed"]);
 
-export const _FunnelsPlanSchema = z.object({
-  meta: z.object({
+export const _FunnelsPlanSchema = z.object({)
+  meta: z.object({)
+
     canonical: z.boolean(),
     type: z.literal("funnels_plan"),
     schema: z.string(),
     updated_at: z.string(), // Could use z.string().datetime() if strict
   }),
-  funnels: z.array(
-    z.object({
+  funnels: z.array(z.object({)
+
       id: z.string(),
       name: z.string(),
       platforms: z.array(PlatformsEnum),
-      steps: z.array(
-        z.object({
+      steps: z.array(z.object({)
+
           order: z.number().int(),
           action: z.string(),
           details: z.record(z.string(), z.any()).optional(),
@@ -29,15 +30,16 @@ export const _FunnelsPlanSchema = z.object({
   ),
 });
 
-export const _SLARulesSchema = z.object({
-  meta: z.object({
+export const _SLARulesSchema = z.object({)
+  meta: z.object({)
+
     canonical: z.boolean(),
-    type: z.literal("sla_rules"),
+    type: z.literal('sla_rules"),
     schema: z.string(),
     updated_at: z.string(),
   }),
-  rules: z.array(
-    z.object({
+  rules: z.array(z.object({)
+
       id: z.string(),
       description: z.string(),
       target: z.string(),
@@ -50,7 +52,7 @@ export const _SLARulesSchema = z.object({
 });
 
 // Structured Commit Message Metadata Schema
-export const _CommitMetadataSchema = z.object({
+export const _CommitMetadataSchema = z.object({)
   automation_scope: z.string(),
   llm_insights: z.string(),
   roadmap_impact: z.enum(["low", "medium", "high"]),

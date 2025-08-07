@@ -18,7 +18,6 @@ const setRafInterval = (callback: () => void, timeout = 0) => {
       startTime = nowTime;
       callback();
     }
-
     handle.id = requestAnimationFrame(loop);
   };
 
@@ -34,7 +33,7 @@ const clearRafInterval = (handle?: RafHandle | null) => {
 };
 
 export const useRafInterval = (fn: () => void, timeout = 0) => {
-  const timerRef = useRef<RafHandle>(null);
+  const timerRef = useRef<RafHandle | null>(null);
 
   const fnRef = useRef(fn);
   fnRef.current = fn;
@@ -57,4 +56,3 @@ export const useRafInterval = (fn: () => void, timeout = 0) => {
 };
 
 export default useRafInterval;
-

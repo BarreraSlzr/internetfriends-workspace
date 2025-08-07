@@ -3,13 +3,12 @@ import * as React from "react";
 import { motion, MotionProps } from "framer-motion";
 
 export interface IMotionDivProps extends MotionProps {
-  className: string;
-}
+  className: string;,
 
 export default function MotionDiv({
   children,
-  transition,
-  className,
+  transition,)
+  className,)
 }: React.PropsWithChildren<IMotionDivProps>) {
   return (
     <motion.div
@@ -21,4 +20,3 @@ export default function MotionDiv({
       {children}
     </motion.div>
   );
-}

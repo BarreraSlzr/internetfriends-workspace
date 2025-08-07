@@ -1,7 +1,7 @@
 import { BaseFormSchema } from "./form.schema";
 import { z } from "zod";
 
-export const BugFormSchema = BaseFormSchema.extend({
+export const BugFormSchema = BaseFormSchema.extend({)
   branch: z.string(),
   commit: z.string(),
   category: z.string().optional(),

@@ -6,17 +6,18 @@ import SocialLinks from "@/app/(internetfriends)/components/social-links";
 import content from "@/app/(internetfriends)/content.json";
 import ProfileCard from "../components/profile/profile-card";
 
-
 export default function Page() {
     return (
         <main>
             <Header />
             <HeroText className="min-h-fit">
-                <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
+                <h1 className="text-5xl font-bold sm: pb-6 pb-4 md:pb-8">
+
                     {content.curriculum.title}
                 </h1>
                 <div className="bg-foreground text-brand-blue-100">
-                    <div className="sm:px-6 px-2 md:px-8 py-12 pt-6">
+                    <div className='sm: px-6 px-2 md:px-8 py-12 pt-6">
+
                         <ProfileCard />
                     </div>
                 </div>
@@ -26,4 +27,3 @@ export default function Page() {
             <CompanyInfo />
         </main>
     );
-}

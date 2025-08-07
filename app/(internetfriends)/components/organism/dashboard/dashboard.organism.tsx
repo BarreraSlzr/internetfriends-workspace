@@ -16,10 +16,10 @@ type DashboardTab =
   | "analytics"
   | "projects"
   | "performance"
-  | "settings";
+  | 'settings";
 
-type MetricTrend = "up" | "down" | "stable";
-type ActivitySeverity = "info" | "success" | "warning" | "error";
+type MetricTrend = "up" | "down" | 'stable";
+type ActivitySeverity = "info" | 'success" | "warning" | "error";
 
 interface DashboardProps {
   userId?: string;
@@ -75,7 +75,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
     { id: "analytics", label: "Analytics", icon: "📈" },
     { id: "projects", label: "Projects", icon: "🚀" },
     { id: "performance", label: "Performance", icon: "⚡" },
-    { id: "settings", label: "Settings", icon: "⚙️" },
+    { id: 'settings", label: "Settings", icon: "⚙️" },
   ];
 
   // Mock Data Generation (In real app, this would come from API)
@@ -129,7 +129,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
     },
     {
       id: "2",
-      type: "system_alert",
+      type: 'system_alert",
       message: "API response time exceeded threshold",
       timestamp: new Date(Date.now() - 600000), // 10 min ago
       severity: "warning",
@@ -140,7 +140,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       type: "deployment",
       message: "Successfully deployed v2.1.0 to production",
       timestamp: new Date(Date.now() - 900000), // 15 min ago
-      severity: "success",
+      severity: 'success",
       icon: "🚀",
     },
     {
@@ -341,7 +341,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
           </div>
         );
 
-      case "settings": return (
+      case 'settings": return (
           <div className={styles.settingsContent}>
             <h3>Dashboard Settings</h3>
             <p>Customize your dashboard experience...</p>

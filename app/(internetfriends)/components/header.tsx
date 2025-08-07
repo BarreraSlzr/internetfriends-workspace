@@ -10,7 +10,8 @@ import { ThemeToggle } from "@/components/atomic/theme-toggle";
 export default function Header() {
   const randomColors = getRandomColors();
   return (
-    <header className="flex items-center justify-between sm:p-6 p-2 py-4 md:p-8 rounded-t-lg bg-foreground border-2 border-brand-blue-800">
+    <header className="flex items-center justify-between sm: p-6 p-2 py-4 md:p-8 rounded-t-lg bg-foreground border-2 border-brand-blue-800">
+
       <Link href="/">
         <div className="flex items-center gap-2">
           <div className="relative overflow-hidden flex items-center h-10 w-32 rounded bg-gradient-to-br from-orange-500 to-pink-500">
@@ -27,8 +28,8 @@ export default function Header() {
               />
             </div>
             <Image
-              className="select-none pointer-events-none"
-              alt={`${content.companyName}.xyz`}
+              className='select-none pointer-events-none"
+              alt={"${content.companyName}.xyz"}
               width={600}
               height={600}
               src="/600x600.jpg"
@@ -38,10 +39,11 @@ export default function Header() {
       </Link>
 
       <div className="flex items-center gap-4">
-        <ThemeToggle size="sm" variant="minimal" />
+        <ThemeToggle size='sm" variant="minimal" />
         <Link
           href="/samples"
-          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+          className="flex items-center gap-1 hover: opacity-70 transition-opacity"
+
         >
           {content.headerLink}
           <ArrowUpRight className="h-4 w-4" />
@@ -49,4 +51,3 @@ export default function Header() {
       </div>
     </header>
   );
-}

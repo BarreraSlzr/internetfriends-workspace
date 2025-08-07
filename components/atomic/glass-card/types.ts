@@ -8,10 +8,10 @@ export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 
   /** Visual variant of the card */
-  variant?: 'default' | 'elevated' | 'subtle' | 'primary' | 'destructive';
+  variant?: "default" | "elevated" | "subtle" | "primary" | "destructive";
 
   /** Size variant affecting padding and border radius */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
 
   /** Whether to show hover effects */
   hover?: boolean;
@@ -24,7 +24,6 @@ export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
 
   /** Whether to apply floating animation */
   animated?: boolean;
-}
 
 export interface GlassCardHeaderProps {
   /** Header content */
@@ -35,7 +34,6 @@ export interface GlassCardHeaderProps {
 
   /** Optional actions to display on the right side */
   actions?: ReactNode;
-}
 
 export interface GlassCardContentProps {
   /** Content to render */
@@ -46,7 +44,6 @@ export interface GlassCardContentProps {
 
   /** Whether to apply scrollable container */
   scrollable?: boolean;
-}
 
 export interface GlassCardFooterProps {
   /** Footer content */
@@ -56,8 +53,7 @@ export interface GlassCardFooterProps {
   className?: string;
 
   /** Alignment of footer content */
-  alignment?: 'left' | 'center' | 'right' | 'between';
-}
+  alignment?: "left" | "center" | "right" | "between";
 
 export interface GlassCardImageProps {
   /** Image source */
@@ -76,14 +72,13 @@ export interface GlassCardImageProps {
   fill?: boolean;
 
   /** Object fit style */
-  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 
   /** Additional CSS classes */
   className?: string;
 
   /** Click handler */
   onClick?: () => void;
-}
 
 export interface GlassCardActionsProps {
   /** Action buttons/components */
@@ -93,8 +88,7 @@ export interface GlassCardActionsProps {
   className?: string;
 
   /** Layout direction */
-  direction?: 'horizontal' | 'vertical';
+  direction?: "horizontal" | "vertical";
 
   /** Spacing between actions */
-  spacing?: 'tight' | 'normal' | 'loose';
-}
+  spacing?: "tight" | "normal" | "loose";

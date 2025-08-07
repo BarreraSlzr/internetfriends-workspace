@@ -7,7 +7,7 @@ test.describe("InternetFriends Design System", () => {
     await page.waitForLoadState("networkidle");
   });
 
-  test("should load design system page successfully", async ({ page }) => {
+  test('should load design system page successfully", async ({ page }) => {
     // Check page loads without errors
     await expect(page).toHaveTitle(/InternetFriends/i);
 
@@ -18,7 +18,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.getByText("InternetFriends Design System")).toBeVisible();
   });
 
-  test("should display component nodes correctly", async ({ page }) => {
+  test('should display component nodes correctly", async ({ page }) => {
     // Wait for nodes to load
     await page.waitForSelector('[data-id="header-atomic"]', { timeout: 10000 });
 
@@ -35,7 +35,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator('[data-id="css-utilities"]')).toBeVisible();
   });
 
-  test("should have working search functionality", async ({ page }) => {
+  test('should have working search functionality", async ({ page }) => {
     // Wait for search input
     const searchInput = page.locator('input[placeholder*= "Search"]');
     await expect(searchInput).toBeVisible();
@@ -54,7 +54,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator('[data-id="header-atomic"]')).toBeVisible();
   });
 
-  test("should have working category filter", async ({ page }) => {
+  test('should have working category filter", async ({ page }) => {
     // Wait for filter dropdown
     const categoryFilter = page.locator('select');
     await expect(categoryFilter).toBeVisible();
@@ -74,7 +74,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator('[data-id="design-tokens"]')).toBeVisible();
   });
 
-  test("should display stats panel correctly", async ({ page }) => {
+  test('should display stats panel correctly", async ({ page }) => {
     // Check stats panel is visible
     const statsPanel = page.getByText("Registry Stats").locator("..");
     await expect(statsPanel).toBeVisible();
@@ -86,7 +86,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.getByText("Molecular: ")).toBeVisible();
   });
 
-  test("should have working React Flow controls", async ({ page }) => {
+  test('should have working React Flow controls", async ({ page }) => {
     // Check controls panel exists
     await expect(page.locator(".react-flow__controls")).toBeVisible();
 
@@ -100,7 +100,7 @@ test.describe("InternetFriends Design System", () => {
     }
   });
 
-  test("should display live component showcase", async ({ page }) => {
+  test('should display live component showcase", async ({ page }) => {
     // Check component showcase panel
     const showcasePanel = page.getByText("Live Components").locator("..");
     await expect(showcasePanel).toBeVisible();
@@ -111,7 +111,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.getByRole("button", { name: "Glass" })).toBeVisible();
   });
 
-  test("should handle node interactions", async ({ page }) => {
+  test('should handle node interactions", async ({ page }) => {
     // Wait for nodes to be interactive
     await page.waitForSelector('[data-id="button-atomic"]', { state: "visible" });
 
@@ -123,7 +123,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(buttonNode).toHaveClass(/selected/);
   });
 
-  test("should show connection edges", async ({ page }) => {
+  test('should show connection edges", async ({ page }) => {
     // Wait for edges to render
     await page.waitForSelector(".react-flow__edge", { timeout: 10000 });
 
@@ -135,7 +135,7 @@ test.describe("InternetFriends Design System", () => {
     expect(await edges.count()).toBeGreaterThan(0);
   });
 
-  test("should be responsive on mobile", async ({ page }) => {
+  test('should be responsive on mobile", async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
 
     // Should still show main content
@@ -146,7 +146,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(headerPanel).toBeVisible();
   });
 
-  test("should handle clear filters action", async ({ page }) => {
+  test('should handle clear filters action", async ({ page }) => {
     // Add a search filter
     const searchInput = page.locator('input[placeholder*= "Search"]');
     await searchInput.fill("Button");
@@ -167,7 +167,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator('[data-id="design-tokens"]')).toBeVisible();
   });
 
-  test("should toggle stats panel", async ({ page }) => {
+  test('should toggle stats panel", async ({ page }) => {
     // Find stats toggle button
     const statsToggle = page.getByRole("button", { name: /stats/i });
 
@@ -184,7 +184,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(statsPanel).toBeVisible();
   });
 
-  test("should have no JavaScript errors", async ({ page }) => {
+  test('should have no JavaScript errors", async ({ page }) => {
     const consoleErrors: string[] = [];
 
     page.on("console", (msg) => {
@@ -211,7 +211,7 @@ test.describe("InternetFriends Design System", () => {
     expect(consoleErrors.length).toBe(0);
   });
 
-  test("should have proper accessibility", async ({ page }) => {
+  test('should have proper accessibility", async ({ page }) => {
     // Check for proper ARIA labels
     await expect(page.locator('input[placeholder*= "Search"]')).toHaveAttribute("type", "text");
 
@@ -223,10 +223,10 @@ test.describe("InternetFriends Design System", () => {
     expect(await buttons.count()).toBeGreaterThan(0);
 
     // Check select elements are accessible
-    await expect(page.locator("select")).toBeVisible();
+    await expect(page.locator('select")).toBeVisible();
   });
 
-  test("should load within performance budget", async ({ page }) => {
+  test('should load within performance budget", async ({ page }) => {
     const startTime = Date.now();
 
     await page.goto("/design-system");
@@ -238,7 +238,7 @@ test.describe("InternetFriends Design System", () => {
     expect(loadTime).toBeLessThan(5000);
   });
 
-  test("should handle network errors gracefully", async ({ page }) => {
+  test('should handle network errors gracefully", async ({ page }) => {
     // Block network requests to simulate offline
     await page.route("**/*", route => route.abort());
 
@@ -251,7 +251,7 @@ test.describe("InternetFriends Design System", () => {
 });
 
 test.describe("Component Registry", () => {
-  test("should have proper component data structure", async ({ page }) => {
+  test('should have proper component data structure", async ({ page }) => {
     await page.goto("/design-system");
 
     // Test component registry via browser evaluation
@@ -277,7 +277,7 @@ test.describe("Component Registry", () => {
 });
 
 test.describe("Design System Integration", () => {
-  test("should apply InternetFriends design tokens", async ({ page }) => {
+  test('should apply InternetFriends design tokens", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check CSS custom properties are applied
@@ -297,7 +297,7 @@ test.describe("Design System Integration", () => {
     expect(rootStyles.radiusLg).toBe("0.75rem");
   });
 
-  test("should have glass morphism effects", async ({ page }) => {
+  test('should have glass morphism effects", async ({ page }) => {
     await page.goto("/design-system");
 
     // Check for glass morphism classes

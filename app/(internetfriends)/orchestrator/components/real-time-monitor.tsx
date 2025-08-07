@@ -15,68 +15,101 @@ import { cn } from "@/lib/utils";
 
 interface SystemMetrics {
   cpu: number;
+
   memory: number;
+
   network: number;
+
   database: "connected" | "disconnected" | "error";
-  server: "running" | "stopped" | "error";
-  buildStatus: "success" | "building" | "failed";
-  lastUpdate: string;
-}
+
+  server: "running" | 'stopped" | "error";
+
+  buildStatus: 'success" | "building" | "failed";
+
+  lastUpdate: string;,
 
 interface SystemStatusResponse {
   timestamp: string;
+
   system: {
+
     cpu: number;
+
     memory: {
+
       used: number;
+
       total: number;
-      percentage: number;
-    };
+
+      percentage: number;,
+
     uptime: number;
+
     platform: string;
-    arch: string;
-  };
+
+    arch: string;,
+
   application: {
-    server: "running" | "stopped" | "error";
+
+    server: "running" | 'stopped" | "error";
+
     database: "connected" | "disconnected" | "error";
-    buildStatus: "success" | "building" | "failed";
+
+    buildStatus: 'success" | "building" | "failed";
+
     port: number;
-    environment: string;
-  };
+
+    environment: string;,
+
   project: {
+
     eslintIssues: number;
+
     typeScriptErrors: number;
+
     testCoverage: number;
+
     components: number;
+
     totalFiles: number;
+
     lastBuildTime?: string;
-  };
+
   processes: Array<{
+
     name: string;
-    status: "running" | "idle" | "stopped";
+
+    status: "running" | "idle" | 'stopped";
+
     uptime: string;
+
     pid?: number;
   }>;
   logs: Array<{
+
     timestamp: string;
-    level: "info" | "warn" | "error" | "success";
+
+    level: "info" | "warn" | "error" | 'success";
+
     message: string;
-    source: string;
+
+    source: string;,
   }>;
-}
 
 interface LogEntry {
   timestamp: string;
-  level: "info" | "warn" | "error" | "success";
+
+  level: "info" | "warn" | "error" | 'success";
+
   message: string;
-  source: string;
-}
+
+  source: string;,
 
 interface RealTimeMonitorProps {
   className?: string;
-}
 
 export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
+
   className = "",
 }) => {
   const [metrics, setMetrics] = useState<SystemMetrics>({
@@ -85,26 +118,26 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
     network: 23,
     database: "connected",
     server: "running",
-    buildStatus: "success",
+    buildStatus: 'success",
     lastUpdate: new Date().toISOString(),
   });
 
   const [logs, setLogs] = useState<LogEntry[]>([
-    {
+  {
       timestamp: new Date().toISOString(),
-      level: "success",
+      level: 'success",
       message: "Orchestrator initialized successfully",
-      source: "system",
+      source: 'system",
     },
-    {
+  {
       timestamp: new Date(Date.now() - 5000).toISOString(),
       level: "info",
       message: "Development server started on port 3001",
       source: "next",
     },
-    {
+  {
       timestamp: new Date(Date.now() - 12000).toISOString(),
-      level: "success",
+      level: 'success",
       message: "Database connection established",
       source: "database",
     },
@@ -113,8 +146,8 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   const [isConnected, setIsConnected] = useState(true);
   const [activeProcesses, setActiveProcesses] = useState([
     { name: "Next.js Dev Server", status: "running", uptime: "00:12:34" },
-    { name: "Turbopack", status: "active", uptime: "00:12:34" },
-    { name: "TypeScript Check", status: "idle", uptime: "00:12:34" },
+    { name: "Turbopack", status: "active", uptime: "00:12:34" },)
+    { name: "TypeScript Check", status: "idle", uptime: "00:12:34" },)
   ]);
 
   const logsRef = useRef<HTMLDivElement>(null);
@@ -142,7 +175,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
         setLogs(data.logs);
 
         // Update processes from real data
-        setActiveProcesses(
+        setActiveProcesses()
           data.processes.map((p) => ({
             name: p.name,
             status: p.status,
@@ -154,12 +187,10 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
       } else {
         console.warn("Failed to fetch system status");
         setIsConnected(false);
-      }
+
     } catch (error) {
       console.error("Error fetching system status: ", error);
       setIsConnected(false);
-    }
-  };
 
   // Real-time data fetching
   useEffect(() => {
@@ -174,14 +205,14 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   useEffect(() => {
     if (logsRef.current) {
       logsRef.current.scrollTop = 0;
-    }
+
   }, [logs]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "connected":
       case "running":
-      case "success":
+      case 'success":
         return "text-green-400";
       case "building":
       case "active":
@@ -189,37 +220,31 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
       case "idle":
         return "text-gray-400";
       case "disconnected":
-      case "stopped":
+      case 'stopped":
       case "failed":
       case "error":
         return "text-red-400";
-      default:
-        return "text-gray-400";
-    }
-  };
+      default: return "text-gray-400";,
 
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "connected":
       case "running":
-      case "success":
+      case 'success":
         return <CheckCircle className="w-4 h-4" />;
       case "building":
       case "active":
         return <Activity className="w-4 h-4 animate-pulse" />;
       case "disconnected":
-      case "stopped":
+      case 'stopped":
       case "failed":
       case "error":
         return <AlertTriangle className="w-4 h-4" />;
-      default:
-        return <div className="w-4 h-4" />;
-    }
-  };
+      default: return <div className="w-4 h-4" />;,
 
   const getLogLevelColor = (level: LogEntry["level"]) => {
     switch (level) {
-      case "success":
+      case 'success":
         return "text-green-400";
       case "info":
         return "text-blue-400";
@@ -227,14 +252,10 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
         return "text-yellow-400";
       case "error":
         return "text-red-400";
-      default:
-        return "text-gray-400";
-    }
-  };
+      default: return "text-gray-400";,
 
   const formatTime = (timestamp: string) => {
     return new Date(timestamp).toLocaleTimeString();
-  };
 
   const getMetricColor = (
     value: number,
@@ -243,20 +264,18 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
     if (value >= thresholds.critical) return "text-red-400";
     if (value >= thresholds.warn) return "text-yellow-400";
     return "text-green-400";
-  };
 
   return (
     <div
-      className={cn(
-        "bg-gray-900 border border-gray-700 rounded-lg p-4",
-        className,
+      className={cn("bg-gray-900 border border-gray-700 rounded-lg p-4",)
+        className,)
       )}
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Activity
-            className={`w-5 h-5 ${isConnected ? "text-green-400 animate-pulse" : "text-red-400"}`}
+            className={"w-5 h-5 ${isConnected ? "text-green-400 animate-pulse" : "text-red-400"}"}
           />
           <h3 className="text-lg font-semibold text-white">
             Real-time Monitor
@@ -268,9 +287,10 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg: grid-cols-2 gap-4">
+
         {/* System Metrics */}
-        <div className="space-y-4">
+        <div className='space-y-4">
           <h4 className="text-md font-medium text-gray-300 flex items-center space-x-2">
             <Server className="w-4 h-4" />
             <span>System Metrics</span>
@@ -284,7 +304,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
                 <span className="text-sm text-gray-300">CPU Usage</span>
               </div>
               <span
-                className={`text-sm font-medium ${getMetricColor(metrics.cpu)}`}
+                className={"text-sm font-medium ${getMetricColor(metrics.cpu)}"}
               >
                 {metrics.cpu.toFixed(1)}%
               </span>
@@ -292,7 +312,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
             <div className="w-full bg-gray-700 rounded-full h-2">
               <div
                 className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${metrics.cpu}%` }}
+                style={{ width: "${metrics.cpu}%" }}
               />
             </div>
           </div>
@@ -305,7 +325,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
                 <span className="text-sm text-gray-300">Memory Usage</span>
               </div>
               <span
-                className={`text-sm font-medium ${getMetricColor(metrics.memory)}`}
+                className={"text-sm font-medium ${getMetricColor(metrics.memory)}"}
               >
                 {metrics.memory.toFixed(1)}%
               </span>
@@ -313,7 +333,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
             <div className="w-full bg-gray-700 rounded-full h-2">
               <div
                 className="bg-gradient-to-r from-green-500 to-blue-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${metrics.memory}%` }}
+                style={{ width: "${metrics.memory}%" }}
               />
             </div>
           </div>
@@ -326,7 +346,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
                 <span className="text-sm text-gray-300">Network I/O</span>
               </div>
               <span
-                className={`text-sm font-medium ${getMetricColor(metrics.network, { warn: 80, critical: 95 })}`}
+                className={"text-sm font-medium ${getMetricColor(metrics.network, { warn: 80, critical: 95 })}"}
               >
                 {metrics.network.toFixed(1)}%
               </span>
@@ -334,7 +354,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
             <div className="w-full bg-gray-700 rounded-full h-2">
               <div
                 className="bg-gradient-to-r from-yellow-500 to-orange-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${metrics.network}%` }}
+                style={{ width: "${metrics.network}%" }}
               />
             </div>
           </div>
@@ -344,14 +364,14 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
             <h5 className="text-sm font-medium text-gray-300 mb-2">
               Service Status
             </h5>
-            <div className="space-y-2">
+            <div className='space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   {getStatusIcon(metrics.database)}
                   <span className="text-sm text-gray-300">Database</span>
                 </div>
                 <span
-                  className={`text-sm font-medium ${getStatusColor(metrics.database)}`}
+                  className={"text-sm font-medium ${getStatusColor(metrics.database)}"}
                 >
                   {metrics.database}
                 </span>
@@ -362,7 +382,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
                   <span className="text-sm text-gray-300">Server</span>
                 </div>
                 <span
-                  className={`text-sm font-medium ${getStatusColor(metrics.server)}`}
+                  className={"text-sm font-medium ${getStatusColor(metrics.server)}"}
                 >
                   {metrics.server}
                 </span>
@@ -373,7 +393,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
                   <span className="text-sm text-gray-300">Build</span>
                 </div>
                 <span
-                  className={`text-sm font-medium ${getStatusColor(metrics.buildStatus)}`}
+                  className={"text-sm font-medium ${getStatusColor(metrics.buildStatus)}"}
                 >
                   {metrics.buildStatus}
                 </span>
@@ -383,14 +403,14 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
         </div>
 
         {/* Logs & Processes */}
-        <div className="space-y-4">
+        <div className='space-y-4">
           {/* Active Processes */}
           <div className="bg-gray-800 rounded-lg p-3">
             <h5 className="text-sm font-medium text-gray-300 mb-2 flex items-center space-x-2">
               <Activity className="w-4 h-4" />
               <span>Active Processes</span>
             </h5>
-            <div className="space-y-2">
+            <div className='space-y-2">
               {activeProcesses.map((process, index) => (
                 <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -401,7 +421,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
                   </div>
                   <div className="text-right">
                     <div
-                      className={`text-xs font-medium ${getStatusColor(process.status)}`}
+                      className={"text-xs font-medium ${getStatusColor(process.status)}"}
                     >
                       {process.status}
                     </div>
@@ -421,16 +441,16 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
             </h5>
             <div
               ref={logsRef}
-              className="space-y-1 max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
+              className='space-y-1 max-h-60 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800"
             >
               {logs.map((log, index) => (
-                <div key={`${log.timestamp}-${index}`} className="text-xs">
+                <div key={"${log.timestamp}-${index}"} className="text-xs">
                   <div className="flex items-start space-x-2">
                     <span className="text-gray-500 font-mono">
                       {formatTime(log.timestamp)}
                     </span>
                     <span
-                      className={`font-medium ${getLogLevelColor(log.level)}`}
+                      className={"font-medium ${getLogLevelColor(log.level)}"}
                     >
                       [{log.level.toUpperCase()}]
                     </span>
@@ -452,4 +472,3 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
       </div>
     </div>
   );
-};

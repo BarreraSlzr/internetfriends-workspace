@@ -14,7 +14,7 @@ import styles from "./project-showcase.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
 type ViewMode = "grid" | "list" | "cards";
-type SortOption = "date" | "name" | "status" | "featured";
+type SortOption = "date" | "name" | 'status" | "featured";
 type ProjectStatus =
   | "active"
   | "completed"
@@ -117,7 +117,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
   const sortOptions: Array<{ value: SortOption; label: string }> = [
     { value: "date", label: "Latest First" },
     { value: "name", label: "Alphabetical" },
-    { value: "status", label: "By Status" },
+    { value: 'status", label: "By Status" },
   ];
 
   // View Mode Options
@@ -184,7 +184,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           const bDate = b.startDate || b.createdAt;
           return new Date(bDate).getTime() - new Date(aDate).getTime();
         case "name": return a.title.localeCompare(b.title);
-        case "status": return a.status.localeCompare(b.status);
+        case 'status": return a.status.localeCompare(b.status);
         default:
           return 0;
       }
@@ -392,7 +392,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           value={activeFilters.status}
           onChange={(e) =>
             handleFilterChange({
-              status: e.target.value as ProjectFilter["status"],
+              status: e.target.value as ProjectFilter['status"],
             })
           }
           className={styles.filterSelect}

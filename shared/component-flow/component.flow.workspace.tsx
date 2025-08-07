@@ -25,33 +25,36 @@ import styles from "./component.flow.workspace.module.scss";
 // Node types for React Flow
 const nodeTypes = {
   componentPreview: ComponentPreviewNode,
-};
 
 interface ComponentFlowWorkspaceProps {
   initialNodes?: ComponentPreviewNodeType[];
   initialEdges?: Edge[];
   className?: string;
-  theme?: 'light' | 'dark' | 'system';
+  theme?: "light" | "dark" | 'system";
   showMinimap?: boolean;
   showControls?: boolean;
   showComponentLibrary?: boolean;
   onNodeSelect?: (node: ComponentPreviewNodeType | null) => void;
-  onWorkspaceChange?: (nodes: ComponentPreviewNodeType[], edges: Edge[]) => void;
-}
+
+  onWorkspaceChange?: (nodes: ComponentPreviewNodeType[], edges: Edge[]) => void;,
 
 interface ComponentLibraryItem {
   id: string;
+
   name: string;
+
   type: string;
+
   category: string;
-  tags: string[];
-}
+
+  tags: string[];,
 
 export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
+
   initialNodes = [],
   initialEdges = [],
-  className = '',
-  theme = 'system',
+  className = "",
+  theme = 'system",
   showMinimap = true,
   showControls = true,
   showComponentLibrary = true,
@@ -62,8 +65,8 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [selectedNode, setSelectedNode] = useState<ComponentPreviewNodeType | null>(null);
   const [showLibrary, setShowLibrary] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   // Get component library items
   const libraryItems = useMemo<ComponentLibraryItem[]>(() => {
@@ -72,8 +75,8 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
       id: comp.id,
       name: comp.metadata.componentName,
       type: comp.metadata.componentType,
-      category: comp.metadata.category || 'general',
-      tags: comp.metadata.tags || [],
+      category: comp.metadata.category || "general",)
+      tags: comp.metadata.tags || [],)
     }));
   }, []);
 
@@ -81,18 +84,16 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
   const filteredLibraryItems = useMemo(() => {
     let filtered = libraryItems;
 
-    if (selectedCategory !== 'all') {
+    if (selectedCategory !== "all") {
       filtered = filtered.filter(item => item.category === selectedCategory);
-    }
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(item =>
+      filtered = filtered.filter(item =>)
         item.name.toLowerCase().includes(query) ||
         item.category.toLowerCase().includes(query) ||
         item.tags.some(tag => tag.toLowerCase().includes(query))
       );
-    }
 
     return filtered;
   }, [libraryItems, selectedCategory, searchQuery]);
@@ -100,11 +101,11 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
   // Get unique categories for filter
   const categories = useMemo(() => {
     const cats = Array.from(new Set(libraryItems.map(item => item.category)));
-    return ['all', ...cats.sort()];
+    return ["all", ...cats.sort()];
   }, [libraryItems]);
 
   // Handle connection between nodes
-  const onConnect = useCallback(
+  const onConnect = useCallback()
     (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
@@ -128,14 +129,15 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
     if (!componentEntry) return;
 
     const newNode: ComponentPreviewNodeType = {
-      id: `${componentId}-${Date.now()}`,
-      type: 'componentPreview',
+
+      id: "${componentId}-${Date.now()}",
+      type: "componentPreview",
       position: {
+
         x: Math.random() * 300 + 100,
         y: Math.random() * 200 + 100,
       },
       data: componentEntry.metadata,
-    };
 
     setNodes((nds) => nds.concat(newNode));
     setShowLibrary(false);
@@ -156,10 +158,11 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
       return {
         ...node,
         position: {
+
           x: col * 500 + 50,
           y: row * 400 + 50,
         },
-      };
+
     });
 
     setNodes(layouted);
@@ -174,30 +177,30 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
 
   // Export workspace
   const exportWorkspace = useCallback(() => {
-    const data = {
+  {
       nodes,
       edges,
       metadata: {
+
         exportedAt: new Date().toISOString(),
         nodeCount: nodes.length,
         edgeCount: edges.length,
       },
-    };
 
     const blob = new Blob([JSON.stringify(data, null, 2)], {
-      type: 'application/json',
+      type: "application/json",
     });
 
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `component-workspace-${Date.now()}.json`;
+    a.download = "component-workspace-${Date.now()}.json";
     a.click();
     URL.revokeObjectURL(url);
   }, [nodes, edges]);
 
   return (
-    <div className={`${styles.workspace}${className}`} data-theme={theme}>
+    <div className={"${styles.workspace}${className}"} data-theme={theme}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -217,12 +220,12 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
             nodeColor={(node) => {
               const data = node.data as any;
               switch (data?.componentType) {
-                case 'atomic': return '#10b981';
-                case 'molecular': return '#3b82f6';
-                case 'organism': return '#8b5cf6';
-                case 'template': return '#ec4899';
-                default: return '#6b7280';
-              }
+                case "atomic": return "#10b981";
+                case "molecular": return "#3b82f6";
+                case "organism": return "#8b5cf6";
+                case "template": return "#ec4899";
+                default: return "#6b7280";,
+
             }}
           />
         )}
@@ -235,7 +238,7 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
         <Panel position="top-left" className={styles.toolbar}>
           <div className={styles.toolbarGroup}>
             <button
-              className={`${styles.toolBtn}${showLibrary ? styles.active : ''}`}
+              className={"${styles.toolBtn}${showLibrary ? styles.active : ""}"}
               onClick={() => setShowLibrary(!showLibrary)}
               title="Toggle Component Library"
             >
@@ -283,7 +286,7 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
             <div className={styles.nodeInfoContent}>
               <h3>{selectedNode.data.componentName}</h3>
               <p>Type: <code>{selectedNode.data.componentType}</code></p>
-              <p>Category: <code>{selectedNode.data.category || 'general'}</code></p>
+              <p>Category: <code>{selectedNode.data.category || "general"}</code></p>
 
               {selectedNode.data.tags && (
                 <div className={styles.tags}>
@@ -336,7 +339,7 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
             >
               {categories.map((category) => (
                 <option key={category} value={category}>
-                  {category === 'all' ? 'All Categories' : category}
+                  {category === "all" ? "All Categories" : category}
                 </option>
               ))}
             </select>
@@ -355,11 +358,11 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
                   key={item.id}
                   className={styles.componentItem}
                   onClick={() => addComponentFromLibrary(item.id)}
-                  title={`Add ${item.name} to workspace`}
+                  title={"Add ${item.name} to workspace"}
                 >
                   <div className={styles.componentHeader}>
                     <h4>{item.name}</h4>
-                    <span className={`${styles.componentType}${styles[item.type]}`}>
+                    <span className={"${styles.componentType}${styles[item.type]}"}>
                       {item.type}
                     </span>
                   </div>
@@ -397,7 +400,6 @@ export const ComponentFlowWorkspace: React.FC<ComponentFlowWorkspaceProps> = ({
       )}
     </div>
   );
-};
 
 // Wrapper component with ReactFlowProvider
 export const ComponentFlowWorkspaceProvider: React.FC<ComponentFlowWorkspaceProps> = (props) => {
@@ -406,6 +408,5 @@ export const ComponentFlowWorkspaceProvider: React.FC<ComponentFlowWorkspaceProp
       <ComponentFlowWorkspace {...props} />
     </ReactFlowProvider>
   );
-};
 
 export default ComponentFlowWorkspaceProvider;

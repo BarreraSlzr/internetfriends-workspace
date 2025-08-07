@@ -13,28 +13,28 @@ export const BREAKPOINTS = {
 
 // Media query helpers
 export const MEDIA_QUERIES = {
-  xs: `(min-width: ${BREAKPOINTS.xs})`,
-  sm: `(min-width: ${BREAKPOINTS.sm})`,
-  md: `(min-width: ${BREAKPOINTS.md})`,
-  lg: `(min-width: ${BREAKPOINTS.lg})`,
-  xl: `(min-width: ${BREAKPOINTS.xl})`,
-  "2xl": `(min-width: ${BREAKPOINTS["2xl"]})`,
+  xs: "(min-width: ${BREAKPOINTS.xs})",
+  sm: "(min-width: ${BREAKPOINTS.sm})",
+  md: "(min-width: ${BREAKPOINTS.md})",
+  lg: "(min-width: ${BREAKPOINTS.lg})",
+  xl: "(min-width: ${BREAKPOINTS.xl})",
+  "2xl": "(min-width: ${BREAKPOINTS["2xl"]})",
 
   // Max-width queries for specific ranges
-  "max-sm": `(max-width: ${parseInt(BREAKPOINTS.sm) - 1}px)`,
-  "max-md": `(max-width: ${parseInt(BREAKPOINTS.md) - 1}px)`,
-  "max-lg": `(max-width: ${parseInt(BREAKPOINTS.lg) - 1}px)`,
-  "max-xl": `(max-width: ${parseInt(BREAKPOINTS.xl) - 1}px)`,
+  "max-sm": "(max-width: ${parseInt(BREAKPOINTS.sm) - 1}px)",
+  "max-md": "(max-width: ${parseInt(BREAKPOINTS.md) - 1}px)",
+  "max-lg": "(max-width: ${parseInt(BREAKPOINTS.lg) - 1}px)",
+  "max-xl": "(max-width: ${parseInt(BREAKPOINTS.xl) - 1}px)",
 
   // Range queries
-  "sm-only": `(min-width: ${BREAKPOINTS.sm}) and (max-width: ${parseInt(BREAKPOINTS.md) - 1}px)`,
-  "md-only": `(min-width: ${BREAKPOINTS.md}) and (max-width: ${parseInt(BREAKPOINTS.lg) - 1}px)`,
-  "lg-only": `(min-width: ${BREAKPOINTS.lg}) and (max-width: ${parseInt(BREAKPOINTS.xl) - 1}px)`,
+  'sm-only": "(min-width: ${BREAKPOINTS.sm}) and (max-width: ${parseInt(BREAKPOINTS.md) - 1}px)",
+  "md-only": "(min-width: ${BREAKPOINTS.md}) and (max-width: ${parseInt(BREAKPOINTS.lg) - 1}px)",
+  "lg-only": "(min-width: ${BREAKPOINTS.lg}) and (max-width: ${parseInt(BREAKPOINTS.xl) - 1}px)",
 
   // Device-specific queries
-  mobile: `(max-width: ${parseInt(BREAKPOINTS.md) - 1}px)`,
-  tablet: `(min-width: ${BREAKPOINTS.md}) and (max-width: ${parseInt(BREAKPOINTS.lg) - 1}px)`,
-  desktop: `(min-width: ${BREAKPOINTS.lg})`,
+  mobile: "(max-width: ${parseInt(BREAKPOINTS.md) - 1}px)",
+  tablet: "(min-width: ${BREAKPOINTS.md}) and (max-width: ${parseInt(BREAKPOINTS.lg) - 1}px)",
+  desktop: "(min-width: ${BREAKPOINTS.lg})",
 
   // Orientation queries
   portrait: "(orientation: portrait)",
@@ -63,6 +63,7 @@ export const CONTAINER_SIZES = {
 export const _GRID = {
   columns: 12,
   gutter: {
+
     xs: "1rem", // 16px
     sm: "1.5rem", // 24px
     md: "2rem", // 32px
@@ -70,6 +71,7 @@ export const _GRID = {
     xl: "3rem", // 48px
   },
   margin: {
+
     xs: "1rem", // 16px
     sm: "1.5rem", // 24px
     md: "2rem", // 32px
@@ -82,36 +84,42 @@ export const _GRID = {
 export const _RESPONSIVE_TYPOGRAPHY = {
   // Heading scales that adjust with breakpoints
   h1: {
+
     xs: "1.875rem", // 30px
     sm: "2.25rem", // 36px
     md: "3rem", // 48px
     lg: "3.75rem", // 60px
   },
   h2: {
+
     xs: "1.5rem", // 24px
     sm: "1.875rem", // 30px
     md: "2.25rem", // 36px
     lg: "3rem", // 48px
   },
   h3: {
+
     xs: "1.25rem", // 20px
     sm: "1.5rem", // 24px
     md: "1.875rem", // 30px
     lg: "2.25rem", // 36px
   },
   h4: {
+
     xs: "1.125rem", // 18px
     sm: "1.25rem", // 20px
     md: "1.5rem", // 24px
     lg: "1.875rem", // 30px
   },
   body: {
+
     xs: "0.875rem", // 14px
     sm: "1rem", // 16px
     md: "1rem", // 16px
     lg: "1.125rem", // 18px
   },
   caption: {
+
     xs: "0.75rem", // 12px
     sm: "0.875rem", // 14px
     md: "0.875rem", // 14px
@@ -123,13 +131,16 @@ export const _RESPONSIVE_TYPOGRAPHY = {
 export const _COMPONENT_RESPONSIVE = {
   // Header behavior
   header: {
+
     height: {
+
       xs: "3.5rem", // 56px
       sm: "4rem", // 64px
       md: "4rem", // 64px
       lg: "4rem", // 64px
     },
     padding: {
+
       xs: "0 1rem",
       sm: "0 1.5rem",
       md: "0 2rem",
@@ -139,7 +150,9 @@ export const _COMPONENT_RESPONSIVE = {
 
   // Navigation behavior
   navigation: {
+
     layout: {
+
       xs: "mobile", // Hamburger menu
       sm: "mobile", // Hamburger menu
       md: "desktop", // Horizontal nav
@@ -149,7 +162,9 @@ export const _COMPONENT_RESPONSIVE = {
 
   // Card layouts
   cards: {
+
     columns: {
+
       xs: 1,
       sm: 1,
       md: 2,
@@ -157,6 +172,7 @@ export const _COMPONENT_RESPONSIVE = {
       xl: 3,
     },
     gap: {
+
       xs: "1rem",
       sm: "1.5rem",
       md: "2rem",
@@ -166,13 +182,16 @@ export const _COMPONENT_RESPONSIVE = {
 
   // Form layouts
   forms: {
+
     layout: {
-      xs: "stacked", // All inputs stacked
-      sm: "stacked", // All inputs stacked
+
+      xs: 'stacked", // All inputs stacked
+      sm: 'stacked", // All inputs stacked
       md: "mixed", // Some side-by-side
       lg: "mixed", // Some side-by-side
     },
     inputWidth: {
+
       xs: "100%",
       sm: "100%",
       md: "auto",
@@ -197,6 +216,7 @@ export const _TOUCH_TARGETS = {
 export const _RESPONSIVE_UTILITIES = {
   // Hide/show at breakpoints
   hideOn: {
+
     xs: "hide-xs",
     sm: "hide-sm",
     md: "hide-md",
@@ -204,11 +224,12 @@ export const _RESPONSIVE_UTILITIES = {
     xl: "hide-xl",
   },
   showOn: {
-    xs: "show-xs",
-    sm: "show-sm",
-    md: "show-md",
-    lg: "show-lg",
-    xl: "show-xl",
+
+    xs: 'show-xs",
+    sm: 'show-sm",
+    md: 'show-md",
+    lg: 'show-lg",
+    xl: 'show-xl",
   },
 } as const;
 
@@ -218,12 +239,10 @@ export type MediaQuery = keyof typeof MEDIA_QUERIES;
 export type ContainerSize = keyof typeof CONTAINER_SIZES;
 export type ResponsiveValue<T> = {
   [K in Breakpoint]?: T;
-};
 
 // Utility function to get breakpoint value
 export const _getBreakpointValue = (breakpoint: Breakpoint): string => {
   return BREAKPOINTS[breakpoint];
-};
 
 // Utility function to create responsive styles
 export const _createResponsiveStyles = <T>(
@@ -234,9 +253,8 @@ export const _createResponsiveStyles = <T>(
     .map(([breakpoint, value]) => {
       const bp = breakpoint as Breakpoint;
       if (bp === "xs") {
-        return `${property}: ${value};`;
-      }
-      return `@media ${MEDIA_QUERIES[bp]} { ${property}: ${value}; }`;
+        return "${property}: ${value};";
+
+      return "@media ${MEDIA_QUERIES[bp]} { ${property}: ${value}; }";
     })
     .join(" ");
-};

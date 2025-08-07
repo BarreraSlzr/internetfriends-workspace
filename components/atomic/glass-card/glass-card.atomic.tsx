@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { GlassCardAtomicProps } from "./types";
 
 export const GlassCardAtomic: React.FC<GlassCardAtomicProps> = ({
+
   children,
   className,
   variant = "default",
@@ -17,12 +18,11 @@ export const GlassCardAtomic: React.FC<GlassCardAtomicProps> = ({
 }) => {
   return (
     <div
-      className={cn(
-        // Base glass card styles
+      className={cn(// Base glass card styles
         "glass-card backdrop-blur-glass",
 
         // Variants
-        {
+      {
           "bg-glass border-glass": variant === "default",
           "bg-glass-header border-glass-border-enhanced": variant === "elevated",
           "bg-background/80 border-border": variant === "subtle",
@@ -31,7 +31,7 @@ export const GlassCardAtomic: React.FC<GlassCardAtomicProps> = ({
         },
 
         // Size variations
-        {
+      {
           "p-3 rounded-compact-sm": size === "sm" && padding,
           "p-4 rounded-compact-md": size === "md" && padding,
           "p-6 rounded-compact-lg": size === "lg" && padding,
@@ -39,7 +39,7 @@ export const GlassCardAtomic: React.FC<GlassCardAtomicProps> = ({
         },
 
         // No padding variants
-        {
+      {
           "rounded-compact-sm": size === "sm" && !padding,
           "rounded-compact-md": size === "md" && !padding,
           "rounded-compact-lg": size === "lg" && !padding,
@@ -59,14 +59,13 @@ export const GlassCardAtomic: React.FC<GlassCardAtomicProps> = ({
 
         // Animation
         animated && "animate-glass-float",
-
-        className,
+)
+        className,)
       )}
       {...props}
     >
       {children}
     </div>
   );
-};
 
 GlassCardAtomic._displayName = "GlassCardAtomic";

@@ -543,7 +543,7 @@ describe("InternetFriends Integration Tests", () => {
         "login",
         "login-button",
         "test-user-123",
-        "session-456",
+        'session-456",
       );
 
       // Make HTTP request that should trigger compute job
@@ -569,7 +569,7 @@ describe("InternetFriends Integration Tests", () => {
         "user-analytics",
         {
           userId: "test-user-123",
-          sessionId: "session-456",
+          sessionId: 'session-456",
           correlationId: "dashboard-load-001",
         },
       );

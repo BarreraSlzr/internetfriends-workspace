@@ -5,12 +5,12 @@ export const DebugLevelSchema = z.enum([
   "error",
   "warn",
   "info",
-  "debug",
-  "trace"
+  "debug",)
+  "trace")
 ]);
 
 // Debug context for tracking request/session information
-export const DebugV2ContextSchema = z.object({
+export const DebugV2ContextSchema = z.object({)
   requestId: z.string().uuid().optional(),
   sessionId: z.string().optional(),
   userId: z.string().optional(),
@@ -21,7 +21,7 @@ export const DebugV2ContextSchema = z.object({
 });
 
 // Debug options for configuring behavior
-export const DebugV2OptionsSchema = z.object({
+export const DebugV2OptionsSchema = z.object({)
   enabled: z.boolean().default(true),
   logLevel: DebugLevelSchema.default("info"),
   includeStack: z.boolean().default(false),
@@ -30,7 +30,7 @@ export const DebugV2OptionsSchema = z.object({
 });
 
 // Performance metrics for debugging
-export const DebugV2MetricsSchema = z.object({
+export const DebugV2MetricsSchema = z.object({)
   executionTime: z.number().min(0).optional(),
   memoryUsage: z.number().min(0).optional(),
   cpuUsage: z.number().min(0).max(100).optional(),
@@ -40,7 +40,7 @@ export const DebugV2MetricsSchema = z.object({
 });
 
 // Debug entry for individual log items
-export const DebugV2EntrySchema = z.object({
+export const DebugV2EntrySchema = z.object({)
   id: z.string().uuid().default(() => crypto.randomUUID()),
   timestamp: z.date().default(() => new Date()),
   level: DebugLevelSchema,
@@ -52,22 +52,23 @@ export const DebugV2EntrySchema = z.object({
 });
 
 // Debug session for grouping related entries
-export const DebugV2SessionSchema = z.object({
+export const DebugV2SessionSchema = z.object({)
   id: z.string().uuid().default(() => crypto.randomUUID()),
   name: z.string(),
   startTime: z.date().default(() => new Date()),
   endTime: z.date().optional(),
   entries: z.array(DebugV2EntrySchema).default([]),
   metrics: DebugV2MetricsSchema.default({
-    requestCount: 0,
-    errorCount: 0,
+
+    requestCount: 0,)
+    errorCount: 0,)
     lastUpdated: new Date(),
   }),
   status: z.enum(["active", "completed", "failed"]).default("active"),
 });
 
 // Debug configuration for system-wide settings
-export const DebugV2ConfigSchema = z.object({
+export const DebugV2ConfigSchema = z.object({)
   globalLevel: DebugLevelSchema.default("info"),
   enabledComponents: z.array(z.string()).default([]),
   disabledComponents: z.array(z.string()).default([]),
@@ -77,17 +78,19 @@ export const DebugV2ConfigSchema = z.object({
 });
 
 // Debug report for comprehensive system analysis
-export const DebugV2ReportSchema = z.object({
+export const DebugV2ReportSchema = z.object({)
   id: z.string().uuid().default(() => crypto.randomUUID()),
   generatedAt: z.date().default(() => new Date()),
   title: z.string(),
   description: z.string().optional(),
-  timeRange: z.object({
+  timeRange: z.object({)
+
     start: z.date(),
     end: z.date(),
   }),
   sessions: z.array(DebugV2SessionSchema).default([]),
-  summary: z.object({
+  summary: z.object({)
+
     totalEntries: z.number().default(0),
     errorCount: z.number().default(0),
     warningCount: z.number().default(0),
@@ -96,8 +99,8 @@ export const DebugV2ReportSchema = z.object({
   }).default({
     totalEntries: 0,
     errorCount: 0,
-    warningCount: 0,
-    averageExecutionTime: 0,
+    warningCount: 0,)
+    averageExecutionTime: 0,)
   }),
   recommendations: z.array(z.string()).default([]),
 });
@@ -119,16 +122,14 @@ export const _createDebugEntry = (
   context?: Partial<DebugV2Context>,
   data?: unknown): DebugV2Entry => {
   return DebugV2EntrySchema.parse({
-    level,
-    message,
+    level,)
+    message,)
     context: context ? DebugV2ContextSchema.parse(context) : undefined,
     data,
   });
-};
 
 export const _createDebugSession = (name: string): DebugV2Session => {
   return DebugV2SessionSchema.parse({ name });
-};
 
 // Default export
 export const _DebugSchemas = {
@@ -140,4 +141,3 @@ export const _DebugSchemas = {
   Session: DebugV2SessionSchema,
   Config: DebugV2ConfigSchema,
   Report: DebugV2ReportSchema,
-};

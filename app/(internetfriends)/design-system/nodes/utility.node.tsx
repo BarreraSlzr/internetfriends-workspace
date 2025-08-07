@@ -6,19 +6,23 @@ import { cn } from "@/lib/utils";
 
 interface UtilityNodeData {
   label: string;
+
   category: "helper" | "hook" | "constant" | "type" | "config";
+
   description: string;
+
   exports?: string[];
   usedBy?: string[];
-}
 
 interface UtilityNodeProps {
   data: UtilityNodeData;
+
   isConnectable: boolean;
+
   selected: boolean;
-}
 
 const UtilityNode: React.FC<UtilityNodeProps> = ({
+
   data,
   isConnectable,
   selected,
@@ -30,15 +34,11 @@ const UtilityNode: React.FC<UtilityNodeProps> = ({
       case "constant": return "from-orange-50 to-orange-100 border-orange-200 text-orange-900";
       case "type": return "from-pink-50 to-pink-100 border-pink-200 text-pink-900";
       case "config": return "from-cyan-50 to-cyan-100 border-cyan-200 text-cyan-900";
-      default:
-        return "from-gray-50 to-gray-100 border-gray-200 text-gray-900";
-    }
-  };
+      default: return "from-gray-50 to-gray-100 border-gray-200 text-gray-900";
 
   return (
     <div
-      className={cn(
-        "min-w-[220px] max-w-[280px] bg-gradient-to-br rounded-compact-lg border-2 shadow-glass transition-all duration-200",
+      className={cn("min-w-[220px] max-w-[280px] bg-gradient-to-br rounded-compact-lg border-2 shadow-glass transition-all duration-200",)
         getCategoryColor(data.category),
         selected && "ring-2 ring-if-primary ring-offset-2",
         "hover:shadow-glass-hover hover:scale-[1.02]",
@@ -65,7 +65,8 @@ const UtilityNode: React.FC<UtilityNodeProps> = ({
 
         {data.exports && data.exports.length > 0 && (
           <div>
-            <h4 className="text-xs font-semibold mb-1">Exports:</h4>
+            <h4 className="text-xs font-semibold mb-1">Exports: </h4>
+
             <div className="flex flex-wrap gap-1">
               {data.exports.map((exportItem, index) => (
                 <span
@@ -88,7 +89,6 @@ const UtilityNode: React.FC<UtilityNodeProps> = ({
       />
     </div>
   );
-};
 
 export { UtilityNode };
 export type { UtilityNodeData };
