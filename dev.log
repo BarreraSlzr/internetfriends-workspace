@@ -1,0 +1,12 @@
+$ bun --bun next dev --turbopack
+   ▲ Next.js 15.1.2 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.100.40:3000
+   - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 1066ms
+ ○ Compiling / ...
+ ✓ Compiled / in 1875ms
+ GET / 200 in 2057ms
+[?25h
