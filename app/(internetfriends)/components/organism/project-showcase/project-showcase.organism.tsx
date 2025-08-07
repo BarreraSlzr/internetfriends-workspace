@@ -417,7 +417,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
               <input
                 type="checkbox"
                 checked={activeFilters.technology?.includes(tech) || false}
-                onChange={((e) => {
+                onChange={(e) => {
                   const currentTech = activeFilters.technology || [];
                   const newTech = e.target.checked
                     ? [...currentTech, tech]
@@ -454,7 +454,9 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
       {/* View Mode Toggle */}
       <div className={styles.viewModeToggle}>
         {viewModeOptions.map((option) => (
-          <button key={option.value} onClick={() => handleViewModeChange(option.value)}
+          <button
+            key={option.value}
+            onClick={() => handleViewModeChange(option.value)}
             className={`${styles.viewModeButton}${currentViewMode === option.value ? styles.active : ""}
             `}
             title={option.label}
@@ -498,7 +500,9 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
     const statusInfo = statusConfig[project.status];
 
     return (
-      <motion.div key={project.id} className={`${styles.projectCard}${styles[currentViewMode]}
+      <motion.div
+        key={project.id}
+        className={`${styles.projectCard}${styles[currentViewMode]}
           ${isHovered ? styles._hovered : ""}
         `}
         variants={projectVariants}

@@ -107,7 +107,8 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
-  const [columnVisibility, setColumnVisibility] = useState<Record<string, boolean>
+  const [columnVisibility, setColumnVisibility] = useState<
+    Record<string, boolean>
   >({});
 
   // Refs
@@ -364,7 +365,9 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     const sortDirection = sortConfig?.direction;
 
     return (
-      <th key={column.key} className={`
+      <th
+        key={column.key}
+        className={`
           ${styles.headerCell}
           ${sortable && column.sortable !== false ? styles.sortable : ""}
           ${isSorted ? styles._sorted : ""}
@@ -415,7 +418,11 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   };
 
   // Render table cell
-  const renderCell = (row: TableRow, column: TableColumn, _rowIndex: number) => {
+  const renderCell = (
+    row: TableRow,
+    column: TableColumn,
+    _rowIndex: number,
+  ) => {
     const value = row[column.key];
     let displayValue = value;
 
@@ -432,7 +439,9 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     }
 
     return (
-      <td key={column.key} className={`
+      <td
+        key={column.key}
+        className={`
           ${styles.cell}
           ${column.align ? styles[`align-${column.align}`] : ""}
         `}
@@ -486,7 +495,9 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             ⟨
           </button>
           {pages.map((page) => (
-            <button key={page} onClick={() => handlePageChange(page)}
+            <button
+              key={page}
+              onClick={() => handlePageChange(page)}
               className={`${styles.paginationButton}${page === currentPage ? styles.active : ""}`}
             >
               {page}
@@ -689,7 +700,8 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
               ) : (
                 visibleData.map((row, index) => (
                   <motion.tr
-                    <tr key={row.id} className={`${styles.row}${selectedRows.has(row.id) ? styles.selected : ""}
+                    key={row.id}
+                    className={`${styles.row}${selectedRows.has(row.id) ? styles.selected : ""}
                       ${onRowClick ? styles.clickable : ""}
                     `}
                     variants={rowVariants}
