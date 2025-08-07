@@ -493,7 +493,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
     </div>
   );
 
-  const renderProjectCard = (project: Project, _index: number) => {
+  const renderProjectCard = (project: Project, __index: number) => {
     const isHovered = hoveredProject === project.id;
     const statusInfo = statusConfig[project.status];
 
@@ -512,7 +512,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
       >
         {/* Project Image */}
         <div className={styles.projectImage}>
-          <img
+          <Image width={100} height={100}
             src={
               project.image || project.imageUrl || "/placeholder-project.jpg"
             }

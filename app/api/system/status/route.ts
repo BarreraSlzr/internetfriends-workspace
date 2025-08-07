@@ -85,7 +85,7 @@ function getProjectMetrics(): SystemStatus['project'] {
     // Count TypeScript/TSX files in components and app directories
     const countFiles = (dir: string): number => {
       try {
-        const files = require('fs').readdirSync(dir, { withFileTypes: true });
+        import files from 'fs'.readdirSync(dir, { withFileTypes: true });
         let count = 0;
 
         for (const file of files) {
@@ -106,7 +106,7 @@ function getProjectMetrics(): SystemStatus['project'] {
     };
 
     totalFiles = countFiles('app') + countFiles('components') + countFiles('lib');
-  } catch (error) {
+  } catch () {
     // Fallback values if directory scanning fails
     componentCount = 45;
     totalFiles = 120;
@@ -284,7 +284,7 @@ export async function POST(request: NextRequest) {
       message: 'Log added successfully'
     });
 
-  } catch (error) {
+  } catch () {
     return NextResponse.json(
       { error: 'Failed to add log entry' },
       { status: 500 }

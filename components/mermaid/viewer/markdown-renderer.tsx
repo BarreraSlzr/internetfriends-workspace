@@ -110,7 +110,7 @@ function processContentByFileType(content: string, fileType: string, fileName?: 
         const parsed = JSON.parse(content);
         const formatted = JSON.stringify(parsed, null, 2);
         return `# ${displayName}\n\n\`\`\`json\n${formatted}\n\`\`\``;
-      } catch (_e) {
+      } catch () {
         return `# ${displayName} (Parse Error)\n\n\`\`\`json\n${content}\n\`\`\``;
       }
 

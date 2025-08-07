@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   eventSystem,
@@ -314,7 +314,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     [onTimeRangeChange, userId, sessionId],
   );
 
-  const __handleFilterChange = useCallback(
+
     (filterId: string, value: unknown) => {
       const newFilters = { ...activeFilters, [filterId]: value };
       setActiveFilters(newFilters);

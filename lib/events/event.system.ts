@@ -223,7 +223,7 @@ export class InternetFriendsEventSystem {
   // Register event handler
   on(
     eventType: EventType,
-    handler: Function,
+    handler: (...args: unknown[]) => unknown,
     options: Partial<EventHandler> = {},
   ): string {
     const eventHandler: EventHandler = {
@@ -246,7 +246,7 @@ export class InternetFriendsEventSystem {
   }
 
   // Register global handler (receives all events)
-  onAll(handler: Function, options: Partial<EventHandler> = {}): string {
+  onAll(handler: (...args: unknown[]) => unknown, options: Partial<EventHandler> = {}): string {
     const eventHandler: EventHandler = {
       id: options.id || crypto.randomUUID(),
       eventType: "system.startup", // Placeholder, not used for global handlers
@@ -434,7 +434,7 @@ export class InternetFriendsEventSystem {
   // Health check
   async healthCheck(): Promise<boolean> {
     try {
-      const __testEventId = this.emit("system.health_check", {
+
         timestamp: Date.now(),
       });
 
@@ -460,7 +460,7 @@ export const emit = (
 
 export const on = (
   eventType: EventType,
-  handler: Function,
+  handler: (...args: unknown[]) => unknown,
   options?: Partial<EventHandler>,
 ) => eventSystem.on(eventType, handler, options);
 

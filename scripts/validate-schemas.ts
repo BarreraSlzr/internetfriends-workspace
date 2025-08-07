@@ -38,7 +38,7 @@ async function validateSchemas() {
   
   // Test User Schema
   try {
-    const _validUser = UserSchema.parse({
+
       id: "123e4567-e89b-12d3-a456-426614174000",
       email: "user@internetfriends.xyz",
       name: "John Doe",
@@ -53,7 +53,7 @@ async function validateSchemas() {
   
   // Test Project Schema
   try {
-    const _validProject = ProjectSchema.parse({
+
       id: "456e7890-e89b-12d3-a456-426614174001", 
       name: "InternetFriends Landing Page",
       description: "Next.js landing page for InternetFriends platform",

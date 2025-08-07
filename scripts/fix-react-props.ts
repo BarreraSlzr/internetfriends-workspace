@@ -74,7 +74,7 @@ const contentFixes = [
 ];
 
 // Fix missing keys in map iterations
-const _keyFixes = [
+
   {
     pattern: /\.map\(\(([^,]+),\s*([^)]+)\)\s*=>\s*\(\s*<([^>]+)(?!\s+key=)/g,
     replacement: (match: string, item: string, index: string, tag: string) => {
@@ -125,7 +125,7 @@ function fixFile(filePath: string): number {
     // More comprehensive key fix pattern
     content = content.replace(
       /\.map\(\(([^,)]+)(?:,\s*([^)]+))?\)\s*=>\s*(?:\(|\s)*(<[^>]*?)(?!\s+key\s*=)([^>]*>)/g,
-      (match, item, index, openTag, _rest) => {
+      (match, item, index, openTag, __rest) => {
         const indexVar = index || 'index';
         return match.replace(openTag, `${openTag} key={${indexVar}}`);
       }

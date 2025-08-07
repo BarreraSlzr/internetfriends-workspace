@@ -106,7 +106,7 @@ class ServerMicroUXExplorer {
   async scanDirectory(dirPath: string, depth = 0): Promise<ProjectNode[]> {
     if (depth > this.explorationDepth) return [];
 
-    const _scanEvent = this.createEvent('SCAN', {
+
       path: dirPath,
       depth,
       status: 'started'
@@ -321,7 +321,7 @@ class ServerMicroUXExplorer {
 
   // 📈 Generate project structure analysis
   async analyzeProject(): Promise<any> {
-    const _analysisEvent = this.createEvent('ANALYZE', { status: 'started' });
+    const = this.createEvent('ANALYZE', { status: 'started' });
 
     const structure = await this.scanDirectory(this.rootPath);
 
@@ -450,10 +450,10 @@ export async function POST(request: NextRequest) {
     // Filter results if targetFiles specified
     if (targetFiles && Array.isArray(targetFiles)) {
       analysis.transportable_ui_data.tree_view = analysis.transportable_ui_data.tree_view.filter(
-        (_event: Event) => targetFiles.some(target => node.label.includes(target))
+        (__event: Event) => targetFiles.some(target => node.label.includes(target))
       );
       analysis.transportable_ui_data.grid_view = analysis.transportable_ui_data.grid_view.filter(
-        (_event: Event) => targetFiles.some(target => node.name.includes(target))
+        (__event: Event) => targetFiles.some(target => node.name.includes(target))
       );
     }
 

@@ -19,7 +19,7 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   variant = "button",
   showLabels = false,
 }) => {
-  const { theme, setTheme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
   const isHydrated = useIsHydrated();
 
   const getIconSize = () => {

@@ -519,7 +519,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
                 onClick={logo.onClick}
               >
                 {logo.src ? (
-                  <img
+                  <Image width={100} height={100}
                     src={logo.src}
                     alt={logo.alt || "Logo"}
                     width={logo.width || 32}

@@ -188,7 +188,7 @@ class TypeScriptSyntaxFixer {
 }
 
 // Parse command line arguments
-const args = process.argv.slice(2);
+
 
 
 

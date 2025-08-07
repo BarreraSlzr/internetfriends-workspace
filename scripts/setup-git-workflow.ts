@@ -36,7 +36,7 @@ class GitWorkflowSetup {
   private execGit(command: string): string {
     try {
       return execSync(`git ${command}`, { encoding: 'utf8' }).trim();
-    } catch (error) {
+    } catch () {
       console.warn(`⚠️  Git command failed: git ${command}`);
       return '';
     }
@@ -45,7 +45,7 @@ class GitWorkflowSetup {
   private execCommand(command: string): string {
     try {
       return execSync(command, { encoding: 'utf8' }).trim();
-    } catch (error) {
+    } catch () {
       console.warn(`⚠️  Command failed: ${command}`);
       return '';
     }
@@ -231,7 +231,7 @@ AI_CONTEXT_*.md
 
     const gitignorePath = '.gitignore';
     if (existsSync(gitignorePath)) {
-      const currentGitignore = require('fs').readFileSync(gitignorePath, 'utf8');
+      import currentGitignore from 'fs'.readFileSync(gitignorePath, 'utf8');
       if (!currentGitignore.includes('# Git workflow artifacts')) {
         require('fs').appendFileSync(gitignorePath, workflowGitignore);
         console.log('✅ Updated .gitignore');

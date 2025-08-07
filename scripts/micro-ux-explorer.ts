@@ -126,7 +126,7 @@ class MicroUXExplorer {
   async scanDirectory(dirPath: string, depth = 0): Promise<ProjectNode[]> {
     if (depth > this.state.explorationDepth) return [];
 
-    const _scanEvent = this.createEvent('SCAN', {
+
       path: dirPath,
       depth,
       status: 'started'
@@ -213,7 +213,7 @@ class MicroUXExplorer {
 
   // 📈 Generate project structure analysis
   async analyzeProject(): Promise<any> {
-    const _analysisEvent = this.createEvent('ANALYZE', { status: 'started' });
+    const = this.createEvent('ANALYZE', { status: 'started' });
 
     const structure = await this.scanDirectory(this.state.currentPath);
 
@@ -412,7 +412,7 @@ class MicroUXExplorer {
     if (options.depth) this.state.explorationDepth = options.depth;
     if (options.filters) this.state.filters = options.filters;
 
-    const _exploreEvent = this.createEvent('EXPLORE', {
+
       options,
       state: this.state
     });

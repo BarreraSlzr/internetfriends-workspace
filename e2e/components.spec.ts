@@ -85,7 +85,7 @@ test.describe("Atomic Components", () => {
       await glassCard.hover();
 
       // Should have hover effects (transform or shadow changes)
-      const _hasTransform = await page.evaluate(() => {
+      const __hasTransform = await page.evaluate(() => {
         const card = document.querySelector(".glass-card:hover");
         if (!card) return false;
         const style = getComputedStyle(card);

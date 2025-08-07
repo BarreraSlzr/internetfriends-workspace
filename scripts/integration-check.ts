@@ -87,7 +87,7 @@ async function checkMarketScripts() {
       const file = Bun.file(`./scripts/${script}`);
       const exists = await file.exists();
       console.log(`${exists ? "✅" : "❌"} ${script}: ${exists ? "Available" : "Missing"}`);
-    } catch (error) {
+    } catch () {
       console.log(`❌ ${script}: Error checking file`);
     }
   }

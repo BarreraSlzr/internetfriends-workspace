@@ -7,14 +7,14 @@ import { join } from "path";
 import { z } from "zod";
 
 // Validation schemas
-const _OrganismStructureSchema = z.object({
+
   componentFile: z.string().regex(/\.organism\.tsx$/),
   stylesFile: z.string().regex(/\.styles\.module\.scss$/),
   typesFile: z.string().regex(/types\.ts$/),
   indexFile: z.string().optional()
 });
 
-const _ComponentExportSchema = z.object({
+
   defaultExport: z.boolean(),
   namedExports: z.array(z.string()),
   propsInterface: z.string().optional(),
@@ -89,7 +89,7 @@ class OrganismValidator {
       }
 
       return organisms;
-    } catch (error) {
+    } catch () {
       if (this.verbose) {
         console.log('⚠️  Organism directory not found, creating validation for expected structure...');
       }
@@ -170,7 +170,7 @@ class OrganismValidator {
         result.details.structure = true;
       } else {
         const missing = Object.entries(requiredFiles)
-          .filter(([__, filename]) => !files.includes(filename))
+          .filter(([___, filename]) => !files.includes(filename))
           .map(([type, filename]) => `${type}: ${filename}`);
 
         result.issues.push(`Missing required files: ${missing.join(', ')}`);
@@ -181,7 +181,7 @@ class OrganismValidator {
         // Bonus points for proper exports
       }
 
-    } catch (error) {
+    } catch () {
       result.issues.push('Cannot read organism directory structure');
     }
   }
@@ -225,7 +225,7 @@ class OrganismValidator {
         result.issues.push(`TypeScript issues: ${issues.join(', ')}`);
       }
 
-    } catch (error) {
+    } catch () {
       result.issues.push('Cannot validate TypeScript files');
     }
   }
@@ -262,7 +262,7 @@ class OrganismValidator {
         result.issues.push(`Style issues: ${issues.join(', ')}`);
       }
 
-    } catch (error) {
+    } catch () {
       result.issues.push('Cannot validate styles file');
     }
   }
@@ -295,7 +295,7 @@ class OrganismValidator {
         result.issues.push(`Export issues: ${issues.join(', ')}`);
       }
 
-    } catch (error) {
+    } catch () {
       result.issues.push('Cannot validate exports');
     }
   }
@@ -325,7 +325,7 @@ class OrganismValidator {
         result.issues.push('Missing documentation (JSDoc comments, prop descriptions, or usage examples)');
       }
 
-    } catch (error) {
+    } catch () {
       result.issues.push('Cannot validate documentation');
     }
   }
@@ -363,7 +363,7 @@ class OrganismValidator {
         result.issues.push('Missing accessibility features (ARIA attributes, semantic HTML, keyboard support, or focus management)');
       }
 
-    } catch (error) {
+    } catch () {
       result.issues.push('Cannot validate accessibility');
     }
   }

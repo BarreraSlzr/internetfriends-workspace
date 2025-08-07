@@ -18,7 +18,7 @@ import {
 
 const HeaderDemoPage: React.FC = () => {
   // Demo navigation items
-  const navigationItems = [
+
     {
       id: "home",
       label: "Home",
@@ -65,7 +65,7 @@ const HeaderDemoPage: React.FC = () => {
   ];
 
   // Demo header actions
-  const headerActions = [
+
     {
       id: "search-mobile",
       label: "Search",

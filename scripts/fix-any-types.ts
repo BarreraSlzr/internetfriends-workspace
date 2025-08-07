@@ -134,7 +134,7 @@ class AnyTypesFixer {
     }
 
     let content = readFileSync(filePath, 'utf-8');
-    const originalContent = content;
+
     const lines = content.split('\n');
 
     let hasChanges = false;

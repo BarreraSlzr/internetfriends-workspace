@@ -3,7 +3,7 @@
 
 import { ComponentType } from "react";
 import { ComponentRegistryEntry, ComponentPreviewNodeData } from "../component-flow/types";
-import { patterns, utilities } from "../patterns/design-system.patterns";
+import { } from "..//design-system.";
 
 // MDX Integration Utilities
 export class MDXIntegrationUtility {
@@ -25,7 +25,7 @@ export class MDXIntegrationUtility {
 
     // Try to extract default component
     const defaultExportMatch = mdxContent.match(/export\s+default\s+(\w+)/);
-    const componentName = defaultExportMatch ? defaultExportMatch[1] : exports[0];
+
 
     return {
       frontmatter,
@@ -409,7 +409,7 @@ export class I18nIntegrationUtility {
   static generateLocaleFile(locale: string, translations: Record<string, Record<string, string>>): string {
     const flatTranslations: Record<string, string> = {};
 
-    Object.entries(translations).forEach(([_componentKey, componentTranslations]) => {
+    Object.entries(translations).forEach(([__componentKey, componentTranslations]) => {
       Object.entries(componentTranslations).forEach(([key, value]) => {
         flatTranslations[key] = value;
       });

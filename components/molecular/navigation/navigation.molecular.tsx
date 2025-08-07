@@ -176,7 +176,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
             onClick={() => logo.onClick?.()}
           >
             {logo.src ? (
-              <img
+              <Image width={100} height={100}
                 src={logo.src}
                 alt={logo.alt || "Logo"}
                 width={logo.width || 32}
@@ -261,7 +261,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
               <div className="flex items-center justify-between p-4 border-b border-glass-border">
                 <div className="flex items-center gap-2">
                   {logo?.src ? (
-                    <img
+                    <Image width={100} height={100}
                       src={logo.src}
                       alt={logo.alt || "Logo"}
                       width={24}

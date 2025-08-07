@@ -223,7 +223,7 @@ class InternetFriendsIntegrationDemo {
     console.log("  ✅ Event monitoring active");
 
     // Register demo job handlers
-    computeManager.registerJobHandler("api.request", async (_event: Event) => {
+    computeManager.registerJobHandler("api.request", async (__event: Event) => {
       await this.sleep(Math.random() * 500 + 100); // 100-600ms processing time
       return {
         url: job.payload.url,
@@ -232,7 +232,7 @@ class InternetFriendsIntegrationDemo {
       };
     });
 
-    computeManager.registerJobHandler("data.processing", async (_event: Event) => {
+    computeManager.registerJobHandler("data.processing", async (__event: Event) => {
       const items = job.payload.items || 100;
       await this.sleep(items * 2); // 2ms per item
       return {
@@ -251,7 +251,7 @@ class InternetFriendsIntegrationDemo {
     try {
       // Run health check tests with default properties
       const healthCheckTests = InternetFriendsTestSuites.healthCheck.map(
-        (_event: Event) => ({
+        (__event: Event) => ({
           ...test,
           timeout: test.timeout || 10000,
           followRedirects: test.followRedirects ?? true,
@@ -568,7 +568,7 @@ if (import.meta.main) {
       throw new Error(`Server responded with ${testResponse.status}`);
     }
     console.log(`✅ Server accessible at ${DEMO_CONFIG.baseUrl}`);
-  } catch (error) {
+  } catch () {
     console.log(
       `⚠️  Warning: Server may not be running at ${DEMO_CONFIG.baseUrl}`,
     );

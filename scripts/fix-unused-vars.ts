@@ -59,7 +59,7 @@ class UnusedVariableFixer {
       }
 
       return issues;
-    } catch (error) {
+    } catch () {
       console.warn('Could not get ESLint output, proceeding with manual detection...');
       return [];
     }
@@ -70,7 +70,7 @@ class UnusedVariableFixer {
     return match ? match[1] : '';
   }
 
-  private determineVariableType(message: string, variable: string): 'import' | 'variable' | 'parameter' {
+  private determineVariableType(message: string, : string): 'import' | '' | 'parameter' {
     if (message.includes('is defined but never used') && message.includes('import')) {
       return 'import';
     }

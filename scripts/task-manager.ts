@@ -47,7 +47,7 @@ class TaskManager {
     if (existsSync(this.tasksFile)) {
       try {
         return JSON.parse(readFileSync(this.tasksFile, 'utf-8'));
-      } catch (error) {
+      } catch () {
         console.warn('⚠️  Failed to load existing tasks, creating new state');
       }
     }

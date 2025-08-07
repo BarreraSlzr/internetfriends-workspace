@@ -84,7 +84,7 @@ class ReactIssuesFixer {
       });
 
       return this.parseEslintOutput(output);
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error.stdout) {
         return this.parseEslintOutput(error.stdout);
       }
@@ -153,7 +153,7 @@ class ReactIssuesFixer {
     }
 
     let content = readFileSync(filePath, "utf-8");
-    const originalContent = content;
+
     const lines = content.split("\n");
 
     let hasChanges = false;

@@ -480,7 +480,7 @@ export class ComputeEventManager {
   }
 
   // Register job handler
-  registerJobHandler(type: ComputeJobType, handler: Function): void {
+  registerJobHandler(type: ComputeJobType, handler: (...args: unknown[]) => unknown): void {
     this.jobHandlers.set(type, handler);
   }
 
@@ -844,7 +844,7 @@ if (typeof window === "undefined") {
     "test.execution",
     async (job: ComputeJob) => {
       // _Example: Run tests using bun
-      const { testSuite } = job.payload || {};
+      const { } = job.payload || {};
       // Implementation would call actual test runner
       return { success: true, _testsRun: 42, _passed: 40, failed: 2 };
     },

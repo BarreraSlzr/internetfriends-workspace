@@ -29,7 +29,7 @@ const CurlTestConfigSchema = z.object({
 export type CurlTestConfig = z.infer<typeof CurlTestConfigSchema>;
 
 // Test Result Schema
-const CurlTestResultSchema = z.object({
+
   name: z.string(),
   success: z.boolean(),
   status: z.number().optional(),
@@ -342,7 +342,7 @@ export async function runCurlTests(
   const rawTests = InternetFriendsTestSuites[suite];
 
   // Transform tests to include required properties
-  const tests: CurlTestConfig[] = rawTests.map((_event: Event) => ({
+  const tests: CurlTestConfig[] = rawTests.map((__event: Event) => ({
     ...test,
     timeout: test.timeout || 10000,
     followRedirects: test.followRedirects ?? true,

@@ -5,7 +5,7 @@
 // Import our new systems
 import { InternetFriendsColors, generateCSSVariables } from "../lib/design-system/colors";
 import { defaultGestureConfig, GestureConfigSchema } from "../lib/design-system/gestures";
-import { UserAuthSchema, InternetFriendsUserSchema } from "../lib/auth/session-integration";
+import { InternetFriendsUserSchema } from "../lib/auth/session-integration";
 import { AIModelSchema, InternetFriendsModels } from "../lib/compute/models";
 import { FileUtilities, StringUtils } from "../lib/utilities";
 

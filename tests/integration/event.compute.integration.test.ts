@@ -32,7 +32,7 @@ const TEST_CONFIG = {
 };
 
 // Integration Test Suite Schema
-const IntegrationTestSuiteSchema = z.object({
+
   name: z.string(),
   description: z.string(),
   tests: z.array(
@@ -393,7 +393,7 @@ describe("InternetFriends Integration Tests", () => {
       const startTime = Date.now();
 
       // Register a test job handler
-      computeManager.registerJobHandler("test.execution", async (_event: Event) => {
+      computeManager.registerJobHandler("test.execution", async (__event: Event) => {
         await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate work
         return {
           testsRun: 10,
@@ -564,7 +564,7 @@ describe("InternetFriends Integration Tests", () => {
       });
 
       // Submit compute job as if triggered by the HTTP request
-      const jobId = await ComputeOperations.processData(
+
         { userId: "test-user-123", action: "load-dashboard" },
         "user-analytics",
         {
@@ -625,7 +625,7 @@ describe("InternetFriends Integration Tests", () => {
       );
 
       // Register handler that fails
-      computeManager.registerJobHandler("test.execution", async (_event: Event) => {
+      computeManager.registerJobHandler("test.execution", async (__event: Event) => {
         if (job.payload?.shouldFail) {
           throw new Error("Simulated job failure");
         }
@@ -744,7 +744,7 @@ describe("InternetFriends Integration Tests", () => {
       const jobCount = 20;
 
       // Register fast job handler
-      computeManager.registerJobHandler("data.processing", async (_event: Event) => {
+      computeManager.registerJobHandler("data.processing", async (__event: Event) => {
         await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms work
         return { processed: job.payload?.items || 100 };
       });

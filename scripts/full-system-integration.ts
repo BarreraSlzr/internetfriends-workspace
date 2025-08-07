@@ -709,13 +709,13 @@ class SystemIntegrator {
     const passedTests = report.tests.filter(
       (t) => t.status === "passed",
     ).length;
-    const failedTests = report.tests.filter(
+
       (t) => t.status === "failed",
     ).length;
     const healthyComponents = report.components.filter(
       (c) => c.status === "healthy",
     ).length;
-    const failedComponents = report.components.filter(
+
       (c) => c.status === "failed",
     ).length;
 
