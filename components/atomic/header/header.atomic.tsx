@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { HeaderAtomicProps } from "./types";
 
 export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
-
   children,
   className,
   sticky = true,
@@ -23,6 +22,7 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
       const scrolled = window.scrollY > scrollThreshold;
       setIsScrolled(scrolled);
       onScrollChange?.(scrolled);
+    };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -30,7 +30,8 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
 
   return (
     <header
-      className={cn(// Base header styles
+      className={cn(
+        // Base header styles
         "w-full transition-all duration-300 ease-in-out",
 
         // Positioning
@@ -48,21 +49,19 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
           "bg-background border-b border-border",
           isScrolled && "shadow-glass",
         ],
-)
-        className,)
+        className,
       )}
       data-scrolled={isScrolled}
       data-theme="light" // Will be controlled by theme provider
       {...props}
     >
-      <div className="container mx-auto px-4 sm: px-6 lg:px-8">
-
-        <div className="flex items-center justify-between h-16 lg: h-20">
-
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {children}
         </div>
       </div>
     </header>
   );
+};
 
-HeaderAtomic._displayName = "HeaderAtomic";
+HeaderAtomic.displayName = "HeaderAtomic";
