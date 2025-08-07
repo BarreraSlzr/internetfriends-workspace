@@ -1,11 +1,20 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect, useMemo } from 'react';
-import { Search, Folder, File, ChevronDown, ChevronRight, Grid, List, Network } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from "react";
+import {
+  Search,
+  Folder,
+  File,
+  ChevronDown,
+  ChevronRight,
+  Grid,
+  List,
+  Network,
+} from "lucide-react";
 
 // Event-driven types matching the micro-ux-explorer
 interface ExplorerEvent {
-  type: 'EXPLORE' | 'SCAN' | 'ANALYZE' | 'TRANSPORT' | 'UI_UPDATE';
+  type: "EXPLORE" | "SCAN" | "ANALYZE" | "TRANSPORT" | "UI_UPDATE";
   timestamp: string;
   data: any;
   metadata?: {
@@ -18,7 +27,7 @@ interface ExplorerEvent {
 interface ProjectNode {
   name: string;
   path: string;
-  type: 'file' | 'directory';
+  type: "file" | "directory";
   size?: number;
   extension?: string;
   children?: ProjectNode[];
@@ -28,18 +37,18 @@ interface ProjectNode {
     isComponent?: boolean;
     isScript?: boolean;
     isTest?: boolean;
-    complexity?: 'simple' | 'moderate' | 'complex';
-    importance?: 'low' | 'medium' | 'high' | 'critical';
+    complexity?: "simple" | "moderate" | "complex";
+    importance?: "low" | "medium" | "high" | "critical";
   };
 }
 
 interface TreeViewData {
   id: string;
   label: string;
-  type: 'file' | 'directory';
+  type: "file" | "directory";
   indent: number;
   icon: string;
-  metadata: ProjectNode['metadata'];
+  metadata: ProjectNode["metadata"];
   children?: TreeViewData[];
   expandable: boolean;
   ui_props: {
@@ -83,7 +92,7 @@ interface TransportableUIData {
   };
 }
 
-type ViewMode = 'tree' | 'grid' | 'graph';
+type ViewMode = "tree" | "grid" | "graph";
 
 interface ProjectExplorerProps {
   initialData?: TransportableUIData;
@@ -97,51 +106,56 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
   initialData,
   onNodeSelect,
   onEventGenerated,
-  className = ''
+  className = "",
 }) => {
-  const [viewMode, setViewMode] = useState<ViewMode>('tree');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [viewMode, setViewMode] = useState<ViewMode>("tree");
+  const [searchQuery, setSearchQuery] = useState("");
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const [data, setData] = useState<TransportableUIData | null>(initialData || null);
+  const [data, setData] = useState<TransportableUIData | null>(
+    initialData || null,
+  );
   const [eventHistory, setEventHistory] = useState<ExplorerEvent[]>([]);
 
   // Event creation utility
-  const createEvent = (type: ExplorerEvent['type'], data: any) => {
+  const createEvent = (type: ExplorerEvent["type"], data: any) => {
     const event: ExplorerEvent = {
       type,
       timestamp: new Date().toISOString(),
       data,
       metadata: {
-        source: 'project-explorer-client',
+        source: "project-explorer-client",
         transportable: true,
-        ui_ready: true
-      }
+        ui_ready: true,
+      },
     };
 
-    setEventHistory(prev => [...prev, event]);
+    setEventHistory((prev) => [...prev, event]);
     onEventGenerated?.(event);
     return event;
   };
 
   // Load data from micro-ux-explorer via API or direct import
   const loadProjectData = async () => {
-    createEvent('UI_UPDATE', { action: 'loading_started' });
+    createEvent("UI_UPDATE", { action: "loading_started" });
 
     try {
       // This would typically fetch from an API endpoint that runs the micro-ux-explorer
-      const response = await fetch('/api/project-explorer');
+      const response = await fetch("/api/project-explorer");
       if (response.ok) {
         const explorerData = await response.json();
         setData(explorerData.transportable_ui_data);
-        createEvent('UI_UPDATE', {
-          action: 'data_loaded',
-          data_size: explorerData.statistics?.totalFiles || 0
+        createEvent("UI_UPDATE", {
+          action: "data_loaded",
+          data_size: explorerData.statistics?.totalFiles || 0,
         });
       }
     } catch (error) {
-      console.error('Failed to load project data:', error);
-      createEvent('UI_UPDATE', { action: 'loading_failed', error: error.message });
+      console.error("Failed to load project data:", error);
+      createEvent("UI_UPDATE", {
+        action: "loading_failed",
+        error: error.message,
+      });
     }
   };
 
@@ -156,39 +170,47 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
     if (!data || !searchQuery) return data;
 
     const filterTreeNodes = (nodes: TreeViewData[]): TreeViewData[] => {
-      return nodes.filter(node => {
-        const matchesSearch = node.label.toLowerCase().includes(searchQuery.toLowerCase());
-        const hasMatchingChildren = node.children ?
-          filterTreeNodes(node.children).length > 0 : false;
+      return nodes
+        .filter((node) => {
+          const matchesSearch = node.label
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase());
+          const hasMatchingChildren = node.children
+            ? filterTreeNodes(node.children).length > 0
+            : false;
 
-        return matchesSearch || hasMatchingChildren;
-      }).map(node => ({
-        ...node,
-        children: node.children ? filterTreeNodes(node.children) : undefined
-      }));
+          return matchesSearch || hasMatchingChildren;
+        })
+        .map((node) => ({
+          ...node,
+          children: node.children ? filterTreeNodes(node.children) : undefined,
+        }));
     };
 
     const filterGridNodes = (nodes: GridViewData[]): GridViewData[] => {
-      return nodes.filter(node =>
-        node.name.toLowerCase().includes(searchQuery.toLowerCase())
+      return nodes.filter((node) =>
+        node.name.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     };
 
     return {
       ...data,
       tree_view: filterTreeNodes(data.tree_view),
-      grid_view: filterGridNodes(data.grid_view)
+      grid_view: filterGridNodes(data.grid_view),
     };
   }, [data, searchQuery]);
 
   // Handle node selection
-  const handleNodeSelect = (nodeId: string, nodeData: TreeViewData | GridViewData) => {
+  const handleNodeSelect = (
+    nodeId: string,
+    nodeData: TreeViewData | GridViewData,
+  ) => {
     setSelectedNode(nodeId);
     onNodeSelect?.(nodeData);
-    createEvent('UI_UPDATE', {
-      action: 'node_selected',
+    createEvent("UI_UPDATE", {
+      action: "node_selected",
       node_id: nodeId,
-      node_type: nodeData.type
+      node_type: nodeData.type,
     });
   };
 
@@ -201,29 +223,36 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
       newExpanded.add(nodeId);
     }
     setExpandedNodes(newExpanded);
-    createEvent('UI_UPDATE', {
-      action: 'node_toggled',
+    createEvent("UI_UPDATE", {
+      action: "node_toggled",
       node_id: nodeId,
-      expanded: newExpanded.has(nodeId)
+      expanded: newExpanded.has(nodeId),
     });
   };
 
   // Get importance badge color
   const getImportanceBadge = (importance: string) => {
     switch (importance) {
-      case 'critical': return 'bg-red-500 text-white';
-      case 'high': return 'bg-amber-500 text-white';
-      case 'medium': return 'bg-blue-500 text-white';
-      default: return 'bg-gray-400 text-white';
+      case "critical":
+        return "bg-red-500 text-white";
+      case "high":
+        return "bg-amber-500 text-white";
+      case "medium":
+        return "bg-blue-500 text-white";
+      default:
+        return "bg-gray-400 text-white";
     }
   };
 
   // Get complexity indicator
   const getComplexityIndicator = (complexity: string) => {
     switch (complexity) {
-      case 'complex': return '⚡';
-      case 'moderate': return '⚖️';
-      default: return '○';
+      case "complex":
+        return "⚡";
+      case "moderate":
+        return "⚖️";
+      default:
+        return "○";
     }
   };
 
@@ -233,11 +262,11 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
     const isSelected = selectedNode === node.id;
 
     return (
-      <div className key={node.id}="select-none">
+      <div key={node.id} className="select-none">
         <div
           className={`
             flex items-center py-1 px-2 hover:bg-blue-50 cursor-pointer rounded
-            ${isSelected ? 'bg-blue-100 border-l-2 border-blue-500' : ''}
+            ${isSelected ? "bg-blue-100 border-l-2 border-blue-500" : ""}
             ${node.ui_props.className}
           `}
           style={node.ui_props.style}
@@ -264,26 +293,29 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
           <span className="flex-1 text-sm truncate">{node.label}</span>
 
           {/* Importance badge */}
-          {node.metadata.importance && node.metadata.importance !== 'low' && (
-            <span className={`
+          {node.metadata.importance && node.metadata.importance !== "low" && (
+            <span
+              className={`
               ml-2 px-1.5 py-0.5 text-xs rounded-full
               ${getImportanceBadge(node.metadata.importance)}
-            `}>
-              {node.metadata.importance === 'critical' ? '!' :
-               node.metadata.importance === 'high' ? '⭐' : '●'}
+            `}
+            >
+              {node.metadata.importance === "critical"
+                ? "!"
+                : node.metadata.importance === "high"
+                  ? "⭐"
+                  : "●"}
             </span>
           )}
 
           {/* Complexity indicator */}
           <span className="ml-1 text-xs">
-            {getComplexityIndicator(node.metadata.complexity || 'simple')}
+            {getComplexityIndicator(node.metadata.complexity || "simple")}
           </span>
         </div>
 
         {node.children && isExpanded && (
-          <div>
-            {node.children.map(child => renderTreeNode(child))}
-          </div>
+          <div>{node.children.map((child) => renderTreeNode(child))}</div>
         )}
       </div>
     );
@@ -294,10 +326,12 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
     const isSelected = selectedNode === item.id;
 
     return (
-      <div key={item.id} className={`
+      <div
+        key={item.id}
+        className={`
           p-3 border rounded-lg cursor-pointer transition-all duration-200
           hover:shadow-md hover:border-blue-300
-          ${isSelected ? 'bg-blue-50 border-blue-500 shadow-md' : 'bg-white border-gray-200'}
+          ${isSelected ? "bg-blue-50 border-blue-500 shadow-md" : "bg-white border-gray-200"}
           ${item.ui_props.className}
         `}
         onClick={() => handleNodeSelect(item.id, item)}
@@ -310,10 +344,12 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
         </div>
 
         <div className="flex justify-between items-center text-xs text-gray-600">
-          <span className={`
+          <span
+            className={`
             px-2 py-1 rounded-full
             ${getImportanceBadge(item.importance)}
-          `}>
+          `}
+          >
             {item.importance}
           </span>
 
@@ -348,25 +384,27 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
       {/* Header with controls */}
       <div className="p-4 border-b border-gray-200">
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-semibold text-gray-900">Project Explorer</h2>
+          <h2 className="text-lg font-semibold text-gray-900">
+            Project Explorer
+          </h2>
 
           {/* View mode toggle */}
           <div className="flex bg-gray-100 rounded-md p-1">
             <button
-              onClick={() => setViewMode('tree')}
+              onClick={() => setViewMode("tree")}
               className={`
                 px-3 py-1 rounded text-sm flex items-center
-                ${viewMode === 'tree' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}
+                ${viewMode === "tree" ? "bg-white shadow-sm" : "hover:bg-gray-200"}
               `}
             >
               <List size={16} className="mr-1" />
               Tree
             </button>
             <button
-              onClick={() => setViewMode('grid')}
+              onClick={() => setViewMode("grid")}
               className={`
                 px-3 py-1 rounded text-sm flex items-center
-                ${viewMode === 'grid' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'}
+                ${viewMode === "grid" ? "bg-white shadow-sm" : "hover:bg-gray-200"}
               `}
             >
               <Grid size={16} className="mr-1" />
@@ -377,7 +415,10 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
 
         {/* Search input */}
         <div className="relative">
-          <Search size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <Search
+            size={16}
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+          />
           <input
             type="text"
             placeholder="Search files and directories..."
@@ -390,15 +431,15 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
 
       {/* Content area */}
       <div className="p-4 max-h-96 overflow-auto">
-        {viewMode === 'tree' && (
+        {viewMode === "tree" && (
           <div className="space-y-1">
-            {filteredData.tree_view.map(node => renderTreeNode(node))}
+            {filteredData.tree_view.map((node) => renderTreeNode(node))}
           </div>
         )}
 
-        {viewMode === 'grid' && (
+        {viewMode === "grid" && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {filteredData.grid_view.map(item => renderGridItem(item))}
+            {filteredData.grid_view.map((item) => renderGridItem(item))}
           </div>
         )}
       </div>
@@ -407,11 +448,12 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
       <div className="px-4 py-2 border-t border-gray-200 bg-gray-50 rounded-b-lg">
         <div className="flex justify-between text-xs text-gray-600">
           <span>
-            {viewMode === 'tree' ? filteredData.tree_view.length : filteredData.grid_view.length} items
+            {viewMode === "tree"
+              ? filteredData.tree_view.length
+              : filteredData.grid_view.length}{" "}
+            items
           </span>
-          <span>
-            Events: {eventHistory.length}
-          </span>
+          <span>Events: {eventHistory.length}</span>
         </div>
       </div>
     </div>
