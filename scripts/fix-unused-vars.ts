@@ -107,7 +107,7 @@ class UnusedVariableFixer {
    * Fix unused imports in a file
    */
   private fixUnusedImports(content: string, unusedImports: string[]): string {
-    let fixed = content;
+    const fixed = content;
     const lines = fixed.split('\n');
 
     for (let i = 0; i < lines.length; i++) {

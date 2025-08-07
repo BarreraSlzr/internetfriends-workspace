@@ -234,8 +234,8 @@ export const darkTheme: InternetFriendsTheme = {
 export interface ComponentPattern {
   name: string;
   description: string;
-  props: Record<string, any>;
-  variants?: Record<string, any>;
+  props: Record<string, unknown>;
+  variants?: Record<string, unknown>;
   states?: string[];
   accessibility?: {
     ariaLabel?: string;
@@ -497,14 +497,14 @@ export class PatternUtility {
 
 // MDX integration utilities
 export interface MDXComponentConfig {
-  frontmatter: Record<string, any>;
-  components: Record<string, any>;
+  frontmatter: Record<string, unknown>;
+  components: Record<string, unknown>;
   exports: string[];
   imports: string[];
 }
 
 export class MDXPatternIntegration {
-  static extractFrontmatter(content: string): Record<string, any> {
+  static extractFrontmatter(content: string): Record<string, unknown> {
     const frontmatterRegex = /^---\n([\s\S]*?)\n---/;
     const match = content.match(frontmatterRegex);
 
@@ -513,7 +513,7 @@ export class MDXPatternIntegration {
     try {
       // Simple YAML parser - in production, use a proper YAML library
       const lines = match[1].split('\n');
-      const result: Record<string, any> = {};
+      const result: Record<string, unknown> = {};
 
       lines.forEach(line => {
         const colonIndex = line.indexOf(':');
@@ -585,12 +585,12 @@ export interface MicrofrontendModule {
   shared: string[];
   federation: {
     exposes: Record<string, string>;
-    shared: Record<string, any>;
+    shared: Record<string, unknown>;
   };
 }
 
 export class MicrofrontendPatternIntegration {
-  static generateModuleFederation(module: MicrofrontendModule): any {
+  static generateModuleFederation(module: MicrofrontendModule): unknown {
     return {
       name: module.name,
       exposes: module.federation.exposes,
@@ -620,8 +620,8 @@ export class MicrofrontendPatternIntegration {
 
 // Data pipeline integration
 export interface DataPipelineSchema {
-  input: Record<string, any>;
-  output: Record<string, any>;
+  input: Record<string, unknown>;
+  output: Record<string, unknown>;
   transforms: Array<{
     type: string;
     config: Record<string, any>;

@@ -62,7 +62,7 @@ class TestResultsCollector {
     success: boolean;
     duration: number;
     error?: string;
-    metrics?: Record<string, any>;
+    metrics?: Record<string, unknown>;
     timestamp: Date;
   }> = [];
 
@@ -73,7 +73,7 @@ class TestResultsCollector {
     success: boolean,
     duration: number,
     error?: string,
-    metrics?: Record<string, any>,
+    metrics?: Record<string, unknown>,
   ) {
     this.results.push({
       suite,

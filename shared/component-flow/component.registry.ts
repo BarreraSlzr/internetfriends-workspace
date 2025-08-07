@@ -155,7 +155,7 @@ class ComponentRegistry {
   }
 
   // Extract default props from component
-  private extractDefaultProps(component: ComponentType<any>): Record<string, any> {
+  private extractDefaultProps(component: ComponentType<unknown>): Record<string, unknown> {
     // In a real implementation, this would use static analysis or runtime inspection
     const defaultProps = (component as any).defaultProps || {};
     return { ...defaultProps };
@@ -346,7 +346,7 @@ class ComponentRegistry {
   }
 
   // Export registry data
-  public export(): { components: ComponentRegistryEntry[], metadata: any } {
+  public export(): { components: ComponentRegistryEntry[], metadata: Record<string, unknown> } {
     return {
       components: this.getAllComponents(),
       metadata: {

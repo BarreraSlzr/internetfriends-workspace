@@ -9,7 +9,7 @@ import { patterns, utilities } from "../patterns/design-system.patterns";
 export class MDXIntegrationUtility {
   // Extract component metadata from MDX frontmatter
   static extractComponentFromMDX(mdxContent: string): {
-    frontmatter: Record<string, any>;
+    frontmatter: Record<string, unknown>;
     component: ComponentType<any> | null;
     exports: string[];
   } {
@@ -35,8 +35,8 @@ export class MDXIntegrationUtility {
   }
 
   // Parse YAML-like frontmatter
-  private static parseFrontmatter(yamlContent: string): Record<string, any> {
-    const result: Record<string, any> = {};
+  private static parseFrontmatter(yamlContent: string): Record<string, unknown> {
+    const result: Record<string, unknown> = {};
     const lines = yamlContent.split('\n').filter(line => line.trim());
 
     lines.forEach(line => {
@@ -168,7 +168,7 @@ ${metadata.documentation?.performance ? Object.entries(metadata.documentation.pe
 // Microfrontend Integration Utilities
 export class MicrofrontendIntegrationUtility {
   // Generate Module Federation configuration
-  static generateModuleFederationConfig(appName: string, components: ComponentRegistryEntry[]): any {
+  static generateModuleFederationConfig(appName: string, components: ComponentRegistryEntry[]): unknown {
     const exposes = components.reduce((acc, comp) => {
       acc[`./${comp.metadata.componentName}`] = comp.path;
       return acc;
@@ -198,7 +198,7 @@ export class MicrofrontendIntegrationUtility {
   }
 
   // Generate component manifest for remote consumption
-  static generateComponentManifest(components: ComponentRegistryEntry[]): any {
+  static generateComponentManifest(components: ComponentRegistryEntry[]): unknown {
     return {
       name: '@internetfriends/component-library',
       version: '1.0.0',
@@ -388,7 +388,7 @@ export class I18nIntegrationUtility {
   }
 
   // Generate i18n configuration for Next.js
-  static generateNextI18nConfig(supportedLocales: string[] = ['en', 'es', 'fr', 'de']): any {
+  static generateNextI18nConfig(supportedLocales: string[] = ['en', 'es', 'fr', 'de']): unknown {
     return {
       i18n: {
         defaultLocale: 'en',
@@ -436,7 +436,7 @@ export class I18nIntegrationUtility {
 // Data Pipeline Integration Utilities
 export class DataPipelineIntegrationUtility {
   // Create data transformation pipeline for component props
-  static createPropsPipeline(component: ComponentRegistryEntry): any {
+  static createPropsPipeline(component: ComponentRegistryEntry): unknown {
     return {
       source: {
         type: 'component_registry',
@@ -478,7 +478,7 @@ export class DataPipelineIntegrationUtility {
     };
   }
 
-  private static generateValidationSchema(props: Record<string, unknown>[]): any {
+  private static generateValidationSchema(props: Record<string, unknown>[]): unknown {
     return props.reduce((schema, prop) => {
       schema[prop.name] = {
         type: prop.type,
@@ -491,7 +491,7 @@ export class DataPipelineIntegrationUtility {
   }
 
   // Generate stream processing configuration
-  static generateStreamConfig(components: ComponentRegistryEntry[]): any {
+  static generateStreamConfig(components: ComponentRegistryEntry[]): unknown {
     return {
       streams: {
         component_updates: {
@@ -658,7 +658,7 @@ union ComponentUnion = ${components.map(comp => `${comp.metadata.componentName}C
 // Streamlined Development Orchestrator
 export class StreamlinedDevelopmentOrchestrator {
   // Generate complete integration setup
-  static generateIntegrationSetup(components: ComponentRegistryEntry[]): any {
+  static generateIntegrationSetup(components: ComponentRegistryEntry[]): unknown {
     return {
       mdx: {
         templates: components.map(comp => ({
@@ -724,7 +724,7 @@ bun run shared/utilities/integration.utilities.ts --mode types --generate --vali
     };
   }
 
-  private static generateWorkflowConfigurations(): Record<string, any> {
+  private static generateWorkflowConfigurations(): Record<string, unknown> {
     return {
       'component-pipeline': {
         trigger: 'component_updated',

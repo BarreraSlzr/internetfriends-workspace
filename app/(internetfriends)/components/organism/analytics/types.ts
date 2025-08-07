@@ -155,7 +155,7 @@ export interface AnalyticsApiResponse {
 // Utility types
 export type _MetricValue = string | number;
 export type _ChartDataMap = Record<string, DataPoint[]>;
-export type _MetricMap = Record<string, any>;
+export type _MetricMap = Record<string, unknown>;
 
 export interface AnalyticsConfig {
   refreshInterval: number;

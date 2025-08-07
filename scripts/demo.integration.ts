@@ -92,7 +92,7 @@ class DemoStatsCollector {
 
 // Event Monitor for Demo
 class DemoEventMonitor {
-  private eventLog: Array<{ type: EventType; timestamp: number; data: any }> =
+  private eventLog: Array<{ type: EventType; timestamp: number; data: unknown }> =
     [];
   private handlerIds: string[] = [];
 
@@ -147,7 +147,7 @@ class DemoEventMonitor {
 
   getRecentEvents(
     count: number = 10,
-  ): Array<{ type: EventType; timestamp: number; data: any }> {
+  ): Array<{ type: EventType; timestamp: number; data: unknown }> {
     return this.eventLog.slice(-count);
   }
 }

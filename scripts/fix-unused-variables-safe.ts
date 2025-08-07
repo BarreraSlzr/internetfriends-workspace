@@ -79,7 +79,7 @@ class SafeUnusedVariablesFixer {
       });
 
       return this.parseEslintOutput(output);
-    } catch (error: any) {
+    } catch (error: Record<string, unknown>) {
       // ESLint returns non-zero exit code when issues are found
       if (error.stdout) {
         return this.parseEslintOutput(error.stdout);
@@ -133,7 +133,7 @@ class SafeUnusedVariablesFixer {
       return;
     }
 
-    let content = readFileSync(filePath, 'utf-8');
+    const content = readFileSync(filePath, 'utf-8');
 
     const lines = content.split('\n');
 

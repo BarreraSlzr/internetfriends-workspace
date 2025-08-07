@@ -109,7 +109,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   const [charts, setCharts] = useState<ChartData[]>([]);
   const [insights, setInsights] = useState<MetricInsight[]>([]);
   const [filters, setFilters] = useState<AnalyticsFilter[]>([]);
-  const [activeFilters, setActiveFilters] = useState<Record<string, any>>({});
+  const [activeFilters, setActiveFilters] = useState<Record<string, unknown>>({});
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
   // Time Range Options

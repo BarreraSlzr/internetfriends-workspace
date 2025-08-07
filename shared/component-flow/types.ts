@@ -6,7 +6,7 @@ export interface ComponentPreviewNodeData {
   componentName: string;
   componentType: 'atomic' | 'molecular' | 'organism' | 'template' | 'page';
   component: ComponentType<any>;
-  defaultProps?: Record<string, any>;
+  defaultProps?: Record<string, unknown>;
   availableProps?: ComponentProp[];
   initialWidth?: number;
   initialHeight?: number;
@@ -54,7 +54,7 @@ export interface ComponentDocumentation {
 export interface ComponentExample {
   title: string;
   description?: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
   code?: string;
 }
 
@@ -172,7 +172,7 @@ export interface ComponentFlowEvent {
 
 // MDX integration types
 export interface MDXComponentNode {
-  frontmatter?: Record<string, any>;
+  frontmatter?: Record<string, unknown>;
   content?: string;
   components?: ComponentRegistryEntry[];
   exports?: MDXExport[];
@@ -202,7 +202,7 @@ export interface MicrofrontendManifest {
   dependencies: ComponentDependency[];
   remoteEntry?: string;
   exposedModules?: Record<string, string>;
-  sharedModules?: Record<string, any>;
+  sharedModules?: Record<string, unknown>;
 }
 
 // Internationalization support

@@ -341,7 +341,7 @@ class MicroUXExplorer {
   }
 
   // 🕸️ Generate graph data for network visualization
-  private generateGraphData(nodes: ProjectNode[]): any {
+  private generateGraphData(nodes: ProjectNode[]): unknown {
     const graphNodes: unknown[] = [];
     const graphEdges: unknown[] = [];
 

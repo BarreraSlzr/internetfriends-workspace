@@ -245,7 +245,7 @@ export async function GET(__request: NextRequest) {
     ]);
 
     // Process check results
-    const checks: Record<string, any> = {
+    const checks: Record<string, unknown> = {
       database:
         databaseCheck.status === "fulfilled"
           ? databaseCheck.value

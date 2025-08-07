@@ -84,7 +84,7 @@ export const _useConstant = <T>(fn: () => T): T => {
 };
 
 // Hook composition utilities
-export const _composeHooks = <T extends Record<string, any>>(
+export const _composeHooks = <T extends Record<string, unknown>>(
   ...hooks: Array<() => Partial<T>>
 ): (() => T) => {
   return () => {

@@ -23,7 +23,7 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
   });
 
   const [showProps, setShowProps] = useState(false);
-  const [propOverrides, setPropOverrides] = useState<Record<string, any>>(
+  const [propOverrides, setPropOverrides] = useState<Record<string, unknown>>(
     data.defaultProps || {}
   );
 
