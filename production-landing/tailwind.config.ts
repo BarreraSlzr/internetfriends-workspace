@@ -99,6 +99,7 @@ const config: Config = {
         "compact-sm": "var(--radius-sm)", // 6px
         "compact-md": "var(--radius-md)", // 8px
         "compact-lg": "var(--radius-lg)", // 12px
+        "compact-xl": "var(--radius-lg)", // 12px - same as lg (max for InternetFriends)
 
         // Standard shadcn radius
         lg: "var(--radius)",
@@ -219,7 +220,7 @@ const config: Config = {
   plugins: [
     animate,
     // Custom plugin for InternetFriends utilities
-    function ({ addUtilities, addComponents, theme }) {
+    function ({ addUtilities, addComponents, theme }: any) {
       addComponents({
         ".glass-morphism": {
           "backdrop-filter": "blur(12px)",
