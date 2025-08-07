@@ -153,7 +153,7 @@ class FinalCleanupFixer {
       return;
     }
 
-    let content = readFileSync(filePath, "utf-8");
+    const content = readFileSync(filePath, "utf-8");
     const lines = content.split("\n");
 
     let hasChanges = false;

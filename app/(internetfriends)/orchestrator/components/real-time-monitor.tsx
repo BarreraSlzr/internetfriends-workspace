@@ -168,7 +168,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
     const interval = setInterval(fetchSystemStatus, 3000); // Update every 3 seconds
 
     return () => clearInterval(interval);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   // Auto-scroll logs to top when new entries arrive
   useEffect(() => {

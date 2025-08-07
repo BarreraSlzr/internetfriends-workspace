@@ -103,7 +103,7 @@ export default function OrchestratorPage() {
     fetchProjectMetrics();
     const interval = setInterval(fetchProjectMetrics, 5000);
     return () => clearInterval(interval);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);  
 
   const getHealthColor = (status: string) => {
     switch (status) {
