@@ -43,5 +43,15 @@
       "format_on_save": "on",
       "formatter": "prettier"
     }
+  },
+  "file_types": {
+    "**/.github/chatmodes/*.md": "plaintext",
+    "**/schemas/*.ts": "typescript"
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "outline_panel": {
+    "dock": "right"
   }
 }

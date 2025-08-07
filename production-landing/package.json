@@ -12,9 +12,12 @@
     "test": "bun test",
     "test:watch": "bun test --watch",
     "test:playwright": "bunx playwright test",
+    "test:integration": "bun run scripts/system-integration-test.ts",
     "debug:browser": "bun run scripts/debug-browser.ts",
     "debug:hotreload": "bun run scripts/check-hotreload.ts",
     "schema:validate": "bun run scripts/validate-schemas.ts",
+    "integration:check": "bun run scripts/integration-check.ts",
+    "smart:commit": "bun run scripts/smart-commit-orchestrator.ts",
     "format": "bunx prettier --write .",
     "format:check": "bunx prettier --check ."
   },

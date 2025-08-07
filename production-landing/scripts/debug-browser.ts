@@ -1,18 +1,9 @@
 #!/usr/bin/env bun
 // Debug Browser Utility - Opens browser and provides debugging information
 
-import { spawn } from "bun";
-
-const DEV_URL = "http://localhost:3000";
-const BROWSER_COMMANDS = {
-  darwin: "open",
-  linux: "xdg-open", 
-  win32: "start"
-};
-
 async function checkDevServer() {
   try {
-    const response = await fetch(DEV_URL);
+    const response = await fetch("http://localhost:3000");
     return response.ok;
   } catch {
     return false;
@@ -20,11 +11,17 @@ async function checkDevServer() {
 }
 
 async function openBrowser() {
-  const platform = process.platform as keyof typeof BROWSER_COMMANDS;
-  const command = BROWSER_COMMANDS[platform] || "open";
+  const platform = process.platform;
   
   console.log("🌐 Opening browser...");
-  spawn([command, DEV_URL], { stdio: "inherit" });
+  
+  if (platform === "darwin") {
+    await Bun.spawn(["open", "http://localhost:3000"]);
+  } else if (platform === "linux") {
+    await Bun.spawn(["xdg-open", "http://localhost:3000"]);
+  } else {
+    console.log("Please open http://localhost:3000 manually");
+  }
 }
 
 async function main() {
@@ -34,13 +31,13 @@ async function main() {
   const isRunning = await checkDevServer();
   
   if (!isRunning) {
-    console.log("❌ Dev server not running at", DEV_URL);
+    console.log("❌ Dev server not running at http://localhost:3000");
     console.log("💡 Start it with: bun run dev");
     process.exit(1);
   }
   
   console.log("✅ Dev server is running");
-  console.log("🌐 URL:", DEV_URL);
+  console.log("🌐 URL: http://localhost:3000");
   
   await openBrowser();
   
