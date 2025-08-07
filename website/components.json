@@ -14,8 +14,15 @@
     "components": "@/components",
     "utils": "@/lib/utils",
     "ui": "@/components/ui",
+    "atomic": "@/components/atomic",
+    "molecular": "@/components/molecular",
+    "organisms": "@/components/organisms",
+    "templates": "@/components/templates",
     "lib": "@/lib",
-    "hooks": "@/hooks"
+    "hooks": "@/hooks",
+    "types": "@/types",
+    "constants": "@/constants",
+    "styles": "@/styles"
   },
   "iconLibrary": "lucide"
 }
