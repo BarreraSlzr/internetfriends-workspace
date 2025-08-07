@@ -206,7 +206,7 @@ class SystemValidator {
     }));
 
     results.push(await this.validateTest('ESLint validation', async () => {
-      const { success, output } = await this.runCommand('bunx eslint . --ext .ts,.tsx,.js,.jsx', { timeout: 20000 });
+      const { success, output } = await this.runCommand('bunx eslint .', { timeout: 20000 });
       if (!success && this.verbose) {
         this.log(`ESLint errors:\n${output}`, 'error');
       }
@@ -429,7 +429,7 @@ class SystemValidator {
 
     this.log('Attempting to fix TypeScript issues...', 'info');
     try {
-      await this.runCommand('bunx eslint . --ext .ts,.tsx,.js,.jsx --fix');
+      await this.runCommand('bunx eslint . --fix');
       this.log('ESLint auto-fixes applied', 'success');
     } catch {
       this.log('Failed to apply ESLint fixes', 'error');

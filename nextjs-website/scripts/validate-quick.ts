@@ -119,7 +119,7 @@ class QuickValidator {
 
   async validateLinting(): Promise<void> {
     await this.runCheck('ESLint validation', () => {
-      const { success, output } = this.runCommand('bunx eslint . --ext .ts,.tsx,.js,.jsx');
+      const { success, output } = this.runCommand('bunx eslint .');
       if (!success && this.verbose) {
         console.log(`ESLint errors:\n${output}`);
       }
