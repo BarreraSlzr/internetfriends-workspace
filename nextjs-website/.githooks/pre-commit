@@ -1,0 +1,28 @@
+#!/bin/bash
+# InternetFriends pre-commit hook
+
+echo "🔍 Running pre-commit checks..."
+
+# Check if we're on a protected branch
+branch=$(git branch --show-current)
+if [[ "$branch" == "main" || "$branch" == "develop" ]]; then
+  echo "❌ Direct commits to $branch are not allowed!"
+  echo "💡 Use feature branches and pull requests."
+  exit 1
+fi
+
+# Run linting if available
+if command -v bun &> /dev/null && [ -f "package.json" ]; then
+  echo "🧹 Running linter..."
+  bun run lint --fix 2>/dev/null || true
+fi
+
+# Check for secrets
+echo "🔐 Checking for secrets..."
+if git diff --cached --name-only | xargs grep -l "sk-\|pk_\|AKIA\|AIza" 2>/dev/null; then
+  echo "❌ Potential secrets detected in staged files!"
+  echo "💡 Please remove API keys and secrets before committing."
+  exit 1
+fi
+
+echo "✅ Pre-commit checks passed"

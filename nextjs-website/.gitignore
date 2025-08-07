@@ -41,3 +41,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Git workflow artifacts
+AI_CONTEXT_*.md
+.workflow-temp/
+*.workflow.tmp

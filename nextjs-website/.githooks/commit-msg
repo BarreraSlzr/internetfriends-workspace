@@ -1,0 +1,12 @@
+#!/bin/bash
+# InternetFriends commit message hook
+
+commit_regex='^(feat|fix|docs|style|refactor|test|chore|ai)((.+))?: .{1,50}'
+
+if ! grep -qE "$commit_regex" "$1"; then
+  echo "❌ Invalid commit message format!"
+  echo "💡 Use: type(scope): description"
+  echo "   Types: feat, fix, docs, style, refactor, test, chore, ai"
+  echo "   Example: feat(orchestrator): add real-time monitoring"
+  exit 1
+fi
