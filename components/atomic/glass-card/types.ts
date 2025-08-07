@@ -24,6 +24,7 @@ export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
 
   /** Whether to apply floating animation */
   animated?: boolean;
+}
 
 export interface GlassCardHeaderProps {
   /** Header content */
@@ -34,6 +35,7 @@ export interface GlassCardHeaderProps {
 
   /** Optional actions to display on the right side */
   actions?: ReactNode;
+}
 
 export interface GlassCardContentProps {
   /** Content to render */
@@ -41,9 +43,7 @@ export interface GlassCardContentProps {
 
   /** Additional CSS classes */
   className?: string;
-
-  /** Whether to apply scrollable container */
-  scrollable?: boolean;
+}
 
 export interface GlassCardFooterProps {
   /** Footer content */
@@ -51,9 +51,7 @@ export interface GlassCardFooterProps {
 
   /** Additional CSS classes */
   className?: string;
-
-  /** Alignment of footer content */
-  alignment?: "left" | "center" | "right" | "between";
+}
 
 export interface GlassCardImageProps {
   /** Image source */
@@ -76,9 +74,7 @@ export interface GlassCardImageProps {
 
   /** Additional CSS classes */
   className?: string;
-
-  /** Click handler */
-  onClick?: () => void;
+}
 
 export interface GlassCardActionsProps {
   /** Action buttons/components */
@@ -92,3 +88,4 @@ export interface GlassCardActionsProps {
 
   /** Spacing between actions */
   spacing?: "tight" | "normal" | "loose";
+}
