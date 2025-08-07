@@ -277,7 +277,7 @@ class ResourceMonitor {
   }
 
   checkResourceAvailability(
-    required: Partial<Record ResourceType, number>>,
+    required: Partial<Record<ResourceType, number>>,
   ): boolean {
     for (const [type, amount] of Object.entries(required)) {
       if (amount === undefined) continue;
@@ -291,7 +291,7 @@ class ResourceMonitor {
 
   allocateResources(
     jobId: string,
-    required: Partial<Record ResourceType, number>>,
+    required: Partial<Record<ResourceType, number>>,
   ): boolean {
     // Check availability first
     if (!this.checkResourceAvailability(required)) {
@@ -319,7 +319,7 @@ class ResourceMonitor {
 
   releaseResources(
     jobId: string,
-    allocated: Partial<Record ResourceType, number>>,
+    allocated: Partial<Record<ResourceType, number>>,
   ): void {
     for (const [type, amount] of Object.entries(allocated)) {
       if (amount === undefined) continue;
@@ -589,7 +589,7 @@ export class ComputeEventManager {
   // Execute individual job
   private async executeJob(job: ComputeJob): Promise<void> {
     const _startTime = Date.now();
-    let allocatedResources: Partial<Record ResourceType, number>> = {};
+    let allocatedResources: Partial<Record<ResourceType, number>> = {};
 
     try {
       // Allocate resources
@@ -743,7 +743,8 @@ export const _ComputeOperations = {
       {
         priority: "high",
         timeoutMs: 60000,
-        requiredResources: { gpu: 50, memory: 1024 } as Partial<Record ResourceType, number>
+        requiredResources: { gpu: 50, memory: 1024 } as Partial<
+          Record<ResourceType, number>
         >,
         ...options,
       },
@@ -763,7 +764,8 @@ export const _ComputeOperations = {
       },
       {
         priority: "normal",
-        requiredResources: { cpu: 25, memory: 512 } as Partial<Record ResourceType, number>
+        requiredResources: { cpu: 25, memory: 512 } as Partial<
+          Record<ResourceType, number>
         >,
         ...options,
       },
@@ -782,7 +784,8 @@ export const _ComputeOperations = {
       {
         priority: "normal",
         timeoutMs: 30000,
-        requiredResources: { cpu: 30, memory: 256 } as Partial<Record ResourceType, number>
+        requiredResources: { cpu: 30, memory: 256 } as Partial<
+          Record<ResourceType, number>
         >,
         ...options,
       },
@@ -801,7 +804,8 @@ export const _ComputeOperations = {
       {
         priority: "normal",
         timeoutMs: 120000,
-        requiredResources: { cpu: 40, memory: 1024 } as Partial<Record ResourceType, number>
+        requiredResources: { cpu: 10, memory: 128 } as Partial<
+          Record<ResourceType, number>
         >,
         ...options,
       },
@@ -822,7 +826,8 @@ export const _ComputeOperations = {
       {
         priority: "high",
         timeoutMs: 15000,
-        requiredResources: { database_connections: 1, memory: 128 } as Partial<Record ResourceType, number>
+        requiredResources: { database_connections: 1, memory: 128 } as Partial<
+          Record<ResourceType, number>
         >,
         ...options,
       },
