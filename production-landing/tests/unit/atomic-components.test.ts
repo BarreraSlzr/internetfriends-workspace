@@ -10,7 +10,7 @@ import { test, expect, describe } from "bun:test";
 describe("Atomic Components Unit Tests", () => {
   describe("Component Exports", () => {
     test("should export HeaderAtomic component", async () => {
-      const { HeaderAtomic } = await import("../components/atomic/header");
+      const { HeaderAtomic } = await import("../../components/atomic/header");
       expect(HeaderAtomic).toBeDefined();
       expect(typeof HeaderAtomic).toBe("function");
       expect(HeaderAtomic.displayName).toBe("HeaderAtomic");
@@ -18,7 +18,7 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should export GlassCardAtomic component", async () => {
       const { GlassCardAtomic } = await import(
-        "../components/atomic/glass-card"
+        "../../components/atomic/glass-card"
       );
       expect(GlassCardAtomic).toBeDefined();
       expect(typeof GlassCardAtomic).toBe("function");
@@ -26,14 +26,14 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should export ButtonAtomic component", async () => {
-      const { ButtonAtomic } = await import("../components/atomic/button");
+      const { ButtonAtomic } = await import("../../components/atomic/button");
       expect(ButtonAtomic).toBeDefined();
       expect(typeof ButtonAtomic).toBe("object"); // React.forwardRef returns an object
       expect(ButtonAtomic.displayName).toBe("ButtonAtomic");
     });
 
     test("should export all components from index", async () => {
-      const components = await import("../components/atomic");
+      const components = await import("../../components/atomic");
       expect(components.HeaderAtomic).toBeDefined();
       expect(components.GlassCardAtomic).toBeDefined();
       expect(components.ButtonAtomic).toBeDefined();
@@ -42,18 +42,18 @@ describe("Atomic Components Unit Tests", () => {
 
   describe("Component Types", () => {
     test("should export HeaderAtomic types", async () => {
-      const types = await import("../components/atomic/header/types");
+      const types = await import("../../components/atomic/header/types");
       expect(types).toBeDefined();
       // Types should be properly exported (TypeScript will validate at compile time)
     });
 
     test("should export GlassCardAtomic types", async () => {
-      const types = await import("../components/atomic/glass-card/types");
+      const types = await import("../../components/atomic/glass-card/types");
       expect(types).toBeDefined();
     });
 
     test("should export ButtonAtomic types", async () => {
-      const types = await import("../components/atomic/button/types");
+      const types = await import("../../components/atomic/button/types");
       expect(types).toBeDefined();
     });
   });
@@ -61,7 +61,7 @@ describe("Atomic Components Unit Tests", () => {
   describe("Component Registry", () => {
     test("should export component registry", async () => {
       const { componentRegistry } = await import(
-        "../app/(internetfriends)/design-system/registry/component.registry"
+        "../../app/(internetfriends)/design-system/registry/component.registry"
       );
       expect(componentRegistry).toBeDefined();
       expect(typeof componentRegistry.getAllComponents).toBe("function");
@@ -70,7 +70,7 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should have registered atomic components", async () => {
       const { componentRegistry } = await import(
-        "../app/(internetfriends)/design-system/registry/component.registry"
+        "../../app/(internetfriends)/design-system/registry/component.registry"
       );
 
       const atomicComponents =
@@ -85,7 +85,7 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should have registered molecular components", async () => {
       const { componentRegistry } = await import(
-        "../app/(internetfriends)/design-system/registry/component.registry"
+        "../../app/(internetfriends)/design-system/registry/component.registry"
       );
 
       const molecularComponents =
@@ -98,7 +98,7 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should generate flow nodes correctly", async () => {
       const { componentRegistry } = await import(
-        "../app/(internetfriends)/design-system/registry/component.registry"
+        "../../app/(internetfriends)/design-system/registry/component.registry"
       );
 
       const nodes = componentRegistry.generateFlowNodes();
@@ -113,7 +113,7 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should generate flow edges correctly", async () => {
       const { componentRegistry } = await import(
-        "../app/(internetfriends)/design-system/registry/component.registry"
+        "../../app/(internetfriends)/design-system/registry/component.registry"
       );
 
       const edges = componentRegistry.generateFlowEdges();
@@ -130,7 +130,7 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should provide component statistics", async () => {
       const { componentRegistry } = await import(
-        "../app/(internetfriends)/design-system/registry/component.registry"
+        "../../app/(internetfriends)/design-system/registry/component.registry"
       );
 
       const stats = componentRegistry.getComponentStats();
@@ -145,7 +145,7 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should support component search", async () => {
       const { componentRegistry } = await import(
-        "../app/(internetfriends)/design-system/registry/component.registry"
+        "../../app/(internetfriends)/design-system/registry/component.registry"
       );
 
       const buttonResults = componentRegistry.searchComponents("Button");
@@ -166,13 +166,13 @@ describe("Atomic Components Unit Tests", () => {
 
   describe("Utilities", () => {
     test("should export cn utility function", async () => {
-      const { cn } = await import("../lib/utils");
+      const { cn } = await import("../../lib/utils");
       expect(cn).toBeDefined();
       expect(typeof cn).toBe("function");
     });
 
     test("cn utility should merge classes correctly", async () => {
-      const { cn } = await import("../lib/utils");
+      const { cn } = await import("../../lib/utils");
 
       // Basic merging
       const result = cn("bg-red-500", "text-white");
@@ -195,8 +195,14 @@ describe("Atomic Components Unit Tests", () => {
       const fs = await import("fs");
       const path = await import("path");
 
+      // Find the production-landing directory
+      const cwd = process.cwd();
+      const prodLandingPath = cwd.includes("production-landing")
+        ? cwd
+        : path.join(cwd, "production-landing");
+
       const cssPath = path.join(
-        process.cwd(),
+        prodLandingPath,
         "app/(internetfriends)/globals.css",
       );
       const cssContent = fs.readFileSync(cssPath, "utf8");
@@ -227,8 +233,14 @@ describe("Atomic Components Unit Tests", () => {
       const fs = await import("fs");
       const path = await import("path");
 
+      // Find the production-landing directory
+      const cwd = process.cwd();
+      const prodLandingPath = cwd.includes("production-landing")
+        ? cwd
+        : path.join(cwd, "production-landing");
+
       const cssPath = path.join(
-        process.cwd(),
+        prodLandingPath,
         "app/(internetfriends)/globals.css",
       );
       const cssContent = fs.readFileSync(cssPath, "utf8");
@@ -244,8 +256,14 @@ describe("Atomic Components Unit Tests", () => {
       const fs = await import("fs");
       const path = await import("path");
 
+      // Find the production-landing directory
+      const cwd = process.cwd();
+      const prodLandingPath = cwd.includes("production-landing")
+        ? cwd
+        : path.join(cwd, "production-landing");
+
       const cssPath = path.join(
-        process.cwd(),
+        prodLandingPath,
         "app/(internetfriends)/globals.css",
       );
       const cssContent = fs.readFileSync(cssPath, "utf8");
@@ -258,14 +276,14 @@ describe("Atomic Components Unit Tests", () => {
 
   describe("Tailwind Configuration", () => {
     test("should export Tailwind config", async () => {
-      const config = await import("../tailwind.config");
+      const config = await import("../../tailwind.config");
       expect(config.default).toBeDefined();
       expect(config.default.content).toBeDefined();
       expect(config.default.theme).toBeDefined();
       expect(config.default.plugins).toBeDefined();
     });
     test("should include InternetFriends colors", async () => {
-      const config = await import("../tailwind.config");
+      const config = await import("../../tailwind.config");
       const theme = config.default.theme;
 
       expect(theme?.extend?.colors).toBeDefined();
@@ -277,7 +295,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should include compact border radius system", async () => {
-      const config = await import("../tailwind.config");
+      const config = await import("../../tailwind.config");
       const theme = config.default.theme;
 
       expect(theme?.extend?.borderRadius).toBeDefined();
@@ -293,7 +311,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should include InternetFriends animations", async () => {
-      const config = await import("../tailwind.config");
+      const config = await import("../../tailwind.config");
       const theme = config.default.theme;
 
       expect(theme?.extend?.animation).toBeDefined();
@@ -309,16 +327,16 @@ describe("Atomic Components Unit Tests", () => {
   describe("React Flow Integration", () => {
     test("should export node types", async () => {
       const componentNode = await import(
-        "../app/(internetfriends)/design-system/nodes/component.node"
+        "../../app/(internetfriends)/design-system/nodes/component.node"
       );
       const utilityNode = await import(
-        "../app/(internetfriends)/design-system/nodes/utility.node"
+        "../../app/(internetfriends)/design-system/nodes/utility.node"
       );
       const pageNode = await import(
-        "../app/(internetfriends)/design-system/nodes/page.node"
+        "../../app/(internetfriends)/design-system/nodes/page.node"
       );
       const hookNode = await import(
-        "../app/(internetfriends)/design-system/nodes/hook.node"
+        "../../app/(internetfriends)/design-system/nodes/hook.node"
       );
 
       expect(componentNode.ComponentNode).toBeDefined();
@@ -329,16 +347,16 @@ describe("Atomic Components Unit Tests", () => {
 
     test("should have proper component node display names", async () => {
       const { ComponentNode } = await import(
-        "../app/(internetfriends)/design-system/nodes/component.node"
+        "../../app/(internetfriends)/design-system/nodes/component.node"
       );
       const { UtilityNode } = await import(
-        "../app/(internetfriends)/design-system/nodes/utility.node"
+        "../../app/(internetfriends)/design-system/nodes/utility.node"
       );
       const { PageNode } = await import(
-        "../app/(internetfriends)/design-system/nodes/page.node"
+        "../../app/(internetfriends)/design-system/nodes/page.node"
       );
       const { HookNode } = await import(
-        "../app/(internetfriends)/design-system/nodes/hook.node"
+        "../../app/(internetfriends)/design-system/nodes/hook.node"
       );
 
       expect(ComponentNode.displayName).toBe("ComponentNode");
@@ -351,7 +369,7 @@ describe("Atomic Components Unit Tests", () => {
   describe("Molecular Components", () => {
     test("should export NavigationMolecular component", async () => {
       const { NavigationMolecular } = await import(
-        "../components/molecular/navigation"
+        "../../components/molecular/navigation"
       );
       expect(NavigationMolecular).toBeDefined();
       expect(typeof NavigationMolecular).toBe("function");
@@ -359,7 +377,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should export NavigationMolecular types", async () => {
-      const types = await import("../components/molecular/navigation/types");
+      const types = await import("../../components/molecular/navigation/types");
       expect(types).toBeDefined();
       // TypeScript will validate the type exports at compile time
     });
@@ -370,7 +388,13 @@ describe("Atomic Components Unit Tests", () => {
       const fs = await import("fs");
       const path = await import("path");
 
-      const atomicPath = path.join(process.cwd(), "components/atomic");
+      // Find the production-landing directory
+      const cwd = process.cwd();
+      const prodLandingPath = cwd.includes("production-landing")
+        ? cwd
+        : path.join(cwd, "production-landing");
+
+      const atomicPath = path.join(prodLandingPath, "components/atomic");
       expect(fs.existsSync(atomicPath)).toBe(true);
 
       // Check component directories
@@ -392,7 +416,13 @@ describe("Atomic Components Unit Tests", () => {
       const fs = await import("fs");
       const path = await import("path");
 
-      const molecularPath = path.join(process.cwd(), "components/molecular");
+      // Find the production-landing directory
+      const cwd = process.cwd();
+      const prodLandingPath = cwd.includes("production-landing")
+        ? cwd
+        : path.join(cwd, "production-landing");
+
+      const molecularPath = path.join(prodLandingPath, "components/molecular");
       expect(fs.existsSync(molecularPath)).toBe(true);
 
       // Check navigation component
@@ -409,8 +439,14 @@ describe("Atomic Components Unit Tests", () => {
       const fs = await import("fs");
       const path = await import("path");
 
+      // Find the production-landing directory
+      const cwd = process.cwd();
+      const prodLandingPath = cwd.includes("production-landing")
+        ? cwd
+        : path.join(cwd, "production-landing");
+
       const designSystemPath = path.join(
-        process.cwd(),
+        prodLandingPath,
         "app/(internetfriends)/design-system",
       );
       expect(fs.existsSync(designSystemPath)).toBe(true);
