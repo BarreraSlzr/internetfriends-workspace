@@ -1,24 +1,79 @@
-import React from "react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import React from "react";
+import Header from "./(internetfriends)/components/header";
+import Navigation from "./(internetfriends)/components/navigation";
+import SocialLinks from "./(internetfriends)/components/social-links";
+import HeroText from "./(internetfriends)/components/hero-text";
+import CompanyInfo from "./(internetfriends)/components/company-info";
 
-export default function NotFound() {
+const messages = [
+  {
+    main: "This page doesn&apos;t exist... yet.",
+    subtitle: "Maybe it&apos;s waiting for a business solution!",
+  },
+  {
+    main: "Looks like this project went missing.",
+    subtitle: "Time to bring in the project management tools!",
+  },
+  {
+    main: "Oops! Lost in automation.",
+    subtitle: "Let&apos;s simplify that workflow and find your way.",
+  },
+  {
+    main: "Not here yet.",
+    subtitle: "Could it be your next high-performance tool?",
+  },
+  {
+    main: "Nothing to see here.",
+    subtitle: "Let&apos;s create something amazing instead!",
+  },
+  {
+    main: "Page not found.",
+    subtitle: "A great opportunity to explore business automation!",
+  },
+  {
+    main: "Missing in action.",
+    subtitle: "Maybe it&apos;s busy creating creative solutions for you.",
+  },
+  {
+    main: "Content unavailable.",
+    subtitle: "It might be waiting for distribution!",
+  },
+  {
+    main: "This page is taking a creative break.",
+    subtitle: "Let&apos;s brainstorm your next big idea!",
+  },
+];
+
+export default function NotFoundPage() {
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
-        <h2 className="text-2xl font-semibold text-gray-700 mb-6">
-          Page Not Found
-        </h2>
-        <p className="text-gray-600 mb-8">
-          The page you are looking for doesn&apos;t exist.
-        </p>
+    <main>
+      {/* Header */}
+      <Header />
+
+      <HeroText>
+        <h1 className="text-4xl font-bold mb-4 font-mono">
+          404 - {randomMessage.main}
+        </h1>
+        <p className="text-lg mb-6">{randomMessage.subtitle}</p>
         <Link
           href="/"
-          className="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
         >
           Go Home
+          <ArrowUpRight className="h-4 w-4" />
         </Link>
-      </div>
-    </div>
+      </HeroText>
+
+      {/* Main Navigation */}
+      <Navigation />
+
+      {/* Social Links */}
+      <SocialLinks />
+      <CompanyInfo />
+    </main>
   );
 }
