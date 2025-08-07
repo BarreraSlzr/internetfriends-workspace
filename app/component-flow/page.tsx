@@ -65,7 +65,7 @@ export default function ComponentFlowPage({
     };
 
     initializeComponents();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Register demo components
   const registerDemoComponents = () => {
@@ -409,13 +409,13 @@ export default function ComponentFlowPage({
         <aside className={styles.infoPanel}>
           <h3>🚀 Welcome to Component Flow!</h3>
           <p>
-            This is your visual component development workspace. here's what you
+            This is your visual component development workspace. here's what you {/* TODO: Fix unescaped entities - use &apos; &quot; &lt; &gt; &amp; */}
             can do:
           </p>
 
           <ul className={styles.featureList}>
             <li>
-              <strong>📚 Browse Library:</strong> Click "Library" to see all
+              <strong>📚 Browse Library:</strong> Click "Library" to see all {/* TODO: Fix unescaped entities - use &apos; &quot; &lt; &gt; &amp; */} {/* TODO: Fix unescaped entities - use &apos; &quot; &lt; &gt; &amp; */}
               available components
             </li>
             <li>

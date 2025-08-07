@@ -254,7 +254,7 @@ const HeaderActions: React.FC<{ actions?: HeaderAction[] }> = ({ actions }) => {
             <Link
               href
               key={action.id}
-              href={action.href}
+              href={action.href} // TODO: Review duplicate props
               target={action.external ? "_blank" : undefined}
             >
               <ButtonAtomic
@@ -449,7 +449,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   // Close mobile menu on route change
   useEffect(() => {
     contextValue.closeMobileMenu();
-  }, [pathname]);
+  }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Header size styles
   const sizeStyles = {

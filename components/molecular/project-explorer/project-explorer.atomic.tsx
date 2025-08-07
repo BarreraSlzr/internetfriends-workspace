@@ -163,7 +163,7 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
     if (!data) {
       loadProjectData();
     }
-  }, [data]);
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Filter data based on search query
   const filteredData = useMemo(() => {

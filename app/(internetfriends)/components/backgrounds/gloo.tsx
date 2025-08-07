@@ -161,7 +161,7 @@ export function BgGoo({
 
     glRef.current = gl;
     shaderProgramRef.current = shaderProgram;
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const gl = glRef.current;

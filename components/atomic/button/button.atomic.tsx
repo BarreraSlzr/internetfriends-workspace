@@ -87,6 +87,7 @@ const buttonVariants = cva(
 
 // Button component with forwarded ref
 export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
+ButtonAtomic.displayName = 'ButtonAtomic';
   (
     {
       className,
