@@ -1,0 +1,530 @@
+// InternetFriends Header Organism Styles
+// SCSS module for comprehensive site header component
+
+@use '../../../styles/design-tokens' as tokens;
+@use '../../../styles/mixins' as mixins;
+
+.headerOrganism {
+  // Base header styles
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--header-height, 4rem);
+
+  // Glass morphism integration
+  &.glass {
+    background: var(--glass-bg-header);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+
+    // Enhanced glass effect when sticky
+    &.sticky {
+      background: var(--glass-bg-header-scrolled);
+      border-bottom-color: var(--glass-border-enhanced);
+      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Solid variant
+  &.solid {
+    background: var(--color-bg-primary);
+    border-bottom: 1px solid var(--color-border-primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  // Transparent variant
+  &.transparent {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+
+    // Become glass when sticky
+    &.sticky {
+      background: var(--glass-bg-header);
+      backdrop-filter: blur(12px);
+      border-bottom-color: var(--glass-border);
+    }
+  }
+
+  // Size variants
+  &.sm {
+    --header-height: 3.5rem; // 56px
+  }
+
+  &.md {
+    --header-height: 4rem; // 64px
+  }
+
+  &.lg {
+    --header-height: 5rem; // 80px
+  }
+
+  // Sticky behavior
+  &.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
+
+  // Hidden state (scroll behavior)
+  &.hidden {
+    transform: translateY(-100%);
+  }
+
+  // Responsive layout adaptations
+  @include mixins.breakpoint-down('md') {
+    --header-height: 3.5rem; // Smaller on mobile
+  }
+}
+
+// Skip to main content link
+.skipToMain {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 50;
+  padding: 0.5rem 1rem;
+  background: var(--if-primary);
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s ease;
+
+  &:focus {
+    top: 1rem;
+    outline: 2px dashed var(--color-border-focus);
+    outline-offset: 2px;
+  }
+
+  &:hover {
+    background: var(--if-primary-hover);
+  }
+}
+
+// Header container
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-max-width, 1200px);
+  margin: 0 auto;
+  padding: 0 var(--container-padding, 1rem);
+  height: 100%;
+
+  @include mixins.breakpoint-up('lg') {
+    padding: 0 var(--container-padding-lg, 2rem);
+  }
+}
+
+// Header sections
+.headerSection {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md, 1rem);
+
+  &.left {
+    justify-content: flex-start;
+    flex-shrink: 0;
+  }
+
+  &.center {
+    flex: 1;
+    justify-content: center;
+
+    @include mixins.breakpoint-down('lg') {
+      display: none; // Hide center nav on mobile
+    }
+  }
+
+  &.right {
+    justify-content: flex-end;
+    flex-shrink: 0;
+    gap: var(--spacing-sm, 0.5rem);
+  }
+}
+
+// Logo styles
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm, 0.5rem);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: 2px dashed var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  img {
+    object-fit: contain;
+    max-height: 2rem;
+  }
+
+  .logoFallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: var(--if-primary);
+    color: white;
+    font-weight: bold;
+    font-size: 0.875rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .logoText {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+
+    @include mixins.breakpoint-down('sm') {
+      display: none; // Hide text on very small screens
+    }
+  }
+}
+
+// Theme toggle dropdown
+.themeToggle {
+  position: relative;
+
+  .themeDropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 50;
+    min-width: 12rem;
+    background: var(--glass-bg-header);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    padding: 0.5rem 0;
+
+    .themeOption {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: none;
+      color: var(--color-text-primary);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background: var(--if-primary-light);
+        color: var(--if-primary);
+      }
+
+      &:first-child {
+        border-top-left-radius: var(--radius-md);
+        border-top-right-radius: var(--radius-md);
+      }
+
+      &:last-child {
+        border-bottom-left-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
+      }
+
+      &.active {
+        background: var(--if-primary-light);
+        color: var(--if-primary);
+
+        .activeIndicator {
+          width: 0.5rem;
+          height: 0.5rem;
+          background: var(--if-primary);
+          border-radius: 50%;
+          margin-left: auto;
+        }
+      }
+
+      svg {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+// Language selector dropdown
+.languageSelector {
+  position: relative;
+
+  .languageDropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    z-index: 50;
+    min-width: 12rem;
+    background: var(--glass-bg-header);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    padding: 0.5rem 0;
+
+    .languageOption {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: none;
+      color: var(--color-text-primary);
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+
+      &:hover {
+        background: var(--if-primary-light);
+        color: var(--if-primary);
+      }
+
+      &:first-child {
+        border-top-left-radius: var(--radius-md);
+        border-top-right-radius: var(--radius-md);
+      }
+
+      &:last-child {
+        border-bottom-left-radius: var(--radius-md);
+        border-bottom-right-radius: var(--radius-md);
+      }
+
+      &.active {
+        background: var(--if-primary-light);
+        color: var(--if-primary);
+      }
+
+      .flag {
+        font-size: 1.125rem;
+        flex-shrink: 0;
+      }
+
+      .languageCode {
+        font-size: 0.75rem;
+        opacity: 0.75;
+        text-transform: uppercase;
+        margin-left: auto;
+      }
+    }
+  }
+}
+
+// Header actions
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm, 0.5rem);
+
+  .actionButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    // Hide desktop-only actions on mobile
+    &.desktopOnly {
+      @include mixins.breakpoint-down('lg') {
+        display: none;
+      }
+    }
+
+    // Hide mobile-only actions on desktop
+    &.mobileOnly {
+      @include mixins.breakpoint-up('lg') {
+        display: none;
+      }
+    }
+  }
+}
+
+// Search functionality
+.searchContainer {
+  position: relative;
+
+  .searchInput {
+    width: 20rem;
+    max-width: 100%;
+
+    @include mixins.breakpoint-down('md') {
+      width: 100%;
+    }
+  }
+
+  .searchShortcut {
+    margin-left: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    background: var(--color-bg-muted);
+    color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    border-radius: var(--radius-xs);
+  }
+}
+
+// Announcement bar
+.announcementBar {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  border-bottom: 1px solid;
+  position: relative;
+
+  &.info {
+    background: rgb(239 246 255); // blue-50
+    color: rgb(30 58 138); // blue-900
+    border-bottom-color: rgb(191 219 254); // blue-200
+  }
+
+  &.warning {
+    background: rgb(254 252 232); // yellow-50
+    color: rgb(113 63 18); // yellow-900
+    border-bottom-color: rgb(254 240 138); // yellow-200
+  }
+
+  &.success {
+    background: rgb(240 253 244); // green-50
+    color: rgb(20 83 45); // green-900
+    border-bottom-color: rgb(187 247 208); // green-200
+  }
+
+  &.error {
+    background: rgb(254 242 242); // red-50
+    color: rgb(127 29 29); // red-900
+    border-bottom-color: rgb(254 202 202); // red-200
+  }
+
+  &.clickable {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .dismissButton {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: var(--radius-xs);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
+
+// Mobile menu overlay (when needed)
+.mobileMenuOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+
+  @include mixins.breakpoint-up('lg') {
+    display: none;
+  }
+}
+
+// Animation utilities
+.fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.slideDown {
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Focus management
+.focusTrap {
+  &:focus-within {
+    .dropdownContent {
+      display: block;
+    }
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .headerOrganism {
+    border-bottom-width: 2px;
+  }
+
+  .themeDropdown,
+  .languageDropdown {
+    border-width: 2px;
+  }
+
+  .skipToMain {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  .headerOrganism {
+    transition: none;
+  }
+
+  .skipToMain,
+  .logo,
+  .themeOption,
+  .languageOption,
+  .actionButton {
+    transition: none;
+  }
+
+  .fadeIn,
+  .slideDown {
+    animation: none;
+  }
+}
