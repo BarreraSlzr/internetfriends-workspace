@@ -24,34 +24,106 @@
   "tab_size": 2,
   "hard_tabs": false,
   "show_whitespaces": "selection",
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1,
+    "active_line_width": 2
+  },
   "terminal": {
     "shell": {
       "program": "/bin/zsh"
+    },
+    "font_size": 14,
+    "line_height": {
+      "custom": 1.4
     }
   },
   "git": {
     "inline_blame": {
-      "enabled": true
-    }
+      "enabled": true,
+      "delay_ms": 800
+    },
+    "git_gutter": "tracked_files"
   },
   "languages": {
     "TypeScript": {
       "format_on_save": "on",
-      "formatter": "prettier"
+      "formatter": "prettier",
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+        "source.removeUnused": true
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true
+      }
     },
     "JavaScript": {
+      "format_on_save": "on",
+      "formatter": "prettier",
+      "code_actions_on_format": {
+        "source.organizeImports": true
+      }
+    },
+    "JSON": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "CSS": {
+      "format_on_save": "on",
+      "formatter": "prettier"
+    },
+    "SCSS": {
       "format_on_save": "on",
       "formatter": "prettier"
     }
   },
   "file_types": {
-    "**/.github/chatmodes/*.md": "plaintext",
-    "**/schemas/*.ts": "typescript"
+    "**/.github/chatmodes/*.md": "markdown",
+    "**/schemas/*.ts": "typescript",
+    "**/*.module.scss": "scss",
+    "**/*.atomic.tsx": "tsx",
+    "**/*.molecular.tsx": "tsx",
+    "**/*.organism.tsx": "tsx"
   },
   "project_panel": {
-    "dock": "left"
+    "dock": "left",
+    "default_width": 280,
+    "file_icons": true,
+    "folder_icons": true,
+    "git_status": true
   },
   "outline_panel": {
+    "dock": "right",
+    "default_width": 240
+  },
+  "collaboration_panel": {
     "dock": "right"
+  },
+  "search": {
+    "seed_search_query_from_cursor": "selection"
+  },
+  "scrollbar": {
+    "cursors": true,
+    "git_diff": true,
+    "search_results": true,
+    "selected_symbol": true,
+    "diagnostics": true
+  },
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "Gruvbox Dark Hard"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 14,
+  "buffer_font_family": "JetBrains Mono",
+  "vim_mode": false,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
   }
 }

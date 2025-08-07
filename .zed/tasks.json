@@ -1,0 +1,240 @@
+{
+  "$schema": "https://zed.dev/schema/tasks.json",
+  "tasks": [
+    {
+      "label": "🚀 Dev Server",
+      "command": "bun",
+      "args": ["run", "dev"],
+      "use_new_terminal": true,
+      "allow_concurrent_runs": false,
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "tags": ["dev", "server"]
+    },
+    {
+      "label": "🚀 Dev Server (Skip Validation)",
+      "command": "bun",
+      "args": ["run", "dev:skip-validation"],
+      "use_new_terminal": true,
+      "allow_concurrent_runs": false,
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "tags": ["dev", "server", "quick"]
+    },
+    {
+      "label": "📋 Type Check",
+      "command": "bun",
+      "args": ["run", "typecheck"],
+      "use_new_terminal": false,
+      "tags": ["quality", "typescript"]
+    },
+    {
+      "label": "🧹 Lint & Fix",
+      "command": "bun",
+      "args": ["run", "lint", "--fix"],
+      "use_new_terminal": false,
+      "tags": ["quality", "lint"]
+    },
+    {
+      "label": "🎨 Format Code",
+      "command": "bun",
+      "args": ["run", "format"],
+      "use_new_terminal": false,
+      "tags": ["quality", "format"]
+    },
+    {
+      "label": "🧪 Test Watch",
+      "command": "bun",
+      "args": ["run", "test:unit:watch"],
+      "use_new_terminal": true,
+      "allow_concurrent_runs": false,
+      "tags": ["test", "watch"]
+    },
+    {
+      "label": "🧪 Test All",
+      "command": "bun",
+      "args": ["run", "test:all"],
+      "use_new_terminal": true,
+      "tags": ["test", "comprehensive"]
+    },
+    {
+      "label": "🎭 E2E Tests",
+      "command": "bun",
+      "args": ["run", "test:e2e"],
+      "use_new_terminal": true,
+      "tags": ["test", "e2e"]
+    },
+    {
+      "label": "🏗️ Build",
+      "command": "bun",
+      "args": ["run", "build"],
+      "use_new_terminal": true,
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "tags": ["build"]
+    },
+    {
+      "label": "🚀 Start Production",
+      "command": "bun",
+      "args": ["run", "start"],
+      "use_new_terminal": true,
+      "allow_concurrent_runs": false,
+      "env": {
+        "NODE_ENV": "production"
+      },
+      "tags": ["production", "server"]
+    },
+    {
+      "label": "✨ Clean & Install",
+      "command": "sh",
+      "args": ["-c", "rm -rf node_modules bun.lock .next && bun install"],
+      "use_new_terminal": true,
+      "tags": ["maintenance", "install"]
+    },
+    {
+      "label": "🔍 Validate System",
+      "command": "bun",
+      "args": ["run", "validate"],
+      "use_new_terminal": false,
+      "tags": ["quality", "validation"]
+    },
+    {
+      "label": "⚡ Quick Validate",
+      "command": "bun",
+      "args": ["run", "validate:quick"],
+      "use_new_terminal": false,
+      "tags": ["quality", "validation", "quick"]
+    },
+    {
+      "label": "🔧 Fix Unused Variables",
+      "command": "bun",
+      "args": ["scripts/fix-unused-variables-safe.ts"],
+      "use_new_terminal": false,
+      "tags": ["quality", "fix", "cleanup"]
+    },
+    {
+      "label": "🔧 Fix Any Types",
+      "command": "bun",
+      "args": ["scripts/fix-any-types.ts"],
+      "use_new_terminal": false,
+      "tags": ["quality", "fix", "typescript"]
+    },
+    {
+      "label": "🔧 Fix React Issues",
+      "command": "bun",
+      "args": ["scripts/fix-react-issues.ts"],
+      "use_new_terminal": false,
+      "tags": ["quality", "fix", "react"]
+    },
+    {
+      "label": "🔧 Final Cleanup",
+      "command": "bun",
+      "args": ["scripts/final-cleanup.ts"],
+      "use_new_terminal": false,
+      "tags": ["quality", "fix", "comprehensive"]
+    },
+    {
+      "label": "🚀 Demo Integration",
+      "command": "bun",
+      "args": ["run", "demo"],
+      "use_new_terminal": true,
+      "tags": ["demo", "integration"]
+    },
+    {
+      "label": "🚀 Demo Quick",
+      "command": "bun",
+      "args": ["run", "demo:quick"],
+      "use_new_terminal": true,
+      "tags": ["demo", "quick"]
+    },
+    {
+      "label": "📊 Test API Health",
+      "command": "curl",
+      "args": ["-s", "http://localhost:3000/api/health"],
+      "use_new_terminal": false,
+      "tags": ["api", "health"]
+    },
+    {
+      "label": "🔐 Security Scan",
+      "command": "bun",
+      "args": ["run", "security:scan"],
+      "use_new_terminal": true,
+      "tags": ["security", "scan"]
+    },
+    {
+      "label": "⚡ Performance Test",
+      "command": "bun",
+      "args": ["run", "performance:test"],
+      "use_new_terminal": true,
+      "tags": ["performance", "test"]
+    },
+    {
+      "label": "📈 Benchmark",
+      "command": "bun",
+      "args": ["run", "benchmark"],
+      "use_new_terminal": true,
+      "tags": ["performance", "benchmark"]
+    },
+    {
+      "label": "🔄 Schema Validate",
+      "command": "bun",
+      "args": ["run", "schema:validate"],
+      "use_new_terminal": false,
+      "tags": ["validation", "schema"]
+    },
+    {
+      "label": "📝 Generate Schemas",
+      "command": "bun",
+      "args": ["run", "schema:generate"],
+      "use_new_terminal": false,
+      "tags": ["generate", "schema"]
+    },
+    {
+      "label": "🔍 Integration Check",
+      "command": "bun",
+      "args": ["run", "integration:check"],
+      "use_new_terminal": false,
+      "tags": ["integration", "check"]
+    },
+    {
+      "label": "🤖 Smart Commit",
+      "command": "bun",
+      "args": ["run", "smart:commit"],
+      "use_new_terminal": true,
+      "tags": ["git", "commit", "smart"]
+    },
+    {
+      "label": "📊 Monitor Events",
+      "command": "bun",
+      "args": ["run", "monitoring:events"],
+      "use_new_terminal": true,
+      "allow_concurrent_runs": true,
+      "tags": ["monitoring", "events"]
+    },
+    {
+      "label": "💾 Monitor Health",
+      "command": "bun",
+      "args": ["run", "monitoring:health"],
+      "use_new_terminal": true,
+      "allow_concurrent_runs": true,
+      "tags": ["monitoring", "health"]
+    },
+    {
+      "label": "🔍 Project Explorer",
+      "command": "bun",
+      "args": ["scripts/micro-ux-explorer.ts", "--output", "tree"],
+      "use_new_terminal": false,
+      "tags": ["explore", "project"]
+    },
+    {
+      "label": "📋 Project Summary",
+      "command": "bun",
+      "args": ["scripts/project-summary.ts"],
+      "use_new_terminal": false,
+      "tags": ["summary", "project"]
+    }
+  ]
+}
