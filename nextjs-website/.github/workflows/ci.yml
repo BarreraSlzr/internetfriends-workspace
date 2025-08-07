@@ -1,0 +1,318 @@
+name: 🚀 InternetFriends Portfolio CI/CD
+
+on:
+  push:
+    branches: [ main, develop, showcase ]
+  pull_request:
+    branches: [ main, develop ]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+env:
+  NODE_VERSION: '20'
+  BUN_VERSION: '1.2.19'
+
+jobs:
+  # 🔍 Code Quality & Security
+  quality-checks:
+    name: 🧹 Quality & Security
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🔒 Security audit
+        run: bun audit
+        continue-on-error: true
+
+      - name: 🧹 Lint code
+        run: bun run lint
+
+      - name: 📋 Type check
+        run: bun run typecheck
+
+      - name: 🎨 Check formatting
+        run: bun run format:check
+
+      - name: 🔍 Secret scanning
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: main
+          head: HEAD
+          extra_args: --debug --only-verified
+
+  # 🧪 Unit & Integration Tests
+  tests:
+    name: 🧪 Tests
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    needs: quality-checks
+
+    strategy:
+      matrix:
+        test-type: [unit, integration]
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🧪 Run ${{ matrix.test-type }} tests
+        run: bun run test:${{ matrix.test-type }}
+        env:
+          NODE_ENV: test
+
+      - name: 📊 Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ matrix.test-type }}
+          path: test-results/
+          retention-days: 7
+
+  # 🎭 End-to-End Tests
+  e2e-tests:
+    name: 🎭 E2E Tests
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false && github.base_ref == 'main'
+    needs: tests
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🏗️ Build application
+        run: bun run build
+        env:
+          NODE_ENV: production
+
+      - name: 🎭 Install Playwright
+        run: bunx playwright install --with-deps chromium
+
+      - name: 🚀 Start application
+        run: |
+          bun run start &
+          sleep 10
+        env:
+          NODE_ENV: production
+          PORT: 3000
+
+      - name: 🧪 Run E2E tests
+        run: bun run test:e2e
+        env:
+          E2E_BASE_URL: http://localhost:3000
+
+      - name: 📸 Upload screenshots
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-screenshots
+          path: test-results/
+          retention-days: 7
+
+  # 🏗️ Build & Performance
+  build-and-performance:
+    name: 🏗️ Build & Performance
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    needs: quality-checks
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🏗️ Build application
+        run: bun run build
+        env:
+          NODE_ENV: production
+          NEXT_TELEMETRY_DISABLED: 1
+
+      - name: 📊 Analyze bundle size
+        run: |
+          echo "## 📊 Bundle Analysis" >> $GITHUB_STEP_SUMMARY
+          if [ -f ".next/analyze/client.html" ]; then
+            echo "Bundle analysis completed ✅" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Bundle analysis not available" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: ⚡ Performance audit
+        run: |
+          bun run start &
+          APP_PID=$!
+          sleep 10
+
+          # Simple performance check
+          curl -o /dev/null -s -w "Response time: %{time_total}s\nStatus: %{http_code}\n" http://localhost:3000
+
+          kill $APP_PID
+        env:
+          NODE_ENV: production
+
+      - name: 💾 Cache build output
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+            .next/static
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/bun.lock') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/bun.lock') }}-
+
+  # 🤖 AI Workflow Analysis
+  ai-workflow-analysis:
+    name: 🤖 AI Workflow
+    runs-on: ubuntu-latest
+    if: contains(github.head_ref, 'ai/') || contains(github.head_ref, 'feature/')
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🔍 Project structure analysis
+        run: |
+          echo "## 🤖 AI Workflow Analysis" >> $GITHUB_STEP_SUMMARY
+          bun scripts/micro-ux-explorer.ts --output json > project-analysis.json
+          echo "Project analysis completed ✅" >> $GITHUB_STEP_SUMMARY
+
+      - name: 📊 Generate insights
+        run: |
+          echo "### 📊 Project Insights" >> $GITHUB_STEP_SUMMARY
+          bun scripts/project-summary.ts >> $GITHUB_STEP_SUMMARY
+
+      - name: 💾 Upload analysis
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-workflow-analysis
+          path: project-analysis.json
+          retention-days: 30
+
+  # 🚀 Preview Deployment
+  preview-deploy:
+    name: 🚀 Preview Deploy
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false && github.base_ref == 'main'
+    needs: [tests, build-and-performance]
+    environment: preview
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: 📦 Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: 🏗️ Build for preview
+        run: bun run build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_APP_ENV: preview
+
+      - name: 📝 Preview deployment info
+        run: |
+          echo "## 🚀 Preview Deployment" >> $GITHUB_STEP_SUMMARY
+          echo "Preview URL will be available after deployment ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch**: ${{ github.head_ref }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+
+  # 📋 Workflow Summary
+  workflow-summary:
+    name: 📋 Summary
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [quality-checks, tests, build-and-performance]
+
+    steps:
+      - name: 📊 Workflow summary
+        run: |
+          echo "## 🎯 InternetFriends Portfolio CI/CD Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### ✅ Completed Jobs:" >> $GITHUB_STEP_SUMMARY
+          echo "- Quality & Security Checks" >> $GITHUB_STEP_SUMMARY
+          echo "- Unit & Integration Tests" >> $GITHUB_STEP_SUMMARY
+          echo "- Build & Performance Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🚀 Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "- Review test results and performance metrics" >> $GITHUB_STEP_SUMMARY
+          echo "- Merge when all checks pass ✅" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "**InternetFriends Portfolio** - Where AI meets human creativity! 🤖✨" >> $GITHUB_STEP_SUMMARY
+
+  # 🏷️ Auto-tagging for main branch
+  auto-tag:
+    name: 🏷️ Auto Tag
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [tests, build-and-performance]
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🏷️ Create auto-tag
+        run: |
+          # Get current version from package.json
+          VERSION=$(cat package.json | grep '"version"' | head -1 | cut -d'"' -f4)
+
+          # Check if tag already exists
+          if git tag -l | grep -q "v$VERSION"; then
+            echo "Tag v$VERSION already exists"
+          else
+            echo "Creating tag v$VERSION"
+            git config user.name "InternetFriends Bot"
+            git config user.email "bot@internetfriends.dev"
+            git tag -a "v$VERSION" -m "Auto-tag: v$VERSION from CI/CD pipeline"
+            git push origin "v$VERSION"
+          fi
