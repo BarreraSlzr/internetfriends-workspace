@@ -11,6 +11,7 @@ interface PageNodeData {
 
   route?: string;
   components?: string[];
+}
 
 interface PageNodeProps {
   data: PageNodeData;
@@ -18,18 +19,19 @@ interface PageNodeProps {
   isConnectable: boolean;
 
   selected: boolean;
+}
 
 const PageNode: React.FC<PageNodeProps> = ({
-
   data,
   isConnectable,
   selected,
 }) => {
   return (
     <div
-      className={cn("min-w-[280px] max-w-[320px] bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 text-indigo-900 rounded-compact-lg shadow-glass transition-all duration-200",
-        selected && "ring-2 ring-if-primary ring-offset-2",)
-        "hover:shadow-glass-hover hover:scale-[1.02]",)
+      className={cn(
+        "min-w-[280px] max-w-[320px] bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 text-indigo-900 rounded-compact-lg shadow-glass transition-all duration-200",
+        selected && "ring-2 ring-if-primary ring-offset-2",
+        "hover:shadow-glass-hover hover:scale-[1.02]",
       )}
     >
       <Handle
@@ -87,6 +89,9 @@ const PageNode: React.FC<PageNodeProps> = ({
       />
     </div>
   );
+};
+
+PageNode.displayName = "PageNode";
 
 export { PageNode };
 export type { PageNodeData };

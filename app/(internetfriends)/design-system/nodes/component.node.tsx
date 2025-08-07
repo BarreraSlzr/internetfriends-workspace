@@ -14,6 +14,7 @@ interface ComponentNodeData {
   props?: string[];
   features?: string[];
   composition?: string[];
+}
 
 interface ComponentNodeProps {
   data: ComponentNodeData;
@@ -21,23 +22,30 @@ interface ComponentNodeProps {
   isConnectable: boolean;
 
   selected: boolean;
+}
 
 const ComponentNode: React.FC<ComponentNodeProps> = ({
-
   data,
   isConnectable,
   selected,
 }) => {
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "atomic": return "from-blue-50 to-blue-100 border-blue-200 text-blue-900";
-      case "molecular": return "from-purple-50 to-purple-100 border-purple-200 text-purple-900";
-      case "organism": return "from-green-50 to-green-100 border-green-200 text-green-900";
-      default: return "from-gray-50 to-gray-100 border-gray-200 text-gray-900";
+      case "atomic":
+        return "from-blue-50 to-blue-100 border-blue-200 text-blue-900";
+      case "molecular":
+        return "from-purple-50 to-purple-100 border-purple-200 text-purple-900";
+      case "organism":
+        return "from-green-50 to-green-100 border-green-200 text-green-900";
+      default:
+        return "from-gray-50 to-gray-100 border-gray-200 text-gray-900";
+    }
+  };
 
   return (
     <div
-      className={cn("min-w-[250px] max-w-[300px] bg-gradient-to-br rounded-compact-lg border-2 shadow-glass transition-all duration-200",)
+      className={cn(
+        "min-w-[250px] max-w-[300px] bg-gradient-to-br rounded-compact-lg border-2 shadow-glass transition-all duration-200",
         getCategoryColor(data.category),
         selected && "ring-2 ring-if-primary ring-offset-2",
         "hover:shadow-glass-hover hover:scale-[1.02]",
@@ -104,6 +112,9 @@ const ComponentNode: React.FC<ComponentNodeProps> = ({
       />
     </div>
   );
+};
+
+ComponentNode.displayName = "ComponentNode";
 
 export { ComponentNode };
 export type { ComponentNodeData };

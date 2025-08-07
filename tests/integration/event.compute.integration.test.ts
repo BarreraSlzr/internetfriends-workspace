@@ -32,7 +32,7 @@ const TEST_CONFIG = {
 };
 
 // Integration Test Suite Schema
-
+const IntegrationTestSuiteSchema = z.object({
   name: z.string(),
   description: z.string(),
   tests: z.array(
@@ -393,15 +393,18 @@ describe("InternetFriends Integration Tests", () => {
       const startTime = Date.now();
 
       // Register a test job handler
-      computeManager.registerJobHandler("test.execution", async (__event: Event) => {
-        await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate work
-        return {
-          testsRun: 10,
-          passed: 8,
-          failed: 2,
-          processingTime: 100,
-        };
-      });
+      computeManager.registerJobHandler(
+        "test.execution",
+        async (__event: Event) => {
+          await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate work
+          return {
+            testsRun: 10,
+            passed: 8,
+            failed: 2,
+            processingTime: 100,
+          };
+        },
+      );
 
       // Submit job through compute system
       const jobId = await ComputeOperations.runTests("unit-tests", {
@@ -543,7 +546,7 @@ describe("InternetFriends Integration Tests", () => {
         "login",
         "login-button",
         "test-user-123",
-        'session-456",
+        "session-456",
       );
 
       // Make HTTP request that should trigger compute job
@@ -564,12 +567,12 @@ describe("InternetFriends Integration Tests", () => {
       });
 
       // Submit compute job as if triggered by the HTTP request
-
+      await computeEngine.submitJob(
         { userId: "test-user-123", action: "load-dashboard" },
         "user-analytics",
         {
           userId: "test-user-123",
-          sessionId: 'session-456",
+          sessionId: "session-456",
           correlationId: "dashboard-load-001",
         },
       );
@@ -625,12 +628,15 @@ describe("InternetFriends Integration Tests", () => {
       );
 
       // Register handler that fails
-      computeManager.registerJobHandler("test.execution", async (__event: Event) => {
-        if (job.payload?.shouldFail) {
-          throw new Error("Simulated job failure");
-        }
-        return { success: true };
-      });
+      computeManager.registerJobHandler(
+        "test.execution",
+        async (__event: Event) => {
+          if (job.payload?.shouldFail) {
+            throw new Error("Simulated job failure");
+          }
+          return { success: true };
+        },
+      );
 
       // 2. Make HTTP request that should return error
       const httpErrorResult = await curlRunner.runTest({
@@ -744,10 +750,13 @@ describe("InternetFriends Integration Tests", () => {
       const jobCount = 20;
 
       // Register fast job handler
-      computeManager.registerJobHandler("data.processing", async (__event: Event) => {
-        await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms work
-        return { processed: job.payload?.items || 100 };
-      });
+      computeManager.registerJobHandler(
+        "data.processing",
+        async (__event: Event) => {
+          await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms work
+          return { processed: job.payload?.items || 100 };
+        },
+      );
 
       // Submit multiple jobs simultaneously
       const jobPromises = Array.from({ length: jobCount }, (_, i) =>

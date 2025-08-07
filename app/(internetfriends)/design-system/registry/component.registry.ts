@@ -2,15 +2,10 @@ import { Node, Edge } from "reactflow";
 
 export interface ComponentRegistryItem {
   id: string;
-
   name: string;
-
   category: "atomic" | "molecular" | "organism";
-
   description: string;
-
   filePath: string;
-
   props?: ComponentProp[];
   features?: string[];
   dependencies?: string[];
@@ -18,121 +13,92 @@ export interface ComponentRegistryItem {
   examples?: ComponentExample[];
   documentation?: string;
   status: "stable" | "beta" | "deprecated" | "planned";
-
   lastUpdated: Date;
+}
 
 export interface ComponentProp {
   name: string;
-
   type: string;
-
   required: boolean;
-
   defaultValue?: unknown;
   description: string;
+}
 
 export interface ComponentExample {
   name: string;
-
-  _code: string;
-
+  code: string;
   description?: string;
+}
 
 export interface UtilityRegistryItem {
   id: string;
-
   name: string;
-
   category: "tokens" | "utilities" | "functions" | "constants";
-
   description: string;
-
   filePath: string;
-
   exports?: string[];
+  functions?: UtilityFunction[];
   tokens?: DesignToken[];
   classes?: CSSClass[];
-  functions?: UtilityFunction[];
-  features?: string[];
   status: "stable" | "beta" | "deprecated" | "planned";
-
   lastUpdated: Date;
+}
 
 export interface DesignToken {
   name: string;
-
   value: string;
-
   description: string;
-
   category: "color" | "spacing" | "typography" | "animation" | "shadow";
+}
 
 export interface CSSClass {
   name: string;
-
   description: string;
-
   properties?: string[];
+}
 
 export interface UtilityFunction {
   name: string;
-
-  _signature: string;
-
+  signature: string;
   description: string;
-
   parameters?: FunctionParameter[];
-  _returnType: string;
+  returnType: string;
+}
 
 export interface FunctionParameter {
   name: string;
-
   type: string;
-
   description: string;
-
   optional?: boolean;
+}
 
 export interface HookRegistryItem {
   id: string;
-
   name: string;
-
   description: string;
-
   filePath: string;
-
   parameters?: FunctionParameter[];
   returns: string;
-
   usage: string;
-
-  examples?: ComponentExample[];
   dependencies?: string[];
   status: "stable" | "beta" | "deprecated" | "planned";
-
   lastUpdated: Date;
+}
 
 export interface PageRegistryItem {
   id: string;
-
   name: string;
-
   route: string;
-
   description: string;
-
   filePath: string;
-
   layout?: string;
   components: string[];
-
-  features?: string[];
+  features: string[];
   seoTitle?: string;
   seoDescription?: string;
-  status: "live" | "development" | "planned" | "archived";
-
+  status: "live" | "draft" | "archived";
   lastUpdated: Date;
+}
 
 export class ComponentRegistry {
   private components: Map<string, ComponentRegistryItem> = new Map();
@@ -142,49 +108,49 @@ export class ComponentRegistry {
 
   constructor() {
     this.initializeRegistry();
+  }
 
   private initializeRegistry() {
-    // Initialize with existing components
+    // Initialize atomic components
     this.registerComponent({
       id: "header-atomic",
       name: "HeaderAtomic",
       category: "atomic",
-      description: "Glass morphism header with scroll detection and responsive navigation",
+      description:
+        "Glass morphism header with scroll detection and responsive navigation",
       filePath: "/components/atomic/header/header.atomic.tsx",
       props: [
-
-      {
+        {
           name: "sticky",
           type: "boolean",
           required: false,
           defaultValue: true,
-          description: "Whether the header should stick to the top when scrolling",
+          description:
+            "Whether the header should stick to the top when scrolling",
         },
-      {
+        {
           name: "transparent",
           type: "boolean",
           required: false,
           defaultValue: true,
-          description: "Whether to use glass morphism transparency effect",
+          description: "Whether the header should be transparent",
         },
-      {
-          name: "scrollThreshold",
-          type: "number",
+        {
+          name: "className",
+          type: "string",
           required: false,
-          defaultValue: 50,
-          description: "Scroll threshold in pixels before header changes appearance",
+          description: "Additional CSS classes",
         },
       ],
       features: [
-
-        "Glass morphism effect",
-        "Scroll state detection",
+        "Glass morphism styling",
+        "Scroll detection",
         "Responsive design",
-        "Theme-aware styling",
-        "Accessibility support",
+        "Backdrop blur effects",
+        "InternetFriends design system integration",
       ],
-      dependencies: ["@/lib/utils", "react"],)
-      status: "stable",)
+      dependencies: ["@/lib/utils", "react"],
+      status: "stable",
       lastUpdated: new Date(),
     });
 
@@ -192,49 +158,39 @@ export class ComponentRegistry {
       id: "glass-card-atomic",
       name: "GlassCardAtomic",
       category: "atomic",
-      description: "Glass morphism card component with multiple variants and animation support",
+      description:
+        "Glass morphism card component with hover effects and compact border radius",
       filePath: "/components/atomic/glass-card/glass-card.atomic.tsx",
       props: [
-
-      {
+        {
+          name: "children",
+          type: "React.ReactNode",
+          required: true,
+          description: "Card content",
+        },
+        {
           name: "variant",
-          type: ""default" | "elevated" | "subtle" | "primary" | "destructive"",
+          type: "header | card | overlay",
           required: false,
-          defaultValue: "default",
-          description: "Visual variant of the card",
+          defaultValue: "card",
+          description: "Visual variant of the glass card",
         },
-      {
-          name: "size",
-          type: ""sm" | "md" | "lg" | "xl"",
+        {
+          name: "className",
+          type: "string",
           required: false,
-          defaultValue: "md",
-          description: "Size variant affecting padding and border radius",
-        },
-      {
-          name: "hover",
-          type: "boolean",
-          required: false,
-          defaultValue: true,
-          description: "Whether to show hover effects",
-        },
-      {
-          name: "animated",
-          type: "boolean",
-          required: false,
-          defaultValue: false,
-          description: "Whether to apply floating animation",
+          description: "Additional CSS classes",
         },
       ],
       features: [
-
-        "Multiple visual variants",
-        "Size variations",
+        "Glass morphism effects",
         "Hover animations",
-        "Glass morphism backdrop",
-        "Configurable padding and borders",
+        "Compact border radius (12px max)",
+        "Backdrop blur",
+        "Multiple variants",
       ],
-      dependencies: ["@/lib/utils", "react"],)
-      status: "stable",)
+      dependencies: ["@/lib/utils", "react"],
+      status: "stable",
       lastUpdated: new Date(),
     });
 
@@ -242,150 +198,132 @@ export class ComponentRegistry {
       id: "button-atomic",
       name: "ButtonAtomic",
       category: "atomic",
-      description: "InternetFriends styled button with multiple variants, loading states, and icon support",
+      description:
+        "Versatile button component with InternetFriends design system styling",
       filePath: "/components/atomic/button/button.atomic.tsx",
       props: [
-
-      {
+        {
           name: "variant",
-          type: ""primary" | "secondary" | "outline" | "ghost" | "glass" | "destructive" | "link"",
+          type: "primary | glass | outline | ghost",
           required: false,
           defaultValue: "primary",
-          description: "Visual variant of the button",
+          description: "Button style variant",
         },
-      {
+        {
           name: "size",
-          type: ""sm" | "md" | "lg" | "xl" | "icon"",
+          type: "sm | md | lg",
           required: false,
           defaultValue: "md",
-          description: "Size variant affecting padding and height",
+          description: "Button size",
         },
-      {
-          name: "loading",
+        {
+          name: "children",
+          type: "React.ReactNode",
+          required: true,
+          description: "Button content",
+        },
+        {
+          name: "disabled",
           type: "boolean",
           required: false,
           defaultValue: false,
-          description: "Whether button is in loading state",
+          description: "Whether the button is disabled",
         },
-      {
-          name: "fullWidth",
-          type: "boolean",
+        {
+          name: "className",
+          type: "string",
           required: false,
-          defaultValue: false,
-          description: "Whether button should take full width",
+          description: "Additional CSS classes",
         },
       ],
       features: [
-
-        "Multiple variants with InternetFriends styling",)
-        "Loading states with spinner",)
-        "Icon support (left and right)",
-        "Hover and active animations",
-        "Accessibility compliance",
-        "Radix Slot integration for asChild prop",
+        "Multiple style variants",
+        "Size variations",
+        "Glass morphism variant",
+        "Hover and focus states",
+        "Accessibility support",
       ],
-      dependencies: [
-
-        "@radix-ui/react-slot",
-        "class-variance-authority",
-        "@/lib/utils",
-        "react",
-      ],
+      dependencies: ["@/lib/utils", "react"],
       status: "stable",
       lastUpdated: new Date(),
     });
 
-    // Molecular Components
+    // Initialize molecular components
     this.registerComponent({
       id: "navigation-molecular",
       name: "NavigationMolecular",
       category: "molecular",
-      description: "Complete navigation component with mobile menu, dropdowns, and glass morphism",
+      description:
+        "Comprehensive navigation component with mobile support and dropdown menus",
       filePath: "/components/molecular/navigation/navigation.molecular.tsx",
       props: [
-
-      {
+        {
           name: "items",
           type: "NavigationItem[]",
           required: true,
-          description: "Navigation items to display",
+          description: "Navigation menu items",
         },
-      {
+        {
           name: "logo",
           type: "NavigationLogo",
           required: false,
           description: "Logo configuration",
         },
-      {
+        {
+          name: "actions",
+          type: "React.ReactNode",
+          required: false,
+          description: "Action buttons or elements",
+        },
+        {
           name: "variant",
-          type: ""transparent" | "solid" | "glass"",
+          type: "transparent | solid",
           required: false,
           defaultValue: "transparent",
-          description: "Visual variant of the navigation",
-        },
-      {
-          name: "mobileBreakpoint",
-          type: ""sm" | "md" | "lg"",
-          required: false,
-          defaultValue: "lg",
-          description: "Breakpoint for mobile menu toggle",
+          description: "Navigation style variant",
         },
       ],
       features: [
-
-        "Mobile responsive with slide-out menu",
-        "Dropdown navigation support",
+        "Mobile responsive",
+        "Dropdown menu support",
         "Glass morphism styling",
+        "Logo display",
+        "Action buttons",
         "Keyboard navigation",
-        "Active state management",
-        "External link support",
+        "Accessibility support",
       ],
-      dependencies: [
-
-        "@/components/atomic/header",
-        "@/components/atomic/button",
-        "lucide-react",
-        "next/link",
-      ],
-      composition: ["HeaderAtomic", "ButtonAtomic"],)
-      status: "stable",)
+      composition: ["HeaderAtomic", "ButtonAtomic"],
+      status: "stable",
       lastUpdated: new Date(),
     });
 
     // Initialize utilities
     this.registerUtility({
       id: "design-tokens",
-      name: "InternetFriends Design Tokens",
-      category: "tokens",)
-      description: "Complete design token system with glass morphism and compact radius values",)
-      filePath: "/app/(internetfriends)/globals.css",
+      name: "Design Tokens",
+      category: "tokens",
+      description:
+        "InternetFriends design system tokens for colors, spacing, and animations",
+      filePath: "/styles/design-tokens.css",
       tokens: [
-
-      {
+        {
           name: "--if-primary",
           value: "#3b82f6",
-          description: "Primary brand color - InternetFriends blue",
+          description: "Primary brand color",
           category: "color",
         },
-      {
+        {
           name: "--glass-bg-header",
           value: "rgba(255, 255, 255, 0.85)",
-          description: "Glass morphism background for headers",
+          description: "Glass header background",
           category: "color",
         },
-      {
+        {
           name: "--radius-lg",
           value: "0.75rem",
-          description: "Large border radius - maximum for backgrounds",
+          description: "Large border radius (12px max)",
           category: "spacing",
         },
-      ],
-      features: [
-
-        "Glass morphism system",
-        "Compact border radius scale",
-        "Coin of value color system",
-        "Light/dark mode support",
       ],
       status: "stable",
       lastUpdated: new Date(),
@@ -394,42 +332,26 @@ export class ComponentRegistry {
     this.registerUtility({
       id: "css-utilities",
       name: "CSS Utilities",
-      category: "utilities",)
-      description: "Custom CSS utility classes for InternetFriends design system",)
-      filePath: "/app/(internetfriends)/globals.css",
+      category: "utilities",
+      description: "Utility classes for common styling patterns",
+      filePath: "/styles/utilities.css",
       classes: [
-
-      {
-          name: ".glass-header",
-          description: "Glass morphism header styling with backdrop blur",
+        {
+          name: "glass-header",
+          description: "Glass morphism header styling",
           properties: [
-
             "backdrop-filter: blur(12px)",
-            "border: 1px solid var(--glass-border)",
+            "background: var(--glass-bg-header)",
           ],
         },
-      {
-          name: ".focus-dashed",
-          description: "Mermaid viewer inspired focus state with dashed border",
-          properties: ["border: 2px dashed var(--color-border-focus)"],
-        },
-      {
-          name: ".btn-if-primary",
-          description: "Primary button styling with InternetFriends brand colors",
+        {
+          name: "glass-card",
+          description: "Glass morphism card styling",
           properties: [
-
-            "background: var(--if-primary)",
-            "hover animations",
-            "shadow effects",
+            "backdrop-filter: blur(8px)",
+            "border-radius: var(--radius-lg)",
           ],
         },
-      ],
-      features: [
-
-        "Glass morphism effects",
-        "Focus state management",
-        "Animation utilities",
-        "Responsive helpers",
       ],
       status: "stable",
       lastUpdated: new Date(),
@@ -439,21 +361,21 @@ export class ComponentRegistry {
     this.registerHook({
       id: "use-scroll-detection",
       name: "useScrollDetection",
-      description: "Custom hook for detecting scroll position and triggering state changes",
-      filePath: "/hooks/useScrollDetection.ts",
+      description: "Hook for detecting scroll position and direction",
+      filePath: "/hooks/use-scroll-detection.ts",
       parameters: [
-
-      {
+        {
           name: "threshold",
           type: "number",
           description: "Scroll threshold in pixels",
           optional: true,
         },
       ],
-      returns: "{ _isScrolled: boolean, _scrollY: number }",
+      returns:
+        "{ scrollY: number, isScrolled: boolean, scrollDirection: 'up' | 'down' }",
       usage: "Header scroll state management and scroll-based animations",
-      dependencies: ["react"],)
-      status: "planned",)
+      dependencies: ["react"],
+      status: "stable",
       lastUpdated: new Date(),
     });
 
@@ -461,134 +383,116 @@ export class ComponentRegistry {
     this.registerPage({
       id: "home-page",
       name: "Home Page",
-      route: "/",)
-      description: "Main landing page showcasing InternetFriends services and design system",)
+      route: "/",
+      description:
+        "Main landing page showcasing InternetFriends services and design system",
       filePath: "/app/(internetfriends)/page.tsx",
       layout: "default",
       components: ["HeaderAtomic", "GlassCardAtomic", "ButtonAtomic"],
       features: [
-
         "Hero section with glass morphism",
         "Service cards with hover effects",
         "Responsive design",
         "SEO optimized",
       ],
       seoTitle: "InternetFriends | Creative Digital Solutions",
-      seoDescription: "Professional web development and creative project services",
+      seoDescription:
+        "Professional web development and creative project services",
       status: "live",
       lastUpdated: new Date(),
     });
+  }
 
   // Component methods
   registerComponent(component: ComponentRegistryItem): void {
-
     this.components.set(component.id, component);
+  }
 
   getComponent(id: string): ComponentRegistryItem | undefined {
-
     return this.components.get(id);
+  }
 
   getAllComponents(): ComponentRegistryItem[] {
     return Array.from(this.components.values());
+  }
 
-  getComponentsByCategory(category: "atomic" | "molecular" | "organism",)
+  getComponentsByCategory(
+    category: "atomic" | "molecular" | "organism",
   ): ComponentRegistryItem[] {
     return this.getAllComponents().filter((comp) => comp.category === category);
+  }
 
   // Utility methods
   registerUtility(utility: UtilityRegistryItem): void {
-
     this.utilities.set(utility.id, utility);
+  }
 
   getUtility(id: string): UtilityRegistryItem | undefined {
-
     return this.utilities.get(id);
+  }
 
   getAllUtilities(): UtilityRegistryItem[] {
     return Array.from(this.utilities.values());
+  }
 
   // Hook methods
   registerHook(hook: HookRegistryItem): void {
-
     this.hooks.set(hook.id, hook);
+  }
 
   getHook(id: string): HookRegistryItem | undefined {
-
     return this.hooks.get(id);
+  }
 
   getAllHooks(): HookRegistryItem[] {
     return Array.from(this.hooks.values());
+  }
 
   // Page methods
   registerPage(page: PageRegistryItem): void {
-
     this.pages.set(page.id, page);
+  }
 
   getPage(id: string): PageRegistryItem | undefined {
-
     return this.pages.get(id);
+  }
 
   getAllPages(): PageRegistryItem[] {
     return Array.from(this.pages.values());
+  }
 
-  // Flow generation methods
+  // React Flow integration
   generateFlowNodes(): Node[] {
     const nodes: Node[] = [];
 
     // Add component nodes
-    this.getAllComponents().forEach((comp, index) => {
+    this.getAllComponents().forEach((component, index) => {
       nodes.push({
-        id: comp.id,
-        type: "component",)
-        position: {)
-
-          x: 100 + (index % 3) * 250,
-          y: 200 + Math.floor(index / 3) * 200,
-        },
+        id: component.id,
+        type: "component",
+        position: { x: index * 200, y: 100 },
         data: {
-
-          label: comp.name,
-          category: comp.category,
-          description: comp.description,
-          props: comp.props?.map((p) => p.name) || [],
-          features: comp.features || [],
-          composition: comp.composition || [],
+          label: component.name,
+          description: component.description,
+          category: component.category,
+          status: component.status,
+          props: component.props || [],
+          features: component.features || [],
         },
       });
     });
 
     // Add utility nodes
-    this.getAllUtilities().forEach((util, index) => {
+    this.getAllUtilities().forEach((utility, index) => {
       nodes.push({
-        id: util.id,)
-        type: "utility",)
-        position: { x: 700 + (index % 2) * 250, y: 200 + index * 150 },
+        id: utility.id,
+        type: "utility",
+        position: { x: index * 200, y: 250 },
         data: {
-
-          label: util.name,
-          category: util.category,
-          description: util.description,
-          tokens: util.tokens?.map((t) => t.name) || [],
-          classes: util.classes?.map((c) => c.name) || [],
-          features: util.features || [],
-        },
-      });
-    });
-
-    // Add hook nodes
-    this.getAllHooks().forEach((hook, index) => {
-      nodes.push({
-        id: hook.id,
-        type: "hook",
-        position: { x: 100 + index * 200, y: 350 },
-        data: {
-
-          label: hook.name,
-          description: hook.description,
-          returns: hook.returns,)
-          usage: hook.usage,)
-          parameters: hook.parameters?.map((p) => "${p.name}: ${p.type}") || [],
-          dependencies: hook.dependencies || [],
+          label: utility.name,
+          description: utility.description,
+          category: utility.category,
+          exports: utility.exports || [],
         },
       });
     });
@@ -598,23 +502,38 @@ export class ComponentRegistry {
       nodes.push({
         id: page.id,
         type: "page",
-        position: { x: 400 + index * 300, y: 50 },
+        position: { x: index * 200, y: 400 },
         data: {
-
           label: page.name,
           description: page.description,
           route: page.route,
           components: page.components,
-          features: page.features || [],
-          layout: page.layout,)
-        },)
+        },
       });
     });
 
     return nodes;
+  }
 
   generateFlowEdges(): Edge[] {
     const edges: Edge[] = [];
+
+    // Create composition edges (molecular -> atomic)
+    this.getAllComponents().forEach((comp) => {
+      if (comp.composition) {
+        comp.composition.forEach((childName) => {
+          const childId = this.findComponentByName(childName);
+          if (childId) {
+            edges.push({
+              id: `${childId}-${comp.id}`,
+              source: childId,
+              target: comp.id,
+              type: "smoothstep",
+            });
+          }
+        });
+      }
+    });
 
     // Create dependency edges
     this.getAllComponents().forEach((comp) => {
@@ -623,32 +542,15 @@ export class ComponentRegistry {
           const utilityId = this.findUtilityByExport(dep);
           if (utilityId) {
             edges.push({
-              id: "${utilityId}-${comp.id}",
+              id: `${utilityId}-${comp.id}`,
               source: utilityId,
               target: comp.id,
-              type: "smoothstep",)
-              animated: true,)
+              type: "smoothstep",
+              animated: true,
             });
-
+          }
         });
-
-    });
-
-    // Create composition edges
-    this.getAllComponents().forEach((comp) => {
-      if (comp.composition) {
-        comp.composition.forEach((childName) => {
-          const childId = this.findComponentByName(childName);
-          if (childId) {
-            edges.push({
-              id: "${childId}-${comp.id}",
-              source: childId,
-              target: comp.id,)
-              type: "smoothstep",)
-            });
-
-        });
-
+      }
     });
 
     // Create page to component edges
@@ -657,41 +559,48 @@ export class ComponentRegistry {
         const compId = this.findComponentByName(compName);
         if (compId) {
           edges.push({
-            id: "${page.id}-${compId}",
+            id: `${page.id}-${compId}`,
             source: page.id,
-            target: compId,)
-            type: "smoothstep",)
+            target: compId,
+            type: "smoothstep",
           });
-
+        }
       });
     });
 
     return edges;
+  }
 
   private findUtilityByExport(exportName: string): string | undefined {
-
     for (const [id, utility] of this.utilities) {
       if (
-        utility.exports?.includes(exportName) ||
-        exportName.includes(utility.name.toLowerCase())
+        utility.exports &&
+        (utility.exports.includes(exportName) ||
+          utility.functions?.some((f) => f.name === exportName))
       ) {
         return id;
-
+      }
+    }
     return undefined;
+  }
 
   private findComponentByName(name: string): string | undefined {
-
     for (const [id, component] of this.components) {
       if (component.name === name) {
         return id;
-
+      }
+    }
     return undefined;
+  }
 
-  // Search and filtering
+  // Search functionality
   searchComponents(query: string): ComponentRegistryItem[] {
+    if (!query.trim()) {
+      return [];
+    }
 
     const lowercaseQuery = query.toLowerCase();
-    return this.getAllComponents().filter()
+    return this.getAllComponents().filter(
       (comp) =>
         comp.name.toLowerCase().includes(lowercaseQuery) ||
         comp.description.toLowerCase().includes(lowercaseQuery) ||
@@ -699,17 +608,21 @@ export class ComponentRegistry {
           feature.toLowerCase().includes(lowercaseQuery),
         ),
     );
+  }
 
   getComponentStats() {
     const components = this.getAllComponents();
     return {
-      _total: components.length,
+      total: components.length,
       atomic: components.filter((c) => c.category === "atomic").length,
       molecular: components.filter((c) => c.category === "molecular").length,
       organism: components.filter((c) => c.category === "organism").length,
       stable: components.filter((c) => c.status === "stable").length,
       beta: components.filter((c) => c.status === "beta").length,
       planned: components.filter((c) => c.status === "planned").length,
+    };
+  }
+}
 
 // Singleton instance
-export const _componentRegistry = new ComponentRegistry();
+export const componentRegistry = new ComponentRegistry();

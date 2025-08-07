@@ -12,6 +12,7 @@ interface HookNodeData {
   returns?: string;
   parameters?: string[];
   dependencies?: string[];
+}
 
 interface HookNodeProps {
   data: HookNodeData;
@@ -19,18 +20,19 @@ interface HookNodeProps {
   isConnectable: boolean;
 
   selected: boolean;
+}
 
 const HookNode: React.FC<HookNodeProps> = ({
-
   data,
   isConnectable,
   selected,
 }) => {
   return (
     <div
-      className={cn("min-w-[240px] max-w-[300px] bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 text-emerald-900 rounded-compact-lg shadow-glass transition-all duration-200",
-        selected && "ring-2 ring-if-primary ring-offset-2",)
-        "hover:shadow-glass-hover hover:scale-[1.02]",)
+      className={cn(
+        "min-w-[240px] max-w-[300px] bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 text-emerald-900 rounded-compact-lg shadow-glass transition-all duration-200",
+        selected && "ring-2 ring-if-primary ring-offset-2",
+        "hover:shadow-glass-hover hover:scale-[1.02]",
       )}
     >
       <Handle
@@ -85,6 +87,9 @@ const HookNode: React.FC<HookNodeProps> = ({
       />
     </div>
   );
+};
+
+HookNode.displayName = "HookNode";
 
 export { HookNode };
 export type { HookNodeData };

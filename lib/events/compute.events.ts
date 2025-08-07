@@ -1,24 +1,18 @@
 #!/usr/bin/env bun
-// InternetFriends Compute Events - Optimized Job Management & Resource Allocation
-// Event-driven compute system for streamlined operations and performance optimization
+// InternetFriends Compute Events System
+// High-performance compute job management and resource optimization
 
 import { z } from "zod";
-import { emit, on } from "./event.system";
 
 // Compute Job Types
 export const ComputeJobTypeSchema = z.enum([
-  "ai.inference",
-  "ai.training",
-  "ai.embedding",
-  "data.processing",
-  "image.optimization",
   "build.compilation",
   "test.execution",
   "database.query",
   "api.request",
   "file.processing",
-  "cache.warm",)
-  "analytics.compute",)
+  "cache.warm",
+  "analytics.compute",
 ]);
 
 export type ComputeJobType = z.infer<typeof ComputeJobTypeSchema>;
@@ -28,11 +22,11 @@ export const ResourceTypeSchema = z.enum([
   "cpu",
   "memory",
   "gpu",
-  'storage",
+  "storage",
   "network",
   "database_connections",
-  "api_tokens",)
-  "cache_memory",)
+  "api_tokens",
+  "cache_memory",
 ]);
 
 export type ResourceType = z.infer<typeof ResourceTypeSchema>;
@@ -42,11 +36,11 @@ export const JobPrioritySchema = z.enum([
   "background",
   "normal",
   "high",
-  "critical",)
-  "real_time",)
+  "critical",
+  "real_time",
 ]);
 
-export type _JobPriority = z.infer<typeof JobPrioritySchema>;
+export type JobPriority = z.infer<typeof JobPrioritySchema>;
 
 // Job Status
 export const JobStatusSchema = z.enum([
@@ -55,83 +49,78 @@ export const JobStatusSchema = z.enum([
   "running",
   "completed",
   "failed",
-  "cancelled",)
-  "timeout",)
+  "cancelled",
+  "timeout",
 ]);
 
-export type _JobStatus = z.infer<typeof JobStatusSchema>;
+export type JobStatus = z.infer<typeof JobStatusSchema>;
 
 // Compute Job Schema
-export const ComputeJobSchema = z.object({)
+export const ComputeJobSchema = z.object({
   id: z.string().uuid(),
   type: ComputeJobTypeSchema,
   priority: JobPrioritySchema.default("normal"),
   status: JobStatusSchema.default("pending"),
   payload: z.record(z.string(), z.any()).optional(),
-  requiredResources: z.record(z.string(), z.number()).optional(),
-  _maxRetries: z.number().default(3),
-  timeoutMs: z.number().default(30000),
+  metadata: z.record(z.string(), z.string()).optional(),
+  retries: z.number().default(3),
+  timeout: z.number().default(30000), // 30 seconds
   createdAt: z.date(),
   startedAt: z.date().optional(),
   completedAt: z.date().optional(),
-  _userId: z.string().optional(),
-  _sessionId: z.string().optional(),
+  userId: z.string().optional(),
+  sessionId: z.string().optional(),
   correlationId: z.string().optional(),
-  _tags: z.array(z.string()).optional(),
-  metadata: z.record(z.string(), z.string()).optional(),
 });
 
 export type ComputeJob = z.infer<typeof ComputeJobSchema>;
 
 // Resource Usage Schema
-export const ResourceUsageSchema = z.object({)
-  type: ResourceTypeSchema,)
-  current: z.number(),
-  max: z.number(),
-  reserved: z.number(),
+export const ResourceUsageSchema = z.object({
+  type: ResourceTypeSchema,
+  used: z.number(),
   available: z.number(),
-  utilization: z.number().min(0).max(1),
+  limit: z.number(),
+  percentage: z.number(),
 });
 
 export type ResourceUsage = z.infer<typeof ResourceUsageSchema>;
 
 // Job Result Schema
-export const JobResultSchema = z.object({)
+export const JobResultSchema = z.object({
   jobId: z.string(),
   success: z.boolean(),
   result: z.any().optional(),
   error: z.string().optional(),
   processingTime: z.number(),
-  resourcesUsed: z.record(z.string(), z.number()).optional(),
-  _retryCount: z.number(),
-  metadata: z.record(z.string(), z.string()).optional(),
+  resourceUsage: z.record(z.string(), z.number()).optional(),
+  timestamp: z.date(),
 });
 
-export type _JobResult = z.infer<typeof JobResultSchema>;
+export type JobResult = z.infer<typeof JobResultSchema>;
 
-// Compute System Configuration
-export const ComputeConfigSchema = z.object({)
+// Compute Configuration Schema
+export const ComputeConfigSchema = z.object({
   maxConcurrentJobs: z.number().default(10),
-  maxQueueSize: z.number().default(1000),
   resourceLimits: z.record(z.string(), z.number()).default({
-    cpu: 80, // 80% max CPU usage
-    memory: 85, // 85% max memory usage
-    gpu: 90, // 90% max GPU usage
-    storage: 95, // 95% max storage usage
-    network: 100, // 100Mbps max
+    cpu_cores: 4,
+    memory_mb: 8192,
+    gpu_units: 1,
+    storage_gb: 100,
+    network_mbps: 1000,
     database_connections: 50,
-    api_tokens: 1000,)
-    cache_memory: 512, // MB)
+    api_tokens: 1000,
+    cache_memory_mb: 2048,
   }),
-  _priorityWeights: z.record(z.string(), z.number()).default({
+  priorityWeights: z.record(z.string(), z.number()).default({
     background: 1,
     normal: 2,
     high: 4,
-    critical: 8,)
-    real_time: 16,)
+    critical: 8,
+    real_time: 16,
   }),
   enableAutoScaling: z.boolean().default(true),
-  _metricsRetentionMs: z.number().default(3600000), // 1 hour
+  metricsRetentionMs: z.number().default(3600000), // 1 hour
 });
 
 export type ComputeConfig = z.infer<typeof ComputeConfigSchema>;
@@ -139,301 +128,170 @@ export type ComputeConfig = z.infer<typeof ComputeConfigSchema>;
 // Job Queue with Priority Management
 class ComputeJobQueue {
   private jobs: ComputeJob[] = [];
-
-  private runningJobs: Map<string, ComputeJob> = new Map();
+  private runningJobs = new Set<string>();
   private maxConcurrent: number;
 
-  constructor(maxConcurrent: number = 10) {
-
+  constructor(maxConcurrent = 10) {
     this.maxConcurrent = maxConcurrent;
+  }
 
   enqueue(job: ComputeJob): void {
-
-    // Insert based on priority and creation time
+    // Insert based on priority
     const index = this.findInsertIndex(job);
     this.jobs.splice(index, 0, job);
-
-    emit("compute.job_queued",
-    {
-        jobId: job.id,
-        type: job.type,
-        priority: job.priority,
-        _queuePosition: index,
-        queueSize: this.jobs.length,
-      },)
-      { correlationId: job.correlationId },)
-    );
+  }
 
   dequeue(): ComputeJob | null {
     if (this.runningJobs.size >= this.maxConcurrent) {
       return null;
+    }
 
     const job = this.jobs.shift();
     if (job) {
-      this.runningJobs.set(job.id, job);
+      this.runningJobs.add(job.id);
       job.status = "running";
       job.startedAt = new Date();
-
+    }
     return job || null;
+  }
 
-  completeJob(jobId: string): void {
-
+  complete(jobId: string): void {
     this.runningJobs.delete(jobId);
+  }
 
-  getQueueSize(): number {
-    return
+  size(): number {
     return this.jobs.length;
+  }
 
   getRunningCount(): number {
-    return
     return this.runningJobs.size;
-
-  getRunningJobs(): ComputeJob[] {
-    return Array.from(this.runningJobs.values());
-
-  cancelJob(jobId: string): boolean {
-
-    // Remove from queue
-    const queueIndex = this.jobs.findIndex((j) => j.id === jobId);
-    if (queueIndex !== -1) {
-      this.jobs.splice(queueIndex, 1);
-      return true;
-
-    // Cancel running job
-    const runningJob = this.runningJobs.get(jobId);
-    if (runningJob) {
-      runningJob.status = "cancelled";
-      this.runningJobs.delete(jobId);
-      return true;
-
-    return false;
+  }
 
   private findInsertIndex(job: ComputeJob): number {
-
     const priorities = {
-      background: 1,
-      normal: 2,
-      high: 4,
-      critical: 8,
-      real_time: 16,
-
+      real_time: 0,
+      critical: 1,
+      high: 2,
+      normal: 3,
+      background: 4,
+    };
     const jobPriorityValue = priorities[job.priority];
 
     for (let i = 0; i < this.jobs.length; i++) {
-      const queueJobPriority = priorities[this.jobs[i].priority];
-
-      if (jobPriorityValue > queueJobPriority) {
+      const queuePriorityValue = priorities[this.jobs[i].priority];
+      if (jobPriorityValue < queuePriorityValue) {
         return i;
-
-      if (
-        jobPriorityValue === queueJobPriority &&
-        job.createdAt < this.jobs[i].createdAt
-      ) {
-        return i;
-
+      }
+    }
     return this.jobs.length;
+  }
+}
 
 // Resource Monitor
 class ResourceMonitor {
   private resources: Map<ResourceType, ResourceUsage> = new Map();
-  private updateInterval: Timer | null = null;
-
-  constructor() {
-    this.initializeResources();
+  private updateInterval: NodeJS.Timeout | null = null;
 
   start(): void {
-    return
-    if (this.updateInterval) return;
-
     this.updateInterval = setInterval(() => {
       this.updateResourceUsage();
     }, 1000); // Update every second
+  }
 
   stop(): void {
-    return
     if (this.updateInterval) {
       clearInterval(this.updateInterval);
       this.updateInterval = null;
+    }
+  }
 
-  getResourceUsage(type: ResourceType): ResourceUsage | undefined {
-
-    return this.resources.get(type);
-
-  getAllResourceUsage(): Map<ResourceType, ResourceUsage> {
-    return new Map(this.resources);
-
-  checkResourceAvailability(required: Partial<Record<ResourceType, number>>,)
-  ): boolean {
-    for (const [type, amount] of Object.entries(required)) {
-      if (amount === undefined) continue;
-      const resource = this.resources.get(type as ResourceType);
-      if (!resource || resource.available < amount) {
-        return false;
-
-    return true;
-
-  allocateResources(jobId: string,)
-    required: Partial<Record<ResourceType, number>>,)
-  ): boolean {
-    // Check availability first
-    if (!this.checkResourceAvailability(required)) {
-      return false;
-
-    // Allocate resources
-    for (const [type, amount] of Object.entries(required)) {
-      const resource = this.resources.get(type as ResourceType);
-      if (resource) {
-        resource.reserved += amount;
-        resource.available -= amount;
-        resource.utilization = resource.current / resource.max;
-
-    emit("compute.resource_allocated", {
-      jobId,)
-      resources: required,)
-      timestamp: Date.now(),
-    });
-
-    return true;
-
-  releaseResources(jobId: string,)
-    allocated: Partial<Record<ResourceType, number>>,)
-  ): void {
-    for (const [type, amount] of Object.entries(allocated)) {
-      if (amount === undefined) continue;
-      const resource = this.resources.get(type as ResourceType);
-      if (resource) {
-        resource.reserved = Math.max(0, resource.reserved - amount);
-        resource.available = Math.min(resource.max - resource.current,)
-          resource.max - resource.reserved,)
-        );
-        resource.utilization = resource.current / resource.max;
-
-    emit("compute.resource_released", {
-      jobId,)
-      resources: allocated,)
-      timestamp: Date.now(),
-    });
-
-  private initializeResources(): void {
-    return
+  private updateResourceUsage(): void {
+    // Simulate resource usage monitoring
+    // In a real implementation, this would query actual system resources
     const resourceTypes: ResourceType[] = [
-
       "cpu",
       "memory",
       "gpu",
-      'storage",
+      "storage",
       "network",
       "database_connections",
       "api_tokens",
       "cache_memory",
     ];
 
-    for (const type of resourceTypes) {
+    resourceTypes.forEach((type) => {
+      const limit = this.getResourceLimit(type);
+      const used = Math.random() * limit * 0.8; // Simulate 0-80% usage
+      const available = limit - used;
+      const percentage = (used / limit) * 100;
+
       this.resources.set(type, {
-        type,)
-        current: 0,)
-        max: this.getMaxResource(type),
-        reserved: 0,
-        available: this.getMaxResource(type),
-        utilization: 0,
+        type,
+        used,
+        available,
+        limit,
+        percentage,
       });
+    });
+  }
 
-  private updateResourceUsage(): void {
-    return
-    // Simulate resource usage updates
-    // In a real system, this would query actual system resources
-    for (const [type, resource] of this.resources) {
-      const baseUsage = this.getSimulatedUsage(type);
-      resource.current = baseUsage;
-      resource.available = resource.max - resource.current - resource.reserved;
-      resource.utilization = resource.current / resource.max;
-
-      // Emit resource usage events if utilization is high
-      if (resource.utilization > 0.8) {
-        emit("compute.resource_high_usage",
-        {
-            resourceType: type,
-            utilization: resource.utilization,
-            current: resource.current,
-            max: resource.max,
-          },)
-          { priority: "high" },)
-        );
-
-  private getMaxResource(type: ResourceType): number {
-
-    const limits = {
-      cpu: 100, // 100% CPU
-      memory: 16384, // 16GB in MB
-      gpu: 100, // 100% GPU
-      storage: 1000000, // 1TB in MB
-      network: 1000, // 1Gbps
-      database_connections: 100,
-      api_tokens: 10000,
-      cache_memory: 1024, // 1GB
-
+  private getResourceLimit(type: ResourceType): number {
+    const limits: Record<ResourceType, number> = {
+      cpu: 4,
+      memory: 8192,
+      gpu: 1,
+      storage: 102400,
+      network: 1000,
+      database_connections: 50,
+      api_tokens: 1000,
+      cache_memory: 2048,
+    };
     return limits[type] || 100;
+  }
 
-  private getSimulatedUsage(type: ResourceType): number {
+  getResourceUsage(type: ResourceType): ResourceUsage | null {
+    return this.resources.get(type) || null;
+  }
 
-    // Simulate realistic usage patterns
-    const baseUsage = Math.random() * 0.3; // 0-30% base usage
-    const spikeChance = Math.random();
+  getAllResourceUsage(): ResourceUsage[] {
+    return Array.from(this.resources.values());
+  }
 
-    if (spikeChance > 0.9) {
-      return Math.min()
-        this.getMaxResource(type),
-        baseUsage * this.getMaxResource(type) +
-          Math.random() * 0.4 * this.getMaxResource(type),
-      );
+  isResourceAvailable(type: ResourceType, required: number): boolean {
+    const usage = this.resources.get(type);
+    return usage ? usage.available >= required : false;
+  }
+}
 
-    return baseUsage * this.getMaxResource(type);
-
-// Main Compute Event Manager
-export class ComputeEventManager {
-  private jobQueue: ComputeJobQueue;
-
-  private resourceMonitor: ResourceMonitor;
-
+// Compute Manager
+export class ComputeManager {
+  private jobQueue = new ComputeJobQueue();
+  private resourceMonitor = new ResourceMonitor();
   private config: ComputeConfig;
-
   private isRunning = false;
-  private processInterval: Timer | null = null;
-
-  private jobHandlers: Map<ComputeJobType, Function> = new Map();
-  private metrics = {
-    totalJobs: 0,
-    completedJobs: 0,
-    failedJobs: 0,
-    averageProcessingTime: 0,
-    _throughputPerSecond: 0,
+  private processInterval: NodeJS.Timeout | null = null;
+  private jobHandlers = new Map<
+    ComputeJobType,
+    (job: ComputeJob) => Promise<any>
+  >();
 
   constructor(config: Partial<ComputeConfig> = {}) {
     this.config = ComputeConfigSchema.parse(config);
-    this.jobQueue = new ComputeJobQueue(this.config.maxConcurrentJobs);
-    this.resourceMonitor = new ResourceMonitor();
-
-    this.setupEventHandlers();
+  }
 
   start(): void {
-    return
     if (this.isRunning) return;
 
     this.isRunning = true;
     this.resourceMonitor.start();
 
-    // Process job queue
+    // Process jobs continuously
     this.processInterval = setInterval(() => {
       this.processJobs();
-    }, 100); // Check every 100ms
-
-    emit("compute.system_started", {
-      maxConcurrentJobs: this.config.maxConcurrentJobs,)
-      resourceLimits: this.config.resourceLimits,)
-    });
+    }, 100); // Process every 100ms
+  }
 
   stop(): void {
-    return
     if (!this.isRunning) return;
 
     this.isRunning = false;
@@ -442,350 +300,174 @@ export class ComputeEventManager {
     if (this.processInterval) {
       clearInterval(this.processInterval);
       this.processInterval = null;
+    }
+  }
 
-    emit("compute.system_stopped", {)
-      totalJobs: this.metrics.totalJobs,)
-      _uptime: Date.now(),
-    });
+  registerJobHandler(
+    jobType: ComputeJobType,
+    handler: (job: ComputeJob) => Promise<any>,
+  ): void {
+    this.jobHandlers.set(jobType, handler);
+  }
 
-  // Register job handler
-  registerJobHandler(type: ComputeJobType, handler: (...args: unknown[]) => unknown): void {
-
-    this.jobHandlers.set(type, handler);
-
-  // Submit job
-  async submitJob(type: ComputeJobType,
-    payload?: unknown,)
-    options: Partial<ComputeJob> = {},)
+  async submitJob(
+    payload: unknown,
+    jobType: ComputeJobType,
+    options: Partial<ComputeJob> = {},
   ): Promise<string> {
-    const job: ComputeJob = ComputeJobSchema.parse({)
-
+    const job: ComputeJob = {
       id: crypto.randomUUID(),
-      type,
-      payload,
+      type: jobType,
+      priority: options.priority || "normal",
+      status: "pending",
+      payload:
+        typeof payload === "object" && payload !== null
+          ? (payload as Record<string, any>)
+          : { data: payload },
+      metadata: options.metadata,
+      retries: options.retries || 3,
+      timeout: options.timeout || 30000,
       createdAt: new Date(),
-      ...options,
-    });
-
-    // Check queue capacity
-    if (this.jobQueue.getQueueSize() >= this.config.maxQueueSize) {
-      throw new Error("Job queue is full (${this.config.maxQueueSize} jobs)");
-
-    // Check resource availability
-    if (
-      job.requiredResources &&
-      !this.resourceMonitor.checkResourceAvailability(job.requiredResources)
-    ) {
-      job.status = "failed";
-      emit("compute.job_failed",
-      {
-          jobId: job.id,
-          error: "Insufficient resources",
-          requiredResources: job.requiredResources,
-        },)
-        { correlationId: job.correlationId, priority: "high" },)
-      );
-
-      throw new Error("Insufficient resources for job");
+      userId: options.userId,
+      sessionId: options.sessionId,
+      correlationId: options.correlationId,
+    };
 
     this.jobQueue.enqueue(job);
-    this.metrics.totalJobs++;
-
-    emit("compute.job_submitted",
-    {
-        jobId: job.id,
-        type: job.type,)
-        priority: job.priority,)
-        queueSize: this.jobQueue.getQueueSize(),
-      },
-      { correlationId: job.correlationId },
-    );
-
     return job.id;
+  }
 
-  // Cancel job
-  cancelJob(jobId: string): boolean {
-
-    const cancelled = this.jobQueue.cancelJob(jobId);
-
-    if (cancelled) {
-      emit("compute.job_cancelled",
-      {)
-          jobId,)
-          timestamp: Date.now(),
-        },
-        { correlationId: jobId },
-      );
-
-    return cancelled;
-
-  // Get system status
-  getStatus() {
-    return {
-      isRunning: this.isRunning,
-      queueSize: this.jobQueue.getQueueSize(),
-      runningJobs: this.jobQueue.getRunningCount(),
-      _resourceUsage: Object.fromEntries()
-
-        this.resourceMonitor.getAllResourceUsage(),
-      ),
-      metrics: this.metrics,
-      config: this.config,
-
-  // Process jobs from queue
   private async processJobs(): Promise<void> {
     if (!this.isRunning) return;
 
-    while (true) {
-      const job = this.jobQueue.dequeue();
-      if (!job) break;
+    const job = this.jobQueue.dequeue();
+    if (!job) return;
 
-      // Process job asynchronously
-      this.executeJob(job).catch((error) => {
-        console.error("Job ${job.id} execution failed:", error);
-      });
-
-  // Execute individual job
-  private async executeJob(job: ComputeJob): Promise<void> {
-
-    let allocatedResources: Partial<Record<ResourceType, number>> = {};
+    const handler = this.jobHandlers.get(job.type);
+    if (!handler) {
+      console.warn(`No handler registered for job type: ${job.type}`);
+      this.jobQueue.complete(job.id);
+      return;
+    }
 
     try {
-      // Allocate resources
-      if (job.requiredResources) {
-        const allocated = this.resourceMonitor.allocateResources(job.id,)
-          job.requiredResources,)
-        );
-        if (!allocated) {
-          throw new Error("Failed to allocate resources");
-
-        allocatedResources = job.requiredResources;
-
-      emit("compute.job_started",
-      {
-          jobId: job.id,
-          type: job.type,
-          startedAt: job.startedAt,
-          allocatedResources,
-        },)
-        { correlationId: job.correlationId },)
-      );
-
-      // Get handler for job type
-      const handler = this.jobHandlers.get(job.type);
-      if (!handler) {
-        throw new Error("No handler registered for job type: ${job.type}");
-
-      // Execute job with timeout
-      const result = await Promise.race([)
+      const result = await Promise.race([
         handler(job),
         new Promise((_, reject) =>
-          setTimeout(() => reject(new Error("Job timeout")), job.timeoutMs),
+          setTimeout(() => reject(new Error("Job timeout")), job.timeout),
         ),
       ]);
 
-      // Job completed successfully
-      const processingTime = Date.now() - startTime;
       job.status = "completed";
       job.completedAt = new Date();
+      this.jobQueue.complete(job.id);
 
-      this.metrics.completedJobs++;
-      this.updateAverageProcessingTime(processingTime);
-
-      emit("compute.job_completed",
-      {
+      // Emit job completed event
+      if (
+        typeof globalThis !== "undefined" &&
+        (globalThis as any).eventSystem
+      ) {
+        (globalThis as any).eventSystem.emit("compute.job_completed", {
           jobId: job.id,
           result,
-          processingTime,
-          resourcesUsed: allocatedResources,
-        },)
-        { correlationId: job.correlationId },)
-      );
+          processingTime:
+            job.completedAt.getTime() -
+            (job.startedAt?.getTime() || job.createdAt.getTime()),
+        });
+      }
     } catch (error) {
-      // Job failed
-      const processingTime = Date.now() - startTime;
       job.status = "failed";
       job.completedAt = new Date();
+      this.jobQueue.complete(job.id);
 
-      this.metrics.failedJobs++;
+      // Emit job failed event
+      if (
+        typeof globalThis !== "undefined" &&
+        (globalThis as any).eventSystem
+      ) {
+        (globalThis as any).eventSystem.emit("compute.job_failed", {
+          jobId: job.id,
+          error: error instanceof Error ? error.message : String(error),
+        });
+      }
+    }
+  }
 
-      emit("compute.job_failed",
-      {)
-          jobId: job.id,)
-          error: error instanceof Error ? error._message : String(error),
-          processingTime,
-          resourcesUsed: allocatedResources,
-        },
-        { correlationId: job.correlationId, priority: "high" },
-      );
-    } finally {
-      // Release resources
-      if (Object.keys(allocatedResources).length > 0) {
-        this.resourceMonitor.releaseResources(job.id, allocatedResources);
+  getQueueStats(): {
+    pending: number;
+    running: number;
+    maxConcurrent: number;
+  } {
+    return {
+      pending: this.jobQueue.size(),
+      running: this.jobQueue.getRunningCount(),
+      maxConcurrent: this.config.maxConcurrentJobs,
+    };
+  }
 
-      // Mark job as completed in queue
-      this.jobQueue.completeJob(job.id);
+  getResourceUsage(): ResourceUsage[] {
+    return this.resourceMonitor.getAllResourceUsage();
+  }
 
-  // Setup event handlers
-  private setupEventHandlers(): void {
-    return
-    // Handle system events
-    on('system.startup", () => {
-      this.start();
-    });
+  async healthCheck(): Promise<boolean> {
+    try {
+      const stats = this.getQueueStats();
+      const resourceUsage = this.getResourceUsage();
 
-    on('system.shutdown", () => {
-      this.stop();
-    });
+      // Check if system is healthy
+      const isHealthy =
+        this.isRunning &&
+        stats.pending < 1000 && // Queue not overloaded
+        resourceUsage.every((r) => r.percentage < 95); // Resources not maxed out
 
-    // Handle resource events
-    on("compute.resource_high_usage", (event: unknown) => {
-      // Implement auto-scaling or load balancing logic
-      if (this.config.enableAutoScaling) {
-        this.handleHighResourceUsage(event.data);
-
-    });
-
-  // Handle high resource usage
-  private handleHighResourceUsage(data: unknown): void {
-
-    const { resourceType, utilization } = data;
-
-    if (utilization > 0.9) {
-      // Critical resource usage - pause low priority jobs
-      emit("compute.system_overload",
-      {
-          resourceType,
-          utilization,
-          _action: "pause_low_priority_jobs",
-        },)
-        { priority: "critical" },)
-      );
-
-  // Update average processing time
-  private updateAverageProcessingTime(newTime: number): void {
-
-    const totalCompleted = this.metrics.completedJobs;
-    this.metrics.averageProcessingTime =
-      (this.metrics.averageProcessingTime * (totalCompleted - 1) + newTime) /
-      totalCompleted;
+      return isHealthy;
+    } catch {
+      return false;
+    }
+  }
+}
 
 // Singleton instance
-export const computeManager = new ComputeEventManager();
+export const computeManager = new ComputeManager();
 
-// Convenience functions for common compute operations
-export const __ComputeOperations = {
-  // AI Operations
-  async runAIInference(model: string,
-    input: unknown,)
-    options: Partial<ComputeJob> = {},)
+// Convenience functions for common operations
+export const ComputeOperations = {
+  async runTests(
+    testSuite: string,
+    options?: Record<string, any>,
   ): Promise<string> {
-    return await computeManager.submitJob("ai.inference",
-    {
-        model,
-        input,
-      },
-    {
-        priority: "high",
-        timeoutMs: 60000,
-        requiredResources: { gpu: 50, memory: 1024 } as Partial<
-          Record<ResourceType, number>
-        >,
-        ...options,)
-      },)
+    return computeManager.submitJob(
+      { testSuite, ...options },
+      "test.execution",
     );
   },
 
-  async processData(data: unknown,
-    operation: string,)
-    options: Partial<ComputeJob> = {},)
-  ): Promise<string> {
-    return await computeManager.submitJob("data.processing",
-    {
-        data,
-        operation,
-      },
-    {
-        priority: "normal",
-        requiredResources: { cpu: 25, memory: 512 } as Partial<
-          Record<ResourceType, number>
-        >,
-        ...options,)
-      },)
-    );
+  async runBuild(buildConfig: Record<string, any>): Promise<string> {
+    return computeManager.submitJob(buildConfig, "build.compilation");
   },
 
-  async optimizeImage(imageData: unknown,)
-    options: Partial<ComputeJob> = {},)
-  ): Promise<string> {
-    return await computeManager.submitJob("image.optimization",
-    {
-        imageData,
-      },
-    {
-        priority: "normal",
-        timeoutMs: 30000,
-        requiredResources: { cpu: 30, memory: 256 } as Partial<
-          Record<ResourceType, number>
-        >,
-        ...options,)
-      },)
-    );
+  async processFile(filePath: string, operation: string): Promise<string> {
+    return computeManager.submitJob({ filePath, operation }, "file.processing");
   },
 
-  async runTests(testSuite: string,)
-    options: Partial<ComputeJob> = {},)
-  ): Promise<string> {
-    return await computeManager.submitJob("test.execution",
-    {
-        testSuite,
-      },
-    {
-        priority: "normal",
-        timeoutMs: 120000,
-        requiredResources: { cpu: 10, memory: 128 } as Partial<
-          Record<ResourceType, number>
-        >,
-        ...options,)
-      },)
-    );
+  async runQuery(query: string, params?: Record<string, any>): Promise<string> {
+    return computeManager.submitJob({ query, params }, "database.query");
   },
 
-  async executeQuery(query: string,
-    database: string,)
-    options: Partial<ComputeJob> = {},)
-  ): Promise<string> {
-    return await computeManager.submitJob("database.query",
-    {
-        query,
-        database,
-      },
-    {
-        priority: "high",
-        timeoutMs: 15000,
-        requiredResources: { database_connections: 1, memory: 128 } as Partial<
-          Record<ResourceType, number>
-        >,
-        ...options,)
-      },)
-    );
+  async warmCache(cacheKey: string, data?: any): Promise<string> {
+    return computeManager.submitJob({ cacheKey, data }, "cache.warm");
   },
+};
 
-// Auto-start compute manager in server environment
+// Initialize compute system when module loads
 if (typeof window === "undefined") {
+  // Server-side initialization
   computeManager.start();
-
-  // Register default handlers
-  computeManager.registerJobHandler("test.execution",)
-    async (job: ComputeJob) => {
-      // _Example: Run tests using bun
-
-      const { } = job.payload || {};
-      // Implementation would call actual test runner
-      return { success: true, _testsRun: 42, _passed: 40, failed: 2 };
-    },
-  );
 
   // Graceful shutdown
   process.on("SIGINT", () => computeManager.stop());
   process.on("SIGTERM", () => computeManager.stop());
+}
+
+// Export for testing and debugging
+export { computeManager as debugComputeManager };

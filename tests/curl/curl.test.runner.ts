@@ -29,7 +29,7 @@ const CurlTestConfigSchema = z.object({
 export type CurlTestConfig = z.infer<typeof CurlTestConfigSchema>;
 
 // Test Result Schema
-
+export const CurlTestResultSchema = z.object({
   name: z.string(),
   success: z.boolean(),
   status: z.number().optional(),

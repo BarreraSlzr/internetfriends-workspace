@@ -3,7 +3,7 @@ import { HeaderAtomicProps } from "@/components/atomic/header";
 
 export interface NavigationItem {
   /** Unique identifier */
-  _id: string;
+  id: string;
 
   /** Display label */
   label: string;
@@ -24,7 +24,13 @@ export interface NavigationItem {
   badge?: string;
 
   /** Badge variant */
-  badgeVariant?: "default" | "primary" | "secondary" | "success" | "warning" | "danger";
+  badgeVariant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
 
   /** External link indicator */
   external?: boolean;
@@ -37,6 +43,7 @@ export interface NavigationItem {
 
   /** Custom click handler */
   onClick?: () => void;
+}
 
 export interface NavigationLogo {
   /** Logo image source */
@@ -62,8 +69,10 @@ export interface NavigationLogo {
 
   /** Text to display if no image provided */
   text?: string;
+}
 
-export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, "children"> {
+export interface NavigationMolecularProps
+  extends Omit<HeaderAtomicProps, "children"> {
   /** Navigation items to display */
   items: NavigationItem[];
 
@@ -90,6 +99,7 @@ export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, "child
 
   /** Additional CSS classes */
   className?: string;
+}
 
 export interface NavigationDropdownProps {
   /** Dropdown items */
@@ -102,7 +112,7 @@ export interface NavigationDropdownProps {
   onOpenChange: (open: boolean) => void;
 
   /** Trigger element */
-  _trigger: ReactNode;
+  trigger: ReactNode;
 
   /** Additional CSS classes */
   className?: string;
@@ -112,6 +122,7 @@ export interface NavigationDropdownProps {
 
   /** Side of dropdown */
   side?: "top" | "right" | "bottom" | "left";
+}
 
 export interface MobileMenuProps {
   /** Whether mobile menu is open */
@@ -134,6 +145,7 @@ export interface MobileMenuProps {
 
   /** Animation variant */
   animation?: "slide" | "fade" | "scale";
+}
 
 export interface NavigationBreadcrumbProps {
   /** Breadcrumb items */
@@ -147,6 +159,7 @@ export interface NavigationBreadcrumbProps {
 
   /** Additional CSS classes */
   className?: string;
+}
 
 export interface NavigationTabsProps {
   /** Tab items */
@@ -169,3 +182,4 @@ export interface NavigationTabsProps {
 
   /** Whether tabs should be scrollable on mobile */
   scrollable?: boolean;
+}
