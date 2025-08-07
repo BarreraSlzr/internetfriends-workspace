@@ -2,10 +2,11 @@
 // Centralized type system for the entire application
 
 // Re-export all specific type modules
-export * from './components';
-export * from './theme';
-export * from './api';
-export * from './navigation';
+export * from "./components";
+export * from "./theme";
+export * from "./api";
+export * from "./navigation";
+export * from "./forms";
 
 // Global utility types
 export type Prettify<T> = {
@@ -18,7 +19,8 @@ export type DeepPartial<T> = {
 
 export type RequiredKeys<T, K extends keyof T> = T & Required<Pick<T, K>>;
 
-export type OptionalKeys<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
+export type OptionalKeys<T, K extends keyof T> = Omit<T, K> &
+  Partial<Pick<T, K>>;
 
 export type NonEmptyArray<T> = [T, ...T[]];
 
@@ -31,11 +33,11 @@ export type KeysOfType<T, U> = {
 // Brand types for type safety
 export type Brand<T, B> = T & { readonly __brand: B };
 
-export type UserId = Brand<string, 'UserId'>;
-export type ProjectId = Brand<string, 'ProjectId'>;
-export type PostId = Brand<string, 'PostId'>;
-export type Email = Brand<string, 'Email'>;
-export type Url = Brand<string, 'Url'>;
+export type UserId = Brand<string, "UserId">;
+export type ProjectId = Brand<string, "ProjectId">;
+export type PostId = Brand<string, "PostId">;
+export type Email = Brand<string, "Email">;
+export type Url = Brand<string, "Url">;
 
 // Common data structures
 export interface BaseEntity {
@@ -48,12 +50,12 @@ export interface User extends BaseEntity {
   email: Email;
   name: string;
   avatar?: Url;
-  role: 'admin' | 'user' | 'guest';
+  role: "admin" | "user" | "guest";
   preferences: UserPreferences;
 }
 
 export interface UserPreferences {
-  theme: 'light' | 'dark' | 'system';
+  theme: "light" | "dark" | "system";
   language: string;
   timezone: string;
   notifications: {
@@ -67,7 +69,7 @@ export interface Project extends BaseEntity {
   title: string;
   description: string;
   slug: string;
-  status: 'draft' | 'published' | 'archived';
+  status: "draft" | "published" | "archived";
   tags: string[];
   technologies: string[];
   featured: boolean;
@@ -90,7 +92,7 @@ export interface ProjectLink {
   id: string;
   label: string;
   url: Url;
-  type: 'demo' | 'source' | 'case-study' | 'documentation';
+  type: "demo" | "source" | "case-study" | "documentation";
 }
 
 export interface BlogPost extends BaseEntity {
@@ -115,30 +117,10 @@ export interface SEOMetadata {
   ogImage?: Url;
   ogTitle?: string;
   ogDescription?: string;
-  twitterCard?: 'summary' | 'summary_large_image';
+  twitterCard?: "summary" | "summary_large_image";
   canonical?: Url;
   noindex?: boolean;
   nofollow?: boolean;
-}
-
-// Form types
-export interface ContactFormData {
-  name: string;
-  email: Email;
-  company?: string;
-  message: string;
-  budget?: 'under-5k' | '5k-15k' | '15k-50k' | '50k-plus';
-  timeline?: 'asap' | '1-3-months' | '3-6-months' | '6-plus-months';
-  services: string[];
-  captcha?: string;
-}
-
-export interface NewsletterFormData {
-  email: Email;
-  firstName?: string;
-  lastName?: string;
-  interests?: string[];
-  source?: string;
 }
 
 // Error types
@@ -148,16 +130,6 @@ export interface ApiError {
   details?: Record<string, unknown>;
   timestamp: Date;
   path?: string;
-}
-
-export interface ValidationError {
-  field: string;
-  message: string;
-  code: string;
-}
-
-export interface FormErrors<T> {
-  [K in keyof T]?: string;
 }
 
 // Response types
@@ -195,7 +167,7 @@ export interface AnalyticsEvent {
 }
 
 export interface PageViewEvent extends AnalyticsEvent {
-  name: 'page_view';
+  name: "page_view";
   properties: {
     page: string;
     referrer?: string;
@@ -206,7 +178,7 @@ export interface PageViewEvent extends AnalyticsEvent {
 }
 
 export interface ContactFormEvent extends AnalyticsEvent {
-  name: 'contact_form_submit';
+  name: "contact_form_submit";
   properties: {
     form_type: string;
     success: boolean;
@@ -216,7 +188,7 @@ export interface ContactFormEvent extends AnalyticsEvent {
 
 // Configuration types
 export interface AppConfig {
-  env: 'development' | 'staging' | 'production';
+  env: "development" | "staging" | "production";
   version: string;
   apiUrl: string;
   cdnUrl?: string;
@@ -258,7 +230,7 @@ export interface SearchQuery {
   q: string;
   filters?: Record<string, string | string[]>;
   sort?: string;
-  order?: 'asc' | 'desc';
+  order?: "asc" | "desc";
   page?: number;
   limit?: number;
 }
@@ -266,7 +238,7 @@ export interface SearchQuery {
 // Content Management types
 export interface ContentBlock {
   id: string;
-  type: 'text' | 'image' | 'video' | 'code' | 'quote' | 'gallery';
+  type: "text" | "image" | "video" | "code" | "quote" | "gallery";
   data: Record<string, unknown>;
   order: number;
 }
@@ -281,16 +253,16 @@ export interface ImageTransform {
   width?: number;
   height?: number;
   quality?: number;
-  format?: 'webp' | 'avif' | 'jpg' | 'png';
-  fit?: 'cover' | 'contain' | 'fill';
-  position?: 'center' | 'top' | 'bottom' | 'left' | 'right';
+  format?: "webp" | "avif" | "jpg" | "png";
+  fit?: "cover" | "contain" | "fill";
+  position?: "center" | "top" | "bottom" | "left" | "right";
 }
 
 // Internationalization types
 export interface LocaleConfig {
   code: string;
   name: string;
-  dir: 'ltr' | 'rtl';
+  dir: "ltr" | "rtl";
   default?: boolean;
 }
 
@@ -346,7 +318,6 @@ export type DeepMutable<T> = {
 // Function types
 export type AsyncFunction<T = void> = () => Promise<T>;
 export type EventHandler<T = unknown> = (event: T) => void;
-export type Validator<T> = (value: T) => boolean | string;
 
 // Component prop types (basic)
 export interface WithChildren {
@@ -358,7 +329,7 @@ export interface WithClassName {
 }
 
 export interface WithTestId {
-  'data-testid'?: string;
+  "data-testid"?: string;
 }
 
 export interface BaseProps extends WithChildren, WithClassName, WithTestId {
@@ -366,51 +337,90 @@ export interface BaseProps extends WithChildren, WithClassName, WithTestId {
 }
 
 // Animation types
-export type AnimationDirection = 'up' | 'down' | 'left' | 'right';
-export type AnimationDuration = 'fast' | 'normal' | 'slow';
-export type AnimationEasing = 'linear' | 'easeIn' | 'easeOut' | 'easeInOut';
+export type AnimationDirection = "up" | "down" | "left" | "right";
+export type AnimationDuration = "fast" | "normal" | "slow";
+export type AnimationEasing = "linear" | "easeIn" | "easeOut" | "easeInOut";
 
 // Layout types
-export type LayoutVariant = 'fixed' | 'fluid' | 'contained';
-export type Alignment = 'start' | 'center' | 'end' | 'stretch';
-export type Justification = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
+export type LayoutVariant = "fixed" | "fluid" | "contained";
+export type Alignment = "start" | "center" | "end" | "stretch";
+export type Justification =
+  | "start"
+  | "center"
+  | "end"
+  | "between"
+  | "around"
+  | "evenly";
 
 // Responsive types
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+export type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "2xl";
 export type ResponsiveValue<T> = T | Partial<Record<Breakpoint, T>>;
 
 // Color types
-export type ColorScheme = 'light' | 'dark';
-export type ColorVariant = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'info';
-export type ColorIntensity = 50 | 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+export type ColorScheme = "light" | "dark";
+export type ColorVariant =
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "error"
+  | "info";
+export type ColorIntensity =
+  | 50
+  | 100
+  | 200
+  | 300
+  | 400
+  | 500
+  | 600
+  | 700
+  | 800
+  | 900;
 
 // Size types
-export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-export type Spacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | 20 | 24 | 32 | 40 | 48 | 56 | 64;
+export type Size = "xs" | "sm" | "md" | "lg" | "xl";
+export type Spacing =
+  | 0
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 8
+  | 10
+  | 12
+  | 16
+  | 20
+  | 24
+  | 32
+  | 40
+  | 48
+  | 56
+  | 64;
 
 // Status types
-export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
-export type SubmissionState = 'idle' | 'submitting' | 'success' | 'error';
+export type LoadingState = "idle" | "loading" | "success" | "error";
 
 // File types
 export interface FileUpload {
   file: File;
   progress: number;
-  status: 'pending' | 'uploading' | 'success' | 'error';
+  status: "pending" | "uploading" | "success" | "error";
   url?: string;
   error?: string;
 }
 
 // Environment types
-export type Environment = 'development' | 'staging' | 'production';
+export type Environment = "development" | "staging" | "production";
 
 // Feature flag types
 export type FeatureFlag =
-  | 'blog_enabled'
-  | 'contact_form_enabled'
-  | 'newsletter_enabled'
-  | 'dark_mode_enabled'
-  | 'analytics_enabled';
+  | "blog_enabled"
+  | "contact_form_enabled"
+  | "newsletter_enabled"
+  | "dark_mode_enabled"
+  | "analytics_enabled";
 
 export interface FeatureFlags {
   [key: string]: boolean;
@@ -420,7 +430,7 @@ export interface FeatureFlags {
 export interface PerformanceMetric {
   name: string;
   value: number;
-  unit: 'ms' | 'bytes' | 'count';
+  unit: "ms" | "bytes" | "count";
   timestamp: Date;
 }
 

@@ -1,0 +1,244 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "portfolio": "Portfolio",
+    "projects": "Projects",
+    "samples": "Samples",
+    "curriculum": "Curriculum",
+    "contact": "Contact",
+    "pricing": "Pricing",
+    "blog": "Blog",
+    "services": "Services"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "export": "Export",
+    "import": "Import",
+    "download": "Download",
+    "upload": "Upload",
+    "copy": "Copy",
+    "share": "Share",
+    "print": "Print"
+  },
+  "buttons": {
+    "getStarted": "Get Started",
+    "learnMore": "Learn More",
+    "contactUs": "Contact Us",
+    "viewPortfolio": "View Portfolio",
+    "downloadResume": "Download Resume",
+    "hireMeNow": "Hire Me Now",
+    "requestQuote": "Request Quote",
+    "viewDemo": "View Demo",
+    "readMore": "Read More",
+    "showLess": "Show Less"
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "company": "Company",
+    "message": "Message",
+    "subject": "Subject",
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "invalidPhone": "Please enter a valid phone number",
+    "minLength": "Must be at least {{count}} characters",
+    "maxLength": "Must be no more than {{count}} characters",
+    "sending": "Sending...",
+    "sent": "Message sent successfully!",
+    "sendError": "Failed to send message. Please try again.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "website": "Website",
+    "budget": "Budget",
+    "timeline": "Timeline",
+    "services": "Services Needed"
+  },
+  "hero": {
+    "title": "Building Digital Connections",
+    "subtitle": "InternetFriends",
+    "description": "Expert web development and digital solutions for modern businesses. We create beautiful, fast, and scalable applications that connect people and drive results.",
+    "primaryCta": "Get Started",
+    "secondaryCta": "View Portfolio",
+    "videoCta": "Watch Demo"
+  },
+  "about": {
+    "title": "About InternetFriends",
+    "subtitle": "Passionate about creating digital experiences",
+    "description": "We are a team of dedicated developers and designers committed to building exceptional web applications that make a difference.",
+    "mission": "Our Mission",
+    "missionText": "To empower businesses with cutting-edge digital solutions that drive growth and create meaningful connections with their audiences.",
+    "vision": "Our Vision",
+    "visionText": "To be the leading provider of innovative web development services, known for our commitment to excellence and customer satisfaction."
+  },
+  "features": {
+    "title": "Why Choose InternetFriends",
+    "subtitle": "Everything you need to build modern web applications",
+    "description": "We provide comprehensive solutions that combine cutting-edge technology with proven design patterns to deliver exceptional digital experiences.",
+    "modernDevelopment": {
+      "title": "Modern Development",
+      "description": "Built with the latest technologies including Next.js, TypeScript, and cutting-edge frameworks for optimal performance.",
+      "features": ["Next.js 15", "TypeScript", "Server Components", "Edge Runtime"]
+    },
+    "designSystems": {
+      "title": "Design Systems",
+      "description": "Comprehensive design systems with atomic components, consistent theming, and scalable architecture.",
+      "features": ["Atomic Design", "CSS Modules", "Theme Support", "Responsive Design"]
+    },
+    "performanceFirst": {
+      "title": "Performance First",
+      "description": "Optimized for speed with code splitting, lazy loading, and modern build tools for lightning-fast experiences.",
+      "features": ["Code Splitting", "Image Optimization", "Bundle Analysis", "Core Web Vitals"]
+    },
+    "securityReliability": {
+      "title": "Security & Reliability",
+      "description": "Enterprise-grade security with testing, monitoring, and deployment best practices built-in.",
+      "features": ["Security Headers", "Type Safety", "Error Boundaries", "Performance Monitoring"]
+    },
+    "userExperience": {
+      "title": "User Experience",
+      "description": "Intuitive interfaces designed for accessibility, usability, and conversion optimization.",
+      "features": ["WCAG Compliance", "User Testing", "A/B Testing", "Analytics Integration"]
+    },
+    "mobileOptimized": {
+      "title": "Mobile Optimized",
+      "description": "Responsive designs that work perfectly across all devices with progressive web app capabilities.",
+      "features": ["Responsive Design", "Touch Optimized", "Offline Support", "PWA Ready"]
+    }
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Trusted by businesses worldwide",
+    "description": "Don't just take our word for it. Here's what our clients have to say about working with InternetFriends.",
+    "viewAll": "View All Testimonials"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Ready to start your project?",
+    "description": "Let's discuss how we can help bring your vision to life. We're here to answer any questions and provide a free consultation.",
+    "formTitle": "Send us a message",
+    "formDescription": "Fill out the form below and we'll get back to you within 24 hours.",
+    "contactInfo": "Contact Information",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "hours": "Business Hours",
+    "mondayFriday": "Monday - Friday: 9:00 AM - 6:00 PM",
+    "weekend": "Weekend: By appointment only"
+  },
+  "footer": {
+    "tagline": "Building digital connections, one project at a time.",
+    "quickLinks": "Quick Links",
+    "services": "Services",
+    "resources": "Resources",
+    "legal": "Legal",
+    "followUs": "Follow Us",
+    "newsletter": "Newsletter",
+    "newsletterDescription": "Stay updated with our latest news and insights.",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "copyright": "© {{year}} InternetFriends. All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy"
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Showcasing our best work",
+    "description": "Take a look at some of the projects we've completed for our clients. Each project represents our commitment to quality and innovation.",
+    "allProjects": "All Projects",
+    "webDevelopment": "Web Development",
+    "mobileApps": "Mobile Apps",
+    "ecommerce": "E-commerce",
+    "designSystems": "Design Systems",
+    "viewProject": "View Project",
+    "liveDemo": "Live Demo",
+    "sourceCode": "Source Code",
+    "caseStudy": "Case Study"
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that's right for your project",
+    "description": "No hidden fees. No surprises. Just honest pricing for quality work.",
+    "starter": "Starter",
+    "professional": "Professional",
+    "enterprise": "Enterprise",
+    "custom": "Custom",
+    "perMonth": "per month",
+    "perProject": "per project",
+    "getQuote": "Get Quote",
+    "choosePlan": "Choose Plan",
+    "mostPopular": "Most Popular",
+    "contactSales": "Contact Sales"
+  },
+  "stats": {
+    "happyClients": "Happy Clients",
+    "projectsCompleted": "Projects Completed",
+    "yearsExperience": "Years Experience",
+    "teamMembers": "Team Members",
+    "averageRating": "Average Rating",
+    "uptime": "Uptime"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggleTheme": "Toggle theme"
+  },
+  "language": {
+    "english": "English",
+    "spanish": "Español",
+    "french": "Français",
+    "selectLanguage": "Select Language"
+  },
+  "seo": {
+    "defaultTitle": "InternetFriends - Building Digital Connections",
+    "defaultDescription": "Expert web development and digital solutions for modern businesses. We create beautiful, fast, and scalable applications.",
+    "keywords": "web development, digital solutions, next.js, react, typescript, design systems"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to content",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "toggleMobileMenu": "Toggle mobile menu",
+    "previousSlide": "Previous slide",
+    "nextSlide": "Next slide",
+    "playPause": "Play/Pause",
+    "mute": "Mute",
+    "fullscreen": "Fullscreen"
+  },
+  "errors": {
+    "pageNotFound": "Page Not Found",
+    "pageNotFoundDescription": "The page you're looking for doesn't exist or has been moved.",
+    "serverError": "Server Error",
+    "serverErrorDescription": "Something went wrong on our end. Please try again later.",
+    "networkError": "Network Error",
+    "networkErrorDescription": "Please check your internet connection and try again.",
+    "formValidation": "Please check the form for errors and try again.",
+    "fileUploadError": "Failed to upload file. Please try again.",
+    "sessionExpired": "Your session has expired. Please log in again."
+  },
+  "success": {
+    "messageSent": "Your message has been sent successfully!",
+    "subscribed": "You've been successfully subscribed to our newsletter!",
+    "updated": "Your information has been updated successfully!",
+    "saved": "Changes saved successfully!",
+    "uploaded": "File uploaded successfully!"
+  }
+}

@@ -1,7 +1,7 @@
 // InternetFriends Theme Hook
 // Comprehensive theme management with system preference detection and persistence
 
-import { useState, useEffect, useCallback, useContext, createContext } from 'react';
+import React, { useState, useEffect, useCallback, useContext, createContext } from 'react';
 import { ThemeMode, ColorScheme, ThemeConfig, UseThemeReturn } from '../types/theme';
 import { HOOK_DEFAULTS, createHookError } from './index';
 

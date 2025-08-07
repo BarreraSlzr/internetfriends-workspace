@@ -1,0 +1,244 @@
+{
+  "navigation": {
+    "home": "Inicio",
+    "about": "Acerca de",
+    "portfolio": "Portafolio",
+    "projects": "Proyectos",
+    "samples": "Muestras",
+    "curriculum": "Currículum",
+    "contact": "Contacto",
+    "pricing": "Precios",
+    "blog": "Blog",
+    "services": "Servicios"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "export": "Exportar",
+    "import": "Importar",
+    "download": "Descargar",
+    "upload": "Subir",
+    "copy": "Copiar",
+    "share": "Compartir",
+    "print": "Imprimir"
+  },
+  "buttons": {
+    "getStarted": "Comenzar",
+    "learnMore": "Saber Más",
+    "contactUs": "Contáctanos",
+    "viewPortfolio": "Ver Portafolio",
+    "downloadResume": "Descargar Currículum",
+    "hireMeNow": "Contrátame Ahora",
+    "requestQuote": "Solicitar Cotización",
+    "viewDemo": "Ver Demo",
+    "readMore": "Leer Más",
+    "showLess": "Mostrar Menos"
+  },
+  "forms": {
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono",
+    "company": "Empresa",
+    "message": "Mensaje",
+    "subject": "Asunto",
+    "required": "Este campo es requerido",
+    "invalidEmail": "Por favor ingresa un correo electrónico válido",
+    "invalidPhone": "Por favor ingresa un número de teléfono válido",
+    "minLength": "Debe tener al menos {{count}} caracteres",
+    "maxLength": "No debe tener más de {{count}} caracteres",
+    "sending": "Enviando...",
+    "sent": "¡Mensaje enviado exitosamente!",
+    "sendError": "Error al enviar el mensaje. Por favor intenta de nuevo.",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "website": "Sitio Web",
+    "budget": "Presupuesto",
+    "timeline": "Cronograma",
+    "services": "Servicios Necesarios"
+  },
+  "hero": {
+    "title": "Construyendo Conexiones Digitales",
+    "subtitle": "InternetFriends",
+    "description": "Desarrollo web experto y soluciones digitales para empresas modernas. Creamos aplicaciones hermosas, rápidas y escalables que conectan a las personas y generan resultados.",
+    "primaryCta": "Comenzar",
+    "secondaryCta": "Ver Portafolio",
+    "videoCta": "Ver Demo"
+  },
+  "about": {
+    "title": "Acerca de InternetFriends",
+    "subtitle": "Apasionados por crear experiencias digitales",
+    "description": "Somos un equipo de desarrolladores y diseñadores dedicados comprometidos con la construcción de aplicaciones web excepcionales que marcan la diferencia.",
+    "mission": "Nuestra Misión",
+    "missionText": "Empoderar a las empresas con soluciones digitales de vanguardia que impulsen el crecimiento y creen conexiones significativas con sus audiencias.",
+    "vision": "Nuestra Visión",
+    "visionText": "Ser el proveedor líder de servicios innovadores de desarrollo web, conocidos por nuestro compromiso con la excelencia y la satisfacción del cliente."
+  },
+  "features": {
+    "title": "Por Qué Elegir InternetFriends",
+    "subtitle": "Todo lo que necesitas para construir aplicaciones web modernas",
+    "description": "Proporcionamos soluciones integrales que combinan tecnología de vanguardia con patrones de diseño probados para ofrecer experiencias digitales excepcionales.",
+    "modernDevelopment": {
+      "title": "Desarrollo Moderno",
+      "description": "Construido con las últimas tecnologías incluyendo Next.js, TypeScript y frameworks de vanguardia para un rendimiento óptimo.",
+      "features": ["Next.js 15", "TypeScript", "Componentes de Servidor", "Edge Runtime"]
+    },
+    "designSystems": {
+      "title": "Sistemas de Diseño",
+      "description": "Sistemas de diseño integrales con componentes atómicos, temas consistentes y arquitectura escalable.",
+      "features": ["Diseño Atómico", "Módulos CSS", "Soporte de Temas", "Diseño Responsivo"]
+    },
+    "performanceFirst": {
+      "title": "Rendimiento Primero",
+      "description": "Optimizado para velocidad con división de código, carga perezosa y herramientas de construcción modernas para experiencias ultrarrápidas.",
+      "features": ["División de Código", "Optimización de Imágenes", "Análisis de Paquetes", "Core Web Vitals"]
+    },
+    "securityReliability": {
+      "title": "Seguridad y Confiabilidad",
+      "description": "Seguridad de nivel empresarial con pruebas, monitoreo y mejores prácticas de implementación incorporadas.",
+      "features": ["Encabezados de Seguridad", "Seguridad de Tipos", "Límites de Error", "Monitoreo de Rendimiento"]
+    },
+    "userExperience": {
+      "title": "Experiencia de Usuario",
+      "description": "Interfaces intuitivas diseñadas para accesibilidad, usabilidad y optimización de conversión.",
+      "features": ["Cumplimiento WCAG", "Pruebas de Usuario", "Pruebas A/B", "Integración de Analytics"]
+    },
+    "mobileOptimized": {
+      "title": "Optimizado para Móvil",
+      "description": "Diseños responsivos que funcionan perfectamente en todos los dispositivos con capacidades de aplicaciones web progresivas.",
+      "features": ["Diseño Responsivo", "Optimizado para Táctil", "Soporte Sin Conexión", "PWA Listo"]
+    }
+  },
+  "testimonials": {
+    "title": "Lo Que Dicen Nuestros Clientes",
+    "subtitle": "Confiado por empresas de todo el mundo",
+    "description": "No solo tomes nuestra palabra. Esto es lo que nuestros clientes tienen que decir sobre trabajar con InternetFriends.",
+    "viewAll": "Ver Todos los Testimonios"
+  },
+  "contact": {
+    "title": "Ponte en Contacto",
+    "subtitle": "¿Listo para comenzar tu proyecto?",
+    "description": "Hablemos sobre cómo podemos ayudarte a dar vida a tu visión. Estamos aquí para responder cualquier pregunta y proporcionar una consulta gratuita.",
+    "formTitle": "Envíanos un mensaje",
+    "formDescription": "Completa el formulario a continuación y te responderemos dentro de 24 horas.",
+    "contactInfo": "Información de Contacto",
+    "address": "Dirección",
+    "phone": "Teléfono",
+    "email": "Correo Electrónico",
+    "hours": "Horario de Atención",
+    "mondayFriday": "Lunes - Viernes: 9:00 AM - 6:00 PM",
+    "weekend": "Fin de semana: Solo con cita previa"
+  },
+  "footer": {
+    "tagline": "Construyendo conexiones digitales, un proyecto a la vez.",
+    "quickLinks": "Enlaces Rápidos",
+    "services": "Servicios",
+    "resources": "Recursos",
+    "legal": "Legal",
+    "followUs": "Síguenos",
+    "newsletter": "Boletín",
+    "newsletterDescription": "Mantente actualizado con nuestras últimas noticias e insights.",
+    "emailPlaceholder": "Ingresa tu correo electrónico",
+    "subscribe": "Suscribirse",
+    "copyright": "© {{year}} InternetFriends. Todos los derechos reservados.",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "cookiePolicy": "Política de Cookies"
+  },
+  "portfolio": {
+    "title": "Nuestro Portafolio",
+    "subtitle": "Mostrando nuestro mejor trabajo",
+    "description": "Echa un vistazo a algunos de los proyectos que hemos completado para nuestros clientes. Cada proyecto representa nuestro compromiso con la calidad e innovación.",
+    "allProjects": "Todos los Proyectos",
+    "webDevelopment": "Desarrollo Web",
+    "mobileApps": "Aplicaciones Móviles",
+    "ecommerce": "Comercio Electrónico",
+    "designSystems": "Sistemas de Diseño",
+    "viewProject": "Ver Proyecto",
+    "liveDemo": "Demo en Vivo",
+    "sourceCode": "Código Fuente",
+    "caseStudy": "Caso de Estudio"
+  },
+  "pricing": {
+    "title": "Precios Simples y Transparentes",
+    "subtitle": "Elige el plan que sea adecuado para tu proyecto",
+    "description": "Sin tarifas ocultas. Sin sorpresas. Solo precios honestos por trabajo de calidad.",
+    "starter": "Inicial",
+    "professional": "Profesional",
+    "enterprise": "Empresarial",
+    "custom": "Personalizado",
+    "perMonth": "por mes",
+    "perProject": "por proyecto",
+    "getQuote": "Obtener Cotización",
+    "choosePlan": "Elegir Plan",
+    "mostPopular": "Más Popular",
+    "contactSales": "Contactar Ventas"
+  },
+  "stats": {
+    "happyClients": "Clientes Felices",
+    "projectsCompleted": "Proyectos Completados",
+    "yearsExperience": "Años de Experiencia",
+    "teamMembers": "Miembros del Equipo",
+    "averageRating": "Calificación Promedio",
+    "uptime": "Tiempo de Actividad"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "toggleTheme": "Cambiar tema"
+  },
+  "language": {
+    "english": "English",
+    "spanish": "Español",
+    "french": "Français",
+    "selectLanguage": "Seleccionar Idioma"
+  },
+  "seo": {
+    "defaultTitle": "InternetFriends - Construyendo Conexiones Digitales",
+    "defaultDescription": "Desarrollo web experto y soluciones digitales para empresas modernas. Creamos aplicaciones hermosas, rápidas y escalables.",
+    "keywords": "desarrollo web, soluciones digitales, next.js, react, typescript, sistemas de diseño"
+  },
+  "accessibility": {
+    "skipToContent": "Saltar al contenido",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "toggleMobileMenu": "Alternar menú móvil",
+    "previousSlide": "Diapositiva anterior",
+    "nextSlide": "Siguiente diapositiva",
+    "playPause": "Reproducir/Pausar",
+    "mute": "Silenciar",
+    "fullscreen": "Pantalla completa"
+  },
+  "errors": {
+    "pageNotFound": "Página No Encontrada",
+    "pageNotFoundDescription": "La página que buscas no existe o ha sido movida.",
+    "serverError": "Error del Servidor",
+    "serverErrorDescription": "Algo salió mal en nuestro lado. Por favor intenta de nuevo más tarde.",
+    "networkError": "Error de Red",
+    "networkErrorDescription": "Por favor verifica tu conexión a internet e intenta de nuevo.",
+    "formValidation": "Por favor verifica el formulario en busca de errores e intenta de nuevo.",
+    "fileUploadError": "Error al subir el archivo. Por favor intenta de nuevo.",
+    "sessionExpired": "Tu sesión ha expirado. Por favor inicia sesión de nuevo."
+  },
+  "success": {
+    "messageSent": "¡Tu mensaje ha sido enviado exitosamente!",
+    "subscribed": "¡Te has suscrito exitosamente a nuestro boletín!",
+    "updated": "¡Tu información ha sido actualizada exitosamente!",
+    "saved": "¡Cambios guardados exitosamente!",
+    "uploaded": "¡Archivo subido exitosamente!"
+  }
+}
