@@ -121,7 +121,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         {isOpen && (
           <div className="absolute right-0 top-full mt-1 w-48 bg-popover border border-border rounded-md shadow-lg z-50 py-1">
             {availableLocales.map((localeConfig) => (
-              <button onClick key={localeConfig.code}={() => handleLocaleChange(localeConfig.code)}
+              <button key={localeConfig.code} onClick={() => handleLocaleChange(localeConfig.code)}
                 className={cn(
                   'w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors',
                   'hover:bg-accent hover:text-accent-foreground',
@@ -195,7 +195,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
             {t('language.selectLanguage')}
           </div>
           {availableLocales.map((localeConfig) => (
-            <button onClick key={localeConfig.code}={() => handleLocaleChange(localeConfig.code)}
+            <button key={localeConfig.code} onClick={() => handleLocaleChange(localeConfig.code)}
               className={cn(
                 'w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors',
                 'hover:bg-accent hover:text-accent-foreground',

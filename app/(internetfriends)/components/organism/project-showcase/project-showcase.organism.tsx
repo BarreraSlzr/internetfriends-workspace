@@ -379,7 +379,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           >
             <option value="all">All Categories</option>
             {categories.map((category) => (
-              <option value key={category}={category}>
+              <option key={category} value={category}>
                 {category}
               </option>
             ))}
@@ -401,7 +401,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         >
           <option value="all">All Status</option>
           {Object.entries(statusConfig).map(([status, config]) => (
-            <option value key={status}={status}>
+            <option key={status} value={status}>
               {config.icon} {config.label}
             </option>
           ))}
@@ -413,7 +413,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         <label className={styles.filterLabel}>Technologies:</label>
         <div className={styles.technologyFilter}>
           {allTechnologies.slice(0, 8).map((tech) => (
-            <label className key={tech}={styles.technologyTag}>
+            <label key={tech} className={styles.technologyTag}>
               <input
                 type="checkbox"
                 checked={activeFilters.technology?.includes(tech) || false}
@@ -444,7 +444,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           className={styles.sortSelect}
         >
           {sortOptions.map((option) => (
-            <option value key={option.value}={option.value}>
+            <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
@@ -454,10 +454,8 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
       {/* View Mode Toggle */}
       <div className={styles.viewModeToggle}>
         {viewModeOptions.map((option) => (
-          <button onClick key={option.value}={() => handleViewModeChange(option.value)}
-            className={`
-              ${styles.viewModeButton}
-              ${currentViewMode === option.value ? styles.active : ""}
+          <button key={option.value} onClick={() => handleViewModeChange(option.value)}
+            className={`${styles.viewModeButton}${currentViewMode === option.value ? styles.active : ""}
             `}
             title={option.label}
           >
@@ -500,9 +498,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
     const statusInfo = statusConfig[project.status];
 
     return (
-      <motion.div key={project.id} className ={`
-          ${styles.projectCard}
-          ${styles[currentViewMode]}
+      <motion.div key={project.id} className={`${styles.projectCard}${styles[currentViewMode]}
           ${isHovered ? styles._hovered : ""}
         `}
         variants={projectVariants}
@@ -561,7 +557,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           {/* Technologies */}
           <div className={styles.projectTechnologies}>
             {project.technologies?.slice(0, 3).map((tech: string) => (
-              <span className key={tech}={styles.techBadge}>
+              <span key={tech} className={styles.techBadge}>
                 {tech}
               </span>
             ))}
@@ -638,9 +634,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
                 )}
                 <button
                   onClick={() => handlePageChange(page)}
-                  className={`
-                    ${styles.paginationNumber}
-                    ${page === currentPage ? styles.active : ""}
+                  className={`${styles.paginationNumber}${page === currentPage ? styles.active : ""}
                   `}
                 >
                   {page}
@@ -662,7 +656,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
 
   if (error) {
     return (
-      <div className={`${styles.container} ${styles.error} ${className || ""}`}>
+      <div className={`${styles.container}${styles.error} ${className || ""}`}>
         <div className={styles.errorContent}>
           <h2>⚠️ Projects Error</h2>
           <p>{error}</p>
@@ -674,7 +668,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
   return (
     <motion.div
       _ref={containerRef}
-      className={`${styles.container} ${className || ""}`}
+      className={`${styles.container}${className || ""}`}
       variants={containerVariants}
       _initial="hidden"
       _animate={animateOnScroll ? (isInView ? "visible" : "hidden") : "visible"}
@@ -705,7 +699,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
 
       {/* Projects Grid */}
       <motion.div
-        className={`${styles.projectsGrid} ${styles[currentViewMode]}`}
+        className={`${styles.projectsGrid}${styles[currentViewMode]}`}
         variants={itemVariants}
       >
         <AnimatePresence mode="popLayout">

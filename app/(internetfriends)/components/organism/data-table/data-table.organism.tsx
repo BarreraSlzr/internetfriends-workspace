@@ -102,12 +102,12 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
 }) => {
   // State Management
   const [sortConfig, setSortConfig] = useState<SortConfig | null>(null);
-  const [filters, setFilters] = useState<Record string, FilterConfig>>({});
+  const [filters, setFilters] = useState<Record<string, FilterConfig>>({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedRows, setSelectedRows] = useState<Set string>>(new Set());
+  const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
-  const [columnVisibility, setColumnVisibility] = useState<Record string, boolean>
+  const [columnVisibility, setColumnVisibility] = useState<Record<string, boolean>
   >({});
 
   // Refs
@@ -364,7 +364,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     const sortDirection = sortConfig?.direction;
 
     return (
-      <th className key={column.key}={`
+      <th key={column.key} className={`
           ${styles.headerCell}
           ${sortable && column.sortable !== false ? styles.sortable : ""}
           ${isSorted ? styles._sorted : ""}
@@ -432,7 +432,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     }
 
     return (
-      <td className key={column.key}={`
+      <td key={column.key} className={`
           ${styles.cell}
           ${column.align ? styles[`align-${column.align}`] : ""}
         `}
@@ -486,8 +486,8 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             ⟨
           </button>
           {pages.map((page) => (
-            <button onClick key={page}={() => handlePageChange(page)}
-              className={`${styles.paginationButton} ${page === currentPage ? styles.active : ""}`}
+            <button key={page} onClick={() => handlePageChange(page)}
+              className={`${styles.paginationButton}${page === currentPage ? styles.active : ""}`}
             >
               {page}
             </button>
@@ -547,7 +547,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
 
   if (error) {
     return (
-      <div className={`${styles.container} ${styles.error} ${className || ""}`}>
+      <div className={`${styles.container}${styles.error} ${className || ""}`}>
         <div className={styles.errorContent}>
           <h3>⚠️ Table Error</h3>
           <p>{error}</p>
@@ -563,9 +563,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
 
   return (
     <div
-      className={`
-        ${styles.container}
-        ${compact ? styles.compact : ""}
+      className={`${styles.container}${compact ? styles.compact : ""}
         ${className || ""}
       `}
       {...props}
@@ -623,9 +621,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
       <div className={styles.tableContainer}>
         <motion.table
           ref={tableRef}
-          className={`
-            ${styles.table}
-            ${zebra ? styles.zebra : ""}
+          className={`${styles.table}${zebra ? styles.zebra : ""}
             ${stickyHeader ? styles.stickyHeader : ""}
           `}
           variants={containerVariants}
@@ -693,9 +689,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
               ) : (
                 visibleData.map((row, index) => (
                   <motion.tr
-                    <className key={row.id}={`
-                      ${styles.row}
-                      ${selectedRows.has(row.id) ? styles.selected : ""}
+                    <tr key={row.id} className={`${styles.row}${selectedRows.has(row.id) ? styles.selected : ""}
                       ${onRowClick ? styles.clickable : ""}
                     `}
                     variants={rowVariants}

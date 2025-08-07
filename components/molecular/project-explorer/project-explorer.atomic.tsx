@@ -101,7 +101,7 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
 }) => {
   const [viewMode, setViewMode] = useState<ViewMode>('tree');
   const [searchQuery, setSearchQuery] = useState('');
-  const [expandedNodes, setExpandedNodes] = useState<Set string>>(new Set());
+  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set());
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
   const [data, setData] = useState<TransportableUIData | null>(initialData || null);
   const [eventHistory, setEventHistory] = useState<ExplorerEvent[]>([]);
@@ -294,7 +294,7 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
     const isSelected = selectedNode === item.id;
 
     return (
-      <div className key={item.id}={`
+      <div key={item.id} className={`
           p-3 border rounded-lg cursor-pointer transition-all duration-200
           hover:shadow-md hover:border-blue-300
           ${isSelected ? 'bg-blue-50 border-blue-500 shadow-md' : 'bg-white border-gray-200'}

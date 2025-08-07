@@ -282,9 +282,7 @@ export interface HeaderUtils {
 }
 
 // Default configurations
-export const _HEADER_DEFAULTS: Required<Pick 
-    HeaderOrganismProps,
-    "variant" | "size" | "skipToMain" | "mainContentSelector"
+export const _HEADER_DEFAULTS: Required<Pick<HeaderOrganismProps, "variant" | "size" | "skipToMain" | "mainContentSelector"
   >
 > = {
   variant: "default",
@@ -293,7 +291,7 @@ export const _HEADER_DEFAULTS: Required<Pick
   mainContentSelector: "#main-content",
 };
 
-export const _HEADER_STICKY_DEFAULTS: Required<Omit HeaderStickyConfig, "stickyContent">
+export const _HEADER_STICKY_DEFAULTS: Required<Omit<HeaderStickyConfig, "stickyContent">>
 > & { stickyContent: ReactNode | null } = {
   enabled: true,
   offset: 0,

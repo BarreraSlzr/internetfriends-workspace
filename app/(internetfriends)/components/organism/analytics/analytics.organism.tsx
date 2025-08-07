@@ -109,7 +109,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   const [charts, setCharts] = useState<ChartData[]>([]);
   const [insights, setInsights] = useState<MetricInsight[]>([]);
   const [filters, setFilters] = useState<AnalyticsFilter[]>([]);
-  const [activeFilters, setActiveFilters] = useState<Record string, any>>({});
+  const [activeFilters, setActiveFilters] = useState<Record<string, any>>({});
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
   // Time Range Options
@@ -542,7 +542,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
 
   if (error) {
     return (
-      <div className={`${styles.container} ${styles.error} ${className || ""}`}>
+      <div className={`${styles.container}${styles.error} ${className || ""}`}>
         <div className={styles.errorContent}>
           <h2>⚠️ Analytics Error</h2>
           <p>{error}</p>
@@ -556,7 +556,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
 
   return (
     <motion.div
-      className={`${styles.container} ${className || ""}`}
+      className={`${styles.container}${className || ""}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -576,7 +576,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
                 className={styles.timeRangeSelect}
               >
                 {timeRangeOptions.map((option) => (
-                  <option value key={option.value}={option.value}>
+                  <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}

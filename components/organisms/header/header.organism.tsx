@@ -139,7 +139,7 @@ const ThemeToggle: React.FC<{
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
             {themeOptions.map((option) => (
-              <button onClick key={option.value}={() => {
+              <button key={option.value} onClick={() => {
                   setTheme(option.value);
                   setIsOpen(false);
                 }}
@@ -212,7 +212,7 @@ const LanguageSelector: React.FC<{
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
             {availableLocales.map((lang: unknown) => (
-              <button onClick key={lang.code}={() => {
+              <button key={lang.code} onClick={() => {
                   setLocale(lang.code);
                   setIsOpen(false);
                 }}
@@ -247,7 +247,7 @@ const HeaderActions: React.FC<{ actions?: HeaderAction[] }> = ({ actions }) => {
       {actions.map((action) => {
         if (action.href) {
           return (
-            <Link href key={action.id}={action.href}
+            <Link href key={action.id} href={action.href}
               target={action.external ? "_blank" : undefined}
             >
               <ButtonAtomic
@@ -270,7 +270,7 @@ const HeaderActions: React.FC<{ actions?: HeaderAction[] }> = ({ actions }) => {
         }
 
         return (
-          <ButtonAtomic variant key={action.id}={action.variant || "primary"}
+          <ButtonAtomic key={action.id} href={action.variant || "primary"}
             size={action.size || "sm"}
             onClick={action.onClick}
             disabled={action.disabled}

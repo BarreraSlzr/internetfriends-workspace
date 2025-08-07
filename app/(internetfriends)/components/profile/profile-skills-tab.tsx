@@ -8,7 +8,7 @@ export const ProfileSkillsTab = () => {
       <div className={_cardCss}>
         <p className="font-medium">Skills & Aptitudes</p>
       </div>
-      <div className={`${_cardCss} flex flex-row flex-wrap gap-2`}>
+      <div className={`${_cardCss}flex flex-row flex-wrap gap-2`}>
         {curriculum.skills
           .sort((a, b) => b.popularity - a.popularity)
           .map((skill, index) => (

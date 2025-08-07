@@ -360,7 +360,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
 
   if (error) {
     return (
-      <div className={`${styles.dashboard} ${styles.error} ${className || ""}`}>
+      <div className={`${styles.dashboard}${styles.error} ${className || ""}`}>
         <div className={styles.errorContent}>
           <h2>⚠️ Dashboard Error</h2>
           <p>{error}</p>
@@ -374,7 +374,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
 
   return (
     <motion.div
-      className={`${styles.dashboard} ${className || ""}`}
+      className={`${styles.dashboard}${className || ""}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -402,8 +402,8 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       {/* Navigation Tabs */}
       <nav className={styles.navigation}>
         {tabs.map((tab) => (
-          <button onClick key={tab.id}={() => handleTabChange(tab.id)}
-            className={`${styles.tab} ${activeTab === tab.id ? styles.active : ""}`}
+          <button key={tab.id} onClick={() => handleTabChange(tab.id)}
+            className={`${styles.tab}${activeTab === tab.id ? styles.active : ""}`}
             data-active={activeTab === tab.id}
           >
             <span className={styles.tabIcon}>{tab.icon}</span>
@@ -415,7 +415,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       {/* Main Content */}
       <main className={styles.content}>
         <AnimatePresence _mode="wait">
-          <motion.div key={activeTab} motion.div  initial={{ opacity: 0, x: 20 }}
+          <motion.div key={activeTab}  initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}

@@ -73,7 +73,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
 
     if (hasDropdown) {
       return (
-        <div className key={item.id}="relative group">
+        <div className key={item.id} className="relative group">
           <button
             onClick={() => toggleDropdown(item.id)}
             className={cn(
@@ -106,7 +106,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
               )}
             >
               {item.children.map((child: unknown) => (
-                <Link href key={child.id}={child.href}
+                <Link href key={child.id} href={child.href}
                   onClick={() => handleItemClick(child)}
                   className={cn(
                     "block px-4 py-2 text-sm text-foreground hover:bg-if-primary-light hover:text-if-primary transition-colors duration-200",
@@ -137,7 +137,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
     }
 
     return (
-      <Link href key={item.id}={item.href}
+      <Link href key={item.id} href={item.href}
         onClick={() => handleItemClick(item)}
         className={cn(
           "flex items-center gap-2 px-3 py-2 text-sm font-medium transition-colors duration-200",
