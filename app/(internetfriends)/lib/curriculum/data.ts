@@ -5,32 +5,27 @@ const curriculumData: CVData = {
   _jobExperiences: [
     {
       title: "Software Engineer II",
-      description:
-        "Responsible for tech consulting, planning, developing and maintaining web applications.",
+      description: "Responsible for tech consulting, planning, developing and maintaining web applications.",
       razonSocial: "Robert Bosch México S.A. de C.V.",
       projects: [
         {
           name: "Preboarding and Onboarding Web System App",
-          description:
-            "Development of a web application for the management of the recruitment of human resources with external users, internal administrators and different roles involved.",
+          description: "Development of a web application for the management of the recruitment of human resources with external users, internal administrators and different roles involved.",
           skillsUsed: [3, 5, 8, 10, 14, 15, 13, 16, 11],
         },
         {
           name: "Tariff Classifier for Aduanas",
-          description:
-            "Created an website to ask for Aduana Classification having a text input to describe any kind of object.",
+          description: "Created an website to ask for Aduana Classification having a text input to describe any kind of object.",
           skillsUsed: [2, 3, 4, 6, 12],
         },
         {
           name: "Audits and Jobs scheduler - 5 Renew Projects",
-          description:
-            "Refurbishment of 5 projects, each 5 years old since the last commit pushed, used to audit financial databases and manage recurring work schedules to monitor financial functionality with different currencies around the world.",
+          description: "Refurbishment of 5 projects, each 5 years old since the last commit pushed, used to audit financial databases and manage recurring work schedules to monitor financial functionality with different currencies around the world.",
           skillsUsed: [2, 3, 4, 7, 5],
         },
         {
           name: "Security Audits Dashboard",
-          description:
-            "Creation of a graphical dashboard platform to audit security compliance performance and facilitate accreditation and certification of business departments through manager role-based access.",
+          description: "Creation of a graphical dashboard platform to audit security compliance performance and facilitate accreditation and certification of business departments through manager role-based access.",
           skillsUsed: [2, 3, 4, 5, 10, 22],
         },
         {
@@ -40,8 +35,7 @@ const curriculumData: CVData = {
         },
         {
           name: "Many other small-projects as Fullstack or only Frontend capability",
-          description:
-            "I have created many other projects with less impact in core business, such as internal laboratory management, the sensor network website with real-time information from site, Stamping Monitor which was a website for real-time monitoring of Industry 4.0, or FlowChart that was a webapp where you can create a flow work and export it in csv to be used with a special font that creates flow-charts.",
+          description: "I have created many other projects with less impact in core business, such as internal laboratory management, the sensor network website with real-time information from site, Stamping Monitor which was a website for real-time monitoring of Industry 4.0, or FlowChart that was a webapp where you can create a flow work and export it in csv to be used with a special font that creates flow-charts.",
           skillsUsed: [1, 3, 4, 25],
         },
         {

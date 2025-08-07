@@ -1,7 +1,7 @@
 'use server'
 
-import { upsertContactSubmission } from '@/app/(internetfriends)/lib/db/queries/contact'
-import { ContactFormData } from '@/app/(internetfriends)/lib/db/schema'
+import { upsertContactSubmission } from "@/app/(internetfriends)/lib/db/queries/contact"
+import { ContactFormData } from "@/app/(internetfriends)/lib/db/schema"
 
 export async function submitContactForm(formData: FormData) {
   try {
@@ -16,7 +16,7 @@ export async function submitContactForm(formData: FormData) {
     }
 
     const result = await upsertContactSubmission(data)
-    
+
     if (!result?.id) {
       return { error: 'Failed to submit form' }
     }
@@ -27,4 +27,3 @@ export async function submitContactForm(formData: FormData) {
     return { error: 'An unexpected error occurred' }
   }
 }
-

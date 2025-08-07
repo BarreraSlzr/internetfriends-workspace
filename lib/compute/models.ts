@@ -36,7 +36,7 @@ export const AIModelSchema = z.object({
 export type AIModel = z.infer<typeof AIModelSchema>;
 
 // Cerebras Integration (from workspace setup)
-export const _CerebrasModelSchema = AIModelSchema.extend({
+export const __CerebrasModelSchema = AIModelSchema.extend({
   provider: z.literal("cerebras"),
   _apiKey: z.string().optional(),
   _apiUrl: z.string().url().default("https://api.cerebras.ai/v1"),

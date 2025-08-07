@@ -4,5 +4,5 @@ export const platformUrls: { [_key: string]: string } = {
     instagram: 'https://www.instagram.com/internetfriendsxyz?_igsh=amtucW40ZjJ6MnJ2',
 }
 
-export const platformNames = Object.keys(platformUrls)
+export const _platformNames = Object.keys(platformUrls)
 

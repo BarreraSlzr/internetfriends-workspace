@@ -156,7 +156,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
         setIsConnected(false);
       }
     } catch (error) {
-      console.error("Error fetching system status:", error);
+      console.error("Error fetching system status: ", error);
       setIsConnected(false);
     }
   };
@@ -168,7 +168,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
     const interval = setInterval(fetchSystemStatus, 3000); // Update every 3 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   // Auto-scroll logs to top when new entries arrive
   useEffect(() => {
@@ -179,19 +179,13 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "connected":
-      case "running":
-      case "success":
-        return "text-green-400";
-      case "building":
-      case "active":
+      case "connected": case "running":
+      case "success": return "text-green-400";
+      case "building": case "active":
         return "text-blue-400";
-      case "idle":
-        return "text-gray-400";
-      case "disconnected":
-      case "stopped":
-      case "failed":
-      case "error":
+      case "idle": return "text-gray-400";
+      case "disconnected": case "stopped":
+      case "failed": case "error":
         return "text-red-400";
       default:
         return "text-gray-400";
@@ -200,17 +194,12 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "connected":
-      case "running":
-      case "success":
-        return <CheckCircle className="w-4 h-4" />;
-      case "building":
-      case "active":
+      case "connected": case "running":
+      case "success": return <CheckCircle className="w-4 h-4" />;
+      case "building": case "active":
         return <Activity className="w-4 h-4 animate-pulse" />;
-      case "disconnected":
-      case "stopped":
-      case "failed":
-      case "error":
+      case "disconnected": case "stopped":
+      case "failed": case "error":
         return <AlertTriangle className="w-4 h-4" />;
       default:
         return <div className="w-4 h-4" />;
@@ -219,14 +208,10 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
 
   const getLogLevelColor = (level: LogEntry["level"]) => {
     switch (level) {
-      case "success":
-        return "text-green-400";
-      case "info":
-        return "text-blue-400";
-      case "warn":
-        return "text-yellow-400";
-      case "error":
-        return "text-red-400";
+      case "success": return "text-green-400";
+      case "info": return "text-blue-400";
+      case "warn": return "text-yellow-400";
+      case "error": return "text-red-400";
       default:
         return "text-gray-400";
     }

@@ -26,12 +26,9 @@ const ComponentNode: React.FC<ComponentNodeProps> = ({
 }) => {
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "atomic":
-        return "from-blue-50 to-blue-100 border-blue-200 text-blue-900";
-      case "molecular":
-        return "from-purple-50 to-purple-100 border-purple-200 text-purple-900";
-      case "organism":
-        return "from-green-50 to-green-100 border-green-200 text-green-900";
+      case "atomic": return "from-blue-50 to-blue-100 border-blue-200 text-blue-900";
+      case "molecular": return "from-purple-50 to-purple-100 border-purple-200 text-purple-900";
+      case "organism": return "from-green-50 to-green-100 border-green-200 text-green-900";
       default:
         return "from-gray-50 to-gray-100 border-gray-200 text-gray-900";
     }

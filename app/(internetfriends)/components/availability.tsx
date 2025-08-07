@@ -1,6 +1,6 @@
 import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data"
 
-export const Availability = ({className = ''}: {className?: string}) => {
+export const _Availability = ({className = ''}: {className?: string}) => {
     return (
         <div className={`inline-flex gap-2 items-center ${className}`.trim()}>
             <span className="relative flex h-3 w-3">

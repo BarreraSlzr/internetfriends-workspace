@@ -24,8 +24,7 @@ export const GlassCardAtomic: React.FC<GlassCardAtomicProps> = ({
         // Variants
         {
           "bg-glass border-glass": variant === "default",
-          "bg-glass-header border-glass-border-enhanced":
-            variant === "elevated",
+          "bg-glass-header border-glass-border-enhanced": variant === "elevated",
           "bg-background/80 border-border": variant === "subtle",
           "bg-if-primary/5 border-if-primary/20": variant === "primary",
           "bg-destructive/5 border-destructive/20": variant === "destructive",

@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from "react";
 
 export interface HeaderAtomicProps extends HTMLAttributes<HTMLElement> {
   /** Content to render inside the header */

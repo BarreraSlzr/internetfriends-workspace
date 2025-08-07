@@ -1,4 +1,3 @@
-import type { Config } from "tailwindcss";
 import animate from "tailwindcss-animate";
 
 const config: Config = {
@@ -220,7 +219,7 @@ const config: Config = {
   plugins: [
     animate,
     // Custom plugin for InternetFriends utilities
-    function ({ addUtilities, addComponents, theme }: any) {
+    function ({ addUtilities, addComponents, theme }: unknown) {
       addComponents({
         ".glass-morphism": {
           "backdrop-filter": "blur(12px)",

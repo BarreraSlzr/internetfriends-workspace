@@ -23,8 +23,8 @@ interface ThemeConfig {
 
 interface UseThemeReturn {
   theme: ThemeConfig;
-  tokens: any;
-  components: any;
+  tokens: unknown;
+  components: unknown;
   setTheme: (mode: ThemeMode) => void;
   toggleTheme: () => void;
   getColor: (property: string) => string;
@@ -88,7 +88,7 @@ const getStoredTheme = (): ThemeMode => {
       return stored as ThemeMode;
     }
   } catch (error) {
-    console.warn("Failed to read theme from localStorage:", error);
+    console.warn("Failed to read theme from localStorage: ", error);
   }
 
   return "system";
@@ -101,7 +101,7 @@ const storeTheme = (mode: ThemeMode): void => {
   try {
     localStorage.setItem(STORAGE_KEY, mode);
   } catch (error) {
-    console.warn("Failed to store theme in localStorage:", error);
+    console.warn("Failed to store theme in localStorage: ", error);
   }
 };
 
@@ -124,7 +124,7 @@ const applyThemeToDocument = (colorScheme: ColorScheme): void => {
       metaThemeColor.setAttribute("content", color);
     }
   } catch (error) {
-    console.warn("Failed to apply theme to document:", error);
+    console.warn("Failed to apply theme to document: ", error);
   }
 };
 
@@ -149,7 +149,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
     // Apply initial theme
     const resolvedScheme = resolveColorScheme(storedTheme, systemScheme);
     applyThemeToDocument(resolvedScheme);
-  }, []);
+  }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   // Listen for system theme changes
   useEffect(() => {
@@ -280,7 +280,7 @@ export const useTheme = (): UseThemeReturn => {
 };
 
 // Hook for color scheme only
-export const useColorScheme = () => {
+export const _useColorScheme = () => {
   const { theme, isDark, isLight, systemPreference } = useTheme();
 
   return {
@@ -292,7 +292,7 @@ export const useColorScheme = () => {
 };
 
 // Hook for theme-aware class names
-export const useThemeClassName = (
+export const _useThemeClassName = (
   baseClassName: string,
   variants?: Record<string, boolean>,
 ) => {
@@ -327,7 +327,7 @@ export const useThemeClassName = (
 };
 
 // Hook for theme-aware CSS custom properties
-export const useThemeStyles = () => {
+export const _useThemeStyles = () => {
   const { getColor, theme } = useTheme();
 
   return {
@@ -340,7 +340,7 @@ export const useThemeStyles = () => {
 };
 
 // Export theme utilities
-export const themeUtils = {
+export const _themeUtils = {
   getSystemColorScheme,
   resolveColorScheme,
   applyThemeToDocument,

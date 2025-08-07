@@ -71,11 +71,11 @@ export const InternetFriendsUserSchema = UserAuthSchema.extend({
 export type _InternetFriendsUser = z.infer<typeof InternetFriendsUserSchema>;
 
 // Auth Utilities
-export const _createSessionToken = () => {
+export const __createSessionToken = () => {
   return crypto.randomUUID() + "." + Date.now().toString(36);
 };
 
-export const _isSessionValid = (session: Session): boolean => {
+export const __isSessionValid = (session: Session): boolean => {
   return (
     session.isActive && session.expiresAt > new Date() && !session.revokedAt
   );

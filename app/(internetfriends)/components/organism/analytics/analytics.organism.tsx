@@ -235,32 +235,27 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
         id: "growth_insight",
         type: "growth",
         title: "Strong User Growth",
-        description:
-          "User registrations increased by 15% this week compared to last week.",
+        description: "User registrations increased by 15% this week compared to last week.",
         severity: "positive",
         confidence: 0.85,
         actionable: true,
-        suggestion:
-          "Consider increasing marketing spend to capitalize on this trend.",
+        suggestion: "Consider increasing marketing spend to capitalize on this trend.",
       },
       {
         id: "conversion_insight",
         type: "conversion",
         title: "Conversion Rate Optimization",
-        description:
-          "Mobile conversion rate is 23% lower than desktop. Focus on mobile UX.",
+        description: "Mobile conversion rate is 23% lower than desktop. Focus on mobile UX.",
         severity: "warning",
         confidence: 0.92,
         actionable: true,
-        suggestion:
-          "Run A/B tests on mobile checkout flow to improve conversions.",
+        suggestion: "Run A/B tests on mobile checkout flow to improve conversions.",
       },
       {
         id: "retention_insight",
         type: "retention",
         title: "User Retention Stable",
-        description:
-          "Weekly user retention remains consistent at 68% for the past month.",
+        description: "Weekly user retention remains consistent at 68% for the past month.",
         severity: "neutral",
         confidence: 0.78,
         actionable: false,
@@ -319,7 +314,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     [onTimeRangeChange, userId, sessionId],
   );
 
-  const _handleFilterChange = useCallback(
+  const __handleFilterChange = useCallback(
     (filterId: string, value: unknown) => {
       const newFilters = { ...activeFilters, [filterId]: value };
       setActiveFilters(newFilters);
@@ -365,21 +360,17 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   // Utility Functions
   const formatValue = (value: number, format: string): string => {
     switch (format) {
-      case "currency":
-        return new Intl.NumberFormat("en-US", {
+      case "currency": return new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
           _minimumFractionDigits: 0,
           _maximumFractionDigits: 0,
         }).format(value);
-      case "percentage":
-        return `${value.toFixed(2)}%`;
-      case "duration":
-        const minutes = Math.floor(value / 60);
+      case "percentage": return `${value.toFixed(2)}%`;
+      case "duration": const minutes = Math.floor(value / 60);
         const seconds = value % 60;
         return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-      case "number":
-        return new Intl.NumberFormat("en-US").format(value);
+      case "number": return new Intl.NumberFormat("en-US").format(value);
       default:
         return value.toString();
     }
@@ -389,7 +380,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     change: number,
     trend: "up" | "down" | "stable",
   ) => {
-    const _absChange = Math.abs(change);
+    const __absChange = Math.abs(change);
     const isPositive = change > 0;
 
     return {

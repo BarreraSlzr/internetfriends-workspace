@@ -7,8 +7,8 @@
  * This is a lightweight version that skips build and server tests.
  */
 
-import { execSync } from 'child_process';
-import { existsSync, readFileSync } from 'fs';
+import { execSync } from "child_process";
+import { existsSync, readFileSync } from "fs";
 
 interface QuickCheckResult {
   name: string;
@@ -64,7 +64,7 @@ class QuickValidator {
       this.log(`${name}: ${result.message} (${duration}ms)`, passed ? 'success' : 'error');
       this.results.push(result);
       return result;
-    } catch (error: any) {
+    } catch (error: unknown) {
       const duration = Date.now() - startTime;
       const result: QuickCheckResult = {
         name,
@@ -87,7 +87,7 @@ class QuickValidator {
         stdio: 'pipe'
       });
       return { success: true, output };
-    } catch (error: any) {
+    } catch (error: unknown) {
       return { success: false, output: error.message || 'Command failed' };
     }
   }
@@ -268,7 +268,7 @@ class QuickValidator {
       }
 
       return success;
-    } catch (error: any) {
+    } catch (error: unknown) {
       this.log(`❌ Quick validation crashed: ${error.message}`, 'error');
       return false;
     }

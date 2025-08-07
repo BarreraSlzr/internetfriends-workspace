@@ -50,27 +50,17 @@ export function extractDiagramTitle(code: string, index: number): string {
   if (typeMatch) {
     const type = typeMatch[1];
     switch (type.toLowerCase()) {
-      case "graph":
-      case "flowchart":
+      case "graph": case "flowchart":
         return `Flowchart ${index + 1}`;
-      case "sequencediagram":
-        return `Sequence Diagram ${index + 1}`;
-      case "classdiagram":
-        return `Class Diagram ${index + 1}`;
-      case "statediagram":
-        return `State Diagram ${index + 1}`;
-      case "gantt":
-        return `Gantt Chart ${index + 1}`;
-      case "pie":
-        return `Pie Chart ${index + 1}`;
-      case "journey":
-        return `User Journey ${index + 1}`;
-      case "erdiagram":
-        return `ER Diagram ${index + 1}`;
-      case "gitgraph":
-        return `Git Graph ${index + 1}`;
-      case "requirement":
-        return `Requirement Diagram ${index + 1}`;
+      case "sequencediagram": return `Sequence Diagram ${index + 1}`;
+      case "classdiagram": return `Class Diagram ${index + 1}`;
+      case "statediagram": return `State Diagram ${index + 1}`;
+      case "gantt": return `Gantt Chart ${index + 1}`;
+      case "pie": return `Pie Chart ${index + 1}`;
+      case "journey": return `User Journey ${index + 1}`;
+      case "erdiagram": return `ER Diagram ${index + 1}`;
+      case "gitgraph": return `Git Graph ${index + 1}`;
+      case "requirement": return `Requirement Diagram ${index + 1}`;
       default:
         return `${type} Diagram ${index + 1}`;
     }

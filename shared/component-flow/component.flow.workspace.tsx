@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import ReactFlow, {
   Node,
   Edge,
@@ -14,13 +14,13 @@ import ReactFlow, {
   ConnectionMode,
   Panel,
   ReactFlowProvider,
-} from 'reactflow';
-import 'reactflow/dist/style.css';
+} from "reactflow";
+import "reactflow/dist/style.css";
 
-import { ComponentPreviewNode as ComponentPreviewNodeType } from './types';
-import { ComponentPreviewNode } from './component.preview.node';
-import { componentRegistry } from './component.registry';
-import styles from './component.flow.workspace.module.scss';
+import { ComponentPreviewNode as ComponentPreviewNodeType } from "./types";
+import { ComponentPreviewNode } from "./component.preview.node";
+import { componentRegistry } from "./component.registry";
+import styles from "./component.flow.workspace.module.scss";
 
 // Node types for React Flow
 const nodeTypes = {

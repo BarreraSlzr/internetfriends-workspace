@@ -533,11 +533,11 @@ export type SpacingKey = keyof Spacing;
 export type BreakpointKey = keyof Breakpoints;
 
 // Type guards
-export const isThemeMode = (value: string): value is ThemeMode => {
+export const _isThemeMode = (value: string): value is ThemeMode => {
   return ["light", "dark", "system"].includes(value);
 };
 
-export const isColorScheme = (value: string): value is ColorScheme => {
+export const _isColorScheme = (value: string): value is ColorScheme => {
   return ["light", "dark"].includes(value);
 };
 

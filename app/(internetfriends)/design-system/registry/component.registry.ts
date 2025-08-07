@@ -118,8 +118,7 @@ export class ComponentRegistry {
       id: "header-atomic",
       name: "HeaderAtomic",
       category: "atomic",
-      description:
-        "Glass morphism header with scroll detection and responsive navigation",
+      description: "Glass morphism header with scroll detection and responsive navigation",
       filePath: "/components/atomic/header/header.atomic.tsx",
       props: [
         {
@@ -127,8 +126,7 @@ export class ComponentRegistry {
           type: "boolean",
           required: false,
           defaultValue: true,
-          description:
-            "Whether the header should stick to the top when scrolling",
+          description: "Whether the header should stick to the top when scrolling",
         },
         {
           name: "transparent",
@@ -142,8 +140,7 @@ export class ComponentRegistry {
           type: "number",
           required: false,
           defaultValue: 50,
-          description:
-            "Scroll threshold in pixels before header changes appearance",
+          description: "Scroll threshold in pixels before header changes appearance",
         },
       ],
       features: [
@@ -162,8 +159,7 @@ export class ComponentRegistry {
       id: "glass-card-atomic",
       name: "GlassCardAtomic",
       category: "atomic",
-      description:
-        "Glass morphism card component with multiple variants and animation support",
+      description: "Glass morphism card component with multiple variants and animation support",
       filePath: "/components/atomic/glass-card/glass-card.atomic.tsx",
       props: [
         {
@@ -211,8 +207,7 @@ export class ComponentRegistry {
       id: "button-atomic",
       name: "ButtonAtomic",
       category: "atomic",
-      description:
-        "InternetFriends styled button with multiple variants, loading states, and icon support",
+      description: "InternetFriends styled button with multiple variants, loading states, and icon support",
       filePath: "/components/atomic/button/button.atomic.tsx",
       props: [
         {
@@ -267,8 +262,7 @@ export class ComponentRegistry {
       id: "navigation-molecular",
       name: "NavigationMolecular",
       category: "molecular",
-      description:
-        "Complete navigation component with mobile menu, dropdowns, and glass morphism",
+      description: "Complete navigation component with mobile menu, dropdowns, and glass morphism",
       filePath: "/components/molecular/navigation/navigation.molecular.tsx",
       props: [
         {
@@ -322,8 +316,7 @@ export class ComponentRegistry {
       id: "design-tokens",
       name: "InternetFriends Design Tokens",
       category: "tokens",
-      description:
-        "Complete design token system with glass morphism and compact radius values",
+      description: "Complete design token system with glass morphism and compact radius values",
       filePath: "/app/(internetfriends)/globals.css",
       tokens: [
         {
@@ -359,8 +352,7 @@ export class ComponentRegistry {
       id: "css-utilities",
       name: "CSS Utilities",
       category: "utilities",
-      description:
-        "Custom CSS utility classes for InternetFriends design system",
+      description: "Custom CSS utility classes for InternetFriends design system",
       filePath: "/app/(internetfriends)/globals.css",
       classes: [
         {
@@ -378,8 +370,7 @@ export class ComponentRegistry {
         },
         {
           name: ".btn-if-primary",
-          description:
-            "Primary button styling with InternetFriends brand colors",
+          description: "Primary button styling with InternetFriends brand colors",
           properties: [
             "background: var(--if-primary)",
             "hover animations",
@@ -401,8 +392,7 @@ export class ComponentRegistry {
     this.registerHook({
       id: "use-scroll-detection",
       name: "useScrollDetection",
-      description:
-        "Custom hook for detecting scroll position and triggering state changes",
+      description: "Custom hook for detecting scroll position and triggering state changes",
       filePath: "/hooks/useScrollDetection.ts",
       parameters: [
         {
@@ -424,8 +414,7 @@ export class ComponentRegistry {
       id: "home-page",
       name: "Home Page",
       route: "/",
-      description:
-        "Main landing page showcasing InternetFriends services and design system",
+      description: "Main landing page showcasing InternetFriends services and design system",
       filePath: "/app/(internetfriends)/page.tsx",
       layout: "default",
       components: ["HeaderAtomic", "GlassCardAtomic", "ButtonAtomic"],
@@ -436,8 +425,7 @@ export class ComponentRegistry {
         "SEO optimized",
       ],
       seoTitle: "InternetFriends | Creative Digital Solutions",
-      seoDescription:
-        "Professional web development and creative project services",
+      seoDescription: "Professional web development and creative project services",
       status: "live",
       lastUpdated: new Date(),
     });
@@ -684,4 +672,4 @@ export class ComponentRegistry {
 }
 
 // Singleton instance
-export const componentRegistry = new ComponentRegistry();
+export const _componentRegistry = new ComponentRegistry();

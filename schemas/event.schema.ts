@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const BaseEventSchema = z.object({
   type: z.string(),
@@ -9,6 +9,6 @@ export const BaseEventSchema = z.object({
 });
 
 // Example: Brand-specific extension
-export const FriendsXYZEventSchema = BaseEventSchema.extend({
+export const _FriendsXYZEventSchema = BaseEventSchema.extend({
   // brand-specific fields here
 }); 

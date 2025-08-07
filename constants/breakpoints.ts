@@ -60,7 +60,7 @@ export const CONTAINER_SIZES = {
 } as const;
 
 // Grid system configuration
-export const GRID = {
+export const _GRID = {
   columns: 12,
   gutter: {
     xs: "1rem", // 16px
@@ -79,7 +79,7 @@ export const GRID = {
 } as const;
 
 // Responsive typography scale
-export const RESPONSIVE_TYPOGRAPHY = {
+export const _RESPONSIVE_TYPOGRAPHY = {
   // Heading scales that adjust with breakpoints
   h1: {
     xs: "1.875rem", // 30px
@@ -120,7 +120,7 @@ export const RESPONSIVE_TYPOGRAPHY = {
 } as const;
 
 // Component responsive behavior
-export const COMPONENT_RESPONSIVE = {
+export const _COMPONENT_RESPONSIVE = {
   // Header behavior
   header: {
     height: {
@@ -182,7 +182,7 @@ export const COMPONENT_RESPONSIVE = {
 } as const;
 
 // Touch and interaction considerations
-export const TOUCH_TARGETS = {
+export const _TOUCH_TARGETS = {
   // Minimum touch target sizes (44px minimum for accessibility)
   minSize: "44px",
   recommended: "48px",
@@ -194,7 +194,7 @@ export const TOUCH_TARGETS = {
 } as const;
 
 // CSS utility classes for responsive design
-export const RESPONSIVE_UTILITIES = {
+export const _RESPONSIVE_UTILITIES = {
   // Hide/show at breakpoints
   hideOn: {
     xs: "hide-xs",
@@ -221,12 +221,12 @@ export type ResponsiveValue<T> = {
 };
 
 // Utility function to get breakpoint value
-export const getBreakpointValue = (breakpoint: Breakpoint): string => {
+export const _getBreakpointValue = (breakpoint: Breakpoint): string => {
   return BREAKPOINTS[breakpoint];
 };
 
 // Utility function to create responsive styles
-export const createResponsiveStyles = <T>(
+export const _createResponsiveStyles = <T>(
   values: ResponsiveValue<T>,
   property: string,
 ): string => {

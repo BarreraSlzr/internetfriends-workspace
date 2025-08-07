@@ -113,12 +113,11 @@ export type DebugV2Config = z.infer<typeof DebugV2ConfigSchema>;
 export type DebugV2Report = z.infer<typeof DebugV2ReportSchema>;
 
 // Utility functions for creating debug entries
-export const createDebugEntry = (
+export const _createDebugEntry = (
   level: DebugLevel,
   message: string,
   context?: Partial<DebugV2Context>,
-  data?: any
-): DebugV2Entry => {
+  data?: unknown): DebugV2Entry => {
   return DebugV2EntrySchema.parse({
     level,
     message,
@@ -127,12 +126,12 @@ export const createDebugEntry = (
   });
 };
 
-export const createDebugSession = (name: string): DebugV2Session => {
+export const _createDebugSession = (name: string): DebugV2Session => {
   return DebugV2SessionSchema.parse({ name });
 };
 
 // Default export
-export const DebugSchemas = {
+export const _DebugSchemas = {
   Level: DebugLevelSchema,
   Context: DebugV2ContextSchema,
   Options: DebugV2OptionsSchema,

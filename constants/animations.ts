@@ -306,7 +306,7 @@ export type KeyframeName = keyof typeof KEYFRAMES;
 export type AnimationType = keyof typeof ANIMATIONS;
 
 // Export all animation constants
-export const ANIMATION_CONSTANTS = {
+export const _ANIMATION_CONSTANTS = {
   durations: DURATIONS,
   easings: EASINGS,
   transitions: TRANSITIONS,

@@ -139,7 +139,7 @@ const HeaderDemoPage: React.FC = () => {
           show: true,
           placeholder: "Search documentation...",
           _shortcut: "⌘K",
-          _onSearch: (query) => console.log("Search:", query),
+          _onSearch: (query) => console.log("Search: ", query),
         }}
         announcement={{
           show: true,

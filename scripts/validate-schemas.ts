@@ -25,7 +25,7 @@ export const ProjectSchema = z.object({
   updatedAt: z.date(),
 });
 
-export const APIResponseSchema = z.object({
+export const _APIResponseSchema = z.object({
   success: z.boolean(),
   data: z.unknown(),
   error: z.string().optional(),
@@ -34,11 +34,11 @@ export const APIResponseSchema = z.object({
 
 async function validateSchemas() {
   console.log("🔍 InternetFriends Schema Validation");
-  console.log("===================================");
+  console.log("=================================== ");
   
   // Test User Schema
   try {
-    const validUser = UserSchema.parse({
+    const _validUser = UserSchema.parse({
       id: "123e4567-e89b-12d3-a456-426614174000",
       email: "user@internetfriends.xyz",
       name: "John Doe",
@@ -48,12 +48,12 @@ async function validateSchemas() {
     });
     console.log("✅ User Schema validation passed");
   } catch (error) {
-    console.log("❌ User Schema validation failed:", error);
+    console.log("❌ User Schema validation failed: ", error);
   }
   
   // Test Project Schema
   try {
-    const validProject = ProjectSchema.parse({
+    const _validProject = ProjectSchema.parse({
       id: "456e7890-e89b-12d3-a456-426614174001", 
       name: "InternetFriends Landing Page",
       description: "Next.js landing page for InternetFriends platform",
@@ -72,7 +72,7 @@ async function validateSchemas() {
     });
     console.log("✅ Project Schema validation passed");
   } catch (error) {
-    console.log("❌ Project Schema validation failed:", error);
+    console.log("❌ Project Schema validation failed: ", error);
   }
   
   console.log("🎯 Schema validation complete!");

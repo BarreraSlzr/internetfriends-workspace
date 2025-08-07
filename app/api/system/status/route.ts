@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { readFileSync, statSync } from 'fs';
-import { join } from 'path';
-import os from 'os';
+import { NextRequest, NextResponse } from "next/server";
+import { join } from "path";
+import os from "os";
 
 interface SystemStatus {
   timestamp: string;

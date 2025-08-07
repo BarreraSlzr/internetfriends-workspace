@@ -12,7 +12,7 @@ export async function upsertContactSubmission(
         ...data,
         _updated_at: new Date().toISOString(),
       })
-      .where("id", "=", id)
+      .where("id", "= ", id)
       .returning(["id"])
       .executeTakeFirst();
   }

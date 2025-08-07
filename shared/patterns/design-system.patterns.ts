@@ -539,7 +539,6 @@ category: component
 type: pattern
 ---
 
-import { ${pattern.name} } from '../components';
 
 # ${pattern.name}
 

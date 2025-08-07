@@ -1,8 +1,7 @@
 // InternetFriends Component Type Definitions
 // Component-specific props, variants, and utility types
 
-import { ComponentProps, ReactNode, ElementType, HTMLAttributes } from "react";
-import { VariantProps } from "class-variance-authority";
+import { ComponentProps, ReactNode, ElementType } from "react";
 
 // Base component props that all components should extend
 export interface BaseComponentProps {

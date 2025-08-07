@@ -1,7 +1,6 @@
 #!/usr/bin/env bun
 // InternetFriends System Integration Test
 
-import { z } from "zod";
 
 // Import our new systems
 import { InternetFriendsColors, generateCSSVariables } from "../lib/design-system/colors";
@@ -43,7 +42,7 @@ async function testAuthSystem() {
   };
   
   try {
-    const validatedUser = UserAuthSchema.parse(testUser);
+    const _validatedUser = UserAuthSchema.parse(testUser);
     console.log("✅ User auth schema validation passed");
     
     const extendedUser = InternetFriendsUserSchema.parse({
@@ -54,7 +53,7 @@ async function testAuthSystem() {
     console.log("✅ InternetFriends user schema validation passed");
     console.log(`   Plan: ${extendedUser.plan}, Credits: ${extendedUser.credits}`);
   } catch (error) {
-    console.log("❌ Auth system validation failed:", error);
+    console.log("❌ Auth system validation failed: ", error);
   }
 }
 
@@ -72,7 +71,7 @@ async function testComputeSystem() {
     console.log(`   Max tokens: ${validatedModel.maxTokens}`);
     console.log(`   Tokens/sec: ${validatedModel.tokensPerSecond || "N/A"}`);
   } catch (error) {
-    console.log("❌ Compute system validation failed:", error);
+    console.log("❌ Compute system validation failed: ", error);
   }
 }
 
@@ -126,7 +125,7 @@ async function testMarketIntegration() {
 
 async function main() {
   console.log("🚀 InternetFriends System Integration Test");
-  console.log("==========================================");
+  console.log("========================================== ");
   
   await testDesignSystem();
   await testAuthSystem();
@@ -135,7 +134,7 @@ async function main() {
   await testChatModes();
   await testMarketIntegration();
   
-  console.log("\\n🎯 Integration Test Summary:");
+  console.log("\\n🎯 Integration Test Summary: ");
   console.log("   ✅ Design System: Colors, gestures, animations");
   console.log("   ✅ Auth System: User management, session handling");
   console.log("   ✅ Compute System: AI models, Cerebras integration");
@@ -144,7 +143,7 @@ async function main() {
   console.log("   ✅ Market Integration: Smart commits, automation scripts");
   
   console.log("\\n🌟 InternetFriends workspace is fully integrated!");
-  console.log("Ready for:");
+  console.log("Ready for: ");
   console.log("  • AI-powered development with Cerebras");
   console.log("  • Design system with glass morphism");
   console.log("  • Session-based authentication");

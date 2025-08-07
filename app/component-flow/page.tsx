@@ -7,8 +7,7 @@ import {
   componentRegistry,
   registerInternetFriendsComponents,
 } from "@/shared/component-flow/component.registry";
-import { ComponentPreviewNode as ComponentPreviewNodeType } from "@/shared/component-flow/types";
-import { patterns, themes } from "@/shared/patterns/design-system.patterns";
+import { patterns } from "@/shared/patterns/design-system.patterns";
 import "@/shared/styles/design-tokens.css";
 import styles from "./component-flow.page.module.scss";
 
@@ -33,7 +32,7 @@ interface ComponentFlowPageProps {
   }>;
 }
 
-export default async function ComponentFlowPage({
+export default function ComponentFlowPage({
   searchParams,
 }: ComponentFlowPageProps) {
   const resolvedSearchParams = await searchParams;
@@ -61,7 +60,7 @@ export default async function ComponentFlowPage({
           "components",
         );
       } catch (error) {
-        console.error("Failed to initialize components:", error);
+        console.error("Failed to initialize components: ", error);
       }
     };
 
@@ -183,8 +182,7 @@ export default async function ComponentFlowPage({
         }}
         onFocus={(e) => {
           e.currentTarget.style.borderColor = "var(--if-primary, #3b82f6)";
-          e.currentTarget.style.outline =
-            "2px dashed var(--border-focus, #60a5fa)";
+          e.currentTarget.style.outline = "2px dashed var(--border-focus, #60a5fa)";
           e.currentTarget.style.outlineOffset = "2px";
         }}
         onBlur={(e) => {
@@ -220,8 +218,7 @@ export default async function ComponentFlowPage({
           initialWidth: 200,
           initialHeight: 100,
           documentation: {
-            description:
-              "A demo button component showcasing InternetFriends design system",
+            description: "A demo button component showcasing InternetFriends design system",
             examples: [
               {
                 title: "Primary Button",
@@ -267,8 +264,7 @@ export default async function ComponentFlowPage({
           initialWidth: 300,
           initialHeight: 200,
           documentation: {
-            description:
-              "A flexible card component with glass morphism and elevation variants",
+            description: "A flexible card component with glass morphism and elevation variants",
           },
         },
       },
@@ -300,8 +296,7 @@ export default async function ComponentFlowPage({
           initialWidth: 250,
           initialHeight: 80,
           documentation: {
-            description:
-              "A form input with focus states and accessibility support",
+            description: "A form input with focus states and accessibility support",
           },
         },
       },
@@ -310,9 +305,9 @@ export default async function ComponentFlowPage({
 
   const handleWorkspaceChange = (
     nodes: ComponentPreviewNodeType[],
-    edges: any[],
+    edges: unknown[],
   ) => {
-    console.log("Workspace updated:", {
+    console.log("Workspace updated: ", {
       nodes: nodes.length,
       edges: edges.length,
     });
@@ -414,7 +409,7 @@ export default async function ComponentFlowPage({
         <aside className={styles.infoPanel}>
           <h3>🚀 Welcome to Component Flow!</h3>
           <p>
-            This is your visual component development workspace. Here's what you
+            This is your visual component development workspace. here's what you
             can do:
           </p>
 

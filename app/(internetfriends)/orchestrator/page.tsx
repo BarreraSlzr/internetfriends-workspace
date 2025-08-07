@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import {
   Activity,
   Settings,
@@ -95,7 +94,7 @@ export default function OrchestratorPage() {
         });
       }
     } catch (error) {
-      console.error("Failed to fetch project metrics:", error);
+      console.error("Failed to fetch project metrics: ", error);
     }
   };
 
@@ -103,25 +102,18 @@ export default function OrchestratorPage() {
     fetchProjectMetrics();
     const interval = setInterval(fetchProjectMetrics, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   const getHealthColor = (status: string) => {
     switch (status) {
-      case "healthy":
-      case "online":
-      case "running":
-      case "success":
-      case "deployed":
-        return "text-green-400";
-      case "warning":
-      case "degraded":
-      case "building":
-      case "pending":
+      case "healthy": case "online":
+      case "running": case "success":
+      case "deployed": return "text-green-400";
+      case "warning": case "degraded":
+      case "building": case "pending":
         return "text-yellow-400";
-      case "critical":
-      case "offline":
-      case "stopped":
-      case "failed":
+      case "critical": case "offline":
+      case "stopped": case "failed":
         return "text-red-400";
       default:
         return "text-gray-400";
@@ -130,19 +122,13 @@ export default function OrchestratorPage() {
 
   const getHealthIcon = (status: string) => {
     switch (status) {
-      case "online":
-      case "running":
-      case "success":
-      case "deployed":
+      case "online": case "running":
+      case "success": case "deployed":
         return "🟢";
-      case "degraded":
-      case "building":
-      case "pending":
-        return "🟡";
-      case "offline":
-      case "stopped":
-      case "failed":
-        return "🔴";
+      case "degraded": case "building":
+      case "pending": return "🟡";
+      case "offline": case "stopped":
+      case "failed": return "🔴";
       default:
         return "⚪";
     }

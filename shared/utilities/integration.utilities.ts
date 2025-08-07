@@ -1,10 +1,9 @@
 // Integration Utilities - InternetFriends Streamlined Development
 // Central utilities for MDX, microfrontends, i18n, and data pipeline integration
 
-import { ComponentType } from 'react';
-import { componentRegistry } from '../component-flow/component.registry';
-import { ComponentRegistryEntry, ComponentPreviewNodeData } from '../component-flow/types';
-import { patterns, themes, utilities } from '../patterns/design-system.patterns';
+import { ComponentType } from "react";
+import { ComponentRegistryEntry, ComponentPreviewNodeData } from "../component-flow/types";
+import { patterns, utilities } from "../patterns/design-system.patterns";
 
 // MDX Integration Utilities
 export class MDXIntegrationUtility {
@@ -44,7 +43,7 @@ export class MDXIntegrationUtility {
       const colonIndex = line.indexOf(':');
       if (colonIndex > -1) {
         const key = line.slice(0, colonIndex).trim();
-        let value: any = line.slice(colonIndex + 1).trim();
+        let value: unknown = line.slice(colonIndex + 1).trim();
 
         // Remove quotes
         if ((value.startsWith('"') && value.endsWith('"')) ||
@@ -87,7 +86,7 @@ ${example.description ? `${example.description}\n` : ''}
 
 \`\`\`jsx
 <${metadata.componentName} ${Object.entries(example.props).map(([key, value]) =>
-  `${key}="${value}"`
+  `${key}= "${value}"`
 ).join(' ')} />
 \`\`\`
 `).join('\n') || 'No examples available';
@@ -101,8 +100,7 @@ tags: [${(metadata.tags || []).join(', ')}]
 version: ${metadata.version || '1.0.0'}
 ---
 
-import { ${metadata.componentName} } from '../components/${metadata.componentType}';
-
+import { ${metadata.componentName} } from "../components/${metadata.componentType}";
 # ${metadata.componentName}
 
 ${metadata.documentation?.description || 'Component description not available'}
@@ -118,13 +116,12 @@ ${examplesDoc}
 ## Usage
 
 \`\`\`jsx
-import { ${metadata.componentName} } from '@internetfriends/components';
+import { ${metadata.componentName} } from "@internetfriends/components";
 
-function MyComponent() {
   return (
     <${metadata.componentName}
       ${metadata.defaultProps ? Object.entries(metadata.defaultProps).map(([key, value]) =>
-        `${key}="${value}"`
+        `${key}= "${value}"`
       ).join('\n      ') : '// Add props here'}
     >
       {/* Content */}
@@ -251,7 +248,7 @@ export class MicrofrontendIntegrationUtility {
   // Generate TypeScript definitions for remote components
   static generateTypeDefinitions(components: ComponentRegistryEntry[]): string {
     const imports = components.map(comp =>
-      `import { ${comp.metadata.componentName} } from './${comp.metadata.componentName}';`
+      `import { ${comp.metadata.componentName} } from "./${comp.metadata.componentName}";`
     ).join('\n');
 
     const exports = components.map(comp => {
@@ -271,7 +268,7 @@ export declare const ${comp.metadata.componentName}: React.FC<${comp.metadata.co
     return `// Generated TypeScript definitions for InternetFriends Component Library
 // This file is auto-generated. Do not edit manually.
 
-import React from 'react';
+import React from "react";
 
 ${imports}
 
@@ -287,7 +284,7 @@ export interface ComponentManifest {
     name: string;
     type: string;
     required: boolean;
-    default?: any;
+    default?: unknown;
   }>;
   tags: string[];
   version: string;
@@ -323,7 +320,7 @@ export {
       case 'boolean': return 'boolean';
       case 'array': return 'any[]';
       case 'object': return 'Record<string, any>';
-      case 'function': return '(...args: any[]) => any';
+      case 'function': return '(...args: unknown[]) => any';
       case 'select': return 'string';
       default: return 'any';
     }
@@ -481,7 +478,7 @@ export class DataPipelineIntegrationUtility {
     };
   }
 
-  private static generateValidationSchema(props: any[]): any {
+  private static generateValidationSchema(props: Record<string, unknown>[]): any {
     return props.reduce((schema, prop) => {
       schema[prop.name] = {
         type: prop.type,

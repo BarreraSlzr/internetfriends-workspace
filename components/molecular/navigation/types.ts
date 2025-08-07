@@ -1,5 +1,5 @@
-import { ReactNode, ComponentProps } from 'react';
-import { HeaderAtomicProps } from '@/components/atomic/header';
+import { ReactNode } from "react";
+import { HeaderAtomicProps } from "@/components/atomic/header";
 
 export interface NavigationItem {
   /** Unique identifier */

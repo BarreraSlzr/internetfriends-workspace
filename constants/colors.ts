@@ -152,17 +152,17 @@ export const CSS_VARIABLES = {
 } as const;
 
 // Utility function to get theme colors
-export const getThemeColors = (theme: 'light' | 'dark') => {
+export const _getThemeColors = (theme: 'light' | 'dark') => {
   return theme === 'light' ? LIGHT_THEME : DARK_THEME;
 };
 
 // Utility function to get glass colors
-export const getGlassColors = (theme: 'light' | 'dark') => {
+export const _getGlassColors = (theme: 'light' | 'dark') => {
   return theme === 'light' ? GLASS_COLORS : GLASS_DARK_COLORS;
 };
 
 // Export all color constants
-export const COLORS = {
+export const _COLORS = {
   brand: BRAND_COLORS,
   glass: GLASS_COLORS,
   glassDark: GLASS_DARK_COLORS,

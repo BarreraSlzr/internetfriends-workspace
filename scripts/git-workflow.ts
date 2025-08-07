@@ -5,9 +5,9 @@
  * Automates common git operations following InternetFriends workflow strategy
  */
 
-import { execSync } from 'child_process';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { execSync } from "child_process";
+import { readFileSync, writeFileSync, existsSync } from "fs";
+import { join } from "path";
 
 // Workflow configuration
 interface WorkflowConfig {

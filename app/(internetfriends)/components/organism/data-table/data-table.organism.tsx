@@ -8,7 +8,7 @@ import React, {
   useRef,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { eventSystem, UIEvents } from "../../../../../lib/events/event.system";
+import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./data-table.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
@@ -143,21 +143,16 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
           const filterValue = filter.value;
 
           switch (filter.type) {
-            case "text":
-              return String(cellValue)
+            case "text": return String(cellValue)
                 .toLowerCase()
                 .includes(String(filterValue).toLowerCase());
-            case "number":
-              return Number(cellValue) === Number(filterValue);
-            case "date":
-              return (
+            case "number": return Number(cellValue) === Number(filterValue);
+            case "date": return (
                 new Date(cellValue).toDateString() ===
                 new Date(filterValue).toDateString()
               );
-            case "boolean":
-              return Boolean(cellValue) === Boolean(filterValue);
-            case "select":
-              return cellValue === filterValue;
+            case "boolean": return Boolean(cellValue) === Boolean(filterValue);
+            case "select": return cellValue === filterValue;
             default:
               return true;
           }

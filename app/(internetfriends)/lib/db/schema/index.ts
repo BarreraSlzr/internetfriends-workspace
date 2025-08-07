@@ -1,4 +1,4 @@
-import { Generated, ColumnType, Insertable } from 'kysely'
+import { Generated, ColumnType, Insertable } from "kysely"
 
 export interface Database {
   _contact_submissions: ContactSubmissionsTable

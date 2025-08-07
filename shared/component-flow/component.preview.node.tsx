@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useCallback, useMemo } from 'react';
-import { Handle, Position, NodeProps } from 'reactflow';
-import styles from './component.preview.node.module.scss';
-import { ComponentPreviewNodeData } from './types';
+import React, { useState, useCallback, useMemo } from "react";
+import { Handle, Position, NodeProps } from "reactflow";
+import styles from "./component.preview.node.module.scss";
+import { ComponentPreviewNodeData } from "./types";
 
 interface ResizeHandle {
   width: number;
@@ -76,7 +76,7 @@ export const ComponentPreviewNode: React.FC<NodeProps<ComponentPreviewNodeData>>
   }, [data.component, data.defaultProps, propOverrides]);
 
   // Handle prop value changes
-  const handlePropChange = useCallback((key: string, value: any) => {
+  const handlePropChange = useCallback((key: string, value: unknown) => {
     setPropOverrides(prev => ({
       ...prev,
       [key]: value

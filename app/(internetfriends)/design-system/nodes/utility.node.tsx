@@ -25,16 +25,11 @@ const UtilityNode: React.FC<UtilityNodeProps> = ({
 }) => {
   const getCategoryColor = (category: string) => {
     switch (category) {
-      case "helper":
-        return "from-yellow-50 to-yellow-100 border-yellow-200 text-yellow-900";
-      case "hook":
-        return "from-emerald-50 to-emerald-100 border-emerald-200 text-emerald-900";
-      case "constant":
-        return "from-orange-50 to-orange-100 border-orange-200 text-orange-900";
-      case "type":
-        return "from-pink-50 to-pink-100 border-pink-200 text-pink-900";
-      case "config":
-        return "from-cyan-50 to-cyan-100 border-cyan-200 text-cyan-900";
+      case "helper": return "from-yellow-50 to-yellow-100 border-yellow-200 text-yellow-900";
+      case "hook": return "from-emerald-50 to-emerald-100 border-emerald-200 text-emerald-900";
+      case "constant": return "from-orange-50 to-orange-100 border-orange-200 text-orange-900";
+      case "type": return "from-pink-50 to-pink-100 border-pink-200 text-pink-900";
+      case "config": return "from-cyan-50 to-cyan-100 border-cyan-200 text-cyan-900";
       default:
         return "from-gray-50 to-gray-100 border-gray-200 text-gray-900";
     }

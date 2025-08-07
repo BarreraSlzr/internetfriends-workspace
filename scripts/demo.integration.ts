@@ -2,7 +2,6 @@
 // InternetFriends Integration Demonstration Script
 // Showcases the power of curl testing + event-driven compute system
 
-import { z } from "zod";
 import {
   CurlTestRunner,
   InternetFriendsTestSuites,
@@ -101,7 +100,7 @@ class DemoEventMonitor {
     console.log("📡 Starting event monitoring...");
 
     // Monitor all events
-    const globalHandlerId = eventSystem.onAll((event: any) => {
+    const globalHandlerId = eventSystem.onAll((event: Event) => {
       this.eventLog.push({
         type: event.type,
         timestamp: Date.now(),
@@ -114,7 +113,7 @@ class DemoEventMonitor {
     // Monitor specific compute events
     const computeHandlerId = eventSystem.on(
       "compute.job_completed",
-      (event: any) => {
+      (event: Event) => {
         console.log(
           `  ✅ Job ${event.data.jobId} completed in ${event.data.processingTime}ms`,
         );
@@ -126,7 +125,7 @@ class DemoEventMonitor {
     // Monitor API events
     const apiHandlerId = eventSystem.on(
       "api.request_complete",
-      (event: any) => {
+      (event: Event) => {
         console.log(
           `  🌐 ${event.data.method} ${event.data.url} → ${event.data.status} (${event.data.responseTime}ms)`,
         );
@@ -173,7 +172,7 @@ class InternetFriendsIntegrationDemo {
     this.startTime = Date.now();
 
     console.log("🚀 InternetFriends Integration Demo Starting...");
-    console.log("=".repeat(60));
+    console.log("= ".repeat(60));
 
     try {
       for (const phase of DEMO_CONFIG.phases) {
@@ -181,7 +180,7 @@ class InternetFriendsIntegrationDemo {
         await this.sleep(1000); // Pause between phases
       }
     } catch (error) {
-      console.error("❌ Demo failed:", error);
+      console.error("❌ Demo failed: ", error);
       this.statsCollector.increment("errors");
     } finally {
       await this.generateFinalReport();
@@ -193,23 +192,17 @@ class InternetFriendsIntegrationDemo {
     console.log("-".repeat(40));
 
     switch (phase) {
-      case "setup":
-        await this.setupPhase();
+      case "setup": await this.setupPhase();
         break;
-      case "curl_testing":
-        await this.curlTestingPhase();
+      case "curl_testing": await this.curlTestingPhase();
         break;
-      case "event_processing":
-        await this.eventProcessingPhase();
+      case "event_processing": await this.eventProcessingPhase();
         break;
-      case "compute_jobs":
-        await this.computeJobsPhase();
+      case "compute_jobs": await this.computeJobsPhase();
         break;
-      case "integration":
-        await this.integrationPhase();
+      case "integration": await this.integrationPhase();
         break;
-      case "teardown":
-        await this.teardownPhase();
+      case "teardown": await this.teardownPhase();
         break;
     }
   }
@@ -230,7 +223,7 @@ class InternetFriendsIntegrationDemo {
     console.log("  ✅ Event monitoring active");
 
     // Register demo job handlers
-    computeManager.registerJobHandler("api.request", async (job: any) => {
+    computeManager.registerJobHandler("api.request", async (event: Event) => {
       await this.sleep(Math.random() * 500 + 100); // 100-600ms processing time
       return {
         url: job.payload.url,
@@ -239,7 +232,7 @@ class InternetFriendsIntegrationDemo {
       };
     });
 
-    computeManager.registerJobHandler("data.processing", async (job: any) => {
+    computeManager.registerJobHandler("data.processing", async (event: Event) => {
       const items = job.payload.items || 100;
       await this.sleep(items * 2); // 2ms per item
       return {
@@ -258,7 +251,7 @@ class InternetFriendsIntegrationDemo {
     try {
       // Run health check tests with default properties
       const healthCheckTests = InternetFriendsTestSuites.healthCheck.map(
-        (test: any) => ({
+        (event: Event) => ({
           ...test,
           timeout: test.timeout || 10000,
           followRedirects: test.followRedirects ?? true,
@@ -292,7 +285,7 @@ class InternetFriendsIntegrationDemo {
         `  📊 Success rate: ${healthResults.filter((r) => r.success).length}/${healthResults.length}`,
       );
     } catch (error) {
-      console.log("  ❌ Curl testing failed:", error);
+      console.log("  ❌ Curl testing failed: ", error);
       this.statsCollector.increment("errors");
     }
   }
@@ -493,9 +486,9 @@ class InternetFriendsIntegrationDemo {
     const totalDuration = Date.now() - this.startTime;
     this.statsCollector.increment("totalDuration", totalDuration);
 
-    console.log("\n" + "=".repeat(60));
+    console.log("\n" + "= ".repeat(60));
     console.log("📊 FINAL DEMO REPORT");
-    console.log("=".repeat(60));
+    console.log("= ".repeat(60));
 
     const report = this.statsCollector.generateReport();
     console.log(report);
@@ -508,7 +501,7 @@ class InternetFriendsIntegrationDemo {
     // Show recent events
     const recentEvents = this.eventMonitor.getRecentEvents(5);
     if (recentEvents.length > 0) {
-      console.log("\n🔍 Recent Events:");
+      console.log("\n🔍 Recent Events: ");
       recentEvents.forEach((event) => {
         const timeAgo = Date.now() - event.timestamp;
         console.log(`  • ${event.type} (${timeAgo}ms ago)`);
@@ -530,12 +523,12 @@ async function main() {
     verbose: args.includes("--verbose") || args.includes("-v"),
     quick: args.includes("--quick") || args.includes("-q"),
     baseUrl:
-      args.find((arg) => arg.startsWith("--url="))?.split("=")[1] ||
+      args.find((arg) => arg.startsWith("--url="))?.split("= ")[1] ||
       DEMO_CONFIG.baseUrl,
   };
 
   if (options.verbose) {
-    console.log("🔧 Demo Configuration:");
+    console.log("🔧 Demo Configuration: ");
     console.log(`  Base URL: ${options.baseUrl}`);
     console.log(`  Verbose: ${options.verbose}`);
     console.log(`  Quick mode: ${options.quick}`);

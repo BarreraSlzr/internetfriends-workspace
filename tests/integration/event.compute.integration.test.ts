@@ -160,14 +160,14 @@ class TestResultsCollector {
 class EventTracker {
   private events: Array<{
     type: EventType;
-    data: any;
+    data: unknown;
     timestamp: Date;
   }> = [];
   private handlerIds: string[] = [];
 
   startTracking(): void {
     // Track all events
-    const handlerId = eventSystem.onAll((event: any) => {
+    const handlerId = eventSystem.onAll((event: Event) => {
       this.events.push({
         type: event.type,
         data: event.data,
@@ -183,13 +183,13 @@ class EventTracker {
     this.handlerIds = [];
   }
 
-  getEvents(): Array<{ type: EventType; data: any; timestamp: Date }> {
+  getEvents(): Array<{ type: EventType; data: unknown; timestamp: Date }> {
     return [...this.events];
   }
 
   getEventsByType(
     type: EventType,
-  ): Array<{ type: EventType; data: any; timestamp: Date }> {
+  ): Array<{ type: EventType; data: unknown; timestamp: Date }> {
     return this.events.filter((e) => e.type === type);
   }
 
@@ -203,7 +203,7 @@ class EventTracker {
         reject(new Error(`Timeout waiting for event: ${type}`));
       }, timeout);
 
-      const handlerId = eventSystem.on(type, (event: any) => {
+      const handlerId = eventSystem.on(type, (event: Event) => {
         clearTimeout(timeoutId);
         eventSystem.off(handlerId);
         resolve(event);
@@ -393,7 +393,7 @@ describe("InternetFriends Integration Tests", () => {
       const startTime = Date.now();
 
       // Register a test job handler
-      computeManager.registerJobHandler("test.execution", async (job: any) => {
+      computeManager.registerJobHandler("test.execution", async (event: Event) => {
         await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate work
         return {
           testsRun: 10,
@@ -625,7 +625,7 @@ describe("InternetFriends Integration Tests", () => {
       );
 
       // Register handler that fails
-      computeManager.registerJobHandler("test.execution", async (job: any) => {
+      computeManager.registerJobHandler("test.execution", async (event: Event) => {
         if (job.payload?.shouldFail) {
           throw new Error("Simulated job failure");
         }
@@ -744,7 +744,7 @@ describe("InternetFriends Integration Tests", () => {
       const jobCount = 20;
 
       // Register fast job handler
-      computeManager.registerJobHandler("data.processing", async (job: any) => {
+      computeManager.registerJobHandler("data.processing", async (event: Event) => {
         await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms work
         return { processed: job.payload?.items || 100 };
       });
@@ -766,7 +766,7 @@ describe("InternetFriends Integration Tests", () => {
 
       const completionHandler = eventSystem.on(
         "compute.job_completed",
-        (event: any) => {
+        (event: Event) => {
           if (jobIds.includes(event.data.jobId)) {
             completedJobs++;
             completedJobIds.push(event.data.jobId);

@@ -85,7 +85,7 @@ test.describe("Atomic Components", () => {
       await glassCard.hover();
 
       // Should have hover effects (transform or shadow changes)
-      const hasTransform = await page.evaluate(() => {
+      const _hasTransform = await page.evaluate(() => {
         const card = document.querySelector(".glass-card:hover");
         if (!card) return false;
         const style = getComputedStyle(card);
@@ -167,7 +167,7 @@ test.describe("Component Integration", () => {
     expect(await edges.count()).toBeGreaterThan(0);
 
     // Should have composition edges (solid lines)
-    const compositionEdges = page.locator('.react-flow__edge[data-testid*="smoothstep"]');
+    const compositionEdges = page.locator('.react-flow__edge[data-testid*= "smoothstep"]');
     expect(await compositionEdges.count()).toBeGreaterThan(0);
   });
 
@@ -175,11 +175,11 @@ test.describe("Component Integration", () => {
     await page.goto("/design-system");
 
     // Check atomic components are positioned correctly
-    const atomicNodes = page.locator('[data-testid*="atomic"]');
+    const atomicNodes = page.locator('[data-testid*= "atomic"]');
     expect(await atomicNodes.count()).toBeGreaterThan(0);
 
     // Check molecular components exist
-    const molecularNodes = page.locator('[data-testid*="molecular"]');
+    const molecularNodes = page.locator('[data-testid*= "molecular"]');
     expect(await molecularNodes.count()).toBeGreaterThan(0);
   });
 });
@@ -189,11 +189,11 @@ test.describe("Design System Validation", () => {
     await page.goto("/design-system");
 
     // Check for consistent border radius usage
-    const elements = await page.locator('[class*="rounded-compact"]').all();
+    const elements = await page.locator('[class*= "rounded-compact"]').all();
     expect(elements.length).toBeGreaterThan(0);
 
     // Check for InternetFriends primary color usage
-    const primaryElements = await page.locator('[class*="if-primary"]').all();
+    const primaryElements = await page.locator('[class*= "if-primary"]').all();
     expect(primaryElements.length).toBeGreaterThan(0);
   });
 
@@ -201,7 +201,7 @@ test.describe("Design System Validation", () => {
     await page.goto("/design-system");
 
     // Check for consistent padding/margin classes
-    const spacingElements = await page.locator('[class*="p-"], [class*="m-"]').all();
+    const spacingElements = await page.locator('[class*= "p-"], [class*= "m-"]').all();
     expect(spacingElements.length).toBeGreaterThan(0);
   });
 

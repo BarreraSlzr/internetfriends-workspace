@@ -296,8 +296,7 @@ class TestValidator {
       const usesCorrectPath =
         testScript.includes("tests/unit/") &&
         unitTestScript.includes("tests/unit/");
-      const hasWatchScript =
-        "test:unit:watch" in scripts &&
+      const hasWatchScript = "test:unit:watch" in scripts &&
         scripts["test:unit:watch"].includes("tests/unit/");
 
       const passed = usesCorrectPath && hasWatchScript;
@@ -369,7 +368,7 @@ class TestValidator {
     const totalTests = this.results.length;
     const passed = this.results.filter((r) => r.passed).length;
     const failed = totalTests - passed;
-    const totalDuration = Date.now() - this.startTime;
+    const _totalDuration = Date.now() - this.startTime;
 
     let summary = "";
     if (failed === 0) {
@@ -442,7 +441,7 @@ class TestValidator {
     this.logResult(unitResult.name, unitResult.passed, unitResult.duration);
 
     if (unitResult.output && !unitResult.passed) {
-      console.log("\nUnit Test Output (last 500 chars):");
+      console.log("\nUnit Test Output (last 500 chars): ");
       console.log("─".repeat(50));
       console.log(unitResult.output);
     }
@@ -458,7 +457,7 @@ class TestValidator {
     console.log("\n" + report.summary);
 
     if (report.failed > 0) {
-      console.log("\n🔧 FAILED CHECKS:");
+      console.log("\n🔧 FAILED CHECKS: ");
       console.log("─".repeat(30));
       report.results
         .filter((r) => !r.passed)
@@ -467,15 +466,15 @@ class TestValidator {
           if (r.error) console.log(`   Error: ${r.error}`);
         });
 
-      console.log("\n💡 NEXT STEPS:");
+      console.log("\n💡 NEXT STEPS: ");
       console.log("1. Review the failed checks above");
       console.log("2. Fix configuration or file structure issues");
       console.log("3. Re-run validation: bun run scripts/test-validation.ts");
-      console.log("4. Run tests individually:");
+      console.log("4. Run tests individually: ");
       console.log("   - Unit tests: bun test");
       console.log("   - E2E tests: bun run test:e2e --headed");
     } else {
-      console.log("\n🚀 READY TO DEVELOP:");
+      console.log("\n🚀 READY TO DEVELOP: ");
       console.log("─".repeat(20));
       console.log("• Unit tests: bun test");
       console.log("• Unit tests (watch): bun test --watch");

@@ -342,7 +342,7 @@ export async function runCurlTests(
   const rawTests = InternetFriendsTestSuites[suite];
 
   // Transform tests to include required properties
-  const tests: CurlTestConfig[] = rawTests.map((test: any) => ({
+  const tests: CurlTestConfig[] = rawTests.map((event: Event) => ({
     ...test,
     timeout: test.timeout || 10000,
     followRedirects: test.followRedirects ?? true,
@@ -352,12 +352,12 @@ export async function runCurlTests(
   }));
 
   console.log(`🧪 Running ${suite} test suite (${tests.length} tests)...`);
-  console.log("=".repeat(50));
+  console.log("= ".repeat(50));
 
   const results = await runner.runTests(tests);
   const report = runner.generateReport(results);
 
-  console.log("\n" + "=".repeat(50));
+  console.log("\n" + "= ".repeat(50));
   console.log(report);
 
   // Write report to file

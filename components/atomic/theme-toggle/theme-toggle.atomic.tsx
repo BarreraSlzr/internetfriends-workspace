@@ -24,12 +24,9 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 
   const getIconSize = () => {
     switch (size) {
-      case "sm":
-        return "w-4 h-4";
-      case "md":
-        return "w-5 h-5";
-      case "lg":
-        return "w-6 h-6";
+      case "sm": return "w-4 h-4";
+      case "md": return "w-5 h-5";
+      case "lg": return "w-6 h-6";
       default:
         return "w-5 h-5";
     }
@@ -37,12 +34,9 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 
   const getButtonSize = () => {
     switch (size) {
-      case "sm":
-        return "p-1.5";
-      case "md":
-        return "p-2";
-      case "lg":
-        return "p-3";
+      case "sm": return "p-1.5";
+      case "md": return "p-2";
+      case "lg": return "p-3";
       default:
         return "p-2";
     }
@@ -51,12 +45,9 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   const getCurrentIcon = () => {
     const iconSize = getIconSize();
     switch (theme.mode) {
-      case "light":
-        return <Sun className={cn(iconSize, "text-yellow-500")} />;
-      case "dark":
-        return <Moon className={cn(iconSize, "text-blue-400")} />;
-      case "system":
-        return <Monitor className={cn(iconSize, "text-gray-500")} />;
+      case "light": return <Sun className={cn(iconSize, "text-yellow-500")} />;
+      case "dark": return <Moon className={cn(iconSize, "text-blue-400")} />;
+      case "system": return <Monitor className={cn(iconSize, "text-gray-500")} />;
       default:
         return <Monitor className={cn(iconSize, "text-gray-500")} />;
     }
@@ -64,12 +55,9 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
 
   const getLabel = () => {
     switch (theme.mode) {
-      case "light":
-        return "Light mode";
-      case "dark":
-        return "Dark mode";
-      case "system":
-        return "System";
+      case "light": return "Light mode";
+      case "dark": return "Dark mode";
+      case "system": return "System";
       default:
         return "Theme";
     }

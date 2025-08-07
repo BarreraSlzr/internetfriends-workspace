@@ -2,9 +2,8 @@
 // InternetFriends Organism Components Demonstration Script
 // Interactive showcase of all organism-level components with live examples
 
-import { spawn } from 'child_process';
-import { readdir } from 'fs/promises';
-import { join } from 'path';
+import { spawn } from "child_process";
+import { readdir } from "fs/promises";
 
 // Demo configuration
 interface OrganismDemo {
@@ -13,7 +12,7 @@ interface OrganismDemo {
   description: string;
   features: string[];
   props: Record<string, any>;
-  demoData?: any;
+  demoData?: unknown;
   interactiveFeatures: string[];
 }
 
@@ -246,7 +245,7 @@ const ORGANISM_DEMOS: OrganismDemo[] = [
 class OrganismDemonstrator {
   private verbose: boolean;
   private interactive: boolean;
-  private serverProcess?: any;
+  private serverProcess?: unknown;
 
   constructor(verbose: boolean = false, interactive: boolean = true) {
     this.verbose = verbose;
@@ -408,9 +407,9 @@ class OrganismDemonstrator {
   private showUsageExample(demo: OrganismDemo): void {
     console.log('💻 Usage Example:');
     console.log('```tsx');
-    console.log(`import { ${demo.component} } from './components/organism/${demo.name.toLowerCase().replace(/\s+/g, '-')}';`);
+    console.log(`import { ${demo.component} } from "./components/organism/${demo.name.toLowerCase().replace(/\s+/g, "-')}';`);
     console.log('');
-    console.log(`const MyPage = () => {`);
+    console.log(`const _MyPage = () => {`);
     console.log(`  return (`);
     console.log(`    <${demo.component}`);
 
@@ -433,11 +432,11 @@ class OrganismDemonstrator {
     console.log('🔗 Integration Example:');
     console.log('```tsx');
     console.log(`// Complete dashboard page with multiple organisms`);
-    console.log(`import { DashboardOrganism } from './organism/dashboard';`);
-    console.log(`import { AnalyticsOrganism } from './organism/analytics';`);
-    console.log(`import { DataTableOrganism } from './organism/data-table';`);
+    console.log(`import { DashboardOrganism } from "./organism/dashboard";`);
+    console.log(`import { AnalyticsOrganism } from "./organism/analytics";`);
+    console.log(`import { DataTableOrganism } from "./organism/data-table";`);
     console.log('');
-    console.log(`export const ComprehensiveDashboard = () => {`);
+    console.log(`export const _ComprehensiveDashboard = () => {`);
     console.log(`  return (`);
     console.log(`    <div className="dashboard-layout">`);
     console.log(`      <DashboardOrganism userId="current-user" />`);

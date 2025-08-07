@@ -37,7 +37,7 @@ test.describe("InternetFriends Design System", () => {
 
   test("should have working search functionality", async ({ page }) => {
     // Wait for search input
-    const searchInput = page.locator('input[placeholder*="Search"]');
+    const searchInput = page.locator('input[placeholder*= "Search"]');
     await expect(searchInput).toBeVisible();
 
     // Search for specific component
@@ -82,8 +82,8 @@ test.describe("InternetFriends Design System", () => {
     // Check stats content
     await expect(page.getByText("Components")).toBeVisible();
     await expect(page.getByText("Stable")).toBeVisible();
-    await expect(page.getByText("Atomic:")).toBeVisible();
-    await expect(page.getByText("Molecular:")).toBeVisible();
+    await expect(page.getByText("Atomic: ")).toBeVisible();
+    await expect(page.getByText("Molecular: ")).toBeVisible();
   });
 
   test("should have working React Flow controls", async ({ page }) => {
@@ -94,7 +94,7 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator(".react-flow__minimap")).toBeVisible();
 
     // Test zoom in button
-    const zoomInButton = page.locator('.react-flow__controls-button[title*="zoom in"]');
+    const zoomInButton = page.locator('.react-flow__controls-button[title*= "zoom in"]');
     if (await zoomInButton.count() > 0) {
       await zoomInButton.click();
     }
@@ -148,7 +148,7 @@ test.describe("InternetFriends Design System", () => {
 
   test("should handle clear filters action", async ({ page }) => {
     // Add a search filter
-    const searchInput = page.locator('input[placeholder*="Search"]');
+    const searchInput = page.locator('input[placeholder*= "Search"]');
     await searchInput.fill("Button");
 
     // Add category filter
@@ -198,7 +198,7 @@ test.describe("InternetFriends Design System", () => {
     await page.waitForLoadState("networkidle");
 
     // Interact with search
-    const searchInput = page.locator('input[placeholder*="Search"]');
+    const searchInput = page.locator('input[placeholder*= "Search"]');
     await searchInput.fill("Button");
     await searchInput.clear();
 
@@ -213,7 +213,7 @@ test.describe("InternetFriends Design System", () => {
 
   test("should have proper accessibility", async ({ page }) => {
     // Check for proper ARIA labels
-    await expect(page.locator('input[placeholder*="Search"]')).toHaveAttribute("type", "text");
+    await expect(page.locator('input[placeholder*= "Search"]')).toHaveAttribute("type", "text");
 
     // Check for proper semantic elements
     await expect(page.locator("h1")).toBeVisible();

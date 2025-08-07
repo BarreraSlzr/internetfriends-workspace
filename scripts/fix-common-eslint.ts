@@ -5,9 +5,9 @@
  * Addresses the most common linting issues automatically
  */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { glob } from 'glob';
-import path from 'path';
+import { readFileSync, writeFileSync } from "fs";
+import { glob } from "glob";
+import path from "path";
 
 interface FixStats {
   filesProcessed: number;
@@ -84,7 +84,7 @@ const commonFixes = [
     pattern: /^(import.*from\s+['"]react['"];?\s*)$/m,
     replacement: (match: string, content: string) => {
       if (content.includes('<Image ') && !content.includes('import Image from')) {
-        return `${match}\nimport Image from 'next/image';`;
+        return `${match}\nimport Image from "next/image";`;
       }
       return match;
     },
@@ -122,8 +122,8 @@ function fixFile(filePath: string): number {
 
     // Apply specific fixes for common unused variables
     const unusedVarFixes = [
-      { pattern: /const\s+setNodes\s*=/, replacement: 'const _setNodes =' },
-      { pattern: /const\s+startTime\s*=/, replacement: 'const _startTime =' },
+      { pattern: /const\s+setNodes\s*=/, replacement: 'const __setNodes =' },
+      { pattern: /const\s+startTime\s*=/, replacement: 'const __startTime =' },
       { pattern: /\(\s*request\s*:/g, replacement: '(_request:' },
       { pattern: /\(\s*e\s*\)/g, replacement: '(_e)' },
       { pattern: /\(\s*index\s*:/g, replacement: '(_index:' },

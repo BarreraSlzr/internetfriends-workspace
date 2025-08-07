@@ -4,7 +4,7 @@ import { ProfileSkillsTab } from "./profile-skills-tab";
 import { ProfileProjectsTab } from "./profile-projects-tab";
 import { ProfileMoreTab } from "./profile-more-tab";
 
-export const ProfileTabs = () => {
+export const _ProfileTabs = () => {
   return (
     <Tabs defaultValue="expertise">
       <TabsList>

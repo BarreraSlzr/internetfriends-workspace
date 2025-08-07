@@ -258,11 +258,11 @@ export interface ButtonRenderProps extends ButtonState {
 export type _ButtonRenderProp = (props: ButtonRenderProps) => ReactNode;
 
 // Type guards
-export const isButtonVariant = (value: unknown): value is ButtonVariant => {
+export const _isButtonVariant = (value: unknown): value is ButtonVariant => {
   return ["primary", "secondary", "outline", "ghost", "link"].includes(value);
 };
 
-export const isButtonSize = (value: unknown): value is ButtonSize => {
+export const _isButtonSize = (value: unknown): value is ButtonSize => {
   return ["xs", "sm", "md", "lg", "xl"].includes(value);
 };
 

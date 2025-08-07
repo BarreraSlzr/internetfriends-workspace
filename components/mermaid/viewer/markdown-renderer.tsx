@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useMemo } from 'react';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
-import { MermaidViewer } from './mermaid-viewer';
-import { extractMermaidDiagrams, extractDiagramTitle, processMermaidMarkdown } from '../utils';
+import React, { useMemo } from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { MermaidViewer } from "./mermaid-viewer";
+import { extractDiagramTitle, processMermaidMarkdown } from "../utils";
 
 export interface MarkdownRendererProps {
   /** Markdown content to render */
@@ -89,7 +89,7 @@ function simpleMarkdownToHTML(markdown: string): string {
  * Wrap content in proper HTML structure
  */
 function wrapInParagraphs(html: string): string {
-  // Don't wrap if already contains block elements
+  // don't wrap if already contains block elements
   if (html.includes('<h1') || html.includes('<h2') || html.includes('<h3') ||
       html.includes('<pre') || html.includes('<blockquote') || html.includes('<hr')) {
     return html;

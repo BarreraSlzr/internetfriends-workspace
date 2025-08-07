@@ -22,7 +22,7 @@ export async function setupDatabase() {
         console.log('Database setup completed successfully.');
     } catch (error) {
         console.error('Error during database setup:', error);
-        // Don't throw error in development to prevent app crash
+        // don't throw error in development to prevent app crash
         if (process.env.NODE_ENV === 'production') {
             throw error;
         }

@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { _cardCss } from "./profile-card";
 
-export const ProfileProjectsTab = () => {
+export const _ProfileProjectsTab = () => {
   const skillsMap = new Map(
     curriculum.skills.map((skill) => [skill.id, skill]),
   );

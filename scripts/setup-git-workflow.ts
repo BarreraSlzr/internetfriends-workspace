@@ -5,9 +5,9 @@
  * Initializes the InternetFriends git workflow strategy
  */
 
-import { execSync } from 'child_process';
-import { writeFileSync, existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
+import { execSync } from "child_process";
+import { writeFileSync, existsSync, mkdirSync } from "fs";
+import { join } from "path";
 
 interface SetupConfig {
   remote: string;
@@ -349,7 +349,7 @@ Screenshots, mockups, or additional context.
     console.log(`
 🎉 InternetFriends Git Workflow Setup Complete!
 
-📋 WHAT'S BEEN CONFIGURED:
+📋 what's BEEN CONFIGURED:
 ✅ Branch structure (main, develop, showcase)
 ✅ Git settings optimized for workflow
 ✅ Pre-commit and commit message hooks

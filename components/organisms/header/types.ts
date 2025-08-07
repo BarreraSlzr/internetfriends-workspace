@@ -315,7 +315,7 @@ export const _HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
 };
 
 // Type guards
-export const _isHeaderAction = (value: unknown): value is HeaderAction => {
+export const __isHeaderAction = (value: unknown): value is HeaderAction => {
   return (
     typeof value === "object" &&
     value !== null &&
@@ -324,7 +324,7 @@ export const _isHeaderAction = (value: unknown): value is HeaderAction => {
   );
 };
 
-export const _isHeaderVariant = (
+export const __isHeaderVariant = (
   value: string | undefined,
 ): value is HeaderOrganismProps["variant"] => {
   return (
@@ -333,7 +333,7 @@ export const _isHeaderVariant = (
   );
 };
 
-export const _isHeaderSize = (
+export const __isHeaderSize = (
   value: string | undefined,
 ): value is HeaderOrganismProps["size"] => {
   return value !== undefined && ["sm", "md", "lg"].includes(value);

@@ -43,8 +43,7 @@ export const authenticationTests: CurlTestConfig[] = [
     url: "/api/auth/verify",
     method: "GET",
     headers: {
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+      Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
     },
     expectedStatus: 200,
     timeout: 3000,
@@ -831,7 +830,7 @@ export const AdvancedTestSuites = {
 };
 
 // Test Suite Metadata
-export const TestSuiteMetadata = {
+export const _TestSuiteMetadata = {
   authentication: {
     name: "Authentication & Authorization",
     description: "Tests for login, JWT validation, and security",

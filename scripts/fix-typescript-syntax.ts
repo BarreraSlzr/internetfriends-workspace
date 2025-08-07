@@ -2,8 +2,8 @@
 
 // Quick TypeScript syntax fix script for InternetFriends project
 
-import { readFileSync, writeFileSync } from 'fs';
-import { glob } from 'glob';
+import { readFileSync, writeFileSync } from "fs";
+import { glob } from "glob";
 
 interface FixRule {
   pattern: RegExp;
@@ -190,7 +190,7 @@ class TypeScriptSyntaxFixer {
 // Parse command line arguments
 const args = process.argv.slice(2);
 const verbose = args.includes('--verbose') || args.includes('-v');
-const dryRun = args.includes('--dry-run') || args.includes('-d');
+const _dryRun = args.includes('--dry-run') || args.includes('-d');
 
 // Run the fixer
 async function main() {

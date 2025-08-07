@@ -3,9 +3,9 @@
 // Demo script for InternetFriends Component Flow System
 // Demonstrates the complete integrated development workflow
 
-import { componentRegistry, registerInternetFriendsComponents } from '../shared/component-flow/component.registry';
-import { patterns, themes, utilities } from '../shared/patterns/design-system.patterns';
-import { integrationUtilities } from '../shared/utilities/integration.utilities';
+import { componentRegistry, registerInternetFriendsComponents } from "../shared/component-flow/component.registry";
+import { patterns, themes, utilities } from "../shared/patterns/design-system.patterns";
+import { integrationUtilities } from "../shared/utilities/integration.utilities";
 
 interface DemoConfig {
   verbose?: boolean;
@@ -77,7 +77,7 @@ class ComponentFlowDemo {
 
   private registerDemoComponents(): void {
     // Demo Button Component
-    const DemoButton = ({ variant = 'primary', children = 'Button', size = 'md', ...props }: any) => {
+    const DemoButton = ({ variant = 'primary', children = 'Button', size = 'md', ...props }: unknown) => {
       const styles = {
         primary: { backgroundColor: '#3b82f6', color: 'white' },
         secondary: { backgroundColor: '#f9fafb', color: '#111827', border: '1px solid #e5e7eb' },
@@ -109,7 +109,7 @@ class ComponentFlowDemo {
     };
 
     // Demo Card Component
-    const DemoCard = ({ variant = 'default', title = 'Card Title', children = 'Card content...', ...props }: any) => {
+    const DemoCard = ({ variant = 'default', title = 'Card Title', children = 'Card content...', ...props }: unknown) => {
       const variants = {
         default: { backgroundColor: '#ffffff', border: '1px solid #e5e7eb' },
         glass: { backgroundColor: 'rgba(255, 255, 255, 0.85)', border: '1px solid rgba(255, 255, 255, 0.18)', backdropFilter: 'blur(12px)' },
@@ -275,7 +275,7 @@ class ComponentFlowDemo {
     });
 
     // Test search functionality
-    this.log(`\n🔎 Search Test - "button":`);
+    this.log(`\n🔎 Search Test - "button": `);
     const searchResults = componentRegistry.searchComponents('button');
     searchResults.forEach(comp => {
       this.log(`   ✓ Found: ${comp.metadata.componentName}`);
@@ -602,7 +602,7 @@ Interactive button with multiple variants...`;
     console.log(message);
   }
 
-  private error(message: string, error?: any): void {
+  private error(message: string, error?: unknown): void {
     console.error(message, error);
   }
 

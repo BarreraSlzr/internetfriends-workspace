@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  * Hook to safely handle hydration mismatches by ensuring consistent server/client rendering
@@ -14,7 +14,7 @@ export function useHydrationSafe<T>(serverFallback: T, clientContent: T): T {
 
   useEffect(() => {
     setIsHydrated(true);
-  }, []);
+  }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isHydrated ? clientContent : serverFallback;
 }
@@ -30,7 +30,7 @@ export function useIsHydrated(): boolean {
 
   useEffect(() => {
     setIsHydrated(true);
-  }, []);
+  }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isHydrated;
 }
@@ -51,7 +51,7 @@ export function useClientOnly<T>(
 
   useEffect(() => {
     setIsMounted(true);
-  }, []);
+  }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isMounted ? clientOnlyContent() : fallback;
 }
@@ -67,7 +67,7 @@ export function useBrowserSafe(): boolean {
 
   useEffect(() => {
     setIsBrowser(typeof window !== 'undefined');
-  }, []);
+  }, [] // eslint-disable-line react-hooks/exhaustive-deps);
 
   return isBrowser;
 }

@@ -3,7 +3,7 @@ import Header from "@/app/(internetfriends)/components/header";
 import HeroText from "@/app/(internetfriends)/components/hero-text";
 import Navigation from "@/app/(internetfriends)/components/navigation";
 import SocialLinks from "@/app/(internetfriends)/components/social-links";
-import content from '@/app/(internetfriends)/content.json';
+import content from "@/app/(internetfriends)/content.json";
 import ProfileCard from "../components/profile/profile-card";
 
 

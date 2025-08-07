@@ -3,7 +3,7 @@
 // Event-driven compute system for streamlined operations and performance optimization
 
 import { z } from "zod";
-import { eventSystem, emit, on, EventType } from "./event.system";
+import { emit, on } from "./event.system";
 
 // Compute Job Types
 export const ComputeJobTypeSchema = z.enum([
@@ -588,7 +588,7 @@ export class ComputeEventManager {
 
   // Execute individual job
   private async executeJob(job: ComputeJob): Promise<void> {
-    const _startTime = Date.now();
+    const __startTime = Date.now();
     let allocatedResources: Partial<Record<ResourceType, number>> = {};
 
     try {
@@ -727,7 +727,7 @@ export class ComputeEventManager {
 export const computeManager = new ComputeEventManager();
 
 // Convenience functions for common compute operations
-export const _ComputeOperations = {
+export const __ComputeOperations = {
   // AI Operations
   async runAIInference(
     model: string,

@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { _cardCss } from "./profile-card";
 
-export const ProfileExpertiseTab = () => {
+export const _ProfileExpertiseTab = () => {
   return (
     <div className="flex flex-col gap-2">
       {curriculum.jobExperiences.map((job, index) => (

@@ -4,7 +4,7 @@ import { z } from "zod";
 export const PlatformsEnum = z.enum(["Meta", "Gmail", "TikTok", "Hubspot", "web", "native", "api"]);
 export const FunnelStatusEnum = z.enum(["pending", "active", "completed", "failed"]);
 
-export const FunnelsPlanSchema = z.object({
+export const _FunnelsPlanSchema = z.object({
   meta: z.object({
     canonical: z.boolean(),
     type: z.literal("funnels_plan"),
@@ -29,7 +29,7 @@ export const FunnelsPlanSchema = z.object({
   ),
 });
 
-export const SLARulesSchema = z.object({
+export const _SLARulesSchema = z.object({
   meta: z.object({
     canonical: z.boolean(),
     type: z.literal("sla_rules"),
@@ -50,7 +50,7 @@ export const SLARulesSchema = z.object({
 });
 
 // Structured Commit Message Metadata Schema
-export const CommitMetadataSchema = z.object({
+export const _CommitMetadataSchema = z.object({
   automation_scope: z.string(),
   llm_insights: z.string(),
   roadmap_impact: z.enum(["low", "medium", "high"]),

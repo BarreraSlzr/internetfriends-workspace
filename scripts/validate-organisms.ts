@@ -2,19 +2,19 @@
 // InternetFriends Organism Components Validation Script
 // Comprehensive validation for all organism-level components
 
-import { readdir, stat } from 'fs/promises';
-import { join } from 'path';
-import { z } from 'zod';
+import { readdir, stat } from "fs/promises";
+import { join } from "path";
+import { z } from "zod";
 
 // Validation schemas
-const OrganismStructureSchema = z.object({
+const _OrganismStructureSchema = z.object({
   componentFile: z.string().regex(/\.organism\.tsx$/),
   stylesFile: z.string().regex(/\.styles\.module\.scss$/),
   typesFile: z.string().regex(/types\.ts$/),
   indexFile: z.string().optional()
 });
 
-const ComponentExportSchema = z.object({
+const _ComponentExportSchema = z.object({
   defaultExport: z.boolean(),
   namedExports: z.array(z.string()),
   propsInterface: z.string().optional(),

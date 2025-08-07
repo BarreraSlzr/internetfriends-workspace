@@ -1,12 +1,10 @@
 // InternetFriends Atomic Button Component Exports
 // Clean exports for the button component and all related utilities
 
-// Main component export
-export { ButtonAtomic } from "./button.atomic";
+// Main component export export { ButtonAtomic } from "./button.atomic";
 export { ButtonAtomic as default } from "./button.atomic";
 
-// Component variants export
-export { buttonVariants } from "./button.atomic";
+// Component variants export export { buttonVariants } from "./button.atomic";
 
 // Type exports
 export type {

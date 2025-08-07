@@ -432,11 +432,11 @@ class PerformanceMonitor {
   // Print real-time dashboard
   printDashboard(): void {
     const report = this.generateReport();
-    const stats = this.generateBasicStats();
+    const _stats = this.generateBasicStats();
 
     console.clear();
     console.log("🔍 InternetFriends Performance Monitor Dashboard");
-    console.log("=".repeat(60));
+    console.log("= ".repeat(60));
     console.log("");
 
     // Session info
@@ -445,7 +445,7 @@ class PerformanceMonitor {
     console.log("");
 
     // Key metrics
-    console.log("🚀 Key Metrics:");
+    console.log("🚀 Key Metrics: ");
     console.log(`   Requests: ${report.summary.totalRequests}`);
     console.log(
       `   Avg Response Time: ${Math.round(report.summary.averageResponseTime)}ms`,
@@ -463,7 +463,7 @@ class PerformanceMonitor {
     ).length;
     const poorMetrics = this.metrics.filter((m) => m.rating === "poor").length;
 
-    console.log("📈 Performance Ratings:");
+    console.log("📈 Performance Ratings: ");
     console.log(`   🟢 Good: ${goodMetrics}`);
     console.log(`   🟡 Needs Improvement: ${needsImprovementMetrics}`);
     console.log(`   🔴 Poor: ${poorMetrics}`);
@@ -472,7 +472,7 @@ class PerformanceMonitor {
     // Recent metrics (last 5)
     const recentMetrics = this.metrics.slice(-5);
     if (recentMetrics.length > 0) {
-      console.log("📝 Recent Activity:");
+      console.log("📝 Recent Activity: ");
       recentMetrics.forEach((metric) => {
         const ratingIcon =
           metric.rating === "good"
@@ -492,7 +492,7 @@ class PerformanceMonitor {
 
     // Recommendations
     if (report.recommendations.length > 0) {
-      console.log("💡 Recommendations:");
+      console.log("💡 Recommendations: ");
       report.recommendations.slice(0, 3).forEach((rec) => {
         console.log(`   • ${rec}`);
       });
@@ -547,7 +547,7 @@ class PerformanceMonitor {
 
     // Print summary
     console.log("\n🏁 Performance Monitoring Summary");
-    console.log("=".repeat(50));
+    console.log("= ".repeat(50));
     console.log(
       `Session Duration: ${Math.round(finalReport.duration / 1000)}s`,
     );
@@ -561,7 +561,7 @@ class PerformanceMonitor {
     console.log("");
 
     if (finalReport.recommendations.length > 0) {
-      console.log("📋 Final Recommendations:");
+      console.log("📋 Final Recommendations: ");
       finalReport.recommendations.forEach((rec, index) => {
         console.log(`${index + 1}. ${rec}`);
       });
@@ -581,12 +581,12 @@ async function main() {
   const args = process.argv.slice(2);
   const verbose = args.includes("--verbose") || args.includes("-v");
   const duration = parseInt(
-    args.find((arg) => arg.startsWith("--duration="))?.split("=")[1] || "0",
+    args.find((arg) => arg.startsWith("--duration="))?.split("= ")[1] || "0",
   );
   const dashboard = args.includes("--dashboard") || args.includes("-d");
 
   console.log("🔍 InternetFriends Performance Monitor");
-  console.log("=".repeat(50));
+  console.log("= ".repeat(50));
   console.log("");
 
   const monitor = new PerformanceMonitor(verbose || dashboard);

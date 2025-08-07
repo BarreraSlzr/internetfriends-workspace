@@ -1,7 +1,7 @@
 "use client";
 
-import { ComponentType } from 'react';
-import { ComponentRegistryEntry, ComponentPreviewNodeData, ComponentProp } from './types';
+import { ComponentType } from "react";
+import { ComponentRegistryEntry, ComponentPreviewNodeData, ComponentProp } from "./types";
 
 // Component registry for auto-discovery and cataloging
 class ComponentRegistry {
@@ -195,7 +195,7 @@ class ComponentRegistry {
   }
 
   // Infer prop type from PropTypes or other type info
-  private inferPropType(propType: any): ComponentProp['type'] {
+  private inferPropType(propType: unknown): ComponentProp['type'] {
     if (!propType) return 'string';
 
     const typeName = propType.toString();
@@ -210,7 +210,7 @@ class ComponentRegistry {
   }
 
   // Check if prop is required
-  private isPropRequired(propType: any): boolean {
+  private isPropRequired(propType: unknown): boolean {
     return propType && propType.isRequired === true;
   }
 

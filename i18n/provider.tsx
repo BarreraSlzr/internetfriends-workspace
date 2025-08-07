@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import {
   I18nContext,
   type I18nContextType,
@@ -12,7 +12,7 @@ import {
   storeLocale,
   loadTranslations,
   createTranslationFunction,
-} from './config';
+} from "./config";
 
 export interface I18nProviderProps {
   children: React.ReactNode;

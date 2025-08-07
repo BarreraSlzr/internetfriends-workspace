@@ -1,3 +1,4 @@
+import Image from 'next/image';
 "use client";
 
 import React, {
@@ -8,7 +9,7 @@ import React, {
   useContext,
 } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   Menu,
   X,
@@ -20,7 +21,6 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { HeaderAtomic } from "@/components/atomic/header";
 import { ButtonAtomic } from "@/components/atomic/button";
 import { NavigationMolecular } from "@/components/molecular/navigation";
 import { useTheme } from "@/hooks/use-theme";

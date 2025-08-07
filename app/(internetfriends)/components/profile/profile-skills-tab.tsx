@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { _cardCss } from "./profile-card";
 
-export const ProfileSkillsTab = () => {
+export const _ProfileSkillsTab = () => {
   return (
     <div className="flex flex-col gap-2">
       <div className={_cardCss}>

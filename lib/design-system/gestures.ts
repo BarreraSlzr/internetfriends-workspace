@@ -39,7 +39,7 @@ export interface PinchGesture {
 }
 
 // Focus Management for Accessibility
-export const _FocusKeyPatterns = {
+export const __FocusKeyPatterns = {
   // Keyboard navigation
   navigation: {
     _next: ["Tab"],
@@ -63,7 +63,7 @@ export const _FocusKeyPatterns = {
 } as const;
 
 // Animation Presets for InternetFriends
-export const _AnimationPresets = {
+export const __AnimationPresets = {
   // Glass morphism transitions
   _glassTransition: {
     duration: 300,
@@ -100,7 +100,7 @@ export const Breakpoints = {
 } as const;
 
 // Component State Patterns
-export const _ComponentStates = {
+export const __ComponentStates = {
   // Interactive states
   _interactive: {
     _idle: "opacity-100 transform-none",

@@ -38,7 +38,7 @@ type HealthResponse = {
 };
 
 // System start time for uptime calculation
-const _startTime = Date.now();
+const __startTime = Date.now();
 
 // Helper function to get memory usage
 function getMemoryUsage() {

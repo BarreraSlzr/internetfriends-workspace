@@ -27,7 +27,7 @@ function logChange(filename: string) {
 
 async function checkHotReload() {
   console.log("🔥 InternetFriends Hot Reload Checker");
-  console.log("=====================================");
+  console.log("===================================== ");
   console.log("Monitoring app/ directory for changes...");
   console.log("Make changes to see hot reload performance");
   console.log("Press Ctrl+C to stop");

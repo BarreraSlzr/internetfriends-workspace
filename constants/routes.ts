@@ -190,7 +190,7 @@ export const NAVIGATION = {
 } as const;
 
 // Route patterns for dynamic routes
-export const ROUTE_PATTERNS = {
+export const _ROUTE_PATTERNS = {
   // Blog post: /blog/[slug]
   blogPost: (slug: string) => `/blog/${slug}`,
 
@@ -240,7 +240,7 @@ export const ROUTE_VALIDATORS = {
 } as const;
 
 // Route permissions (for future auth implementation)
-export const ROUTE_PERMISSIONS = {
+export const _ROUTE_PERMISSIONS = {
   public: [
     ROUTES.home,
     ROUTES.about,
@@ -265,7 +265,7 @@ export const ROUTE_PERMISSIONS = {
 } as const;
 
 // Sitemap generation helpers
-export const SITEMAP_CONFIG = {
+export const _SITEMAP_CONFIG = {
   // Static routes for sitemap
   staticRoutes: [
     {
@@ -317,11 +317,11 @@ export type RouteMetadata = typeof ROUTE_METADATA[keyof typeof ROUTE_METADATA];
 export type RouteSection = 'home' | 'about' | 'portfolio' | 'blog' | 'contact' | 'pricing';
 
 // Utility functions
-export const getRouteMetadata = (pathname: string): RouteMetadata | null => {
+export const _getRouteMetadata = (pathname: string): RouteMetadata | null => {
   return ROUTE_METADATA[pathname as keyof typeof ROUTE_METADATA] || null;
 };
 
-export const buildUrl = (base: string, params?: Record<string, string>): string => {
+export const _buildUrl = (base: string, params?: Record<string, string>): string => {
   if (!params) return base;
 
   const url = new URL(base, 'https://example.com');
@@ -332,7 +332,7 @@ export const buildUrl = (base: string, params?: Record<string, string>): string 
   return url.pathname + url.search;
 };
 
-export const parseRoute = (pathname: string) => {
+export const _parseRoute = (pathname: string) => {
   const segments = pathname.split('/').filter(Boolean);
   const section = segments[0] || 'home';
   const subsection = segments[1];

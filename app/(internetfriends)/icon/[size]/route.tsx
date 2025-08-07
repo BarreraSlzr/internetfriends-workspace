@@ -1,5 +1,5 @@
-import { ImageResponse } from 'next/og'
-import { NextRequest } from 'next/server'
+import { ImageResponse } from "next/og"
+import { NextRequest } from "next/server"
 
 export async function GET(_request: NextRequest, { params }: { params: Promise<{ size: string }> }) {
   const size = parseInt((await params).size, 10)

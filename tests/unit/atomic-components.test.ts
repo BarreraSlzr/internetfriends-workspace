@@ -17,9 +17,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should export GlassCardAtomic component", async () => {
-      const { GlassCardAtomic } = await import(
-        "../../components/atomic/glass-card"
-      );
+      const { GlassCardAtomic } = await import("../../components/atomic/glass-card");
       expect(GlassCardAtomic).toBeDefined();
       expect(typeof GlassCardAtomic).toBe("function");
       expect(GlassCardAtomic.displayName).toBe("GlassCardAtomic");
@@ -60,18 +58,14 @@ describe("Atomic Components Unit Tests", () => {
 
   describe("Component Registry", () => {
     test("should export component registry", async () => {
-      const { componentRegistry } = await import(
-        "../../app/(internetfriends)/design-system/registry/component.registry"
-      );
+      const { componentRegistry } = await import("../../app/(internetfriends)/design-system/registry/component.registry");
       expect(componentRegistry).toBeDefined();
       expect(typeof componentRegistry.getAllComponents).toBe("function");
       expect(typeof componentRegistry.getComponent).toBe("function");
     });
 
     test("should have registered atomic components", async () => {
-      const { componentRegistry } = await import(
-        "../../app/(internetfriends)/design-system/registry/component.registry"
-      );
+      const { componentRegistry } = await import("../../app/(internetfriends)/design-system/registry/component.registry");
 
       const atomicComponents =
         componentRegistry.getComponentsByCategory("atomic");
@@ -84,9 +78,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should have registered molecular components", async () => {
-      const { componentRegistry } = await import(
-        "../../app/(internetfriends)/design-system/registry/component.registry"
-      );
+      const { componentRegistry } = await import("../../app/(internetfriends)/design-system/registry/component.registry");
 
       const molecularComponents =
         componentRegistry.getComponentsByCategory("molecular");
@@ -97,9 +89,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should generate flow nodes correctly", async () => {
-      const { componentRegistry } = await import(
-        "../../app/(internetfriends)/design-system/registry/component.registry"
-      );
+      const { componentRegistry } = await import("../../app/(internetfriends)/design-system/registry/component.registry");
 
       const nodes = componentRegistry.generateFlowNodes();
       expect(nodes.length).toBeGreaterThan(0);
@@ -112,9 +102,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should generate flow edges correctly", async () => {
-      const { componentRegistry } = await import(
-        "../../app/(internetfriends)/design-system/registry/component.registry"
-      );
+      const { componentRegistry } = await import("../../app/(internetfriends)/design-system/registry/component.registry");
 
       const edges = componentRegistry.generateFlowEdges();
       expect(edges.length).toBeGreaterThan(0);
@@ -129,9 +117,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should provide component statistics", async () => {
-      const { componentRegistry } = await import(
-        "../../app/(internetfriends)/design-system/registry/component.registry"
-      );
+      const { componentRegistry } = await import("../../app/(internetfriends)/design-system/registry/component.registry");
 
       const stats = componentRegistry.getComponentStats();
       expect(stats.total).toBeGreaterThan(0);
@@ -144,9 +130,7 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should support component search", async () => {
-      const { componentRegistry } = await import(
-        "../../app/(internetfriends)/design-system/registry/component.registry"
-      );
+      const { componentRegistry } = await import("../../app/(internetfriends)/design-system/registry/component.registry");
 
       const buttonResults = componentRegistry.searchComponents("Button");
       expect(buttonResults.length).toBeGreaterThan(0);
@@ -326,18 +310,10 @@ describe("Atomic Components Unit Tests", () => {
 
   describe("React Flow Integration", () => {
     test("should export node types", async () => {
-      const componentNode = await import(
-        "../../app/(internetfriends)/design-system/nodes/component.node"
-      );
-      const utilityNode = await import(
-        "../../app/(internetfriends)/design-system/nodes/utility.node"
-      );
-      const pageNode = await import(
-        "../../app/(internetfriends)/design-system/nodes/page.node"
-      );
-      const hookNode = await import(
-        "../../app/(internetfriends)/design-system/nodes/hook.node"
-      );
+      const componentNode = await import("../../app/(internetfriends)/design-system/nodes/component.node");
+      const utilityNode = await import("../../app/(internetfriends)/design-system/nodes/utility.node");
+      const pageNode = await import("../../app/(internetfriends)/design-system/nodes/page.node");
+      const hookNode = await import("../../app/(internetfriends)/design-system/nodes/hook.node");
 
       expect(componentNode.ComponentNode).toBeDefined();
       expect(utilityNode.UtilityNode).toBeDefined();
@@ -346,18 +322,10 @@ describe("Atomic Components Unit Tests", () => {
     });
 
     test("should have proper component node display names", async () => {
-      const { ComponentNode } = await import(
-        "../../app/(internetfriends)/design-system/nodes/component.node"
-      );
-      const { UtilityNode } = await import(
-        "../../app/(internetfriends)/design-system/nodes/utility.node"
-      );
-      const { PageNode } = await import(
-        "../../app/(internetfriends)/design-system/nodes/page.node"
-      );
-      const { HookNode } = await import(
-        "../../app/(internetfriends)/design-system/nodes/hook.node"
-      );
+      const { ComponentNode } = await import("../../app/(internetfriends)/design-system/nodes/component.node");
+      const { UtilityNode } = await import("../../app/(internetfriends)/design-system/nodes/utility.node");
+      const { PageNode } = await import("../../app/(internetfriends)/design-system/nodes/page.node");
+      const { HookNode } = await import("../../app/(internetfriends)/design-system/nodes/hook.node");
 
       expect(ComponentNode.displayName).toBe("ComponentNode");
       expect(UtilityNode.displayName).toBe("UtilityNode");
@@ -368,9 +336,7 @@ describe("Atomic Components Unit Tests", () => {
 
   describe("Molecular Components", () => {
     test("should export NavigationMolecular component", async () => {
-      const { NavigationMolecular } = await import(
-        "../../components/molecular/navigation"
-      );
+      const { NavigationMolecular } = await import("../../components/molecular/navigation");
       expect(NavigationMolecular).toBeDefined();
       expect(typeof NavigationMolecular).toBe("function");
       expect(NavigationMolecular.displayName).toBe("NavigationMolecular");

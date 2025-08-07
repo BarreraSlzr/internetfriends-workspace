@@ -1,11 +1,10 @@
-import { ArrowUpRight } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
-import Header from './(internetfriends)/components/header';
-import Navigation from './(internetfriends)/components/navigation';
-import SocialLinks from './(internetfriends)/components/social-links';
-import HeroText from './(internetfriends)/components/hero-text';
-import CompanyInfo from './(internetfriends)/components/company-info';
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import Header from "./(internetfriends)/components/header";
+import Navigation from "./(internetfriends)/components/navigation";
+import SocialLinks from "./(internetfriends)/components/social-links";
+import HeroText from "./(internetfriends)/components/hero-text";
+import CompanyInfo from "./(internetfriends)/components/company-info";
 
 
 const messages = [

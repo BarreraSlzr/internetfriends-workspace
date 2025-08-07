@@ -16,7 +16,7 @@ import {
 interface ExplorerEvent {
   type: "EXPLORE" | "SCAN" | "ANALYZE" | "TRANSPORT" | "UI_UPDATE";
   timestamp: string;
-  data: any;
+  data: unknown;
   metadata?: {
     source: string;
     transportable: boolean;
@@ -118,7 +118,7 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
   const [eventHistory, setEventHistory] = useState<ExplorerEvent[]>([]);
 
   // Event creation utility
-  const createEvent = (type: ExplorerEvent["type"], data: any) => {
+  const createEvent = (type: ExplorerEvent["type"], data: unknown) => {
     const event: ExplorerEvent = {
       type,
       timestamp: new Date().toISOString(),
@@ -151,7 +151,7 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
         });
       }
     } catch (error) {
-      console.error("Failed to load project data:", error);
+      console.error("Failed to load project data: ", error);
       createEvent("UI_UPDATE", {
         action: "loading_failed",
         error: error.message,
@@ -233,12 +233,9 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
   // Get importance badge color
   const getImportanceBadge = (importance: string) => {
     switch (importance) {
-      case "critical":
-        return "bg-red-500 text-white";
-      case "high":
-        return "bg-amber-500 text-white";
-      case "medium":
-        return "bg-blue-500 text-white";
+      case "critical": return "bg-red-500 text-white";
+      case "high": return "bg-amber-500 text-white";
+      case "medium": return "bg-blue-500 text-white";
       default:
         return "bg-gray-400 text-white";
     }
@@ -247,10 +244,8 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
   // Get complexity indicator
   const getComplexityIndicator = (complexity: string) => {
     switch (complexity) {
-      case "complex":
-        return "⚡";
-      case "moderate":
-        return "⚖️";
+      case "complex": return "⚡";
+      case "moderate": return "⚖️";
       default:
         return "○";
     }

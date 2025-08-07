@@ -1,5 +1,5 @@
-import { ComponentType } from 'react';
-import { Node, Edge } from 'reactflow';
+import { ComponentType } from "react";
+import { Node, Edge } from "reactflow";
 
 // Base component preview data
 export interface ComponentPreviewNodeData {
@@ -25,7 +25,7 @@ export interface ComponentProp {
   name: string;
   type: 'string' | 'number' | 'boolean' | 'select' | 'object' | 'array' | 'function';
   required?: boolean;
-  defaultValue?: any;
+  defaultValue?: unknown;
   description?: string;
   options?: string[]; // For select type
   validation?: ValidationRule[];
@@ -35,9 +35,9 @@ export interface ComponentProp {
 // Validation rules for props
 export interface ValidationRule {
   type: 'required' | 'minLength' | 'maxLength' | 'min' | 'max' | 'pattern' | 'custom';
-  value?: any;
+  value?: unknown;
   message?: string;
-  validator?: (value: any) => boolean | string;
+  validator?: (event: Event) => boolean | string;
 }
 
 // Component documentation
@@ -96,7 +96,7 @@ export interface ComponentConnection extends Edge {
 export interface PropMapping {
   sourceProp: string;
   targetProp: string;
-  transform?: (value: any) => any;
+  transform?: (event: Event) => any;
 }
 
 // Component registry entry
@@ -166,7 +166,7 @@ export interface ComponentFlowEvent {
   type: 'node:select' | 'node:deselect' | 'node:move' | 'node:resize' | 'prop:change' | 'edge:connect' | 'edge:disconnect';
   nodeId?: string;
   edgeId?: string;
-  data?: any;
+  data?: unknown;
   timestamp?: Date;
 }
 
@@ -227,9 +227,9 @@ export interface ThemeComponentData {
 export interface DataPipelineNode {
   id: string;
   type: 'source' | 'transform' | 'sink' | 'component';
-  data: any;
+  data: unknown;
   connections: string[];
-  schema?: any;
+  schema?: unknown;
   validation?: ValidationRule[];
 }
 
@@ -255,5 +255,5 @@ export interface ComponentAnalytics {
 
 // Export utility types
 export type ComponentFlowEventHandler = (event: ComponentFlowEvent) => void;
-export type PropValidator = (value: any, prop: ComponentProp) => boolean | string;
+export type PropValidator = (value: unknown, prop: ComponentProp) => boolean | string;
 export type ComponentTransformer = (component: ComponentType<any>, metadata: ComponentPreviewNodeData) => ComponentType<any>;

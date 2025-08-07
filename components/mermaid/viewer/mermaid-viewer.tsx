@@ -100,7 +100,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         mermaidInstance.initialize(config);
         setMermaid(mermaidInstance);
       } catch (err) {
-        console.error("Failed to initialize Mermaid:", err);
+        console.error("Failed to initialize Mermaid: ", err);
         if (isMounted) {
           setError("Failed to initialize diagram renderer");
           onError?.("Failed to initialize diagram renderer");
@@ -220,7 +220,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         setIsFullscreen(false);
       }
     } catch (err) {
-      console.error("Fullscreen toggle failed:", err);
+      console.error("Fullscreen toggle failed: ", err);
     }
   }, [isFullscreen]);
 
@@ -243,7 +243,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     } catch (err) {
-      console.error("Download failed:", err);
+      console.error("Download failed: ", err);
     }
   }, [title]);
 
@@ -311,21 +311,17 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       if (!containerRef.current?.contains(document.activeElement)) return;
 
       switch (e.key) {
-        case "+":
-        case "=":
+        case "+": case "= ":
           e.preventDefault();
           handleZoomIn();
           break;
-        case "-":
-          e.preventDefault();
+        case "-": e.preventDefault();
           handleZoomOut();
           break;
-        case "0":
-          e.preventDefault();
+        case "0": e.preventDefault();
           handleZoomReset();
           break;
-        case "f":
-        case "F11":
+        case "f": case "F11":
           e.preventDefault();
           toggleFullscreen();
           break;

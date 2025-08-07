@@ -47,7 +47,7 @@ class ThemeOptimizer {
 
   async optimize(): Promise<void> {
     console.log("🎨 InternetFriends Theme Optimization");
-    console.log("=====================================");
+    console.log("===================================== ");
 
     // Step 1: Analyze current theme implementation
     await this.analyzeThemeFiles();
@@ -307,7 +307,7 @@ class ThemeOptimizer {
   ): void {
     this.analysis.issues.push({
       type,
-      file: file.replace(this.projectRoot, "").replace(/^\//, ""),
+      file: file.replace(this.projectRoot, "").replace(/^\// , ""),
       line,
       message,
       suggestion,
@@ -316,10 +316,10 @@ class ThemeOptimizer {
 
   private generateReport(): void {
     console.log("\n📊 Theme Optimization Report");
-    console.log("============================");
+    console.log("============================ ");
 
     // Statistics
-    console.log("\n📈 Statistics:");
+    console.log("\n📈 Statistics: ");
     console.log(`• Total files analyzed: ${this.analysis.stats.totalFiles}`);
     console.log(`• CSS/SCSS files: ${this.analysis.stats.cssFiles}`);
     console.log(`• Component files: ${this.analysis.stats.componentFiles}`);
@@ -380,7 +380,7 @@ class ThemeOptimizer {
     }
 
     // Recommendations
-    console.log("\n🚀 Recommendations:");
+    console.log("\n🚀 Recommendations: ");
     if (this.analysis.stats.hardcodedColors > 0) {
       console.log("   • Replace hardcoded colors with design token variables");
     }

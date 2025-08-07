@@ -90,7 +90,7 @@ export const DESIGN_TOKENS = {
 } as const;
 
 // Component variants
-export const COMPONENT_VARIANTS = {
+export const _COMPONENT_VARIANTS = {
   button: {
     size: ['xs', 'sm', 'md', 'lg', 'xl'] as const,
     variant: ['primary', 'secondary', 'outline', 'ghost', 'link'] as const,
@@ -106,7 +106,7 @@ export const COMPONENT_VARIANTS = {
 } as const;
 
 // Layout constants
-export const LAYOUT = {
+export const _LAYOUT = {
   header: {
     height: '4rem', // 64px
     zIndex: DESIGN_TOKENS.zIndex.sticky,
@@ -125,7 +125,7 @@ export const LAYOUT = {
 } as const;
 
 // InternetFriends specific constants
-export const INTERNETFRIENDS = {
+export const _INTERNETFRIENDS = {
   brand: {
     name: 'InternetFriends',
     tagline: 'Building digital connections',

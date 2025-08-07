@@ -6,7 +6,7 @@ import { ProfileTabs } from "./profile-tabs";
 import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import content from "@/app/(internetfriends)/content.json";
 
-export const _cardCss = `sm:p-4 p-2 bg-brand-blue-900 rounded-sm`;
+export const __cardCss = `sm:p-4 p-2 bg-brand-blue-900 rounded-sm`;
 
 const ProfileCard = () => {
   return (

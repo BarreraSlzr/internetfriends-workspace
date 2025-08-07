@@ -5,15 +5,14 @@
  * Interactive project exploration with transportable UI events
  */
 
-import { readdir, stat, readFile } from 'fs/promises';
-import { join, relative, extname, basename } from 'path';
-import { existsSync } from 'fs';
+import { readdir, stat, readFile } from "fs/promises";
+import { join, relative, extname, basename } from "path";
 
 // Event-driven system types
 interface ExplorerEvent {
   type: 'EXPLORE' | 'SCAN' | 'ANALYZE' | 'TRANSPORT' | 'UI_UPDATE';
   timestamp: string;
-  data: any;
+  data: unknown;
   metadata?: {
     source: string;
     transportable: boolean;
@@ -62,7 +61,7 @@ class MicroUXExplorer {
   }
 
   // 🎯 Event creation with transportable UI metadata
-  private createEvent(type: ExplorerEvent['type'], data: any, transportable = true): ExplorerEvent {
+  private createEvent(type: ExplorerEvent['type'], data: unknown, transportable = true): ExplorerEvent {
     const event: ExplorerEvent = {
       type,
       timestamp: new Date().toISOString(),
@@ -83,7 +82,7 @@ class MicroUXExplorer {
   }
 
   // 🎨 Check if data is ready for UI transport
-  private isUIReady(data: any): boolean {
+  private isUIReady(data: Record<string, unknown>): boolean {
     return data &&
            typeof data === 'object' &&
            (Array.isArray(data) || data.hasOwnProperty('name') || data.hasOwnProperty('structure'));
@@ -127,7 +126,7 @@ class MicroUXExplorer {
   async scanDirectory(dirPath: string, depth = 0): Promise<ProjectNode[]> {
     if (depth > this.state.explorationDepth) return [];
 
-    const scanEvent = this.createEvent('SCAN', {
+    const _scanEvent = this.createEvent('SCAN', {
       path: dirPath,
       depth,
       status: 'started'
@@ -214,7 +213,7 @@ class MicroUXExplorer {
 
   // 📈 Generate project structure analysis
   async analyzeProject(): Promise<any> {
-    const analysisEvent = this.createEvent('ANALYZE', { status: 'started' });
+    const _analysisEvent = this.createEvent('ANALYZE', { status: 'started' });
 
     const structure = await this.scanDirectory(this.state.currentPath);
 
@@ -266,7 +265,7 @@ class MicroUXExplorer {
   }
 
   // 🧠 Generate actionable insights
-  private generateInsights(stats: any, structure: ProjectNode[]): string[] {
+  private generateInsights(stats: unknown, structure: ProjectNode[]): string[] {
     const insights: string[] = [];
 
     const totalFiles = stats.totalFiles;
@@ -293,7 +292,7 @@ class MicroUXExplorer {
   }
 
   // 🌳 Generate tree view data for UI transport
-  private generateTreeView(nodes: ProjectNode[], indent = 0): any[] {
+  private generateTreeView(nodes: ProjectNode[], indent = 0): unknown[] {
     return nodes.map(node => ({
       id: node.path,
       label: node.name,
@@ -311,7 +310,7 @@ class MicroUXExplorer {
   }
 
   // 📊 Generate grid view data
-  private generateGridView(nodes: ProjectNode[]): any[] {
+  private generateGridView(nodes: ProjectNode[]): unknown[] {
     const flattenNodes = (nodeList: ProjectNode[]): ProjectNode[] => {
       let result: ProjectNode[] = [];
       for (const node of nodeList) {
@@ -343,8 +342,8 @@ class MicroUXExplorer {
 
   // 🕸️ Generate graph data for network visualization
   private generateGraphData(nodes: ProjectNode[]): any {
-    const graphNodes: any[] = [];
-    const graphEdges: any[] = [];
+    const graphNodes: unknown[] = [];
+    const graphEdges: unknown[] = [];
 
     const processNode = (node: ProjectNode, parentId?: string) => {
       const nodeId = node.path;
@@ -413,7 +412,7 @@ class MicroUXExplorer {
     if (options.depth) this.state.explorationDepth = options.depth;
     if (options.filters) this.state.filters = options.filters;
 
-    const exploreEvent = this.createEvent('EXPLORE', {
+    const _exploreEvent = this.createEvent('EXPLORE', {
       options,
       state: this.state
     });
@@ -474,7 +473,7 @@ class MicroUXExplorer {
     });
   }
 
-  private printTableView(stats: any): void {
+  private printTableView(stats: unknown): void {
     console.log('📊 Project Statistics:');
     console.log(`   Files: ${stats.totalFiles}`);
     console.log(`   Directories: ${stats.totalDirectories}`);
@@ -494,7 +493,7 @@ async function main() {
   const args = process.argv.slice(2);
   const explorer = new MicroUXExplorer('./');
 
-  const options: any = {};
+  const options: unknown = {};
 
   // Parse command line arguments
   for (let i = 0; i < args.length; i++) {

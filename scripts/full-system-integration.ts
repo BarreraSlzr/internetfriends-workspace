@@ -3,7 +3,7 @@
 // Comprehensive automation for development, testing, validation, and deployment
 
 import { spawn, exec } from "child_process";
-import { readFile, writeFile, mkdir, readdir } from "fs/promises";
+import { writeFile, mkdir, readdir } from "fs/promises";
 import { join } from "path";
 import { promisify } from "util";
 
@@ -175,7 +175,7 @@ class SystemIntegrator {
         dependencies: ["Event System"],
         healthCheck: async () => {
           try {
-            const response = await fetch("http://localhost:3000/api/health");
+            const response = await fetch("http:// localhost:3000/api/health");
             return response.ok;
           } catch {
             return false;
@@ -274,7 +274,7 @@ class SystemIntegrator {
   // Run full system integration
   async runFullIntegration(): Promise<IntegrationReport> {
     this.log("🚀 Starting Full System Integration", "info");
-    this.log("=".repeat(60), "info");
+    this.log("= ".repeat(60), "info");
 
     const report: IntegrationReport = {
       sessionId: this.sessionId,
@@ -777,7 +777,7 @@ async function main() {
   const report = !args.includes("--no-report");
 
   console.log("🚀 InternetFriends Full System Integration");
-  console.log("=".repeat(60));
+  console.log("= ".repeat(60));
   console.log("");
 
   const integrator = new SystemIntegrator(verbose);
@@ -804,7 +804,7 @@ async function main() {
     // Print final status
     console.log("");
     console.log("🏁 Integration Complete");
-    console.log("=".repeat(60));
+    console.log("= ".repeat(60));
 
     const statusEmoji = {
       success: "✅",
@@ -825,7 +825,7 @@ async function main() {
 
     if (integrationReport.recommendations.length > 0) {
       console.log("");
-      console.log("📋 Key Recommendations:");
+      console.log("📋 Key Recommendations: ");
       integrationReport.recommendations.slice(0, 3).forEach((rec, index) => {
         console.log(`${index + 1}. ${rec}`);
       });

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const ConsoleLogEntrySchema = z.object({
   time: z.string(), // e.g., '12:34:01'
@@ -13,6 +13,6 @@ export const ConsoleLogExportSchema = z.object({
 });
 
 // Example usage in a pipe or backend endpoint:
-// import { ConsoleLogExportSchema } from '@/schemas/console-log.schema';
+// import { ConsoleLogExportSchema } from "@/schemas/console-log.schema";
 // const result = ConsoleLogExportSchema.safeParse(payload);
 // if (!result.success) { /* handle validation error */ } 

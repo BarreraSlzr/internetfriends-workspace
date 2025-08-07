@@ -1,6 +1,6 @@
-import content from '@/app/(internetfriends)/content.json';
+import content from "@/app/(internetfriends)/content.json";
 
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = content.siteConfig.url

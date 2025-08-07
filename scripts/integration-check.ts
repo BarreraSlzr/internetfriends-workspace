@@ -34,14 +34,14 @@ const IntegratedConfigSchema = z.object({
 
 async function validateIntegration() {
   console.log("🔗 InternetFriends Integration Validator");
-  console.log("======================================");
+  console.log("====================================== ");
   
   const config = {
     landing: {
       siteName: "InternetFriends",
       description: "Connect, Create, Collaborate",
       version: "1.0.0",
-      deploymentUrl: "https://landingpage-five-phi.vercel.app",
+      deploymentUrl: "https:// landingpage-five-phi.vercel.app",
       analyticsEnabled: true,
       contactFormEnabled: true,
     },
@@ -62,14 +62,14 @@ async function validateIntegration() {
   try {
     const validated = IntegratedConfigSchema.parse(config);
     console.log("✅ Integration configuration valid");
-    console.log("📋 Configuration:");
+    console.log("📋 Configuration: ");
     console.log(`   Landing: ${validated.landing.siteName}`);
     console.log(`   Market Integration: ${validated.market.automationEnabled ? "Enabled" : "Disabled"}`);
     console.log(`   Workspace: ${validated.workspace.name}`);
     console.log(`   Bun Version: ${validated.workspace.bunVersion}`);
     return validated;
   } catch (error) {
-    console.log("❌ Integration validation failed:", error);
+    console.log("❌ Integration validation failed: ", error);
     return null;
   }
 }
@@ -98,7 +98,7 @@ async function main() {
   await checkMarketScripts();
   
   if (config) {
-    console.log("\\n🎯 Next Integration Steps:");
+    console.log("\\n🎯 Next Integration Steps: ");
     console.log("  1. Import more Market automation scripts");
     console.log("  2. Set up shared schema validation");
     console.log("  3. Enable smart commit workflow");

@@ -1,5 +1,5 @@
-import content from '@/app/(internetfriends)/content.json';
-import { MetadataRoute } from 'next'
+import content from "@/app/(internetfriends)/content.json";
+import { MetadataRoute } from "next"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {

@@ -1,6 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 import Header from "./(internetfriends)/components/header";
 import Navigation from "./(internetfriends)/components/navigation";
 import SocialLinks from "./(internetfriends)/components/social-links";
@@ -9,8 +8,8 @@ import CompanyInfo from "./(internetfriends)/components/company-info";
 
 const messages = [
   {
-    main: "This page doesn&apos;t exist... yet.",
-    subtitle: "Maybe it&apos;s waiting for a business solution!",
+    main: "This page doesn't exist... yet.",
+    subtitle: "Maybe it's waiting for a business solution!",
   },
   {
     main: "Looks like this project went missing.",
@@ -18,7 +17,7 @@ const messages = [
   },
   {
     main: "Oops! Lost in automation.",
-    subtitle: "Let&apos;s simplify that workflow and find your way.",
+    subtitle: "Let's simplify that workflow and find your way.",
   },
   {
     main: "Not here yet.",
@@ -26,7 +25,7 @@ const messages = [
   },
   {
     main: "Nothing to see here.",
-    subtitle: "Let&apos;s create something amazing instead!",
+    subtitle: "Let's create something amazing instead!",
   },
   {
     main: "Page not found.",
@@ -34,7 +33,7 @@ const messages = [
   },
   {
     main: "Missing in action.",
-    subtitle: "Maybe it&apos;s busy creating creative solutions for you.",
+    subtitle: "Maybe it's busy creating creative solutions for you.",
   },
   {
     main: "Content unavailable.",
@@ -42,7 +41,7 @@ const messages = [
   },
   {
     main: "This page is taking a creative break.",
-    subtitle: "Let&apos;s brainstorm your next big idea!",
+    subtitle: "Let's brainstorm your next big idea!",
   },
 ];
 

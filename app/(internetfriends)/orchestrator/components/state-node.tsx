@@ -20,14 +20,10 @@ export interface StateNodeProps {
 export const StateNode: React.FC<StateNodeProps> = ({ data, selected }) => {
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "healthy":
-        return "bg-green-500";
-      case "active":
-        return "bg-blue-500";
-      case "warning":
-        return "bg-yellow-500";
-      case "error":
-        return "bg-red-500";
+      case "healthy": return "bg-green-500";
+      case "active": return "bg-blue-500";
+      case "warning": return "bg-yellow-500";
+      case "error": return "bg-red-500";
       default:
         return "bg-gray-500";
     }
@@ -35,14 +31,10 @@ export const StateNode: React.FC<StateNodeProps> = ({ data, selected }) => {
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case "healthy":
-        return "🟢";
-      case "active":
-        return "🔵";
-      case "warning":
-        return "🟡";
-      case "error":
-        return "🔴";
+      case "healthy": return "🟢";
+      case "active": return "🔵";
+      case "warning": return "🟡";
+      case "error": return "🔴";
       default:
         return "⚪";
     }

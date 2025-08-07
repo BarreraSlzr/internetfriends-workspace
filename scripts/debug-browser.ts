@@ -16,7 +16,7 @@ async function openBrowser() {
   console.log("🌐 Opening browser...");
   
   if (platform === "darwin") {
-    await Bun.spawn(["open", "http://localhost:3000"]);
+    await Bun.spawn(["open", "http:// localhost:3000"]);
   } else if (platform === "linux") {
     await Bun.spawn(["xdg-open", "http://localhost:3000"]);
   } else {
@@ -26,7 +26,7 @@ async function openBrowser() {
 
 async function main() {
   console.log("🔍 InternetFriends Debug Browser Utility");
-  console.log("========================================");
+  console.log("======================================== ");
   
   const isRunning = await checkDevServer();
   
@@ -41,7 +41,7 @@ async function main() {
   
   await openBrowser();
   
-  console.log("🛠️  Debug Tips:");
+  console.log("🛠️  Debug Tips: ");
   console.log("   - F12: Open DevTools");
   console.log("   - Ctrl+Shift+I: Inspect Element");
   console.log("   - Ctrl+R: Hard Reload");

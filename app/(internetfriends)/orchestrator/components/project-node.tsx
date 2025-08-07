@@ -24,14 +24,10 @@ const ProjectNode: React.FC<ProjectNodeProps> = ({
 }) => {
   const getStatusColor = () => {
     switch (data.status) {
-      case "active":
-        return "border-green-400 bg-green-50 text-green-800";
-      case "completed":
-        return "border-blue-400 bg-blue-50 text-blue-800";
-      case "paused":
-        return "border-yellow-400 bg-yellow-50 text-yellow-800";
-      case "planning":
-        return "border-purple-400 bg-purple-50 text-purple-800";
+      case "active": return "border-green-400 bg-green-50 text-green-800";
+      case "completed": return "border-blue-400 bg-blue-50 text-blue-800";
+      case "paused": return "border-yellow-400 bg-yellow-50 text-yellow-800";
+      case "planning": return "border-purple-400 bg-purple-50 text-purple-800";
       default:
         return "border-gray-400 bg-gray-50 text-gray-800";
     }
@@ -42,14 +38,10 @@ const ProjectNode: React.FC<ProjectNodeProps> = ({
       return "border-blue-500";
     }
     switch (data.status) {
-      case "active":
-        return "border-green-400";
-      case "completed":
-        return "border-blue-400";
-      case "paused":
-        return "border-yellow-400";
-      case "planning":
-        return "border-purple-400";
+      case "active": return "border-green-400";
+      case "completed": return "border-blue-400";
+      case "paused": return "border-yellow-400";
+      case "planning": return "border-purple-400";
       default:
         return "border-gray-400";
     }

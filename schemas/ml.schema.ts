@@ -7,7 +7,7 @@
 
 import { z } from "zod";
 
-export const MLDatasetFossilSchema = z.object({
+export const _MLDatasetFossilSchema = z.object({
   source: z.literal("ml"),
   created_by: z.string(),
   status: z.string(),

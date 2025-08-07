@@ -1,4 +1,4 @@
-import { createKysely } from '@vercel/postgres-kysely'
-import { Database } from './schema'
+import { createKysely } from "@vercel/postgres-kysely"
+import { Database } from "./schema"
 
-export const _db = createKysely<Database>()
+export const __db = createKysely<Database>()

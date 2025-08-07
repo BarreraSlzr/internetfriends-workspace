@@ -102,7 +102,7 @@ export const bounceEffect = String.raw`vec2 effect(vec2 p, float i, float time) 
   );
 }`;
 
-export const effectFunctions = [
+export const _effectFunctions = [
   defaultEffect,
   spiralEffect,
   waveEffect,

@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from "react";
 
 export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
   /** Content to render inside the glass card */

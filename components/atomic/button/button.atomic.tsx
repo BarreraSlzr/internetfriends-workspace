@@ -2,7 +2,7 @@
 // Extends shadcn/ui Button with InternetFriends design system
 
 import React, { forwardRef } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Button as ShadcnButton } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
@@ -124,15 +124,11 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
     // Icon sizing based on button size
     const getIconSize = () => {
       switch (size) {
-        case "xs":
-        case "sm":
+        case "xs": case "sm":
           return "h-3 w-3";
-        case "md":
-          return "h-4 w-4";
-        case "lg":
-          return "h-5 w-5";
-        case "xl":
-          return "h-6 w-6";
+        case "md": return "h-4 w-4";
+        case "lg": return "h-5 w-5";
+        case "xl": return "h-6 w-6";
         _default:
           return "h-4 w-4";
       }

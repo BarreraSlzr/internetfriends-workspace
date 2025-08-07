@@ -359,7 +359,7 @@ export function createTranslationFunction(translations: Translations) {
     try {
       // Navigate nested object using dot notation
       const keys = key.split(".");
-      let value: any = translations;
+      let value: unknown = translations;
 
       for (const k of keys) {
         if (value && typeof value === "object" && k in value) {
@@ -387,7 +387,7 @@ export function createTranslationFunction(translations: Translations) {
 
       return value;
     } catch (error) {
-      console.error(`Translation error for key "${key}":`, error);
+      console.error(`Translation error for key "${key}": `, error);
       return key;
     }
   };
@@ -402,7 +402,7 @@ export async function loadTranslations(
     const translations = await import(`./locales/${locale}/common.json`);
     return translations.default;
   } catch (error) {
-    console.error(`Failed to load translations for locale "${locale}":`, error);
+    console.error(`Failed to load translations for locale "${locale}": `, error);
 
     // Fallback to English if locale fails to load
     if (locale !== DEFAULT_LOCALE) {
@@ -412,7 +412,7 @@ export async function loadTranslations(
         );
         return fallbackTranslations.default;
       } catch (fallbackError) {
-        console.error("Failed to load fallback translations:", fallbackError);
+        console.error("Failed to load fallback translations: ", fallbackError);
         throw new Error("Failed to load any translations");
       }
     }

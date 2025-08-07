@@ -5,8 +5,8 @@
  * Comprehensive task tracking and automation for project improvements
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, writeFileSync, existsSync } from "fs";
+import { join } from "path";
 
 interface Task {
   id: string;
@@ -421,7 +421,7 @@ async function main() {
   switch (command) {
     case 'list':
     case 'ls':
-      const filters: any = {};
+      const filters: unknown = {};
       if (args.includes('--pending')) filters.status = 'pending';
       if (args.includes('--completed')) filters.status = 'completed';
       if (args.includes('--high')) filters.priority = 'high';

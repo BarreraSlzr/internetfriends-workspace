@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Check, ChevronDown, Globe } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ButtonAtomic } from '@/components/atomic/button';
-import { useI18n, LOCALES, type SupportedLocale } from '@/i18n';
+import React, { useState } from "react";
+import { Check, ChevronDown, Globe } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ButtonAtomic } from "@/components/atomic/button";
+import { useI18n, LOCALES } from "@/i18n";
 
 export interface LanguageSelectorProps {
   /** Additional CSS classes */

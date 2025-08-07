@@ -313,40 +313,35 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case "overview":
-        return (
+      case "overview": return (
           <div className={styles.overviewContent}>
             {showMetrics && renderMetrics()}
             {showActivity && renderActivity()}
           </div>
         );
 
-      case "analytics":
-        return (
+      case "analytics": return (
           <div className={styles.analyticsContent}>
             <h3>Analytics Dashboard</h3>
             <p>Advanced analytics and insights coming soon...</p>
           </div>
         );
 
-      case "projects":
-        return (
+      case "projects": return (
           <div className={styles.projectsContent}>
             <h3>Project Management</h3>
             <p>Project overview and management tools...</p>
           </div>
         );
 
-      case "performance":
-        return (
+      case "performance": return (
           <div className={styles.performanceContent}>
             <h3>Performance Monitoring</h3>
             <p>Real-time performance metrics and optimization...</p>
           </div>
         );
 
-      case "settings":
-        return (
+      case "settings": return (
           <div className={styles.settingsContent}>
             <h3>Dashboard Settings</h3>
             <p>Customize your dashboard experience...</p>

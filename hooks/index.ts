@@ -10,7 +10,7 @@ export { useTheme } from "./use-theme";
 export type { UseThemeReturn, UseColorSchemeReturn } from "../types/theme";
 
 // Common hook utilities
-export const HOOK_DEFAULTS = {
+export const _HOOK_DEFAULTS = {
   // Debounce delay
   debounceDelay: 300,
 
@@ -46,7 +46,7 @@ export class HookError extends Error {
 }
 
 // Hook utilities
-export const createHookError = (
+export const _createHookError = (
   hook: string,
   message: string,
   code?: string,
@@ -55,7 +55,7 @@ export const createHookError = (
 };
 
 // Common hook patterns
-export const useStableCallback = <T extends (...args: any[]) => any>(
+export const _useStableCallback = <T extends (...args: unknown[]) => any>(
   callback: T,
 ): T => {
   const ref = React.useRef<T>(callback);
@@ -66,14 +66,14 @@ export const useStableCallback = <T extends (...args: any[]) => any>(
 
   return React.useMemo(
     () =>
-      ((...args: any[]) => {
+      ((...args: unknown[]) => {
         return ref.current(...args);
       }) as T,
     [],
   );
 };
 
-export const useConstant = <T>(fn: () => T): T => {
+export const _useConstant = <T>(fn: () => T): T => {
   const ref = React.useRef<{ value: T } | undefined>(undefined);
 
   if (!ref.current) {
@@ -84,7 +84,7 @@ export const useConstant = <T>(fn: () => T): T => {
 };
 
 // Hook composition utilities
-export const composeHooks = <T extends Record<string, any>>(
+export const _composeHooks = <T extends Record<string, any>>(
   ...hooks: Array<() => Partial<T>>
 ): (() => T) => {
   return () => {
@@ -94,7 +94,7 @@ export const composeHooks = <T extends Record<string, any>>(
 };
 
 // Hook testing utilities (for development)
-export const createMockHook = <T>(mockValue: T) => {
+export const _createMockHook = <T>(mockValue: T) => {
   return () => mockValue;
 };
 

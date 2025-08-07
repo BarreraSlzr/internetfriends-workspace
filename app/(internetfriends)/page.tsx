@@ -12,12 +12,10 @@ const mainIdeas = [
   {
     subtitle: "Creative Projects",
     title: "Got a Big Idea?",
-    description:
-      "Whether it’s a website, an app, or something wild and new, we help bring your vision to life—no idea is too crazy for us.",
+    description: "Whether it’s a website, an app, or something wild and new, we help bring your vision to life—no idea is too crazy for us.",
     project_scope: "Let's create a Creative Project",
     cta_word: "Let’s Build",
-    className:
-      "bg-gradient-to-tr from-brand-blue-300 via-brand-blue-300 to-brand-blue-500 text-brand-blue-900",
+    className: "bg-gradient-to-tr from-brand-blue-300 via-brand-blue-300 to-brand-blue-500 text-brand-blue-900",
   },
   {
     subtitle: "Ready for Anything",
@@ -26,8 +24,7 @@ const mainIdeas = [
       "This page may not exist... but your project absolutely can. Let's talk and create something truly unique for you!",
     project_scope: "Let's create a Random Fun Project",
     cta_word: "Let’s Talk",
-    className:
-      "bg-gradient-to-br from-purple-300 via-purple-300 to-purple-500 text-brand-blue-100",
+    className: "bg-gradient-to-br from-purple-300 via-purple-300 to-purple-500 text-brand-blue-100",
   },
 ];
 
@@ -35,56 +32,49 @@ const randomIdea = [
   {
     subtitle: "Tailored Solutions",
     title: "Simplify Your Workflows",
-    description:
-      "Let’s remove the clutter! We’ll streamline your processes so you can focus on the creative stuff (or that morning coffee).",
+    description: "Let’s remove the clutter! We’ll streamline your processes so you can focus on the creative stuff (or that morning coffee).",
     project_scope: "Let's create a project about Workflow Optimization",
     cta_word: "Let’s Dive In",
   },
   {
     subtitle: "Quick Wins",
     title: "Automate Your Tasks",
-    description:
-      "Let’s free up your time by automating those repetitive tasks. More time for the fun stuff and better results!",
+    description: "Let’s free up your time by automating those repetitive tasks. More time for the fun stuff and better results!",
     project_scope: "Let's create a project about Task Automation",
     cta_word: "Automate Now",
   },
   {
     subtitle: "Business Growth",
     title: "Achieve Project Success",
-    description:
-      "Ready to crush your project goals? We’ll equip you with the tools and experience for successful execution.",
+    description: "Ready to crush your project goals? We’ll equip you with the tools and experience for successful execution.",
     project_scope: "Let's create a project about Project Management",
     cta_word: "Make It Happen",
   },
   {
     subtitle: "Digital Magic",
     title: "Web Development Services",
-    description:
-      "Build a powerful online presence with a website that works as hard as you do. Let’s code something amazing together.",
+    description: "Build a powerful online presence with a website that works as hard as you do. Let’s code something amazing together.",
     project_scope: "Let's create a project about Web Development",
     cta_word: "Start Building",
   },
   {
     subtitle: "Design That Works",
     title: "Transform Your Brand",
-    description:
-      "Your brand deserves to shine. We’ll help you design creative solutions that leave a lasting impression.",
+    description: "Your brand deserves to shine. We’ll help you design creative solutions that leave a lasting impression.",
     project_scope: "Let's create a project about Brand Design",
     cta_word: "Revamp Now",
   },
   {
     subtitle: "Optimized Operations",
     title: "Automate Your Business",
-    description:
-      "From workflows to management, automate everything for smoother operations and happier teams.",
+    description: "From workflows to management, automate everything for smoother operations and happier teams.",
     project_scope: "Let's create a project about Business Automation",
     cta_word: "Optimize Today",
   },
   {
     subtitle: "Innovation First",
     title: "Content Creation and Distribution",
-    description:
-      "Want to distribute engaging content? We’ll help you create, share, and optimize across all channels.",
+    description: "Want to distribute engaging content? We’ll help you create, share, and optimize across all channels.",
     project_scope: "Let's create a project about Content Distribution",
     cta_word: "Get Started",
   },

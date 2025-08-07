@@ -333,7 +333,7 @@ export class InternetFriendsEventSystem {
   // Process single event
   private async processEvent(event: BaseEvent): Promise<EventResult[]> {
     const results: EventResult[] = [];
-    const _startTime = Date.now();
+    const __startTime = Date.now();
 
     // Get handlers for this event type
     const eventHandlers = this.handlers.get(event.type) || [];
@@ -434,7 +434,7 @@ export class InternetFriendsEventSystem {
   // Health check
   async healthCheck(): Promise<boolean> {
     try {
-      const _testEventId = this.emit("system.health_check", {
+      const __testEventId = this.emit("system.health_check", {
         timestamp: Date.now(),
       });
 
@@ -467,7 +467,7 @@ export const on = (
 export const off = (handlerId: string) => eventSystem.off(handlerId);
 
 // Specialized event emitters for common use cases
-export const _ComputeEvents = {
+export const __ComputeEvents = {
   _jobStarted: (jobId: string, data?: unknown) =>
     emit("compute.job_started", { jobId, ...data }, { correlationId: jobId }),
 
@@ -492,7 +492,7 @@ export const _ComputeEvents = {
     emit("compute.resource_released", { resourceId, type, amount }),
 };
 
-export const _UIEvents = {
+export const __UIEvents = {
   _pageLoad: (page: string, loadTime: number, userId?: string) =>
     emit("ui.page_load", { page, loadTime }, { userId }),
 
@@ -510,7 +510,7 @@ export const _UIEvents = {
     emit("ui.theme_change", { from, to }, { userId }),
 };
 
-export const APIEvents = {
+export const _APIEvents = {
   _requestStart: (method: string, url: string, requestId: string) =>
     emit(
       "api.request_start",

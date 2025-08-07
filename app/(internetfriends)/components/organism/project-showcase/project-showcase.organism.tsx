@@ -1,3 +1,4 @@
+import Image from 'next/image';
 "use client";
 
 import React, {
@@ -8,7 +9,7 @@ import React, {
   useRef,
 } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import { eventSystem, UIEvents } from "../../../../../lib/events/event.system";
+import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./project-showcase.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
@@ -179,14 +180,11 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
     // Apply sorting
     result.sort((a, b) => {
       switch (currentSort) {
-        case "date":
-          const aDate = a.startDate || a.createdAt;
+        case "date": const aDate = a.startDate || a.createdAt;
           const bDate = b.startDate || b.createdAt;
           return new Date(bDate).getTime() - new Date(aDate).getTime();
-        case "name":
-          return a.title.localeCompare(b.title);
-        case "status":
-          return a.status.localeCompare(b.status);
+        case "name": return a.title.localeCompare(b.title);
+        case "status": return a.status.localeCompare(b.status);
         default:
           return 0;
       }

@@ -7,9 +7,9 @@
  * before starting the development server or deploying to production.
  */
 
-import { execSync } from 'child_process';
-import { existsSync, readFileSync } from 'fs';
-import { join } from 'path';
+import { execSync } from "child_process";
+import { existsSync, readFileSync } from "fs";
+import { join } from "path";
 
 interface ValidationResult {
   name: string;
@@ -42,7 +42,7 @@ class SystemValidator {
         stdio: 'pipe'
       });
       return { success: true, output };
-    } catch (error: any) {
+    } catch (error: unknown) {
       return { success: false, output: error.message || 'Command failed' };
     }
   }
@@ -85,7 +85,7 @@ class SystemValidator {
 
       this.log(`${name}: ${result.message} (${duration}ms)`, passed ? 'success' : 'error');
       return result;
-    } catch (error: any) {
+    } catch (error: unknown) {
       const duration = Date.now() - startTime;
       const result: ValidationResult = {
         name,
@@ -452,7 +452,7 @@ class SystemValidator {
       const allPassed = this.results.every(suite => suite.passed);
       process.exit(allPassed ? 0 : 1);
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       this.log(`❌ Validation failed with error: ${error.message}`, 'error');
       process.exit(1);
     }

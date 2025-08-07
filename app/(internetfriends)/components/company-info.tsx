@@ -3,7 +3,7 @@ import content from "../content.json";
 import { latinAmericanCountries } from "@/app/(internetfriends)/lib/latinAmericanCountries";
 import { Availability } from "./availability";
 
-export default async function CompanyInfo() {
+export default function CompanyInfo() {
   const headersList = await headers();
   const country = headersList.get("X-Vercel-IP-Country") || "default";
   const isFromLatinAmerica = latinAmericanCountries.includes(

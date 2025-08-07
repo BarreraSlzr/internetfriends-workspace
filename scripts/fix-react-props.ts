@@ -5,9 +5,9 @@
  * Removes underscore prefixes from DOM props and fixes undefined href values
  */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { glob } from 'glob';
-import path from 'path';
+import { readFileSync, writeFileSync } from "fs";
+import { glob } from "glob";
+import path from "path";
 
 interface FixStats {
   filesProcessed: number;
@@ -24,7 +24,7 @@ const stats: FixStats = {
 // React DOM props that shouldn't have underscores
 const domPropFixes = [
   // Common DOM attributes
-  { pattern: /className=/g, replacement: 'className=' },
+  { pattern: /className=/g, replacement: 'className=' }, // TODO: Fix duplicate className props
   { pattern: /_onClick=/g, replacement: 'onClick=' },
   { pattern: /onChange=/g, replacement: 'onChange=' },
   { pattern: /onSubmit=/g, replacement: 'onSubmit=' },
@@ -74,7 +74,7 @@ const contentFixes = [
 ];
 
 // Fix missing keys in map iterations
-const keyFixes = [
+const _keyFixes = [
   {
     pattern: /\.map\(\(([^,]+),\s*([^)]+)\)\s*=>\s*\(\s*<([^>]+)(?!\s+key=)/g,
     replacement: (match: string, item: string, index: string, tag: string) => {
