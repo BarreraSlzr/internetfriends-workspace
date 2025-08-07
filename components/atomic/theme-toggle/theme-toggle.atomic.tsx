@@ -3,6 +3,7 @@
 import React from "react";
 import { Sun, Moon, Monitor } from "lucide-react";
 import { useTheme } from "@/hooks/use-theme";
+import { useIsHydrated } from "@/hooks/use-hydration-safe";
 import { cn } from "@/lib/utils";
 
 interface ThemeToggleProps {
@@ -18,24 +19,8 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
   variant = "button",
   showLabels = false,
 }) => {
-  const { theme, setTheme, toggleTheme, mounted } = useTheme();
-
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) {
-    return (
-      <div
-        className={cn(
-          "animate-pulse bg-gray-200 dark:bg-gray-700 rounded",
-          {
-            "w-8 h-8": size === "sm",
-            "w-10 h-10": size === "md",
-            "w-12 h-12": size === "lg",
-          },
-          className,
-        )}
-      />
-    );
-  }
+  const { theme, setTheme, toggleTheme } = useTheme();
+  const isHydrated = useIsHydrated();
 
   const getIconSize = () => {
     switch (size) {
@@ -89,6 +74,23 @@ export const ThemeToggle: React.FC<ThemeToggleProps> = ({
         return "Theme";
     }
   };
+
+  // Consistent placeholder for SSR and pre-hydration
+  if (!isHydrated) {
+    return (
+      <div
+        className={cn(
+          "inline-flex items-center justify-center rounded-md transition-colors",
+          "bg-gray-100 dark:bg-gray-800",
+          getButtonSize(),
+          className,
+        )}
+        aria-label="Theme toggle loading"
+      >
+        <Monitor className={cn(getIconSize(), "text-gray-400")} />
+      </div>
+    );
+  }
 
   if (variant === "minimal") {
     return (

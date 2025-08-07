@@ -27,20 +27,21 @@ const ComponentFlowWorkspace = dynamic(
 );
 
 interface ComponentFlowPageProps {
-  searchParams?: {
+  searchParams?: Promise<{
     theme?: "light" | "dark" | "system";
     mode?: "demo" | "development" | "showcase";
-  };
+  }>;
 }
 
-export default function ComponentFlowPage({
+export default async function ComponentFlowPage({
   searchParams,
 }: ComponentFlowPageProps) {
+  const resolvedSearchParams = await searchParams;
   const [isInitialized, setIsInitialized] = useState(false);
   const [selectedTheme, setSelectedTheme] = useState<
     "light" | "dark" | "system"
-  >(searchParams?.theme || "system");
-  const [mode, setMode] = useState(searchParams?.mode || "demo");
+  >(resolvedSearchParams?.theme || "system");
+  const [mode, setMode] = useState(resolvedSearchParams?.mode || "demo");
   const [stats, setStats] = useState(componentRegistry.getStats());
 
   // Initialize component registry
