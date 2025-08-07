@@ -288,7 +288,7 @@ class ComponentFlowDemo {
     this.section('Design Pattern System');
 
     this.log(`🎨 Available Patterns:`);
-    Object.entries(patterns).forEach(([key, pattern]) => {
+    Object.entries(patterns).forEach(([_key, pattern]) => {
       this.log(`   • ${pattern.name}: ${pattern.description}`);
       this.log(`     Props: ${Object.keys(pattern.props).length}`);
       this.log(`     Variants: ${pattern.variants ? Object.keys(pattern.variants).length : 0}`);

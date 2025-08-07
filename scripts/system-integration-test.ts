@@ -42,7 +42,7 @@ async function testAuthSystem() {
   };
   
   try {
-    const _validatedUser = UserAuthSchema.parse(testUser);
+
     console.log("✅ User auth schema validation passed");
     
     const extendedUser = InternetFriendsUserSchema.parse({

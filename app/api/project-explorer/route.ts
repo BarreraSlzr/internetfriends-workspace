@@ -450,10 +450,10 @@ export async function POST(request: NextRequest) {
     // Filter results if targetFiles specified
     if (targetFiles && Array.isArray(targetFiles)) {
       analysis.transportable_ui_data.tree_view = analysis.transportable_ui_data.tree_view.filter(
-        (event: Event) => targetFiles.some(target => node.label.includes(target))
+        (_event: Event) => targetFiles.some(target => node.label.includes(target))
       );
       analysis.transportable_ui_data.grid_view = analysis.transportable_ui_data.grid_view.filter(
-        (event: Event) => targetFiles.some(target => node.name.includes(target))
+        (_event: Event) => targetFiles.some(target => node.name.includes(target))
       );
     }
 

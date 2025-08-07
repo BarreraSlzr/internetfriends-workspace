@@ -229,7 +229,7 @@ class ProjectCompletion {
     console.log('\n📈 PROJECT METRICS');
     console.log('-'.repeat(40));
 
-    const _fileCount = this.countFiles();
+
 
     console.log('Code Quality:');
     console.log('  • ESLint Issues Fixed: 927');

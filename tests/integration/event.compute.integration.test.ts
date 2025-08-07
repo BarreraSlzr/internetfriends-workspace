@@ -393,7 +393,7 @@ describe("InternetFriends Integration Tests", () => {
       const startTime = Date.now();
 
       // Register a test job handler
-      computeManager.registerJobHandler("test.execution", async (event: Event) => {
+      computeManager.registerJobHandler("test.execution", async (_event: Event) => {
         await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate work
         return {
           testsRun: 10,
@@ -625,7 +625,7 @@ describe("InternetFriends Integration Tests", () => {
       );
 
       // Register handler that fails
-      computeManager.registerJobHandler("test.execution", async (event: Event) => {
+      computeManager.registerJobHandler("test.execution", async (_event: Event) => {
         if (job.payload?.shouldFail) {
           throw new Error("Simulated job failure");
         }
@@ -744,7 +744,7 @@ describe("InternetFriends Integration Tests", () => {
       const jobCount = 20;
 
       // Register fast job handler
-      computeManager.registerJobHandler("data.processing", async (event: Event) => {
+      computeManager.registerJobHandler("data.processing", async (_event: Event) => {
         await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms work
         return { processed: job.payload?.items || 100 };
       });

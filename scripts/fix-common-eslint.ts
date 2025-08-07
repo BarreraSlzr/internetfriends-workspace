@@ -105,7 +105,7 @@ function fixFile(filePath: string): number {
       const before = content;
 
       if (typeof fix.replacement === 'function') {
-        content = content.replace(fix.pattern, (match, ...args) => {
+        content = content.replace(fix.pattern, (match, ..._args) => {
           const result = fix.replacement(match, content);
           if (result !== match) {
             fixCount++;

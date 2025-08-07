@@ -432,7 +432,7 @@ class PerformanceMonitor {
   // Print real-time dashboard
   printDashboard(): void {
     const report = this.generateReport();
-    const _stats = this.generateBasicStats();
+
 
     console.clear();
     console.log("🔍 InternetFriends Performance Monitor Dashboard");

@@ -223,7 +223,7 @@ class InternetFriendsIntegrationDemo {
     console.log("  ✅ Event monitoring active");
 
     // Register demo job handlers
-    computeManager.registerJobHandler("api.request", async (event: Event) => {
+    computeManager.registerJobHandler("api.request", async (_event: Event) => {
       await this.sleep(Math.random() * 500 + 100); // 100-600ms processing time
       return {
         url: job.payload.url,
@@ -232,7 +232,7 @@ class InternetFriendsIntegrationDemo {
       };
     });
 
-    computeManager.registerJobHandler("data.processing", async (event: Event) => {
+    computeManager.registerJobHandler("data.processing", async (_event: Event) => {
       const items = job.payload.items || 100;
       await this.sleep(items * 2); // 2ms per item
       return {
@@ -251,7 +251,7 @@ class InternetFriendsIntegrationDemo {
     try {
       // Run health check tests with default properties
       const healthCheckTests = InternetFriendsTestSuites.healthCheck.map(
-        (event: Event) => ({
+        (_event: Event) => ({
           ...test,
           timeout: test.timeout || 10000,
           followRedirects: test.followRedirects ?? true,

@@ -380,7 +380,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     change: number,
     trend: "up" | "down" | "stable",
   ) => {
-    const __absChange = Math.abs(change);
+
     const isPositive = change > 0;
 
     return {

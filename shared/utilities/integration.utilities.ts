@@ -409,7 +409,7 @@ export class I18nIntegrationUtility {
   static generateLocaleFile(locale: string, translations: Record<string, Record<string, string>>): string {
     const flatTranslations: Record<string, string> = {};
 
-    Object.entries(translations).forEach(([componentKey, componentTranslations]) => {
+    Object.entries(translations).forEach(([_componentKey, componentTranslations]) => {
       Object.entries(componentTranslations).forEach(([key, value]) => {
         flatTranslations[key] = value;
       });

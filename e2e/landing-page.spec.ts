@@ -36,7 +36,7 @@ test.describe("InternetFriends Landing Page", () => {
     expect(loadTime).toBeLessThan(3000);
   });
   
-  test("should handle hot reload", async ({ page, context }) => {
+  test("should handle hot reload", async ({ page, _context }) => {
     await page.goto("/");
     
     // Wait for page to be fully loaded

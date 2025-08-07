@@ -588,7 +588,7 @@ export class ComputeEventManager {
 
   // Execute individual job
   private async executeJob(job: ComputeJob): Promise<void> {
-    const __startTime = Date.now();
+
     let allocatedResources: Partial<Record<ResourceType, number>> = {};
 
     try {

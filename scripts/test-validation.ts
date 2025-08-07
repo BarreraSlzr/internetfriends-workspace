@@ -368,7 +368,7 @@ class TestValidator {
     const totalTests = this.results.length;
     const passed = this.results.filter((r) => r.passed).length;
     const failed = totalTests - passed;
-    const _totalDuration = Date.now() - this.startTime;
+
 
     let summary = "";
     if (failed === 0) {

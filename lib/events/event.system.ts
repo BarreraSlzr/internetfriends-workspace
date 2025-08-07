@@ -333,7 +333,7 @@ export class InternetFriendsEventSystem {
   // Process single event
   private async processEvent(event: BaseEvent): Promise<EventResult[]> {
     const results: EventResult[] = [];
-    const __startTime = Date.now();
+
 
     // Get handlers for this event type
     const eventHandlers = this.handlers.get(event.type) || [];

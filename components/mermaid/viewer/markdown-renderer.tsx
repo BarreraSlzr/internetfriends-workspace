@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useMemo } from "react";
-import Image from "next/image";
+
 import { cn } from "@/lib/utils";
 import { MermaidViewer } from "./mermaid-viewer";
 import { extractDiagramTitle, processMermaidMarkdown } from "../utils";

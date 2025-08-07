@@ -125,7 +125,7 @@ function fixFile(filePath: string): number {
     // More comprehensive key fix pattern
     content = content.replace(
       /\.map\(\(([^,)]+)(?:,\s*([^)]+))?\)\s*=>\s*(?:\(|\s)*(<[^>]*?)(?!\s+key\s*=)([^>]*>)/g,
-      (match, item, index, openTag, rest) => {
+      (match, item, index, openTag, _rest) => {
         const indexVar = index || 'index';
         return match.replace(openTag, `${openTag} key={${indexVar}}`);
       }

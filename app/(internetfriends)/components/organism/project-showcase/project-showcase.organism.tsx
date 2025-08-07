@@ -1,4 +1,4 @@
-import Image from 'next/image';
+
 "use client";
 
 import React, {
@@ -493,7 +493,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
     </div>
   );
 
-  const renderProjectCard = (project: Project, index: number) => {
+  const renderProjectCard = (project: Project, _index: number) => {
     const isHovered = hoveredProject === project.id;
     const statusInfo = statusConfig[project.status];
 

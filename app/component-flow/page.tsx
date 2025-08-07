@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { ComponentFlowWorkspaceProvider } from "@/shared/component-flow/component.flow.workspace";
+
 import {
   componentRegistry,
   registerInternetFriendsComponents,

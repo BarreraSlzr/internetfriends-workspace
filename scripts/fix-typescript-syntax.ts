@@ -189,8 +189,8 @@ class TypeScriptSyntaxFixer {
 
 // Parse command line arguments
 const args = process.argv.slice(2);
-const verbose = args.includes('--verbose') || args.includes('-v');
-const _dryRun = args.includes('--dry-run') || args.includes('-d');
+
+
 
 // Run the fixer
 async function main() {

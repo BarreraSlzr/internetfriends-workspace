@@ -4,7 +4,7 @@
 
 import { spawn, exec } from "child_process";
 import { writeFile, mkdir, readdir } from "fs/promises";
-import { join } from "path";
+
 import { promisify } from "util";
 
 const execAsync = promisify(exec);
@@ -773,7 +773,7 @@ class SystemIntegrator {
 async function main() {
   const args = process.argv.slice(2);
   const verbose = args.includes("--verbose") || args.includes("-v");
-  const quick = args.includes("--quick") || args.includes("-q");
+
   const report = !args.includes("--no-report");
 
   console.log("🚀 InternetFriends Full System Integration");

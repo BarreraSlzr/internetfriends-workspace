@@ -65,7 +65,7 @@ test.describe("Atomic Components", () => {
     });
 
     test("should have proper border radius", async ({ page }) => {
-      const glassCard = page.locator(".glass-card").first();
+
 
       const borderRadius = await page.evaluate(() => {
         const card = document.querySelector(".glass-card");

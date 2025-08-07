@@ -170,7 +170,7 @@ class OrganismValidator {
         result.details.structure = true;
       } else {
         const missing = Object.entries(requiredFiles)
-          .filter(([_, filename]) => !files.includes(filename))
+          .filter(([__, filename]) => !files.includes(filename))
           .map(([type, filename]) => `${type}: ${filename}`);
 
         result.issues.push(`Missing required files: ${missing.join(', ')}`);
