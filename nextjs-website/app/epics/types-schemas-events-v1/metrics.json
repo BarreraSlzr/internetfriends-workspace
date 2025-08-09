@@ -1,0 +1,33 @@
+{
+  "timestamp": "2025-08-09T07:05:50.987Z",
+  "schemaCount": 11,
+  "schemasRegistered": 3,
+  "schemaCoveragePct": 27.27,
+  "orphanSchemas": [
+    "schemas/bug.form.schema.ts",
+    "schemas/console-log.schema.ts",
+    "schemas/debug.schema.ts",
+    "schemas/event.schema.ts",
+    "schemas/feedback.form.schema.ts",
+    "schemas/form.schema.ts",
+    "schemas/fossil.schema.ts",
+    "schemas/internetFriendResults.schema.ts",
+    "schemas/ml.schema.ts",
+    "schemas/pr.form.schema.ts",
+    "schemas/zod.schema.ts"
+  ],
+  "eventTypesEnum": 5,
+  "eventTypesCatalogued": 5,
+  "eventCatalogCoveragePct": 100,
+  "eventThroughput": {
+    "baselineEventsPerSecond": 0,
+    "lastBenchmark": 0
+  },
+  "parity": {
+    "lastProdSnapshot": null,
+    "lastLocalSnapshot": null,
+    "htmlLengthDeltaPct": null,
+    "hashMatch": null
+  },
+  "strictBuild": false
+}

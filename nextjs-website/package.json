@@ -71,7 +71,14 @@
     "performance:test": "bun run test:curl:performance",
     "load:test": "bun run test:curl:load",
     "format": "bunx prettier --write .",
-    "format:check": "bunx prettier --check ."
+    "format:check": "bunx prettier --check .",
+    "scaffold:schema": "bun run scripts/scaffold-schema.ts",
+    "scaffold:component": "bun run scripts/scaffold-component.ts",
+    "schema:registry": "bun -e \"import { printSummary } from './schemas/registry'; printSummary()\"",
+    "schema:fixtures": "bun -e \"import { validateFixtures } from './schemas/registry'; console.log(JSON.stringify(validateFixtures(), null, 2))\"",
+    "events:benchmark": "bun run scripts/benchmark-events.ts --json",
+    "snapshot:prod": "bun run scripts/snapshot-prod.ts --json-only",
+    "docs:generate": "bun run scripts/generate-docs.ts"
   },
   "dependencies": {
     "@date-fns/tz": "^1.2.0",

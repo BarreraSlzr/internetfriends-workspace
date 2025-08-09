@@ -25,7 +25,15 @@
     "integration:check": "cd nextjs-website && bun run integration:check",
     "smart:commit": "cd nextjs-website && bun run smart:commit",
     "setup": "bun install && cd nextjs-website && bun install",
-    "clean": "rm -rf nextjs-website/node_modules nextjs-website/.next"
+    "clean": "rm -rf nextjs-website/node_modules nextjs-website/.next",
+    "agent:dev": "cd nextjs-website && bun run scripts/dev-agent.ts",
+    "events:benchmark": "cd nextjs-website && bun run events:benchmark",
+    "snapshot:prod": "cd nextjs-website && bun run snapshot:prod",
+    "docs:generate": "cd nextjs-website && bun run docs:generate",
+    "scaffold:schema": "cd nextjs-website && bun run scaffold:schema",
+    "scaffold:component": "cd nextjs-website && bun run scaffold:component",
+    "schema:registry": "cd nextjs-website && bun run schema:registry",
+    "schema:fixtures": "cd nextjs-website && bun run schema:fixtures"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
