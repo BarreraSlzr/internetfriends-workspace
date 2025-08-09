@@ -379,7 +379,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           >
             <option value="all">All Categories</option>
             {categories.map((category) => (
-              < key={index}option key={category} value={category}>
+              <option key={category} value={category}>
                 {category}
               </option>
             ))}
@@ -401,7 +401,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         >
           <option value="all">All Status</option>
           {Object.entries(statusConfig).map(([status, config]) => (
-            < key={config]}option key={status} value={status}>
+            <option key={status} value={status}>
               {config.icon} {config.label}
             </option>
           ))}
@@ -413,7 +413,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
         <label className={styles.filterLabel}>Technologies:</label>
         <div className={styles.technologyFilter}>
           {allTechnologies.slice(0, 8).map((tech) => (
-            < key={index}label key={tech} className={styles.technologyTag}>
+            <label key={tech} className={styles.technologyTag}>
               <input
                 type="checkbox"
                 checked={activeFilters.technology?.includes(tech) || false}
@@ -444,7 +444,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           className={styles.sortSelect}
         >
           {sortOptions.map((option) => (
-            < key={index}option key={option.value} value={option.value}>
+            <option key={option.value} value={option.value}>
               {option.label}
             </option>
           ))}
@@ -454,7 +454,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
       {/* View Mode Toggle */}
       <div className={styles.viewModeToggle}>
         {viewModeOptions.map((option) => (
-          < key={index}button
+          <button
             key={option.value}
             onClick={() => handleViewModeChange(option.value)}
             className={`
@@ -565,7 +565,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
           {/* Technologies */}
           <div className={styles.projectTechnologies}>
             {project.technologies?.slice(0, 3).map((tech: string) => (
-              < key={index}span key={tech} className={styles.techBadge}>
+              <span key={tech} className={styles.techBadge}>
                 {tech}
               </span>
             ))}
@@ -636,7 +636,7 @@ export const ProjectShowcaseOrganism: React.FC<ProjectShowcaseProps> = ({
                 Math.abs(page - currentPage) <= 2,
             )
             .map((page, index, array) => (
-              < key={index, array}React.Fragment key={page}>
+              <React.Fragment key={page}>
                 {index > 0 && array[index - 1] !== page - 1 && (
                   <span className={styles.paginationEllipsis}>...</span>
                 )}
