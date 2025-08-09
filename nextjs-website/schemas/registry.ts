@@ -40,6 +40,22 @@ import { UserAuthSchema } from "../lib/auth/session-integration";
 import { AIModelSchema } from "../lib/compute/models";
 import { GestureConfigSchema } from "../lib/design-system/gestures";
 
+/* Newly registered existing schemas (types-schemas-events-v1 epic expansion) */
+import { BugFormSchema } from "./bug.form.schema";
+import { FeedbackFormSchema } from "./feedback.form.schema";
+import { PRFormSchema } from "./pr.form.schema";
+import { BaseFormSchema } from "./form.schema";
+import { DebugV2ReportSchema } from "./debug.schema";
+import { ConsoleLogExportSchema } from "./console-log.schema";
+import { BaseEventSchema } from "./event.schema";
+import { InternetFriendResultsSchema } from "./internetFriendResults.schema";
+import { MLDatasetFossilSchema } from "./ml.schema";
+import {
+  FunnelsPlanSchema,
+  SLARulesSchema,
+  CommitMetadataSchema,
+} from "./zod.schema";
+
 // NOTE: The project contains additional raw schemas under /schemas/*.ts (e.g. form, fossil, ml).
 // They will be incrementally registered here as part of the types-schemas-events-v1 epic.
 
@@ -61,9 +77,9 @@ export interface RegistryStats {
   domains: Record<string, number>;
   names: string[];
   // Extended metrics (populated externally by agent orchestrator)
-  discoveredFileCount?: number;       // total found schema-like files
-  coveragePct?: number;               // totalRegistered / discoveredFileCount
-  orphanFiles?: string[];             // unregistered schema file paths
+  discoveredFileCount?: number; // total found schema-like files
+  coveragePct?: number; // totalRegistered / discoveredFileCount
+  orphanFiles?: string[]; // unregistered schema file paths
 }
 
 /* -------------------------------------------------------------------------- */
@@ -76,22 +92,110 @@ export const SchemaRegistry: SchemaEntry[] = [
     schema: UserAuthSchema,
     domain: "auth",
     description: "User authentication identity baseline (session integration)",
-    tags: ["core", "user"]
+    tags: ["core", "user"],
   },
   {
     name: "AIModel",
     schema: AIModelSchema,
     domain: "compute",
     description: "AI model configuration and metadata",
-    tags: ["core", "compute", "ai"]
+    tags: ["core", "compute", "ai"],
   },
   {
     name: "GestureConfig",
     schema: GestureConfigSchema,
     domain: "design-system",
     description: "Client gesture interaction tuning parameters",
-    tags: ["ui", "interaction"]
-  }
+    tags: ["ui", "interaction"],
+  },
+
+  /* --------------------------- Newly Added Schemas --------------------------- */
+  {
+    name: "BaseForm",
+    schema: BaseFormSchema,
+    domain: "forms",
+    description: "Base form envelope shared by specialized form schemas",
+    tags: ["form", "base"],
+  },
+  {
+    name: "BugForm",
+    schema: BugFormSchema,
+    domain: "forms",
+    description: "Bug report submission form",
+    tags: ["form", "bug", "issue"],
+  },
+  {
+    name: "FeedbackForm",
+    schema: FeedbackFormSchema,
+    domain: "forms",
+    description: "General feedback / feature / sponsor intake form",
+    tags: ["form", "feedback"],
+  },
+  {
+    name: "PRForm",
+    schema: PRFormSchema,
+    domain: "forms",
+    description: "Pull request review / metadata submission form",
+    tags: ["form", "pr", "code-review"],
+  },
+  {
+    name: "DebugReport",
+    schema: DebugV2ReportSchema,
+    domain: "observability",
+    description: "Structured debug / diagnostics report aggregate",
+    tags: ["debug", "report", "observability"],
+  },
+  {
+    name: "ConsoleLogExport",
+    schema: ConsoleLogExportSchema,
+    domain: "observability",
+    description: "Serialized console log export bundle",
+    tags: ["log", "console", "export"],
+  },
+  {
+    name: "BaseEvent",
+    schema: BaseEventSchema,
+    domain: "events",
+    description: "Generic base event envelope (pre-catalog canonicalization)",
+    tags: ["events", "envelope"],
+  },
+  {
+    name: "InternetFriendResults",
+    schema: InternetFriendResultsSchema,
+    domain: "analytics",
+    description:
+      "Structured matrix / vector / hybrid diagnostic result formats",
+    tags: ["analytics", "results", "diagnostics"],
+  },
+  {
+    name: "MLDatasetFossil",
+    schema: MLDatasetFossilSchema,
+    domain: "ml",
+    description: "Machine learning dataset fossil metadata & payload snapshot",
+    tags: ["ml", "dataset", "fossil"],
+  },
+  {
+    name: "FunnelsPlan",
+    schema: FunnelsPlanSchema,
+    domain: "operations",
+    description: "Marketing / product funnels plan configuration schema",
+    tags: ["funnels", "plan", "ops"],
+  },
+  {
+    name: "SLARules",
+    schema: SLARulesSchema,
+    domain: "operations",
+    description: "Service Level Agreement rule definitions",
+    tags: ["sla", "rules", "ops"],
+  },
+  {
+    name: "CommitMetadata",
+    schema: CommitMetadataSchema,
+    domain: "operations",
+    description:
+      "Structured commit metadata enrichment (automation / analysis)",
+    tags: ["commit", "metadata", "automation"],
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -102,14 +206,14 @@ export const SchemaRegistry: SchemaEntry[] = [
  * Return all schema names.
  */
 export function listSchemas(): string[] {
-  return SchemaRegistry.map(s => s.name);
+  return SchemaRegistry.map((s) => s.name);
 }
 
 /**
  * Find schema by name.
  */
 export function getSchema(name: string): SchemaEntry | undefined {
-  return SchemaRegistry.find(s => s.name === name);
+  return SchemaRegistry.find((s) => s.name === name);
 }
 
 /**
@@ -127,7 +231,10 @@ export function getRegistryStats(partial?: {
 
   let coveragePct: number | undefined;
   if (partial?.discoveredFileCount && partial.discoveredFileCount > 0) {
-    coveragePct = +(SchemaRegistry.length / partial.discoveredFileCount * 100).toFixed(2);
+    coveragePct = +(
+      (SchemaRegistry.length / partial.discoveredFileCount) *
+      100
+    ).toFixed(2);
   }
 
   return {
@@ -136,7 +243,7 @@ export function getRegistryStats(partial?: {
     names: listSchemas(),
     discoveredFileCount: partial?.discoveredFileCount,
     coveragePct,
-    orphanFiles: partial?.orphanFiles
+    orphanFiles: partial?.orphanFiles,
   };
 }
 
@@ -153,7 +260,9 @@ import * as path from "path";
  *
  * Returns an object summarizing success/failures.
  */
-export function validateFixtures(fixturesDir = path.join(process.cwd(), "schemas", "fixtures")): {
+export function validateFixtures(
+  fixturesDir = path.join(process.cwd(), "schemas", "fixtures"),
+): {
   totalFixtures: number;
   validated: number;
   failures: { name: string; error: string }[];
@@ -175,7 +284,10 @@ export function validateFixtures(fixturesDir = path.join(process.cwd(), "schemas
         entry.schema.parse(raw);
         validated++;
       } catch (e: any) {
-        failures.push({ name: entry.name, error: e?.message || "Unknown parse error" });
+        failures.push({
+          name: entry.name,
+          error: e?.message || "Unknown parse error",
+        });
       }
     }
   }
@@ -193,12 +305,12 @@ export function validateFixtures(fixturesDir = path.join(process.cwd(), "schemas
  * (Avoids leaking internals of Zod definition; introspection kept minimal.)
  */
 export function getSchemaDocModel() {
-  return SchemaRegistry.map(entry => ({
+  return SchemaRegistry.map((entry) => ({
     name: entry.name,
     domain: entry.domain,
     version: entry.version || "unversioned",
     description: entry.description || "",
-    tags: entry.tags || []
+    tags: entry.tags || [],
   }));
 }
 
@@ -209,11 +321,17 @@ export function getSchemaDocModel() {
 export function printSummary() {
   const stats = getRegistryStats();
   // Minimal JSON output for automation parsing.
-  console.log(JSON.stringify({
-    totalRegistered: stats.totalRegistered,
-    domains: stats.domains,
-    names: stats.names
-  }, null, 2));
+  console.log(
+    JSON.stringify(
+      {
+        totalRegistered: stats.totalRegistered,
+        domains: stats.domains,
+        names: stats.names,
+      },
+      null,
+      2,
+    ),
+  );
 }
 
 if (process.argv.includes("--summary")) {
