@@ -1,0 +1,21 @@
+{
+  "id": "model-cerebras-qwen-coder-32b",
+  "name": "Qwen 3 Coder 32B (Cerebras)",
+  "provider": "cerebras",
+  "modelId": "qwen-3-coder-32b-instruct",
+  "maxTokens": 131000,
+  "inputCost": 0.0000,
+  "outputCost": 0.0000,
+  "supports": {
+    "chat": true,
+    "completion": true,
+    "codeGeneration": true,
+    "imageGeneration": false,
+    "functionCalling": true,
+    "streaming": true
+  },
+  "averageLatency": 420,
+  "tokensPerSecond": 2000,
+  "isActive": true,
+  "region": ["global"]
+}

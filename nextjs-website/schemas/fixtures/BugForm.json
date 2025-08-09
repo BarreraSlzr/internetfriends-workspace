@@ -1,0 +1,22 @@
+{
+  "type": "bug_report",
+  "timestamp": "2025-08-09T07:18:00.000Z",
+  "status": "pending",
+  "severity": "high",
+  "summary": "Dashboard metrics fail to load in production",
+  "details": "User reports blank dashboard cards after latest deploy. Console shows 500 from /api/metrics.",
+  "branch": "feat/dashboard-metrics",
+  "commit": "b4f9d8c2e7a14f0d9c3a1f5c6d7e8f90abcdef12",
+  "category": "frontend",
+  "canonical": true,
+  "north_star_alignment": true,
+  "actions": [
+    "Reproduce issue locally",
+    "Check /api/metrics response shape",
+    "Validate event emission for compute.job.completed"
+  ],
+  "artifacts": [
+    "screenshot-dashboard-error.png",
+    "network-log-export.har"
+  ]
+}

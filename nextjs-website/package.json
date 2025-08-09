@@ -75,7 +75,8 @@
     "scaffold:schema": "bun run scripts/scaffold-schema.ts",
     "scaffold:component": "bun run scripts/scaffold-component.ts",
     "schema:registry": "bun -e \"import { printSummary } from './schemas/registry'; printSummary()\"",
-    "schema:fixtures": "bun -e \"import { validateFixtures } from './schemas/registry'; console.log(JSON.stringify(validateFixtures(), null, 2))\"",
+    "schema:fixtures": "bun run scripts/validate-fixtures.ts --json",
+    "fixtures:validate": "bun run scripts/validate-fixtures.ts",
     "events:benchmark": "bun run scripts/benchmark-events.ts --json",
     "snapshot:prod": "bun run scripts/snapshot-prod.ts --json-only",
     "docs:generate": "bun run scripts/generate-docs.ts"

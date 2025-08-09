@@ -1,0 +1,17 @@
+{
+  "id": "5f8c1b8e-9d2a-4c1e-9e41-2c7b6b1f9e21",
+  "email": "founder@internetfriends.xyz",
+  "username": "internetfriend",
+  "displayName": "Internet Friend",
+  "avatar": "https://internetfriends.xyz/assets/avatars/default.png",
+  "hasPassword": true,
+  "hasWebAuthn": false,
+  "has2FA": false,
+
+  /* NOTE: Date objects cannot be represented directly in JSON.
+     These placeholder strings are intended to be transformed into real Date
+     instances by a fixture loader before validation against z.date(). */
+  "createdAt": "__ISO_DATE__2025-01-15T12:00:00.000Z",
+  "updatedAt": "__ISO_DATE__2025-08-01T08:30:00.000Z",
+  "lastLoginAt": "__ISO_DATE__2025-08-07T17:45:12.000Z"
+}
