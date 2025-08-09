@@ -181,18 +181,55 @@ function discoverSchemas(registeredNames: string[]): SchemaDiscoveryResult {
     /\.(schema|form\.schema)\.ts$/.test(f),
   );
 
+  // File → registry name aliases (some files define multiple logical schemas)
+  const FILE_NAME_ALIAS: Record<string, string[]> = {
+    "bug.form.schema.ts": ["BugForm"],
+    "feedback.form.schema.ts": ["FeedbackForm"],
+    "pr.form.schema.ts": ["PRForm"],
+    "form.schema.ts": ["BaseForm"],
+    "debug.schema.ts": ["DebugReport"],
+    "console-log.schema.ts": ["ConsoleLogExport"],
+    "event.schema.ts": ["BaseEvent"],
+    "internetFriendResults.schema.ts": ["InternetFriendResults"],
+    "ml.schema.ts": ["MLDatasetFossil"],
+    "zod.schema.ts": ["FunnelsPlan", "SLARules", "CommitMetadata"],
+  };
+
+  const registeredSet = new Set(registeredNames);
+
+  // Derive canonical candidate (PascalCase) names from filenames
   const candidateNames = files.map((f) =>
     toPascalCase(path.basename(f).replace(/\.form\.schema\.ts$/, ".schema.ts")),
   );
 
   const orphanFiles: string[] = [];
-  candidateNames.forEach((n, idx) => {
-    if (!registeredNames.includes(n)) orphanFiles.push(files[idx]);
+  let coveredFileCount = 0;
+
+  files.forEach((filePath, idx) => {
+    const base = path.basename(filePath);
+    const primaryCandidate = candidateNames[idx];
+
+    // All possible logical names this file might represent
+    const logicalNames: string[] = [
+      primaryCandidate,
+      // If it's a form schema and primaryCandidate doesn't already end with Form, add Form variant
+      ...(base.endsWith(".form.schema.ts") && !primaryCandidate.endsWith("Form")
+        ? [primaryCandidate + "Form"]
+        : []),
+      ...(FILE_NAME_ALIAS[base] || []),
+    ];
+
+    const matched = logicalNames.some((n) => registeredSet.has(n));
+    if (matched) {
+      coveredFileCount++;
+    } else {
+      orphanFiles.push(filePath);
+    }
   });
 
   const coveragePct =
     files.length > 0
-      ? +((registeredNames.length / files.length) * 100).toFixed(2)
+      ? +((coveredFileCount / files.length) * 100).toFixed(2)
       : null;
 
   return {
