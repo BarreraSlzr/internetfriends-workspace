@@ -9,6 +9,7 @@ import {
   ComputeEvents,
 } from "../../../../../lib/events/event.system";
 import styles from "./dashboard.styles.module.scss";
+import { TextAtomic } from "@/components/atomic/text";
 
 // Define types inline to avoid module resolution issues
 type DashboardTab =
@@ -387,7 +388,13 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       {/* Dashboard Header */}
       <div className={styles.header}>
         <div className={styles.headerContent}>
-          <h1 className={styles.title}>InternetFriends Dashboard</h1>
+          <TextAtomic
+            variant="h2"
+            tone="contrast"
+            data-testid="dashboard-title"
+          >
+            InternetFriends Dashboard
+          </TextAtomic>
           <div className={styles.headerActions}>
             <span className={styles.lastUpdate}>
               Last _updated: {formattedLastUpdate}
