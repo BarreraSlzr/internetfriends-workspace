@@ -1,0 +1,17 @@
+import React from "react";
+import { HeaderAtomic } from "./components/header";
+
+export default function InternetFriendsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <HeaderAtomic />
+      <main className="min-h-screen">
+        {children}
+      </main>
+    </>
+  );
+}

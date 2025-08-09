@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternetFriends Header Component Demo</title>
+    <style>
+        /* InternetFriends Design System - Inline CSS Demo */
+        :root {
+            /* Brand colors */
+            --if-primary: #3b82f6;
+            --if-primary-hover: #2563eb;
+            --if-primary-light: rgba(59, 130, 246, 0.08);
+            --if-primary-active: rgba(59, 130, 246, 0.12);
+
+            /* Glass morphism system */
+            --glass-bg-header: rgba(255, 255, 255, 0.85);
+            --glass-bg-header-scrolled: rgba(255, 255, 255, 0.92);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-border-enhanced: rgba(255, 255, 255, 0.18);
+
+            /* Compact radius system */
+            --radius-xs: 0.25rem;
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+
+            /* Light theme colors */
+            --color-text-primary: #111827;
+            --color-text-secondary: #6b7280;
+            --color-text-contrast: #000000;
+            --color-bg-primary: #ffffff;
+            --color-bg-glass: rgba(255, 255, 255, 0.95);
+            --color-border-focus: #60a5fa;
+
+            /* Header height */
+            --header-height: 4rem;
+        }
+
+        /* Dark theme overrides */
+        [data-theme="dark"] {
+            --glass-bg-header: rgba(17, 24, 39, 0.85);
+            --glass-bg-header-scrolled: rgba(17, 24, 39, 0.92);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-enhanced: rgba(255, 255, 255, 0.12);
+
+            --color-text-primary: #ffffff;
+            --color-text-secondary: #d1d5db;
+            --color-text-contrast: #ffffff;
+            --color-bg-primary: #111827;
+            --color-bg-glass: rgba(17, 24, 39, 0.95);
+        }
+
+        /* Base styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-bg-primary);
+            color: var(--color-text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        /* Header component styles */
+        .if-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            background: var(--glass-bg-header);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .if-header[data-scrolled="true"] {
+            background: var(--glass-bg-header-scrolled);
+            border-bottom-color: var(--glass-border-enhanced);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        [data-theme="dark"] .if-header {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+        }
+
+        [data-theme="dark"] .if-header[data-scrolled="true"] {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Logo styles */
+        .if-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.2s ease;
+            border-radius: var(--radius-md);
+            padding: 0.25rem 0.5rem;
+        }
+
+        .if-logo:hover {
+            color: var(--if-primary);
+            background: var(--if-primary-light);
+            transform: translateY(-1px);
+        }
+
+        .if-logo:focus {
+            outline: none;
+            border: 2px dashed var(--color-border-focus);
+        }
+
+        .if-logo-image {
+            width: 2rem;
+            height: 2rem;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, #f97316, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.875rem;
+        }
+
+        /* Navigation styles */
+        .if-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .if-nav-list {
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        @media (min-width: 768px) {
+            .if-nav-list {
+                display: flex;
+            }
+        }
+
+        .if-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--color-text-primary);
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .if-nav-link:hover {
+            color: var(--if-primary);
+            background: var(--if-primary-light);
+            transform: translateY(-1px);
+        }
+
+        .if-nav-link:focus {
+            outline: none;
+            border: 2px dashed var(--color-border-focus);
+        }
+
+        /* Actions section */
+        .if-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .if-theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--glass-border);
+            background: transparent;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .if-theme-toggle:hover {
+            background: var(--if-primary-light);
+            border-color: var(--if-primary);
+            transform: scale(1.05);
+        }
+
+        .if-theme-toggle:focus {
+            outline: none;
+            border: 2px dashed var(--color-border-focus);
+        }
+
+        .if-theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        /* Main content styles */
+        .main-content {
+            padding-top: var(--header-height);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--if-primary), var(--if-primary-hover));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            background: var(--color-bg-glass);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            background: var(--color-bg-glass);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15);
+        }
+
+        .scroll-test {
+            height: 150vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--if-primary-light), transparent);
+            border-radius: var(--radius-lg);
+            margin: 4rem 0;
+        }
+
+        /* Utility classes */
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mt-4 { margin-top: 1rem; }
+
+        /* Responsive adjustments */
+        @media (min-width: 640px) {
+            .if-header { padding: 0 1.5rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .if-header { padding: 0 2rem; }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .if-logo:hover,
+        .if-nav-link:hover,
+        .if-theme-toggle:hover {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- InternetFriends Header Component -->
+    <header class="if-header" id="header" role="banner">
+        <!-- Logo Section -->
+        <a href="#" class="if-logo">
+            <div class="if-logo-image">IF</div>
+            <span>InternetFriends</span>
+        </a>
+
+        <!-- Navigation Section -->
+        <nav class="if-nav">
+            <ul class="if-nav-list">
+                <li><a href="#portfolio" class="if-nav-link">Portfolio</a></li>
+                <li><a href="#about" class="if-nav-link">About</a></li>
+                <li><a href="#contact" class="if-nav-link">Contact</a></li>
+                <li><a href="#samples" class="if-nav-link">Samples ↗</a></li>
+            </ul>
+        </nav>
+
+        <!-- Actions Section -->
+        <div class="if-actions">
+            <button class="if-theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span id="themeIcon">🌙</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">InternetFriends Header</h1>
+                <p class="hero-subtitle">
+                    Glass morphism header component with theme switching and scroll-aware behavior
+                </p>
+
+                <div class="glass-card">
+                    <h2 class="mb-2">🚀 Header Component Features</h2>
+                    <p>
+                        This demo showcases the InternetFriends glass morphism header component.
+                        Scroll down to see the enhanced glass effect, and try the theme toggle!
+                    </p>
+                </div>
+            </section>
+
+            <!-- Features Grid -->
+            <section class="features-grid">
+                <div class="feature-card">
+                    <h3 class="mb-2">🎨 Glass Morphism</h3>
+                    <p>Beautiful translucent effects with backdrop blur</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2">🌙 Theme Toggle</h3>
+                    <p>Light, dark, and system preference support</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2">📜 Scroll Aware</h3>
+                    <p>Enhanced opacity and shadows when scrolling</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2">♿ Accessible</h3>
+                    <p>Full keyboard navigation and screen reader support</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2">📱 Responsive</h3>
+                    <p>Works perfectly on all device sizes</p>
+                </div>
+                <div class="feature-card">
+                    <h3 class="mb-2">⚡ Performance</h3>
+                    <p>CSS-only animations and optimized rendering</p>
+                </div>
+            </section>
+
+            <!-- Scroll Test Area -->
+            <section class="scroll-test">
+                <div class="text-center">
+                    <h2 class="mb-4">Keep scrolling to test header behavior</h2>
+                    <p>The header will show enhanced glass morphism effect</p>
+                </div>
+            </section>
+
+            <section class="glass-card text-center">
+                <h2 class="mb-2">✨ Design System Compliance</h2>
+                <p class="mb-4">
+                    This header component follows all InternetFriends design system guidelines:
+                </p>
+                <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
+                    <li class="mb-2">✅ Compact radius system (max 12px)</li>
+                    <li class="mb-2">✅ Blue-centric color palette (#3b82f6)</li>
+                    <li class="mb-2">✅ Glass morphism with proper transparency</li>
+                    <li class="mb-2">✅ Accessible focus states with dashed borders</li>
+                    <li class="mb-2">✅ Theme-aware color management</li>
+                    <li class="mb-2">✅ Performance-optimized animations</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // InternetFriends Header JavaScript
+        class InternetFriendsHeader {
+            constructor() {
+                this.header = document.getElementById('header');
+                this.themeToggle = document.getElementById('themeToggle');
+                this.themeIcon = document.getElementById('themeIcon');
+                this.currentTheme = this.getStoredTheme() || 'system';
+
+                this.init();
+            }
+
+            init() {
+                this.setupScrollListener();
+                this.setupThemeToggle();
+                this.applyTheme(this.currentTheme);
+            }
+
+            setupScrollListener() {
+                let ticking = false;
+
+                const handleScroll = () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            const isScrolled = window.scrollY > 10;
+                            this.header.setAttribute('data-scrolled', isScrolled);
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                };
+
+                window.addEventListener('scroll', handleScroll, { passive: true });
+
+                // Initial check
+                handleScroll();
+            }
+
+            setupThemeToggle() {
+                this.themeToggle.addEventListener('click', () => {
+                    const themes = ['light', 'dark', 'system'];
+                    const currentIndex = themes.indexOf(this.currentTheme);
+                    const nextTheme = themes[(currentIndex + 1) % themes.length];
+
+                    this.currentTheme = nextTheme;
+                    this.applyTheme(nextTheme);
+                    this.storeTheme(nextTheme);
+                });
+            }
+
+            applyTheme(theme) {
+                const html = document.documentElement;
+
+                if (theme === 'system') {
+                    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    html.setAttribute('data-theme', systemTheme);
+                    this.themeIcon.textContent = '🖥️';
+                } else {
+                    html.setAttribute('data-theme', theme);
+                    this.themeIcon.textContent = theme === 'light' ? '☀️' : '🌙';
+                }
+            }
+
+            getStoredTheme() {
+                try {
+                    return localStorage.getItem('if-theme');
+                } catch (e) {
+                    return null;
+                }
+            }
+
+            storeTheme(theme) {
+                try {
+                    localStorage.setItem('if-theme', theme);
+                } catch (e) {
+                    // Storage not available
+                }
+            }
+        }
+
+        // Initialize header when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new InternetFriendsHeader();
+        });
+
+        // Handle system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (document.documentElement.getAttribute('data-theme') === 'system') {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "start": {
+    "name": "start",
+    "status": "in-progress",
+    "completion": 0,
+    "features": [],
+    "owner": "Emmanuel Barrera Salazar (BarreraSlzr)",
+    "timeline": "2-3 weeks",
+    "blockers": [],
+    "goals": [
+      "Define epic goals"
+    ]
+  }
+}
