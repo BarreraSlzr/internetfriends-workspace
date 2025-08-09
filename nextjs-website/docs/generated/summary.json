@@ -1,0 +1,195 @@
+{
+  "generatedAt": "2025-08-09T07:18:23.389Z",
+  "schemaCount": 15,
+  "eventCount": 5,
+  "outputDir": "docs/generated",
+  "files": [
+    "docs/generated/schemas.md",
+    "docs/generated/events.md",
+    "docs/generated/summary.json"
+  ],
+  "includeShape": false,
+  "schemas": [
+    {
+      "name": "AIModel",
+      "domain": "compute",
+      "version": "unversioned",
+      "description": "AI model configuration and metadata",
+      "tags": [
+        "core",
+        "compute",
+        "ai"
+      ]
+    },
+    {
+      "name": "BaseEvent",
+      "domain": "events",
+      "version": "unversioned",
+      "description": "Generic base event envelope (pre-catalog canonicalization)",
+      "tags": [
+        "events",
+        "envelope"
+      ]
+    },
+    {
+      "name": "BaseForm",
+      "domain": "forms",
+      "version": "unversioned",
+      "description": "Base form envelope shared by specialized form schemas",
+      "tags": [
+        "form",
+        "base"
+      ]
+    },
+    {
+      "name": "BugForm",
+      "domain": "forms",
+      "version": "unversioned",
+      "description": "Bug report submission form",
+      "tags": [
+        "form",
+        "bug",
+        "issue"
+      ]
+    },
+    {
+      "name": "CommitMetadata",
+      "domain": "operations",
+      "version": "unversioned",
+      "description": "Structured commit metadata enrichment (automation / analysis)",
+      "tags": [
+        "commit",
+        "metadata",
+        "automation"
+      ]
+    },
+    {
+      "name": "ConsoleLogExport",
+      "domain": "observability",
+      "version": "unversioned",
+      "description": "Serialized console log export bundle",
+      "tags": [
+        "log",
+        "console",
+        "export"
+      ]
+    },
+    {
+      "name": "DebugReport",
+      "domain": "observability",
+      "version": "unversioned",
+      "description": "Structured debug / diagnostics report aggregate",
+      "tags": [
+        "debug",
+        "report",
+        "observability"
+      ]
+    },
+    {
+      "name": "FeedbackForm",
+      "domain": "forms",
+      "version": "unversioned",
+      "description": "General feedback / feature / sponsor intake form",
+      "tags": [
+        "form",
+        "feedback"
+      ]
+    },
+    {
+      "name": "FunnelsPlan",
+      "domain": "operations",
+      "version": "unversioned",
+      "description": "Marketing / product funnels plan configuration schema",
+      "tags": [
+        "funnels",
+        "plan",
+        "ops"
+      ]
+    },
+    {
+      "name": "GestureConfig",
+      "domain": "design-system",
+      "version": "unversioned",
+      "description": "Client gesture interaction tuning parameters",
+      "tags": [
+        "ui",
+        "interaction"
+      ]
+    },
+    {
+      "name": "InternetFriendResults",
+      "domain": "analytics",
+      "version": "unversioned",
+      "description": "Structured matrix / vector / hybrid diagnostic result formats",
+      "tags": [
+        "analytics",
+        "results",
+        "diagnostics"
+      ]
+    },
+    {
+      "name": "MLDatasetFossil",
+      "domain": "ml",
+      "version": "unversioned",
+      "description": "Machine learning dataset fossil metadata & payload snapshot",
+      "tags": [
+        "ml",
+        "dataset",
+        "fossil"
+      ]
+    },
+    {
+      "name": "PRForm",
+      "domain": "forms",
+      "version": "unversioned",
+      "description": "Pull request review / metadata submission form",
+      "tags": [
+        "form",
+        "pr",
+        "code-review"
+      ]
+    },
+    {
+      "name": "SLARules",
+      "domain": "operations",
+      "version": "unversioned",
+      "description": "Service Level Agreement rule definitions",
+      "tags": [
+        "sla",
+        "rules",
+        "ops"
+      ]
+    },
+    {
+      "name": "UserAuth",
+      "domain": "auth",
+      "version": "unversioned",
+      "description": "User authentication identity baseline (session integration)",
+      "tags": [
+        "core",
+        "user"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "type": "auth.session.start"
+    },
+    {
+      "type": "compute.job.completed"
+    },
+    {
+      "type": "compute.job.failed"
+    },
+    {
+      "type": "compute.job.queued"
+    },
+    {
+      "type": "system.health.check"
+    }
+  ],
+  "notes": [
+    "Shape extraction is best-effort; non-object schemas omitted.",
+    "Update registry & catalog to reflect new domain models."
+  ]
+}
