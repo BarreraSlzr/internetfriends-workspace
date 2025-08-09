@@ -73,6 +73,8 @@ interface DataTableProps {
 
 type TableRow = any;
 
+import { TextAtomic } from "@/components/atomic/text";
+
 export const DataTableOrganism: React.FC<DataTableProps> = ({
   data,
   columns,
@@ -377,7 +379,15 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
         style={{ width: column.width }}
       >
         <div className={styles.headerContent}>
-          <span className={styles.headerText}>{column.header}</span>
+          <TextAtomic
+            as="span"
+            variant="label-sm"
+            tone="contrast"
+            className={styles.headerText}
+            data-testid="table-header-text"
+          >
+            {column.header}
+          </TextAtomic>
           {sortable && column.sortable !== false && (
             <div className={styles.sortIndicator}>
               {!isSorted && <span className={styles.sortNeutral}>⇅</span>}
@@ -473,10 +483,16 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
 
     return (
       <div className={styles.pagination}>
-        <div className={styles.paginationInfo}>
+        <TextAtomic
+          as="div"
+          variant="micro"
+          tone="subtle"
+          className={styles.paginationInfo}
+          data-testid="table-pagination-info"
+        >
           Showing {paginationConfig.startIndex + 1}-{paginationConfig.endIndex}{" "}
           of {processedData.length}
-        </div>
+        </TextAtomic>
         <div className={styles.paginationControls}>
           <button
             onClick={() => handlePageChange(1)}
@@ -560,8 +576,23 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     return (
       <div className={`${styles.container} ${styles.error} ${className || ""}`}>
         <div className={styles.errorContent}>
-          <h3>⚠️ Table Error</h3>
-          <p>{error}</p>
+          <TextAtomic
+            as="h3"
+            variant="h5"
+            tone="danger"
+            weight="semibold"
+            data-testid="table-error-title"
+          >
+            ⚠️ Table Error
+          </TextAtomic>
+          <TextAtomic
+            as="p"
+            variant="body-sm"
+            tone="muted"
+            data-testid="table-error-message"
+          >
+            {error}
+          </TextAtomic>
           {onRefresh && (
             <button onClick={onRefresh} className={styles.retryButton}>
               Retry
@@ -617,9 +648,15 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
         </div>
         {selectable && selectedRows.size > 0 && (
           <div className={styles.selectionActions}>
-            <span className={styles.selectionCount}>
+            <TextAtomic
+              as="span"
+              variant="micro"
+              tone="muted"
+              className={styles.selectionCount}
+              data-testid="table-selection-count"
+            >
               {selectedRows.size} selected
-            </span>
+            </TextAtomic>
             <button
               onClick={() => setSelectedRows(new Set())}
               className={styles.clearSelection}
@@ -681,7 +718,14 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                   >
                     <div className={styles.loadingContent}>
                       <div className={styles.spinner}></div>
-                      <span>Loading data...</span>
+                      <TextAtomic
+                        as="span"
+                        variant="micro"
+                        tone="muted"
+                        data-testid="table-loading-text"
+                      >
+                        Loading data...
+                      </TextAtomic>
                     </div>
                   </td>
                 </tr>
@@ -697,7 +741,14 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                   >
                     <div className={styles.emptyContent}>
                       <span className={styles.emptyIcon}>📋</span>
-                      <span>No data available</span>
+                      <TextAtomic
+                        as="span"
+                        variant="micro"
+                        tone="subtle"
+                        data-testid="table-empty-text"
+                      >
+                        No data available
+                      </TextAtomic>
                     </div>
                   </td>
                 </tr>
