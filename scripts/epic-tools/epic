@@ -98,7 +98,7 @@ case "${1:-help}" in
 
         show_banner
         echo -e "${GREEN}🎭 Starting epic: $2${NC}"
-        bun "$SCRIPT_DIR/epic-manager.ts" start "$@"
+        bun "$SCRIPT_DIR/epic-manager-v2.ts" start "${@:2}"
         ;;
 
     "feature")
@@ -114,7 +114,7 @@ case "${1:-help}" in
         elif [ "$2" = "done" ] || [ "$2" = "complete" ]; then
             echo -e "${GREEN}✅ Completing feature '$4' in epic '$3'${NC}"
         fi
-        bun "$SCRIPT_DIR/epic-manager.ts" feature "$@"
+        bun "$SCRIPT_DIR/epic-manager-v2.ts" feature "${@:2}"
         ;;
 
     "complete"|"finish"|"done")
@@ -126,12 +126,12 @@ case "${1:-help}" in
 
         show_banner
         echo -e "${GREEN}🎯 Completing epic: $2${NC}"
-        bun "$SCRIPT_DIR/epic-manager.ts" complete "$@"
+        bun "$SCRIPT_DIR/epic-manager-v2.ts" complete "${@:2}"
         ;;
 
     "dashboard"|"status"|"ls")
         show_banner
-        bun "$SCRIPT_DIR/epic-manager.ts" dashboard
+        bun "$SCRIPT_DIR/epic-manager-v2.ts" dashboard
         ;;
 
     "graph"|"log"|"history")
@@ -139,7 +139,7 @@ case "${1:-help}" in
         show_banner
         echo -e "${YELLOW}📊 Epic Git Graph (last $LIMIT commits)${NC}"
         echo ""
-        bun "$SCRIPT_DIR/epic-manager.ts" graph "$LIMIT"
+        bun "$SCRIPT_DIR/epic-manager-v2.ts" graph "$LIMIT"
         ;;
 
     "quick"|"q")

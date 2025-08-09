@@ -1,3 +1,40 @@
+# 🎭 Enhanced Copilot Instructions - InternetFriends Portfolio
+
+## 🚀 Epic-Based Development Workflow
+
+### Epic Strategy Integration
+
+This project uses an **Epic-Based Git Strategy** where development is organized into visual epics that appear as merged branches in the git timeline. Each epic represents a complete milestone or feature set.
+
+#### Epic Management Commands
+
+```sh
+# Start new epic
+./scripts/epic-tools/epic start <epic-name> --timeline="2-3 weeks" --goal="Epic objective"
+
+# Add features to epic
+./scripts/epic-tools/epic feature add <epic-name> <feature-name>
+
+# Complete features
+./scripts/epic-tools/epic feature done <epic-name> <feature-name> "Description"
+
+# Complete epic
+./scripts/epic-tools/epic complete <epic-name> --version="v1.2.0" --impact-performance="+40%"
+
+# Monitor progress
+./scripts/epic-tools/epic dashboard
+./scripts/epic-tools/epic graph 20
+```
+
+#### Epic-Aware Development
+
+When working on features, always consider:
+
+- **Which epic does this belong to?** - Group related features into meaningful epics
+- **Epic completion metrics** - Track performance, velocity, and quality improvements
+- **Visual git timeline** - Each commit should contribute to the epic story
+- **Measurable impact** - Every epic should deliver quantifiable value
+
 ### Bun CLI Output Patterns & Metadata Extraction
 
 #### Function/Type Detection
@@ -70,7 +107,18 @@ console.log(JSON.stringify({ env_local: envExists, env_example: exampleExists },
 "
 ```
 
-### Example Bun CLI Commands
+### Epic-Integrated Bun Commands
+
+#### Epic Status with Module Analysis
+
+```sh
+bun -e "
+const { execSync } = require('child_process');
+const epicStatus = execSync('./scripts/epic-tools/epic dashboard', { encoding: 'utf8' });
+console.log('🎭 CURRENT EPIC STATUS:');
+console.log(epicStatus);
+"
+```
 
 #### List all exported functions/types from a module
 
@@ -90,13 +138,28 @@ bun -e "import { useComputeEngine } from './src/public/projects/core/event/compu
 bun -e "import { useComputeEngine } from './src/public/projects/core/event/compute/xyz_drive'; console.log(JSON.stringify({ type: typeof useComputeEngine }, null, 2));" | jq .
 ```
 
-# VS Code Copilot Custom Instructions - InternetFriends Portfolio
-
-## Project Overview
+## 🏗️ Project Architecture Overview
 
 This is a Next.js 15.2.4 portfolio application with Turbopack, using TypeScript, SCSS, and advanced component architecture. The project follows snake_case.dots naming convention and implements a "coin of value" color system.
 
-## InternetFriends Design System & Colors
+### Epic-Driven Development Structure
+
+```
+app/
+├── epics/                          # Epic-specific documentation and tracking
+│   ├── database-manager-v1/        # Database epic components
+│   ├── ai-agent-integration/       # AI workflow epic
+│   └── performance-optimization/   # Performance epic
+├── components/
+│   ├── atomic/                     # Atomic design components
+│   ├── molecular/                  # Molecular compositions
+│   └── organisms/                  # Complex organisms
+└── scripts/
+    ├── epic-tools/                 # Epic management CLI
+    └── microtooling/              # Development utilities
+```
+
+## 🎨 InternetFriends Design System & Colors
 
 ### Brand Color Palette
 
@@ -132,7 +195,9 @@ This is a Next.js 15.2.4 portfolio application with Turbopack, using TypeScript,
 - **Subtle shadows**: Maximum 0.15 opacity for shadow effects
 - **Consistent spacing**: 0.25rem increments for all measurements
 
-## Chat Modes Integration
+## 📋 Epic Management Integration
+
+### Chat Modes Integration
 
 Reference existing chat modes in `.github/chatmodes/`:
 
@@ -144,21 +209,34 @@ Reference existing chat modes in `.github/chatmodes/`:
 - `execute.md` - Code execution and automation
 - `ask.md` - General inquiries and documentation
 
-## File Naming Conventions
+### Epic Context for AI Development
+
+When providing assistance:
+
+1. **Check current epic status**: `./scripts/epic-tools/epic dashboard`
+2. **Consider epic scope**: Align suggestions with current epic goals
+3. **Think in milestones**: Each epic should deliver complete value
+4. **Measure impact**: Suggest metrics for epic completion
+5. **Visual timeline**: Consider how changes appear in git graph
+
+## 📁 File Naming Conventions
 
 - Use snake_case.dots naming for files: `header.atomic.tsx`, `header.styles.module.scss`
 - Component files should follow: `[component].atomic.tsx` for atomic components
 - Style files should follow: `[component].styles.module.scss` for CSS Modules
 - Type files should be: `types.ts` or `[component].types.ts`
+- Epic files should be: `epic/[epic-name]/[component].epic.tsx`
 
-## Architecture Principles
+## 🏛️ Architecture Principles
 
+- **Epic-Driven Development**: Group related features into meaningful epics
 - **Atomic Design**: Break components into atomic, molecular, and organism levels
 - **Data Attributes**: Use data attributes for state management: `data-theme`, `data-scrolled`, `data-active`
 - **CSS Modules**: All styles must be CSS Modules compatible (no :global() selectors)
 - **"Coin of Value" Color System**: Color is the primary differentiator between light/dark modes
+- **Visual Git Timeline**: Each commit contributes to epic story progression
 
-## Styling Guidelines
+## 🎨 Styling Guidelines
 
 - Use SCSS with CSS Modules
 - Implement theme-aware CSS custom properties: `var(--color-text-primary)`
@@ -167,7 +245,7 @@ Reference existing chat modes in `.github/chatmodes/`:
 - Responsive design with mobile-first approach
 - Use backdrop-filter for glass effects
 
-## Color System
+## 🎯 Color System
 
 ```scss
 // Light mode
@@ -195,76 +273,93 @@ $colors-dark: (
 );
 ```
 
-## TypeScript Standards
+## 📘 TypeScript Standards
 
 - Use strict TypeScript with proper typing
 - Interface definitions in dedicated `types.ts` files
 - React component props should be explicitly typed
 - Use `React.FC` or explicit return types for components
+- Epic-aware type definitions for component contexts
 
-## Component Structure
+## 🧱 Component Structure
 
 ```tsx
-// Atomic component example
+// Epic-aware atomic component example
 import React from "react";
 import styles from "./component.styles.module.scss";
 import { ComponentProps } from "./types";
 
-export const ComponentAtomic: React.FC<ComponentProps> = ({
+interface EpicContext {
+  epicName?: string;
+  epicPhase?: "development" | "review" | "complete";
+}
+
+export const ComponentAtomic: React.FC<ComponentProps & EpicContext> = ({
   children,
   className,
+  epicName,
+  epicPhase,
   ...props
 }) => {
   return (
-    <div className={`${styles.component} ${className || ""}`} {...props}>
+    <div
+      className={`${styles.component} ${className || ""}`}
+      data-epic={epicName}
+      data-epic-phase={epicPhase}
+      {...props}
+    >
       {children}
     </div>
   );
 };
 ```
 
-## Focus and Interaction States
+## 🎯 Focus and Interaction States
 
 - Use dashed borders (2px) for focus states like Mermaid viewer
 - Active states should use primary color with kbd-style transitions
 - Hover states should be subtle with color transitions
 - Support both mouse and keyboard navigation
 
-## Testing Approach
+## 🧪 Testing Approach
 
 - Prefer `bun -e` for quick testing over file creation
 - Use Bun as the primary runtime for development and testing
 - Jest for comprehensive test suites
 - API testing with custom test runners
+- Epic-specific test suites for complete feature validation
 
-## Responsive Design
+## 📱 Responsive Design
 
 - Mobile-first approach with progressive enhancement
 - Use CSS Grid and Flexbox for layouts
 - Prevent layout shifts with min-height and proper flex properties
 - Ensure single-row layouts don't break into multiple rows on desktop
 
-## Browser Compatibility
+## 🌐 Browser Compatibility
 
 - Support modern browsers with CSS custom properties
 - Use feature detection for advanced CSS features
 - Graceful fallbacks for backdrop-filter and other modern CSS
 
-## Performance Guidelines
+## ⚡ Performance Guidelines
 
 - Use CSS-only solutions where possible
 - Minimize JavaScript for animations
 - Leverage CSS transitions over JavaScript animations
 - Use `will-change` for elements that will be animated
+- Track performance metrics per epic completion
 
-## Development Tools
+## 🛠️ Development Tools
 
 - VS Code with TypeScript, SCSS IntelliSense
+- Zed for fast editing and AI integration
 - Turbopack for fast builds
 - ESLint and Prettier for code formatting
 - Bun for package management and runtime
+- Epic CLI tools for workflow management
 
-## File Organization
+## 📂 File Organization
 
 ```
 app/
@@ -276,21 +371,57 @@ app/
 │               ├── header.styles.module.scss
 │               ├── types.ts
 │               └── index.ts
+└── epics/
+    ├── database-manager-v1/
+    ├── ai-integration/
+    └── performance-optimization/
 ```
 
-## Code Quality
+## ✨ Code Quality
 
 - Keep components focused and single-responsibility
 - Use descriptive variable and function names
 - Comment complex logic and architectural decisions
 - Maintain clean, readable code structure
 - Follow DRY principles while avoiding premature abstraction
+- Document epic-specific architectural decisions
 
-## Git and Version Control
+## 🔄 Git and Version Control
 
-- Use conventional commit messages
-- Feature branch workflow
-- Meaningful branch names: `feature/header`
-- Regular commits with focused changes
+- Use epic-based branching strategy
+- Conventional commit messages with epic context
+- Feature branch workflow within epics
+- Meaningful branch names: `epic/database-manager-v1`, `feat/connection-pool`
+- Regular commits that contribute to epic story
+- Use epic completion for release planning
 
-When generating code, prioritize maintainability, accessibility, and performance. Always consider the responsive behavior and ensure the code follows the established patterns in the project.
+## 🎭 Epic Development Philosophy
+
+When generating code, always consider:
+
+1. **Epic Context**: Which epic does this work belong to?
+2. **Milestone Thinking**: How does this contribute to epic completion?
+3. **Visual Timeline**: How will this appear in the git graph?
+4. **Measurable Impact**: What metrics will improve?
+5. **Story Progression**: How does this advance the epic narrative?
+
+**Remember**: Every epic tells a story. Every merge tells a chapter. Every release tells the complete book of your project's journey.
+
+## 🚀 AI-Enhanced Development Commands
+
+```sh
+# Check epic status before starting work
+./scripts/epic-tools/epic dashboard
+
+# Start epic-aware development session
+bun -e "
+console.log('🎭 EPIC DEVELOPMENT SESSION');
+console.log('Current Epic Status:');
+require('child_process').execSync('./scripts/epic-tools/epic quick', { stdio: 'inherit' });
+"
+
+# Generate epic progress report
+./scripts/epic-tools/epic graph 20
+```
+
+When generating code, prioritize maintainability, accessibility, performance, and epic alignment. Always consider the responsive behavior, epic context, and ensure the code follows the established patterns in the project while contributing meaningfully to the current epic's objectives.
