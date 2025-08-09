@@ -1,0 +1,200 @@
+/**
+ * Stack Atomic SCSS Module
+ * Epic: component-architecture-v1 (feature: atomic-foundation)
+ *
+ * Purpose:
+ *  Enhances the StackAtomic layout primitive with:
+ *   - Design token backed gap system (CSS custom properties)
+ *   - Optional visual dividers styling hooks
+ *   - Data-attribute driven variants (no additional JS branching)
+ *   - Debug & density modes
+ *
+ * Philosophy:
+ *  - Purely stylistic augmentation (no layout logic duplication)
+ *  - Attribute based -> resilient to className composition
+ *  - Zero global leakage (no :global selectors per project standards)
+ *
+ * Integration (planned):
+ *  import styles from "./stack.styles.module.scss";
+ *  <StackAtomic className={styles.stack} ... />
+ *
+ *  (Currently the React component applies Tailwind utility classes directly.
+ *   When adopting this SCSS module, you can gradually shift gap/layout tokens
+ *   to CSS variables for unified theming & runtime adaptation.)
+ */
+
+/* ------------------------------
+ * Token Definitions
+ * (These can be overridden at higher scope e.g. :root, theme providers)
+ * ------------------------------ */
+.stack {
+  /* Gap scale (aligned to 0.25rem increments) */
+  --stack-gap-0: 0;
+  --stack-gap-xs: 0.25rem;
+  --stack-gap-sm: 0.5rem;
+  --stack-gap-md: 0.75rem;
+  --stack-gap-lg: 1rem;
+  --stack-gap-xl: 1.5rem;
+  --stack-gap-2xl: 2rem;
+
+  /* Active gap chosen via data-gap attribute */
+  --stack-gap-current: var(--stack-gap-md);
+
+  /* Divider defaults */
+  --stack-divider-color: var(--glass-border, rgba(255, 255, 255, 0.12));
+  --stack-divider-thickness: 1px;
+  --stack-divider-style: solid;
+  --stack-divider-radius: 0;
+
+  /* Density adjustments (percentage multiplier applied to gap) */
+  --stack-density-scale: 1;
+
+  /* Debug outline color */
+  --stack-debug-color: var(--if-primary, #3b82f6);
+
+  display: flex; /* Harmless duplicate with utility classes */
+  position: relative;
+}
+
+/* ------------------------------
+ * Gap Attribute Mappings
+ * ------------------------------ */
+.stack[data-gap="0"]   { --stack-gap-current: var(--stack-gap-0); }
+.stack[data-gap="xs"]  { --stack-gap-current: var(--stack-gap-xs); }
+.stack[data-gap="sm"]  { --stack-gap-current: var(--stack-gap-sm); }
+.stack[data-gap="md"]  { --stack-gap-current: var(--stack-gap-md); }
+.stack[data-gap="lg"]  { --stack-gap-current: var(--stack-gap-lg); }
+.stack[data-gap="xl"]  { --stack-gap-current: var(--stack-gap-xl); }
+.stack[data-gap="2xl"] { --stack-gap-current: var(--stack-gap-2xl); }
+
+.stack {
+  /* If consumer decides to switch from utility gap-* classes to pure CSS variable spacing:
+     Remove the Tailwind gap-* utilities and uncomment below block.
+  */
+  /* gap: calc(var(--stack-gap-current) * var(--stack-density-scale)); */
+}
+
+/* ------------------------------
+ * Density Variants
+ * (Optional: allow runtime compaction or expansion)
+ * ------------------------------ */
+.stack[data-density="compact"]   { --stack-density-scale: 0.75; }
+.stack[data-density="comfortable"] { --stack-density-scale: 1; }
+.stack[data-density="expanded"]  { --stack-density-scale: 1.25; }
+
+/* ------------------------------
+ * Direction Styling Hooks (optional future enhancements)
+ * These allow orientation-based adjustments if needed.
+ * ------------------------------ */
+.stack[data-direction="row"] {
+  /* Row-specific overrides placeholder */
+}
+
+.stack[data-direction="column"] {
+  /* Column-specific overrides placeholder */
+}
+
+/* ------------------------------
+ * Divider Enhancements
+ * (React component currently injects a wrapper around divider element.
+ *  These styles refine its presentation while remaining optional.)
+ * ------------------------------ */
+.stack :where([data-stack-divider]) {
+  pointer-events: none;
+  user-select: none;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.stack :where([data-stack-divider][data-orientation="vertical"]) > * {
+  width: var(--stack-divider-thickness);
+  height: 100%;
+  background: var(--stack-divider-color);
+  border-radius: var(--stack-divider-radius);
+  content: "";
+}
+
+.stack :where([data-stack-divider][data-orientation="horizontal"]) > * {
+  height: var(--stack-divider-thickness);
+  width: 100%;
+  background: var(--stack-divider-color);
+  border-radius: var(--stack-divider-radius);
+  content: "";
+}
+
+/* Subtle animation hook if dividers need to fade-in (optional) */
+.stack[data-divider-animated="true"] :where([data-stack-divider] > *) {
+  opacity: 0;
+  animation: stack-divider-fade-in 240ms ease forwards;
+}
+
+@keyframes stack-divider-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------
+ * Debug Mode
+ * Adds a faint outline & internal markers to visualize spacing
+ * ------------------------------ */
+.stack[data-debug="true"] {
+  outline: 1px dashed var(--stack-debug-color);
+  outline-offset: 2px;
+}
+
+.stack[data-debug="true"] > * {
+  position: relative;
+}
+
+.stack[data-debug="true"] > *::after {
+  content: "";
+  position: absolute;
+  opacity: 0.35;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    var(--stack-debug-color) 0%,
+    transparent 60%
+  );
+  mix-blend-mode: multiply;
+  inset: 0;
+  border-radius: 2px;
+}
+
+/* ------------------------------
+ * Focus Ring Harmonization (if stack is focusable via tabindex)
+ * ------------------------------ */
+.stack:focus-visible {
+  outline: 2px dashed var(--if-primary, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* ------------------------------
+ * Theming Hook
+ * Allow dark mode adjustments if parent toggles data-theme
+ * ------------------------------ */
+.stack[data-theme="dark"] {
+  --stack-divider-color: rgba(255, 255, 255, 0.16);
+}
+
+/* ------------------------------
+ * Motion Reduction
+ * Disable divider animations when prefers-reduced-motion
+ * ------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  .stack[data-divider-animated="true"] :where([data-stack-divider] > *) {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* ------------------------------
+ * Utility: Inline variant override (if consumer chooses not to rely on inline prop)
+ * ------------------------------ */
+.stack[data-inline="true"] {
+  display: inline-flex;
+}
+
+/* End of stack.styles.module.scss */
