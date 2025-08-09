@@ -82,6 +82,7 @@ interface AnalyticsProps {
   [key: string]: unknown;
 }
 
+import { TextAtomic } from "@/components/atomic/text";
 export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   title = "Analytics Dashboard",
   timeRange = "last_7_days",
@@ -421,14 +422,33 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
           <span style={{ color: kpi.color }}>{kpi.icon || "📊"}</span>
         </div>
         <div className={styles.kpiContent}>
-          <h3 className={styles.kpiTitle}>{kpi.title}</h3>
-          <div className={styles.kpiValue}>
+          <TextAtomic
+            variant="label"
+            className={styles.kpiTitle}
+            data-testid="kpi-title"
+          >
+            {kpi.title}
+          </TextAtomic>
+          <TextAtomic
+            as="div"
+            variant="h4"
+            tone="contrast"
+            weight="semibold"
+            className={styles.kpiValue}
+            data-testid="kpi-value"
+          >
             {formatValue(kpi.value, kpi.format)}
-          </div>
-          <div className={styles.kpiChange} style={{ color: changeInfo.color }}>
+          </TextAtomic>
+          <TextAtomic
+            as="div"
+            variant="micro"
+            className={styles.kpiChange}
+            style={{ color: changeInfo.color }}
+            data-testid="kpi-change"
+          >
             <span className={styles.changeIcon}>{changeInfo.icon}</span>
             <span className={styles.changeText}>{changeInfo.text}</span>
-          </div>
+          </TextAtomic>
         </div>
       </motion.div>
     );
@@ -511,16 +531,41 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
           >
             {severityIcons[insight.severity]}
           </span>
-          <h4 className={styles.insightTitle}>{insight.title}</h4>
+          <TextAtomic
+            as="h4"
+            variant="h6"
+            tone="contrast"
+            weight="semibold"
+            className={styles.insightTitle}
+            data-testid="insight-title"
+          >
+            {insight.title}
+          </TextAtomic>
           <div className={styles.insightConfidence}>
             {Math.round((insight.confidence || 0) * 100)}%
           </div>
         </div>
-        <p className={styles.insightDescription}>{insight.description}</p>
+        <TextAtomic
+          as="p"
+          variant="body-sm"
+          tone="muted"
+          className={styles.insightDescription}
+          data-testid="insight-description"
+        >
+          {insight.description}
+        </TextAtomic>
         {insight.actionable && insight.suggestion && (
-          <div className={styles.insightSuggestion}>
-            <strong>_Suggestion:</strong> {insight.suggestion}
-          </div>
+          <TextAtomic
+            as="div"
+            variant="micro"
+            tone="subtle"
+            className={styles.insightSuggestion}
+            emphasis
+            data-testid="insight-suggestion"
+          >
+            <span className="font-semibold">Suggestion:</span>{" "}
+            {insight.suggestion}
+          </TextAtomic>
         )}
       </motion.div>
     );
@@ -571,7 +616,16 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       {/* Analytics Header */}
       <div className={styles.header}>
         <div className={styles.headerContent}>
-          <h1 className={styles.title}>{title}</h1>
+          <TextAtomic
+            as="h1"
+            variant="h2"
+            tone="contrast"
+            weight="semibold"
+            data-testid="analytics-title"
+            className={styles.title}
+          >
+            {title}
+          </TextAtomic>
           <div className={styles.headerActions}>
             <div className={styles.timeRangeSelector}>
               <select
@@ -617,7 +671,16 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
         {/* KPI Cards */}
         {showKPIs && (
           <motion.section className={styles.kpiSection} variants={itemVariants}>
-            <h2 className={styles.sectionTitle}>Key Performance Indicators</h2>
+            <TextAtomic
+              as="h2"
+              variant="h4"
+              tone="contrast"
+              weight="semibold"
+              className={styles.sectionTitle}
+              data-testid="section-kpis-title"
+            >
+              Key Performance Indicators
+            </TextAtomic>
             <div className={styles.kpiGrid}>
               <AnimatePresence>{kpis.map(renderKPICard)}</AnimatePresence>
             </div>
@@ -630,7 +693,16 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
             className={styles.chartsSection}
             variants={itemVariants}
           >
-            <h2 className={styles.sectionTitle}>Analytics Charts</h2>
+            <TextAtomic
+              as="h2"
+              variant="h5"
+              tone="contrast"
+              weight="semibold"
+              className={styles.sectionTitle}
+              data-testid="section-charts-title"
+            >
+              Analytics Charts
+            </TextAtomic>
             <div className={styles.chartsGrid}>
               <AnimatePresence>{charts.map(renderChart)}</AnimatePresence>
             </div>
@@ -643,9 +715,16 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
             className={styles.insightsSection}
             variants={itemVariants}
           >
-            <h2 className={styles.sectionTitle}>
-              AI Insights & Recommendations
-            </h2>
+            <TextAtomic
+              as="h2"
+              variant="h5"
+              tone="contrast"
+              weight="semibold"
+              className={styles.sectionTitle}
+              data-testid="section-insights-title"
+            >
+              AI Insights &amp; Recommendations
+            </TextAtomic>
             <div className={styles.insightsList}>
               <AnimatePresence>{insights.map(renderInsight)}</AnimatePresence>
             </div>
