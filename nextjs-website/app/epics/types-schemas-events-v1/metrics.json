@@ -1,20 +1,10 @@
 {
-  "timestamp": "2025-08-09T07:05:50.987Z",
+  "timestamp": "2025-08-09T07:15:57.216Z",
   "schemaCount": 11,
-  "schemasRegistered": 3,
-  "schemaCoveragePct": 27.27,
+  "schemasRegistered": 15,
+  "schemaCoveragePct": 90.91,
   "orphanSchemas": [
-    "schemas/bug.form.schema.ts",
-    "schemas/console-log.schema.ts",
-    "schemas/debug.schema.ts",
-    "schemas/event.schema.ts",
-    "schemas/feedback.form.schema.ts",
-    "schemas/form.schema.ts",
-    "schemas/fossil.schema.ts",
-    "schemas/internetFriendResults.schema.ts",
-    "schemas/ml.schema.ts",
-    "schemas/pr.form.schema.ts",
-    "schemas/zod.schema.ts"
+    "schemas/fossil.schema.ts"
   ],
   "eventTypesEnum": 5,
   "eventTypesCatalogued": 5,
@@ -29,5 +19,5 @@
     "htmlLengthDeltaPct": null,
     "hashMatch": null
   },
-  "strictBuild": false
+  "strictBuild": true
 }

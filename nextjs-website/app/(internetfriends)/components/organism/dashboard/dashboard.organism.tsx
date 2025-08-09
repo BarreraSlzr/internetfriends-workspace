@@ -406,7 +406,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       {/* Navigation Tabs */}
       <nav className={styles.navigation}>
         {tabs.map((tab) => (
-          < key={index}button
+          <button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
             className={`${styles.tab} ${activeTab === tab.id ? styles.active : ""}`}

@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
-import { Handle, Position } from 'reactflow';
-import { cn } from '@/lib/utils';
+import React from "react";
+import { Handle, Position } from "reactflow";
+import { cn } from "@/lib/utils";
 
 interface HookNodeData {
   label: string;
@@ -23,14 +23,16 @@ interface HookNodeProps {
 export const HookNode: React.FC<HookNodeProps> = ({
   data,
   isConnectable,
-  selected
+  selected,
 }) => {
   return (
-    <div className={cn(
-      'min-w-[240px] max-w-[300px] bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 text-emerald-900 rounded-compact-lg shadow-glass transition-all duration-200',
-      selected && 'ring-2 ring-if-primary ring-offset-2',
-      'hover:shadow-glass-hover hover:scale-[1.02]'
-    )}>
+    <div
+      className={cn(
+        "min-w-[240px] max-w-[300px] bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 text-emerald-900 rounded-compact-lg shadow-glass transition-all duration-200",
+        selected && "ring-2 ring-if-primary ring-offset-2",
+        "hover:shadow-glass-hover hover:scale-[1.02]",
+      )}
+    >
       <Handle
         type="target"
         position={Position.Top}
@@ -49,9 +51,7 @@ export const HookNode: React.FC<HookNodeProps> = ({
         </div>
 
         {/* Description */}
-        <p className="text-xs opacity-80 leading-relaxed">
-          {data.description}
-        </p>
+        <p className="text-xs opacity-80 leading-relaxed">{data.description}</p>
 
         {/* Parameters */}
         {data.parameters && data.parameters.length > 0 && (
@@ -59,7 +59,7 @@ export const HookNode: React.FC<HookNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Parameters</h4>
             <div className="space-y-1">
               {data.parameters.map((param, index) => (
-                < key={index}span
+                <span
                   key={index}
                   className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono"
                 >
@@ -92,7 +92,7 @@ export const HookNode: React.FC<HookNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Examples</h4>
             <div className="space-y-1">
               {data.examples.map((example, index) => (
-                < key={index}code
+                <code
                   key={index}
                   className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono text-emerald-800"
                 >
@@ -109,7 +109,7 @@ export const HookNode: React.FC<HookNodeProps> = ({
             <h4 className="text-xs font-medium mb-1">Dependencies</h4>
             <div className="flex flex-wrap gap-1">
               {data.dependencies.map((dep, index) => (
-                < key={index}span
+                <span
                   key={index}
                   className="px-2 py-0.5 bg-white/80 rounded-compact-xs text-xs"
                 >
@@ -131,4 +131,4 @@ export const HookNode: React.FC<HookNodeProps> = ({
   );
 };
 
-HookNode._displayName = 'HookNode';
+HookNode._displayName = "HookNode";

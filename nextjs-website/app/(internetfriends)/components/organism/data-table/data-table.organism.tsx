@@ -418,7 +418,11 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   };
 
   // Render table cell
-  const renderCell = (row: TableRow, column: TableColumn, _rowIndex: number) => {
+  const renderCell = (
+    row: TableRow,
+    column: TableColumn,
+    _rowIndex: number,
+  ) => {
     const value = row[column.key];
     let displayValue = value;
 
@@ -491,7 +495,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             ⟨
           </button>
           {pages.map((page) => (
-            < key={index}button
+            <button
               key={page}
               onClick={() => handlePageChange(page)}
               className={`${styles.paginationButton} ${page === currentPage ? styles._active : ""}`}
@@ -699,7 +703,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                 </tr>
               ) : (
                 visibleData.map((row, index) => (
-                  < key={index}motion.tr
+                  <motion.tr
                     key={row.id}
                     className={`
                       ${styles.row}
