@@ -576,13 +576,13 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
             <div className={styles.timeRangeSelector}>
               <select
                 value={selectedTimeRange}
-                onChange={(_e) =>
+                onChange={(e) =>
                   handleTimeRangeChange(e.target.value as TimeRange)
                 }
                 className={styles.timeRangeSelect}
               >
                 {timeRangeOptions.map((option) => (
-                  < key={index}option key={option.value} value={option.value}>
+                  <option key={option.value} value={option.value}>
                     {option.label}
                   </option>
                 ))}

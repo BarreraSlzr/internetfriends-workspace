@@ -259,7 +259,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       animate="visible"
     >
       {metrics.map((metric) => (
-        < key={index}motion.div
+        <motion.div
           key={metric.id}
           className={styles.metricCard}
           variants={itemVariants}
@@ -294,7 +294,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       <h3 className={styles.sectionTitle}>Recent Activity</h3>
       <div className={styles.activityList}>
         {activities.map((activity, index) => (
-          < key={index}motion.div
+          <motion.div
             key={activity.id}
             className={`${styles.activityItem} ${styles[`severity-${activity.severity}`]}`}
             variants={itemVariants}
