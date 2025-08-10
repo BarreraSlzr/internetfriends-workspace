@@ -8,6 +8,7 @@ import { Button as ShadcnButton } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import styles from "./button.styles.module.scss";
 import type { ButtonAtomicProps } from "./types";
+import type { AccentToken } from "../../../styles/tokens/accent.types";
 
 // Button variants using class-variance-authority
 const buttonVariants = cva(
@@ -92,6 +93,7 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
       className,
       variant = "primary",
       size = "md",
+      accent = "primary",
       loading = false,
       disabled = false,
       fullWidth = false,
@@ -191,6 +193,7 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
         data-testid={testId}
         data-variant={variant}
         data-size={size}
+        data-accent={accent}
         data-loading={loading}
         data-disabled={isDisabled}
         {...props}

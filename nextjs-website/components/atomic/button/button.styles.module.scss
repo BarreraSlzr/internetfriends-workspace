@@ -3,6 +3,7 @@
 
 @use "sass:map";
 @use "../../../styles/tokens/typography.scss" as typography;
+@use "../../../styles/tokens/accent.scss" as accent;
 @use "../../../styles/mixins/focus.scss" as focus;
 
 // Base button styles
@@ -326,24 +327,16 @@
   }
 }
 
-@keyframes buttonShake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  10%,
-  30%,
-  50%,
-  70%,
-  90% {
-    transform: translateX(-2px);
-  }
-  20%,
-  40%,
-  60%,
-  80% {
-    transform: translateX(2px);
-  }
+// Accent token integration - Uses CSS variables from design-tokens.css and accent-global.css
+// Simplified approach using CSS custom properties for accent theming
+
+// All accent styling is handled by global CSS variables and data-accent attributes
+// The accent system is defined in styles/accent-global.css and styles/design-tokens.css
+
+// Component-specific accent overrides can be added here if needed
+.button[data-accent] {
+  // Accent colors are automatically applied via CSS custom properties
+  // defined in the global accent system
 }
 
 // Button group styles (for when buttons are grouped)
