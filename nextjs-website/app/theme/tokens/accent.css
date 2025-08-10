@@ -1,0 +1,298 @@
+/* InternetFriends Accent Theming System */
+/* Dynamic color system with user-customizable accent hues */
+
+:root {
+  /* =================================================================
+     ACCENT SYSTEM FOUNDATION
+     Dynamic tokens that change based on user selection
+     ================================================================= */
+
+  /* Base accent scale (default: brand blue #3b82f6) */
+  --accent-50: 217 91% 97%;   /* Lightest tint */
+  --accent-100: 217 90% 94%;  /* Very light */
+  --accent-200: 217 91% 86%;  /* Light */
+  --accent-300: 217 91% 78%;  /* Light-medium */
+  --accent-400: 217 89% 70%;  /* Medium-light */
+  --accent-500: 217 89% 60%;  /* Base color (anchor) */
+  --accent-600: 217 89% 53%;  /* Medium-dark */
+  --accent-700: 217 80% 46%;  /* Dark */
+  --accent-800: 217 75% 39%;  /* Very dark */
+  --accent-900: 217 70% 32%;  /* Darkest shade */
+
+  /* Accent RGB values for alpha compositing */
+  --accent-500-rgb: 59, 130, 246;
+  --accent-600-rgb: 37, 99, 235;
+
+  /* =================================================================
+     SEMANTIC ACCENT TOKENS
+     Stable API that components consume (maps to accent scale)
+     ================================================================= */
+
+  /* Primary interactive colors */
+  --color-primary: var(--accent-500);
+  --color-primary-hover: var(--accent-600);
+  --color-primary-active: var(--accent-700);
+  --color-primary-fg: 0 0% 100%; /* White text on primary */
+
+  /* Surface colors with accent tinting */
+  --surface-accent-subtle: var(--accent-50);
+  --surface-accent-light: var(--accent-100);
+  --surface-accent-medium: var(--accent-200);
+  --surface-accent-bold: var(--accent-500);
+
+  /* Border colors */
+  --border-accent-subtle: var(--accent-200);
+  --border-accent-medium: var(--accent-400);
+  --border-accent-strong: var(--accent-600);
+  --border-focus-ring: var(--accent-400);
+
+  /* Interactive states */
+  --accent-hover-overlay: var(--accent-500) / 0.08;
+  --accent-active-overlay: var(--accent-500) / 0.12;
+  --accent-selected-overlay: var(--accent-500) / 0.16;
+
+  /* =================================================================
+     GLASS MORPHISM WITH ACCENT INTEGRATION
+     Accent-aware transparency tokens
+     ================================================================= */
+
+  --glass-accent-surface: var(--surface-accent-subtle) / 0.65;
+  --glass-accent-border: var(--accent-400) / 0.15;
+  --glass-accent-border-hover: var(--accent-500) / 0.25;
+
+  /* =================================================================
+     GRADIENT SYSTEM
+     Pre-defined gradient combinations using accent tokens
+     ================================================================= */
+
+  --gradient-accent-subtle: linear-gradient(135deg, hsl(var(--accent-50)), hsl(var(--accent-100)));
+  --gradient-accent-soft: linear-gradient(135deg, hsl(var(--accent-100)), hsl(var(--accent-200)));
+  --gradient-accent-medium: linear-gradient(135deg, hsl(var(--accent-200)), hsl(var(--accent-400)));
+  --gradient-accent-bold: linear-gradient(135deg, hsl(var(--accent-300)), hsl(var(--accent-500)));
+  --gradient-accent-vibrant: linear-gradient(135deg, hsl(var(--accent-400)), hsl(var(--accent-600)));
+
+  /* Card gradient patterns (matching current InternetFriends style) */
+  --gradient-card-primary: linear-gradient(to top right, hsl(var(--accent-300)), hsl(var(--accent-300)), hsl(var(--accent-500)));
+  --gradient-card-secondary: linear-gradient(to bottom right, hsl(var(--accent-200)), hsl(var(--accent-300)), hsl(var(--accent-400)));
+
+  /* =================================================================
+     CONTRAST SYSTEM
+     Automatic text color selection for accessibility
+     ================================================================= */
+
+  --accent-contrast-50: 0 0% 10%;   /* Dark text for light backgrounds */
+  --accent-contrast-100: 0 0% 15%;
+  --accent-contrast-200: 0 0% 20%;
+  --accent-contrast-300: 0 0% 25%;
+  --accent-contrast-400: 0 0% 100%; /* White text starts here */
+  --accent-contrast-500: 0 0% 100%;
+  --accent-contrast-600: 0 0% 100%;
+  --accent-contrast-700: 0 0% 100%;
+  --accent-contrast-800: 0 0% 100%;
+  --accent-contrast-900: 0 0% 100%; /* White text for dark backgrounds */
+}
+
+/* =================================================================
+   DARK THEME OVERRIDES
+   Adjustments for dark mode compatibility
+   ================================================================= */
+
+[data-theme="dark"] {
+  /* Darker accent variants for better dark mode contrast */
+  --surface-accent-subtle: var(--accent-900) / 0.3;
+  --surface-accent-light: var(--accent-800) / 0.4;
+  --surface-accent-medium: var(--accent-700) / 0.5;
+
+  /* Adjusted borders for dark backgrounds */
+  --border-accent-subtle: var(--accent-700) / 0.3;
+  --border-accent-medium: var(--accent-600) / 0.5;
+  --border-accent-strong: var(--accent-500);
+
+  /* Glass morphism adjustments */
+  --glass-accent-surface: var(--accent-900) / 0.25;
+  --glass-accent-border: var(--accent-500) / 0.2;
+  --glass-accent-border-hover: var(--accent-400) / 0.3;
+
+  /* Overlay adjustments */
+  --accent-hover-overlay: var(--accent-400) / 0.12;
+  --accent-active-overlay: var(--accent-400) / 0.16;
+  --accent-selected-overlay: var(--accent-400) / 0.2;
+
+  /* Updated gradients for dark mode */
+  --gradient-accent-subtle: linear-gradient(135deg, hsl(var(--accent-900)) / 0.2, hsl(var(--accent-800)) / 0.3);
+  --gradient-accent-soft: linear-gradient(135deg, hsl(var(--accent-800)) / 0.3, hsl(var(--accent-700)) / 0.4);
+  --gradient-accent-medium: linear-gradient(135deg, hsl(var(--accent-700)) / 0.4, hsl(var(--accent-600)) / 0.6);
+  --gradient-accent-bold: linear-gradient(135deg, hsl(var(--accent-600)), hsl(var(--accent-500)));
+  --gradient-accent-vibrant: linear-gradient(135deg, hsl(var(--accent-500)), hsl(var(--accent-400)));
+}
+
+/* =================================================================
+   HIGH CONTRAST MODE SUPPORT
+   Enhanced visibility for accessibility
+   ================================================================= */
+
+[data-theme="high-contrast"] {
+  /* High contrast accent adjustments */
+  --color-primary: var(--accent-600);
+  --color-primary-hover: var(--accent-700);
+  --color-primary-active: var(--accent-800);
+
+  /* Stronger borders */
+  --border-accent-subtle: var(--accent-500);
+  --border-accent-medium: var(--accent-600);
+  --border-accent-strong: var(--accent-700);
+  --border-focus-ring: var(--accent-500);
+
+  /* No transparency in high contrast */
+  --glass-accent-surface: hsl(var(--accent-50));
+  --glass-accent-border: hsl(var(--accent-600));
+  --glass-accent-border-hover: hsl(var(--accent-700));
+
+  /* Solid gradients only */
+  --gradient-accent-subtle: hsl(var(--accent-100));
+  --gradient-accent-soft: hsl(var(--accent-200));
+  --gradient-accent-medium: hsl(var(--accent-300));
+  --gradient-accent-bold: hsl(var(--accent-500));
+  --gradient-accent-vibrant: hsl(var(--accent-600));
+}
+
+/* =================================================================
+   MEDIA QUERY ADAPTATIONS
+   ================================================================= */
+
+/* Reduced transparency for better readability */
+@media (prefers-reduced-transparency) {
+  :root {
+    --glass-accent-surface: hsl(var(--surface-accent-subtle));
+    --glass-accent-border: hsl(var(--border-accent-medium));
+    --accent-hover-overlay: hsl(var(--surface-accent-light));
+    --accent-active-overlay: hsl(var(--surface-accent-medium));
+  }
+}
+
+/* Print styles - convert to solid colors */
+@media print {
+  :root {
+    --color-primary: var(--accent-600) !important;
+    --surface-accent-subtle: var(--accent-100) !important;
+    --border-accent-medium: var(--accent-400) !important;
+    --glass-accent-surface: var(--accent-50) !important;
+    --glass-accent-border: var(--accent-300) !important;
+  }
+}
+
+/* =================================================================
+   UTILITY CLASSES FOR ACCENT SYSTEM
+   Direct CSS classes for common accent patterns
+   ================================================================= */
+
+.accent-primary {
+  background: hsl(var(--color-primary));
+  color: hsl(var(--color-primary-fg));
+}
+
+.accent-primary:hover {
+  background: hsl(var(--color-primary-hover));
+}
+
+.accent-surface-subtle {
+  background: hsl(var(--surface-accent-subtle));
+  color: hsl(var(--accent-contrast-50));
+}
+
+.accent-surface-medium {
+  background: hsl(var(--surface-accent-medium));
+  color: hsl(var(--accent-contrast-200));
+}
+
+.accent-border-subtle {
+  border-color: hsl(var(--border-accent-subtle));
+}
+
+.accent-border-strong {
+  border-color: hsl(var(--border-accent-strong));
+}
+
+.accent-focus {
+  outline: 2px solid hsl(var(--border-focus-ring));
+  outline-offset: 2px;
+}
+
+/* Gradient utility classes */
+.bg-gradient-accent-subtle {
+  background: var(--gradient-accent-subtle);
+}
+
+.bg-gradient-accent-soft {
+  background: var(--gradient-accent-soft);
+}
+
+.bg-gradient-accent-medium {
+  background: var(--gradient-accent-medium);
+}
+
+.bg-gradient-accent-bold {
+  background: var(--gradient-accent-bold);
+}
+
+.bg-gradient-accent-vibrant {
+  background: var(--gradient-accent-vibrant);
+}
+
+.bg-gradient-card-primary {
+  background: var(--gradient-card-primary);
+}
+
+.bg-gradient-card-secondary {
+  background: var(--gradient-card-secondary);
+}
+
+/* Glass morphism with accent */
+.glass-accent {
+  background: hsl(var(--glass-accent-surface));
+  border: 1px solid hsl(var(--glass-accent-border));
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-accent:hover {
+  border-color: hsl(var(--glass-accent-border-hover));
+}
+
+/* =================================================================
+   DEVELOPMENT HELPERS
+   Classes for debugging and development (remove in production)
+   ================================================================= */
+
+.debug-accent-scale {
+  --debug-spacing: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: var(--debug-spacing);
+  padding: var(--debug-spacing);
+}
+
+.debug-accent-scale::before {
+  content: "50";
+  background: hsl(var(--accent-50));
+  color: hsl(var(--accent-contrast-50));
+  padding: var(--debug-spacing);
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.debug-accent-scale::after {
+  content: "100 200 300 400 500 600 700 800 900";
+  display: contents;
+}
+
+.debug-accent-100 { background: hsl(var(--accent-100)); color: hsl(var(--accent-contrast-100)); }
+.debug-accent-200 { background: hsl(var(--accent-200)); color: hsl(var(--accent-contrast-200)); }
+.debug-accent-300 { background: hsl(var(--accent-300)); color: hsl(var(--accent-contrast-300)); }
+.debug-accent-400 { background: hsl(var(--accent-400)); color: hsl(var(--accent-contrast-400)); }
+.debug-accent-500 { background: hsl(var(--accent-500)); color: hsl(var(--accent-contrast-500)); }
+.debug-accent-600 { background: hsl(var(--accent-600)); color: hsl(var(--accent-contrast-600)); }
+.debug-accent-700 { background: hsl(var(--accent-700)); color: hsl(var(--accent-contrast-700)); }
+.debug-accent-800 { background: hsl(var(--accent-800)); color: hsl(var(--accent-contrast-800)); }
+.debug-accent-900 { background: hsl(var(--accent-900)); color: hsl(var(--accent-contrast-900)); }
