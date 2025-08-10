@@ -2,7 +2,8 @@
 // SCSS Module for button component with design system integration
 
 @use "sass:map";
-@use "../../../styles/index.scss" as ds;
+@use "../../../styles/tokens/typography.scss" as typography;
+@use "../../../styles/mixins/focus.scss" as focus;
 
 // Base button styles
 .button {
@@ -30,10 +31,10 @@
   user-select: none;
 
   // Transitions
-  transition: all ds.duration("fast") ds.easing("ease-out");
+  transition: all 150ms cubic-bezier(0, 0, 0.2, 1);
 
   // Focus styles (Mermaid viewer inspired)
-  @include ds.focus-interactive();
+  @include focus.focus-interactive();
 
   // Disabled state
   &:disabled {
