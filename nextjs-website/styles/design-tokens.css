@@ -8,6 +8,37 @@
   --if-primary-light: rgba(59, 130, 246, 0.08);
   --if-primary-active: rgba(59, 130, 246, 0.12);
 
+  /* Accent token system */
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #2563eb;
+  --accent-primary-light-bg: rgba(59, 130, 246, 0.08);
+  --accent-primary-active-bg: rgba(59, 130, 246, 0.12);
+  --accent-primary-contrast: #ffffff;
+
+  --accent-success: #16a34a;
+  --accent-success-hover: #15803d;
+  --accent-success-light-bg: rgba(22, 163, 74, 0.08);
+  --accent-success-active-bg: rgba(22, 163, 74, 0.12);
+  --accent-success-contrast: #ffffff;
+
+  --accent-warning: #d97706;
+  --accent-warning-hover: #b45309;
+  --accent-warning-light-bg: rgba(217, 119, 6, 0.08);
+  --accent-warning-active-bg: rgba(217, 119, 6, 0.12);
+  --accent-warning-contrast: #ffffff;
+
+  --accent-danger: #dc2626;
+  --accent-danger-hover: #b91c1c;
+  --accent-danger-light-bg: rgba(220, 38, 38, 0.08);
+  --accent-danger-active-bg: rgba(220, 38, 38, 0.12);
+  --accent-danger-contrast: #ffffff;
+
+  --accent-info: #0ea5e9;
+  --accent-info-hover: #0284c7;
+  --accent-info-light-bg: rgba(14, 165, 233, 0.08);
+  --accent-info-active-bg: rgba(14, 165, 233, 0.12);
+  --accent-info-contrast: #ffffff;
+
   /* Glass morphism system */
   --glass-bg-header: rgba(255, 255, 255, 0.85);
   --glass-bg-header-scrolled: rgba(255, 255, 255, 0.92);

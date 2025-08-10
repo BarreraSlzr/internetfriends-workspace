@@ -43,105 +43,11 @@ $accent-variants: (
   ),
 );
 
-// Generate CSS custom properties for accent tokens
-:root {
-  @each $name, $variant in $accent-variants {
-    --accent-#{$name}: #{map.get($variant, "color")};
-    --accent-#{$name}-hover: #{map.get($variant, "hover")};
-    --accent-#{$name}-light-bg: #{map.get($variant, "light-bg")};
-    --accent-#{$name}-active-bg: #{map.get($variant, "active-bg")};
-    --accent-#{$name}-contrast: #{map.get($variant, "contrast")};
-  }
-}
+// CSS custom properties are defined in design-tokens.css
+// This file only provides SCSS functions and mixins for CSS modules
 
-// Generate accent variant classes using data attributes
-@each $name, $variant in $accent-variants {
-  [data-accent="#{$name}"] {
-    --current-accent: var(--accent-#{$name});
-    --current-accent-hover: var(--accent-#{$name}-hover);
-    --current-accent-light-bg: var(--accent-#{$name}-light-bg);
-    --current-accent-active-bg: var(--accent-#{$name}-active-bg);
-    --current-accent-contrast: var(--accent-#{$name}-contrast);
-
-    // Base accent styling
-    &.accent-bg {
-      background-color: var(--current-accent);
-      color: var(--current-accent-contrast);
-    }
-
-    &.accent-text {
-      color: var(--current-accent);
-    }
-
-    &.accent-border {
-      border-color: var(--current-accent);
-    }
-
-    // Interactive states
-    &.accent-interactive {
-      background-color: var(--current-accent);
-      color: var(--current-accent-contrast);
-      transition: all 150ms ease-out;
-
-      &:hover {
-        background-color: var(--current-accent-hover);
-        transform: translateY(-1px);
-      }
-
-      &:active {
-        background-color: var(--current-accent);
-        transform: translateY(0);
-      }
-
-      &:focus-visible {
-        outline: 2px dashed var(--current-accent);
-        outline-offset: 2px;
-      }
-    }
-
-    // Light background variant
-    &.accent-light {
-      background-color: var(--current-accent-light-bg);
-      color: var(--current-accent);
-      border: 1px solid transparent;
-
-      &:hover {
-        background-color: var(--current-accent-active-bg);
-        border-color: var(--current-accent);
-      }
-    }
-
-    // Outline variant
-    &.accent-outline {
-      background-color: transparent;
-      color: var(--current-accent);
-      border: 1px solid var(--current-accent);
-
-      &:hover {
-        background-color: var(--current-accent-light-bg);
-      }
-
-      &:active {
-        background-color: var(--current-accent-active-bg);
-      }
-    }
-
-    // Ghost variant
-    &.accent-ghost {
-      background-color: transparent;
-      color: var(--current-accent);
-      border: none;
-
-      &:hover {
-        background-color: var(--current-accent-light-bg);
-      }
-
-      &:active {
-        background-color: var(--current-accent-active-bg);
-      }
-    }
-  }
-}
+// Accent variant classes are defined in global CSS, not CSS modules
+// These mixins provide accent functionality for use in component modules
 
 // Utility functions for SCSS consumption
 @function accent-color($name) {
@@ -183,23 +89,31 @@ $accent-variants: (
   }
 }
 
-// State variants for dynamic accent switching
-.accent-primary { @include apply-accent("primary"); }
-.accent-success { @include apply-accent("success"); }
-.accent-warning { @include apply-accent("warning"); }
-.accent-danger { @include apply-accent("danger"); }
-.accent-info { @include apply-accent("info"); }
+// Global utility classes should be defined in global CSS files
+// CSS modules should use mixins and functions instead
 
-// Text variants
-.text-primary { color: accent-color("primary"); }
-.text-success { color: accent-color("success"); }
-.text-warning { color: accent-color("warning"); }
-.text-danger { color: accent-color("danger"); }
-.text-info { color: accent-color("info"); }
+// Mixin for applying accent colors to individual elements
+@mixin accent-button($accent-name) {
+  background: accent-color($accent-name);
+  color: accent-contrast($accent-name);
+  border-color: accent-color($accent-name);
 
-// Border variants
-.border-primary { border-color: accent-color("primary"); }
-.border-success { border-color: accent-color("success"); }
-.border-warning { border-color: accent-color("warning"); }
-.border-danger { border-color: accent-color("danger"); }
-.border-info { border-color: accent-color("info"); }
+  &:hover:not(:disabled) {
+    background: accent-hover($accent-name);
+    border-color: accent-hover($accent-name);
+  }
+
+  &:focus-visible {
+    outline-color: accent-color($accent-name);
+  }
+}
+
+@mixin accent-outline($accent-name) {
+  background: transparent;
+  color: accent-color($accent-name);
+  border-color: accent-color($accent-name);
+
+  &:hover:not(:disabled) {
+    background: accent-light-bg($accent-name);
+  }
+}

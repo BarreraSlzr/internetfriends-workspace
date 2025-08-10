@@ -66,7 +66,9 @@
     "name": "design-system-hardening-v1",
     "status": "in-progress",
     "completion": 0,
-    "features": [],
+    "features": [
+      "accent-token-integration"
+    ],
     "owner": "Emmanuel Barrera Salazar (BarreraSlzr)",
     "timeline": "1-2 weeks",
     "blockers": [],

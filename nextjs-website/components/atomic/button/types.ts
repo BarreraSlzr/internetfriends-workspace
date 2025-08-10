@@ -4,11 +4,16 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import { VariantProps } from "class-variance-authority";
 import { buttonVariants } from "./button.atomic";
+import type {
+  AccentToken,
+  AccentProps,
+} from "../../../styles/tokens/accent.types";
 
 // Base button props extending HTML button attributes
 export interface ButtonAtomicProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+    VariantProps<typeof buttonVariants>,
+    AccentProps {
   /** Additional CSS classes */
   className?: string;
 
@@ -17,6 +22,9 @@ export interface ButtonAtomicProps
 
   /** Button size */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
+
+  /** Accent token for theming */
+  accent?: AccentToken;
 
   /** Loading state - shows spinner and disables button */
   loading?: boolean;
@@ -83,7 +91,7 @@ export interface ButtonState {
   pressed: boolean;
 }
 
-// Button theme configuration
+// Button theme configuration with accent support
 export interface ButtonTheme {
   /** Primary variant colors */
   primary: {
@@ -128,6 +136,17 @@ export interface ButtonTheme {
     backgroundActive: string;
     color: string;
     border: string;
+  };
+
+  /** Accent-based colors for dynamic theming */
+  accent: {
+    [key in AccentToken]: {
+      background: string;
+      backgroundHover: string;
+      backgroundActive: string;
+      color: string;
+      border: string;
+    };
   };
 }
 
@@ -270,7 +289,13 @@ export const isButtonSize = (value: string): value is ButtonSize => {
 export const BUTTON_DEFAULTS: Required<
   Pick<
     ButtonAtomicProps,
-    "variant" | "size" | "type" | "loading" | "disabled" | "fullWidth"
+    | "variant"
+    | "size"
+    | "type"
+    | "loading"
+    | "disabled"
+    | "fullWidth"
+    | "accent"
   >
 > = {
   variant: "primary",
@@ -279,6 +304,7 @@ export const BUTTON_DEFAULTS: Required<
   loading: false,
   disabled: false,
   fullWidth: false,
+  accent: "primary",
 };
 
 // Export all types - no duplicate exports
