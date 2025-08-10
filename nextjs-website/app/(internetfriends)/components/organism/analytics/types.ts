@@ -24,8 +24,8 @@ export type TrendDirection = "up" | "down" | "stable";
 
 // Base interfaces
 export interface DataPoint {
-  _x: string;
-  _y: number;
+  x: string;
+  y: number;
   label?: string;
   metadata?: Record<string, any>;
 }
@@ -117,10 +117,10 @@ export interface AnalyticsProps {
   data?: AnalyticsData;
   loading?: boolean;
   error?: string | null;
-  onTimeRangeChange?: (_range: TimeRange) => void;
-  onFilterChange?: (_filter: Record<string, any>) => void;
-  onMetricClick?: (_metric: unknown) => void;
-  onInsightAction?: (_insight: MetricInsight) => void;
+  onTimeRangeChange?: (range: TimeRange) => void;
+  onFilterChange?: (filter: Record<string, any>) => void;
+  onMetricClick?: (metric: unknown) => void;
+  onInsightAction?: (insight: MetricInsight) => void;
   onExport?: (data: unknown) => void;
   onRefresh?: () => void;
   userId?: string;
@@ -153,9 +153,9 @@ export interface AnalyticsApiResponse {
 }
 
 // Utility types
-export type _MetricValue = string | number;
-export type _ChartDataMap = Record<string, DataPoint[]>;
-export type _MetricMap = Record<string, any>;
+export type MetricValue = string | number;
+export type ChartDataMap = Record<string, DataPoint[]>;
+export type MetricMap = Record<string, any>;
 
 export interface AnalyticsConfig {
   refreshInterval: number;

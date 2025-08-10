@@ -74,7 +74,7 @@ interface AnalyticsProps {
   showFilters?: boolean;
   customMetrics?: unknown[];
   onTimeRangeChange?: (range: TimeRange) => void;
-  onFilterChange?: (_filter: Record<string, any>) => void;
+  onFilterChange?: (filter: Record<string, any>) => void;
   onExport?: (data: unknown) => void;
   userId?: string;
   sessionId?: string;
@@ -287,7 +287,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       UIEvents.pageLoad("analytics", performance.now(), userId);
     } catch (err) {
       setError(
-        err instanceof Error ? err._message : "Failed to load analytics data",
+        err instanceof Error ? err.message : "Failed to load analytics data",
       );
     } finally {
       setLoading(false);
@@ -319,7 +319,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     [onTimeRangeChange, userId, sessionId],
   );
 
-  const _handleFilterChange = useCallback(
+  const handleFilterChange = useCallback(
     (filterId: string, value: unknown) => {
       const newFilters = { ...activeFilters, [filterId]: value };
       setActiveFilters(newFilters);
@@ -369,8 +369,8 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
         return new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
-          _minimumFractionDigits: 0,
-          _maximumFractionDigits: 0,
+          minimumFractionDigits: 0,
+          maximumFractionDigits: 0,
         }).format(value);
       case "percentage":
         return `${value.toFixed(2)}%`;
@@ -389,7 +389,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     change: number,
     trend: "up" | "down" | "stable",
   ) => {
-    const _absChange = Math.abs(change);
+    const absChange = Math.abs(change);
     const isPositive = change > 0;
 
     return {
@@ -410,13 +410,13 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       <motion.div
         key={kpi.id}
         className={styles.kpiCard}
-        _whileHover={{ scale: 1.02 }}
-        _whileTap={{ scale: 0.98 }}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
         layout
       >
         <div
           className={styles.kpiIcon}
-          style={{ _backgroundColor: `${kpi.color}20` }}
+          style={{ backgroundColor: `${kpi.color}20` }}
         >
           <span style={{ color: kpi.color }}>{kpi.icon || "📊"}</span>
         </div>
@@ -660,7 +660,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
             className={styles.loadingOverlay}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            _exit={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
           >
             <div className={styles.loadingSpinner}>
               <div className={styles.spinner}></div>

@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { cardCss } from "./profile-card";
 
-export const _ProfileExpertiseTab = () => {
+const ProfileExpertiseTab = () => {
   return (
     <div className="flex flex-col gap-2">
       {curriculum.jobExperiences.map((job, index) => (
@@ -12,8 +12,8 @@ export const _ProfileExpertiseTab = () => {
               {job.title} | {job.razonSocial}
             </p>
             <Badge
-              _variant="outline"
-              className="text-gray-700 _hover:bg-gray-300 text-sm font-semibold mr-2 px-2.5 py-0.5"
+              variant="outline"
+              className="text-gray-700 hover:bg-gray-300 text-sm font-semibold mr-2 px-2.5 py-0.5"
             >
               {job.startDate} - {job.endDate || "Present"}
             </Badge>
@@ -24,3 +24,7 @@ export const _ProfileExpertiseTab = () => {
     </div>
   );
 };
+
+export { ProfileExpertiseTab };
+
+export default ProfileExpertiseTab;

@@ -66,7 +66,7 @@ export interface MetricCard {
 export interface ActivityItem {
   id: string;
   type: ActivityType;
-  _message: string;
+  message: string;
   timestamp: Date;
   severity: ActivitySeverity;
   icon?: string;
@@ -251,9 +251,9 @@ export interface PerformanceMetrics {
     _activeConnections: number;
   };
   _database: {
-    _connections: {
+    connections: {
       active: number;
-      _idle: number;
+      idle: number;
       total: number;
     };
     _queryTime: number; // milliseconds
@@ -321,7 +321,7 @@ export interface DashboardAPIResponse<T = any> {
   data?: T;
   error?: string;
   timestamp: Date;
-  _requestId: string;
+  requestId: string;
 }
 
 export interface MetricsAPIResponse extends DashboardAPIResponse {

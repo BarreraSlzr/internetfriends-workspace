@@ -60,7 +60,18 @@ export interface FilterConfig {
   column: string;
   type: FilterType;
   value: unknown;
-  operator?: "equals" | "contains" | "startsWith" | "endsWith" | "gt" | "gte" | "lt" | "lte" | "between" | "in" | "notIn";
+  operator?:
+    | "equals"
+    | "contains"
+    | "startsWith"
+    | "endsWith"
+    | "gt"
+    | "gte"
+    | "lt"
+    | "lte"
+    | "between"
+    | "in"
+    | "notIn";
 }
 
 export interface PaginationConfig {
@@ -234,7 +245,14 @@ export interface DateRangeFilter {
 
 // Event types
 export interface TableEvent {
-  type: "sort" | "filter" | "select" | "search" | "export" | "row_click" | "row_double_click";
+  type:
+    | "sort"
+    | "filter"
+    | "select"
+    | "search"
+    | "export"
+    | "row_click"
+    | "row_double_click";
   data: unknown;
   _timestamp: Date;
   userId?: string;
@@ -251,10 +269,10 @@ export interface TableApiResponse {
 }
 
 // Utility types
-export type _TableData = TableRow[];
-export type _ColumnConfig = Omit<TableColumn, 'render'>;
-export type _SortableColumns = Record<string, boolean>;
-export type _FilterableColumns = Record<string, FilterType>;
+export type TableData = TableRow[];
+export type ColumnConfig = Omit<TableColumn, "render">;
+export type SortableColumns = Record<string, boolean>;
+export type FilterableColumns = Record<string, FilterType>;
 
 // Configuration interfaces
 export interface TableConfig {

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InternetFriends Accent Theming System - Standalone Test</title>
+    <style>
+        /* InternetFriends Accent Token System */
+        :root {
+            /* Base accent scale (default: brand blue #3b82f6) */
+            --accent-50: 217 91% 97%;
+            --accent-100: 217 90% 94%;
+            --accent-200: 217 91% 86%;
+            --accent-300: 217 91% 78%;
+            --accent-400: 217 89% 70%;
+            --accent-500: 217 89% 60%;
+            --accent-600: 217 89% 53%;
+            --accent-700: 217 80% 46%;
+            --accent-800: 217 75% 39%;
+            --accent-900: 217 70% 32%;
+
+            /* Semantic tokens */
+            --color-primary: var(--accent-500);
+            --surface-primary: 0 0% 100%;
+            --surface-elevated: 0 0% 99%;
+            --surface-accent-subtle: var(--accent-50);
+            --surface-accent-medium: var(--accent-200);
+            --border-subtle: 220 14% 92%;
+            --border-accent-medium: var(--accent-400);
+            --text-primary: 220 15% 12%;
+            --text-secondary: 220 8% 38%;
+
+            /* Animation */
+            --transition-colors: all 300ms ease;
+        }
+
+        [data-theme="dark"] {
+            --surface-primary: 220 18% 10%;
+            --surface-elevated: 220 16% 14%;
+            --surface-accent-subtle: var(--accent-900) / 0.3;
+            --surface-accent-medium: var(--accent-700) / 0.5;
+            --border-subtle: 220 14% 24%;
+            --text-primary: 0 0% 100%;
+            --text-secondary: 220 10% 65%;
+        }
+
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: hsl(var(--surface-primary));
+            color: hsl(var(--text-primary));
+            transition: var(--transition-colors);
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: hsl(var(--surface-elevated));
+            border: 1px solid hsl(var(--border-subtle));
+            border-radius: 12px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.75rem 1.5rem;
+            background: hsl(var(--color-primary));
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.25rem;
+            text-decoration: none;
+            transition: var(--transition-colors);
+            margin-bottom: 1rem;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo::before {
+            content: "🎨";
+            font-size: 1.5rem;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--text-primary));
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: hsl(var(--text-secondary));
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .demo-card {
+            padding: 2rem;
+            background: hsl(var(--surface-elevated));
+            border: 1px solid hsl(var(--border-subtle));
+            border-radius: 12px;
+            transition: var(--transition-colors);
+        }
+
+        .demo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: hsl(var(--text-primary));
+        }
+
+        /* Accent showcase */
+        .accent-card {
+            background: hsl(var(--surface-accent-subtle));
+            border: 2px solid hsl(var(--border-accent-medium));
+        }
+
+        .color-scale {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 4px;
+            margin: 1rem 0;
+            height: 60px;
+        }
+
+        .color-swatch {
+            border-radius: 4px;
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 4px;
+        }
+
+        .color-50 { background: hsl(var(--accent-50)); color: hsl(var(--accent-800)); }
+        .color-100 { background: hsl(var(--accent-100)); color: hsl(var(--accent-800)); }
+        .color-200 { background: hsl(var(--accent-200)); color: hsl(var(--accent-800)); }
+        .color-300 { background: hsl(var(--accent-300)); color: hsl(var(--accent-800)); }
+        .color-400 { background: hsl(var(--accent-400)); color: white; }
+        .color-500 { background: hsl(var(--accent-500)); color: white; }
+        .color-600 { background: hsl(var(--accent-600)); color: white; }
+        .color-700 { background: hsl(var(--accent-700)); color: white; }
+        .color-800 { background: hsl(var(--accent-800)); color: white; }
+        .color-900 { background: hsl(var(--accent-900)); color: white; }
+
+        /* Component examples */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition-colors);
+            margin: 0.25rem;
+        }
+
+        .btn-primary {
+            background: hsl(var(--accent-500));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: hsl(var(--accent-600));
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: hsl(var(--accent-600));
+            border: 2px solid hsl(var(--accent-500));
+        }
+
+        .btn-outline:hover {
+            background: hsl(var(--accent-50));
+        }
+
+        .btn-subtle {
+            background: hsl(var(--surface-accent-subtle));
+            color: hsl(var(--accent-700));
+        }
+
+        .btn-subtle:hover {
+            background: hsl(var(--surface-accent-medium));
+        }
+
+        /* Accent selector */
+        .accent-selector {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .accent-option {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: var(--transition-colors);
+            position: relative;
+        }
+
+        .accent-option:hover {
+            transform: scale(1.1);
+        }
+
+        .accent-option.active {
+            border-color: hsl(var(--text-primary));
+            box-shadow: 0 0 0 2px hsl(var(--surface-primary));
+        }
+
+        .theme-controls {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .theme-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.25rem;
+            cursor: pointer;
+            background: hsl(var(--surface-elevated));
+            border: 1px solid hsl(var(--border-subtle));
+            transition: var(--transition-colors);
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+            background: hsl(var(--surface-accent-subtle));
+        }
+
+        .status-indicator {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            padding: 0.5rem 1rem;
+            background: hsl(var(--surface-elevated));
+            border: 1px solid hsl(var(--border-subtle));
+            border-radius: 6px;
+            font-size: 0.875rem;
+            color: hsl(var(--text-secondary));
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-controls">
+        <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark Mode">
+            <span id="theme-icon">🌙</span>
+        </button>
+    </div>
+
+    <div class="status-indicator">
+        <span id="status">Accent: InternetFriends Blue • Theme: Light</span>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo" onclick="cycleAccent()" title="Click to change accent color">
+                InternetFriends
+            </div>
+            <h1 class="title">Accent Theming System</h1>
+            <p class="subtitle">Dynamic, user-customizable colors with perfect accessibility</p>
+        </header>
+
+        <div class="demo-grid">
+            <!-- Current Accent -->
+            <div class="demo-card accent-card">
+                <h2 class="card-title">Current Accent Scale</h2>
+                <div class="color-scale">
+                    <div class="color-swatch color-50">50</div>
+                    <div class="color-swatch color-100">100</div>
+                    <div class="color-swatch color-200">200</div>
+                    <div class="color-swatch color-300">300</div>
+                    <div class="color-swatch color-400">400</div>
+                    <div class="color-swatch color-500">500</div>
+                    <div class="color-swatch color-600">600</div>
+                    <div class="color-swatch color-700">700</div>
+                    <div class="color-swatch color-800">800</div>
+                    <div class="color-swatch color-900">900</div>
+                </div>
+                <p><strong>HSL-based generation:</strong> Single hue creates perfect color relationships</p>
+            </div>
+
+            <!-- Component Examples -->
+            <div class="demo-card">
+                <h2 class="card-title">Interactive Components</h2>
+                <div style="margin: 1rem 0;">
+                    <button class="btn btn-primary">Primary Button</button>
+                    <button class="btn btn-outline">Outline Button</button>
+                    <button class="btn btn-subtle">Subtle Button</button>
+                </div>
+                <p>All components automatically adapt to the selected accent color.</p>
+            </div>
+
+            <!-- Features -->
+            <div class="demo-card">
+                <h2 class="card-title">System Features</h2>
+                <ul style="padding-left: 1.5rem; margin: 1rem 0;">
+                    <li>🎨 8 curated accent presets</li>
+                    <li>♿ WCAG AA accessibility compliance</li>
+                    <li>🌙 Automatic dark mode adaptation</li>
+                    <li>⚡ Zero runtime performance impact</li>
+                    <li>🎯 Logo click interaction</li>
+                </ul>
+            </div>
+
+            <!-- Usage -->
+            <div class="demo-card">
+                <h2 class="card-title">How to Use</h2>
+                <p style="margin-bottom: 1rem;">Try these interactions:</p>
+                <ul style="padding-left: 1.5rem;">
+                    <li><strong>Logo click:</strong> Cycle through accent colors</li>
+                    <li><strong>Moon icon:</strong> Toggle light/dark mode</li>
+                    <li><strong>Color circles below:</strong> Jump to specific accent</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Accent Selector -->
+        <div class="accent-selector">
+            <div class="accent-option active" style="background: #3b82f6;" onclick="setAccent(0, '#3b82f6')" title="InternetFriends Blue"></div>
+            <div class="accent-option" style="background: #6366f1;" onclick="setAccent(1, '#6366f1')" title="Royal Purple"></div>
+            <div class="accent-option" style="background: #8b5cf6;" onclick="setAccent(2, '#8b5cf6')" title="Elegant Violet"></div>
+            <div class="accent-option" style="background: #10b981;" onclick="setAccent(3, '#10b981')" title="Forest Green"></div>
+            <div class="accent-option" style="background: #0ea5e9;" onclick="setAccent(4, '#0ea5e9')" title="Ocean Teal"></div>
+            <div class="accent-option" style="background: #f97316;" onclick="setAccent(5, '#f97316')" title="Sunset Orange"></div>
+            <div class="accent-option" style="background: #ec4899;" onclick="setAccent(6, '#ec4899')" title="Magenta Pink"></div>
+            <div class="accent-option" style="background: #475569;" onclick="setAccent(7, '#475569')" title="Slate Blue"></div>
+        </div>
+    </div>
+
+    <script>
+        // Accent presets
+        const accents = [
+            { name: 'InternetFriends Blue', hex: '#3b82f6' },
+            { name: 'Royal Purple', hex: '#6366f1' },
+            { name: 'Elegant Violet', hex: '#8b5cf6' },
+            { name: 'Forest Green', hex: '#10b981' },
+            { name: 'Ocean Teal', hex: '#0ea5e9' },
+            { name: 'Sunset Orange', hex: '#f97316' },
+            { name: 'Magenta Pink', hex: '#ec4899' },
+            { name: 'Slate Blue', hex: '#475569' }
+        ];
+
+        let currentAccentIndex = 0;
+        let isDarkMode = false;
+
+        // HSL conversion functions
+        function hexToHSL(hex) {
+            let h = hex.replace('#', '');
+            if (h.length === 3) {
+                h = h.split('').map(char => char + char).join('');
+            }
+
+            const r = parseInt(h.slice(0, 2), 16) / 255;
+            const g = parseInt(h.slice(2, 4), 16) / 255;
+            const b = parseInt(h.slice(4, 6), 16) / 255;
+
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const diff = max - min;
+            const lightness = (max + min) / 2;
+
+            let saturation = 0;
+            if (diff !== 0) {
+                saturation = diff / (1 - Math.abs(2 * lightness - 1));
+            }
+
+            let hue = 0;
+            if (diff !== 0) {
+                switch (max) {
+                    case r:
+                        hue = ((g - b) / diff + (g < b ? 6 : 0)) / 6;
+                        break;
+                    case g:
+                        hue = (b - r) / diff / 6 + 1/3;
+                        break;
+                    case b:
+                        hue = (r - g) / diff / 6 + 2/3;
+                        break;
+                }
+            }
+
+            return {
+                h: Math.round(hue * 360),
+                s: Math.round(saturation * 100),
+                l: Math.round(lightness * 100)
+            };
+        }
+
+        function generateAccentScale(baseHSL) {
+            const { h, s, l } = baseHSL;
+
+            const lighten = (factor) => Math.min(100, l + (100 - l) * factor);
+            const darken = (factor) => Math.max(0, l * factor);
+
+            return {
+                50:  `${h} ${s * 0.55}% ${lighten(0.45)}%`,
+                100: `${h} ${s * 0.60}% ${lighten(0.38)}%`,
+                200: `${h} ${s * 0.65}% ${lighten(0.28)}%`,
+                300: `${h} ${s * 0.72}% ${lighten(0.16)}%`,
+                400: `${h} ${s * 0.80}% ${lighten(0.06)}%`,
+                500: `${h} ${s}% ${l}%`,
+                600: `${h} ${Math.min(100, s * 1.05)}% ${darken(0.88)}%`,
+                700: `${h} ${Math.min(100, s * 1.1)}% ${darken(0.72)}%`,
+                800: `${h} ${Math.min(100, s * 1.15)}% ${darken(0.58)}%`,
+                900: `${h} ${Math.min(100, s * 1.2)}% ${darken(0.42)}%`
+            };
+        }
+
+        function applyAccent(hex) {
+            const hsl = hexToHSL(hex);
+            const scale = generateAccentScale(hsl);
+            const root = document.documentElement;
+
+            // Apply accent scale
+            Object.entries(scale).forEach(([weight, value]) => {
+                root.style.setProperty(`--accent-${weight}`, value);
+            });
+
+            console.log(`🎨 Applied accent: ${hex}`, scale);
+        }
+
+        function setAccent(index, hex) {
+            currentAccentIndex = index;
+            applyAccent(hex);
+
+            // Update active state
+            document.querySelectorAll('.accent-option').forEach((option, i) => {
+                option.classList.toggle('active', i === index);
+            });
+
+            updateStatus();
+
+            // Visual feedback
+            const logo = document.querySelector('.logo');
+            logo.style.transform = 'scale(0.95)';
+            setTimeout(() => logo.style.transform = 'scale(1)', 150);
+        }
+
+        function cycleAccent() {
+            const nextIndex = (currentAccentIndex + 1) % accents.length;
+            const nextAccent = accents[nextIndex];
+            setAccent(nextIndex, nextAccent.hex);
+        }
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+            document.getElementById('theme-icon').textContent = isDarkMode ? '☀️' : '🌙';
+            updateStatus();
+        }
+
+        function updateStatus() {
+            const currentAccent = accents[currentAccentIndex];
+            const theme = isDarkMode ? 'Dark' : 'Light';
+            document.getElementById('status').textContent =
+                `Accent: ${currentAccent.name} • Theme: ${theme}`;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Detect system theme
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                toggleTheme();
+            }
+
+            // Initialize first accent
+            applyAccent(accents[0].hex);
+            updateStatus();
+
+            console.log('🎨 InternetFriends Accent Theming System loaded!');
+            console.log('Click the logo to cycle through accent colors');
+        });
+    </script>
+</body>
+</html>

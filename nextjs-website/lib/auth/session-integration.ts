@@ -22,7 +22,7 @@ export const UserAuthSchema = z.object({
   _lastLoginAt: z.date().optional(),
 });
 
-export type _UserAuth = z.infer<typeof UserAuthSchema>;
+export type UserAuth = z.infer<typeof UserAuthSchema>;
 
 // Session Management Schema
 export const SessionSchema = z.object({
@@ -68,14 +68,14 @@ export const InternetFriendsUserSchema = UserAuthSchema.extend({
   _achievements: z.array(z.string()).default([]),
 });
 
-export type _InternetFriendsUser = z.infer<typeof InternetFriendsUserSchema>;
+export type InternetFriendsUser = z.infer<typeof InternetFriendsUserSchema>;
 
 // Auth Utilities
-export const _createSessionToken = () => {
+export const createSessionToken = () => {
   return crypto.randomUUID() + "." + Date.now().toString(36);
 };
 
-export const _isSessionValid = (session: Session): boolean => {
+export const isSessionValid = (session: Session): boolean => {
   return (
     session.isActive && session.expiresAt > new Date() && !session.revokedAt
   );

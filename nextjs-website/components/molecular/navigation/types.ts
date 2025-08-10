@@ -1,9 +1,9 @@
-import { ReactNode, ComponentProps } from 'react';
-import { HeaderAtomicProps } from '@/components/atomic/header';
+import { ReactNode, ComponentProps } from "react";
+import { HeaderAtomicProps } from "@/components/atomic/header";
 
 export interface NavigationItem {
   /** Unique identifier */
-  _id: string;
+  id: string;
 
   /** Display label */
   label: string;
@@ -24,7 +24,13 @@ export interface NavigationItem {
   badge?: string;
 
   /** Badge variant */
-  badgeVariant?: 'default' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+  badgeVariant?:
+    | "default"
+    | "primary"
+    | "secondary"
+    | "success"
+    | "warning"
+    | "danger";
 
   /** External link indicator */
   external?: boolean;
@@ -65,7 +71,8 @@ export interface NavigationLogo {
   text?: string;
 }
 
-export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, 'children'> {
+export interface NavigationMolecularProps
+  extends Omit<HeaderAtomicProps, "children"> {
   /** Navigation items to display */
   items: NavigationItem[];
 
@@ -76,10 +83,10 @@ export interface NavigationMolecularProps extends Omit<HeaderAtomicProps, 'child
   actions?: ReactNode;
 
   /** Visual variant of the navigation */
-  variant?: 'transparent' | 'solid' | 'glass';
+  variant?: "transparent" | "solid" | "glass";
 
   /** Breakpoint for mobile menu toggle */
-  mobileBreakpoint?: 'sm' | 'md' | 'lg';
+  mobileBreakpoint?: "sm" | "md" | "lg";
 
   /** Whether to show mobile menu toggle */
   showMobileToggle?: boolean;
@@ -105,16 +112,16 @@ export interface NavigationDropdownProps {
   onOpenChange: (open: boolean) => void;
 
   /** Trigger element */
-  _trigger: ReactNode;
+  trigger: ReactNode;
 
   /** Additional CSS classes */
   className?: string;
 
   /** Alignment of dropdown */
-  align?: 'start' | 'center' | 'end';
+  align?: "start" | "center" | "end";
 
   /** Side of dropdown */
-  side?: 'top' | 'right' | 'bottom' | 'left';
+  side?: "top" | "right" | "bottom" | "left";
 }
 
 export interface MobileMenuProps {
@@ -137,12 +144,12 @@ export interface MobileMenuProps {
   className?: string;
 
   /** Animation variant */
-  animation?: 'slide' | 'fade' | 'scale';
+  animation?: "slide" | "fade" | "scale";
 }
 
 export interface NavigationBreadcrumbProps {
   /** Breadcrumb items */
-  items: Omit<NavigationItem, 'children'>[];
+  items: Omit<NavigationItem, "children">[];
 
   /** Separator component */
   separator?: ReactNode;
@@ -156,19 +163,19 @@ export interface NavigationBreadcrumbProps {
 
 export interface NavigationTabsProps {
   /** Tab items */
-  items: Omit<NavigationItem, 'children'>[];
+  items: Omit<NavigationItem, "children">[];
 
   /** Currently active tab */
   activeTab?: string;
 
   /** Callback when tab changes */
-  onTabChange?: (_tabId: string) => void;
+  onTabChange?: (tabId: string) => void;
 
   /** Tab variant */
-  variant?: 'default' | 'pills' | 'underline';
+  variant?: "default" | "pills" | "underline";
 
   /** Size variant */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 
   /** Additional CSS classes */
   className?: string;

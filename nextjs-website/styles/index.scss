@@ -1,0 +1,241 @@
+// InternetFriends Design System - Main SCSS Index
+// Modern @use-based aggregation of all design system tokens and mixins
+
+// Import all token modules using @use
+@use "./tokens/colors.scss" as colors;
+@use "./tokens/spacing.scss" as spacing;
+@use "./tokens/typography.scss" as typography;
+@use "./tokens/accent.scss" as accent;
+
+// Import all mixin modules using @use
+@use "./mixins/focus.scss" as focus;
+@use "./mixins/media.scss" as media;
+@use "./mixins/components.scss" as components;
+
+// Re-export utility functions for backward compatibility
+@function spacing($size) {
+  @return spacing.spacing($size);
+}
+
+@function radius($size) {
+  @return spacing.radius($size);
+}
+
+@function color-light($key) {
+  @return colors.color-light($key);
+}
+
+@function color-dark($key) {
+  @return colors.color-dark($key);
+}
+
+@function accent($key) {
+  @return colors.accent($key);
+}
+
+@function font-size($size) {
+  @return typography.font-size($size);
+}
+
+@function shadow($size) {
+  @return typography.shadow($size);
+}
+
+@function z-index($layer) {
+  @return spacing.z-index($layer);
+}
+
+@function duration($speed) {
+  @return typography.duration($speed);
+}
+
+@function easing($type) {
+  @return typography.easing($type);
+}
+
+@function breakpoint($size) {
+  @return spacing.breakpoint($size);
+}
+
+// Export commonly used mixins
+@mixin focus-interactive($accent: "primary") {
+  @include focus.focus-interactive($accent);
+}
+
+@mixin focus-container($accent: "primary") {
+  @include focus.focus-container($accent);
+}
+
+@mixin media-sm {
+  @include media.media-sm {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @include media.media-md {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @include media.media-lg {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @include media.media-xl {
+    @content;
+  }
+}
+
+@mixin button-primary {
+  @include components.button-primary;
+}
+
+@mixin button-secondary {
+  @include components.button-secondary;
+}
+
+@mixin card-base {
+  @include components.card-base;
+}
+
+@mixin glass-morphism($bg: colors.$glass-bg-header, $border: colors.$glass-border) {
+  @include components.glass-morphism($bg, $border);
+}
+
+@mixin input-base {
+  @include components.input-base;
+}
+
+@mixin container($max-width: spacing.container-size("xl")) {
+  @include components.container($max-width);
+}
+
+@mixin truncate {
+  @include components.truncate;
+}
+
+@mixin visually-hidden {
+  @include components.visually-hidden;
+}
+
+// Global CSS Custom Properties (available in all components)
+:root {
+  // Export key tokens as CSS custom properties
+  --if-primary: #{colors.$if-primary};
+  --if-primary-hover: #{colors.$if-primary-hover};
+  --if-primary-light: #{colors.$if-primary-light};
+  --if-primary-active: #{colors.$if-primary-active};
+
+  // Glass morphism tokens
+  --glass-bg-header: #{colors.$glass-bg-header};
+  --glass-bg-header-scrolled: #{colors.$glass-bg-header-scrolled};
+  --glass-border: #{colors.$glass-border};
+  --glass-border-enhanced: #{colors.$glass-border-enhanced};
+
+  // Spacing tokens
+  --spacing-xs: #{spacing.spacing("xs")};
+  --spacing-sm: #{spacing.spacing("sm")};
+  --spacing-md: #{spacing.spacing("md")};
+  --spacing-lg: #{spacing.spacing("lg")};
+  --spacing-xl: #{spacing.spacing("xl")};
+
+  // Radius tokens
+  --radius-xs: #{spacing.radius("xs")};
+  --radius-sm: #{spacing.radius("sm")};
+  --radius-md: #{spacing.radius("md")};
+  --radius-lg: #{spacing.radius("lg")};
+
+  // Typography tokens
+  --font-size-sm: #{typography.font-size("sm")};
+  --font-size-base: #{typography.font-size("base")};
+  --font-size-lg: #{typography.font-size("lg")};
+
+  // Animation tokens
+  --duration-fast: #{typography.duration("fast")};
+  --duration-normal: #{typography.duration("normal")};
+  --ease-out: #{typography.easing("ease-out")};
+  --ease-smooth: #{typography.easing("smooth")};
+}
+
+// Dark mode CSS custom properties
+[data-theme="dark"] {
+  --glass-bg-header: #{colors.$glass-dark-bg-header};
+  --glass-bg-header-scrolled: #{colors.$glass-dark-bg-header-scrolled};
+  --glass-border: #{colors.$glass-dark-border};
+  --glass-border-enhanced: #{colors.$glass-dark-border-enhanced};
+}
+
+// Base reset and defaults
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  @include media.media-reduced-motion {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: typography.font-size("base");
+  line-height: typography.line-height("normal");
+  color: colors.color-light("text-primary");
+  background: colors.color-light("bg-primary");
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Focus management (remove default focus for mouse users)
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+// Skip link for accessibility
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: colors.color-light("bg-primary");
+  color: colors.color-light("text-contrast");
+  padding: spacing.spacing("sm") spacing.spacing("md");
+  border-radius: spacing.radius("sm");
+  text-decoration: none;
+  font-weight: typography.font-weight("medium");
+  z-index: spacing.z-index("skip-link");
+  transition: top typography.duration("fast") typography.easing("ease-out");
+
+  @include focus.focus-skip-link;
+}
+
+// Print styles
+@include media.media-print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.3;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

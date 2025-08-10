@@ -684,4 +684,4 @@ export class ComponentRegistry {
 }
 
 // Singleton instance
-export const _componentRegistry = new ComponentRegistry();
+export const componentRegistry = new ComponentRegistry();

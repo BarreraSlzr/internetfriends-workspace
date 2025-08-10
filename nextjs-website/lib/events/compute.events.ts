@@ -588,7 +588,7 @@ export class ComputeEventManager {
 
   // Execute individual job
   private async executeJob(job: ComputeJob): Promise<void> {
-    const _startTime = Date.now();
+    const startTime = Date.now();
     let allocatedResources: Partial<Record<ResourceType, number>> = {};
 
     try {
@@ -843,10 +843,10 @@ if (typeof window === "undefined") {
   computeManager.registerJobHandler(
     "test.execution",
     async (job: ComputeJob) => {
-      // _Example: Run tests using bun
+      // Example: Run tests using bun
       const { testSuite } = job.payload || {};
       // Implementation would call actual test runner
-      return { success: true, _testsRun: 42, _passed: 40, failed: 2 };
+      return { success: true, testsRun: 42, passed: 40, failed: 2 };
     },
   );
 

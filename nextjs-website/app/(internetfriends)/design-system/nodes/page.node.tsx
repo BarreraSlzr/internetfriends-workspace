@@ -113,4 +113,4 @@ export const PageNode: React.FC<PageNodeProps> = ({
   );
 };
 
-PageNode._displayName = "PageNode";
+PageNode.displayName = "PageNode";

@@ -37,7 +37,7 @@ export function ContactForm() {
   async function handleSubmit(formData: FormData) {
     const result = await submitContactForm(formData);
 
-    if (result.success) {
+    if (result._success) {
       formRef.current?.reset();
     }
   }

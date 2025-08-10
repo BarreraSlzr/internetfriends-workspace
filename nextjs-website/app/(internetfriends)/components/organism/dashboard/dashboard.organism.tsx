@@ -222,9 +222,9 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
   // Computed Values
   const formattedLastUpdate = useMemo(() => {
     return lastUpdate.toLocaleTimeString("en-US", {
-      _hour: "2-digit",
-      _minute: "2-digit",
-      _second: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
     });
   }, [lastUpdate]);
 
@@ -264,10 +264,10 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
           className={styles.metricCard}
           variants={itemVariants}
           onClick={() => handleMetricClick(metric)}
-          _whileHover={{ scale: 1.02 }}
-          _whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <div className={styles.metricIcon} _style={{ color: metric.color }}>
+          <div className={styles.metricIcon} style={{ color: metric.color }}>
             {metric.icon}
           </div>
           <div className={styles.metricContent}>
@@ -420,7 +420,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
 
       {/* Main Content */}
       <main className={styles.content}>
-        <AnimatePresence _mode="wait">
+        <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, x: 20 }}

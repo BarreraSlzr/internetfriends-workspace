@@ -53,7 +53,13 @@ export interface ProjectMetrics {
 
 export interface ProjectTechnology {
   name: string;
-  category: "language" | "framework" | "library" | "tool" | "platform" | "database";
+  category:
+    | "language"
+    | "framework"
+    | "library"
+    | "tool"
+    | "platform"
+    | "database";
   version?: string;
   icon?: string;
   color?: string;
@@ -231,7 +237,15 @@ export interface ProjectDetailModalProps {
 
 // Event types
 export interface ProjectEvent {
-  type: "click" | "edit" | "delete" | "share" | "filter" | "sort" | "search" | "view_change";
+  type:
+    | "click"
+    | "edit"
+    | "delete"
+    | "share"
+    | "filter"
+    | "sort"
+    | "search"
+    | "view_change";
   _data: unknown;
   _timestamp: Date;
   userId?: string;
@@ -256,9 +270,9 @@ export interface ProjectApiResponse {
 }
 
 // Utility types
-export type _ProjectMap = Record<string, Project>;
-export type _TechnologyMap = Record<string, ProjectTechnology>;
-export type _CategoryMap = Record<ProjectCategory, Project[]>;
+export type ProjectMap = Record<string, Project>;
+export type TechnologyMap = Record<string, ProjectTechnology>;
+export type CategoryMap = Record<ProjectCategory, Project[]>;
 
 // Configuration interfaces
 export interface ProjectShowcaseConfig {

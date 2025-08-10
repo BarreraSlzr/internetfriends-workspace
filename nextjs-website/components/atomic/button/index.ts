@@ -2,11 +2,11 @@
 // Clean exports for the button component and all related utilities
 
 // Main component export
-export { ButtonAtomic } from './button.atomic';
-export { ButtonAtomic as default } from './button.atomic';
+export { ButtonAtomic } from "./button.atomic";
+export { ButtonAtomic as default } from "./button.atomic";
 
 // Component variants export
-export { buttonVariants } from './button.atomic';
+export { buttonVariants } from "./button.atomic";
 
 // Type exports
 export type {
@@ -23,10 +23,10 @@ export type {
   ButtonEventHandlers,
   ButtonRenderProps,
   ButtonRenderProp,
-} from './types';
+} from "./types";
 
-// Type guard exports
-export { isButtonVariant, isButtonSize, BUTTON_DEFAULTS } from './types';
+// Type guard & defaults exports (updated to non-underscored names)
+export { isButtonVariant, isButtonSize, BUTTON_DEFAULTS } from "./types";
 
 // Re-export for convenience (common usage patterns)
-export { ButtonAtomic as Button } from './button.atomic';
+export { ButtonAtomic as Button } from "./button.atomic";

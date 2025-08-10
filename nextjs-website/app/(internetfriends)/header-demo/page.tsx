@@ -13,10 +13,10 @@ import {
   Home,
   Info,
   Mail,
-  Phone
+  Phone,
 } from "lucide-react";
 
-const HeaderDemoPage: React._FC = () => {
+const HeaderDemoPage: React.FC = () => {
   // Demo navigation items
   const navigationItems = [
     {
@@ -109,33 +109,33 @@ const HeaderDemoPage: React._FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       {/* Header Organism Demo */}
       <HeaderOrganism
-        _logo={{
+        logo={{
           text: "InternetFriends",
           href: "/",
-          _width: 32,
-          _height: 32,
+          width: 32,
+          height: 32,
         }}
         navigation={{
           items: navigationItems,
-          _activeItem: "home",
+          activeItem: "home",
         }}
         actions={headerActions}
-        _themeToggle={{
+        themeToggle={{
           show: true,
-          _showLabels: true,
+          showLabels: true,
           position: "right",
         }}
-        _languageSelector={{
+        languageSelector={{
           show: true,
-          _showFlags: true,
-          _showNames: false,
+          showFlags: true,
+          showNames: false,
           position: "right",
         }}
         search={{
           show: true,
           placeholder: "Search documentation...",
-          _shortcut: "⌘K",
-          _onSearch: (query) => console.log("Search:", query),
+          shortcut: "⌘K",
+          onSearch: (query) => console.log("Search:", query),
         }}
         announcement={{
           show: true,
@@ -151,14 +151,14 @@ const HeaderDemoPage: React._FC = () => {
           dismissible: true,
         }}
         sticky={{
-          _enabled: true,
-          _hideOnScroll: false,
-          _transitionDuration: "300ms",
+          enabled: true,
+          hideOnScroll: false,
+          transitionDuration: "300ms",
         }}
         responsive={{
-          _mobileBreakpoint: "lg",
-          _showMobileToggle: true,
-          _mobileMenuPosition: "right",
+          mobileBreakpoint: "lg",
+          showMobileToggle: true,
+          mobileMenuPosition: "right",
         }}
         variant="glass"
         size="md"
@@ -174,7 +174,8 @@ const HeaderDemoPage: React._FC = () => {
               HeaderOrganism Demo
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-              Comprehensive site header with theme toggle, i18n support, and responsive navigation
+              Comprehensive site header with theme toggle, i18n support, and
+              responsive navigation
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <ButtonAtomic variant="primary" size="lg">
@@ -194,7 +195,8 @@ const HeaderDemoPage: React._FC = () => {
               </div>
               <h3 className="text-lg font-semibold mb-2">Theme Toggle</h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm">
-                Built-in light/dark/system theme switching with smooth transitions
+                Built-in light/dark/system theme switching with smooth
+                transitions
               </p>
             </div>
 
@@ -221,7 +223,9 @@ const HeaderDemoPage: React._FC = () => {
 
           {/* Instructions */}
           <div className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-sm">
-            <h2 className="text-2xl font-bold mb-6">Interactive Demo Features</h2>
+            <h2 className="text-2xl font-bold mb-6">
+              Interactive Demo Features
+            </h2>
 
             <div className="space-y-4 text-sm">
               <div className="flex items-start gap-3">
@@ -229,7 +233,8 @@ const HeaderDemoPage: React._FC = () => {
                   1
                 </span>
                 <div>
-                  <strong>Theme Toggle:</strong> Click the theme button in the header to switch between light, dark, and system modes
+                  <strong>Theme Toggle:</strong> Click the theme button in the
+                  header to switch between light, dark, and system modes
                 </div>
               </div>
 
@@ -238,7 +243,8 @@ const HeaderDemoPage: React._FC = () => {
                   2
                 </span>
                 <div>
-                  <strong>Language _Selector:</strong> Try switching between available languages using the globe icon
+                  <strong>Language _Selector:</strong> Try switching between
+                  available languages using the globe icon
                 </div>
               </div>
 
@@ -247,7 +253,8 @@ const HeaderDemoPage: React._FC = () => {
                   3
                 </span>
                 <div>
-                  <strong>Mobile _Navigation:</strong> Resize the window or use mobile device to see the responsive menu
+                  <strong>Mobile _Navigation:</strong> Resize the window or use
+                  mobile device to see the responsive menu
                 </div>
               </div>
 
@@ -256,7 +263,8 @@ const HeaderDemoPage: React._FC = () => {
                   4
                 </span>
                 <div>
-                  <strong>Sticky Header:</strong> Scroll down to see the header become sticky with glass morphism effect
+                  <strong>Sticky Header:</strong> Scroll down to see the header
+                  become sticky with glass morphism effect
                 </div>
               </div>
 
@@ -265,7 +273,8 @@ const HeaderDemoPage: React._FC = () => {
                   5
                 </span>
                 <div>
-                  <strong>Announcement _Bar:</strong> Notice the dismissible announcement at the top of the header
+                  <strong>Announcement _Bar:</strong> Notice the dismissible
+                  announcement at the top of the header
                 </div>
               </div>
             </div>
@@ -273,13 +282,19 @@ const HeaderDemoPage: React._FC = () => {
 
           {/* Spacer content for scroll demo */}
           <div className="mt-32 space-y-8">
-            {Array.from({ _length: 10 }, (_, i) => (
-              <div _key={i} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm">
-                <h3 className="text-lg font-semibold mb-2">Demo Content Section {i + 1}</h3>
+            {Array.from({ length: 10 }, (_, i) => (
+              <div
+                key={i}
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm"
+              >
+                <h3 className="text-lg font-semibold mb-2">
+                  Demo Content Section {i + 1}
+                </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  This is placeholder content to demonstrate the sticky header behavior.
-                  As you scroll, notice how the header transforms and maintains its position
-                  at the top of the viewport with a beautiful glass morphism effect.
+                  This is placeholder content to demonstrate the sticky header
+                  behavior. As you scroll, notice how the header transforms and
+                  maintains its position at the top of the viewport with a
+                  beautiful glass morphism effect.
                 </p>
               </div>
             ))}

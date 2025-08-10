@@ -49,8 +49,8 @@ interface PaginationConfig {
 }
 
 interface SelectionConfig {
-  _enabled: boolean;
-  _multiple: boolean;
+  enabled: boolean;
+  multiple: boolean;
 }
 
 interface DataTableProps {
@@ -404,12 +404,12 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     return (
       <div
         className={styles.filterContainer}
-        onClick={(_e) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
       >
         <input
           type="text"
           value={filterValue}
-          onChange={(_e) => handleFilter(column.key, e.target.value, "text")}
+          onChange={(e) => handleFilter(column.key, e.target.value, "text")}
           placeholder={`Filter ${column.header}...`}
           className={styles.filterInput}
         />
@@ -418,11 +418,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   };
 
   // Render table cell
-  const renderCell = (
-    row: TableRow,
-    column: TableColumn,
-    _rowIndex: number,
-  ) => {
+  const renderCell = (row: TableRow, column: TableColumn, rowIndex: number) => {
     const value = row[column.key];
     let displayValue = value;
 
@@ -523,7 +519,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
         <div className={styles.pageSizeSelector}>
           <select
             value={pageSize}
-            onChange={(_e) => setPageSize(Number(e.target.value))}
+            onChange={(e) => setPageSize(Number(e.target.value))}
             className={styles.pageSizeSelect}
           >
             <option value={10}>10 per page</option>
@@ -589,7 +585,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
               <input
                 type="text"
                 value={searchTerm}
-                onChange={(_e) => handleSearch(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)}
                 placeholder="Search table..."
                 className={styles.searchInput}
               />
@@ -640,8 +636,8 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             ${stickyHeader ? styles.stickyHeader : ""}
           `}
           variants={containerVariants}
-          _initial="hidden"
-          _animate="visible"
+          initial="hidden"
+          animate="visible"
         >
           {/* Table Header */}
           <thead ref={headerRef} className={styles.header}>
@@ -654,7 +650,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                       selectedRows.size === visibleData.length &&
                       visibleData.length > 0
                     }
-                    onChange={(_e) => handleSelectAll(e.target.checked)}
+                    onChange={(e) => handleSelectAll(e.target.checked)}
                     className={styles.selectCheckbox}
                   />
                 </th>
@@ -718,11 +714,11 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                         <input
                           type="checkbox"
                           checked={selectedRows.has(row.id)}
-                          onChange={(_e) =>
+                          onChange={(e) =>
                             handleRowSelect(row.id, e.target.checked)
                           }
                           className={styles.selectCheckbox}
-                          onClick={(_e) => e.stopPropagation()}
+                          onClick={(e) => e.stopPropagation()}
                         />
                       </td>
                     )}

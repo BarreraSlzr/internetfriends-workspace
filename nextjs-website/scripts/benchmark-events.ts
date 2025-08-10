@@ -38,13 +38,14 @@ let on: OnFn;
 async function resolveEventSystem() {
   const candidates = [
     "./../lib/events/validated-emitter", // preferred (validated)
-    "./../lib/events/event.system"       // fallback (raw)
+    "./../lib/events/event.system", // fallback (raw)
   ];
   for (const c of candidates) {
     try {
       const mod = await import(c);
       if (mod.emitValidated) {
-        emit = (type: string, payload: any) => mod.emitValidated(type, payload, { injectTimestamp: true });
+        emit = (type: string, payload: any) =>
+          mod.emitValidated(type, payload, { injectTimestamp: true });
       } else if (mod.emit) {
         emit = mod.emit;
       }
@@ -59,8 +60,8 @@ async function resolveEventSystem() {
     }
   }
   // Graceful fallback
-  emit = (type: string, _payload: any) => {};
-  on = (_type: string, _handler: (p: any) => void) => {};
+  emit = (type: string, payload: any) => {};
+  on = (type: string, handler: (p: any) => void) => {};
 }
 
 interface BenchmarkResult {
@@ -82,14 +83,14 @@ interface BenchmarkResult {
 }
 
 function parseFlag(name: string, fallback: number): number {
-  const f = process.argv.find(a => a.startsWith(`--${name}=`));
+  const f = process.argv.find((a) => a.startsWith(`--${name}=`));
   if (!f) return fallback;
   const v = parseInt(f.split("=")[1], 10);
   return Number.isFinite(v) ? v : fallback;
 }
 
 function parseStringFlag(name: string, fallback: string): string {
-  const f = process.argv.find(a => a.startsWith(`--${name}=`));
+  const f = process.argv.find((a) => a.startsWith(`--${name}=`));
   if (!f) return fallback;
   const v = f.split("=")[1];
   return v || fallback;
@@ -118,7 +119,7 @@ async function main() {
       type: eventType,
       timestamp: new Date().toISOString(),
       status: "ok",
-      latencyMs: 0.1
+      latencyMs: 0.1,
     });
   }
 
@@ -129,7 +130,7 @@ async function main() {
       type: eventType,
       timestamp: new Date().toISOString(),
       status: "ok",
-      latencyMs: (Math.random() * 5) + 0.1
+      latencyMs: Math.random() * 5 + 0.1,
     });
   }
   const end = performance.now();
@@ -139,7 +140,7 @@ async function main() {
   const avgPerEventMicro = (durationMs / totalEvents) * 1000;
 
   const mem = process.memoryUsage();
-  const memoryMB = (mem.rss / (1024 * 1024));
+  const memoryMB = mem.rss / (1024 * 1024);
 
   const result: BenchmarkResult = {
     eventType,
@@ -155,8 +156,8 @@ async function main() {
       pid: process.pid,
       nodeVersion: process.version,
       bunVersion: (globalThis as any).Bun?.version,
-      memoryMB: +memoryMB.toFixed(2)
-    }
+      memoryMB: +memoryMB.toFixed(2),
+    },
   };
 
   if (jsonOnly) {
@@ -173,13 +174,15 @@ async function main() {
     console.log(`Events / Second:        ${result.eventsPerSecond}`);
     console.log(`Avg Per Event (µs):     ${result.avgPerEventMicro}`);
     console.log(`Process RSS (MB):       ${result.process.memoryMB}`);
-    console.log(`Runtime:                node=${result.process.nodeVersion} bun=${result.process.bunVersion || "n/a"}`);
+    console.log(
+      `Runtime:                node=${result.process.nodeVersion} bun=${result.process.bunVersion || "n/a"}`,
+    );
     console.log("JSON Result:");
     console.log(JSON.stringify(result, null, 2));
   }
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error("Benchmark failed:", err);
   process.exit(1);
 });

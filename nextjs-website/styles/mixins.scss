@@ -1,145 +1,128 @@
-// InternetFriends Design System Mixins
-// Reusable SCSS mixins for common patterns and utilities
+// InternetFriends Design System Mixins (Legacy)
+// DEPRECATED: Use individual mixin modules from ./mixins/ directory
+// This file is kept for backward compatibility
 
 @use "sass:map";
-@import "./variables.scss";
+@use "./tokens/spacing.scss" as spacing;
+@use "./mixins/media.scss" as media;
+@use "./mixins/focus.scss" as focus;
+@use "./mixins/components.scss" as components;
 
-// Media Query Mixins
+// Deprecation warning
+@warn "mixins.scss is deprecated. Use individual mixin modules: @use './mixins/media.scss', @use './mixins/focus.scss', etc.";
+
+// Forward media query mixins from new modular system
 @mixin media-xs {
-  @media (min-width: #{breakpoint('xs')}) {
+  @include media.media-xs {
     @content;
   }
 }
 
 @mixin media-sm {
-  @media (min-width: #{breakpoint('sm')}) {
+  @include media.media-sm {
     @content;
   }
 }
 
 @mixin media-md {
-  @media (min-width: #{breakpoint('md')}) {
+  @include media.media-md {
     @content;
   }
 }
 
 @mixin media-lg {
-  @media (min-width: #{breakpoint('lg')}) {
+  @include media.media-lg {
     @content;
   }
 }
 
 @mixin media-xl {
-  @media (min-width: #{breakpoint('xl')}) {
+  @include media.media-xl {
     @content;
   }
 }
 
 @mixin media-2xl {
-  @media (min-width: #{breakpoint('2xl')}) {
+  @include media.media-2xl {
     @content;
   }
 }
 
 // Max-width media queries
 @mixin media-max-sm {
-  @media (max-width: #{breakpoint('sm') - 1px}) {
+  @include media.media-max-sm {
     @content;
   }
 }
 
 @mixin media-max-md {
-  @media (max-width: #{breakpoint('md') - 1px}) {
+  @include media.media-max-md {
     @content;
   }
 }
 
 @mixin media-max-lg {
-  @media (max-width: #{breakpoint('lg') - 1px}) {
+  @include media.media-max-lg {
     @content;
   }
 }
 
 @mixin media-max-xl {
-  @media (max-width: #{breakpoint('xl') - 1px}) {
+  @include media.media-max-xl {
     @content;
   }
 }
 
-// Custom media query
-@mixin media($breakpoint) {
-  @media (min-width: $breakpoint) {
-    @content;
+// Forward other common mixins from new modular system
+@mixin button-primary {
+  @include components.button-primary;
+}
+
+@mixin button-secondary {
+  @include components.button-secondary;
+}
+
+@mixin glass-morphism($bg: null, $border: null) {
+  @if $bg and $border {
+    @include components.glass-morphism($bg, $border);
+  } @else {
+    @include components.glass-morphism;
   }
 }
 
-// Breakpoint down mixins (max-width)
-@mixin breakpoint-down($size) {
-  @if $size == "xs" {
-    @media (max-width: #{breakpoint('xs') - 1px}) {
-      @content;
-    }
-  } @else if $size == "sm" {
-    @media (max-width: #{breakpoint('sm') - 1px}) {
-      @content;
-    }
-  } @else if $size == "md" {
-    @media (max-width: #{breakpoint('md') - 1px}) {
-      @content;
-    }
-  } @else if $size == "lg" {
-    @media (max-width: #{breakpoint('lg') - 1px}) {
-      @content;
-    }
-  } @else if $size == "xl" {
-    @media (max-width: #{breakpoint('xl') - 1px}) {
-      @content;
-    }
-  } @else if $size == "2xl" {
-    @media (max-width: #{breakpoint('2xl') - 1px}) {
-      @content;
-    }
+@mixin card-base {
+  @include components.card-base;
+}
+
+@mixin input-base {
+  @include components.input-base;
+}
+
+@mixin focus-interactive($accent: "primary") {
+  @include focus.focus-interactive($accent);
+}
+
+@mixin truncate {
+  @include components.truncate;
+}
+
+@mixin container($max-width: null) {
+  @if $max-width {
+    @include components.container($max-width);
+  } @else {
+    @include components.container;
   }
 }
 
-// Breakpoint up mixins (min-width)
-@mixin breakpoint-up($size) {
-  @if $size == "xs" {
-    @media (min-width: #{breakpoint('xs')}) {
-      @content;
-    }
-  } @else if $size == "sm" {
-    @media (min-width: #{breakpoint('sm')}) {
-      @content;
-    }
-  } @else if $size == "md" {
-    @media (min-width: #{breakpoint('md')}) {
-      @content;
-    }
-  } @else if $size == "lg" {
-    @media (min-width: #{breakpoint('lg')}) {
-      @content;
-    }
-  } @else if $size == "xl" {
-    @media (min-width: #{breakpoint('xl')}) {
-      @content;
-    }
-  } @else if $size == "2xl" {
-    @media (min-width: #{breakpoint('2xl')}) {
-      @content;
-    }
-  }
-}
-
-// Device-specific queries
+// Legacy device-specific queries (forward to new system)
 @mixin mobile-only {
-  @media (max-width: #{breakpoint('md') - 1px}) {
+  @include media.media-max-md {
     @content;
   }
 }
 
 @mixin tablet-only {
-  @media (min-width: #{breakpoint('md')}) and (max-width: #{breakpoint('lg') - 1px}) {
+  @include media.media-between("md", "lg") {
     @content;
   }
 }

@@ -1,0 +1,205 @@
+// InternetFriends Design System - Accent Token SCSS Generator
+// Dynamic accent variants using CSS custom properties and SCSS loops
+
+@use "sass:map";
+@use "./colors.scss" as c;
+
+// Accent token map (synced with TypeScript types)
+$accent-variants: (
+  "primary": (
+    "color": #3b82f6,
+    "hover": #2563eb,
+    "light-bg": rgba(59, 130, 246, 0.08),
+    "active-bg": rgba(59, 130, 246, 0.12),
+    "contrast": #ffffff,
+  ),
+  "success": (
+    "color": #16a34a,
+    "hover": #15803d,
+    "light-bg": rgba(22, 163, 74, 0.08),
+    "active-bg": rgba(22, 163, 74, 0.12),
+    "contrast": #ffffff,
+  ),
+  "warning": (
+    "color": #d97706,
+    "hover": #b45309,
+    "light-bg": rgba(217, 119, 6, 0.08),
+    "active-bg": rgba(217, 119, 6, 0.12),
+    "contrast": #ffffff,
+  ),
+  "danger": (
+    "color": #dc2626,
+    "hover": #b91c1c,
+    "light-bg": rgba(220, 38, 38, 0.08),
+    "active-bg": rgba(220, 38, 38, 0.12),
+    "contrast": #ffffff,
+  ),
+  "info": (
+    "color": #0ea5e9,
+    "hover": #0284c7,
+    "light-bg": rgba(14, 165, 233, 0.08),
+    "active-bg": rgba(14, 165, 233, 0.12),
+    "contrast": #ffffff,
+  ),
+);
+
+// Generate CSS custom properties for accent tokens
+:root {
+  @each $name, $variant in $accent-variants {
+    --accent-#{$name}: #{map.get($variant, "color")};
+    --accent-#{$name}-hover: #{map.get($variant, "hover")};
+    --accent-#{$name}-light-bg: #{map.get($variant, "light-bg")};
+    --accent-#{$name}-active-bg: #{map.get($variant, "active-bg")};
+    --accent-#{$name}-contrast: #{map.get($variant, "contrast")};
+  }
+}
+
+// Generate accent variant classes using data attributes
+@each $name, $variant in $accent-variants {
+  [data-accent="#{$name}"] {
+    --current-accent: var(--accent-#{$name});
+    --current-accent-hover: var(--accent-#{$name}-hover);
+    --current-accent-light-bg: var(--accent-#{$name}-light-bg);
+    --current-accent-active-bg: var(--accent-#{$name}-active-bg);
+    --current-accent-contrast: var(--accent-#{$name}-contrast);
+
+    // Base accent styling
+    &.accent-bg {
+      background-color: var(--current-accent);
+      color: var(--current-accent-contrast);
+    }
+
+    &.accent-text {
+      color: var(--current-accent);
+    }
+
+    &.accent-border {
+      border-color: var(--current-accent);
+    }
+
+    // Interactive states
+    &.accent-interactive {
+      background-color: var(--current-accent);
+      color: var(--current-accent-contrast);
+      transition: all 150ms ease-out;
+
+      &:hover {
+        background-color: var(--current-accent-hover);
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        background-color: var(--current-accent);
+        transform: translateY(0);
+      }
+
+      &:focus-visible {
+        outline: 2px dashed var(--current-accent);
+        outline-offset: 2px;
+      }
+    }
+
+    // Light background variant
+    &.accent-light {
+      background-color: var(--current-accent-light-bg);
+      color: var(--current-accent);
+      border: 1px solid transparent;
+
+      &:hover {
+        background-color: var(--current-accent-active-bg);
+        border-color: var(--current-accent);
+      }
+    }
+
+    // Outline variant
+    &.accent-outline {
+      background-color: transparent;
+      color: var(--current-accent);
+      border: 1px solid var(--current-accent);
+
+      &:hover {
+        background-color: var(--current-accent-light-bg);
+      }
+
+      &:active {
+        background-color: var(--current-accent-active-bg);
+      }
+    }
+
+    // Ghost variant
+    &.accent-ghost {
+      background-color: transparent;
+      color: var(--current-accent);
+      border: none;
+
+      &:hover {
+        background-color: var(--current-accent-light-bg);
+      }
+
+      &:active {
+        background-color: var(--current-accent-active-bg);
+      }
+    }
+  }
+}
+
+// Utility functions for SCSS consumption
+@function accent-color($name) {
+  @return map.get(map.get($accent-variants, $name), "color");
+}
+
+@function accent-hover($name) {
+  @return map.get(map.get($accent-variants, $name), "hover");
+}
+
+@function accent-light-bg($name) {
+  @return map.get(map.get($accent-variants, $name), "light-bg");
+}
+
+@function accent-active-bg($name) {
+  @return map.get(map.get($accent-variants, $name), "active-bg");
+}
+
+@function accent-contrast($name) {
+  @return map.get(map.get($accent-variants, $name), "contrast");
+}
+
+// Mixin for applying accent variants
+@mixin apply-accent($accent-name, $variant: "bg") {
+  @if $variant == "bg" {
+    background-color: accent-color($accent-name);
+    color: accent-contrast($accent-name);
+  } @else if $variant == "text" {
+    color: accent-color($accent-name);
+  } @else if $variant == "border" {
+    border-color: accent-color($accent-name);
+  } @else if $variant == "light" {
+    background-color: accent-light-bg($accent-name);
+    color: accent-color($accent-name);
+  } @else if $variant == "outline" {
+    background-color: transparent;
+    color: accent-color($accent-name);
+    border: 1px solid accent-color($accent-name);
+  }
+}
+
+// State variants for dynamic accent switching
+.accent-primary { @include apply-accent("primary"); }
+.accent-success { @include apply-accent("success"); }
+.accent-warning { @include apply-accent("warning"); }
+.accent-danger { @include apply-accent("danger"); }
+.accent-info { @include apply-accent("info"); }
+
+// Text variants
+.text-primary { color: accent-color("primary"); }
+.text-success { color: accent-color("success"); }
+.text-warning { color: accent-color("warning"); }
+.text-danger { color: accent-color("danger"); }
+.text-info { color: accent-color("info"); }
+
+// Border variants
+.border-primary { border-color: accent-color("primary"); }
+.border-success { border-color: accent-color("success"); }
+.border-warning { border-color: accent-color("warning"); }
+.border-danger { border-color: accent-color("danger"); }
+.border-info { border-color: accent-color("info"); }

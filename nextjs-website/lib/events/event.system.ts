@@ -289,7 +289,11 @@ export class InternetFriendsEventSystem {
   }
 
   // Emit event
-  emit(type: EventType, data?: unknown, options: Partial<BaseEvent> = {}): string {
+  emit(
+    type: EventType,
+    data?: unknown,
+    options: Partial<BaseEvent> = {},
+  ): string {
     const event: BaseEvent = {
       id: crypto.randomUUID(),
       type,
@@ -329,7 +333,7 @@ export class InternetFriendsEventSystem {
   // Process single event
   private async processEvent(event: BaseEvent): Promise<EventResult[]> {
     const results: EventResult[] = [];
-    const _startTime = Date.now();
+    const startTime = Date.now();
 
     // Get handlers for this event type
     const eventHandlers = this.handlers.get(event.type) || [];
@@ -430,7 +434,7 @@ export class InternetFriendsEventSystem {
   // Health check
   async healthCheck(): Promise<boolean> {
     try {
-      const _testEventId = this.emit("system.health_check", {
+      const testEventId = this.emit("system.health_check", {
         timestamp: Date.now(),
       });
 
@@ -463,36 +467,36 @@ export const on = (
 export const off = (handlerId: string) => eventSystem.off(handlerId);
 
 // Specialized event emitters for common use cases
-export const _ComputeEvents = {
-  _jobStarted: (jobId: string, data?: unknown) =>
+export const ComputeEvents = {
+  jobStarted: (jobId: string, data?: unknown) =>
     emit("compute.job_started", { jobId, ...data }, { correlationId: jobId }),
 
-  _jobCompleted: (jobId: string, result?: unknown, processingTime?: number) =>
+  jobCompleted: (jobId: string, result?: unknown, processingTime?: number) =>
     emit(
       "compute.job_completed",
       { jobId, result, processingTime },
       { correlationId: jobId },
     ),
 
-  _jobFailed: (jobId: string, error: string, data?: unknown) =>
+  jobFailed: (jobId: string, error: string, data?: unknown) =>
     emit(
       "compute.job_failed",
       { jobId, error, ...data },
       { correlationId: jobId, priority: "high" },
     ),
 
-  _resourceAllocated: (resourceId: string, type: string, amount: number) =>
+  resourceAllocated: (resourceId: string, type: string, amount: number) =>
     emit("compute.resource_allocated", { resourceId, type, amount }),
 
-  _resourceReleased: (resourceId: string, type: string, amount: number) =>
+  resourceReleased: (resourceId: string, type: string, amount: number) =>
     emit("compute.resource_released", { resourceId, type, amount }),
 };
 
-export const _UIEvents = {
-  _pageLoad: (page: string, loadTime: number, userId?: string) =>
+export const UIEvents = {
+  pageLoad: (page: string, loadTime: number, userId?: string) =>
     emit("ui.page_load", { page, loadTime }, { userId }),
 
-  _componentRender: (component: string, renderTime: number, props?: unknown) =>
+  componentRender: (component: string, renderTime: number, props?: unknown) =>
     emit("ui.component_render", { component, renderTime, props }),
 
   interaction: (
@@ -502,19 +506,19 @@ export const _UIEvents = {
     sessionId?: string,
   ) => emit("ui.interaction", { type, target }, { userId, sessionId }),
 
-  _themeChange: (from: string, to: string, userId?: string) =>
+  themeChange: (from: string, to: string, userId?: string) =>
     emit("ui.theme_change", { from, to }, { userId }),
 };
 
-export const _APIEvents = {
-  _requestStart: (method: string, url: string, requestId: string) =>
+export const APIEvents = {
+  requestStart: (method: string, url: string, requestId: string) =>
     emit(
       "api.request_start",
       { method, url, requestId },
       { correlationId: requestId },
     ),
 
-  _requestComplete: (
+  requestComplete: (
     method: string,
     url: string,
     status: number,
@@ -527,7 +531,7 @@ export const _APIEvents = {
       { correlationId: requestId },
     ),
 
-  _requestError: (
+  requestError: (
     method: string,
     url: string,
     error: string,
@@ -540,7 +544,7 @@ export const _APIEvents = {
       { correlationId: requestId, priority: "high" },
     ),
 
-  _rateLimit: (ip: string, endpoint: string, limit: number, remaining: number) =>
+  rateLimit: (ip: string, endpoint: string, limit: number, remaining: number) =>
     emit(
       "api.rate_limit",
       { ip, endpoint, limit, remaining },

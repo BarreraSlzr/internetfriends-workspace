@@ -2,7 +2,7 @@
 // Extends shadcn/ui Button with InternetFriends design system
 
 import React, { forwardRef } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Button as ShadcnButton } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
@@ -76,7 +76,7 @@ const buttonVariants = cva(
         false: "",
       },
     },
-    _defaultVariants: {
+    defaultVariants: {
       variant: "primary",
       size: "md",
       fullWidth: false,
@@ -133,10 +133,22 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
           return "h-5 w-5";
         case "xl":
           return "h-6 w-6";
-        _default:
+        default:
           return "h-4 w-4";
       }
     };
+
+    // Helper to safely clone an icon element with merged className (simplified typing to satisfy TS)
+    const withIconClass = (
+      el: React.ReactElement<{ className?: string }>,
+      sizeClass: string,
+    ): React.ReactElement<{ className?: string }> =>
+      React.cloneElement(el, {
+        className: cn(
+          sizeClass,
+          (el.props as { className?: string }).className,
+        ),
+      });
 
     // Start icon with proper sizing
     const startIconElement = startIcon && (
@@ -145,9 +157,10 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
         data-testid={testId ? `${testId}-start-icon` : undefined}
       >
         {React.isValidElement(startIcon)
-          ? React.cloneElement(startIcon, {
-              className: cn(getIconSize(), (startIcon.props as any)?.className),
-            } as any)
+          ? withIconClass(
+              startIcon as React.ReactElement<{ className?: string }>,
+              getIconSize(),
+            )
           : startIcon}
       </span>
     );
@@ -159,9 +172,10 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
         data-testid={testId ? `${testId}-end-icon` : undefined}
       >
         {React.isValidElement(endIcon)
-          ? React.cloneElement(endIcon, {
-              className: cn(getIconSize(), (endIcon.props as any)?.className),
-            } as any)
+          ? withIconClass(
+              endIcon as React.ReactElement<{ className?: string }>,
+              getIconSize(),
+            )
           : endIcon}
       </span>
     );
@@ -209,7 +223,7 @@ export const ButtonAtomic = forwardRef<HTMLButtonElement, ButtonAtomicProps>(
   },
 );
 
-ButtonAtomic._displayName = "ButtonAtomic";
+ButtonAtomic.displayName = "ButtonAtomic";
 
 // Export variants for external use
 export { buttonVariants };

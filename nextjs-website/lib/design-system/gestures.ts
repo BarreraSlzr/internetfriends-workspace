@@ -69,19 +69,19 @@ export const _AnimationPresets = {
     duration: 300,
     easing: "cubic-bezier(0.4, 0, 0.2, 1)",
   },
-  
+
   // Micro-interactions
   _microInteraction: {
     duration: 150,
     easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
   },
-  
+
   // Page transitions
   _pageTransition: {
     duration: 500,
     easing: "cubic-bezier(0.33, 1, 0.68, 1)",
   },
-  
+
   // Focus indicators (dashed borders like Mermaid viewer)
   _focusIndicator: {
     duration: 200,
@@ -93,7 +93,7 @@ export const _AnimationPresets = {
 // Responsive Breakpoints
 export const Breakpoints = {
   _mobile: "375px",
-  _tablet: "768px", 
+  _tablet: "768px",
   _desktop: "1024px",
   _wide: "1440px",
   _ultrawide: "1920px",
@@ -102,21 +102,22 @@ export const Breakpoints = {
 // Component State Patterns
 export const _ComponentStates = {
   // Interactive states
-  _interactive: {
-    _idle: "opacity-100 transform-none",
-    _hover: "opacity-90 transform-scale-105",
-    _active: "opacity-80 transform-scale-95",
+  interactive: {
+    idle: "opacity-100 transform-none",
+    hover: "opacity-90 transform-scale-105",
+    active: "opacity-80 transform-scale-95",
     focus: "ring-2 ring-if-primary ring-offset-2",
-    _disabled: "opacity-50 cursor-not-allowed",
+    disabled: "opacity-50 cursor-not-allowed",
   },
-  
+
   // Loading states
   _loading: {
     _skeleton: "animate-pulse bg-gray-200",
     _spinner: "animate-spin",
-    shimmer: "animate-shimmer bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200",
+    shimmer:
+      "animate-shimmer bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200",
   },
-  
+
   // Validation states
   _validation: {
     _success: "border-green-500 text-green-700",

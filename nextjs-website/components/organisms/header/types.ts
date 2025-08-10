@@ -282,7 +282,7 @@ export interface HeaderUtils {
 }
 
 // Default configurations
-export const _HEADER_DEFAULTS: Required<
+export const HEADER_DEFAULTS: Required<
   Pick<
     HeaderOrganismProps,
     "variant" | "size" | "skipToMain" | "mainContentSelector"
@@ -294,7 +294,7 @@ export const _HEADER_DEFAULTS: Required<
   mainContentSelector: "#main-content",
 };
 
-export const _HEADER_STICKY_DEFAULTS: Required<
+export const HEADER_STICKY_DEFAULTS: Required<
   Omit<HeaderStickyConfig, "stickyContent">
 > & { stickyContent: ReactNode | null } = {
   enabled: true,
@@ -305,7 +305,7 @@ export const _HEADER_STICKY_DEFAULTS: Required<
   hideOnScroll: false,
 };
 
-export const _HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
+export const HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
   mobileBreakpoint: "lg",
   showMobileToggle: true,
   mobileMenuPosition: "right",
@@ -315,7 +315,7 @@ export const _HEADER_RESPONSIVE_DEFAULTS: Required<HeaderResponsiveConfig> = {
 };
 
 // Type guards
-export const _isHeaderAction = (value: unknown): value is HeaderAction => {
+export const isHeaderAction = (value: unknown): value is HeaderAction => {
   return (
     typeof value === "object" &&
     value !== null &&
@@ -324,7 +324,7 @@ export const _isHeaderAction = (value: unknown): value is HeaderAction => {
   );
 };
 
-export const _isHeaderVariant = (
+export const isHeaderVariant = (
   value: string | undefined,
 ): value is HeaderOrganismProps["variant"] => {
   return (
@@ -333,7 +333,7 @@ export const _isHeaderVariant = (
   );
 };
 
-export const _isHeaderSize = (
+export const isHeaderSize = (
   value: string | undefined,
 ): value is HeaderOrganismProps["size"] => {
   return value !== undefined && ["sm", "md", "lg"].includes(value);

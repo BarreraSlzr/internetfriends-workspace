@@ -144,4 +144,4 @@ export const ComponentNode: React.FC<ComponentNodeProps> = ({
   );
 };
 
-ComponentNode._displayName = "ComponentNode";
+ComponentNode.displayName = "ComponentNode";

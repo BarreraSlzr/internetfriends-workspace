@@ -167,4 +167,4 @@ export const UtilityNode: React.FC<UtilityNodeProps> = ({
   );
 };
 
-UtilityNode._displayName = "UtilityNode";
+UtilityNode.displayName = "UtilityNode";

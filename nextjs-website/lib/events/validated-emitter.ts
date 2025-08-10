@@ -18,7 +18,12 @@
 
 import { performance } from "perf_hooks";
 import { z } from "zod";
-import { EventCatalog, getEventSchema, listEventTypes, EventType } from "./catalog";
+import {
+  EventCatalog,
+  getEventSchema,
+  listEventTypes,
+  EventType,
+} from "./catalog";
 // NOTE: This file assumes the existence of event.system.ts exporting emit/on abstractions.
 import {
   emit as baseEmit,
@@ -69,7 +74,7 @@ function recordMetric(
   type: string,
   validationMs: number,
   success: boolean,
-  error?: string
+  error?: string,
 ) {
   const now = Date.now();
   if (!emissionMetrics[type]) {
@@ -118,7 +123,7 @@ export function emitValidated<T extends string>(
      * inside payload and not already present).
      */
     injectTimestamp?: boolean;
-  }
+  },
 ) {
   const start = performance.now();
   const schema = getEventSchema(type);
@@ -138,8 +143,8 @@ export function emitValidated<T extends string>(
       recordMetric(type, elapsed, false, parsed.error.message);
       console.warn(
         `[events] Validation failed for '${type}': ${parsed.error.issues
-          .map(i => i.path.join(".") + " " + i.message)
-          .join("; ")}`
+          .map((i) => i.path.join(".") + " " + i.message)
+          .join("; ")}`,
       );
       // We choose to not emit invalid payloads:
       return {
@@ -160,14 +165,14 @@ export function emitValidated<T extends string>(
       const elapsed = performance.now() - start;
       recordMetric(type, elapsed, false, "Unknown event in strict mode");
       throw new Error(
-        `[events] Unknown event type '${type}' emitted under STRICT_MODE`
+        `[events] Unknown event type '${type}' emitted under STRICT_MODE`,
       );
     }
     const elapsed = performance.now() - start;
     recordMetric(type, elapsed, true);
     console.warn(
       `[events] (legacy) Emitting uncatalogued event '${type}'` +
-        (allowed ? " [allowlisted]" : "")
+        (allowed ? " [allowlisted]" : ""),
     );
     return baseEmit(type, payload);
   }
@@ -188,12 +193,12 @@ type EventListener<T> = (payload: T) => void;
  */
 export function onValidated<K extends EventType>(
   type: K,
-  listener: EventListener<z.infer<(typeof EventCatalog)[K]>>
+  listener: EventListener<z.infer<(typeof EventCatalog)[K]>>,
 ) {
   const schema = getEventSchema(type);
   if (!schema) {
     console.warn(
-      `[events] onValidated called for unknown type '${type}'. Listener attached without validation.`
+      `[events] onValidated called for unknown type '${type}'. Listener attached without validation.`,
     );
     return baseOn(type as LegacyEventType, listener as any);
   }
@@ -201,7 +206,7 @@ export function onValidated<K extends EventType>(
     const parsed = schema.safeParse(payload);
     if (!parsed.success) {
       console.warn(
-        `[events] Dropping invalid incoming event '${type}': ${parsed.error.message}`
+        `[events] Dropping invalid incoming event '${type}': ${parsed.error.message}`,
       );
       return;
     }
@@ -238,7 +243,7 @@ export function getEmissionMetrics(): EmissionMetricsSnapshot {
     unknownEmissionCount,
     strictMode: STRICT_MODE,
     metrics: Object.values(emissionMetrics).sort((a, b) =>
-      a.type.localeCompare(b.type)
+      a.type.localeCompare(b.type),
     ),
   };
 }
@@ -258,8 +263,8 @@ export function printEmissionSummary() {
   for (const m of snap.metrics) {
     lines.push(
       `   - ${m.type}: count=${m.count}, avgValMs=${m.avgValidationMs.toFixed(
-        3
-      )}, failures=${m.failures}`
+        3,
+      )}, failures=${m.failures}`,
     );
   }
   console.log(lines.join("\n"));
@@ -268,16 +273,16 @@ export function printEmissionSummary() {
 /* -------------------------------------------------------------------------- */
 /*  CLI Entrypoint (Optional)                                                  */
 /*  Usage: bun -e "import { printEmissionSummary } from './lib/events/validated-emitter'; printEmissionSummary()" */
-+/* -------------------------------------------------------------------------- */
-+
-+if (process.argv.includes("--summary")) {
-+  printEmissionSummary();
-+}
-+
-+/* -------------------------------------------------------------------------- */
-+/*  Future Enhancements                                                       */
-+/* -------------------------------------------------------------------------- *
-+ * - Hook into a metrics exporter (Prometheus / OTEL)
+/* -------------------------------------------------------------------------- */
+
+if (process.argv.includes("--summary")) {
+  printEmissionSummary();
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Future Enhancements                                                       */
+/* -------------------------------------------------------------------------- */
+/* - Hook into a metrics exporter (Prometheus / OTEL)
 + * - Add structured logging (JSON lines) for downstream ingestion
 + * - Introduce queue / backpressure instrumentation
 + * - Add event replay validator using catalog schemas

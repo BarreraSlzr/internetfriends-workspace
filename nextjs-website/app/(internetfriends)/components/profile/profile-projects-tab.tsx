@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { cardCss } from "./profile-card";
 
-export const _ProfileProjectsTab = () => {
+const ProfileProjectsTab = () => {
   const skillsMap = new Map(
     curriculum.skills.map((skill) => [skill.id, skill]),
   );
@@ -50,3 +50,8 @@ export const _ProfileProjectsTab = () => {
     </div>
   );
 };
+
+
+export { ProfileProjectsTab };
+
+export default ProfileProjectsTab;

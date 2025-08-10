@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from "react";
 
 export interface HeaderAtomicProps extends HTMLAttributes<HTMLElement> {
   /** Content to render inside the header */
@@ -39,13 +39,13 @@ export interface HeaderNavigationProps {
 
 export interface NavigationItem {
   /** Unique identifier */
-  _id: string;
+  id: string;
 
   /** Display label */
   label: string;
 
   /** URL or route */
-  _href: string;
+  href: string;
 
   /** Whether item is active */
   active?: boolean;
@@ -96,13 +96,13 @@ export interface HeaderActionsProps {
 
 export interface ThemeToggleProps {
   /** Current theme */
-  theme?: 'light' | 'dark' | 'system';
+  theme?: "light" | "dark" | "system";
 
   /** Callback when theme changes */
-  onThemeChange?: (theme: 'light' | 'dark' | 'system') => void;
+  onThemeChange?: (theme: "light" | "dark" | "system") => void;
 
   /** Size variant */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 
   /** Additional CSS classes */
   className?: string;

@@ -139,7 +139,8 @@ const ThemeToggle: React.FC<{
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
             {themeOptions.map((option) => (
-              < key={index}button
+              <button
+                key={index}
                 key={option.value}
                 onClick={() => {
                   setTheme(option.value);
@@ -170,7 +171,7 @@ const ThemeToggle: React.FC<{
 const LanguageSelector: React.FC<{
   config?: HeaderOrganismProps["languageSelector"];
 }> = ({ config }) => {
-  const { _locale: currentLocale, setLocale, t } = useI18n();
+  const { locale: currentLocale, setLocale, t } = useI18n();
   const availableLocales = Object.values(LOCALES);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -214,7 +215,8 @@ const LanguageSelector: React.FC<{
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
             {availableLocales.map((lang: unknown) => (
-              < key={index}button
+              <button
+                key={index}
                 key={lang.code}
                 onClick={() => {
                   setLocale(lang.code);
@@ -337,7 +339,7 @@ const AnnouncementBar: React.FC<{
       {config.content}
       {config.dismissible && (
         <button
-          onClick={(_e) => {
+          onClick={(e) => {
             e.stopPropagation();
             setIsVisible(false);
           }}
@@ -418,14 +420,14 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { _passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [sticky?.enabled, sticky?.offset, sticky?.hideOnScroll]);
 
   // Context value
   const contextValue: HeaderContextValue = {
     ...headerState,
-    _toggleMobileMenu: () =>
+    toggleMobileMenu: () =>
       setHeaderState((prev) => ({
         ...prev,
         isMobileMenuOpen: !prev.isMobileMenuOpen,
@@ -437,11 +439,11 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
         ...prev,
         isSearchActive: !prev.isSearchActive,
       })),
-    _setSearchQuery: (query: string) =>
+    setSearchQuery: (query: string) =>
       setHeaderState((prev) => ({ ...prev, searchQuery: query })),
-    _dismissAnnouncement: () =>
+    dismissAnnouncement: () =>
       setHeaderState((prev) => ({ ...prev, isAnnouncementVisible: false })),
-    _updateState: (updates: Partial<HeaderState>) =>
+    updateState: (updates: Partial<HeaderState>) =>
       setHeaderState((prev) => ({ ...prev, ...updates })),
   };
 
@@ -490,7 +492,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
             "bg-glass-bg-header backdrop-blur-glass",
           className,
         )}
-        _style={{
+        style={{
           transitionDuration: sticky?.transitionDuration,
         }}
         data-testid={testId}
@@ -584,4 +586,4 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   );
 };
 
-HeaderOrganism._displayName = "HeaderOrganism";
+HeaderOrganism.displayName = "HeaderOrganism";

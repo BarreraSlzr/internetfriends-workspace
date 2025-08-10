@@ -1,0 +1,118 @@
+// InternetFriends Design System - Focus Mixins
+// Centralized focus state patterns using dashed borders inspired by Mermaid viewer
+
+@use "sass:map";
+@use "../tokens/colors.scss" as c;
+@use "../tokens/spacing.scss" as s;
+
+// Base focus ring mixin with dashed pattern
+@mixin focus-ring($color: c.accent("primary"), $radius: s.radius("sm"), $offset: 2px) {
+  outline: 2px dashed $color;
+  outline-offset: $offset;
+  border-radius: $radius;
+  transition: outline-color 150ms ease-out;
+}
+
+// Enhanced focus ring with background highlight
+@mixin focus-ring-enhanced($color: c.accent("primary"), $bg-opacity: 0.08) {
+  @include focus-ring($color);
+  background-color: rgba($color, $bg-opacity);
+  transition: outline-color 150ms ease-out, background-color 150ms ease-out;
+}
+
+// Interactive element focus (buttons, links, form controls)
+@mixin focus-interactive($accent: "primary") {
+  &:focus-visible {
+    @include focus-ring(c.accent($accent));
+    z-index: s.z-index("docked");
+  }
+
+  // Remove default browser focus styles
+  &:focus {
+    outline: none;
+  }
+}
+
+// Card/container focus for navigable elements
+@mixin focus-container($accent: "primary", $radius: s.radius("md")) {
+  &:focus-visible {
+    @include focus-ring-enhanced(c.accent($accent), 0.04);
+    border-radius: $radius;
+    z-index: s.z-index("base");
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// High contrast focus for critical actions
+@mixin focus-critical($color: c.accent("danger")) {
+  &:focus-visible {
+    outline: 3px dashed $color;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 1px rgba($color, 0.2);
+    z-index: s.z-index("docked");
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Focus states for form inputs
+@mixin focus-input($accent: "primary") {
+  &:focus-visible {
+    border-color: c.accent($accent);
+    outline: 2px dashed c.accent($accent);
+    outline-offset: 1px;
+    box-shadow: 0 0 0 3px rgba(c.accent($accent), 0.1);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Skip link focus (accessibility)
+@mixin focus-skip-link() {
+  &:focus-visible {
+    @include focus-ring(c.color-light("text-contrast"), s.radius("sm"), 4px);
+    background: c.color-light("bg-primary");
+    color: c.color-light("text-contrast");
+    z-index: s.z-index("skip-link");
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// Glass morphism focus variant
+@mixin focus-glass($accent: "primary") {
+  &:focus-visible {
+    outline: 2px dashed c.accent($accent);
+    outline-offset: 2px;
+    backdrop-filter: blur(12px);
+    background: rgba(c.accent($accent), 0.05);
+    box-shadow:
+      0 4px 6px -1px rgba(c.accent($accent), 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+// Theme-aware focus (adapts to light/dark mode)
+@mixin focus-theme-aware($accent: "primary") {
+  &:focus-visible {
+    // Use CSS custom properties for theme switching
+    outline: 2px dashed var(--accent-#{$accent}, #{c.accent($accent)});
+    outline-offset: 2px;
+    background-color: var(--focus-bg-#{$accent}, rgba(#{c.accent($accent)}, 0.08));
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

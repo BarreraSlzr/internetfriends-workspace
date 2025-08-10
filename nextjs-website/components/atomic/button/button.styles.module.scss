@@ -1,11 +1,8 @@
 // InternetFriends Atomic Button Styles
 // SCSS Module for button component with design system integration
 
-@use 'sass:map';
-
-// Import design system variables
-@import '../../../styles/variables.scss';
-@import '../../../styles/mixins.scss';
+@use "sass:map";
+@use "../../../styles/index.scss" as ds;
 
 // Base button styles
 .button {
@@ -33,14 +30,10 @@
   user-select: none;
 
   // Transitions
-  transition: all var(--animation-duration-fast) var(--animation-easing-easeOut);
+  transition: all ds.duration("fast") ds.easing("ease-out");
 
   // Focus styles (Mermaid viewer inspired)
-  &:focus-visible {
-    outline: 2px dashed var(--color-border-focus);
-    outline-offset: 2px;
-    border-radius: var(--radius-sm);
-  }
+  @include ds.focus-interactive();
 
   // Disabled state
   &:disabled {
@@ -333,13 +326,21 @@
 }
 
 @keyframes buttonShake {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0);
   }
-  10%, 30%, 50%, 70%, 90% {
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
     transform: translateX(-2px);
   }
-  20%, 40%, 60%, 80% {
+  20%,
+  40%,
+  60%,
+  80% {
     transform: translateX(2px);
   }
 }

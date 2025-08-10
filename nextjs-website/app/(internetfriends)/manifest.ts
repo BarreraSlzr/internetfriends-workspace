@@ -1,49 +1,49 @@
-import content from '@/app/(internetfriends)/content.json';
-import { MetadataRoute } from 'next'
+import content from "@/app/(internetfriends)/content.json";
+import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: content.companyName,
     short_name: content.companyNameShort,
     description: content.hero.description,
-    _start_url: '/',
-    _display: 'standalone',
-    _background_color: '#FF7E29',
-    _theme_color: '#FF486C',
+    start_url: "/",
+    _display: "standalone",
+    _background_color: "#FF7E29",
+    theme_color: "#FF486C",
     icons: [
       {
-        src: '/icon/192',
-        sizes: '192x192',
-        type: 'image/png',
-        _purpose: 'any',
+        src: "/icon/192",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
       },
       {
-        src: '/icon/384',
-        sizes: '384x384',
-        type: 'image/png',
+        src: "/icon/384",
+        sizes: "384x384",
+        type: "image/png",
       },
       {
-        src: '/icon/512',
-        sizes: '512x512',
-        type: 'image/png',
+        src: "/icon/512",
+        sizes: "512x512",
+        type: "image/png",
       },
     ],
-    _orientation: 'portrait',
-    _categories: ['business', 'productivity', 'marketing'],
+    _orientation: "portrait",
+    _categories: ["business", "productivity", "marketing"],
     _shortcuts: [
       {
-        name: 'Contact Us',
-        short_name: 'Contact',
-        description: 'Get in touch with our team',
-        url: '/contact',
-        icons: [{ src: '/icon/96', sizes: '96x96' }],
+        name: "Contact Us",
+        short_name: "Contact",
+        description: "Get in touch with our team",
+        url: "/contact",
+        icons: [{ src: "/icon/96", sizes: "96x96" }],
       },
       {
-        name: 'Enterprise Solutions',
-        short_name: 'Pricing',
-        description: 'Learn about our pricing',
-        url: '/pricing',
-        icons: [{ src: '/icon/96.png', sizes: '96x96' }],
+        name: "Enterprise Solutions",
+        short_name: "Pricing",
+        description: "Learn about our pricing",
+        url: "/pricing",
+        icons: [{ src: "/icon/96.png", sizes: "96x96" }],
       },
     ],
     // _screenshots: [
@@ -88,6 +88,5 @@ export default function manifest(): MetadataRoute.Manifest {
     //     ],
     //   },
     // },
-  }
+  };
 }
-

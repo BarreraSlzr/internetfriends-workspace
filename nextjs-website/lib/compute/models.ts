@@ -36,10 +36,10 @@ export const AIModelSchema = z.object({
 export type AIModel = z.infer<typeof AIModelSchema>;
 
 // Cerebras Integration (from workspace setup)
-export const _CerebrasModelSchema = AIModelSchema.extend({
+export const CerebrasModelSchema = AIModelSchema.extend({
   provider: z.literal("cerebras"),
-  _apiKey: z.string().optional(),
-  _apiUrl: z.string().url().default("https://api.cerebras.ai/v1"),
+  apiKey: z.string().optional(),
+  apiUrl: z.string().url().default("https://api.cerebras.ai/v1"),
 
   // Cerebras-specific features
   tokensPerSecond: z.number().default(2000), // Ultra-fast inference
@@ -119,7 +119,7 @@ export const ComputeTaskSchema = z.object({
   updatedAt: z.date(),
 });
 
-export type _ComputeTask = z.infer<typeof ComputeTaskSchema>;
+export type ComputeTask = z.infer<typeof ComputeTaskSchema>;
 
 // Compute Engine Configuration
 export const ComputeEngineSchema = z.object({
@@ -136,11 +136,11 @@ export const ComputeEngineSchema = z.object({
   _modelRouting: z.record(z.string(), z.string()).optional(), // task type -> model id
 
   // Cost management
-  _budgetLimits: z
+  budgetLimits: z
     .object({
-      _daily: z.number().min(0).optional(),
-      _monthly: z.number().min(0).optional(),
-      _perTask: z.number().min(0).optional(),
+      daily: z.number().min(0).optional(),
+      monthly: z.number().min(0).optional(),
+      perTask: z.number().min(0).optional(),
     })
     .optional(),
 
@@ -164,7 +164,7 @@ export const ComputeEngineSchema = z.object({
   updatedAt: z.date(),
 });
 
-export type _ComputeEngine = z.infer<typeof ComputeEngineSchema>;
+export type ComputeEngine = z.infer<typeof ComputeEngineSchema>;
 
 // Pre-configured AI Models for InternetFriends
 export const _InternetFriendsModels: Record<string, AIModel> = {
