@@ -2,7 +2,46 @@
 
 Epic-aware WebGL background system for InternetFriends, featuring theme-reactive palettes, effect cycling, and seamless integration with the InternetFriends design system.
 
-## 🚀 Quick Start
+## ⚠️ IMPORTANT: Centralized Configuration (2024)
+
+**The Gloo system has been consolidated for steadiest addressability:**
+
+### Production Usage (Recommended)
+```tsx
+import { GlooClient } from '@/app/(internetfriends)/components/gloo-client';
+
+// Single, centralized background component
+export default function Layout({ children }) {
+  return (
+    <div>
+      <GlooClient />
+      {children}
+    </div>
+  );
+}
+```
+
+### Centralized Defaults
+All productive parameters are now centralized in `config/gloo.defaults.ts`:
+- **Speed**: 0.4 (smooth, non-distracting)
+- **Resolution**: 2.0 (1.0 for Safari)
+- **Depth**: 4 (visual interest without complexity)
+- **Seed**: 2.4 (aesthetically pleasing patterns)
+- **DPR**: Auto-clamps to 1.0 on Safari for stability
+
+### Debug Parameter Overrides
+Use URL parameters to override defaults for testing:
+- `?glooEffect=3` - Force specific effect index
+- `?glooDpr=1` - Override device pixel ratio
+- `?glooResolution=1.0` - Override resolution
+- `?glooDebug=1` - Enable debug mode and overlays
+
+### Deprecated Components
+- ❌ `GlooBackgroundSimple` - Use `GlooClient` instead
+- ❌ `GlooIntegrationSimple` - Use `GlooClient` instead  
+- ❌ `GlooGlobalOrganism` - Use `GlooClient` for consistency
+
+## 🚀 Legacy Quick Start (For Reference)
 
 ```tsx
 import { GlooGlobal } from '@/components/gloo';

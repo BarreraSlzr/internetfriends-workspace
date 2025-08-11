@@ -105,6 +105,7 @@ export interface GlooCanvasProps {
   effectName?: GlooEffectName;
   width?: number;
   height?: number;
+  dpr?: number;
   className?: string;
   style?: React.CSSProperties;
   animate?: boolean;

@@ -1,19 +1,25 @@
 "use client";
 /**
- * background-simple.tsx - Simplified Gloo Background
+ * background-simple.tsx - Example Gloo Background Component
  *
- * Implements "Steadiest Addressability Agency" pattern from WebGL troubleshooting learnings:
+ * ⚠️ DEPRECATED: This is a development/example component.
+ * For production use, import GlooClient from '@/app/(internetfriends)/components/gloo-client'
  *
+ * This component demonstrates the "Steadiest Addressability Agency" pattern:
  * 1. Minimal configuration surface - Only essential props
  * 2. Once-on-mount randomization - Stable effect selection
  * 3. Productive defaults - Parameters that work reliably
  * 4. Clear client-only boundary - No SSR complications
  * 5. Brand color consistency - InternetFriends palette
  *
- * Usage:
- * <GlooBackgroundSimple />
- * <GlooBackgroundSimple zIndex={-10} />
- * <GlooBackgroundSimple disabled={reducedMotion} />
+ * @deprecated Use GlooClient instead
+ * @example
+ * // Instead of this:
+ * // <GlooBackgroundSimple />
+ *
+ * // Use this:
+ * import { GlooClient } from '@/app/(internetfriends)/components/gloo-client';
+ * <GlooClient />
  */
 
 import React, { useState, useEffect } from "react";
@@ -22,6 +28,9 @@ import { GlooCanvasAtomic } from "./canvas.atomic";
 import { effectFunctions } from "./effects";
 import type { GlooPalette } from "./types";
 
+/**
+ * @deprecated Use GlooClient instead
+ */
 interface GlooBackgroundSimpleProps {
   /** Z-index for positioning (default: -1) */
   zIndex?: number;
@@ -38,26 +47,33 @@ interface GlooBackgroundSimpleProps {
 // Productive brand colors as normalized RGB tuples (from legacy repo)
 const PRODUCTIVE_COLORS = {
   light: [
-    [235/255, 231/255, 92/255],   // Yellow
-    [223/255, 72/255, 67/255],    // Red
-    [235/255, 64/255, 240/255],   // Purple
+    [235 / 255, 231 / 255, 92 / 255], // Yellow
+    [223 / 255, 72 / 255, 67 / 255], // Red
+    [235 / 255, 64 / 255, 240 / 255], // Purple
   ] as const,
   dark: [
-    [235/255, 231/255, 92/255],   // Yellow (same - works in dark)
-    [255/255, 92/255, 87/255],    // Lighter red for dark mode
-    [255/255, 84/255, 255/255],   // Lighter purple for dark mode
+    [235 / 255, 231 / 255, 92 / 255], // Yellow (same - works in dark)
+    [255 / 255, 92 / 255, 87 / 255], // Lighter red for dark mode
+    [255 / 255, 84 / 255, 255 / 255], // Lighter purple for dark mode
   ] as const,
 };
 
 // Convert RGB tuples to hex for palette
-function tuplesToHexPalette(tuples: readonly [number, number, number][]): [string, string, string] {
-  return tuples.map(([r, g, b]) =>
-    '#' + [r * 255, g * 255, b * 255]
-      .map(c => Math.round(c).toString(16).padStart(2, '0'))
-      .join('')
+function tuplesToHexPalette(
+  tuples: readonly (readonly [number, number, number])[],
+): [string, string, string] {
+  return tuples.map(
+    ([r, g, b]) =>
+      "#" +
+      [r * 255, g * 255, b * 255]
+        .map((c) => Math.round(c).toString(16).padStart(2, "0"))
+        .join(""),
   ) as [string, string, string];
 }
 
+/**
+ * @deprecated Use GlooClient instead - this is kept for development/example purposes only
+ */
 export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
   zIndex = -1,
   disabled = false,
@@ -66,10 +82,14 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
   absolute = false,
 }) => {
   const { isDark } = useTheme();
+  const isSafari =
+    typeof navigator !== "undefined" &&
+    /Safari/.test(navigator.userAgent) &&
+    !/Chrome/.test(navigator.userAgent);
 
   // Once-on-mount effect randomization - key learning from troubleshooting
   const [effectIndex] = useState(() =>
-    Math.floor(Math.random() * effectFunctions.length)
+    Math.floor(Math.random() * effectFunctions.length),
   );
 
   // Respect reduced motion
@@ -89,12 +109,11 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
 
   // Generate theme-aware palette
   const palette: GlooPalette = {
-    colors: tuplesToHexPalette(PRODUCTIVE_COLORS[isDark ? 'dark' : 'light']),
+    colors: tuplesToHexPalette(PRODUCTIVE_COLORS[isDark ? "dark" : "light"]),
     strategy: "brand-triad",
     mode: isDark ? "dark" : "light",
     metadata: {
       generated: false,
-      source: "productive-legacy"
     },
   };
 
@@ -103,6 +122,13 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
   // Client-side only check
   if (typeof window === "undefined") return null;
 
+  // Development warning
+  if (process.env.NODE_ENV === "development") {
+    console.warn(
+      "⚠️ GlooBackgroundSimple is deprecated. Use GlooClient from gloo-client.tsx instead.",
+    );
+  }
+
   return (
     <div
       className={[
@@ -110,7 +136,9 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
         absolute ? "absolute inset-0" : "fixed inset-0",
         "pointer-events-none select-none",
         className || "",
-      ].filter(Boolean).join(" ")}
+      ]
+        .filter(Boolean)
+        .join(" ")}
       style={{
         zIndex,
         isolation: "isolate",
@@ -134,22 +162,17 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
         resolution={2.0}
         depth={4}
         seed={2.4}
-
         // Stable configuration
         effectIndex={effectIndex}
-        randomEffect={false}
-        autoEffectCycle={false}
         animate={shouldAnimate}
         still={!shouldAnimate}
-
         // Brand palette
         palette={palette}
-
         // Reduced motion support
         reducedMotion={!shouldAnimate}
-
         // Keep WebGL simple
         preserveDrawingBuffer={false}
+        dpr={isSafari ? 1 : undefined}
       />
 
       {/* Development debug info */}
@@ -166,11 +189,16 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
             border: "1px solid rgba(0, 255, 136, 0.3)",
           }}
         >
-          <div>🎭 Gloo Simple</div>
-          <div>Effect: {effectIndex}/{effectFunctions.length}</div>
+          <div>🎭 Gloo Simple (DEPRECATED)</div>
+          <div>
+            Effect: {effectIndex}/{effectFunctions.length}
+          </div>
           <div>Mode: {isDark ? "dark" : "light"}</div>
           <div>Animate: {shouldAnimate ? "yes" : "no"}</div>
           <div>Colors: {palette.colors.length}</div>
+          <div className="text-red-300 text-xs mt-1">
+            ⚠️ Use GlooClient instead
+          </div>
         </div>
       )}
     </div>
