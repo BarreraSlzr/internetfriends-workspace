@@ -1,15 +1,20 @@
 "use client";
 
-import { PropsWithChildren, useMemo } from "react";
+import { PropsWithChildren } from "react";
 import content from "../content.json";
 import NoiseFilter from "./backgrounds/noise-filter-div";
 import { motion } from "framer-motion";
 import { BgGoo } from "./backgrounds/gloo";
-import { getRandomColors } from "../lib/color-palette";
+import { HeroVignette } from "@/components/effects/dark-vignette";
 
 const DefaultHero = () => (
   <div className="text-3xl md:text-4xl lg:text-5xl leading-relaxed text-foreground">
-    <h1 className="font-bold">{content.hero.title}</h1>
+    <h1
+      className="font-bold font-[family:var(--font-display)] tracking-tight"
+      style={{ letterSpacing: "var(--letter-spacing-display, -0.015em)" }}
+    >
+      {content.hero.title}
+    </h1>
     <p className="text-lg mb-6 font-mono text-muted-foreground">
       {content.hero.description}
     </p>
@@ -24,26 +29,25 @@ export default function HeroText({
   children = <DefaultHero />,
   className,
 }: PropsWithChildren<Props>) {
-  const randomColors = useMemo(() => getRandomColors(), []);
+  // Adaptive teen mode: BgGoo will internally derive palette
   return (
     <section className={`relative min-h-[60vh] ${className}`}>
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 glass-stack">
-        <div
-          className="glass-layer-3 glass-noise-overlay"
-          data-strength="strong"
-        >
-          <NoiseFilter className="mix-blend-overlay" />
-        </div>
-        <BgGoo
-          speed={0.3}
-          resolution={2.0}
-          depth={2}
-          seed={0.4}
-          color1={randomColors[0]}
-          color2={randomColors[1]}
-          color3={randomColors[2]}
+        {/* Single ambient noise for entire page */}
+        <NoiseFilter
+          className="mix-blend-overlay"
+          role="ambient"
+          strength="normal"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background/80 backdrop-blur-[2px]" />
+        <BgGoo
+          modeStyle="teen"
+          adaptiveColors
+          speed={0.28}
+          intensity={1.0}
+          suspendOffscreen
+        />
+        <HeroVignette />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/50 to-background/70 backdrop-blur-[1px]" />
       </div>
       <motion.div
         initial={{ opacity: 0, y: 10 }}

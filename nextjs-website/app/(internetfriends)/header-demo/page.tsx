@@ -16,6 +16,9 @@ import {
   Phone,
 } from "lucide-react";
 
+// Force dynamic rendering to avoid SSG issues with complex hooks
+export const dynamic = "force-dynamic";
+
 const HeaderDemoPage: React.FC = () => {
   // Demo navigation items
   const navigationItems = [
