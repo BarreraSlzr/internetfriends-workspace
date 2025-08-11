@@ -19,12 +19,12 @@ import { effectFunctions } from "./gloo-effects";
 
 /**
  * GlooIntegration - Unified ambient background component
- * 
+ *
  * Integrates three rendering approaches:
  * - DOM: Framer Motion blobs (default, accessible)
- * - Canvas: 2D Canvas rendering (performance middle-ground)  
+ * - Canvas: 2D Canvas rendering (performance middle-ground)
  * - WebGL: Shader-based effects (high-performance, experimental)
- * 
+ *
  * Goals:
  * - Single API for all rendering modes
  * - Automatic fallback chain: WebGL → Canvas → DOM
@@ -47,47 +47,47 @@ export interface GlooIntegrationProps {
   /* Rendering Strategy */
   mode?: GooRenderMode; // "auto" by default - intelligent fallback
   fallbackChain?: GooRenderMode[]; // Custom fallback order
-  
+
   /* Visual Behavior */
   animate?: boolean; // true by default
-  variant?: GooVariant; // "balanced" by default  
+  variant?: GooVariant; // "balanced" by default
   quality?: GooQuality; // "medium" by default
   speed?: number; // 1.0 by default
   blendMode?: GooBlend;
   intensity?: number; // 1.0 by default
-  
+
   /* Performance & Motion */
   suspendOffscreen?: boolean; // true by default
   respectReducedMotion?: boolean; // true by default
   idleDelayMs?: number; // 0 by default
-  
+
   /* Color System */
   colors?: string | string[];
   palette?: RGB[]; // Direct RGB array
   adaptiveColors?: boolean; // false by default
   scheme?: "auto" | "light" | "dark"; // "auto" by default
-  
+
   /* WebGL Specific */
   shaderEffect?: string; // From gloo-effects.ts
   webglFallback?: boolean; // true by default
-  
-  /* Canvas Specific */ 
+
+  /* Canvas Specific */
   canvasBlur?: boolean; // true by default
   blobCount?: number; // Derived from variant if not set
-  
+
   /* DOM Specific */
   domOptimized?: boolean; // true by default - reduced DOM nodes when possible
-  
+
   /* Debug & Development */
   debug?: boolean; // false by default
   performanceMonitoring?: boolean; // false by default
-  
+
   /* Standard Props */
   className?: string;
   style?: CSSProperties;
   as?: ElementType;
   disabled?: boolean;
-  
+
   /* Epic Integration */
   epicContext?: {
     name?: string;
@@ -102,7 +102,7 @@ export interface GlooIntegrationProps {
 
 interface RenderCapabilities {
   webgl: boolean;
-  canvas: boolean; 
+  canvas: boolean;
   dom: boolean;
   webgl2: boolean;
   performanceAPI: boolean;
@@ -118,7 +118,7 @@ function detectRenderCapabilities(): RenderCapabilities {
       performanceAPI: false,
     };
   }
-  
+
   // Test WebGL
   let webgl = false;
   let webgl2 = false;
@@ -132,7 +132,7 @@ function detectRenderCapabilities(): RenderCapabilities {
     webgl = false;
     webgl2 = false;
   }
-  
+
   // Test 2D Canvas
   let canvas = false;
   try {
@@ -142,7 +142,7 @@ function detectRenderCapabilities(): RenderCapabilities {
   } catch (e) {
     canvas = false;
   }
-  
+
   return {
     webgl,
     canvas,
@@ -161,11 +161,11 @@ const WebGLGloo = lazy(() => import("./renderers/webgl-gloo").catch(() => ({
 })));
 
 const CanvasGloo = lazy(() => import("./renderers/canvas-gloo").catch(() => ({
-  default: () => <div data-gloo-error="canvas-load-failed" />  
+  default: () => <div data-gloo-error="canvas-load-failed" />
 })));
 
-// DOM renderer is imported directly since it's the fallback
-import { BgGoo } from "./gloo-dom-backup";
+// Use simplified BgGooSimple as fallback renderer
+import { BgGooSimple } from "./gloo-simple";
 
 /* -------------------------------------------------------
  * Performance Monitoring Hook
@@ -185,19 +185,19 @@ function useGlooPerformance(enabled: boolean, renderMode: string) {
     frameTime: 0,
     animationActive: false,
   });
-  
+
   const measureFrame = useCallback((startTime: number, endTime: number) => {
     if (!enabled) return;
-    
+
     metricsRef.current.frameTime = endTime - startTime;
     metricsRef.current.renderMode = renderMode;
-    
+
     // Log performance warnings in development
     if (process.env.NODE_ENV === "development" && metricsRef.current.frameTime > 16) {
       console.warn(`[GlooIntegration] Slow frame detected: ${metricsRef.current.frameTime.toFixed(2)}ms in ${renderMode} mode`);
     }
   }, [enabled, renderMode]);
-  
+
   return { metrics: metricsRef.current, measureFrame };
 }
 
