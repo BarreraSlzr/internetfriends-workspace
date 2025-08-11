@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { cardCss } from "./profile-card";
 
-export const _ProfileSkillsTab = () => {
+const ProfileSkillsTab = () => {
   return (
     <div className="flex flex-col gap-2">
       <div className={cardCss}>
@@ -14,7 +14,7 @@ export const _ProfileSkillsTab = () => {
           .map((skill, index) => (
             <Badge
               key={`skill-${index}`}
-              className="bg-brand-blue-100 text-brand-blue-800 hover:text-blue-100"
+              className="glass-stack glass-noise-overlay glass-layer-3 border-accent-medium text-foreground hover:border-accent-strong"
             >
               {skill?.name}
             </Badge>
@@ -23,3 +23,7 @@ export const _ProfileSkillsTab = () => {
     </div>
   );
 };
+
+export { ProfileSkillsTab };
+
+export default ProfileSkillsTab;

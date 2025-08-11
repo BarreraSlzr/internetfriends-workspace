@@ -1,8 +1,16 @@
 /* InternetFriends Theme Initialization System */
 /* SSR-safe theme setup with accent persistence and hydration alignment */
 
-import { initAccent, debugAccentSystem, type AccentMetrics } from './accent_engine';
-import { bindLogoAccentCycle, getCurrentAccentPreset, debugAccentCycling } from './accent_cycle';
+import {
+  initAccent,
+  debugAccentSystem,
+  type AccentMetrics,
+} from "./accent_engine";
+import {
+  bindLogoAccentCycle,
+  getCurrentAccentPreset,
+  debugAccentCycling,
+} from "./accent_cycle";
 
 // =================================================================
 // THEME INITIALIZATION STATE
@@ -21,7 +29,7 @@ let themeState: ThemeInitState = {
   isHydrated: false,
   initStartTime: 0,
   accentMetrics: null,
-  errors: []
+  errors: [],
 };
 
 // =================================================================
@@ -34,7 +42,7 @@ let themeState: ThemeInitState = {
  * @param accentHex - Accent color hex (from cookie or default)
  * @returns CSS string for <style> tag injection
  */
-export function generateInlineAccentCSS(accentHex: string = '#3b82f6'): string {
+export function generateInlineAccentCSS(accentHex: string = "#3b82f6"): string {
   // This is a simplified version that only includes critical accent variables
   // The full accent system will initialize on the client
 
@@ -55,7 +63,7 @@ export function generateInlineAccentCSS(accentHex: string = '#3b82f6'): string {
     }
   `;
 
-  return cssVars.replace(/\s+/g, ' ').trim();
+  return cssVars.replace(/\s+/g, " ").trim();
 }
 
 /**
@@ -63,31 +71,30 @@ export function generateInlineAccentCSS(accentHex: string = '#3b82f6'): string {
  * Should be called in a <script> tag in document <head>
  */
 export function earlyThemeInit(): void {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
 
   try {
     // Set loading state
-    document.documentElement.setAttribute('data-accent-loading', 'true');
+    document.documentElement.setAttribute("data-accent-loading", "true");
 
     // Try to get saved accent from localStorage
-    let savedAccent = '#3b82f6'; // default
+    let savedAccent = "#3b82f6"; // default
     try {
-      savedAccent = localStorage.getItem('if-accent-color') || '#3b82f6';
-    } catch (e) {
+      savedAccent = localStorage.getItem("if-accent-color") || "#3b82f6";
+    } catch {
       // localStorage access failed, use default
     }
 
     // Set initial data attribute to prevent mismatch with SSR
-    document.documentElement.setAttribute('data-accent', savedAccent);
+    document.documentElement.setAttribute("data-accent", savedAccent);
 
     // Mark as ready for CSS transitions
     setTimeout(() => {
-      document.documentElement.setAttribute('data-accent-ready', 'true');
-      document.documentElement.removeAttribute('data-accent-loading');
+      document.documentElement.setAttribute("data-accent-ready", "true");
+      document.documentElement.removeAttribute("data-accent-loading");
     }, 50);
-
   } catch (error) {
-    console.warn('Early theme init failed:', error);
+    console.warn("Early theme init failed:", error);
   }
 }
 
@@ -142,9 +149,9 @@ export interface ThemeInitOptions {
 const DEFAULT_INIT_OPTIONS: Required<ThemeInitOptions> = {
   enableAccentCycling: true,
   logoSelector: '[href="/"], .logo, [data-logo]',
-  debugMode: process.env.NODE_ENV === 'development',
+  debugMode: process.env.NODE_ENV === "development",
   onInitComplete: () => {},
-  onError: () => {}
+  onError: () => {},
 };
 
 /**
@@ -152,7 +159,9 @@ const DEFAULT_INIT_OPTIONS: Required<ThemeInitOptions> = {
  * @param options - Configuration options
  * @returns Promise that resolves when initialization is complete
  */
-export async function initThemeSystem(options: Partial<ThemeInitOptions> = {}): Promise<AccentMetrics> {
+export async function initThemeSystem(
+  options: Partial<ThemeInitOptions> = {},
+): Promise<AccentMetrics> {
   const config = { ...DEFAULT_INIT_OPTIONS, ...options };
 
   if (themeState.isInitialized) {
@@ -166,7 +175,7 @@ export async function initThemeSystem(options: Partial<ThemeInitOptions> = {}): 
   try {
     // Step 1: Initialize accent system
     if (config.debugMode) {
-      console.log('🎨 Initializing InternetFriends theme system...');
+      console.log("🎨 Initializing InternetFriends theme system...");
     }
 
     const accentMetrics = initAccent();
@@ -178,7 +187,7 @@ export async function initThemeSystem(options: Partial<ThemeInitOptions> = {}): 
         selector: config.logoSelector,
         enableKeyboard: true,
         enableTooltip: !config.debugMode, // No tooltip in debug mode to avoid console noise
-        debugMode: config.debugMode
+        debugMode: config.debugMode,
       });
     }
 
@@ -190,8 +199,8 @@ export async function initThemeSystem(options: Partial<ThemeInitOptions> = {}): 
     themeState.isHydrated = true;
 
     // Step 5: Clean up loading states
-    document.documentElement.removeAttribute('data-accent-loading');
-    document.documentElement.setAttribute('data-theme-ready', 'true');
+    document.documentElement.removeAttribute("data-accent-loading");
+    document.documentElement.setAttribute("data-theme-ready", "true");
 
     const initTime = performance.now() - themeState.initStartTime;
 
@@ -205,12 +214,12 @@ export async function initThemeSystem(options: Partial<ThemeInitOptions> = {}): 
     config.onInitComplete(accentMetrics);
 
     return accentMetrics;
-
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     themeState.errors.push(errorMessage);
 
-    console.error('❌ Theme system initialization failed:', error);
+    console.error("❌ Theme system initialization failed:", error);
     config.onError(errorMessage);
 
     // Return fallback metrics
@@ -219,8 +228,8 @@ export async function initThemeSystem(options: Partial<ThemeInitOptions> = {}): 
       baseSaturation: 89,
       baseLightness: 60,
       contrastRatio: 0,
-      accessibility: 'FAIL',
-      generationTime: performance.now() - themeState.initStartTime
+      accessibility: "FAIL",
+      generationTime: performance.now() - themeState.initStartTime,
     };
 
     themeState.accentMetrics = fallbackMetrics;
@@ -234,40 +243,44 @@ export async function initThemeSystem(options: Partial<ThemeInitOptions> = {}): 
  */
 function setupThemeChangeListeners(config: Required<ThemeInitOptions>): void {
   // Listen for accent changes
-  window.addEventListener('accentChange', (event) => {
+  window.addEventListener("accentChange", (event) => {
     const detail = (event as CustomEvent).detail;
 
     if (config.debugMode) {
-      console.log('🎨 Accent change detected:', detail);
+      console.log("🎨 Accent change detected:", detail);
     }
 
     // Update metrics
     themeState.accentMetrics = detail.metrics;
 
     // Dispatch to other parts of the app
-    window.dispatchEvent(new CustomEvent('themeUpdate', {
-      detail: {
-        type: 'accent',
-        accent: detail.preset,
-        metrics: detail.metrics
-      }
-    }));
+    window.dispatchEvent(
+      new CustomEvent("themeUpdate", {
+        detail: {
+          type: "accent",
+          accent: detail.preset,
+          metrics: detail.metrics,
+        },
+      }),
+    );
   });
 
   // Listen for system theme changes
-  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  mediaQuery.addEventListener('change', (e) => {
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  mediaQuery.addEventListener("change", (e) => {
     if (config.debugMode) {
-      console.log('🌙 System theme changed to:', e.matches ? 'dark' : 'light');
+      console.log("🌙 System theme changed to:", e.matches ? "dark" : "light");
     }
 
     // Future: Handle automatic dark mode switching
-    window.dispatchEvent(new CustomEvent('themeUpdate', {
-      detail: {
-        type: 'system',
-        darkMode: e.matches
-      }
-    }));
+    window.dispatchEvent(
+      new CustomEvent("themeUpdate", {
+        detail: {
+          type: "system",
+          darkMode: e.matches,
+        },
+      }),
+    );
   });
 }
 
@@ -308,14 +321,14 @@ export function resetThemeSystem(): void {
     isHydrated: false,
     initStartTime: 0,
     accentMetrics: null,
-    errors: []
+    errors: [],
   };
 
   // Clean up DOM attributes
-  if (typeof document !== 'undefined') {
-    document.documentElement.removeAttribute('data-theme-ready');
-    document.documentElement.removeAttribute('data-accent-ready');
-    document.documentElement.removeAttribute('data-accent-loading');
+  if (typeof document !== "undefined") {
+    document.documentElement.removeAttribute("data-theme-ready");
+    document.documentElement.removeAttribute("data-accent-ready");
+    document.documentElement.removeAttribute("data-accent-loading");
   }
 }
 
@@ -341,7 +354,7 @@ export function useThemeInit(options: Partial<ThemeInitOptions> = {}) {
 
     // Methods
     reinitialize: () => initThemeSystem(options),
-    reset: resetThemeSystem
+    reset: resetThemeSystem,
   };
 }
 
@@ -354,7 +367,9 @@ export function useThemeInit(options: Partial<ThemeInitOptions> = {}) {
  * @param timeout - Maximum time to wait in milliseconds
  * @returns Promise that resolves when theme is ready
  */
-export function waitForThemeReady(timeout: number = 5000): Promise<AccentMetrics> {
+export function waitForThemeReady(
+  timeout: number = 5000,
+): Promise<AccentMetrics> {
   return new Promise((resolve, reject) => {
     if (themeState.isInitialized && themeState.accentMetrics) {
       resolve(themeState.accentMetrics);
@@ -366,7 +381,7 @@ export function waitForThemeReady(timeout: number = 5000): Promise<AccentMetrics
       if (themeState.isInitialized && themeState.accentMetrics) {
         resolve(themeState.accentMetrics);
       } else if (Date.now() - startTime > timeout) {
-        reject(new Error('Theme system initialization timeout'));
+        reject(new Error("Theme system initialization timeout"));
       } else {
         setTimeout(checkReady, 50);
       }
@@ -382,12 +397,14 @@ export function waitForThemeReady(timeout: number = 5000): Promise<AccentMetrics
  */
 export function getThemePerformanceMetrics() {
   return {
-    initializationTime: themeState.initStartTime > 0 ?
-      (performance.now() - themeState.initStartTime) : null,
+    initializationTime:
+      themeState.initStartTime > 0
+        ? performance.now() - themeState.initStartTime
+        : null,
     accentGenerationTime: themeState.accentMetrics?.generationTime || null,
     isInitialized: themeState.isInitialized,
     isHydrated: themeState.isHydrated,
-    errorCount: themeState.errors.length
+    errorCount: themeState.errors.length,
   };
 }
 
@@ -403,13 +420,13 @@ export const ThemeDebug = {
    * Log complete theme system state
    */
   logState(): void {
-    console.group('🎨 Theme System State');
-    console.log('Initialization:', themeState);
-    console.log('Performance:', getThemePerformanceMetrics());
-    console.log('DOM State:', {
-      accentReady: document.documentElement.hasAttribute('data-accent-ready'),
-      themeReady: document.documentElement.hasAttribute('data-theme-ready'),
-      currentAccent: document.documentElement.getAttribute('data-accent')
+    console.group("🎨 Theme System State");
+    console.log("Initialization:", themeState);
+    console.log("Performance:", getThemePerformanceMetrics());
+    console.log("DOM State:", {
+      accentReady: document.documentElement.hasAttribute("data-accent-ready"),
+      themeReady: document.documentElement.hasAttribute("data-theme-ready"),
+      currentAccent: document.documentElement.getAttribute("data-accent"),
     });
     console.groupEnd();
   },
@@ -417,8 +434,10 @@ export const ThemeDebug = {
   /**
    * Force re-initialization (development only)
    */
-  async forceReinit(options?: Partial<ThemeInitOptions>): Promise<AccentMetrics> {
-    console.warn('🔄 Force re-initializing theme system...');
+  async forceReinit(
+    options?: Partial<ThemeInitOptions>,
+  ): Promise<AccentMetrics> {
+    console.warn("🔄 Force re-initializing theme system...");
     resetThemeSystem();
     return await initThemeSystem(options);
   },
@@ -427,12 +446,13 @@ export const ThemeDebug = {
    * Test accent cycling
    */
   testCycling(): void {
-    console.log('🔄 Testing accent cycling...');
+    console.log("🔄 Testing accent cycling...");
     debugAccentCycling();
-  }
+  },
 };
 
 // Make debug utilities available globally in development
-if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
-  (window as any).ThemeDebug = ThemeDebug;
+if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+  (window as unknown as { ThemeDebug: typeof ThemeDebug }).ThemeDebug =
+    ThemeDebug;
 }

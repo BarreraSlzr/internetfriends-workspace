@@ -2,7 +2,7 @@ import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
 import { cardCss } from "./profile-card";
 
-export const _ProfileProjectsTab = () => {
+const ProfileProjectsTab = () => {
   const skillsMap = new Map(
     curriculum.skills.map((skill) => [skill.id, skill]),
   );
@@ -15,7 +15,7 @@ export const _ProfileProjectsTab = () => {
     return sortedSkills.map((skill) => (
       <Badge
         key={skill?.id}
-        className="bg-brand-blue-100 text-brand-blue-800 hover:text-blue-100"
+        className="glass-stack glass-noise-overlay glass-layer-3 border-accent-medium text-foreground hover:border-accent-strong"
       >
         {skill?.name}
       </Badge>
@@ -50,3 +50,7 @@ export const _ProfileProjectsTab = () => {
     </div>
   );
 };
+
+export { ProfileProjectsTab };
+
+export default ProfileProjectsTab;

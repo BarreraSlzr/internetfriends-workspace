@@ -1,16 +1,10 @@
 "use client";
 
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  createContext,
-  useContext,
-} from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
-  Menu,
   X,
   Search,
   Globe,
@@ -20,7 +14,6 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { HeaderAtomic } from "@/components/atomic/header";
 import { ButtonAtomic } from "@/components/atomic/button";
 import { NavigationMolecular } from "@/components/molecular/navigation";
 import { useTheme } from "@/hooks/use-theme";
@@ -139,7 +132,7 @@ const ThemeToggle: React.FC<{
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
             {themeOptions.map((option) => (
-              < key={index}button
+              <button
                 key={option.value}
                 onClick={() => {
                   setTheme(option.value);
@@ -170,7 +163,7 @@ const ThemeToggle: React.FC<{
 const LanguageSelector: React.FC<{
   config?: HeaderOrganismProps["languageSelector"];
 }> = ({ config }) => {
-  const { _locale: currentLocale, setLocale, t } = useI18n();
+  const { locale: currentLocale, setLocale, t } = useI18n();
   const availableLocales = Object.values(LOCALES);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -213,11 +206,11 @@ const LanguageSelector: React.FC<{
             aria-hidden="true"
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
-            {availableLocales.map((lang: unknown) => (
-              < key={index}button
+            {availableLocales.map((lang) => (
+              <button
                 key={lang.code}
                 onClick={() => {
-                  setLocale(lang.code);
+                  setLocale(lang.code as "fr" | "en" | "es");
                   setIsOpen(false);
                 }}
                 className={cn(
@@ -228,7 +221,7 @@ const LanguageSelector: React.FC<{
                     "bg-if-primary-light text-if-primary",
                 )}
               >
-                {lang.flag && <span className="text-lg">{lang.flag}</span>}
+                <span className="text-lg">{lang.flag}</span>
                 <span>{lang.name}</span>
                 <span className="text-xs opacity-75 uppercase ml-auto">
                   {lang.code}
@@ -319,9 +312,9 @@ const AnnouncementBar: React.FC<{
 
   const variantStyles = {
     info: "bg-blue-50 text-blue-900 border-blue-200",
-    _warning: "bg-yellow-50 text-yellow-900 border-yellow-200",
-    _success: "bg-green-50 text-green-900 border-green-200",
-    _error: "bg-red-50 text-red-900 border-red-200",
+    warning: "bg-yellow-50 text-yellow-900 border-yellow-200",
+    success: "bg-green-50 text-green-900 border-green-200",
+    error: "bg-red-50 text-red-900 border-red-200",
   };
 
   return (
@@ -337,7 +330,7 @@ const AnnouncementBar: React.FC<{
       {config.content}
       {config.dismissible && (
         <button
-          onClick={(_e) => {
+          onClick={(e) => {
             e.stopPropagation();
             setIsVisible(false);
           }}
@@ -378,7 +371,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
 
   // Header state
   const [headerState, setHeaderState] = useState<HeaderState>({
-    isSticky: false,
+    isSticky: true,
     isMobileMenuOpen: false,
     scrollPosition: 0,
     isHidden: false,
@@ -386,6 +379,10 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
     searchQuery: "",
     isAnnouncementVisible: announcement?.show || false,
   });
+
+  // Simple orb effect state (scale + margin shift)
+  const [orbActive, setOrbActive] = useState(false);
+  const [mouseX, setMouseX] = useState(0);
 
   // Scroll handler for sticky behavior
   useEffect(() => {
@@ -407,6 +404,9 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
         scrollPosition: scrollY,
       }));
 
+      // Activate orb effect when scrolled
+      setOrbActive(scrollY > 50);
+
       lastScrollY = scrollY;
       ticking = false;
     };
@@ -418,37 +418,62 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { _passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [sticky?.enabled, sticky?.offset, sticky?.hideOnScroll]);
+
+  // Mouse/touch position handler for orb effect
+  const handlePointerMove = (
+    e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>,
+  ) => {
+    if (!orbActive) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.width / 2;
+
+    // Handle both mouse and touch events
+    const clientX = "clientX" in e ? e.clientX : e.touches[0]?.clientX || 0;
+    const relativeX = clientX - rect.left - centerX;
+
+    // Normalize to -1 to 1, then scale for margin effect
+    const normalizedX = Math.max(-1, Math.min(1, relativeX / centerX));
+    setMouseX(normalizedX * 16); // Max 16px shift for subtlety
+  };
+
+  // Reset orb position when leaving header
+  const handlePointerLeave = () => {
+    setMouseX(0);
+  };
 
   // Context value
   const contextValue: HeaderContextValue = {
     ...headerState,
-    _toggleMobileMenu: () =>
+    toggleMobileMenu: () =>
       setHeaderState((prev) => ({
         ...prev,
         isMobileMenuOpen: !prev.isMobileMenuOpen,
       })),
     closeMobileMenu: () =>
-      setHeaderState((prev) => ({ ...prev, isMobileMenuOpen: false })),
+      setHeaderState((prev) => ({
+        ...prev,
+        isMobileMenuOpen: false,
+      })),
     toggleSearch: () =>
       setHeaderState((prev) => ({
         ...prev,
         isSearchActive: !prev.isSearchActive,
       })),
-    _setSearchQuery: (query: string) =>
+    setSearchQuery: (query: string) =>
       setHeaderState((prev) => ({ ...prev, searchQuery: query })),
-    _dismissAnnouncement: () =>
+    dismissAnnouncement: () =>
       setHeaderState((prev) => ({ ...prev, isAnnouncementVisible: false })),
-    _updateState: (updates: Partial<HeaderState>) =>
+    updateState: (updates: Partial<HeaderState>) =>
       setHeaderState((prev) => ({ ...prev, ...updates })),
   };
 
   // Close mobile menu on route change
   useEffect(() => {
     contextValue.closeMobileMenu();
-  }, [pathname]);
+  }, [pathname, contextValue]);
 
   // Header size styles
   const sizeStyles = {
@@ -472,11 +497,15 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   return (
     <HeaderContext.Provider value={contextValue}>
       <header
+        onMouseMove={handlePointerMove}
+        onTouchMove={handlePointerMove}
+        onMouseLeave={handlePointerLeave}
+        onTouchEnd={handlePointerLeave}
         className={cn(
           styles.headerOrganism,
           sizeStyles[size],
-          "w-full z-40 transition-all duration-300",
-          sticky?.enabled && "sticky top-0",
+          "w-full z-40 transition-all duration-500 ease-out",
+          "sticky top-0",
           headerState.isSticky && sticky?.stickyClassName,
           headerState.isHidden && "transform -translate-y-full",
           variant === "glass" &&
@@ -490,10 +519,16 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
             "bg-glass-bg-header backdrop-blur-glass",
           className,
         )}
-        _style={{
+        style={{
           transitionDuration: sticky?.transitionDuration,
+          transform: orbActive ? `scale(0.82)` : "scale(1)",
+          marginLeft: orbActive ? `${mouseX}px` : "0px",
+          marginRight: orbActive ? `${-mouseX}px` : "0px",
+          marginTop: orbActive ? "8px" : "0px",
+          borderRadius: orbActive ? "var(--radius-md)" : "0",
         }}
         data-testid={testId}
+        data-orb-active={orbActive}
         id={id}
         aria-label={ariaLabel || t("accessibility.skipToContent")}
         {...props}
@@ -518,7 +553,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
                 onClick={logo.onClick}
               >
                 {logo.src ? (
-                  <img
+                  <Image
                     src={logo.src}
                     alt={logo.alt || "Logo"}
                     width={logo.width || 32}
@@ -584,4 +619,4 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   );
 };
 
-HeaderOrganism._displayName = "HeaderOrganism";
+HeaderOrganism.displayName = "HeaderOrganism";

@@ -2,21 +2,22 @@
 // InternetFriends Integration Demonstration Script
 // Showcases the power of curl testing + event-driven compute system
 
-import { z } from "zod";
+// import { z } from "zod"; // Unused for now
 import {
   CurlTestRunner,
   InternetFriendsTestSuites,
 } from "../tests/curl/curl.test.runner";
 import {
-  ComputeEventManager,
-  ComputeOperations,
+  // ComputeEventManager, // Unused
+  // ComputeOperations, // Unused
   computeManager,
+  ComputeJob,
 } from "../lib/events/compute.events";
 import {
   eventSystem,
   emit,
-  on,
-  off,
+  // on, // Unused
+  // off, // Unused
   EventType,
   UIEvents,
   APIEvents,
@@ -93,15 +94,18 @@ class DemoStatsCollector {
 
 // Event Monitor for Demo
 class DemoEventMonitor {
-  private eventLog: Array<{ type: EventType; timestamp: number; data: any }> =
-    [];
+  private eventLog: Array<{
+    type: EventType;
+    timestamp: number;
+    data: unknown;
+  }> = [];
   private handlerIds: string[] = [];
 
   start() {
     console.log("📡 Starting event monitoring...");
 
     // Monitor all events
-    const globalHandlerId = eventSystem.onAll((event: any) => {
+    const globalHandlerId = eventSystem.onAll((event) => {
       this.eventLog.push({
         type: event.type,
         timestamp: Date.now(),
@@ -112,26 +116,32 @@ class DemoEventMonitor {
     this.handlerIds.push(globalHandlerId);
 
     // Monitor specific compute events
+    // Monitor compute jobs
     const computeHandlerId = eventSystem.on(
       "compute.job_completed",
-      (event: any) => {
+      (event) => {
+        const data = event.data as { jobId: string; processingTime: number };
         console.log(
-          `  ✅ Job ${event.data.jobId} completed in ${event.data.processingTime}ms`,
+          `  💼 Job ${data.jobId} completed in ${data.processingTime}ms`,
         );
       },
     );
 
     this.handlerIds.push(computeHandlerId);
 
-    // Monitor API events
-    const apiHandlerId = eventSystem.on(
-      "api.request_complete",
-      (event: any) => {
-        console.log(
-          `  🌐 ${event.data.method} ${event.data.url} → ${event.data.status} (${event.data.responseTime}ms)`,
-        );
-      },
-    );
+    // Monitor API requests
+    const apiHandlerId = eventSystem.on("api.request_complete", (event) => {
+      const data = event.data as {
+        url: string;
+        statusCode: number;
+        responseTime: number;
+        method?: string;
+        status?: number;
+      };
+      console.log(
+        `  🌐 ${data.method || "GET"} ${data.url} → ${data.status || data.statusCode} (${data.responseTime}ms)`,
+      );
+    });
 
     this.handlerIds.push(apiHandlerId);
   }
@@ -148,7 +158,7 @@ class DemoEventMonitor {
 
   getRecentEvents(
     count: number = 10,
-  ): Array<{ type: EventType; timestamp: number; data: any }> {
+  ): Array<{ type: EventType; timestamp: number; data: unknown }> {
     return this.eventLog.slice(-count);
   }
 }
@@ -230,17 +240,21 @@ class InternetFriendsIntegrationDemo {
     console.log("  ✅ Event monitoring active");
 
     // Register demo job handlers
-    computeManager.registerJobHandler("api.request", async (job: any) => {
+    computeManager.registerJobHandler("api.request", async (job) => {
+      const payload = job as ComputeJob;
+      const data = payload.payload as { url?: string } | undefined;
       await this.sleep(Math.random() * 500 + 100); // 100-600ms processing time
       return {
-        url: job.payload.url,
+        url: data?.url || "unknown",
         result: "processed",
         timestamp: Date.now(),
       };
     });
 
-    computeManager.registerJobHandler("data.processing", async (job: any) => {
-      const items = job.payload.items || 100;
+    computeManager.registerJobHandler("data.processing", async (job) => {
+      const payload = job as ComputeJob;
+      const data = payload.payload as { items?: number } | undefined;
+      const items = data?.items || 100;
       await this.sleep(items * 2); // 2ms per item
       return {
         itemsProcessed: items,
@@ -258,13 +272,17 @@ class InternetFriendsIntegrationDemo {
     try {
       // Run health check tests with default properties
       const healthCheckTests = InternetFriendsTestSuites.healthCheck.map(
-        (test: any) => ({
-          ...test,
-          timeout: test.timeout || 10000,
-          followRedirects: test.followRedirects ?? true,
-          insecure: test.insecure ?? false,
-          retries: test.retries || 3,
-          retryDelay: test.retryDelay || 1000,
+        (test) => ({
+          name: test.name,
+          url: test.url,
+          method: test.method,
+          expectedStatus: test.expectedStatus,
+          bodyContains: test.bodyContains,
+          timeout: 10000,
+          followRedirects: true,
+          insecure: false,
+          retries: 3,
+          retryDelay: 1000,
         }),
       );
       const healthResults = await this.curlRunner.runTests(healthCheckTests);
@@ -575,7 +593,7 @@ if (import.meta.main) {
       throw new Error(`Server responded with ${testResponse.status}`);
     }
     console.log(`✅ Server accessible at ${DEMO_CONFIG.baseUrl}`);
-  } catch (error) {
+  } catch {
     console.log(
       `⚠️  Warning: Server may not be running at ${DEMO_CONFIG.baseUrl}`,
     );

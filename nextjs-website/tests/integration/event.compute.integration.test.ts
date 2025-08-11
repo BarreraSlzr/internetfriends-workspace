@@ -6,21 +6,22 @@ import { describe, test, expect, beforeAll, afterAll } from "bun:test";
 import { z } from "zod";
 import {
   CurlTestRunner,
-  InternetFriendsTestSuites,
+  // InternetFriendsTestSuites, // Unused
 } from "../curl/curl.test.runner";
 import {
-  ComputeEventManager,
+  // ComputeEventManager, // Unused
   ComputeOperations,
   computeManager,
+  ComputeJob,
 } from "../../lib/events/compute.events";
 import {
   eventSystem,
-  emit,
-  on,
+  // emit, // Unused
+  // on, // Unused
   EventType,
   UIEvents,
   APIEvents,
-  ComputeEvents,
+  // ComputeEvents, // Unused
 } from "../../lib/events/event.system";
 
 // Test Configuration
@@ -32,6 +33,7 @@ const TEST_CONFIG = {
 };
 
 // Integration Test Suite Schema
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const IntegrationTestSuiteSchema = z.object({
   name: z.string(),
   description: z.string(),
@@ -39,7 +41,7 @@ const IntegrationTestSuiteSchema = z.object({
     z.object({
       name: z.string(),
       type: z.enum(["curl", "event", "compute", "hybrid"]),
-      config: z.record(z.string(), z.any()),
+      config: z.record(z.string(), z.unknown()),
       expectations: z.array(
         z.object({
           type: z.enum(["response", "event", "performance", "resource"]),
@@ -51,6 +53,7 @@ const IntegrationTestSuiteSchema = z.object({
   ),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type IntegrationTestSuite = z.infer<typeof IntegrationTestSuiteSchema>;
 
 // Test Results Collector
@@ -62,7 +65,7 @@ class TestResultsCollector {
     success: boolean;
     duration: number;
     error?: string;
-    metrics?: Record<string, any>;
+    metrics?: Record<string, unknown>;
     timestamp: Date;
   }> = [];
 
@@ -73,7 +76,7 @@ class TestResultsCollector {
     success: boolean,
     duration: number,
     error?: string,
-    metrics?: Record<string, any>,
+    metrics?: Record<string, unknown>,
   ) {
     this.results.push({
       suite,
@@ -160,20 +163,22 @@ class TestResultsCollector {
 class EventTracker {
   private events: Array<{
     type: EventType;
-    data: any;
+    data: unknown;
     timestamp: Date;
   }> = [];
   private handlerIds: string[] = [];
 
   startTracking(): void {
     // Track all events
-    const handlerId = eventSystem.onAll((event: any) => {
-      this.events.push({
-        type: event.type,
-        data: event.data,
-        timestamp: new Date(),
-      });
-    });
+    const handlerId = eventSystem.onAll(
+      (event: { type: EventType; data: unknown }) => {
+        this.events.push({
+          type: event.type,
+          data: event.data,
+          timestamp: new Date(),
+        });
+      },
+    );
 
     this.handlerIds.push(handlerId);
   }
@@ -183,13 +188,13 @@ class EventTracker {
     this.handlerIds = [];
   }
 
-  getEvents(): Array<{ type: EventType; data: any; timestamp: Date }> {
+  getEvents(): Array<{ type: EventType; data: unknown; timestamp: Date }> {
     return [...this.events];
   }
 
   getEventsByType(
     type: EventType,
-  ): Array<{ type: EventType; data: any; timestamp: Date }> {
+  ): Array<{ type: EventType; data: unknown; timestamp: Date }> {
     return this.events.filter((e) => e.type === type);
   }
 
@@ -197,13 +202,13 @@ class EventTracker {
     this.events = [];
   }
 
-  waitForEvent(type: EventType, timeout: number = 5000): Promise<any> {
+  waitForEvent(type: EventType, timeout: number = 5000): Promise<unknown> {
     return new Promise((resolve, reject) => {
       const timeoutId = setTimeout(() => {
         reject(new Error(`Timeout waiting for event: ${type}`));
       }, timeout);
 
-      const handlerId = eventSystem.on(type, (event: any) => {
+      const handlerId = eventSystem.on(type, (event: unknown) => {
         clearTimeout(timeoutId);
         eventSystem.off(handlerId);
         resolve(event);
@@ -393,7 +398,7 @@ describe("InternetFriends Integration Tests", () => {
       const startTime = Date.now();
 
       // Register a test job handler
-      computeManager.registerJobHandler("test.execution", async (job: any) => {
+      computeManager.registerJobHandler("test.execution", async () => {
         await new Promise((resolve) => setTimeout(resolve, 100)); // Simulate work
         return {
           testsRun: 10,
@@ -564,7 +569,7 @@ describe("InternetFriends Integration Tests", () => {
       });
 
       // Submit compute job as if triggered by the HTTP request
-      const jobId = await ComputeOperations.processData(
+      await ComputeOperations.processData(
         { userId: "test-user-123", action: "load-dashboard" },
         "user-analytics",
         {
@@ -625,12 +630,15 @@ describe("InternetFriends Integration Tests", () => {
       );
 
       // Register handler that fails
-      computeManager.registerJobHandler("test.execution", async (job: any) => {
-        if (job.payload?.shouldFail) {
-          throw new Error("Simulated job failure");
-        }
-        return { success: true };
-      });
+      computeManager.registerJobHandler(
+        "test.execution",
+        async (job: ComputeJob) => {
+          if (job.payload?.shouldFail) {
+            throw new Error("Simulated job failure");
+          }
+          return { success: true };
+        },
+      );
 
       // 2. Make HTTP request that should return error
       const httpErrorResult = await curlRunner.runTest({
@@ -727,8 +735,11 @@ describe("InternetFriends Integration Tests", () => {
           avgResponseTime:
             results
               .filter((r) => r.status === "fulfilled")
-              .reduce((sum, r) => sum + (r.value as any).responseTime, 0) /
-            successfulRequests,
+              .reduce(
+                (sum, r) =>
+                  sum + (r.value as { responseTime: number }).responseTime,
+                0,
+              ) / successfulRequests,
         },
       );
 
@@ -744,10 +755,13 @@ describe("InternetFriends Integration Tests", () => {
       const jobCount = 20;
 
       // Register fast job handler
-      computeManager.registerJobHandler("data.processing", async (job: any) => {
-        await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms work
-        return { processed: job.payload?.items || 100 };
-      });
+      computeManager.registerJobHandler(
+        "data.processing",
+        async (job: ComputeJob) => {
+          await new Promise((resolve) => setTimeout(resolve, 50)); // 50ms work
+          return { processed: job.payload?.items || 100 };
+        },
+      );
 
       // Submit multiple jobs simultaneously
       const jobPromises = Array.from({ length: jobCount }, (_, i) =>
@@ -766,7 +780,7 @@ describe("InternetFriends Integration Tests", () => {
 
       const completionHandler = eventSystem.on(
         "compute.job_completed",
-        (event: any) => {
+        (event: { data: { jobId: string } }) => {
           if (jobIds.includes(event.data.jobId)) {
             completedJobs++;
             completedJobIds.push(event.data.jobId);

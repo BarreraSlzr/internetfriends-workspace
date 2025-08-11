@@ -1,11 +1,13 @@
 # InternetFriends Project Structure Summary
 
 ## Overview
+
 This document provides a comprehensive overview of the InternetFriends project structure, showcasing the integration between shadcn/ui components and our custom atomic design system with snake_case.dots naming convention.
 
 ## 🏗️ Architecture Philosophy
 
 ### Design System Integration
+
 - **shadcn/ui Base**: Unstyled, accessible foundation components
 - **Atomic Layer**: Custom branded extensions with InternetFriends styling
 - **Molecular Layer**: Composed components for common UI patterns
@@ -13,6 +15,7 @@ This document provides a comprehensive overview of the InternetFriends project s
 - **Template Layer**: Page-level compositions
 
 ### Key Principles
+
 1. **Atomic Design**: Hierarchical component composition
 2. **Glass Morphism**: Translucent backgrounds with backdrop-filter
 3. **Compact Radius**: Maximum 12px border radius for backgrounds
@@ -89,16 +92,25 @@ website/
 │       └── types.ts                # 🔄 TODO: API types
 │
 ├── 📁 styles/                      # Global Styles & Design System
-│   ├── globals.scss                # 🔄 TODO: Global SCSS
-│   ├── variables.scss              # 🔄 TODO: SCSS variables
-│   ├── mixins.scss                 # 🔄 TODO: SCSS mixins
-│   ├── 📁 themes/                  # Theme definitions
-│   │   ├── light.scss              # 🔄 TODO: Light theme
-│   │   ├── dark.scss               # 🔄 TODO: Dark theme
-│   │   └── index.scss              # 🔄 TODO: Theme exports
-│   └── 📁 components/              # Component-specific styles
-│       ├── base.scss               # 🔄 TODO: Base styles
-│       └── utilities.scss          # 🔄 TODO: Utility classes
+│   ├── index.scss                  # ✅ COMPLETED: Design system aggregation
+│   ├── 📁 legacy/                  # DEPRECATED: Scheduled for deletion
+│   │   ├── README.md               # Migration guide
+│   │   ├── variables.scss          # DEPRECATED: Use tokens/* modules
+│   │   └── mixins.scss             # DEPRECATED: Use mixins/* modules
+│   ├── 📁 tokens/                  # ✅ COMPLETED: Design Token Modules
+│   │   ├── colors.scss             # Brand colors, themes, glass morphism
+│   │   ├── spacing.scss            # Layout, radius, breakpoints, z-index
+│   │   ├── typography.scss         # Font sizes, shadows, animations
+│   │   ├── fonts.scss              # Font families, semantic tokens
+│   │   └── accent.scss             # Dynamic accent system
+│   ├── 📁 mixins/                  # ✅ COMPLETED: Modular Mixin Libraries
+│   │   ├── focus.scss              # Focus states (Mermaid-inspired)
+│   │   ├── media.scss              # Responsive breakpoints, queries
+│   │   └── components.scss         # Button, card, input, glass patterns
+│   └── 📁 themes/                  # Theme definitions
+│       ├── light.scss              # 🔄 TODO: Light theme
+│       ├── dark.scss               # 🔄 TODO: Dark theme
+│       └── index.scss              # 🔄 TODO: Theme exports
 │
 ├── 📁 types/                       # TypeScript Definitions
 │   ├── index.ts                    # ✅ COMPLETED: Global types
@@ -125,24 +137,26 @@ website/
 ## 🎨 Design System Implementation
 
 ### Color System ("Coin of Value")
+
 ```scss
 // Primary brand colors
---if-primary: #3b82f6;              // Main brand blue
---if-primary-hover: #2563eb;        // Hover state
---if-primary-light: rgba(59, 130, 246, 0.08);  // Light backgrounds
+--if-primary: #3b82f6; // Main brand blue
+--if-primary-hover: #2563eb; // Hover state
+--if-primary-light: rgba(59, 130, 246, 0.08); // Light backgrounds
 
 // Glass morphism system
 --glass-bg-header: rgba(255, 255, 255, 0.85);
 --glass-border: rgba(255, 255, 255, 0.12);
 
 // Compact radius (max 12px for backgrounds)
---radius-xs: 0.25rem;   // 4px
---radius-sm: 0.375rem;  // 6px
---radius-md: 0.5rem;    // 8px
---radius-lg: 0.75rem;   // 12px (maximum)
+--radius-xs: 0.25rem; // 4px
+--radius-sm: 0.375rem; // 6px
+--radius-md: 0.5rem; // 8px
+--radius-lg: 0.75rem; // 12px (maximum)
 ```
 
 ### Component Architecture
+
 ```tsx
 // Example: Atomic Button extending shadcn/ui
 import { Button as ShadcnButton } from '@/components/ui/button';
@@ -156,6 +170,7 @@ import { ButtonAtomic } from '@/components/atomic/button';
 ## 🔧 Development Workflow
 
 ### Component Creation Process
+
 1. **Start with shadcn/ui**: `npx shadcn@latest add button`
 2. **Create atomic variant**: Extend with InternetFriends styling
 3. **Build molecular**: Compose atomic components
@@ -163,33 +178,36 @@ import { ButtonAtomic } from '@/components/atomic/button';
 5. **Design templates**: Page layouts using organisms
 
 ### File Naming Conventions
+
 - **Components**: `[name].[level].tsx` (e.g., `button.atomic.tsx`)
 - **Styles**: `[name].styles.module.scss`
 - **Types**: `types.ts` or `[name].types.ts`
 - **Exports**: `index.ts` for clean imports
 
 ### Import Patterns
+
 ```tsx
 // shadcn/ui base components
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 // Atomic components
-import { ButtonAtomic } from '@/atomic/button';
+import { ButtonAtomic } from "@/atomic/button";
 
 // Molecular components
-import { NavigationMolecular } from '@/molecular/navigation';
+import { NavigationMolecular } from "@/molecular/navigation";
 
 // Organisms
-import { HeaderOrganism } from '@/organisms/header';
+import { HeaderOrganism } from "@/organisms/header";
 
 // Hooks and utilities
-import { useTheme } from '@/hooks/use-theme';
-import { cn } from '@/lib/utils/cn';
+import { useTheme } from "@/hooks/use-theme";
+import { cn } from "@/lib/utils/cn";
 ```
 
 ## 📋 Current Status & Next Steps
 
 ### ✅ Completed (Foundation)
+
 - [x] Project architecture setup
 - [x] Type system foundation
 - [x] Constants and design tokens
@@ -198,6 +216,7 @@ import { cn } from '@/lib/utils/cn';
 - [x] Path aliases configuration
 
 ### 🎯 Priority: Organism Components (16-24 hours)
+
 1. **Header Organism** - Site navigation and branding
 2. **Hero Section** - Landing page hero with CTAs
 3. **Features Section** - Service/product showcases
@@ -206,18 +225,21 @@ import { cn } from '@/lib/utils/cn';
 6. **Footer Section** - Site footer with links
 
 ### 🔄 Phase 2: Molecular Components (8-12 hours)
+
 1. **Navigation Molecular** - Menu systems and breadcrumbs
 2. **Form Molecular** - Contact and newsletter forms
 3. **Card Molecular** - Content cards and layouts
 4. **Search Molecular** - Search interfaces
 
 ### 🔄 Phase 3: Atomic Completion (4-8 hours)
+
 1. **Input Atomic** - Branded input variants
 2. **Text Atomic** - Typography system
 3. **Icon Atomic** - Icon component system
 4. **Badge Atomic** - Status and category badges
 
 ### 🔄 Phase 4: Templates & Integration (4-6 hours)
+
 1. **Landing Page Template** - Complete page composition
 2. **Contact Page Template** - Contact-focused layout
 3. **Layout Templates** - Reusable page structures
@@ -225,6 +247,7 @@ import { cn } from '@/lib/utils/cn';
 ## 🧪 Testing Strategy
 
 ### Component Testing
+
 ```bash
 # Unit tests for atomic components
 bun test components/atomic/
@@ -238,6 +261,7 @@ bun run test:e2e
 ```
 
 ### Development Commands
+
 ```bash
 # Development server with Turbopack
 bun run dev
@@ -253,6 +277,7 @@ bun run type-check
 ## 🎯 Success Metrics
 
 ### Technical Goals
+
 - [ ] All components follow atomic design principles
 - [ ] 100% TypeScript coverage with strict types
 - [ ] Consistent naming conventions (snake_case.dots)
@@ -260,6 +285,7 @@ bun run type-check
 - [ ] Accessibility compliance (WCAG 2.1 AA)
 
 ### Business Goals
+
 - [ ] Cohesive brand experience across all components
 - [ ] Maintainable and scalable component architecture
 - [ ] Developer-friendly API with excellent TypeScript support
@@ -268,12 +294,14 @@ bun run type-check
 ## 📚 Resources
 
 ### Documentation
+
 - [Atomic Design Methodology](https://atomicdesign.bradfrost.com/)
 - [shadcn/ui Documentation](https://ui.shadcn.com/)
 - [Next.js 15 App Router](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/docs)
 
 ### Key Files for Reference
+
 - `ARCHITECTURE.md` - Detailed architecture documentation
 - `components/atomic/button/` - Complete atomic component example
 - `constants/` - Design system tokens and values
@@ -281,4 +309,4 @@ bun run type-check
 
 ---
 
-*Last updated: [Current Date] - InternetFriends Project Structure v1.0*
+_Last updated: [Current Date] - InternetFriends Project Structure v1.0_

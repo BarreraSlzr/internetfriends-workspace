@@ -2,8 +2,6 @@
 
 import React, { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
-  Node,
-  Edge,
   addEdge,
   Connection,
   useNodesState,
@@ -41,7 +39,7 @@ function DesignSystemFlow() {
   const initialNodes = useMemo(() => componentRegistry.generateFlowNodes(), []);
   const initialEdges = useMemo(() => componentRegistry.generateFlowEdges(), []);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
@@ -75,7 +73,7 @@ function DesignSystemFlow() {
 
   const stats = useMemo(() => componentRegistry.getComponentStats(), []);
 
-  const proOptions = { _hideAttribution: true };
+  const proOptions = { hideAttribution: true };
 
   return (
     <div className="w-full h-screen bg-background">
@@ -94,8 +92,8 @@ function DesignSystemFlow() {
           variant={BackgroundVariant.Dots}
           gap={20}
           size={1}
-          _color="var(--if-primary)"
-          style={{ _opacity: 0.1 }}
+          color="var(--if-primary)"
+          style={{ opacity: 0.1 }}
         />
 
         {/* Header Panel */}
@@ -119,14 +117,14 @@ function DesignSystemFlow() {
                 type="text"
                 placeholder="Search components, utilities, hooks..."
                 value={searchQuery}
-                onChange={(_e) => setSearchQuery(e.target.value)}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus:outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
               />
 
               {/* Category Filter */}
               <select
                 value={selectedCategory}
-                onChange={(_e) => setSelectedCategory(e.target.value)}
+                onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full px-3 py-2 text-sm bg-background/80 border border-border rounded-compact-sm focus:outline-none focus:ring-2 focus:ring-if-primary focus:border-transparent"
               >
                 <option value="all">All Categories</option>
@@ -301,14 +299,14 @@ function DesignSystemFlow() {
 
         <MiniMap
           className="bg-glass-header backdrop-blur-glass border border-glass-border rounded-compact-md"
-          _nodeStrokeColor={(n) => {
+          nodeStrokeColor={(n) => {
             if (n.type === "component") return "#3b82f6";
             if (n.type === "utility") return "#f59e0b";
             if (n.type === "hook") return "#10b981";
             if (n.type === "page") return "#6366f1";
             return "#6b7280";
           }}
-          _nodeColor={(n) => {
+          nodeColor={(n) => {
             if (n.type === "component") return "#dbeafe";
             if (n.type === "utility") return "#fef3c7";
             if (n.type === "hook") return "#d1fae5";

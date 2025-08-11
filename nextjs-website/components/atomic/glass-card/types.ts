@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from "react";
 
 export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
   /** Content to render inside the glass card */
@@ -8,10 +8,10 @@ export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 
   /** Visual variant of the card */
-  variant?: 'default' | 'elevated' | 'subtle' | 'primary' | 'destructive';
+  variant?: "default" | "elevated" | "subtle" | "primary" | "destructive";
 
   /** Size variant affecting padding and border radius */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: "sm" | "md" | "lg" | "xl";
 
   /** Whether to show hover effects */
   hover?: boolean;
@@ -56,15 +56,15 @@ export interface GlassCardFooterProps {
   className?: string;
 
   /** Alignment of footer content */
-  alignment?: 'left' | 'center' | 'right' | 'between';
+  alignment?: "left" | "center" | "right" | "between";
 }
 
 export interface GlassCardImageProps {
   /** Image source */
-  _src: string;
+  src: string;
 
   /** Alt text for accessibility */
-  _alt: string;
+  alt: string;
 
   /** Image width */
   width?: number;
@@ -76,7 +76,7 @@ export interface GlassCardImageProps {
   fill?: boolean;
 
   /** Object fit style */
-  objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
+  objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down";
 
   /** Additional CSS classes */
   className?: string;
@@ -93,8 +93,8 @@ export interface GlassCardActionsProps {
   className?: string;
 
   /** Layout direction */
-  direction?: 'horizontal' | 'vertical';
+  direction?: "horizontal" | "vertical";
 
   /** Spacing between actions */
-  spacing?: 'tight' | 'normal' | 'loose';
+  spacing?: "tight" | "normal" | "loose";
 }

@@ -1,0 +1,44 @@
+{
+  "timestamp": "2025-08-10T10:06:21.764Z",
+  "status": "passed",
+  "tests": {
+    "componentExists": true,
+    "hookExists": true,
+    "layoutIntegration": true,
+    "nextDevRunning": false,
+    "portAvailable": true,
+    "telemetryActive": true
+  },
+  "server": {
+    "port": 3000,
+    "url": "http://localhost:3000",
+    "running": false
+  },
+  "instructions": [
+    "1. Start Next.js development server:",
+    "   cd nextjs-website && bun run dev",
+    "",
+    "2. Open browser and navigate to: http://localhost:3000",
+    "3. Open browser DevTools (F12)",
+    "4. Go to Console tab",
+    "5. Look for performance telemetry messages:",
+    "   🚀 FCP: XXXms",
+    "   🚀 LCP: XXXms",
+    "   🚀 CLS: X.XXX",
+    "   🚀 TTFB: XXXms",
+    "",
+    "6. In development mode, you should also see a debug overlay in the top-right corner",
+    "   showing live telemetry data",
+    "",
+    "7. Test force flush with keyboard shortcut: Ctrl+Shift+P (or Cmd+Shift+P on Mac)",
+    ""
+  ],
+  "verificationSteps": [
+    "Check console for telemetry log messages (🚀 prefix)",
+    "Verify debug overlay appears in top-right (development only)",
+    "Confirm metrics update as you navigate pages",
+    "Test keyboard shortcut for manual flush",
+    "Verify no console errors related to performance observer",
+    "Check Network tab for any beacon requests (if NEXT_PUBLIC_PERF_BEACON_URL is set)"
+  ]
+}

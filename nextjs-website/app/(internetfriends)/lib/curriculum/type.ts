@@ -1,49 +1,49 @@
 export interface Project {
   name: string;
   description: string;
-  _skillsUsed: number[];
+  skillsUsed: number[];
 }
 
 export interface JobExperience {
   title: string;
-  _razonSocial: string;
+  razonSocial: string;
   description: string;
-  _startDate: string;
-  _endDate: string;
-  _projects: Project[];
+  startDate: string;
+  endDate: string;
+  projects: Project[];
 }
 
 export interface Skill {
-  _id: number
+  id: number;
   name: string;
-  _popularity: number;
+  popularity: number;
 }
 
 export interface URL {
   title: string;
-  _url: string;
-  _icon: string;
+  url: string;
+  icon: string;
 }
 
 export interface ContactInfo {
-  _fullname: string;
-  _bio: string;
-  _email: string;
-  _phone: string;
-  _timezone: string;
-  _isOnline: boolean
-  _urls: URL[];
-  _height: string;
-  _sex: string;
-  _nationality: string;
-  _location: string;
-  _localTime: string;
-  _availability: string
+  fullname: string;
+  bio: string;
+  email: string;
+  phone: string;
+  timezone: string;
+  isOnline: boolean;
+  urls: URL[];
+  height: string;
+  sex: string;
+  nationality: string;
+  location: string;
+  localTime: string;
+  availability: string;
 }
 
 export interface CVData {
-  _professionalPosition: string;
-  _jobExperiences: JobExperience[];
-  _skills: Skill[];
-  _contactInfo: ContactInfo;
+  professionalPosition: string;
+  jobExperiences: JobExperience[];
+  skills: Skill[];
+  contactInfo: ContactInfo;
 }

@@ -1,0 +1,86 @@
+{
+  "bundle": {
+    "js_initial_kb": {
+      "warn": 420,
+      "fail": 460,
+      "description": "Initial JavaScript bundle size in KB"
+    },
+    "css_total_kb": {
+      "warn": 95,
+      "fail": 105,
+      "description": "Total CSS bundle size in KB"
+    },
+    "route_max_js_kb": {
+      "warn": 170,
+      "fail": 190,
+      "description": "Maximum JavaScript per route in KB"
+    },
+    "total_assets_mb": {
+      "warn": 2.0,
+      "fail": 2.5,
+      "description": "Total assets size including images in MB"
+    }
+  },
+  "metrics": {
+    "lcp_mobile_ms": {
+      "warn": 2500,
+      "fail": 3000,
+      "description": "Largest Contentful Paint on mobile (3G) in milliseconds"
+    },
+    "ttfi_ms": {
+      "warn": 2300,
+      "fail": 2600,
+      "description": "Time to First Interactive in milliseconds"
+    },
+    "cls": {
+      "warn": 0.1,
+      "fail": 0.15,
+      "description": "Cumulative Layout Shift score"
+    },
+    "fcp_ms": {
+      "warn": 1800,
+      "fail": 2200,
+      "description": "First Contentful Paint in milliseconds"
+    },
+    "ttfb_ms": {
+      "warn": 800,
+      "fail": 1200,
+      "description": "Time to First Byte in milliseconds"
+    },
+    "lighthouse_performance": {
+      "warn": 85,
+      "fail": 75,
+      "description": "Lighthouse Performance Score (0-100)"
+    }
+  },
+  "network_conditions": {
+    "mobile_3g": {
+      "description": "Simulated mobile 3G connection",
+      "cpu_slowdown": 4,
+      "network": "slow3G"
+    },
+    "desktop": {
+      "description": "Desktop conditions",
+      "cpu_slowdown": 1,
+      "network": "desktop"
+    }
+  },
+  "routes_to_test": [
+    "/",
+    "/projects",
+    "/projects/database-manager",
+    "/about",
+    "/contact"
+  ],
+  "epic_targets": {
+    "phase4_completion": {
+      "js_initial_kb_reduction": 30,
+      "css_total_kb_reduction": 15,
+      "lcp_mobile_improvement_percent": 15,
+      "hydration_cpu_reduction_percent": 20,
+      "description": "Phase 4 target improvements from baseline"
+    }
+  },
+  "version": "1.0.0",
+  "last_updated": "2025-01-12T00:00:00Z"
+}

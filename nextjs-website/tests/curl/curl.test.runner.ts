@@ -29,6 +29,7 @@ const CurlTestConfigSchema = z.object({
 export type CurlTestConfig = z.infer<typeof CurlTestConfigSchema>;
 
 // Test Result Schema
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CurlTestResultSchema = z.object({
   name: z.string(),
   success: z.boolean(),
@@ -342,14 +343,16 @@ export async function runCurlTests(
   const rawTests = InternetFriendsTestSuites[suite];
 
   // Transform tests to include required properties
-  const tests: CurlTestConfig[] = rawTests.map((test: any) => ({
-    ...test,
-    timeout: test.timeout || 10000,
-    followRedirects: test.followRedirects ?? true,
-    insecure: test.insecure ?? false,
-    retries: test.retries || 3,
-    retryDelay: test.retryDelay || 1000,
-  }));
+  const tests: CurlTestConfig[] = rawTests.map(
+    (test: Record<string, unknown>) => ({
+      ...test,
+      timeout: test.timeout || 10000,
+      followRedirects: test.followRedirects ?? true,
+      insecure: test.insecure ?? false,
+      retries: test.retries || 3,
+      retryDelay: test.retryDelay || 1000,
+    }),
+  );
 
   console.log(`🧪 Running ${suite} test suite (${tests.length} tests)...`);
   console.log("=".repeat(50));

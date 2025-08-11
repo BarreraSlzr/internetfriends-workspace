@@ -287,7 +287,7 @@ export function applyAccent(hex: string): AccentMetrics {
       (acc, [weight, hslValue]) => {
         const [h, s, l] = hslValue
           .split(" ")
-          .map((v, i) =>
+          .map((v: string, i: number) =>
             i === 0 ? parseInt(v) : parseFloat(v.replace("%", "")),
           );
         const contrast = getContrastColor({ h, s, l });
@@ -421,7 +421,7 @@ export function previewAccentScale(hex: string) {
     contrast: Object.entries(scale).map(([weight, hslValue]) => {
       const [h, s, l] = hslValue
         .split(" ")
-        .map((v, i) =>
+        .map((v: string, i: number) =>
           i === 0 ? parseInt(v) : parseFloat(v.replace("%", "")),
         );
       const colorHSL = { h, s, l };

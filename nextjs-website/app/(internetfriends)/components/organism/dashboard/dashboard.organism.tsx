@@ -2,12 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  eventSystem,
-  UIEvents,
-  APIEvents,
-  ComputeEvents,
-} from "../../../../../lib/events/event.system";
+import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./dashboard.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
@@ -27,7 +22,6 @@ interface DashboardProps {
   initialTab?: DashboardTab;
   showMetrics?: boolean;
   showActivity?: boolean;
-  showAnalytics?: boolean;
   className?: string;
   [key: string]: unknown;
 }
@@ -57,7 +51,6 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
   initialTab = "overview",
   showMetrics = true,
   showActivity = true,
-  showAnalytics = true,
   className,
   ...props
 }) => {
@@ -222,9 +215,9 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
   // Computed Values
   const formattedLastUpdate = useMemo(() => {
     return lastUpdate.toLocaleTimeString("en-US", {
-      _hour: "2-digit",
-      _minute: "2-digit",
-      _second: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
     });
   }, [lastUpdate]);
 
@@ -236,7 +229,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       y: 0,
       transition: {
         duration: 0.6,
-        _staggerChildren: 0.1,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -264,10 +257,10 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
           className={styles.metricCard}
           variants={itemVariants}
           onClick={() => handleMetricClick(metric)}
-          _whileHover={{ scale: 1.02 }}
-          _whileTap={{ scale: 0.98 }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
-          <div className={styles.metricIcon} _style={{ color: metric.color }}>
+          <div className={styles.metricIcon} style={{ color: metric.color }}>
             {metric.icon}
           </div>
           <div className={styles.metricContent}>
@@ -300,7 +293,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            transition={{ _delay: index * 0.1 }}
+            transition={{ delay: index * 0.1 }}
           >
             <div className={styles.activityIcon}>{activity.icon}</div>
             <div className={styles.activityContent}>
@@ -390,7 +383,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
           <h1 className={styles.title}>InternetFriends Dashboard</h1>
           <div className={styles.headerActions}>
             <span className={styles.lastUpdate}>
-              Last _updated: {formattedLastUpdate}
+              Last updated: {formattedLastUpdate}
             </span>
             <button
               onClick={handleRefresh}
@@ -420,7 +413,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
 
       {/* Main Content */}
       <main className={styles.content}>
-        <AnimatePresence _mode="wait">
+        <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, x: 20 }}

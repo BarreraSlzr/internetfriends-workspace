@@ -1,0 +1,294 @@
+// InternetFriends Design System - Main SCSS Index
+// Modern @use-based aggregation of all design system tokens and mixins
+//
+// ⚠️ LEGACY WARNING: Do not import variables.scss or mixins.scss
+// These files have been moved to ./legacy/ and are deprecated.
+// Use this index file or individual token/mixin modules instead.
+
+// Import all token modules using @use
+@use "./tokens/colors.scss" as colors;
+@use "./tokens/spacing.scss" as spacing;
+@use "./tokens/typography.scss" as typography;
+@use "./tokens/fonts.scss" as fonts;
+@use "./tokens/accent.scss" as accent;
+
+// Import all mixin modules using @use
+@use "./mixins/focus.scss" as focus;
+@use "./mixins/media.scss" as media;
+@use "./mixins/components.scss" as components;
+
+// Re-export utility functions for backward compatibility
+@function spacing($size) {
+  @return spacing.spacing($size);
+}
+
+@function radius($size) {
+  @return spacing.radius($size);
+}
+
+@function color-light($key) {
+  @return colors.color-light($key);
+}
+
+@function color-dark($key) {
+  @return colors.color-dark($key);
+}
+
+@function accent($key) {
+  @return colors.accent($key);
+}
+
+@function font-size($size) {
+  @return typography.font-size($size);
+}
+
+@function shadow($size) {
+  @return typography.shadow($size);
+}
+
+@function z-index($layer) {
+  @return spacing.z-index($layer);
+}
+
+@function duration($speed) {
+  @return typography.duration($speed);
+}
+
+@function easing($type) {
+  @return typography.easing($type);
+}
+
+@function breakpoint($size) {
+  @return spacing.breakpoint($size);
+}
+
+// Export commonly used mixins
+@mixin focus-interactive($accent: "primary") {
+  @include focus.focus-interactive($accent);
+}
+
+@mixin focus-container($accent: "primary") {
+  @include focus.focus-container($accent);
+}
+
+@mixin media-sm {
+  @include media.media-sm {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @include media.media-md {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @include media.media-lg {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @include media.media-xl {
+    @content;
+  }
+}
+
+@mixin button-primary {
+  @include components.button-primary;
+}
+
+@mixin button-secondary {
+  @include components.button-secondary;
+}
+
+@mixin card-base {
+  @include components.card-base;
+}
+
+@mixin glass-morphism(
+  $bg: colors.$glass-bg-header,
+  $border: colors.$glass-border
+) {
+  @include components.glass-morphism($bg, $border);
+}
+
+@mixin input-base {
+  @include components.input-base;
+}
+
+@mixin container($max-width: spacing.container-size("xl")) {
+  @include components.container($max-width);
+}
+
+@mixin truncate {
+  @include components.truncate;
+}
+
+@mixin visually-hidden {
+  @include components.visually-hidden;
+}
+
+// Global CSS Custom Properties (available in all components)
+:root {
+  // Export key tokens as CSS custom properties
+  --if-primary: #{colors.$if-primary};
+  --if-primary-hover: #{colors.$if-primary-hover};
+  --if-primary-light: #{colors.$if-primary-light};
+  --if-primary-active: #{colors.$if-primary-active};
+
+  // Teenage Engineering adaptive accent system
+  --if-accent-primary: var(--if-primary); // fallback, overridden at runtime
+  --if-accent-soft: rgba(60, 80, 120, 0.16);
+  --if-accent-faint: rgba(60, 80, 120, 0.08);
+
+  // Neutral surfaces (light mode defaults)
+  --if-surface-neutral: #f6f7f8;
+  --if-surface-neutral-alt: #eceeef;
+  --if-hairline: rgba(10, 15, 25, 0.08);
+
+  // Extended typography system - Teenage Engineering aesthetic
+  --font-display:
+    var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  --font-interface:
+    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  --font-body:
+    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  --font-mono:
+    var(--font-geist-mono), "SF Mono", Monaco, Inconsolata, monospace;
+  --font-accent: var(--font-orbitron), monospace;
+
+  // Glass morphism tokens
+  --glass-bg-header: #{colors.$glass-bg-header};
+  --glass-bg-header-scrolled: #{colors.$glass-bg-header-scrolled};
+  --glass-border: #{colors.$glass-border};
+  --glass-border-enhanced: #{colors.$glass-border-enhanced};
+
+  // Standardized radius system (md/tiny focus)
+  --radius-tiny: 0.125rem; // 2px
+
+  // Spacing tokens
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 0.75rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 1.25rem;
+
+  // Radius tokens (simplified)
+  --radius-xs: 0.25rem; // 4px - compact elements
+  --radius-sm: 0.375rem; // 6px - small components
+  --radius-md: 0.5rem; // 8px - primary standard
+  --radius-lg: 0.75rem; // 12px - large surfaces (max)
+
+  // Typography tokens
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+
+  // Animation tokens
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Dark mode CSS custom properties
+[data-theme="dark"] {
+  // Dark surface overrides (near-black teenage engineering style)
+  --if-surface-neutral: #060708;
+  --if-surface-neutral-alt: #0b0d10;
+  --if-accent-soft: rgba(59, 130, 246, 0.15);
+  --if-accent-faint: rgba(59, 130, 246, 0.08);
+  --if-hairline: rgba(255, 255, 255, 0.07);
+
+  --glass-bg-header: #{colors.$glass-dark-bg-header};
+  --glass-bg-header-scrolled: #{colors.$glass-dark-bg-header-scrolled};
+  --glass-border: #{colors.$glass-dark-border};
+  --glass-border-enhanced: #{colors.$glass-dark-border-enhanced};
+}
+
+// Base reset and defaults
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  @include media.media-reduced-motion {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  font-family:
+    var(--font-geist-sans),
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    system-ui,
+    sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #111827;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Focus management (remove default focus for mouse users)
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+// Skip link for accessibility
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #ffffff;
+  color: #000000;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  font-weight: 500;
+  z-index: 1600;
+  transition: top 150ms cubic-bezier(0, 0, 0.2, 1);
+
+  @include focus.focus-skip-link;
+}
+
+// Print styles
+@include media.media-print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.3;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}

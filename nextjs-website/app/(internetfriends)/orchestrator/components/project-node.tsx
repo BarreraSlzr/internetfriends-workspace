@@ -77,7 +77,7 @@ export const ProjectNode: React.FC<ProjectNodeProps> = ({ data, selected }) => {
       <div className="space-y-1">
         <div className="text-xs text-gray-400 font-medium">Features:</div>
         {data.features.map((feature, index) => (
-          < key={index}div key={index} className="flex items-center space-x-2 text-xs">
+          <div key={index} className="flex items-center space-x-2 text-xs">
             <div className="w-1.5 h-1.5 bg-blue-400 rounded-full"></div>
             <span className="text-gray-300">{feature}</span>
           </div>

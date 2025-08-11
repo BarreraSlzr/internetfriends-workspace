@@ -131,4 +131,4 @@ export const HookNode: React.FC<HookNodeProps> = ({
   );
 };
 
-HookNode._displayName = "HookNode";
+HookNode.displayName = "HookNode";

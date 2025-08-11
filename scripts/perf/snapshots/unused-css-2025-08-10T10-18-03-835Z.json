@@ -1,0 +1,826 @@
+{
+  "timestamp": "2025-08-10T10:18:03.835Z",
+  "summary": {
+    "totalScssFiles": 12,
+    "totalTsxFiles": 72,
+    "totalCSSClasses": 103,
+    "totalUsageReferences": 3461,
+    "unusedClasses": 48,
+    "possiblyDynamic": 2,
+    "cleanupRecommendations": 46
+  },
+  "unusedClasses": [
+    {
+      "className": "skip-link",
+      "definedIn": "nextjs-website/styles/index.scss",
+      "line": 218,
+      "context": ".skip-link {",
+      "safeToRemove": true
+    },
+    {
+      "className": "no-print",
+      "definedIn": "nextjs-website/styles/index.scss",
+      "line": 257,
+      "context": ".no-print {",
+      "safeToRemove": true
+    },
+    {
+      "className": "glass",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 15,
+      "context": "&.glass {",
+      "safeToRemove": true
+    },
+    {
+      "className": "solid",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 29,
+      "context": "&.solid {",
+      "safeToRemove": true
+    },
+    {
+      "className": "transparent",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 36,
+      "context": "&.transparent {",
+      "safeToRemove": true
+    },
+    {
+      "className": "headerContainer",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 105,
+      "context": ".headerContainer {",
+      "safeToRemove": true
+    },
+    {
+      "className": "headerSection",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 121,
+      "context": ".headerSection {",
+      "safeToRemove": true
+    },
+    {
+      "className": "left",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 126,
+      "context": "&.left {",
+      "safeToRemove": true
+    },
+    {
+      "className": "center",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 131,
+      "context": "&.center {",
+      "safeToRemove": true
+    },
+    {
+      "className": "right",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 140,
+      "context": "&.right {",
+      "safeToRemove": true
+    },
+    {
+      "className": "logo",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 148,
+      "context": ".logo {",
+      "safeToRemove": true
+    },
+    {
+      "className": "logoFallback",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 172,
+      "context": ".logoFallback {",
+      "safeToRemove": true
+    },
+    {
+      "className": "logoText",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 185,
+      "context": ".logoText {",
+      "safeToRemove": true
+    },
+    {
+      "className": "themeToggle",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 197,
+      "context": ".themeToggle {",
+      "safeToRemove": true
+    },
+    {
+      "className": "themeDropdown",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 200,
+      "context": ".themeDropdown {",
+      "safeToRemove": true
+    },
+    {
+      "className": "themeOption",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 213,
+      "context": ".themeOption {",
+      "safeToRemove": true
+    },
+    {
+      "className": "activeIndicator",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 245,
+      "context": ".activeIndicator {",
+      "safeToRemove": true
+    },
+    {
+      "className": "languageSelector",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 264,
+      "context": ".languageSelector {",
+      "safeToRemove": true
+    },
+    {
+      "className": "languageDropdown",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 267,
+      "context": ".languageDropdown {",
+      "safeToRemove": true
+    },
+    {
+      "className": "languageOption",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 280,
+      "context": ".languageOption {",
+      "safeToRemove": true
+    },
+    {
+      "className": "flag",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 313,
+      "context": ".flag {",
+      "safeToRemove": true
+    },
+    {
+      "className": "languageCode",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 318,
+      "context": ".languageCode {",
+      "safeToRemove": true
+    },
+    {
+      "className": "desktopOnly",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 340,
+      "context": "&.desktopOnly {",
+      "safeToRemove": true
+    },
+    {
+      "className": "mobileOnly",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 347,
+      "context": "&.mobileOnly {",
+      "safeToRemove": true
+    },
+    {
+      "className": "searchShortcut",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 368,
+      "context": ".searchShortcut {",
+      "safeToRemove": true
+    },
+    {
+      "className": "announcementBar",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 379,
+      "context": ".announcementBar {",
+      "safeToRemove": true
+    },
+    {
+      "className": "info",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 387,
+      "context": "&.info {",
+      "safeToRemove": true
+    },
+    {
+      "className": "warning",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 393,
+      "context": "&.warning {",
+      "safeToRemove": false,
+      "reason": "Possibly dynamic class (state, data, or aria)"
+    },
+    {
+      "className": "success",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 399,
+      "context": "&.success {",
+      "safeToRemove": false,
+      "reason": "Possibly dynamic class (state, data, or aria)"
+    },
+    {
+      "className": "clickable",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 411,
+      "context": "&.clickable {",
+      "safeToRemove": true
+    },
+    {
+      "className": "dismissButton",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 420,
+      "context": ".dismissButton {",
+      "safeToRemove": true
+    },
+    {
+      "className": "mobileMenuOverlay",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 444,
+      "context": ".mobileMenuOverlay {",
+      "safeToRemove": true
+    },
+    {
+      "className": "fadeIn",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 457,
+      "context": ".fadeIn {",
+      "safeToRemove": true
+    },
+    {
+      "className": "slideDown",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 461,
+      "context": ".slideDown {",
+      "safeToRemove": true
+    },
+    {
+      "className": "focusTrap",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 486,
+      "context": ".focusTrap {",
+      "safeToRemove": true
+    },
+    {
+      "className": "dropdownContent",
+      "definedIn": "nextjs-website/components/organisms/header/header.organism.module.scss",
+      "line": 488,
+      "context": ".dropdownContent {",
+      "safeToRemove": true
+    },
+    {
+      "className": "fullWidth",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 203,
+      "context": ".fullWidth {",
+      "safeToRemove": true
+    },
+    {
+      "className": "iconStart",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 208,
+      "context": ".iconStart {",
+      "safeToRemove": true
+    },
+    {
+      "className": "iconEnd",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 212,
+      "context": ".iconEnd {",
+      "safeToRemove": true
+    },
+    {
+      "className": "pulse",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 308,
+      "context": "&.pulse {",
+      "safeToRemove": true
+    },
+    {
+      "className": "shake",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 313,
+      "context": "&.shake {",
+      "safeToRemove": true
+    },
+    {
+      "className": "buttonGroup",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 343,
+      "context": ".buttonGroup {",
+      "safeToRemove": true
+    },
+    {
+      "className": "horizontal",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 346,
+      "context": "&.horizontal {",
+      "safeToRemove": true
+    },
+    {
+      "className": "vertical",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 363,
+      "context": "&.vertical {",
+      "safeToRemove": true
+    },
+    {
+      "className": "srOnly",
+      "definedIn": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "line": 389,
+      "context": ".srOnly {",
+      "safeToRemove": true
+    },
+    {
+      "className": "change-up",
+      "definedIn": "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.styles.module.scss",
+      "line": 363,
+      "context": "&.change-up {",
+      "safeToRemove": true
+    },
+    {
+      "className": "change-down",
+      "definedIn": "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.styles.module.scss",
+      "line": 371,
+      "context": "&.change-down {",
+      "safeToRemove": true
+    },
+    {
+      "className": "change-stable",
+      "definedIn": "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.styles.module.scss",
+      "line": 379,
+      "context": "&.change-stable {",
+      "safeToRemove": true
+    }
+  ],
+  "usagePatterns": [
+    {
+      "className": "hidden",
+      "usageCount": 5,
+      "files": [
+        "nextjs-website/app/theme/components/theme-layout-example.tsx",
+        "nextjs-website/components/molecular/navigation/navigation.molecular.tsx",
+        "nextjs-website/components/organisms/header/header.organism.tsx"
+      ]
+    },
+    {
+      "className": "error",
+      "usageCount": 4,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "header",
+      "usageCount": 4,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "headerContent",
+      "usageCount": 4,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "sectionTitle",
+      "usageCount": 4,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "spinner",
+      "usageCount": 4,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "errorContent",
+      "usageCount": 4,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "active",
+      "usageCount": 3,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "actionButton",
+      "usageCount": 3,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx"
+      ]
+    },
+    {
+      "className": "title",
+      "usageCount": 3,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "refreshButton",
+      "usageCount": 3,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "retryButton",
+      "usageCount": 3,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "headerActions",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "searchContainer",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx"
+      ]
+    },
+    {
+      "className": "searchInput",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx"
+      ]
+    },
+    {
+      "className": "loadingSpinner",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "content",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "dashboard",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "lastUpdate",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "loadingOverlay",
+      "usageCount": 2,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+        "nextjs-website/app/(internetfriends)/components/organism/analytics/analytics.organism.tsx"
+      ]
+    },
+    {
+      "className": "headerOrganism",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/organisms/header/header.organism.tsx"
+      ]
+    },
+    {
+      "className": "sticky",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/theme/components/theme-layout-example.tsx"
+      ]
+    },
+    {
+      "className": "sm",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "md",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "lg",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "skipToMain",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/organisms/header/header.organism.tsx"
+      ]
+    },
+    {
+      "className": "button",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "primary",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "secondary",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "outline",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "ghost",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "link",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "xs",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "xl",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/components/atomic/button/button.atomic.tsx"
+      ]
+    },
+    {
+      "className": "loading",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx"
+      ]
+    },
+    {
+      "className": "navigation",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "tab",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "tabIcon",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "tabLabel",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "overviewContent",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "metricsGrid",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "metricCard",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "metricIcon",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "metricContent",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "metricTitle",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "metricValue",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "metricChange",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "activityFeed",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "activityList",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "activityItem",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "activityIcon",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "activityContent",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "activityMessage",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "activityTime",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    },
+    {
+      "className": "settingsContent",
+      "usageCount": 1,
+      "files": [
+        "nextjs-website/app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx"
+      ]
+    }
+  ],
+  "recommendations": {
+    "safeRemovals": [
+      "skip-link",
+      "no-print",
+      "glass",
+      "solid",
+      "transparent",
+      "headerContainer",
+      "headerSection",
+      "left",
+      "center",
+      "right",
+      "logo",
+      "logoFallback",
+      "logoText",
+      "themeToggle",
+      "themeDropdown",
+      "themeOption",
+      "activeIndicator",
+      "languageSelector",
+      "languageDropdown",
+      "languageOption",
+      "flag",
+      "languageCode",
+      "desktopOnly",
+      "mobileOnly",
+      "searchShortcut",
+      "announcementBar",
+      "info",
+      "clickable",
+      "dismissButton",
+      "mobileMenuOverlay",
+      "fadeIn",
+      "slideDown",
+      "focusTrap",
+      "dropdownContent",
+      "fullWidth",
+      "iconStart",
+      "iconEnd",
+      "pulse",
+      "shake",
+      "buttonGroup",
+      "horizontal",
+      "vertical",
+      "srOnly",
+      "change-up",
+      "change-down",
+      "change-stable"
+    ],
+    "reviewRequired": [],
+    "potentialDynamic": [
+      "warning",
+      "success"
+    ]
+  }
+}

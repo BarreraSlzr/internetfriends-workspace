@@ -1,0 +1,110 @@
+// InternetFriends Design System - Color Tokens
+// Modular SCSS tokens for colors using @use pattern
+
+@use "sass:map";
+
+// Brand Colors (InternetFriends)
+$if-primary: #3b82f6;
+$if-primary-hover: #2563eb;
+$if-primary-light: rgba(59, 130, 246, 0.08);
+$if-primary-active: rgba(59, 130, 246, 0.12);
+
+// Glass Morphism System
+$glass-bg-header: rgba(255, 255, 255, 0.85);
+$glass-bg-header-scrolled: rgba(255, 255, 255, 0.92);
+$glass-bg-overlay: rgba(255, 255, 255, 0.95);
+$glass-bg-modal: rgba(255, 255, 255, 0.98);
+$glass-border: rgba(255, 255, 255, 0.12);
+$glass-border-enhanced: rgba(255, 255, 255, 0.18);
+$glass-border-outset: rgba(59, 130, 246, 0.15);
+
+// Glass Morphism Dark Theme
+$glass-dark-bg-header: rgba(17, 24, 39, 0.85);
+$glass-dark-bg-header-scrolled: rgba(17, 24, 39, 0.92);
+$glass-dark-bg-overlay: rgba(17, 24, 39, 0.95);
+$glass-dark-bg-modal: rgba(17, 24, 39, 0.98);
+$glass-dark-border: rgba(255, 255, 255, 0.08);
+$glass-dark-border-enhanced: rgba(255, 255, 255, 0.12);
+
+// Light Theme Colors Map
+$colors-light: (
+  "text-primary": #111827,
+  "text-secondary": #6b7280,
+  "text-tertiary": #9ca3af,
+  "text-contrast": #000000,
+  "text-inverse": #ffffff,
+
+  "bg-primary": #ffffff,
+  "bg-secondary": #f9fafb,
+  "bg-tertiary": #f3f4f6,
+  "bg-muted": #e5e7eb,
+
+  "border-primary": #e5e7eb,
+  "border-secondary": #d1d5db,
+  "border-focus": #60a5fa,
+  "border-error": #ef4444,
+  "border-success": #10b981,
+  "border-warning": #f59e0b,
+
+  "success": #10b981,
+  "warning": #f59e0b,
+  "error": #ef4444,
+  "info": #3b82f6,
+);
+
+// Dark Theme Colors Map
+$colors-dark: (
+  "text-primary": #ffffff,
+  "text-secondary": #d1d5db,
+  "text-tertiary": #9ca3af,
+  "text-contrast": #ffffff,
+  "text-inverse": #000000,
+
+  "bg-primary": #111827,
+  "bg-secondary": #1f2937,
+  "bg-tertiary": #374151,
+  "bg-muted": #4b5563,
+
+  "border-primary": #374151,
+  "border-secondary": #4b5563,
+  "border-focus": #60a5fa,
+  "border-error": #ef4444,
+  "border-success": #10b981,
+  "border-warning": #f59e0b,
+
+  "success": #10b981,
+  "warning": #f59e0b,
+  "error": #ef4444,
+  "info": #3b82f6,
+);
+
+// Accent Token System
+$accent-tokens: (
+  "primary": $if-primary,
+  "success": #16a34a,
+  "warning": #d97706,
+  "danger": #dc2626,
+  "info": #0ea5e9,
+);
+
+// Utility Functions
+@function color-light($key) {
+  @return map.get($colors-light, $key);
+}
+
+@function color-dark($key) {
+  @return map.get($colors-dark, $key);
+}
+
+@function accent($key) {
+  @return map.get($accent-tokens, $key);
+}
+
+@function glass($key) {
+  // Dynamic glass function for light/dark variants
+  @if str-index($key, "dark-") {
+    @return var(--glass-#{str-slice($key, 6)}, #{$glass-bg-header});
+  } @else {
+    @return var(--glass-#{$key}, #{$glass-bg-header});
+  }
+}

@@ -1,20 +1,24 @@
-'use client'
-import * as React from 'react';
-import { motion, MotionProps } from 'framer-motion';
+"use client";
+import * as React from "react";
+import { motion, MotionProps } from "framer-motion";
 
-export interface IMotionDivProps extends MotionProps{
-    className: string;
+export interface IMotionDivProps extends MotionProps {
+  className: string;
 }
 
-export default function MotionDiv ({children, transition, className}: React.PropsWithChildren<IMotionDivProps>) {
+export default function MotionDiv({
+  children,
+  transition,
+  className,
+}: React.PropsWithChildren<IMotionDivProps>) {
   return (
     <motion.div
-    _initial={{ opacity: 0, y: 10 }}
-    _animate={{ opacity: 1, y: 0 }}
-    transition={{ _duration: 0.4, _ease: 'easeOut', ...transition }}
-    className={className}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: "easeOut", ...transition }}
+      className={className}
     >
-        {children}      
+      {children}
     </motion.div>
   );
 }

@@ -6,7 +6,7 @@ export const DebugLevelSchema = z.enum([
   "warn",
   "info",
   "debug",
-  "trace"
+  "trace",
 ]);
 
 // Debug context for tracking request/session information
@@ -41,7 +41,10 @@ export const DebugV2MetricsSchema = z.object({
 
 // Debug entry for individual log items
 export const DebugV2EntrySchema = z.object({
-  id: z.string().uuid().default(() => crypto.randomUUID()),
+  id: z
+    .string()
+    .uuid()
+    .default(() => crypto.randomUUID()),
   timestamp: z.date().default(() => new Date()),
   level: DebugLevelSchema,
   message: z.string(),
@@ -53,7 +56,10 @@ export const DebugV2EntrySchema = z.object({
 
 // Debug session for grouping related entries
 export const DebugV2SessionSchema = z.object({
-  id: z.string().uuid().default(() => crypto.randomUUID()),
+  id: z
+    .string()
+    .uuid()
+    .default(() => crypto.randomUUID()),
   name: z.string(),
   startTime: z.date().default(() => new Date()),
   endTime: z.date().optional(),
@@ -78,7 +84,10 @@ export const DebugV2ConfigSchema = z.object({
 
 // Debug report for comprehensive system analysis
 export const DebugV2ReportSchema = z.object({
-  id: z.string().uuid().default(() => crypto.randomUUID()),
+  id: z
+    .string()
+    .uuid()
+    .default(() => crypto.randomUUID()),
   generatedAt: z.date().default(() => new Date()),
   title: z.string(),
   description: z.string().optional(),
@@ -87,18 +96,20 @@ export const DebugV2ReportSchema = z.object({
     end: z.date(),
   }),
   sessions: z.array(DebugV2SessionSchema).default([]),
-  summary: z.object({
-    totalEntries: z.number().default(0),
-    errorCount: z.number().default(0),
-    warningCount: z.number().default(0),
-    averageExecutionTime: z.number().default(0),
-    mostActiveComponent: z.string().optional(),
-  }).default({
-    totalEntries: 0,
-    errorCount: 0,
-    warningCount: 0,
-    averageExecutionTime: 0,
-  }),
+  summary: z
+    .object({
+      totalEntries: z.number().default(0),
+      errorCount: z.number().default(0),
+      warningCount: z.number().default(0),
+      averageExecutionTime: z.number().default(0),
+      mostActiveComponent: z.string().optional(),
+    })
+    .default({
+      totalEntries: 0,
+      errorCount: 0,
+      warningCount: 0,
+      averageExecutionTime: 0,
+    }),
   recommendations: z.array(z.string()).default([]),
 });
 
@@ -117,7 +128,7 @@ export const createDebugEntry = (
   level: DebugLevel,
   message: string,
   context?: Partial<DebugV2Context>,
-  data?: any
+  data?: unknown,
 ): DebugV2Entry => {
   return DebugV2EntrySchema.parse({
     level,

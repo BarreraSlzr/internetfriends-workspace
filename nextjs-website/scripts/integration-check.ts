@@ -35,7 +35,7 @@ const IntegratedConfigSchema = z.object({
 async function validateIntegration() {
   console.log("🔗 InternetFriends Integration Validator");
   console.log("======================================");
-  
+
   const config = {
     landing: {
       siteName: "InternetFriends",
@@ -58,13 +58,15 @@ async function validateIntegration() {
       lastUpdated: new Date(),
     },
   };
-  
+
   try {
     const validated = IntegratedConfigSchema.parse(config);
     console.log("✅ Integration configuration valid");
     console.log("📋 Configuration:");
     console.log(`   Landing: ${validated.landing.siteName}`);
-    console.log(`   Market Integration: ${validated.market.automationEnabled ? "Enabled" : "Disabled"}`);
+    console.log(
+      `   Market Integration: ${validated.market.automationEnabled ? "Enabled" : "Disabled"}`,
+    );
     console.log(`   Workspace: ${validated.workspace.name}`);
     console.log(`   Bun Version: ${validated.workspace.bunVersion}`);
     return validated;
@@ -76,18 +78,20 @@ async function validateIntegration() {
 
 async function checkMarketScripts() {
   console.log("\\n🔍 Checking Market Scripts Integration...");
-  
+
   const marketScripts = [
     "smart-commit-orchestrator.ts",
     // Add more as we integrate them
   ];
-  
+
   for (const script of marketScripts) {
     try {
       const file = Bun.file(`./scripts/${script}`);
       const exists = await file.exists();
-      console.log(`${exists ? "✅" : "❌"} ${script}: ${exists ? "Available" : "Missing"}`);
-    } catch (error) {
+      console.log(
+        `${exists ? "✅" : "❌"} ${script}: ${exists ? "Available" : "Missing"}`,
+      );
+    } catch {
       console.log(`❌ ${script}: Error checking file`);
     }
   }
@@ -96,7 +100,7 @@ async function checkMarketScripts() {
 async function main() {
   const config = await validateIntegration();
   await checkMarketScripts();
-  
+
   if (config) {
     console.log("\\n🎯 Next Integration Steps:");
     console.log("  1. Import more Market automation scripts");

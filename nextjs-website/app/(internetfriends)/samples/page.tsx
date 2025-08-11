@@ -55,12 +55,12 @@ export default function Page() {
         <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
           {content.samples.title}
         </h1>
-        <div className="sm:p-6 p-2 py-4 md:p-8   flex flex-col bg-foreground text-brand-blue-100">
+        <div className="glass-stack glass-noise-overlay sm:p-6 p-2 py-4 md:p-8 flex flex-col glass-layer-2">
           <p className="text-lg mb-2 max-w-2xl">
             {content.samples.description}
           </p>
         </div>
-        <div className="sm:p-6 p-2 py-4 md:p-8   pt-0 flex flex-col bg-foreground">
+        <div className="glass-stack glass-noise-overlay sm:p-6 p-2 py-4 md:p-8 pt-0 flex flex-col glass-layer-3">
           {projects.map((p, index) => (
             <Link
               key={p.href}

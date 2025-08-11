@@ -92,18 +92,21 @@ interface Summary {
 
 function getFlag(name: string): string | undefined {
   const prefix = `--${name}=`;
-  const arg = process.argv.find(a => a.startsWith(prefix));
+  const arg = process.argv.find((a) => a.startsWith(prefix));
   return arg ? arg.slice(prefix.length) : undefined;
 }
 
 function hasFlag(name: string): boolean {
-  return process.argv.includes(`--${name}`) || process.argv.includes(`--${name}=true`);
+  return (
+    process.argv.includes(`--${name}`) ||
+    process.argv.includes(`--${name}=true`)
+  );
 }
 
 const PROD_ORIGIN = getFlag("origin") || "https://internetfriends.xyz";
 const ROUTES = (getFlag("routes") || "/")
   .split(",")
-  .map(s => s.trim())
+  .map((s) => s.trim())
   .filter(Boolean);
 
 const NO_API = hasFlag("no-api");
@@ -111,7 +114,7 @@ const API_ENDPOINTS = NO_API
   ? []
   : (getFlag("api") || "/api/health")
       .split(",")
-      .map(s => s.trim())
+      .map((s) => s.trim())
       .filter(Boolean);
 
 const TIMEOUT_MS = parseInt(getFlag("timeout") || "10000", 10);
@@ -129,7 +132,10 @@ function sha256(content: string | Buffer) {
   return crypto.createHash("sha256").update(content).digest("hex");
 }
 
-async function fetchWithTimeout(url: string, timeoutMs: number): Promise<Response> {
+async function fetchWithTimeout(
+  url: string,
+  timeoutMs: number,
+): Promise<Response> {
   const controller = new AbortController();
   const to = setTimeout(() => controller.abort(), timeoutMs);
   try {
@@ -173,9 +179,9 @@ async function snapshotHtml(route: string): Promise<RouteSnapshot> {
       hash,
       bytes: Buffer.byteLength(text),
       contentType: res.headers.get("content-type"),
-      meta
+      meta,
     };
-  } catch (e: any) {
+  } catch (e: unknown) {
     return {
       type: "html",
       path: route,
@@ -184,7 +190,7 @@ async function snapshotHtml(route: string): Promise<RouteSnapshot> {
       file: null,
       hash: null,
       bytes: null,
-      error: e?.message || "Unknown error"
+      error: e?.message || "Unknown error",
     };
   }
 }
@@ -196,7 +202,7 @@ async function snapshotApi(endpoint: string): Promise<RouteSnapshot> {
     const status = res.status;
     const ok = res.ok;
     let text: string;
-    let jsonParsed: any = null;
+    let jsonParsed: unknown = null;
     const contentType = res.headers.get("content-type") || "";
     if (/application\/json/i.test(contentType)) {
       try {
@@ -222,7 +228,7 @@ async function snapshotApi(endpoint: string): Promise<RouteSnapshot> {
       bytes: Buffer.byteLength(text),
       contentType,
     };
-  } catch (e: any) {
+  } catch (e: unknown) {
     return {
       type: "api",
       path: endpoint,
@@ -231,7 +237,7 @@ async function snapshotApi(endpoint: string): Promise<RouteSnapshot> {
       file: null,
       hash: null,
       bytes: null,
-      error: e?.message || "Unknown error"
+      error: e?.message || "Unknown error",
     };
   }
 }
@@ -244,8 +250,10 @@ async function main() {
     notes.push("API snapshot disabled via --no-api");
   }
 
-  const htmlSnapshots = await Promise.all(ROUTES.map(r => snapshotHtml(r)));
-  const apiSnapshots = await Promise.all(API_ENDPOINTS.map(e => snapshotApi(e)));
+  const htmlSnapshots = await Promise.all(ROUTES.map((r) => snapshotHtml(r)));
+  const apiSnapshots = await Promise.all(
+    API_ENDPOINTS.map((e) => snapshotApi(e)),
+  );
 
   const all = [...htmlSnapshots, ...apiSnapshots];
   let totalBytes = 0;
@@ -269,7 +277,7 @@ async function main() {
       failed,
       htmlCount: htmlSnapshots.length,
       apiCount: apiSnapshots.length,
-      totalBytes
+      totalBytes,
     },
     heuristics: {},
     notes,
@@ -277,10 +285,10 @@ async function main() {
       script: "snapshot-prod.ts",
       version: "0.1.0",
       runtime: {
-        bun: (globalThis as any).Bun?.version,
-        node: process.version
-      }
-    }
+        bun: (globalThis as Record<string, unknown>).Bun?.version,
+        node: process.version,
+      },
+    },
   };
 
   const summaryPath = path.join(OUT_DIR, "summary.json");
@@ -309,8 +317,8 @@ async function main() {
     console.log(
       `  [${r.type}] ${r.path} -> ${statusStr} status=${r.status} hash=${r.hash?.slice(
         0,
-        12
-      )} bytes=${r.bytes}${metaExtra}${r.error ? " error=" + r.error : ""}`
+        12,
+      )} bytes=${r.bytes}${metaExtra}${r.error ? " error=" + r.error : ""}`,
     );
   }
   console.log("");
@@ -331,7 +339,7 @@ async function main() {
   console.log("Done.");
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error("Snapshot failed:", err);
   process.exit(1);
 });

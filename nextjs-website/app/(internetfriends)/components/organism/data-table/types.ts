@@ -41,7 +41,7 @@ export interface TableColumn {
   pinned?: "left" | "right" | false;
   align?: "left" | "center" | "right";
   render?: (value: unknown, row: TableRow, index: number) => React.ReactNode;
-  accessor?: (row: TableRow) => any;
+  accessor?: (row: TableRow) => unknown;
   className?: string;
   headerClassName?: string;
 }
@@ -53,14 +53,25 @@ export interface TableRow {
 
 export interface SortConfig {
   column: string;
-  _direction: SortDirection;
+  direction: SortDirection;
 }
 
 export interface FilterConfig {
   column: string;
   type: FilterType;
   value: unknown;
-  operator?: "equals" | "contains" | "startsWith" | "endsWith" | "gt" | "gte" | "lt" | "lte" | "between" | "in" | "notIn";
+  operator?:
+    | "equals"
+    | "contains"
+    | "startsWith"
+    | "endsWith"
+    | "gt"
+    | "gte"
+    | "lt"
+    | "lte"
+    | "between"
+    | "in"
+    | "notIn";
 }
 
 export interface PaginationConfig {
@@ -72,12 +83,12 @@ export interface PaginationConfig {
 }
 
 export interface ColumnVisibility {
-  [_columnKey: string]: boolean;
+  [columnKey: string]: boolean;
 }
 
 export interface TableState {
   data: TableRow[];
-  _filteredData: TableRow[];
+  filteredData: TableRow[];
   sortConfig: SortConfig;
   filters: FilterConfig[];
   pagination: PaginationConfig;
@@ -96,7 +107,7 @@ export interface DataTableOrganismProps {
   loading?: boolean;
   error?: string | null;
   selectionMode?: SelectionMode;
-  onSelectionChange?: (_selectedIds: (string | number)[]) => void;
+  onSelectionChange?: (selectedIds: (string | number)[]) => void;
   onRowClick?: (row: TableRow, index: number) => void;
   onRowDoubleClick?: (row: TableRow, index: number) => void;
   onSort?: (sortConfig: SortConfig) => void;
@@ -155,8 +166,8 @@ export interface TableBodyProps {
 
 export interface TablePaginationProps {
   pagination: PaginationConfig;
-  _onPageChange: (page: number) => void;
-  _onPageSizeChange: (pageSize: number) => void;
+  onPageChange: (page: number) => void;
+  onPageSizeChange: (pageSize: number) => void;
   showSizeSelector?: boolean;
   className?: string;
 }
@@ -164,21 +175,21 @@ export interface TablePaginationProps {
 export interface TableFiltersProps {
   columns: TableColumn[];
   filters: FilterConfig[];
-  _onFiltersChange: (filters: FilterConfig[]) => void;
-  _onClearFilters: () => void;
+  onFiltersChange: (filters: FilterConfig[]) => void;
+  onClearFilters: () => void;
   className?: string;
 }
 
 export interface TableToolbarProps {
   searchQuery: string;
-  _onSearchChange: (query: string) => void;
+  onSearchChange: (query: string) => void;
   selectedCount: number;
   totalCount: number;
   onExport?: (format: "csv" | "json" | "xlsx") => void;
   onRefresh?: () => void;
   onColumnToggle?: () => void;
   density: DensityMode;
-  _onDensityChange: (density: DensityMode) => void;
+  onDensityChange: (density: DensityMode) => void;
   enableSearch?: boolean;
   enableExport?: boolean;
   enableRefresh?: boolean;
@@ -190,7 +201,7 @@ export interface TableToolbarProps {
 export interface ColumnToggleProps {
   columns: TableColumn[];
   columnVisibility: ColumnVisibility;
-  _onVisibilityChange: (_visibility: ColumnVisibility) => void;
+  onVisibilityChange: (visibility: ColumnVisibility) => void;
   className?: string;
 }
 
@@ -223,20 +234,27 @@ export interface FilterOption {
 }
 
 export interface NumberRangeFilter {
-  _min: number;
-  _max: number;
+  min: number;
+  max: number;
 }
 
 export interface DateRangeFilter {
-  _start: Date;
-  _end: Date;
+  start: Date;
+  end: Date;
 }
 
 // Event types
 export interface TableEvent {
-  type: "sort" | "filter" | "select" | "search" | "export" | "row_click" | "row_double_click";
+  type:
+    | "sort"
+    | "filter"
+    | "select"
+    | "search"
+    | "export"
+    | "row_click"
+    | "row_double_click";
   data: unknown;
-  _timestamp: Date;
+  timestamp: Date;
   userId?: string;
 }
 
@@ -246,52 +264,52 @@ export interface TableApiResponse {
   total: number;
   page: number;
   pageSize: number;
-  _hasNextPage: boolean;
-  _hasPreviousPage: boolean;
+  hasNextPage: boolean;
+  hasPreviousPage: boolean;
 }
 
 // Utility types
-export type _TableData = TableRow[];
-export type _ColumnConfig = Omit<TableColumn, 'render'>;
-export type _SortableColumns = Record<string, boolean>;
-export type _FilterableColumns = Record<string, FilterType>;
+export type TableData = TableRow[];
+export type ColumnConfig = Omit<TableColumn, "render">;
+export type SortableColumns = Record<string, boolean>;
+export type FilterableColumns = Record<string, FilterType>;
 
 // Configuration interfaces
 export interface TableConfig {
-  _defaultPageSize: number;
+  defaultPageSize: number;
   pageSizeOptions: number[];
-  _maxPageSize: number;
-  _enableVirtualization: boolean;
+  maxPageSize: number;
+  enableVirtualization: boolean;
   stickyHeader: boolean;
-  _stickyColumns: boolean;
-  _resizableColumns: boolean;
-  _sortableColumns: boolean;
-  _filterableColumns: boolean;
-  _searchableColumns: boolean;
-  _exportFormats: ("csv" | "json" | "xlsx")[];
-  _densityOptions: DensityMode[];
+  stickyColumns: boolean;
+  resizableColumns: boolean;
+  sortableColumns: boolean;
+  filterableColumns: boolean;
+  searchableColumns: boolean;
+  exportFormats: ("csv" | "json" | "xlsx")[];
+  densityOptions: DensityMode[];
   selectionMode: SelectionMode;
 }
 
 export interface TableTheme {
-  _colors: {
-    _headerBackground: string;
-    _headerText: string;
-    _rowBackground: string;
-    _rowBackgroundAlt: string;
-    _rowText: string;
-    _border: string;
-    _selectedRow: string;
-    _hoverRow: string;
+  colors: {
+    headerBackground: string;
+    headerText: string;
+    rowBackground: string;
+    rowBackgroundAlt: string;
+    rowText: string;
+    border: string;
+    selectedRow: string;
+    hoverRow: string;
   };
-  _spacing: {
-    _cellPadding: string;
-    _rowHeight: string;
-    _headerHeight: string;
+  spacing: {
+    cellPadding: string;
+    rowHeight: string;
+    headerHeight: string;
   };
-  _typography: {
-    _fontSize: string;
-    _fontWeight: string;
-    _lineHeight: string;
+  typography: {
+    fontSize: string;
+    fontWeight: string;
+    lineHeight: string;
   };
 }

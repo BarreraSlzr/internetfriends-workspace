@@ -89,7 +89,7 @@ export interface ThemeProviderProps {
 export function ThemeProvider({
   children,
   enableAccentCycling = true,
-  enableDarkMode = true,
+
   logoSelector = '[href="/"], .logo, [data-logo]',
   debugMode = process.env.NODE_ENV === "development",
   onThemeInitialized,

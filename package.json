@@ -33,7 +33,14 @@
     "scaffold:schema": "cd nextjs-website && bun run scaffold:schema",
     "scaffold:component": "cd nextjs-website && bun run scaffold:component",
     "schema:registry": "cd nextjs-website && bun run schema:registry",
-    "schema:fixtures": "cd nextjs-website && bun run schema:fixtures"
+    "schema:fixtures": "cd nextjs-website && bun run schema:fixtures",
+    "perf:analyze": "bun scripts/perf/analyze_route_bundles.ts",
+    "perf:baseline": "bun scripts/perf/analyze_route_bundles.ts --baseline",
+    "perf:budgets": "bun scripts/perf/check_budgets.ts",
+    "perf:budgets:ci": "bun scripts/perf/check_budgets.ts --ci",
+    "perf:report": "bun scripts/perf/check_budgets.ts --format json --save",
+    "perf:dashboard": "bun scripts/perf/dashboard.ts",
+    "analyze": "cd nextjs-website && ANALYZE=true bunx next build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

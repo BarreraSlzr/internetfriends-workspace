@@ -1,0 +1,163 @@
+// InternetFriends Design System - Media Query Mixins
+// Modernized responsive mixins using @use pattern
+
+@use "sass:map";
+@use "../tokens/spacing.scss" as s;
+
+// Breakpoint mixins (min-width)
+@mixin media-xs {
+  @media (min-width: #{s.breakpoint('xs')}) {
+    @content;
+  }
+}
+
+@mixin media-sm {
+  @media (min-width: #{s.breakpoint('sm')}) {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @media (min-width: #{s.breakpoint('md')}) {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @media (min-width: #{s.breakpoint('lg')}) {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @media (min-width: #{s.breakpoint('xl')}) {
+    @content;
+  }
+}
+
+@mixin media-2xl {
+  @media (min-width: #{s.breakpoint('2xl')}) {
+    @content;
+  }
+}
+
+// Max-width media queries
+@mixin media-max-xs {
+  @media (max-width: #{s.breakpoint('sm') - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-max-sm {
+  @media (max-width: #{s.breakpoint('md') - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-max-md {
+  @media (max-width: #{s.breakpoint('lg') - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-max-lg {
+  @media (max-width: #{s.breakpoint('xl') - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-max-xl {
+  @media (max-width: #{s.breakpoint('2xl') - 1px}) {
+    @content;
+  }
+}
+
+// Range queries (between breakpoints)
+@mixin media-between($min, $max) {
+  @media (min-width: #{s.breakpoint($min)}) and (max-width: #{s.breakpoint($max) - 1px}) {
+    @content;
+  }
+}
+
+@mixin media-sm-to-lg {
+  @include media-between("sm", "xl");
+}
+
+@mixin media-md-to-xl {
+  @include media-between("md", "2xl");
+}
+
+// Feature-based queries
+@mixin media-hover {
+  @media (hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
+
+@mixin media-no-hover {
+  @media (hover: none) {
+    @content;
+  }
+}
+
+@mixin media-touch {
+  @media (pointer: coarse) {
+    @content;
+  }
+}
+
+@mixin media-reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin media-high-contrast {
+  @media (prefers-contrast: high) {
+    @content;
+  }
+}
+
+@mixin media-dark-mode {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+@mixin media-light-mode {
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
+}
+
+// Container queries (modern approach)
+@mixin container-xs {
+  @container (min-width: #{s.breakpoint('xs')}) {
+    @content;
+  }
+}
+
+@mixin container-sm {
+  @container (min-width: #{s.breakpoint('sm')}) {
+    @content;
+  }
+}
+
+@mixin container-md {
+  @container (min-width: #{s.breakpoint('md')}) {
+    @content;
+  }
+}
+
+@mixin container-lg {
+  @container (min-width: #{s.breakpoint('lg')}) {
+    @content;
+  }
+}
+
+// Print styles
+@mixin media-print {
+  @media print {
+    @content;
+  }
+}

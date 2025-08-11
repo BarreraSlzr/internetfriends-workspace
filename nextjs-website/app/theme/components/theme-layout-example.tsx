@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
 /* InternetFriends Theme Layout Example */
 /* Shows how to integrate the accent theming system into a Next.js layout */
 
-import React from 'react';
-import { ThemeProvider } from '../theme-provider';
-import AccentDemo from './accent-demo';
+import React from "react";
+import { ThemeProvider } from "../theme-provider";
+import AccentDemo from "./accent-demo";
 
 // =================================================================
 // THEME LAYOUT EXAMPLE
@@ -20,7 +20,7 @@ interface ThemeLayoutExampleProps {
 export function ThemeLayoutExample({
   children,
   enableDemo = true,
-  debugMode = false
+  debugMode = false,
 }: ThemeLayoutExampleProps) {
   return (
     <ThemeProvider
@@ -29,13 +29,13 @@ export function ThemeLayoutExample({
       logoSelector="[data-logo], .logo, [href='/']"
       debugMode={debugMode}
       onThemeInitialized={(metrics) => {
-        console.log('🎨 Theme initialized with metrics:', metrics);
+        console.log("🎨 Theme initialized with metrics:", metrics);
       }}
       onAccentChange={(preset, metrics) => {
-        console.log('🎨 Accent changed to:', preset.name, metrics);
+        console.log("🎨 Accent changed to:", preset.name, metrics);
       }}
       onThemeError={(error) => {
-        console.error('🎨 Theme error:', error);
+        console.error("🎨 Theme error:", error);
       }}
     >
       <div className="min-h-screen bg-surface text-primary transition-colors duration-300">
@@ -76,11 +76,7 @@ export function ThemeLayoutExample({
             </div>
           )}
 
-          {children && (
-            <div className="space-y-8">
-              {children}
-            </div>
-          )}
+          {children && <div className="space-y-8">{children}</div>}
 
           {/* Example Content Sections */}
           <ExampleContentSections />
@@ -90,11 +86,10 @@ export function ThemeLayoutExample({
         <footer className="bg-surface-elevated border-t border-border-subtle mt-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div className="text-center text-secondary">
-              <p>
-                🎨 InternetFriends Accent Theming System
-              </p>
+              <p>🎨 InternetFriends Accent Theming System</p>
               <p className="text-sm mt-2">
-                Built with dynamic CSS custom properties and HSL color generation
+                Built with dynamic CSS custom properties and HSL color
+                generation
               </p>
             </div>
           </div>
@@ -124,22 +119,24 @@ function DarkModeToggle() {
   const [isDarkMode, setIsDarkMode] = React.useState(false);
 
   React.useEffect(() => {
-    const savedTheme = localStorage.getItem('if-theme-mode');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setIsDarkMode(savedTheme ? savedTheme === 'dark' : systemPrefersDark);
+    const savedTheme = localStorage.getItem("if-theme-mode");
+    const systemPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+    setIsDarkMode(savedTheme ? savedTheme === "dark" : systemPrefersDark);
   }, []);
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
-    localStorage.setItem('if-theme-mode', newMode ? 'dark' : 'light');
+    localStorage.setItem("if-theme-mode", newMode ? "dark" : "light");
 
     if (newMode) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      document.documentElement.classList.add('dark');
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.classList.add("dark");
     } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      document.documentElement.classList.remove('dark');
+      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.classList.remove("dark");
     }
   };
 
@@ -147,15 +144,15 @@ function DarkModeToggle() {
     <button
       onClick={toggleDarkMode}
       className="p-2 rounded-md bg-surface-elevated hover:bg-theme-accent-100 transition-colors"
-      title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
     >
-      {isDarkMode ? '☀️' : '🌙'}
+      {isDarkMode ? "☀️" : "🌙"}
     </button>
   );
 }
 
 function AccentQuickSelector() {
-  const quickAccents = ['#3b82f6', '#6366f1', '#8b5cf6', '#ec4899'];
+  const quickAccents = ["#3b82f6", "#6366f1", "#8b5cf6", "#ec4899"];
 
   return (
     <div className="flex gap-1">
@@ -164,7 +161,7 @@ function AccentQuickSelector() {
           key={color}
           onClick={() => {
             // This would trigger accent change - simplified for example
-            console.log('Quick accent change to:', color);
+            console.log("Quick accent change to:", color);
           }}
           className="w-6 h-6 rounded-full border-2 border-border-subtle hover:border-theme-accent-500 transition-colors"
           style={{ backgroundColor: color }}
@@ -221,7 +218,8 @@ function ExampleContentSections() {
               Glass Card
             </h3>
             <p className="text-secondary mb-4">
-              This card demonstrates the glass morphism effect with accent integration.
+              This card demonstrates the glass morphism effect with accent
+              integration.
             </p>
             <button className="bg-surface hover:bg-theme-accent-100 border border-border-accent-medium px-4 py-2 rounded-md transition-colors">
               Glass Action
@@ -281,14 +279,19 @@ function ExampleContentSections() {
                   <span>85%</span>
                 </div>
                 <div className="w-full bg-surface rounded-full h-2">
-                  <div className="bg-theme-accent-500 h-2 rounded-full" style={{ width: '85%' }}></div>
+                  <div
+                    className="bg-theme-accent-500 h-2 rounded-full"
+                    style={{ width: "85%" }}
+                  ></div>
                 </div>
               </div>
 
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-sm text-secondary">Accent System: Active</span>
+                  <span className="text-sm text-secondary">
+                    Accent System: Active
+                  </span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-3 h-3 bg-theme-accent-500 rounded-full"></div>
@@ -300,3 +303,7 @@ function ExampleContentSections() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default ThemeLayoutExample;

@@ -1,28 +1,28 @@
-'use client'
+"use client";
 
-import Script from 'next/script';
-import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect } from 'react'
+import Script from "next/script";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
-export const GA_TRACKING_ID = 'G-XXXXXXXXXX' // Replace with your Google Analytics ID
+export const GA_TRACKING_ID = "G-XXXXXXXXXX"; // Replace with your Google Analytics ID
 
 declare global {
   interface Window {
-    gtag: (_option: string, _gaTrackingId: string, _options: object) => void
+    gtag: (option: string, gaTrackingId: string, options: object) => void;
   }
 }
 
 export default function GoogleAnalytics() {
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (pathname) {
-      window.gtag('config', GA_TRACKING_ID, {
+      window.gtag("config", GA_TRACKING_ID, {
         page_path: pathname + searchParams.toString(),
-      })
+      });
     }
-  }, [pathname, searchParams])
+  }, [pathname, searchParams]);
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function GoogleAnalytics() {
       <Script
         id="gtag-init"
         strategy="afterInteractive"
-        _dangerouslySetInnerHTML={{
+        dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -45,6 +45,5 @@ export default function GoogleAnalytics() {
         }}
       />
     </>
-  )
+  );
 }
-

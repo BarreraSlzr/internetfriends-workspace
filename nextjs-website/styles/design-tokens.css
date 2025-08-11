@@ -8,6 +8,37 @@
   --if-primary-light: rgba(59, 130, 246, 0.08);
   --if-primary-active: rgba(59, 130, 246, 0.12);
 
+  /* Accent token system */
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #2563eb;
+  --accent-primary-light-bg: rgba(59, 130, 246, 0.08);
+  --accent-primary-active-bg: rgba(59, 130, 246, 0.12);
+  --accent-primary-contrast: #ffffff;
+
+  --accent-success: #16a34a;
+  --accent-success-hover: #15803d;
+  --accent-success-light-bg: rgba(22, 163, 74, 0.08);
+  --accent-success-active-bg: rgba(22, 163, 74, 0.12);
+  --accent-success-contrast: #ffffff;
+
+  --accent-warning: #d97706;
+  --accent-warning-hover: #b45309;
+  --accent-warning-light-bg: rgba(217, 119, 6, 0.08);
+  --accent-warning-active-bg: rgba(217, 119, 6, 0.12);
+  --accent-warning-contrast: #ffffff;
+
+  --accent-danger: #dc2626;
+  --accent-danger-hover: #b91c1c;
+  --accent-danger-light-bg: rgba(220, 38, 38, 0.08);
+  --accent-danger-active-bg: rgba(220, 38, 38, 0.12);
+  --accent-danger-contrast: #ffffff;
+
+  --accent-info: #0ea5e9;
+  --accent-info-hover: #0284c7;
+  --accent-info-light-bg: rgba(14, 165, 233, 0.08);
+  --accent-info-active-bg: rgba(14, 165, 233, 0.12);
+  --accent-info-contrast: #ffffff;
+
   /* Glass morphism system */
   --glass-bg-header: rgba(255, 255, 255, 0.85);
   --glass-bg-header-scrolled: rgba(255, 255, 255, 0.92);
@@ -16,6 +47,15 @@
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-border-enhanced: rgba(255, 255, 255, 0.18);
   --glass-border-outset: rgba(59, 130, 246, 0.15);
+  /* Layered glass & ambient system */
+  --glass-layer-1: rgba(255, 255, 255, 0.65);
+  --glass-layer-2: rgba(255, 255, 255, 0.5);
+  --glass-layer-3: rgba(255, 255, 255, 0.35);
+  --glass-noise-opacity: 0.35;
+  --glass-noise-opacity-strong: 0.55;
+  /* Goo / procedural background tuning */
+  --goo-brightness: 1;
+  --goo-brightness-dark: 0.75;
 
   /* Spacing scale (0.25rem increments) */
   --spacing-xs: 0.25rem;
@@ -105,6 +145,36 @@
   --color-error: #ef4444;
   --color-info: #3b82f6;
 
+  /* Canvas (page background) tokens */
+  --app-canvas-accent-start: #1d4ed8;
+  --app-canvas-accent-middle: #2563eb;
+  --app-canvas-accent-end: #3b82f6;
+  --app-canvas-gradient: linear-gradient(
+    145deg,
+    var(--app-canvas-accent-start) 0%,
+    var(--app-canvas-accent-middle) 60%,
+    var(--app-canvas-accent-end) 100%
+  );
+  --app-canvas-gradient-animated:
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(59, 130, 246, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(37, 99, 235, 0.2) 0%,
+      transparent 50%
+    ),
+    var(--app-canvas-gradient);
+
+  /* Surface tokens for glass morphism */
+  --surface-glass: rgba(255, 255, 255, 0.8);
+  --surface-glass-hover: rgba(255, 255, 255, 0.88);
+  --surface-solid: #ffffff;
+  --surface-border: rgba(255, 255, 255, 0.35);
+  --surface-border-enhanced: rgba(255, 255, 255, 0.5);
+
   /* Transition presets */
   --transition-default: all var(--animation-duration-normal)
     var(--animation-easing-easeInOut);
@@ -131,40 +201,84 @@
       var(--animation-easing-glass);
 }
 
-/* Dark theme overrides */
+/* Dark theme overrides - Rich Black & Colorful Glass */
 [data-theme="dark"] {
-  /* Glass system dark */
-  --glass-bg-header: rgba(17, 24, 39, 0.85);
-  --glass-bg-header-scrolled: rgba(17, 24, 39, 0.92);
-  --glass-bg-overlay: rgba(17, 24, 39, 0.95);
-  --glass-bg-modal: rgba(17, 24, 39, 0.98);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-enhanced: rgba(255, 255, 255, 0.12);
+  /* Glass system dark - Rich black base with blue tints */
+  --glass-bg-header: rgba(0, 0, 0, 0.85);
+  --glass-bg-header-scrolled: rgba(0, 0, 0, 0.92);
+  --glass-bg-overlay: rgba(0, 0, 0, 0.95);
+  --glass-bg-modal: rgba(0, 0, 0, 0.98);
+  --glass-border: rgba(59, 130, 246, 0.15);
+  --glass-border-enhanced: rgba(59, 130, 246, 0.25);
+  /* Layered glass & ambient system (dark) - Black with blue tints */
+  --glass-layer-1: rgba(0, 0, 0, 0.75);
+  --glass-layer-2: rgba(10, 10, 20, 0.6);
+  --glass-layer-3: rgba(20, 20, 40, 0.45);
+  --glass-noise-opacity: 0.15;
+  --glass-noise-opacity-strong: 0.3;
+  /* Goo / procedural background tuning - Enhanced brightness for visibility */
+  --goo-brightness: 1.2;
 
-  /* Dark theme colors */
+  /* Dark canvas adjustments - Rich colorful gradients */
+  --app-canvas-accent-start: #000000;
+  --app-canvas-accent-middle: #1e1b4b;
+  --app-canvas-accent-end: #312e81;
+  --app-canvas-gradient: linear-gradient(
+    145deg,
+    #000000 0%,
+    #1e1b4b 40%,
+    #312e81 70%,
+    #3730a3 100%
+  );
+  --app-canvas-gradient-animated:
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(96, 165, 250, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(168, 85, 247, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(249, 115, 22, 0.2) 0%,
+      transparent 70%
+    ),
+    var(--app-canvas-gradient);
+
+  /* Dark surface tokens - True black base */
+  --surface-glass: rgba(0, 0, 0, 0.75);
+  --surface-glass-hover: rgba(0, 0, 0, 0.85);
+  --surface-solid: #000000;
+  --surface-border: rgba(59, 130, 246, 0.2);
+  --surface-border-enhanced: rgba(59, 130, 246, 0.35);
+
+  /* Dark theme colors - High contrast on black */
   --color-text-primary: #ffffff;
-  --color-text-secondary: #d1d5db;
-  --color-text-tertiary: #9ca3af;
+  --color-text-secondary: #e2e8f0;
+  --color-text-tertiary: #cbd5e1;
   --color-text-contrast: #ffffff;
   --color-text-inverse: #000000;
 
-  --color-bg-primary: #111827;
-  --color-bg-secondary: #1f2937;
-  --color-bg-tertiary: #374151;
-  --color-bg-muted: #4b5563;
-  --color-bg-glass: rgba(17, 24, 39, 0.95);
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0f0f0f;
+  --color-bg-tertiary: #1a1a1a;
+  --color-bg-muted: #2a2a2a;
+  --color-bg-glass: rgba(0, 0, 0, 0.9);
 
-  --color-border-primary: #374151;
-  --color-border-secondary: #4b5563;
+  --color-border-primary: rgba(59, 130, 246, 0.3);
+  --color-border-secondary: rgba(59, 130, 246, 0.2);
   --color-border-focus: #60a5fa;
-  --color-border-error: #ef4444;
-  --color-border-success: #10b981;
-  --color-border-warning: #f59e0b;
+  --color-border-error: #f87171;
+  --color-border-success: #34d399;
+  --color-border-warning: #fbbf24;
 
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
 }
 
 /* Print styles */

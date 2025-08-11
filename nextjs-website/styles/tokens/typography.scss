@@ -1,0 +1,65 @@
+// InternetFriends Design System - Typography & Effects Tokens
+// Modular SCSS tokens for typography, shadows, and animations using @use pattern
+
+@use "sass:map";
+
+// Typography Scale
+$font-size: (
+  "xs": 0.75rem,     // 12px
+  "sm": 0.875rem,    // 14px
+  "base": 1rem,      // 16px
+  "lg": 1.125rem,    // 18px
+  "xl": 1.25rem,     // 20px
+  "2xl": 1.5rem,     // 24px
+  "3xl": 1.875rem,   // 30px
+  "4xl": 2.25rem,    // 36px
+  "5xl": 3rem,       // 48px
+);
+
+// Font Weights
+$font-weight: (
+  "light": 300,
+  "normal": 400,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 700,
+);
+
+// Line Heights
+$line-height: (
+  "tight": 1.25,
+  "normal": 1.5,
+  "relaxed": 1.75,
+);
+
+// Shadow System (subtle shadows with max 0.15 opacity)
+$shadows: (
+  "sm": 0 1px 2px 0 rgba(0, 0, 0, 0.05),
+  "md": 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  "lg": 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  "glass": 0 4px 6px -1px rgba(59, 130, 246, 0.15),
+  "inner": inset 0 2px 4px 0 rgba(0, 0, 0, 0.06),
+  "none": none,
+);
+
+// Animation Durations
+$duration: (
+  "instant": 0ms,
+  "fast": 150ms,
+  "normal": 300ms,
+  "slow": 500ms,
+  "slower": 750ms,
+  "slowest": 1000ms,
+);
+
+// Animation Easings  
+$easing: (
+  "linear": linear,
+  "ease-in": cubic-bezier(0.4, 0, 1, 1),
+  "ease-out": cubic-bezier(0, 0, 0.2, 1),
+  "ease-in-out": cubic-bezier(0.4, 0, 0.2, 1),
+  "bounce": cubic-bezier(0.68, -0.55, 0.265, 1.55),
+  "smooth": cubic-bezier(0.25, 0.46, 0.45, 0.94),
+  "sharp": cubic-bezier(0.55, 0.085, 0.68, 0.53),
+  "glass": cubic-bezier(0.25, 0.46, 0.45, 0.94),
+);

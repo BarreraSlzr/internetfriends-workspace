@@ -3,8 +3,7 @@
 // Comprehensive automation for development, testing, validation, and deployment
 
 import { spawn, exec } from "child_process";
-import { readFile, writeFile, mkdir, readdir } from "fs/promises";
-import { join } from "path";
+import { writeFile, mkdir, readdir } from "fs/promises";
 import { promisify } from "util";
 
 const execAsync = promisify(exec);
@@ -48,7 +47,7 @@ class SystemIntegrator {
   private startTime: number;
   private verbose: boolean;
   private components: SystemComponent[];
-  private runningProcesses: Map<string, any> = new Map();
+  private runningProcesses: Map<string, unknown> = new Map();
 
   constructor(verbose: boolean = false) {
     this.sessionId = `integration-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -209,8 +208,8 @@ class SystemIntegrator {
         },
         stop: async () => {
           const process = this.runningProcesses.get("dev-server");
-          if (process) {
-            process.kill("SIGTERM");
+          if (process && typeof process === "object" && "kill" in process) {
+            (process as any).kill("SIGTERM");
             this.runningProcesses.delete("dev-server");
           }
         },
@@ -709,14 +708,9 @@ class SystemIntegrator {
     const passedTests = report.tests.filter(
       (t) => t.status === "passed",
     ).length;
-    const failedTests = report.tests.filter(
-      (t) => t.status === "failed",
-    ).length;
+
     const healthyComponents = report.components.filter(
       (c) => c.status === "healthy",
-    ).length;
-    const failedComponents = report.components.filter(
-      (c) => c.status === "failed",
     ).length;
 
     markdown += `\n## Summary Statistics\n\n`;
@@ -735,8 +729,10 @@ class SystemIntegrator {
     // Stop all running processes
     for (const [name, process] of this.runningProcesses.entries()) {
       try {
-        process.kill("SIGTERM");
-        this.log(`   Stopped ${name}`, "info");
+        if (process && typeof process === "object" && "kill" in process) {
+          (process as any).kill("SIGTERM");
+          this.log(`   Stopped ${name}`, "info");
+        }
       } catch (error) {
         this.log(`   Failed to stop ${name}: ${error}`, "warning");
       }
@@ -773,7 +769,7 @@ class SystemIntegrator {
 async function main() {
   const args = process.argv.slice(2);
   const verbose = args.includes("--verbose") || args.includes("-v");
-  const quick = args.includes("--quick") || args.includes("-q");
+
   const report = !args.includes("--no-report");
 
   console.log("🚀 InternetFriends Full System Integration");

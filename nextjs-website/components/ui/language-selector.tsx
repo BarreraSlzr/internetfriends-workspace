@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Check, ChevronDown, Globe } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { ButtonAtomic } from '@/components/atomic/button';
-import { useI18n, LOCALES, type SupportedLocale } from '@/i18n';
+import React, { useState } from "react";
+import { Check, ChevronDown, Globe } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ButtonAtomic } from "@/components/atomic/button";
+import { useI18n, LOCALES, type SupportedLocale } from "@/i18n";
 
 export interface LanguageSelectorProps {
   /** Additional CSS classes */
@@ -18,7 +18,7 @@ export interface LanguageSelectorProps {
   /** Disabled state */
   disabled?: boolean;
   /** Test identifier */
-  'data-testid'?: string;
+  "data-testid"?: string;
 }
 
 export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
@@ -27,7 +27,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   showFlags = true,
   compact = false,
   disabled = false,
-  'data-testid': testId,
+  "data-testid": testId,
 }) => {
   const { locale, setLocale, t, isLoading } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
@@ -42,7 +42,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       await setLocale(newLocale);
       setIsOpen(false);
     } catch (error) {
-      console.error('Failed to change locale:', error);
+      console.error("Failed to change locale:", error);
     }
   };
 
@@ -55,14 +55,14 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   React.useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as Element;
-      if (!target.closest('[data-language-selector]')) {
+      if (!target.closest("[data-language-selector]")) {
         setIsOpen(false);
       }
     };
 
     if (isOpen) {
-      document.addEventListener('click', handleClickOutside);
-      return () => document.removeEventListener('click', handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
+      return () => document.removeEventListener("click", handleClickOutside);
     }
   }, [isOpen]);
 
@@ -72,16 +72,16 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       if (!isOpen) return;
 
       switch (event.key) {
-        case 'Escape':
+        case "Escape":
           setIsOpen(false);
           break;
-        case 'ArrowDown':
-        case 'ArrowUp':
+        case "ArrowDown":
+        case "ArrowUp":
           event.preventDefault();
           // Could implement keyboard navigation here
           break;
-        case 'Enter':
-        case ' ':
+        case "Enter":
+        case " ":
           event.preventDefault();
           // Handle selection
           break;
@@ -89,15 +89,15 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      return () => document.removeEventListener('keydown', handleKeyDown);
+      document.addEventListener("keydown", handleKeyDown);
+      return () => document.removeEventListener("keydown", handleKeyDown);
     }
   }, [isOpen]);
 
   if (compact) {
     return (
       <div
-        className={cn('relative inline-block', className)}
+        className={cn("relative inline-block", className)}
         data-language-selector
         data-testid={testId}
       >
@@ -107,7 +107,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
           onClick={handleToggle}
           disabled={disabled || isLoading}
           className="h-9 w-9 p-0"
-          aria-label={t('language.selectLanguage')}
+          aria-label={t("language.selectLanguage")}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
         >
@@ -121,14 +121,15 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         {isOpen && (
           <div className="absolute right-0 top-full mt-1 w-48 bg-popover border border-border rounded-md shadow-lg z-50 py-1">
             {availableLocales.map((localeConfig) => (
-              < key={index}button
+              <button
                 key={localeConfig.code}
                 onClick={() => handleLocaleChange(localeConfig.code)}
                 className={cn(
-                  'w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors',
-                  'hover:bg-accent hover:text-accent-foreground',
-                  'focus:bg-accent focus:text-accent-foreground focus:outline-none',
-                  locale === localeConfig.code && 'bg-accent text-accent-foreground'
+                  "w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors",
+                  "hover:bg-accent hover:text-accent-foreground",
+                  "focus:bg-accent focus:text-accent-foreground focus:outline-none",
+                  locale === localeConfig.code &&
+                    "bg-accent text-accent-foreground",
                 )}
                 role="option"
                 aria-selected={locale === localeConfig.code}
@@ -152,7 +153,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
 
   return (
     <div
-      className={cn('relative inline-block', className)}
+      className={cn("relative inline-block", className)}
       data-language-selector
       data-testid={testId}
     >
@@ -162,7 +163,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         onClick={handleToggle}
         disabled={disabled || isLoading}
         className="h-9 gap-2"
-        aria-label={t('language.selectLanguage')}
+        aria-label={t("language.selectLanguage")}
         aria-expanded={isOpen}
         aria-haspopup="listbox"
       >
@@ -176,17 +177,15 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
               </span>
             )}
             {showNames && (
-              <span className="text-sm font-medium">
-                {currentLocale.name}
-              </span>
+              <span className="text-sm font-medium">{currentLocale.name}</span>
             )}
           </>
         )}
         <ChevronDown
           size={14}
           className={cn(
-            'transition-transform duration-200',
-            isOpen && 'rotate-180'
+            "transition-transform duration-200",
+            isOpen && "rotate-180",
           )}
         />
       </ButtonAtomic>
@@ -194,17 +193,18 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       {isOpen && (
         <div className="absolute right-0 top-full mt-1 w-48 bg-popover border border-border rounded-md shadow-lg z-50 py-1">
           <div className="px-3 py-2 text-xs font-medium text-muted-foreground border-b border-border">
-            {t('language.selectLanguage')}
+            {t("language.selectLanguage")}
           </div>
           {availableLocales.map((localeConfig) => (
-            < key={index}button
+            <button
               key={localeConfig.code}
               onClick={() => handleLocaleChange(localeConfig.code)}
               className={cn(
-                'w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors',
-                'hover:bg-accent hover:text-accent-foreground',
-                'focus:bg-accent focus:text-accent-foreground focus:outline-none',
-                locale === localeConfig.code && 'bg-accent text-accent-foreground'
+                "w-full flex items-center gap-3 px-3 py-2 text-sm transition-colors",
+                "hover:bg-accent hover:text-accent-foreground",
+                "focus:bg-accent focus:text-accent-foreground focus:outline-none",
+                locale === localeConfig.code &&
+                  "bg-accent text-accent-foreground",
               )}
               role="option"
               aria-selected={locale === localeConfig.code}
@@ -226,6 +226,6 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   );
 };
 
-LanguageSelector._displayName = 'LanguageSelector';
+LanguageSelector.displayName = "LanguageSelector";
 
 export default LanguageSelector;

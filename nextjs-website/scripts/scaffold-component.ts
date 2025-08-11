@@ -95,8 +95,8 @@ function parseArgs(argv: string[]): Options | null {
     return null;
   }
 
-  const positional = argv.filter(a => !a.startsWith("--"));
-  const flags = argv.filter(a => a.startsWith("--"));
+  const positional = argv.filter((a) => !a.startsWith("--"));
+  const flags = argv.filter((a) => a.startsWith("--"));
 
   if (positional.length < 2) {
     console.error("ERROR: Must provide <level> and <name>.");
@@ -108,7 +108,9 @@ function parseArgs(argv: string[]): Options | null {
   const name = positional[1];
 
   if (!VALID_LEVELS.includes(level)) {
-    console.error(`ERROR: Invalid level '${level}'. Valid: ${VALID_LEVELS.join(", ")}`);
+    console.error(
+      `ERROR: Invalid level '${level}'. Valid: ${VALID_LEVELS.join(", ")}`,
+    );
     return null;
   }
 
@@ -122,19 +124,23 @@ function parseArgs(argv: string[]): Options | null {
     desc: extractFlagValue(flags, "desc") || "",
     slots: (extractFlagValue(flags, "slots") || "")
       .split(",")
-      .map(s => s.trim())
+      .map((s) => s.trim())
       .filter(Boolean),
-    styleVariant: (extractFlagValue(flags, "style") as any) || "glass",
+    styleVariant:
+      (extractFlagValue(flags, "style") as "glass" | "panel" | "minimal") ||
+      "glass",
   };
 
   if (opts.phase && !PHASES.includes(opts.phase)) {
-    console.error(`ERROR: Invalid phase '${opts.phase}'. Valid phases: ${PHASES.join(", ")}`);
+    console.error(
+      `ERROR: Invalid phase '${opts.phase}'. Valid phases: ${PHASES.join(", ")}`,
+    );
     return null;
   }
 
   if (!STYLE_VARIANTS.includes(opts.styleVariant)) {
     console.error(
-      `ERROR: Invalid style variant '${opts.styleVariant}'. Options: ${STYLE_VARIANTS.join(", ")}`
+      `ERROR: Invalid style variant '${opts.styleVariant}'. Options: ${STYLE_VARIANTS.join(", ")}`,
     );
     return null;
   }
@@ -144,7 +150,7 @@ function parseArgs(argv: string[]): Options | null {
 
 function extractFlagValue(flags: string[], key: string): string | undefined {
   const prefix = `--${key}=`;
-  const f = flags.find(f => f.startsWith(prefix));
+  const f = flags.find((f) => f.startsWith(prefix));
   return f ? f.slice(prefix.length) : undefined;
 }
 
@@ -168,30 +174,31 @@ function toPascal(s: string): string {
     .replace(/[-_.]+/g, " ")
     .split(" ")
     .filter(Boolean)
-    .map(w => w[0].toUpperCase() + w.slice(1))
+    .map((w) => w[0].toUpperCase() + w.slice(1))
     .join("");
 }
 
 function buildComponentTSX(opts: Options, suffix: string): string {
   const pascal = toPascal(opts.name);
   const compName = `${pascal}${capitalize(suffix)}`;
-  const epicAttrs =
-    opts.epic
-      ? `data-epic="${opts.epic}"${opts.phase ? ` data-epic-phase="${opts.phase}"` : ""}`
-      : "";
+  const epicAttrs = opts.epic
+    ? `data-epic="${opts.epic}"${opts.phase ? ` data-epic-phase="${opts.phase}"` : ""}`
+    : "";
   const description = opts.desc || `${compName} component`;
 
   const slotInterface =
     opts.slots.length > 0
       ? `
 export interface ${pascal}Slots {
-${opts.slots.map(s => `  ${s}?: React.ReactNode;`).join("\n")}
+${opts.slots.map((s) => `  ${s}?: React.ReactNode;`).join("\n")}
 }
 `
       : "";
 
   const slotDestructuring =
-    opts.slots.length > 0 ? `{ ${opts.slots.join(", ")}, children, className, epicName, epicPhase, ...rest }` : `{ children, className, epicName, epicPhase, ...rest }`;
+    opts.slots.length > 0
+      ? `{ ${opts.slots.join(", ")}, children, className, epicName, epicPhase, ...rest }`
+      : `{ children, className, epicName, epicPhase, ...rest }`;
 
   const slotRender =
     opts.slots.length > 0
@@ -199,7 +206,8 @@ ${opts.slots.map(s => `  ${s}?: React.ReactNode;`).join("\n")}
       {/* Slots */}
 ${opts.slots
   .map(
-    s => `      {${s} && <div data-slot="${s}" className={styles.slot}>${s}</div>}`
+    (s) =>
+      `      {${s} && <div data-slot="${s}" className={styles.slot}>${s}</div>}`,
   )
   .join("\n")}`
       : "";
@@ -315,8 +323,6 @@ ${base}
 }
 
 function buildIndex(opts: Options, suffix: string): string {
-  const pascal = toPascal(opts.name);
-  const compName = `${pascal}${capitalize(suffix)}`;
   return `export * from "./${opts.name}.${suffix}";\n`;
 }
 
@@ -337,7 +343,7 @@ function main() {
 
   if (fs.existsSync(componentDir) && !opts.force) {
     console.error(
-      `ERROR: Component directory already exists: ${componentDir} (use --force to overwrite)`
+      `ERROR: Component directory already exists: ${componentDir} (use --force to overwrite)`,
     );
     process.exit(2);
   }
@@ -360,7 +366,7 @@ function main() {
     fs.writeFileSync(stylesFile, styleContent, "utf-8");
     fs.writeFileSync(indexFile, indexContent, "utf-8");
     console.log(
-      `✅ Scaffolded component '${opts.name}' at level '${opts.level}' (${opts.styleVariant})`
+      `✅ Scaffolded component '${opts.name}' at level '${opts.level}' (${opts.styleVariant})`,
     );
     console.log("Files:");
     console.log(" - " + componentFile);
@@ -370,16 +376,19 @@ function main() {
       console.log(
         `Epic Attributes: data-epic="${opts.epic}"${
           opts.phase ? ` data-epic-phase="${opts.phase}"` : ""
-        }`
+        }`,
       );
     }
     console.log(
       `Next steps: Import & use <${toPascal(opts.name)}${capitalize(
-        suffix
-      )}> in a page or parent component.`
+        suffix,
+      )}> in a page or parent component.`,
     );
-  } catch (e: any) {
-    console.error("ERROR: Failed to scaffold component:", e?.message || e);
+  } catch (e: unknown) {
+    console.error(
+      "ERROR: Failed to scaffold component:",
+      e instanceof Error ? e.message : String(e),
+    );
     process.exit(3);
   }
 }

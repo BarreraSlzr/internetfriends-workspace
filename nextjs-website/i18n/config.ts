@@ -1,3 +1,5 @@
+"use client";
+
 // InternetFriends Internationalization Configuration
 // Complete i18n setup with context and utilities
 
@@ -359,11 +361,11 @@ export function createTranslationFunction(translations: Translations) {
     try {
       // Navigate nested object using dot notation
       const keys = key.split(".");
-      let value: any = translations;
+      let value: unknown = translations;
 
       for (const k of keys) {
         if (value && typeof value === "object" && k in value) {
-          value = value[k];
+          value = (value as Record<string, unknown>)[k];
         } else {
           console.warn(`Translation key not found: ${key}`);
           return key; // Return key if not found

@@ -1,0 +1,340 @@
+{
+  "timestamp": "2025-08-10T09:47:33.318Z",
+  "commitHash": "8c445bf",
+  "build": {
+    "js": {
+      "totalBytes": 5058389,
+      "totalKB": 4939.83,
+      "files": [
+        {
+          "path": ".next/static/chunks/node_modules_28650d._.js",
+          "sizeBytes": 1205142,
+          "sizeKB": 1176.9,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_5d3d81._.js",
+          "sizeBytes": 1205142,
+          "sizeKB": 1176.9,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_client_523921._.js",
+          "sizeBytes": 905198,
+          "sizeKB": 883.98,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc._.js",
+          "sizeBytes": 866252,
+          "sizeKB": 845.95,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_compiled_107ce8._.js",
+          "sizeBytes": 295844,
+          "sizeKB": 288.91,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/_65ab26._.js",
+          "sizeBytes": 116892,
+          "sizeKB": 114.15,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_build_polyfills_polyfill-nomodule.js",
+          "sizeBytes": 112594,
+          "sizeKB": 109.96,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_4bb10e._.js",
+          "sizeBytes": 104424,
+          "sizeKB": 101.98,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/app_(internetfriends)_15b922._.js",
+          "sizeBytes": 79312,
+          "sizeKB": 77.45,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/app_365ea9._.js",
+          "sizeBytes": 72718,
+          "sizeKB": 71.01,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/_d95469._.js",
+          "sizeBytes": 65074,
+          "sizeKB": 63.55,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/[turbopack]_browser_dev_hmr-client_d6d8d4._.js",
+          "sizeBytes": 20037,
+          "sizeKB": 19.57,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_@swc_helpers_cjs_00636a._.js",
+          "sizeBytes": 5685,
+          "sizeKB": 5.55,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_d0a96d._.js",
+          "sizeBytes": 1185,
+          "sizeKB": 1.16,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/_e69f0d._.js",
+          "sizeBytes": 674,
+          "sizeKB": 0.66,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/app_(internetfriends)_contact_page_tsx_0232f1._.js",
+          "sizeBytes": 554,
+          "sizeKB": 0.54,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/app_not-found_tsx_0232f1._.js",
+          "sizeBytes": 494,
+          "sizeKB": 0.48,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_8e6352._.js",
+          "sizeBytes": 436,
+          "sizeKB": 0.43,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/chunks/app_layout_tsx_61af54._.js",
+          "sizeBytes": 396,
+          "sizeKB": 0.39,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/development/_buildManifest.js",
+          "sizeBytes": 260,
+          "sizeKB": 0.25,
+          "type": "js"
+        },
+        {
+          "path": ".next/static/development/_ssgManifest.js",
+          "sizeBytes": 76,
+          "sizeKB": 0.07,
+          "type": "js"
+        }
+      ]
+    },
+    "css": {
+      "totalBytes": 24697,
+      "totalKB": 24.12,
+      "files": [
+        {
+          "path": ".next/static/chunks/app_(internetfriends)_components_header_header_styles_module_scss_module_f2938c.css",
+          "sizeBytes": 9219,
+          "sizeKB": 9,
+          "type": "css"
+        },
+        {
+          "path": ".next/static/chunks/app_(internetfriends)_components_header_header_styles_module_scss_module_b52d8e.css",
+          "sizeBytes": 9217,
+          "sizeKB": 9,
+          "type": "css"
+        },
+        {
+          "path": ".next/static/chunks/[next]_internal_font_google_55dcbe._.css",
+          "sizeBytes": 3074,
+          "sizeKB": 3,
+          "type": "css"
+        },
+        {
+          "path": ".next/static/chunks/[next]_internal_font_google_geist_mono_68a01160_module_b52d8e.css",
+          "sizeBytes": 1634,
+          "sizeKB": 1.6,
+          "type": "css"
+        },
+        {
+          "path": ".next/static/chunks/[next]_internal_font_google_geist_e531dabc_module_b52d8e.css",
+          "sizeBytes": 1553,
+          "sizeKB": 1.52,
+          "type": "css"
+        }
+      ]
+    },
+    "other": {
+      "totalBytes": 5584891,
+      "totalKB": 5454,
+      "files": [
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc._.js.map",
+          "sizeBytes": 1375397,
+          "sizeKB": 1343.16,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_28650d._.js.map",
+          "sizeBytes": 1062712,
+          "sizeKB": 1037.8,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_5d3d81._.js.map",
+          "sizeBytes": 1062710,
+          "sizeKB": 1037.8,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_client_523921._.js.map",
+          "sizeBytes": 1054637,
+          "sizeKB": 1029.92,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_compiled_107ce8._.js.map",
+          "sizeBytes": 390542,
+          "sizeKB": 381.39,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/_65ab26._.js.map",
+          "sizeBytes": 150046,
+          "sizeKB": 146.53,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_next_dist_4bb10e._.js.map",
+          "sizeBytes": 130366,
+          "sizeKB": 127.31,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/_d95469._.js.map",
+          "sizeBytes": 101205,
+          "sizeKB": 98.83,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/app_(internetfriends)_15b922._.js.map",
+          "sizeBytes": 43086,
+          "sizeKB": 42.08,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/app_365ea9._.js.map",
+          "sizeBytes": 41403,
+          "sizeKB": 40.43,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/media/or3nQ6H_1_WfwkMZI_qYFrcdmhHkjko-s.p.be19f591.woff2",
+          "sizeBytes": 31288,
+          "sizeKB": 30.55,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/[turbopack]_browser_dev_hmr-client_d6d8d4._.js.map",
+          "sizeBytes": 29708,
+          "sizeKB": 29.01,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/media/gyByhwUxId8gMEwcGFWNOITd-s.p.da1ebef7.woff2",
+          "sizeBytes": 28356,
+          "sizeKB": 27.69,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/media/gyByhwUxId8gMEwSGFWNOITddY4-s.81df3a5b.woff2",
+          "sizeBytes": 15292,
+          "sizeKB": 14.93,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/media/gyByhwUxId8gMEwYGFWNOITddY4-s.b7d310ad.woff2",
+          "sizeBytes": 14676,
+          "sizeKB": 14.33,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/media/or3nQ6H_1_WfwkMZI_qYFrkdmhHkjkotbA-s.e32db976.woff2",
+          "sizeBytes": 13036,
+          "sizeKB": 12.73,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/media/or3nQ6H_1_WfwkMZI_qYFrMdmhHkjkotbA-s.cb6bbcb1.woff2",
+          "sizeBytes": 12608,
+          "sizeKB": 12.31,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/app_(internetfriends)_components_header_header_styles_module_scss_module_f2938c.css.map",
+          "sizeBytes": 6545,
+          "sizeKB": 6.39,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/app_(internetfriends)_components_header_header_styles_module_scss_module_b52d8e.css.map",
+          "sizeBytes": 6494,
+          "sizeKB": 6.34,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/node_modules_@swc_helpers_cjs_00636a._.js.map",
+          "sizeBytes": 5512,
+          "sizeKB": 5.38,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/[next]_internal_font_google_55dcbe._.css.map",
+          "sizeBytes": 4583,
+          "sizeKB": 4.48,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/[next]_internal_font_google_geist_mono_68a01160_module_b52d8e.css.map",
+          "sizeBytes": 2356,
+          "sizeKB": 2.3,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/[next]_internal_font_google_geist_e531dabc_module_b52d8e.css.map",
+          "sizeBytes": 2278,
+          "sizeKB": 2.22,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_d0a96d._.js.map",
+          "sizeBytes": 53,
+          "sizeKB": 0.05,
+          "type": "other"
+        },
+        {
+          "path": ".next/static/development/_clientMiddlewareManifest.json",
+          "sizeBytes": 2,
+          "sizeKB": 0,
+          "type": "other"
+        }
+      ]
+    }
+  },
+  "meta": {
+    "nodeEnv": "development",
+    "totalFiles": 51,
+    "largestFile": {
+      "path": ".next/static/chunks/node_modules_next_dist_compiled_react-dom_1f56dc._.js.map",
+      "sizeBytes": 1375397,
+      "sizeKB": 1343.16,
+      "type": "other"
+    }
+  }
+}

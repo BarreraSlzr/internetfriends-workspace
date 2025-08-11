@@ -18,6 +18,9 @@ export const EventTypeSchema = z.enum([
   "user.action",
   "user.preference_change",
 
+  // Auth events
+  "auth.session_start",
+
   // Compute events
   "compute.job_started",
   "compute.job_completed",
@@ -51,10 +54,9 @@ export const EventTypeSchema = z.enum([
   "db.query_complete",
   "db.query_error",
 
-  // Development events
-  "dev.hot_reload",
-  "dev.build_start",
-  "dev.build_complete",
+  // Dev/Testing events
+  "dev.test_start",
+  "dev.test_complete",
   "dev.test_run",
 ]);
 
@@ -67,7 +69,7 @@ export const EventPrioritySchema = z.enum([
   "high",
   "critical",
 ]);
-export type _EventPriority = z.infer<typeof EventPrioritySchema>;
+export type EventPriority = z.infer<typeof EventPrioritySchema>;
 
 // Base Event Schema
 export const BaseEventSchema = z.object({
@@ -90,11 +92,10 @@ export const EventHandlerSchema = z.object({
   id: z.string(),
   eventType: EventTypeSchema,
   priority: EventPrioritySchema.default("normal"),
-  handler: z.any(),
+  handler: z.function(),
   enabled: z.boolean().default(true),
   retries: z.number().default(3),
   timeout: z.number().default(5000),
-  filter: z.any().optional(),
 });
 
 export type EventHandler = z.infer<typeof EventHandlerSchema>;
@@ -223,7 +224,7 @@ export class InternetFriendsEventSystem {
   // Register event handler
   on(
     eventType: EventType,
-    handler: Function,
+    handler: (event: BaseEvent) => void | Promise<void>,
     options: Partial<EventHandler> = {},
   ): string {
     const eventHandler: EventHandler = {
@@ -234,7 +235,6 @@ export class InternetFriendsEventSystem {
       enabled: options.enabled ?? true,
       retries: options.retries || 3,
       timeout: options.timeout || 5000,
-      filter: options.filter,
     };
 
     if (!this.handlers.has(eventType)) {
@@ -246,7 +246,10 @@ export class InternetFriendsEventSystem {
   }
 
   // Register global handler (receives all events)
-  onAll(handler: Function, options: Partial<EventHandler> = {}): string {
+  onAll(
+    handler: (event: BaseEvent) => void | Promise<void>,
+    options: Partial<EventHandler> = {},
+  ): string {
     const eventHandler: EventHandler = {
       id: options.id || crypto.randomUUID(),
       eventType: "system.startup", // Placeholder, not used for global handlers
@@ -255,7 +258,6 @@ export class InternetFriendsEventSystem {
       enabled: options.enabled ?? true,
       retries: options.retries || 3,
       timeout: options.timeout || 5000,
-      filter: options.filter,
     };
 
     this.globalHandlers.push(eventHandler);
@@ -289,14 +291,18 @@ export class InternetFriendsEventSystem {
   }
 
   // Emit event
-  emit(type: EventType, data?: unknown, options: Partial<BaseEvent> = {}): string {
+  emit(
+    type: EventType,
+    data?: unknown,
+    options: Partial<BaseEvent> = {},
+  ): string {
     const event: BaseEvent = {
       id: crypto.randomUUID(),
       type,
       priority: options.priority || "normal",
       timestamp: new Date(),
       source: options.source || "system",
-      data,
+      data: data as Record<string, unknown>,
       metadata: options.metadata,
       correlationId: options.correlationId,
       userId: options.userId,
@@ -329,16 +335,14 @@ export class InternetFriendsEventSystem {
   // Process single event
   private async processEvent(event: BaseEvent): Promise<EventResult[]> {
     const results: EventResult[] = [];
-    const _startTime = Date.now();
+    // const startTime = Date.now(); // Unused for now
 
     // Get handlers for this event type
     const eventHandlers = this.handlers.get(event.type) || [];
     const allHandlers = [...eventHandlers, ...this.globalHandlers];
 
     // Filter enabled handlers
-    const activeHandlers = allHandlers.filter(
-      (h) => h.enabled && (!h.filter || h.filter(event)),
-    );
+    const activeHandlers = allHandlers.filter((h) => h.enabled);
 
     // Execute handlers
     for (const handler of activeHandlers) {
@@ -366,7 +370,11 @@ export class InternetFriendsEventSystem {
           ),
         );
 
-        const handlerPromise = Promise.resolve(handler.handler(event));
+        const handlerPromise = Promise.resolve(
+          (handler.handler as (event: BaseEvent) => void | Promise<void>)(
+            event,
+          ),
+        );
         const result = await Promise.race([handlerPromise, timeoutPromise]);
 
         return {
@@ -384,7 +392,7 @@ export class InternetFriendsEventSystem {
             handlerId: handler.id,
             success: false,
             processingTime: Date.now() - startTime,
-            error: error instanceof Error ? error._message : String(error),
+            error: error instanceof Error ? error.message : String(error),
             timestamp: new Date(),
           };
         }
@@ -430,7 +438,7 @@ export class InternetFriendsEventSystem {
   // Health check
   async healthCheck(): Promise<boolean> {
     try {
-      const _testEventId = this.emit("system.health_check", {
+      this.emit("system.health_check", {
         timestamp: Date.now(),
       });
 
@@ -456,43 +464,47 @@ export const emit = (
 
 export const on = (
   eventType: EventType,
-  handler: Function,
+  handler: (event: BaseEvent) => void | Promise<void>,
   options?: Partial<EventHandler>,
 ) => eventSystem.on(eventType, handler, options);
 
 export const off = (handlerId: string) => eventSystem.off(handlerId);
 
 // Specialized event emitters for common use cases
-export const _ComputeEvents = {
-  _jobStarted: (jobId: string, data?: unknown) =>
-    emit("compute.job_started", { jobId, ...data }, { correlationId: jobId }),
+export const ComputeEvents = {
+  jobStarted: (jobId: string, data?: unknown) =>
+    emit(
+      "compute.job_started",
+      { jobId, ...(data as Record<string, unknown>) },
+      { correlationId: jobId },
+    ),
 
-  _jobCompleted: (jobId: string, result?: unknown, processingTime?: number) =>
+  jobCompleted: (jobId: string, result?: unknown, processingTime?: number) =>
     emit(
       "compute.job_completed",
       { jobId, result, processingTime },
       { correlationId: jobId },
     ),
 
-  _jobFailed: (jobId: string, error: string, data?: unknown) =>
+  jobFailed: (jobId: string, error: string, data?: unknown) =>
     emit(
       "compute.job_failed",
-      { jobId, error, ...data },
+      { jobId, error, ...(data as Record<string, unknown>) },
       { correlationId: jobId, priority: "high" },
     ),
 
-  _resourceAllocated: (resourceId: string, type: string, amount: number) =>
+  resourceAllocated: (resourceId: string, type: string, amount: number) =>
     emit("compute.resource_allocated", { resourceId, type, amount }),
 
-  _resourceReleased: (resourceId: string, type: string, amount: number) =>
+  resourceReleased: (resourceId: string, type: string, amount: number) =>
     emit("compute.resource_released", { resourceId, type, amount }),
 };
 
-export const _UIEvents = {
-  _pageLoad: (page: string, loadTime: number, userId?: string) =>
+export const UIEvents = {
+  pageLoad: (page: string, loadTime: number, userId?: string) =>
     emit("ui.page_load", { page, loadTime }, { userId }),
 
-  _componentRender: (component: string, renderTime: number, props?: unknown) =>
+  componentRender: (component: string, renderTime: number, props?: unknown) =>
     emit("ui.component_render", { component, renderTime, props }),
 
   interaction: (
@@ -502,19 +514,19 @@ export const _UIEvents = {
     sessionId?: string,
   ) => emit("ui.interaction", { type, target }, { userId, sessionId }),
 
-  _themeChange: (from: string, to: string, userId?: string) =>
+  themeChange: (from: string, to: string, userId?: string) =>
     emit("ui.theme_change", { from, to }, { userId }),
 };
 
-export const _APIEvents = {
-  _requestStart: (method: string, url: string, requestId: string) =>
+export const APIEvents = {
+  requestStart: (method: string, url: string, requestId: string) =>
     emit(
       "api.request_start",
       { method, url, requestId },
       { correlationId: requestId },
     ),
 
-  _requestComplete: (
+  requestComplete: (
     method: string,
     url: string,
     status: number,
@@ -527,7 +539,7 @@ export const _APIEvents = {
       { correlationId: requestId },
     ),
 
-  _requestError: (
+  requestError: (
     method: string,
     url: string,
     error: string,
@@ -540,7 +552,7 @@ export const _APIEvents = {
       { correlationId: requestId, priority: "high" },
     ),
 
-  _rateLimit: (ip: string, endpoint: string, limit: number, remaining: number) =>
+  rateLimit: (ip: string, endpoint: string, limit: number, remaining: number) =>
     emit(
       "api.rate_limit",
       { ip, endpoint, limit, remaining },

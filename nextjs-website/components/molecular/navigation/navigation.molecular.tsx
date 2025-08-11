@@ -2,11 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ButtonAtomic } from "@/components/atomic/button";
 import { HeaderAtomic } from "@/components/atomic/header";
-import { NavigationMolecularProps } from "./types";
+import { NavigationMolecularProps, NavigationItem } from "./types";
 
 export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
   items,
@@ -57,7 +58,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
     };
   }, [isMobileMenuOpen]);
 
-  const handleItemClick = (item: unknown) => {
+  const handleItemClick = (item: NavigationItem) => {
     onItemClick?.(item);
     setIsMobileMenuOpen(false);
     setOpenDropdown(null);
@@ -67,7 +68,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
     setOpenDropdown(openDropdown === itemId ? null : itemId);
   };
 
-  const renderNavigationItem = (item: unknown, mobile = false) => {
+  const renderNavigationItem = (item: NavigationItem, mobile = false) => {
     const isActive = activeItem === item.id || item.active;
     const hasDropdown = item.children && item.children.length > 0;
 
@@ -105,14 +106,14 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
                   "relative top-0 mt-2 shadow-none border-l-2 border-l-if-primary bg-transparent ml-4",
               )}
             >
-              {item.children.map((child: unknown) => (
-                < key={index}Link
+              {item.children?.map((child: NavigationItem) => (
+                <Link
                   key={child.id}
                   href={child.href}
                   onClick={() => handleItemClick(child)}
                   className={cn(
                     "block px-4 py-2 text-sm text-foreground hover:bg-if-primary-light hover:text-if-primary transition-colors duration-200",
-                    "_first:rounded-t-compact-md _last:rounded-b-compact-md",
+                    "first:rounded-t-compact-md last:rounded-b-compact-md",
                     child.disabled && "opacity-50 cursor-not-allowed",
                   )}
                 >
@@ -179,7 +180,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
             onClick={() => logo.onClick?.()}
           >
             {logo.src ? (
-              <img
+              <Image
                 src={logo.src}
                 alt={logo.alt || "Logo"}
                 width={logo.width || 32}
@@ -264,7 +265,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
               <div className="flex items-center justify-between p-4 border-b border-glass-border">
                 <div className="flex items-center gap-2">
                   {logo?.src ? (
-                    <img
+                    <Image
                       src={logo.src}
                       alt={logo.alt || "Logo"}
                       width={24}
@@ -311,4 +312,4 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
   );
 };
 
-NavigationMolecular._displayName = "NavigationMolecular";
+NavigationMolecular.displayName = "NavigationMolecular";

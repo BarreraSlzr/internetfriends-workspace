@@ -1,9 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import { cn } from '@/lib/utils';
-import { HeaderAtomicProps } from './types';
+import React, { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+import { HeaderAtomicProps } from "./types";
+import { useTheme } from "@/hooks/use-theme";
 
+/**
+ * Simplified HeaderAtomic
+ * - Clean sticky header with glass morphism
+ * - Minimal scroll state management
+ * - Standard border radius (md/tiny)
+ */
 export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   children,
   className,
@@ -14,9 +21,10 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   ...props
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     const handleScroll = () => {
       const scrolled = window.scrollY > scrollThreshold;
@@ -24,39 +32,39 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
       onScrollChange?.(scrolled);
     };
 
-    window.addEventListener('scroll', handleScroll, { _passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollThreshold, onScrollChange]);
 
   return (
     <header
       className={cn(
-        // Base header styles
-        'w-full transition-all duration-300 ease-in-out',
+        // Base header styles with standard border radius
+        "relative w-full transition-all duration-300 ease-in-out border-b border-border rounded-std",
 
         // Positioning
-        sticky && 'sticky top-0 z-50',
+        sticky && "sticky top-0 z-50",
 
         // Glass morphism system
         transparent && [
-          'glass-header',
-          'backdrop-blur-glass',
-          isScrolled && 'glass-header-scrolled',
+          "glass-header",
+          "backdrop-blur-glass",
+          isScrolled && "glass-header-scrolled",
         ],
 
         // Non-transparent fallback
-        !transparent && [
-          'bg-background border-b border-border',
-          isScrolled && 'shadow-glass',
-        ],
+        !transparent && ["bg-background", isScrolled && "shadow-sm"],
 
-        className
+        // Scrolled state: subtle elevation
+        isScrolled && "shadow-sm",
+
+        className,
       )}
       data-scrolled={isScrolled}
-      data-theme="light" // Will be controlled by theme provider
+      data-theme={theme.colorScheme}
       {...props}
     >
-      <div className="container mx-auto px-4 _sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {children}
         </div>
@@ -65,4 +73,4 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   );
 };
 
-HeaderAtomic._displayName = 'HeaderAtomic';
+HeaderAtomic.displayName = "HeaderAtomic";

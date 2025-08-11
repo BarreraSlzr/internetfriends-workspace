@@ -1,0 +1,331 @@
+{
+  "timestamp": "2025-08-10T10:18:07.160Z",
+  "summary": {
+    "totalSize": 1547140,
+    "jsSize": 1397509,
+    "cssSize": 87970,
+    "scssSourceSize": 61661,
+    "assetCount": 53,
+    "removedLegacyBytes": 15907
+  },
+  "assets": [
+    {
+      "name": "chunks/517-f4c8b72ab754e405.js",
+      "size": 200484,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/framework-6b27c2b7aa38af2d.js",
+      "size": 181616,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/4bd1b696-6471623b0cd25d0a.js",
+      "size": 167090,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/709-ea51129dd8414934.js",
+      "size": 125330,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/main-c888fa8679a16cd9.js",
+      "size": 116947,
+      "type": "js",
+      "category": "initial"
+    },
+    {
+      "name": "chunks/polyfills-42372ed130431b0a.js",
+      "size": 112594,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/c37d3baf-ec571c21e6a6acbc.js",
+      "size": 81157,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/480-bd17af06df7406eb.js",
+      "size": 68153,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/740-151456d052e86784.js",
+      "size": 63785,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "css/b141f9906dc400de.css",
+      "size": 63014,
+      "type": "css",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/header-demo/page-adeb215f3923d768.js",
+      "size": 40884,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/design-system/page-19c14ec7f821fdd4.js",
+      "size": 35845,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/373-88176812b9962224.js",
+      "size": 35676,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/theme-demo/page-80a3db535700bad8.js",
+      "size": 31808,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/orchestrator/page-ebb2b323d5ccbd26.js",
+      "size": 26620,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/365-c2e28ed2f3afa241.js",
+      "size": 22731,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "css/dfb8190c20f6f4d4.css",
+      "size": 17660,
+      "type": "css",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/layout-6844054467326ebd.js",
+      "size": 14822,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "app/(internetfriends)/components/organism/dashboard/dashboard.styles.module.scss",
+      "size": 12484,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "chunks/616-6de5a379c731f6c9.js",
+      "size": 11469,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/contact/page-88cf2ed8d3862df2.js",
+      "size": 10685,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "components/organisms/header/header.organism.module.scss",
+      "size": 10135,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "chunks/173-09c341b5ea0dbe39.js",
+      "size": 9778,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/216.d4f04a3e8c81abe1.js",
+      "size": 9534,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/449.dceb415f6c59b0bb.js",
+      "size": 8363,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "components/atomic/button/button.styles.module.scss",
+      "size": 7662,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "css/f59bfee53fbffbfb.css",
+      "size": 7296,
+      "type": "css",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/curriculum/page-fe808f28ae54a665.js",
+      "size": 5973,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "styles/mixins/components.scss",
+      "size": 5723,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "styles/index.scss",
+      "size": 5364,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "styles/tokens/fonts.scss",
+      "size": 4832,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "chunks/328-e8632246a0a8e46a.js",
+      "size": 4634,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/page-8901761747435f64.js",
+      "size": 4041,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/webpack-64b4b5e2f571d58e.js",
+      "size": 3509,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "styles/tokens/accent.scss",
+      "size": 3356,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "styles/mixins/focus.scss",
+      "size": 3078,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "styles/tokens/colors.scss",
+      "size": 2710,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "styles/mixins/media.scss",
+      "size": 2619,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "styles/tokens/spacing.scss",
+      "size": 2168,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "styles/tokens/typography.scss",
+      "size": 1530,
+      "type": "scss",
+      "category": "static"
+    },
+    {
+      "name": "3o5jh00FkY4jc88wSEXkF/_buildManifest.js",
+      "size": 1046,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/main-app-34e31a3bd7f55a41.js",
+      "size": 463,
+      "type": "js",
+      "category": "initial"
+    },
+    {
+      "name": "chunks/app/not-found-802a6ad23c5500a6.js",
+      "size": 374,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/samples/page-c3e6c993c509a82c.js",
+      "size": 374,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/pricing/page-9d486c528a365aae.js",
+      "size": 374,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/pages/_app-d23763e3e6c904ff.js",
+      "size": 236,
+      "type": "js",
+      "category": "initial"
+    },
+    {
+      "name": "chunks/pages/_error-3a92756dc3ebc841.js",
+      "size": 232,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/_not-found/page-7df5e0de5d3ea59c.js",
+      "size": 161,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/api/health/route-2d04523ce2d5eb1b.js",
+      "size": 161,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/api/project-explorer/route-db8d0842b80f5ef6.js",
+      "size": 161,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/api/system/status/route-9651981db82aca93.js",
+      "size": 161,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "chunks/app/(internetfriends)/redirect/[url]/page-97c7073a7adf6bf4.js",
+      "size": 161,
+      "type": "js",
+      "category": "route"
+    },
+    {
+      "name": "3o5jh00FkY4jc88wSEXkF/_ssgManifest.js",
+      "size": 77,
+      "type": "js",
+      "category": "route"
+    }
+  ]
+}

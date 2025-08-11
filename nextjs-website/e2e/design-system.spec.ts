@@ -28,7 +28,9 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator('[data-id="button-atomic"]')).toBeVisible();
 
     // Check molecular components
-    await expect(page.locator('[data-id="navigation-molecular"]')).toBeVisible();
+    await expect(
+      page.locator('[data-id="navigation-molecular"]'),
+    ).toBeVisible();
 
     // Check utility nodes
     await expect(page.locator('[data-id="design-tokens"]')).toBeVisible();
@@ -56,7 +58,7 @@ test.describe("InternetFriends Design System", () => {
 
   test("should have working category filter", async ({ page }) => {
     // Wait for filter dropdown
-    const categoryFilter = page.locator('select');
+    const categoryFilter = page.locator("select");
     await expect(categoryFilter).toBeVisible();
 
     // Filter by atomic components
@@ -94,8 +96,10 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator(".react-flow__minimap")).toBeVisible();
 
     // Test zoom in button
-    const zoomInButton = page.locator('.react-flow__controls-button[title*="zoom in"]');
-    if (await zoomInButton.count() > 0) {
+    const zoomInButton = page.locator(
+      '.react-flow__controls-button[title*="zoom in"]',
+    );
+    if ((await zoomInButton.count()) > 0) {
       await zoomInButton.click();
     }
   });
@@ -113,7 +117,9 @@ test.describe("InternetFriends Design System", () => {
 
   test("should handle node interactions", async ({ page }) => {
     // Wait for nodes to be interactive
-    await page.waitForSelector('[data-id="button-atomic"]', { state: "visible" });
+    await page.waitForSelector('[data-id="button-atomic"]', {
+      state: "visible",
+    });
 
     // Click on a component node
     await page.locator('[data-id="button-atomic"]').click();
@@ -142,7 +148,9 @@ test.describe("InternetFriends Design System", () => {
     await expect(page.locator(".react-flow")).toBeVisible();
 
     // Panels should adapt to mobile
-    const headerPanel = page.getByText("InternetFriends Design System").locator("..");
+    const headerPanel = page
+      .getByText("InternetFriends Design System")
+      .locator("..");
     await expect(headerPanel).toBeVisible();
   });
 
@@ -152,7 +160,7 @@ test.describe("InternetFriends Design System", () => {
     await searchInput.fill("Button");
 
     // Add category filter
-    const categoryFilter = page.locator('select');
+    const categoryFilter = page.locator("select");
     await categoryFilter.selectOption("atomic");
 
     // Click clear filters button
@@ -203,7 +211,7 @@ test.describe("InternetFriends Design System", () => {
     await searchInput.clear();
 
     // Interact with filters
-    const categoryFilter = page.locator('select');
+    const categoryFilter = page.locator("select");
     await categoryFilter.selectOption("atomic");
     await categoryFilter.selectOption("all");
 
@@ -213,7 +221,10 @@ test.describe("InternetFriends Design System", () => {
 
   test("should have proper accessibility", async ({ page }) => {
     // Check for proper ARIA labels
-    await expect(page.locator('input[placeholder*="Search"]')).toHaveAttribute("type", "text");
+    await expect(page.locator('input[placeholder*="Search"]')).toHaveAttribute(
+      "type",
+      "text",
+    );
 
     // Check for proper semantic elements
     await expect(page.locator("h1")).toBeVisible();
@@ -240,7 +251,7 @@ test.describe("InternetFriends Design System", () => {
 
   test("should handle network errors gracefully", async ({ page }) => {
     // Block network requests to simulate offline
-    await page.route("**/*", route => route.abort());
+    await page.route("**/*", (route) => route.abort());
 
     // Try to navigate (this will fail for external resources)
     await page.goto("/design-system", { waitUntil: "domcontentloaded" });
@@ -257,14 +268,15 @@ test.describe("Component Registry", () => {
     // Test component registry via browser evaluation
     const registryStats = await page.evaluate(() => {
       // Access the component registry if it's available globally
-      const registry = (window as any).componentRegistry;
+      const registry = (window as { componentRegistry?: any })
+        .componentRegistry;
       if (!registry) return null;
 
       return {
-        totalComponents: registry.getAllComponents().length,
-        totalUtilities: registry.getAllUtilities().length,
-        totalHooks: registry.getAllHooks().length,
-        totalPages: registry.getAllPages().length
+        totalComponents: registry.getAllComponents?.().length || 0,
+        totalUtilities: registry.getAllUtilities?.().length || 0,
+        totalHooks: registry.getAllHooks?.().length || 0,
+        totalPages: registry.getAllPages?.().length || 0,
       };
     });
 
@@ -287,7 +299,7 @@ test.describe("Design System Integration", () => {
       return {
         ifPrimary: computedStyle.getPropertyValue("--if-primary").trim(),
         glassHeader: computedStyle.getPropertyValue("--glass-bg-header").trim(),
-        radiusLg: computedStyle.getPropertyValue("--radius-lg").trim()
+        radiusLg: computedStyle.getPropertyValue("--radius-lg").trim(),
       };
     });
 

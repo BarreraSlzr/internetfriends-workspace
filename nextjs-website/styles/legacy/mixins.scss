@@ -1,0 +1,605 @@
+// InternetFriends Design System Mixins (Legacy)
+// DEPRECATED: Use individual mixin modules from ./mixins/ directory
+// This file is kept for backward compatibility
+
+@use "sass:map";
+@use "./tokens/spacing.scss" as spacing;
+@use "./mixins/media.scss" as media;
+@use "./mixins/focus.scss" as focus;
+@use "./mixins/components.scss" as components;
+
+// Deprecation warning
+@warn "mixins.scss is deprecated. Use individual mixin modules: @use './mixins/media.scss', @use './mixins/focus.scss', etc.";
+
+// Forward media query mixins from new modular system
+@mixin media-xs {
+  @include media.media-xs {
+    @content;
+  }
+}
+
+@mixin media-sm {
+  @include media.media-sm {
+    @content;
+  }
+}
+
+@mixin media-md {
+  @include media.media-md {
+    @content;
+  }
+}
+
+@mixin media-lg {
+  @include media.media-lg {
+    @content;
+  }
+}
+
+@mixin media-xl {
+  @include media.media-xl {
+    @content;
+  }
+}
+
+@mixin media-2xl {
+  @include media.media-2xl {
+    @content;
+  }
+}
+
+// Max-width media queries
+@mixin media-max-sm {
+  @include media.media-max-sm {
+    @content;
+  }
+}
+
+@mixin media-max-md {
+  @include media.media-max-md {
+    @content;
+  }
+}
+
+@mixin media-max-lg {
+  @include media.media-max-lg {
+    @content;
+  }
+}
+
+@mixin media-max-xl {
+  @include media.media-max-xl {
+    @content;
+  }
+}
+
+// Forward other common mixins from new modular system
+@mixin button-primary {
+  @include components.button-primary;
+}
+
+@mixin button-secondary {
+  @include components.button-secondary;
+}
+
+@mixin glass-morphism($bg: null, $border: null) {
+  @if $bg and $border {
+    @include components.glass-morphism($bg, $border);
+  } @else {
+    @include components.glass-morphism;
+  }
+}
+
+@mixin card-base {
+  @include components.card-base;
+}
+
+@mixin input-base {
+  @include components.input-base;
+}
+
+@mixin focus-interactive($accent: "primary") {
+  @include focus.focus-interactive($accent);
+}
+
+@mixin truncate {
+  @include components.truncate;
+}
+
+@mixin container($max-width: null) {
+  @if $max-width {
+    @include components.container($max-width);
+  } @else {
+    @include components.container;
+  }
+}
+
+// Legacy device-specific queries (forward to new system)
+@mixin mobile-only {
+  @include media.media-max-md {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @include media.media-between("md", "lg") {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{breakpoint('lg')}) {
+    @content;
+  }
+}
+
+// Preference-based media queries
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin dark-scheme {
+  @media (prefers-color-scheme: dark) {
+    @content;
+  }
+}
+
+@mixin light-scheme {
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
+}
+
+@mixin high-contrast {
+  @media (prefers-contrast: high) {
+    @content;
+  }
+}
+
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+// Glass Morphism Mixin
+@mixin glass(
+  $background: $glass-bg-header,
+  $border: $glass-border,
+  $blur: 12px
+) {
+  background: $background;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid $border;
+}
+
+@mixin glass-dark(
+  $background: $glass-dark-bg-header,
+  $border: $glass-dark-border,
+  $blur: 12px
+) {
+  [data-theme="dark"] & {
+    background: $background;
+    border-color: $border;
+  }
+}
+
+// Button Mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: spacing("sm");
+  font-family: inherit;
+  font-weight: map-get($font-weight, "medium");
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  outline: none;
+  transition: var(--transition-default);
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &:focus-visible {
+    outline: 2px dashed var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: radius("sm");
+  }
+}
+
+@mixin button-size($size) {
+  @if $size == "xs" {
+    height: 1.75rem;
+    padding: 0 spacing("sm");
+    font-size: font-size("xs");
+    border-radius: radius("xs");
+  } @else if $size == "sm" {
+    height: 2rem;
+    padding: 0 spacing("md");
+    font-size: font-size("sm");
+    border-radius: radius("sm");
+  } @else if $size == "md" {
+    height: 2.5rem;
+    padding: 0 spacing("lg");
+    font-size: font-size("sm");
+    border-radius: radius("md");
+  } @else if $size == "lg" {
+    height: 3rem;
+    padding: 0 spacing("xl");
+    font-size: font-size("base");
+    border-radius: radius("lg");
+  } @else if $size == "xl" {
+    height: 3.5rem;
+    padding: 0 spacing("2xl");
+    font-size: font-size("lg");
+    border-radius: radius("lg");
+  }
+}
+
+@mixin button-variant-primary {
+  background: var(--if-primary);
+  color: white;
+  border: 1px solid var(--if-primary);
+  box-shadow: shadow("sm");
+
+  &:hover:not(:disabled) {
+    background: var(--if-primary-hover);
+    border-color: var(--if-primary-hover);
+    box-shadow: shadow("md");
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--if-primary-active);
+    transform: translateY(0);
+    box-shadow: shadow("sm");
+  }
+}
+
+@mixin button-variant-secondary {
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--color-bg-tertiary);
+    border-color: var(--color-border-secondary);
+    box-shadow: shadow("sm");
+  }
+
+  &:active:not(:disabled) {
+    background: var(--color-bg-muted);
+  }
+}
+
+@mixin button-variant-outline {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--color-bg-secondary);
+    border-color: var(--if-primary);
+    color: var(--if-primary);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--if-primary-light);
+  }
+}
+
+@mixin button-variant-ghost {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid transparent;
+
+  &:hover:not(:disabled) {
+    background: var(--if-primary-light);
+    color: var(--if-primary);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--if-primary-active);
+  }
+}
+
+// Input Mixins
+@mixin input-base {
+  width: 100%;
+  font-family: inherit;
+  font-size: font-size("sm");
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  outline: none;
+  transition: var(--transition-border), var(--transition-shadow);
+
+  &::placeholder {
+    color: var(--color-text-tertiary);
+  }
+
+  &:focus {
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px var(--if-primary-light);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    background: var(--color-bg-muted);
+  }
+
+  &[aria-invalid="true"] {
+    border-color: var(--color-border-error);
+
+    &:focus {
+      border-color: var(--color-border-error);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+  }
+}
+
+@mixin input-size($size) {
+  @if $size == "sm" {
+    height: 2rem;
+    padding: 0 spacing("md");
+    font-size: font-size("xs");
+    border-radius: radius("sm");
+  } @else if $size == "md" {
+    height: 2.5rem;
+    padding: 0 spacing("lg");
+    font-size: font-size("sm");
+    border-radius: radius("md");
+  } @else if $size == "lg" {
+    height: 3rem;
+    padding: 0 spacing("xl");
+    font-size: font-size("base");
+    border-radius: radius("lg");
+  }
+}
+
+// Card Mixins
+@mixin card-base {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: radius("lg");
+  box-shadow: shadow("sm");
+  transition: var(--transition-shadow);
+}
+
+@mixin card-hover {
+  &:hover {
+    box-shadow: shadow("md");
+    transform: translateY(-1px);
+  }
+}
+
+@mixin card-glass {
+  @include glass();
+
+  @include glass-dark();
+}
+
+// Text Mixins
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-line-clamp($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin text-responsive(
+  $min-size,
+  $max-size,
+  $min-viewport: 320px,
+  $max-viewport: 1200px
+) {
+  font-size: clamp(
+    #{$min-size},
+    #{$min-size} + (#{strip-unit($max-size)} - #{strip-unit($min-size)}) *
+      (
+        (100vw - #{$min-viewport}) /
+          (#{strip-unit($max-viewport)} - #{strip-unit($min-viewport)})
+      ),
+    #{$max-size}
+  );
+}
+
+// Layout Mixins
+@mixin container {
+  width: 100%;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+
+  @include mobile-only {
+    padding: 0 spacing("md");
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin grid-auto-fit($min-width: 250px, $gap: spacing("lg")) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+@mixin grid-auto-fill($min-width: 250px, $gap: spacing("lg")) {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  gap: $gap;
+}
+
+// Animation Mixins
+@mixin fade-in($duration: duration("normal")) {
+  opacity: 0;
+  animation: fade-in $duration easing("ease-out") forwards;
+}
+
+@mixin slide-in-up($duration: duration("normal"), $distance: 1rem) {
+  opacity: 0;
+  transform: translateY($distance);
+  animation: slide-in-up $duration easing("ease-out") forwards;
+}
+
+@mixin slide-in-down($duration: duration("normal"), $distance: 1rem) {
+  opacity: 0;
+  transform: translateY(-$distance);
+  animation: slide-in-down $duration easing("ease-out") forwards;
+}
+
+@mixin scale-in($duration: duration("normal")) {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: scale-in $duration easing("bounce") forwards;
+}
+
+// Accessibility Mixins
+@mixin screen-reader-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@mixin focus-visible {
+  &:focus-visible {
+    outline: 2px dashed var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: radius("sm");
+  }
+}
+
+@mixin high-contrast-border {
+  @include high-contrast {
+    border-width: 2px !important;
+  }
+}
+
+// Touch Target Mixin
+@mixin touch-target($size: $touch-target-recommended) {
+  min-height: $size;
+  min-width: $size;
+
+  @include mobile-only {
+    min-height: $touch-target-comfortable;
+    min-width: $touch-target-comfortable;
+  }
+}
+
+// Utility Functions
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+// Keyframe Animations
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-down {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  40%,
+  43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
+}
+
+// Print Styles Mixin
+@mixin print-styles {
+  @include print {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}

@@ -1,31 +1,32 @@
-import { ContactFormData } from '@/app/(internetfriends)/lib/db/schema'
-import { db } from '@/app/(internetfriends)/lib/db/connection'
+import { ContactFormData } from "@/app/(internetfriends)/lib/db/schema";
+import { db } from "@/app/(internetfriends)/lib/db/connection";
 
-export async function upsertContactSubmission(data: ContactFormData, id?: string) {
+export async function upsertContactSubmission(
+  data: ContactFormData,
+  id?: string,
+) {
   if (id) {
     return await db
-      .updateTable('contact_submissions')
+      .updateTable("contact_submissions")
       .set({
         ...data,
-        _updated_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       })
-      .where('id', '=', id)
-      .returning(['id'])
-      .executeTakeFirst()
+      .where("id", "=", id)
+      .returning(["id"])
+      .executeTakeFirst();
   }
 
   return await db
-    .insertInto('contact_submissions')
+    .insertInto("contact_submissions")
     .values(data)
-    .returning(['id'])
-    .executeTakeFirst()
+    .returning(["id"])
+    .executeTakeFirst();
 }
 
-export async function getContactSubmission(id: string) {
+export async function deleteContactSubmission(id: string) {
   return await db
-    .selectFrom('contact_submissions')
-    .selectAll()
-    .where('id', '=', id)
-    .executeTakeFirst()
+    .deleteFrom("contact_submissions")
+    .where("id", "=", id)
+    .executeTakeFirst();
 }
-

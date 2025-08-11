@@ -14,7 +14,20 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      // Added GPU / WebGL friendly launch args for more reliable rendering in headless CI
+      use: {
+        ...devices["Desktop Chrome"],
+        launchOptions: {
+          args: [
+            "--ignore-gpu-blocklist",
+            "--enable-gpu",
+            "--enable-webgl",
+            "--use-angle=gl",
+            "--use-gl=swiftshader",
+            "--disable-software-rasterizer",
+          ],
+        },
+      },
     },
     {
       name: "firefox",

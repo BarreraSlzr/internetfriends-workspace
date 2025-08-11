@@ -3,7 +3,7 @@
 // Event-driven compute system for streamlined operations and performance optimization
 
 import { z } from "zod";
-import { eventSystem, emit, on, EventType } from "./event.system";
+import { emit, on } from "./event.system";
 
 // Compute Job Types
 export const ComputeJobTypeSchema = z.enum([
@@ -46,7 +46,7 @@ export const JobPrioritySchema = z.enum([
   "real_time",
 ]);
 
-export type _JobPriority = z.infer<typeof JobPrioritySchema>;
+export type JobPriority = z.infer<typeof JobPrioritySchema>;
 
 // Job Status
 export const JobStatusSchema = z.enum([
@@ -59,7 +59,7 @@ export const JobStatusSchema = z.enum([
   "timeout",
 ]);
 
-export type _JobStatus = z.infer<typeof JobStatusSchema>;
+export type JobStatus = z.infer<typeof JobStatusSchema>;
 
 // Compute Job Schema
 export const ComputeJobSchema = z.object({
@@ -69,15 +69,15 @@ export const ComputeJobSchema = z.object({
   status: JobStatusSchema.default("pending"),
   payload: z.record(z.string(), z.any()).optional(),
   requiredResources: z.record(z.string(), z.number()).optional(),
-  _maxRetries: z.number().default(3),
+  maxRetries: z.number().default(3),
   timeoutMs: z.number().default(30000),
   createdAt: z.date(),
   startedAt: z.date().optional(),
   completedAt: z.date().optional(),
-  _userId: z.string().optional(),
-  _sessionId: z.string().optional(),
+  userId: z.string().optional(),
+  sessionId: z.string().optional(),
   correlationId: z.string().optional(),
-  _tags: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
   metadata: z.record(z.string(), z.string()).optional(),
 });
 
@@ -103,11 +103,11 @@ export const JobResultSchema = z.object({
   error: z.string().optional(),
   processingTime: z.number(),
   resourcesUsed: z.record(z.string(), z.number()).optional(),
-  _retryCount: z.number(),
+  retryCount: z.number(),
   metadata: z.record(z.string(), z.string()).optional(),
 });
 
-export type _JobResult = z.infer<typeof JobResultSchema>;
+export type JobResult = z.infer<typeof JobResultSchema>;
 
 // Compute System Configuration
 export const ComputeConfigSchema = z.object({
@@ -123,7 +123,7 @@ export const ComputeConfigSchema = z.object({
     api_tokens: 1000,
     cache_memory: 512, // MB
   }),
-  _priorityWeights: z.record(z.string(), z.number()).default({
+  priorityWeights: z.record(z.string(), z.number()).default({
     background: 1,
     normal: 2,
     high: 4,
@@ -131,7 +131,7 @@ export const ComputeConfigSchema = z.object({
     real_time: 16,
   }),
   enableAutoScaling: z.boolean().default(true),
-  _metricsRetentionMs: z.number().default(3600000), // 1 hour
+  metricsRetentionMs: z.number().default(3600000), // 1 hour
 });
 
 export type ComputeConfig = z.infer<typeof ComputeConfigSchema>;
@@ -157,7 +157,7 @@ class ComputeJobQueue {
         jobId: job.id,
         type: job.type,
         priority: job.priority,
-        _queuePosition: index,
+        queuePosition: index,
         queueSize: this.jobs.length,
       },
       { correlationId: job.correlationId },
@@ -428,13 +428,16 @@ export class ComputeEventManager {
   private config: ComputeConfig;
   private isRunning = false;
   private processInterval: Timer | null = null;
-  private jobHandlers: Map<ComputeJobType, Function> = new Map();
+  private jobHandlers: Map<
+    ComputeJobType,
+    (...args: unknown[]) => Promise<unknown>
+  > = new Map();
   private metrics = {
     totalJobs: 0,
     completedJobs: 0,
     failedJobs: 0,
     averageProcessingTime: 0,
-    _throughputPerSecond: 0,
+    throughputPerSecond: 0,
   };
 
   constructor(config: Partial<ComputeConfig> = {}) {
@@ -475,12 +478,15 @@ export class ComputeEventManager {
 
     emit("compute.system_stopped", {
       totalJobs: this.metrics.totalJobs,
-      _uptime: Date.now(),
+      uptime: Date.now(),
     });
   }
 
   // Register job handler
-  registerJobHandler(type: ComputeJobType, handler: Function): void {
+  registerJobHandler(
+    type: ComputeJobType,
+    handler: (...args: unknown[]) => Promise<unknown>,
+  ): void {
     this.jobHandlers.set(type, handler);
   }
 
@@ -563,7 +569,7 @@ export class ComputeEventManager {
       isRunning: this.isRunning,
       queueSize: this.jobQueue.getQueueSize(),
       runningJobs: this.jobQueue.getRunningCount(),
-      _resourceUsage: Object.fromEntries(
+      resourceUsage: Object.fromEntries(
         this.resourceMonitor.getAllResourceUsage(),
       ),
       metrics: this.metrics,
@@ -588,7 +594,7 @@ export class ComputeEventManager {
 
   // Execute individual job
   private async executeJob(job: ComputeJob): Promise<void> {
-    const _startTime = Date.now();
+    const startTime = Date.now();
     let allocatedResources: Partial<Record<ResourceType, number>> = {};
 
     try {
@@ -659,7 +665,7 @@ export class ComputeEventManager {
         "compute.job_failed",
         {
           jobId: job.id,
-          error: error instanceof Error ? error._message : String(error),
+          error: error instanceof Error ? error.message : String(error),
           processingTime,
           resourcesUsed: allocatedResources,
         },
@@ -691,14 +697,17 @@ export class ComputeEventManager {
     on("compute.resource_high_usage", (event: unknown) => {
       // Implement auto-scaling or load balancing logic
       if (this.config.enableAutoScaling) {
-        this.handleHighResourceUsage(event.data);
+        this.handleHighResourceUsage((event as { data: unknown }).data);
       }
     });
   }
 
   // Handle high resource usage
   private handleHighResourceUsage(data: unknown): void {
-    const { resourceType, utilization } = data;
+    const { resourceType, utilization } = data as {
+      resourceType: string;
+      utilization: number;
+    };
 
     if (utilization > 0.9) {
       // Critical resource usage - pause low priority jobs
@@ -707,7 +716,7 @@ export class ComputeEventManager {
         {
           resourceType,
           utilization,
-          _action: "pause_low_priority_jobs",
+          action: "pause_low_priority_jobs",
         },
         { priority: "critical" },
       );
@@ -727,7 +736,7 @@ export class ComputeEventManager {
 export const computeManager = new ComputeEventManager();
 
 // Convenience functions for common compute operations
-export const _ComputeOperations = {
+export const ComputeOperations = {
   // AI Operations
   async runAIInference(
     model: string,
@@ -840,15 +849,11 @@ if (typeof window === "undefined") {
   computeManager.start();
 
   // Register default handlers
-  computeManager.registerJobHandler(
-    "test.execution",
-    async (job: ComputeJob) => {
-      // _Example: Run tests using bun
-      const { testSuite } = job.payload || {};
-      // Implementation would call actual test runner
-      return { success: true, _testsRun: 42, _passed: 40, failed: 2 };
-    },
-  );
+  computeManager.registerJobHandler("test.execution", async () => {
+    // Example: Run tests using bun
+    // Implementation would call actual test runner
+    return { success: true, testsRun: 42, passed: 40, failed: 2 };
+  });
 
   // Graceful shutdown
   process.on("SIGINT", () => computeManager.stop());

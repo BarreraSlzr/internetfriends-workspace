@@ -242,6 +242,27 @@ const config: Config = {
           border: "1px solid var(--glass-border)",
           transition: "all 0.3s ease",
         },
+        ".surface-glass": {
+          background: "var(--surface-glass)",
+          "backdrop-filter": "blur(14px)",
+          "-webkit-backdrop-filter": "blur(14px)",
+          border: "1px solid var(--surface-border)",
+          "border-radius": "var(--radius-md)",
+          transition: "var(--transition-glass)",
+          "&:hover": {
+            background: "var(--surface-glass-hover)",
+            "border-color": "var(--surface-border-enhanced)",
+          },
+        },
+        ".surface-solid": {
+          background: "var(--surface-solid)",
+          border: "1px solid var(--surface-border)",
+          "border-radius": "var(--radius-md)",
+        },
+        ".canvas-full": {
+          background: "var(--app-canvas-gradient)",
+          "min-height": "100%",
+        },
         ".focus-dashed": {
           "&:focus": {
             outline: "none",
@@ -297,6 +318,17 @@ const config: Config = {
           "&::-webkit-scrollbar-thumb:hover": {
             background: "var(--if-primary-hover)",
           },
+        },
+        ".border-accent-subtle": {
+          "border-color":
+            "hsl(var(--border-accent-subtle, var(--color-border-primary)))",
+        },
+        ".border-accent-medium": {
+          "border-color": "hsl(var(--border-accent-medium, var(--if-primary)))",
+        },
+        ".border-accent-strong": {
+          "border-color":
+            "hsl(var(--border-accent-strong, var(--if-primary-hover)))",
         },
       });
     },

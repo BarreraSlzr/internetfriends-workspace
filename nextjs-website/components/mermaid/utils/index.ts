@@ -100,25 +100,30 @@ export function processMermaidMarkdown(content: string): {
 /**
  * Validate Mermaid diagram syntax (basic validation)
  */
-export function validateMermaidSyntax(code: string): {
+export function validateMermaidSyntax(content: string): {
   isValid: boolean;
-  errors: string[];
+  error?: string;
+  suggestion?: string;
 } {
-  const errors: string[] = [];
-
-  if (!code || code.trim().length === 0) {
-    errors.push("Diagram code is empty");
-    return { isValid: false, errors };
+  if (!content || content.trim().length === 0) {
+    return {
+      isValid: false,
+      error: "Diagram code is empty",
+      suggestion: "Please provide diagram content",
+    };
   }
 
-  const lines = code
+  const lines = content
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
   if (lines.length === 0) {
-    errors.push("No valid diagram content found");
-    return { isValid: false, errors };
+    return {
+      isValid: false,
+      error: "No valid diagram content found",
+      suggestion: "Add diagram content with proper syntax",
+    };
   }
 
   const firstLine = lines[0];
@@ -143,51 +148,56 @@ export function validateMermaidSyntax(code: string): {
   );
 
   if (!hasValidType) {
-    errors.push(`Unsupported diagram type. First line: "${firstLine}"`);
+    return {
+      isValid: false,
+      error: `Unsupported diagram type. First line: "${firstLine}"`,
+      suggestion: `Try starting with one of: ${supportedTypes.join(", ")}`,
+    };
   }
 
   return {
-    isValid: errors.length === 0,
-    errors,
+    isValid: true,
   };
 }
 
 /**
  * Generate Mermaid configuration based on theme
  */
-export function getMermaidConfig(theme: "light" | "dark" = "light") {
+export function getMermaidConfig(
+  theme: "light" | "dark" = "light",
+): Record<string, unknown> {
   const baseConfig = {
-    _startOnLoad: false,
+    startOnLoad: false,
     theme: (theme === "dark" ? "dark" : "default") as "dark" | "default",
     themeVariables: {
-      _fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
+      fontFamily: "Inter, ui-sans-serif, system-ui, sans-serif",
       fontSize: "14px",
     },
     flowchart: {
-      _htmlLabels: true,
-      _curve: "basis",
-      _padding: 10,
+      htmlLabels: true,
+      curve: "basis",
+      padding: 10,
     },
-    _sequence: {
-      _actorMargin: 50,
-      _width: 150,
-      _height: 65,
-      _boxMargin: 10,
-      _boxTextMargin: 5,
-      _noteMargin: 10,
-      _messageMargin: 35,
+    sequence: {
+      actorMargin: 50,
+      width: 150,
+      height: 65,
+      boxMargin: 10,
+      boxTextMargin: 5,
+      noteMargin: 10,
+      messageMargin: 35,
     },
     gantt: {
-      _leftPadding: 75,
-      _gridLineStartPadding: 35,
+      leftPadding: 75,
+      gridLineStartPadding: 35,
       fontSize: 11,
-      _sectionFontSize: 11,
+      sectionFontSize: 11,
     },
   };
 
   // Theme-specific customizations
   if (theme === "dark") {
-    (baseConfig.themeVariables as any) = {
+    (baseConfig.themeVariables as Record<string, unknown>) = {
       ...baseConfig.themeVariables,
       primaryTextColor: "#ffffff",
       primaryBorderColor: "#1e40af",
@@ -200,7 +210,7 @@ export function getMermaidConfig(theme: "light" | "dark" = "light") {
       tertiaryBkg: "#4b5563",
     };
   } else {
-    (baseConfig.themeVariables as any) = {
+    (baseConfig.themeVariables as Record<string, unknown>) = {
       ...baseConfig.themeVariables,
       primaryTextColor: "#ffffff",
       primaryBorderColor: "#1e40af",
@@ -214,8 +224,11 @@ export function getMermaidConfig(theme: "light" | "dark" = "light") {
     };
   }
 
-  return baseConfig as any;
+  return baseConfig as Record<string, unknown>;
 }
+
+// Keep the old name for backward compatibility
+export const generateMermaidConfig = getMermaidConfig;
 
 /**
  * Clean and sanitize Mermaid code
@@ -239,20 +252,20 @@ export function sanitizeMermaidCode(code: string): string {
 export function getFileTypeDisplayName(fileType: string): string {
   const typeMap: Record<string, string> = {
     markdown: "Markdown",
-    _md: "Markdown",
-    _json: "JSON",
-    _yaml: "YAML",
-    _yml: "YAML",
-    _typescript: "TypeScript",
-    _ts: "TypeScript",
-    _tsx: "TSX",
+    md: "Markdown",
+    json: "JSON",
+    yaml: "YAML",
+    yml: "YAML",
+    typescript: "TypeScript",
+    ts: "TypeScript",
+    tsx: "TSX",
     javascript: "JavaScript",
-    _js: "JavaScript",
-    _jsx: "JSX",
-    _text: "Text",
-    _txt: "Text",
+    js: "JavaScript",
+    jsx: "JSX",
+    text: "Text",
+    txt: "Text",
     mermaid: "Mermaid",
-    _mmd: "Mermaid",
+    mmd: "Mermaid",
   };
 
   return typeMap[fileType.toLowerCase()] || fileType;
@@ -261,7 +274,7 @@ export function getFileTypeDisplayName(fileType: string): string {
 /**
  * Debounce function for performance optimization
  */
-export function debounce<T extends (...args: unknown[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   wait: number,
 ): (...args: Parameters<T>) => void {

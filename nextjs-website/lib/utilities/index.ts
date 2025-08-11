@@ -1,12 +1,15 @@
-export const _FileUtilities = {
+export const FileUtilities = {
   async exists(path: string): Promise<boolean> {
     const file = Bun.file(path);
     return await file.exists();
   },
 };
 
-export const _StringUtils = {
+export const StringUtils = {
   toSnakeCase(str: string): string {
-    return str.replace(/([A-Z])/g, "_$1").toLowerCase().replace(/^_/, "");
+    return str
+      .replace(/([A-Z])/g, "_$1")
+      .toLowerCase()
+      .replace(/^_/, "");
   },
 };

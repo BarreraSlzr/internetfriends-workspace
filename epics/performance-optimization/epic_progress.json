@@ -1,0 +1,255 @@
+{
+  "epic": "performance-optimization",
+  "status": "in_progress",
+  "startDate": "2025-01-10T00:00:00.000Z",
+  "timeline": "2-3 weeks",
+  "goal": "Establish performance measurement foundation, optimize bundle size, and implement critical rendering path improvements",
+  "phases": {
+    "phase_1_baseline": {
+      "name": "Baseline & Instrumentation",
+      "status": "completed",
+      "progress": 100,
+      "tasks": [
+        {
+          "name": "Add lightweight performance telemetry bootstrap",
+          "status": "completed",
+          "description": "PerformanceObserver for TTFB, FCP, LCP, CLS, INP with console + optional beacon"
+        },
+        {
+          "name": "Generate initial bundle/CSS size snapshot",
+          "status": "completed",
+          "description": "Script to analyze .next/static for JS/CSS sizes with JSON output"
+        },
+        {
+          "name": "SCSS modules size and complexity analysis",
+          "status": "completed",
+          "description": "Inventory SCSS files with class counts, custom properties, modernization status"
+        },
+        {
+          "name": "Performance metrics integration",
+          "status": "completed",
+          "description": "Created comprehensive baseline report with bundle and SCSS analysis"
+        }
+      ]
+    },
+    "phase_2_fonts": {
+      "name": "Fonts & Above-the-Fold",
+      "status": "completed",
+      "progress": 100,
+      "tasks": [
+        {
+          "name": "Font usage inventory",
+          "status": "completed",
+          "description": "Catalogued 8 files with 6 font families and 6 weights, identified optimization opportunities"
+        },
+        {
+          "name": "Implement next/font optimization",
+          "status": "completed",
+          "description": "Next.js Geist fonts already optimized with preloading and variable CSS properties"
+        },
+        {
+          "name": "Create semantic font tokens",
+          "status": "completed",
+          "description": "Created fonts.tokens.scss with 25+ semantic tokens and utility functions"
+        },
+        {
+          "name": "Critical CSS inlining",
+          "status": "completed",
+          "description": "Extracted 21.55KB critical CSS (89% ratio) with 9.42KB deferred for above-the-fold optimization"
+        }
+      ]
+    },
+    "phase_3_pruning": {
+      "name": "Code & Style Pruning",
+      "status": "pending",
+      "progress": 0,
+      "tasks": [
+        {
+          "name": "Unused CSS class detection",
+          "status": "pending",
+          "description": "Script to detect unused classes via static analysis"
+        },
+        {
+          "name": "Dynamic import migration",
+          "status": "pending",
+          "description": "Move heavy components to dynamic imports with suspense"
+        },
+        {
+          "name": "Duplicate color variable cleanup",
+          "status": "pending",
+          "description": "Collapse duplicate color var fallbacks"
+        }
+      ]
+    },
+    "phase_4_assets": {
+      "name": "Asset & Image Efficiency",
+      "status": "pending",
+      "progress": 0,
+      "tasks": [
+        {
+          "name": "Image component standardization",
+          "status": "pending",
+          "description": "Implement <Image> wrappers with enforced sizes + quality defaults"
+        },
+        {
+          "name": "Responsive source sets",
+          "status": "pending",
+          "description": "Add responsive source set strategy for hero/gallery images"
+        },
+        {
+          "name": "Modern format adoption",
+          "status": "pending",
+          "description": "Evaluate AVIF/WebP adoption rate and implementation"
+        }
+      ]
+    },
+    "phase_5_runtime": {
+      "name": "Runtime & Theming Overhead",
+      "status": "pending",
+      "progress": 0,
+      "tasks": [
+        {
+          "name": "Theme switching performance audit",
+          "status": "pending",
+          "description": "Audit computed style reads triggered by accent switching"
+        },
+        {
+          "name": "Accent derivation memoization",
+          "status": "pending",
+          "description": "Memoize accent derivations for JS-driven adjustments"
+        },
+        {
+          "name": "Layout thrash validation",
+          "status": "pending",
+          "description": "Validate no layout thrash during theme/accent toggle"
+        }
+      ]
+    },
+    "phase_6_reporting": {
+      "name": "Reporting & Closure",
+      "status": "pending",
+      "progress": 0,
+      "tasks": [
+        {
+          "name": "Performance delta report",
+          "status": "pending",
+          "description": "Re-run snapshots and produce before/after delta (JSON + Markdown)"
+        },
+        {
+          "name": "Epic metrics calculation",
+          "status": "pending",
+          "description": "% CSS reduction, font blocking time delta, LCP improvement, bundle kB saved"
+        },
+        {
+          "name": "Epic completion and tagging",
+          "status": "pending",
+          "description": "Commit narrative, version tag, and epic closure"
+        }
+      ]
+    }
+  },
+  "metrics": {
+    "baseline": {
+      "bundle": {
+        "jsKB": 4939.83,
+        "cssKB": 24.12,
+        "totalFiles": 51
+      },
+      "webVitals": {
+        "LCP": null,
+        "FCP": null,
+        "CLS": null,
+        "INP": null,
+        "TTFB": null
+      },
+      "scss": {
+        "totalFiles": 14,
+        "totalKB": 70.82,
+        "modernizationPercent": 86,
+        "totalClasses": 178,
+        "totalCustomProperties": 102,
+        "complexityDistribution": {
+          "low": 2,
+          "medium": 7,
+          "high": 5
+        }
+      },
+      "fonts": {
+        "families": [],
+        "unusedFaces": [],
+        "totalFontBytes": null
+      }
+    },
+    "target": {
+      "bundle": {
+        "jsKBReduction": 20,
+        "cssKBReduction": 15,
+        "unusedClassReduction": 30
+      },
+      "webVitals": {
+        "LCPImprovement": 200,
+        "FCPImprovement": 100,
+        "CLSImprovement": 0.05
+      },
+      "performance": {
+        "bundleSizeReduction": "15%",
+        "loadTimeImprovement": "25%",
+        "modernizationComplete": "100%"
+      }
+    }
+  },
+  "deliverables": [
+    "Performance telemetry system with web vitals tracking",
+    "Automated bundle size monitoring and reporting",
+    "SCSS modernization analysis and cleanup tools",
+    "Font loading optimization with next/font integration",
+    "Critical CSS extraction and inlining strategy",
+    "Unused code detection and removal automation",
+    "Image optimization component library",
+    "Runtime performance monitoring for theme switching",
+    "Comprehensive performance improvement documentation"
+  ],
+  "risks": [
+    {
+      "risk": "Performance regressions during optimization",
+      "mitigation": "Comprehensive before/after testing with automated rollback"
+    },
+    {
+      "risk": "SCSS modernization breaking existing styles",
+      "mitigation": "Gradual migration with legacy compatibility layer"
+    },
+    {
+      "risk": "Font loading changes affecting visual stability",
+      "mitigation": "Font-display: swap and preload strategies"
+    }
+  ],
+  "dependencies": [
+    "Completion of design-system-hardening epic (SCSS token architecture)",
+    "Next.js 15+ font optimization features",
+    "Build pipeline access for bundle analysis"
+  ],
+  "tools": [
+    "Bun runtime for performance scripts",
+    "PerformanceObserver API for web vitals",
+    "Next.js Image component optimization",
+    "SCSS static analysis tools",
+    "Bundle analyzer integration"
+  ],
+  "lastUpdated": "2025-08-10T10:01:31.475Z",
+  "commits": [],
+  "notes": [
+    "Epic started with Phase 1 baseline instrumentation",
+    "Created comprehensive performance telemetry hook with beacon support",
+    "Built bundle snapshot and SCSS analysis tooling",
+    "Phase 1 COMPLETED: Generated comprehensive baseline report",
+    "Bundle analysis: 4.94MB JS, 24KB CSS across 51 files",
+    "SCSS analysis: 14 files, 86% modernized, 178 classes, 102 custom properties",
+    "5 recommendations identified for Phase 2 optimization",
+    "Phase 2 COMPLETED: Fonts & Above-the-Fold optimization achieved",
+    "Font optimization: Next.js Geist fonts with preloading and semantic tokens",
+    "Critical CSS: 89% extraction ratio (21.55KB critical, 9.42KB deferred)",
+    "Performance telemetry integrated into app layout for real-time monitoring",
+    "Estimated improvements: 50-100ms FCP, 20-50ms LCP from optimizations",
+    "Ready for Phase 3: Code & Style Pruning"
+  ]
+}

@@ -1,11 +1,10 @@
 // InternetFriends Atomic Button Styles
 // SCSS Module for button component with design system integration
 
-@use 'sass:map';
-
-// Import design system variables
-@import '../../../styles/variables.scss';
-@import '../../../styles/mixins.scss';
+@use "sass:map";
+@use "../../../styles/tokens/typography.scss" as typography;
+@use "../../../styles/tokens/accent.scss" as accent;
+@use "../../../styles/mixins/focus.scss" as focus;
 
 // Base button styles
 .button {
@@ -33,14 +32,10 @@
   user-select: none;
 
   // Transitions
-  transition: all var(--animation-duration-fast) var(--animation-easing-easeOut);
+  transition: all 150ms cubic-bezier(0, 0, 0.2, 1);
 
   // Focus styles (Mermaid viewer inspired)
-  &:focus-visible {
-    outline: 2px dashed var(--color-border-focus);
-    outline-offset: 2px;
-    border-radius: var(--radius-sm);
-  }
+  @include focus.focus-interactive();
 
   // Disabled state
   &:disabled {
@@ -110,7 +105,7 @@
   }
 
   &:active:not(:disabled) {
-    background: var(--if-primary-light);
+    background: var(--if-accent-soft);
   }
 }
 
@@ -120,8 +115,8 @@
   border: 1px solid transparent;
 
   &:hover:not(:disabled) {
-    background: var(--if-primary-light);
-    color: var(--if-primary);
+    background: var(--if-accent-faint);
+    color: var(--if-accent-primary);
   }
 
   &:active:not(:disabled) {
@@ -332,16 +327,16 @@
   }
 }
 
-@keyframes buttonShake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-2px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(2px);
-  }
+// Accent token integration - Uses CSS variables from design-tokens.css and accent-global.css
+// Simplified approach using CSS custom properties for accent theming
+
+// All accent styling is handled by global CSS variables and data-accent attributes
+// The accent system is defined in styles/accent-global.css and styles/design-tokens.css
+
+// Component-specific accent overrides can be added here if needed
+.button[data-accent] {
+  // Accent colors are automatically applied via CSS custom properties
+  // defined in the global accent system
 }
 
 // Button group styles (for when buttons are grouped)

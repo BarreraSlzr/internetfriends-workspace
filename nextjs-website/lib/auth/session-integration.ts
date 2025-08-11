@@ -7,41 +7,41 @@ import { z } from "zod";
 export const UserAuthSchema = z.object({
   id: z.string().uuid(),
   email: z.string().email(),
-  _username: z.string().min(3).max(30),
-  _displayName: z.string().min(1).max(100),
-  _avatar: z.string().url().optional(),
+  username: z.string().min(3).max(30),
+  displayName: z.string().min(1).max(100),
+  avatar: z.string().url().optional(),
 
   // Authentication methods
-  _hasPassword: z.boolean(),
-  _hasWebAuthn: z.boolean(),
-  _has2FA: z.boolean(),
+  hasPassword: z.boolean(),
+  hasWebAuthn: z.boolean(),
+  has2FA: z.boolean(),
 
   // Timestamps
   createdAt: z.date(),
-  _updatedAt: z.date(),
-  _lastLoginAt: z.date().optional(),
+  updatedAt: z.date(),
+  lastLoginAt: z.date().optional(),
 });
 
-export type _UserAuth = z.infer<typeof UserAuthSchema>;
+export type UserAuth = z.infer<typeof UserAuthSchema>;
 
 // Session Management Schema
 export const SessionSchema = z.object({
   id: z.string().uuid(),
-  _userId: z.string().uuid(),
-  _token: z.string(),
+  userId: z.string().uuid(),
+  token: z.string(),
   expiresAt: z.date(),
   createdAt: z.date(),
 
   // Security metadata
-  _ipAddress: z.string().optional(),
-  _userAgent: z.string().optional(),
+  ipAddress: z.string().optional(),
+  userAgent: z.string().optional(),
   country: z.string().length(2).optional(), // ISO country code
-  _city: z.string().optional(),
+  city: z.string().optional(),
 
   // Session flags
   isActive: z.boolean().default(true),
   revokedAt: z.date().optional(),
-  _revokeReason: z.enum(["logout", "expired", "security", "admin"]).optional(),
+  revokeReason: z.enum(["logout", "expired", "security", "admin"]).optional(),
 });
 
 export type Session = z.infer<typeof SessionSchema>;
@@ -49,11 +49,11 @@ export type Session = z.infer<typeof SessionSchema>;
 // InternetFriends User Extension
 export const InternetFriendsUserSchema = UserAuthSchema.extend({
   // Platform-specific fields
-  _plan: z.enum(["free", "pro", "enterprise"]).default("free"),
-  _credits: z.number().min(0).default(0),
+  plan: z.enum(["free", "pro", "enterprise"]).default("free"),
+  credits: z.number().min(0).default(0),
 
   // Preferences
-  _preferences: z
+  preferences: z
     .object({
       theme: z.enum(["light", "dark", "system"]).default("system"),
       language: z.string().default("en"),
@@ -64,18 +64,18 @@ export const InternetFriendsUserSchema = UserAuthSchema.extend({
     }),
 
   // InternetFriends specific data
-  _projects: z.array(z.string().uuid()).default([]),
-  _achievements: z.array(z.string()).default([]),
+  projects: z.array(z.string().uuid()).default([]),
+  achievements: z.array(z.string()).default([]),
 });
 
-export type _InternetFriendsUser = z.infer<typeof InternetFriendsUserSchema>;
+export type InternetFriendsUser = z.infer<typeof InternetFriendsUserSchema>;
 
 // Auth Utilities
-export const _createSessionToken = () => {
+export const createSessionToken = () => {
   return crypto.randomUUID() + "." + Date.now().toString(36);
 };
 
-export const _isSessionValid = (session: Session): boolean => {
+export const isSessionValid = (session: Session): boolean => {
   return (
     session.isActive && session.expiresAt > new Date() && !session.revokedAt
   );

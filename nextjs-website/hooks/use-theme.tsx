@@ -23,8 +23,8 @@ interface ThemeConfig {
 
 interface UseThemeReturn {
   theme: ThemeConfig;
-  tokens: any;
-  components: any;
+  tokens: Record<string, unknown>;
+  components: Record<string, unknown>;
   setTheme: (mode: ThemeMode) => void;
   toggleTheme: () => void;
   getColor: (property: string) => string;
@@ -39,7 +39,11 @@ const HOOK_DEFAULTS = {
 };
 
 class HookError extends Error {
-  constructor(message: string, public readonly hook: string, public readonly code?: string) {
+  constructor(
+    message: string,
+    public readonly hook: string,
+    public readonly code?: string,
+  ) {
     super(message);
     this.name = "HookError";
   }

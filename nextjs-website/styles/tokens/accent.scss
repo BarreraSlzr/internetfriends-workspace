@@ -1,0 +1,119 @@
+// InternetFriends Design System - Accent Token SCSS Generator
+// Dynamic accent variants using CSS custom properties and SCSS loops
+
+@use "sass:map";
+@use "./colors.scss" as c;
+
+// Accent token map (synced with TypeScript types)
+$accent-variants: (
+  "primary": (
+    "color": #3b82f6,
+    "hover": #2563eb,
+    "light-bg": rgba(59, 130, 246, 0.08),
+    "active-bg": rgba(59, 130, 246, 0.12),
+    "contrast": #ffffff,
+  ),
+  "success": (
+    "color": #16a34a,
+    "hover": #15803d,
+    "light-bg": rgba(22, 163, 74, 0.08),
+    "active-bg": rgba(22, 163, 74, 0.12),
+    "contrast": #ffffff,
+  ),
+  "warning": (
+    "color": #d97706,
+    "hover": #b45309,
+    "light-bg": rgba(217, 119, 6, 0.08),
+    "active-bg": rgba(217, 119, 6, 0.12),
+    "contrast": #ffffff,
+  ),
+  "danger": (
+    "color": #dc2626,
+    "hover": #b91c1c,
+    "light-bg": rgba(220, 38, 38, 0.08),
+    "active-bg": rgba(220, 38, 38, 0.12),
+    "contrast": #ffffff,
+  ),
+  "info": (
+    "color": #0ea5e9,
+    "hover": #0284c7,
+    "light-bg": rgba(14, 165, 233, 0.08),
+    "active-bg": rgba(14, 165, 233, 0.12),
+    "contrast": #ffffff,
+  ),
+);
+
+// CSS custom properties are defined in design-tokens.css
+// This file only provides SCSS functions and mixins for CSS modules
+
+// Accent variant classes are defined in global CSS, not CSS modules
+// These mixins provide accent functionality for use in component modules
+
+// Utility functions for SCSS consumption
+@function accent-color($name) {
+  @return map.get(map.get($accent-variants, $name), "color");
+}
+
+@function accent-hover($name) {
+  @return map.get(map.get($accent-variants, $name), "hover");
+}
+
+@function accent-light-bg($name) {
+  @return map.get(map.get($accent-variants, $name), "light-bg");
+}
+
+@function accent-active-bg($name) {
+  @return map.get(map.get($accent-variants, $name), "active-bg");
+}
+
+@function accent-contrast($name) {
+  @return map.get(map.get($accent-variants, $name), "contrast");
+}
+
+// Mixin for applying accent variants
+@mixin apply-accent($accent-name, $variant: "bg") {
+  @if $variant == "bg" {
+    background-color: accent-color($accent-name);
+    color: accent-contrast($accent-name);
+  } @else if $variant == "text" {
+    color: accent-color($accent-name);
+  } @else if $variant == "border" {
+    border-color: accent-color($accent-name);
+  } @else if $variant == "light" {
+    background-color: accent-light-bg($accent-name);
+    color: accent-color($accent-name);
+  } @else if $variant == "outline" {
+    background-color: transparent;
+    color: accent-color($accent-name);
+    border: 1px solid accent-color($accent-name);
+  }
+}
+
+// Global utility classes should be defined in global CSS files
+// CSS modules should use mixins and functions instead
+
+// Mixin for applying accent colors to individual elements
+@mixin accent-button($accent-name) {
+  background: accent-color($accent-name);
+  color: accent-contrast($accent-name);
+  border-color: accent-color($accent-name);
+
+  &:hover:not(:disabled) {
+    background: accent-hover($accent-name);
+    border-color: accent-hover($accent-name);
+  }
+
+  &:focus-visible {
+    outline-color: accent-color($accent-name);
+  }
+}
+
+@mixin accent-outline($accent-name) {
+  background: transparent;
+  color: accent-color($accent-name);
+  border-color: accent-color($accent-name);
+
+  &:hover:not(:disabled) {
+    background: accent-light-bg($accent-name);
+  }
+}

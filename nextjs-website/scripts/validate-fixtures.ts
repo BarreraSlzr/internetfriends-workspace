@@ -97,7 +97,14 @@ const FLAGS = parseFlags();
 const color = (() => {
   if (FLAGS.noColor) {
     const same = (s: string) => s;
-    return { red: same, green: same, yellow: same, cyan: same, dim: same, bold: same };
+    return {
+      red: same,
+      green: same,
+      yellow: same,
+      cyan: same,
+      dim: same,
+      bold: same,
+    };
   }
   const wrap = (c: number) => (s: string) => `\u001b[${c}m${s}\u001b[0m`;
   return {
@@ -150,7 +157,7 @@ function transformDates(value: unknown): unknown {
 interface ValidationFailure {
   name: string;
   error: string;
-  issues?: any;
+  issues?: unknown;
   file?: string;
 }
 
@@ -166,17 +173,19 @@ interface ValidationResult {
   timestamp: string;
 }
 
-function loadFixtureFile(filePath: string): any {
+function loadFixtureFile(filePath: string): unknown {
   const raw = fs.readFileSync(filePath, "utf-8");
   // Remove potential /* comments */ or // comments (allow trailing doc hints)
   const sanitized = raw
     .replace(/\/\*[\s\S]*?\*\//g, "")
     .replace(/^[ \t]*\/\/.*$/gm, "");
-  let parsed: any;
+  let parsed: unknown;
   try {
     parsed = JSON.parse(sanitized);
-  } catch (e: any) {
-    throw new Error(`JSON parse error: ${e.message}`);
+  } catch (e: unknown) {
+    throw new Error(
+      `JSON parse error: ${e instanceof Error ? e.message : String(e)}`,
+    );
   }
   return transformDates(parsed);
 }
@@ -221,7 +230,9 @@ function validateFixtures(): ValidationResult {
         ),
       );
     } else {
-      console.log(color.bold(`Fixture files in ${fixtureDir} (${files.length}):`));
+      console.log(
+        color.bold(`Fixture files in ${fixtureDir} (${files.length}):`),
+      );
       files.forEach((f) => console.log(" - " + f));
     }
     process.exit(0);
@@ -237,13 +248,13 @@ function validateFixtures(): ValidationResult {
     }
 
     fixturesFound++;
-    let data: any;
+    let data: unknown;
     try {
       data = loadFixtureFile(file);
-    } catch (e: any) {
+    } catch (e: unknown) {
       failures.push({
         name: entry.name,
-        error: e.message || "Fixture load error",
+        error: e instanceof Error ? e.message : "Fixture load error",
         file,
       });
       if (FLAGS.failFast) {
@@ -274,7 +285,7 @@ function validateFixtures(): ValidationResult {
         return {
           totalSchemas: registryFiltered.length,
           totalFixturesFound: fixturesFound,
-            validated: success.length,
+          validated: success.length,
           missing,
           failures,
           success,
@@ -316,12 +327,7 @@ const missingFailure =
     : [];
 
 const totalFailures = summary.failures.length + missingFailure.length;
-const exitCode =
-  totalFailures > 0
-    ? FLAGS.failFast
-      ? 2
-      : 1
-    : 0;
+const exitCode = totalFailures > 0 ? (FLAGS.failFast ? 2 : 1) : 0;
 
 if (FLAGS.json) {
   console.log(

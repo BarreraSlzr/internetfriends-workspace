@@ -1,0 +1,130 @@
+@use "sass:map";
+@use "./tokens/colors.scss" as colors;
+@use "./tokens/spacing.scss" as spacing;
+@use "./tokens/typography.scss" as typography;
+
+// InternetFriends Design System Variables (Legacy)
+// DEPRECATED: Use individual token modules from ./tokens/ directory
+// This file is kept for backward compatibility
+
+// Deprecation warning
+@warn "variables.scss is deprecated. Use individual token modules: @use './tokens/colors.scss', @use './tokens/spacing.scss', etc.";
+
+// Forward tokens from new modular system for backward compatibility
+
+// Brand Colors (InternetFriends) - Forwarded from colors module
+$if-primary: colors.$if-primary;
+$if-primary-hover: colors.$if-primary-hover;
+$if-primary-light: colors.$if-primary-light;
+$if-primary-active: colors.$if-primary-active;
+
+// Glass Morphism System - Forwarded from colors module
+$glass-bg-header: colors.$glass-bg-header;
+$glass-bg-header-scrolled: colors.$glass-bg-header-scrolled;
+$glass-bg-overlay: colors.$glass-bg-overlay;
+$glass-bg-modal: colors.$glass-bg-modal;
+$glass-border: colors.$glass-border;
+$glass-border-enhanced: colors.$glass-border-enhanced;
+$glass-border-outset: colors.$glass-border-outset;
+
+// Glass Morphism Dark Theme - Forwarded from colors module
+$glass-dark-bg-header: colors.$glass-dark-bg-header;
+$glass-dark-bg-header-scrolled: colors.$glass-dark-bg-header-scrolled;
+$glass-dark-bg-overlay: colors.$glass-dark-bg-overlay;
+$glass-dark-bg-modal: colors.$glass-dark-bg-modal;
+$glass-dark-border: colors.$glass-dark-border;
+$glass-dark-border-enhanced: colors.$glass-dark-border-enhanced;
+
+// Theme Colors - Forwarded from colors module
+$colors-light: colors.$colors-light;
+$colors-dark: colors.$colors-dark;
+
+// Spacing and Layout - Forwarded from spacing module
+$spacing: spacing.$spacing;
+$radius: spacing.$radius;
+$breakpoints: spacing.$breakpoints;
+$container-sizes: spacing.$container-sizes;
+$z-index: spacing.$z-index;
+
+// Typography and Effects - Forwarded from typography module
+$font-size: typography.$font-size;
+$font-weight: typography.$font-weight;
+$line-height: typography.$line-height;
+$shadows: typography.$shadows;
+$duration: typography.$duration;
+$easing: typography.$easing;
+
+// Layout Constants - Forwarded from spacing module
+$header-height: spacing.$header-height;
+$sidebar-width: spacing.$sidebar-width;
+$sidebar-collapsed: spacing.$sidebar-collapsed;
+$footer-height: spacing.$footer-height;
+$container-padding: spacing.$container-padding;
+$container-max-width: spacing.$container-max-width;
+
+// Touch Targets - Forwarded from spacing module
+$touch-target-min: spacing.$touch-target-min;
+$touch-target-recommended: spacing.$touch-target-recommended;
+$touch-target-comfortable: spacing.$touch-target-comfortable;
+$touch-spacing-min: spacing.$touch-spacing-min;
+$touch-spacing-recommended: spacing.$touch-spacing-recommended;
+
+// Utility Functions for SCSS (forwarded to new modular functions)
+@function spacing($size) {
+  @return spacing.spacing($size);
+}
+
+@function radius($size) {
+  @return spacing.radius($size);
+}
+
+@function color-light($color) {
+  @return colors.color-light($color);
+}
+
+@function color-dark($color) {
+  @return colors.color-dark($color);
+}
+
+@function font-size($size) {
+  @return typography.font-size($size);
+}
+
+@function shadow($size) {
+  @return typography.shadow($size);
+}
+
+@function z-index($layer) {
+  @return spacing.z-index($layer);
+}
+
+@function duration($speed) {
+  @return typography.duration($speed);
+}
+
+@function easing($type) {
+  @return typography.easing($type);
+}
+
+@function breakpoint($size) {
+  @return spacing.breakpoint($size);
+}
+
+// Component Variants - Kept for backward compatibility
+$button-variants: (
+  "primary": (
+    "background": $if-primary,
+    "background-hover": $if-primary-hover,
+    "color": #ffffff,
+    "border": $if-primary,
+  ),
+  "secondary": (
+    "background": transparent,
+    "background-hover": colors.color-light("bg-secondary"),
+    "color": colors.color-light("text-primary"),
+    "border": colors.color-light("border-primary"),
+  ),
+);
+
+// CSS Custom Properties are now handled in design-tokens.css and styles/index.scss
+// This file only contains SCSS variables for use in CSS modules

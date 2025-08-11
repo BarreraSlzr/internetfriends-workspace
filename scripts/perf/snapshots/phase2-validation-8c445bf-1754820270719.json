@@ -1,0 +1,143 @@
+{
+  "timestamp": "2025-08-10T10:04:30.711Z",
+  "commitHash": "8c445bf",
+  "phase": "fonts_above_fold_validation",
+  "overallStatus": "failed",
+  "score": 99,
+  "maxScore": 105,
+  "tests": {
+    "fontTokens": {
+      "name": "Font Tokens Validation",
+      "status": "warning",
+      "score": 20,
+      "maxScore": 20,
+      "details": [
+        "✅ Font tokens file exists: nextjs-website/styles/tokens/fonts.scss",
+        "✅ Semantic family token: --font-sans-display",
+        "✅ Semantic family token: --font-sans-body",
+        "✅ Semantic family token: --font-sans-ui",
+        "✅ Semantic family token: --font-mono-code",
+        "✅ Font weight scale defined",
+        "✅ Font size scale defined",
+        "✅ Utility function: @function font-size",
+        "✅ Utility function: @function font-weight",
+        "✅ Font tokens integrated into main styles",
+        "⚠️ File might be incomplete: 4.72KB"
+      ],
+      "errors": [],
+      "metrics": {
+        "fileSizeKB": 4.72
+      }
+    },
+    "criticalCSS": {
+      "name": "Critical CSS Validation",
+      "status": "failed",
+      "score": 18,
+      "maxScore": 25,
+      "details": [
+        "✅ Critical CSS file exists: styles/critical.css",
+        "✅ Appropriate critical CSS size: 21.56KB",
+        "✅ Excellent critical CSS ratio: 89%"
+      ],
+      "errors": [
+        "❌ Missing critical selector: :root",
+        "❌ Missing critical selector: body",
+        "❌ Missing critical selector: html"
+      ],
+      "metrics": {
+        "criticalKB": 21.55,
+        "deferredKB": 9.42,
+        "totalKB": 24.11,
+        "ratio": 89.38
+      }
+    },
+    "telemetryIntegration": {
+      "name": "Performance Telemetry Integration",
+      "status": "passed",
+      "score": 22,
+      "maxScore": 20,
+      "details": [
+        "✅ Telemetry hook exists: hooks/perf/use_web_vitals_telemetry.ts",
+        "✅ Hook feature: useWebVitalsTelemetry",
+        "✅ Hook feature: PerformanceObserver",
+        "✅ Hook feature: LCP",
+        "✅ Hook feature: FCP",
+        "✅ Hook feature: CLS",
+        "✅ Hook feature: TTFB",
+        "✅ Telemetry component exists: components/perf/performance_metrics_initializer.tsx",
+        "✅ Component uses telemetry hook",
+        "✅ Environment-aware configuration",
+        "✅ Telemetry integrated in app layout",
+        "✅ Proper import statement",
+        "✅ Beacon URL environment variable support"
+      ],
+      "errors": []
+    },
+    "nextjsFonts": {
+      "name": "Next.js Font Optimization",
+      "status": "passed",
+      "score": 15,
+      "maxScore": 15,
+      "details": [
+        "✅ Next.js Google Fonts import",
+        "✅ Geist fonts configured (sans + mono)",
+        "✅ Font CSS variables configured",
+        "✅ Font subsets optimized",
+        "✅ Font variables applied to body",
+        "✅ Font variables used in CSS"
+      ],
+      "errors": []
+    },
+    "performanceBaseline": {
+      "name": "Performance Baseline Integrity",
+      "status": "passed",
+      "score": 15,
+      "maxScore": 15,
+      "details": [
+        "✅ Baseline report accessible",
+        "✅ Complete baseline metrics structure",
+        "✅ Realistic bundle metrics: 4939.83KB JS, 24.12KB CSS, 51 files",
+        "✅ Good SCSS metrics: 14 files, 86% modernized",
+        "✅ Phase 2 completion confirmed"
+      ],
+      "errors": [],
+      "metrics": {
+        "bundleJS": 4939.83,
+        "bundleCSS": 24.12,
+        "bundleFiles": 51
+      }
+    },
+    "cssModernization": {
+      "name": "CSS Modernization Status",
+      "status": "passed",
+      "score": 9,
+      "maxScore": 10,
+      "details": [
+        "✅ Good modernization: 86%",
+        "✅ Manageable complexity: 5 high complexity files",
+        "✅ Good custom properties usage: 102 properties"
+      ],
+      "errors": [],
+      "metrics": {
+        "totalFiles": 14,
+        "modernFiles": 12,
+        "legacyFiles": 2,
+        "modernizationPercent": 86
+      }
+    }
+  },
+  "recommendations": [
+    "🎯 Re-run critical CSS extraction - ensure proper above-the-fold optimization",
+    "🔧 Complete SCSS modernization - migrate remaining @import statements"
+  ],
+  "summary": {
+    "passed": 4,
+    "failed": 1,
+    "warnings": 1,
+    "criticalIssues": [
+      "Critical CSS Validation: ❌ Missing critical selector: :root",
+      "Critical CSS Validation: ❌ Missing critical selector: body",
+      "Critical CSS Validation: ❌ Missing critical selector: html"
+    ]
+  }
+}

@@ -33,7 +33,7 @@ export type KeysOfType<T, U> = {
 }[keyof T];
 
 // Brand types for type safety
-export type Brand<T, B> = T & { readonly __brand: B };
+export type Brand<T, B> = T & { readonly brand: B };
 
 export type UserId = Brand<string, "UserId">;
 export type ProjectId = Brand<string, "ProjectId">;
@@ -459,7 +459,7 @@ export interface CSPConfig {
 }
 
 // Export utility type for getting all keys of a type
-export type AllKeys<T> = T extends any ? keyof T : never;
+export type AllKeys<T> = T extends unknown ? keyof T : never;
 
 // Export conditional rendering types
 export type RenderProp<T> = (props: T) => React.ReactNode;

@@ -105,8 +105,8 @@
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    background: var(--if-primary-light);
-    border-color: var(--if-primary);
+    background: var(--if-accent-soft);
+    border-color: var(--if-accent-primary);
     transform: scale(1.05);
   }
 
@@ -121,14 +121,18 @@
   }
 
   &:focus-visible {
-    outline: 2px dashed var(--if-primary);
+    outline: 2px dashed var(--if-accent-primary);
     outline-offset: 2px;
   }
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // Navigation Tabs
@@ -168,11 +172,11 @@
 
   &:hover {
     color: var(--dashboard-text);
-    background: var(--if-primary-light);
+    background: var(--if-accent-faint);
   }
 
   &:focus-visible {
-    outline: 2px dashed var(--if-primary);
+    outline: 2px dashed var(--if-accent-primary);
     outline-offset: 2px;
     border-radius: var(--radius-xs);
   }
@@ -181,10 +185,10 @@
   &[data-active="true"] {
     color: var(--dashboard-accent);
     border-bottom-color: var(--dashboard-accent);
-    background: var(--if-primary-light);
+    background: var(--if-accent-faint);
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -1px;
       left: 0;
@@ -272,13 +276,18 @@
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, transparent, var(--dashboard-accent), transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--dashboard-accent),
+      transparent
+    );
     opacity: 0;
     transition: opacity 0.2s ease;
   }
@@ -294,7 +303,7 @@
   }
 
   &:focus-visible {
-    outline: 2px dashed var(--if-primary);
+    outline: 2px dashed var(--if-accent-primary);
     outline-offset: 2px;
   }
 
@@ -311,7 +320,7 @@
   justify-content: center;
   width: 3rem;
   height: 3rem;
-  background: var(--if-primary-light);
+  background: var(--if-accent-soft);
   border-radius: var(--radius-sm);
   flex-shrink: 0;
 
@@ -364,7 +373,7 @@
     color: #10b981;
 
     &::before {
-      content: '↗';
+      content: "↗";
     }
   }
 
@@ -372,7 +381,7 @@
     color: #ef4444;
 
     &::before {
-      content: '↘';
+      content: "↘";
     }
   }
 
@@ -380,7 +389,7 @@
     color: var(--color-text-secondary);
 
     &::before {
-      content: '→';
+      content: "→";
     }
   }
 
@@ -427,7 +436,7 @@
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 0;
     top: 0;
@@ -471,7 +480,7 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  background: var(--if-primary-light);
+  background: var(--if-accent-soft);
   border-radius: var(--radius-xs);
   flex-shrink: 0;
 
@@ -621,7 +630,7 @@
   }
 
   &:focus-visible {
-    outline: 2px dashed var(--if-primary);
+    outline: 2px dashed var(--if-accent-primary);
     outline-offset: 2px;
   }
 }
