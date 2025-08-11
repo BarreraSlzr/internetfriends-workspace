@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bun run validate:quick && bun --bun next dev --turbopack",
+    "dev": "bun --bun next dev --turbopack",
+    "dev:with-validation": "bun run validate:quick && bun --bun next dev --turbopack",
     "dev:skip-validation": "bun --bun next dev --turbopack",
     "build": "bun --bun next build",
     "start": "bun --bun next start",

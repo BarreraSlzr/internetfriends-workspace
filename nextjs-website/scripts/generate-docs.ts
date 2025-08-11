@@ -104,7 +104,8 @@ async function loadSchemas(): Promise<SchemaDocEntry[]> {
   const entries: SchemaDocEntry[] = [];
 
   for (const meta of model) {
-    const regEntry = registry.find((r) => r.name === meta.name);
+    const metaTyped = meta as any;
+    const regEntry = registry.find((r) => r.name === metaTyped.name);
     let shapeKeys: string[] | undefined;
     let zodType: string | undefined;
 
@@ -129,11 +130,11 @@ async function loadSchemas(): Promise<SchemaDocEntry[]> {
     }
 
     entries.push({
-      name: (meta as any).name,
-      domain: (meta as any).domain,
-      version: (meta as any).version,
-      description: (meta as any).description,
-      tags: (meta as any).tags || [],
+      name: metaTyped.name,
+      domain: metaTyped.domain,
+      version: metaTyped.version,
+      description: metaTyped.description,
+      tags: metaTyped.tags || [],
       shapeKeys,
       zodType,
     });

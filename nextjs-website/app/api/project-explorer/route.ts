@@ -438,8 +438,30 @@ class ServerMicroUXExplorer {
     insights: string[];
     transportable_ui_data: {
       tree_view: unknown[];
-      grid_view: ReturnType<typeof this.generateGridView>;
-      graph_data: ReturnType<typeof this.generateGraphData>;
+      grid_view: Array<{
+        id: string;
+        name: string;
+        type: string;
+        size: number;
+        lastModified?: Date;
+        importance?: string;
+      }>;
+      graph_data: {
+        nodes: Array<{
+          id: string;
+          label: string;
+          title: string;
+          group: string;
+          importance?: string;
+          size: number;
+          color: string;
+        }>;
+        edges: Array<{
+          from: string;
+          to: string;
+          arrows: string;
+        }>;
+      };
     };
   }> {
     this.createEvent("ANALYZE", { status: "started" });

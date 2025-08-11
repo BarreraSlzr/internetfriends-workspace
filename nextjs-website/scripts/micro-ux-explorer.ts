@@ -86,13 +86,15 @@ class MicroUXExplorer {
   }
 
   // 🎨 Check if data is ready for UI transport
-  private isUIReady(data: unknown): boolean {
-    return (
+  private isUIReady(
+    data: unknown,
+  ): data is Record<string, unknown> | unknown[] {
+    return Boolean(
       data &&
-      typeof data === "object" &&
-      (Array.isArray(data) ||
-        data.hasOwnProperty("name") ||
-        data.hasOwnProperty("structure"))
+        typeof data === "object" &&
+        (Array.isArray(data) ||
+          (data as Record<string, unknown>).hasOwnProperty("name") ||
+          (data as Record<string, unknown>).hasOwnProperty("structure")),
     );
   }
 
@@ -290,9 +292,11 @@ class MicroUXExplorer {
   private generateInsights(stats: Record<string, unknown>): string[] {
     const insights: string[] = [];
 
-    const totalFiles = stats.totalFiles;
-    const criticalFiles = stats.byImportance.critical;
-    const complexFiles = stats.byComplexity.complex;
+    const totalFiles = stats.totalFiles as number;
+    const byImportance = stats.byImportance as Record<string, number>;
+    const byComplexity = stats.byComplexity as Record<string, number>;
+    const criticalFiles = byImportance.critical;
+    const complexFiles = byComplexity.complex;
 
     if (criticalFiles > 0) {
       insights.push(
@@ -306,15 +310,16 @@ class MicroUXExplorer {
       );
     }
 
-    if (stats.byType[".tsx"] && stats.byType[".ts"]) {
+    const byType = stats.byType as Record<string, number>;
+    if (byType[".tsx"] && byType[".ts"]) {
       insights.push(
-        `⚛️  React TypeScript project detected - ${stats.byType[".tsx"]} components, ${stats.byType[".ts"]} utilities`,
+        `⚛️  React TypeScript project detected - ${byType[".tsx"]} components, ${byType[".ts"]} utilities`,
       );
     }
 
-    if (stats.byType[".json"] > 5) {
+    if (byType[".json"] > 5) {
       insights.push(
-        `📄 Multiple config files (${stats.byType[".json"]}) - consolidation opportunity`,
+        `📋 Configuration-heavy project - ${byType[".json"]} config files`,
       );
     }
 
@@ -491,11 +496,11 @@ class MicroUXExplorer {
         break;
 
       case "tree":
-        this.printTreeView(analysis.structure);
+        this.printTreeView(analysis.structure as ProjectNode[]);
         break;
 
       case "table":
-        this.printTableView(analysis.statistics);
+        this.printTableView(analysis.statistics as Record<string, unknown>);
         break;
     }
 
@@ -509,11 +514,13 @@ class MicroUXExplorer {
     console.log(
       `\n✨ Exploration completed. ${this.eventQueue.length} events generated.`,
     );
+    const stats = analysis.statistics as Record<string, unknown>;
     console.log(
-      `📊 Scanned ${analysis.statistics.totalFiles} files and ${analysis.statistics.totalDirectories} directories`,
+      `📊 Scanned ${stats.totalFiles} files and ${stats.totalDirectories} directories`,
     );
 
-    if (analysis.insights.length > 0) {
+    const insights = analysis.insights as string[];
+    if (insights.length > 0) {
       console.log("\n🧠 Insights:");
       analysis.insights.forEach((insight: string) =>
         console.log(`   ${insight}`),
