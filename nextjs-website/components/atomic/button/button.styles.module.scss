@@ -105,7 +105,7 @@
   }
 
   &:active:not(:disabled) {
-    background: var(--if-primary-light);
+    background: var(--if-accent-soft);
   }
 }
 
@@ -115,8 +115,8 @@
   border: 1px solid transparent;
 
   &:hover:not(:disabled) {
-    background: var(--if-primary-light);
-    color: var(--if-primary);
+    background: var(--if-accent-faint);
+    color: var(--if-accent-primary);
   }
 
   &:active:not(:disabled) {
