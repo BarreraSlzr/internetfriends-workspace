@@ -2,8 +2,6 @@
 
 import React, { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
-  Node,
-  Edge,
   addEdge,
   Connection,
   useNodesState,
@@ -41,7 +39,7 @@ function DesignSystemFlow() {
   const initialNodes = useMemo(() => componentRegistry.generateFlowNodes(), []);
   const initialEdges = useMemo(() => componentRegistry.generateFlowEdges(), []);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
@@ -75,7 +73,7 @@ function DesignSystemFlow() {
 
   const stats = useMemo(() => componentRegistry.getComponentStats(), []);
 
-  const proOptions = { _hideAttribution: true };
+  const proOptions = { hideAttribution: true };
 
   return (
     <div className="w-full h-screen bg-background">

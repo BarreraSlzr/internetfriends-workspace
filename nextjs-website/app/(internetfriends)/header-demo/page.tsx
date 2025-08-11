@@ -35,7 +35,7 @@ const HeaderDemoPage: React.FC = () => {
       id: "services",
       label: "Services",
       href: "#",
-      _children: [
+      children: [
         {
           id: "web-dev",
           label: "Web Development",
@@ -71,7 +71,7 @@ const HeaderDemoPage: React.FC = () => {
       label: "Search",
       icon: <Search className="w-4 h-4" />,
       variant: "ghost" as const,
-      _mobileOnly: true,
+      mobileOnly: true,
       onClick: () => console.log("Mobile search clicked"),
     },
     {
@@ -86,7 +86,7 @@ const HeaderDemoPage: React.FC = () => {
       label: "Favorites",
       icon: <Heart className="w-4 h-4" />,
       variant: "ghost" as const,
-      _desktopOnly: true,
+      desktopOnly: true,
       onClick: () => console.log("Favorites clicked"),
     },
     {
@@ -243,7 +243,7 @@ const HeaderDemoPage: React.FC = () => {
                   2
                 </span>
                 <div>
-                  <strong>Language _Selector:</strong> Try switching between
+                  <strong>Language Selector:</strong> Try switching between
                   available languages using the globe icon
                 </div>
               </div>
@@ -253,7 +253,7 @@ const HeaderDemoPage: React.FC = () => {
                   3
                 </span>
                 <div>
-                  <strong>Mobile _Navigation:</strong> Resize the window or use
+                  <strong>Mobile Navigation:</strong> Resize the window or use
                   mobile device to see the responsive menu
                 </div>
               </div>
@@ -273,7 +273,7 @@ const HeaderDemoPage: React.FC = () => {
                   5
                 </span>
                 <div>
-                  <strong>Announcement _Bar:</strong> Notice the dismissible
+                  <strong>Announcement Bar:</strong> Notice the dismissible
                   announcement at the top of the header
                 </div>
               </div>

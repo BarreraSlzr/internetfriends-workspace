@@ -83,7 +83,7 @@ interface CyclingState {
   cycleDirection: 'forward' | 'backward';
 }
 
-let cyclingState: CyclingState = {
+const cyclingState: CyclingState = {
   currentIndex: 0,
   isAnimating: false,
   lastChangeTime: 0,

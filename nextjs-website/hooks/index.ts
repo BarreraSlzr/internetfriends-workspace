@@ -55,7 +55,7 @@ export const createHookError = (
 };
 
 // Common hook patterns
-export const useStableCallback = <T extends (...args: any[]) => any>(
+export const useStableCallback = <T extends (...args: unknown[]) => unknown>(
   callback: T,
 ): T => {
   const ref = React.useRef<T>(callback);
@@ -66,7 +66,7 @@ export const useStableCallback = <T extends (...args: any[]) => any>(
 
   return React.useMemo(
     () =>
-      ((...args: any[]) => {
+      ((...args: Parameters<T>) => {
         return ref.current(...args);
       }) as T,
     [],
@@ -84,7 +84,7 @@ export const useConstant = <T>(fn: () => T): T => {
 };
 
 // Hook composition utilities
-export const composeHooks = <T extends Record<string, any>>(
+export const composeHooks = <T extends Record<string, unknown>>(
   ...hooks: Array<() => Partial<T>>
 ): (() => T) => {
   return () => {

@@ -153,12 +153,10 @@ class TestValidator {
     const name = "Unit Tests (Bun)";
 
     try {
-      const {
-        exitCode,
-        stdout,
-        stderr,
-        duration: cmdDuration,
-      } = await this.runCommand("bun", ["test", "tests/unit/"]);
+      const { exitCode, stdout, stderr } = await this.runCommand("bun", [
+        "test",
+        "tests/unit/",
+      ]);
 
       const passed = exitCode === 0;
       const output = stdout + stderr;
@@ -369,7 +367,6 @@ class TestValidator {
     const totalTests = this.results.length;
     const passed = this.results.filter((r) => r.passed).length;
     const failed = totalTests - passed;
-    const totalDuration = Date.now() - this.startTime;
 
     let summary = "";
     if (failed === 0) {

@@ -17,7 +17,7 @@ export interface HeaderAtomicProps extends HTMLAttributes<HTMLElement> {
   scrollThreshold?: number;
 
   /** Callback fired when scroll state changes */
-  onScrollChange?: (_isScrolled: boolean) => void;
+  onScrollChange?: (isScrolled: boolean) => void;
 }
 
 export interface HeaderNavigationProps {

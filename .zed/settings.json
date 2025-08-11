@@ -1,18 +1,5 @@
 {
-  "assistant": {
-    "default_model": {
-      "provider": "openai",
-      "model": "qwen-3-coder-32b-instruct"
-    },
-    "version": "2",
-    "dock": "right",
-    "default_width": 640,
-    "button": true
-  },
-
-  "auto_save": "on_focus_change",
   "format_on_save": "on",
-  "save_on_focus_change": true,
   "tab_size": 2,
   "hard_tabs": false,
   "show_whitespaces": "selection",
@@ -28,10 +15,8 @@
 
   "terminal": {
     "shell": {
-      "program": "/bin/zsh",
-      "args": ["-l"]
+      "program": "/bin/zsh"
     },
-    "font_family": "MesloLGS NF",
     "font_size": 13,
     "line_height": "comfortable",
     "blinking": "terminal_controlled",
@@ -55,7 +40,6 @@
     "TypeScript": {
       "format_on_save": "on",
       "formatter": "prettier",
-      "code_actions_on_format": ["source.organizeImports"],
       "inlay_hints": {
         "enabled": true,
         "show_type_hints": true,
@@ -66,19 +50,11 @@
     "JavaScript": {
       "format_on_save": "on",
       "formatter": "prettier",
-      "code_actions_on_format": ["source.organizeImports"],
       "tab_size": 2
     },
     "TSX": {
       "format_on_save": "on",
       "formatter": "prettier",
-      "code_actions_on_format": ["source.organizeImports"],
-      "tab_size": 2
-    },
-    "JSX": {
-      "format_on_save": "on",
-      "formatter": "prettier",
-      "code_actions_on_format": ["source.organizeImports"],
       "tab_size": 2
     },
     "SCSS": {
@@ -105,16 +81,16 @@
   },
 
   "file_types": {
-    "**/.github/chatmodes/*.md": "plaintext",
-    "**/schemas/*.ts": "typescript",
-    "epic-config.json": "json",
-    "**/*.epic.tsx": "tsx",
-    "**/*.atomic.tsx": "tsx",
-    "**/*.molecular.tsx": "tsx",
-    "**/*.organism.tsx": "tsx",
-    "**/GIT_*.md": "markdown",
-    "**/EPIC_*.md": "markdown",
-    "**/*.styles.module.scss": "scss"
+    "**/.github/chatmodes/*.md": ["markdown"],
+    "**/schemas/*.ts": ["typescript"],
+    "epic-config.json": ["json"],
+    "**/*.epic.tsx": ["tsx"],
+    "**/*.atomic.tsx": ["tsx"],
+    "**/*.molecular.tsx": ["tsx"],
+    "**/*.organism.tsx": ["tsx"],
+    "**/GIT_*.md": ["markdown"],
+    "**/EPIC_*.md": ["markdown"],
+    "**/*.styles.module.scss": ["scss"]
   },
 
   "project_panel": {
@@ -140,17 +116,11 @@
     "regex": false
   },
 
-  "features": {
-    "copilot": true,
-    "provider": "supermaven"
-  },
-
   "cursor_blink": false,
   "hover_popover_enabled": true,
   "show_completions_on_input": true,
   "show_completion_documentation": true,
   "use_on_type_format": true,
-  "completion_documentation_secondary_query_debounce": 200,
 
   "preview_tabs": {
     "enabled": false,
@@ -158,30 +128,7 @@
     "enable_preview_from_code_navigation": true
   },
 
-  "theme": "Default Dark",
   "ui_font_size": 14,
   "buffer_font_size": 13,
-  "buffer_line_height": "comfortable",
-  "minimap": {
-    "enabled": true,
-    "width": 120,
-    "show_viewport": true,
-    "render_characters": false,
-    "only_show_on_hover": false
-  },
-  "tasks": {
-    "default_task_context": "workspace"
-  },
-
-  "experimental": {
-    "theme_overrides": {
-      "players": [
-        {
-          "cursor": "#3b82f6",
-          "background": "#3b82f625",
-          "selection": "#3b82f635"
-        }
-      ]
-    }
-  }
+  "buffer_line_height": "comfortable"
 }

@@ -109,7 +109,7 @@ function recordMetric(
  *
  * Returns the raw result of baseEmit for parity with underlying system.
  */
-export function emitValidated<T extends string>(
+export function emitValidated<T extends EventType>(
   type: T,
   payload: unknown,
   options?: {
@@ -130,7 +130,7 @@ export function emitValidated<T extends string>(
 
   if (schema && !options?.skipValidation) {
     // Ensure provided payload contains correct literal type (or apply injection).
-    let candidate = payload as any;
+    let candidate = payload as Record<string, unknown>;
     if (candidate?.type !== type) {
       candidate = { ...(candidate || {}), type };
     }
@@ -154,7 +154,7 @@ export function emitValidated<T extends string>(
       };
     }
     recordMetric(type, elapsed, true);
-    return baseEmit(type, parsed.data);
+    return baseEmit(type as EventType, parsed.data);
   }
 
   // Uncatalogued event path
@@ -174,11 +174,11 @@ export function emitValidated<T extends string>(
       `[events] (legacy) Emitting uncatalogued event '${type}'` +
         (allowed ? " [allowlisted]" : ""),
     );
-    return baseEmit(type, payload);
+    return baseEmit(type as EventType, payload);
   }
 
   // Fallback (should not be reachable)
-  return baseEmit(type, payload);
+  return baseEmit(type as EventType, payload);
 }
 
 /* -------------------------------------------------------------------------- */
@@ -200,7 +200,10 @@ export function onValidated<K extends EventType>(
     console.warn(
       `[events] onValidated called for unknown type '${type}'. Listener attached without validation.`,
     );
-    return baseOn(type as LegacyEventType, listener as any);
+    return baseOn(
+      type as LegacyEventType,
+      listener as (event: unknown) => void,
+    );
   }
   return baseOn(type as LegacyEventType, (payload: unknown) => {
     const parsed = schema.safeParse(payload);
@@ -210,14 +213,14 @@ export function onValidated<K extends EventType>(
       );
       return;
     }
-    listener(parsed.data);
+    listener(parsed.data as z.infer<(typeof EventCatalog)[K]>);
   });
 }
 
 /**
  * Direct pass-through subscription (no validation). Provided for parity with legacy code.
  */
-export function onRaw(type: string, listener: (payload: any) => void) {
+export function onRaw(type: string, listener: (payload: unknown) => void) {
   return baseOn(type as LegacyEventType, listener);
 }
 

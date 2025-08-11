@@ -18,7 +18,7 @@ export type {
   HeaderUtils,
 } from "./header";
 
-// Future organism exports will be added _here:
+// Future organism exports will be added here:
 // export { HeroSectionOrganism } from "./hero-section";
 // export { FeaturesSectionOrganism } from "./features-section";
 // export { TestimonialsSectionOrganism } from "./testimonials-section";

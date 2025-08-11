@@ -83,7 +83,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
 
   // Mermaid instance
-  const [mermaid, setMermaid] = useState<any>(null);
+  const [mermaid, setMermaid] = useState<typeof import("mermaid") | null>(null);
 
   // Initialize Mermaid
   useEffect(() => {
@@ -98,7 +98,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         const config = getMermaidConfig(theme.colorScheme);
 
         mermaidInstance.initialize(config);
-        setMermaid(mermaidInstance);
+        setMermaid(mermaidInstance as any);
       } catch (err) {
         console.error("Failed to initialize Mermaid:", err);
         if (isMounted) {
@@ -127,7 +127,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       const validation = validateMermaidSyntax(code);
       if (!validation.isValid) {
         throw new Error(
-          `Invalid diagram syntax: ${validation.errors.join(", ")}`,
+          `Invalid diagram syntax: ${validation.error || "Unknown error"}`,
         );
       }
 
@@ -138,7 +138,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       svgRef.current.innerHTML = "";
 
       // Render the diagram
-      const { svg, bindFunctions } = await mermaid.render(
+      const { svg, bindFunctions } = await (mermaid as any).render(
         diagramId,
         sanitizedCode,
       );
@@ -155,8 +155,8 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         const svgElement = svgRef.current.querySelector("svg");
         if (svgElement) {
           svgElement.style.transform = `translate(${zoomState.translateX}px, ${zoomState.translateY}px) scale(${zoomState.scale})`;
-          svgElement.style._transformOrigin = "center center";
-          svgElement.style._transition = isDragging
+          svgElement.style.transformOrigin = "center center";
+          svgElement.style.transition = isDragging
             ? "none"
             : "transform 0.3s ease";
         }
@@ -165,7 +165,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       }
     } catch (err) {
       const errorMessage =
-        err instanceof Error ? err._message : "Failed to render diagram";
+        err instanceof Error ? err.message : "Failed to render diagram";
       console.error("Mermaid render error:", err);
       setError(errorMessage);
       onError?.(errorMessage);
@@ -175,9 +175,10 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
   }, [mermaid, code, diagramId, zoomState, isDragging, onRender, onError]);
 
   // Debounced render function
-  const debouncedRender = useCallback(debounce(renderDiagram, 300), [
-    renderDiagram,
-  ]);
+  const debouncedRender = useCallback(
+    debounce(() => renderDiagram(), 300),
+    [renderDiagram],
+  );
 
   // Re-render when code or theme changes
   useEffect(() => {
@@ -236,7 +237,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       const url = URL.createObjectURL(blob);
 
       const link = document.createElement("a");
-      link._href = url;
+      link.href = url;
       link.download = `${title || "mermaid-diagram"}.svg`;
       document.body.appendChild(link);
       link.click();

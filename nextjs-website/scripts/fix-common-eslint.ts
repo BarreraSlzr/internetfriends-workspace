@@ -5,9 +5,9 @@
  * Addresses the most common linting issues automatically
  */
 
-import { readFileSync, writeFileSync } from 'fs';
-import { glob } from 'glob';
-import path from 'path';
+import { readFileSync, writeFileSync } from "fs";
+import { glob } from "glob";
+import path from "path";
 
 interface FixStats {
   filesProcessed: number;
@@ -18,21 +18,22 @@ interface FixStats {
 const stats: FixStats = {
   filesProcessed: 0,
   fixesApplied: 0,
-  errors: []
+  errors: [],
 };
 
 // Common fixes mapping
 const commonFixes = [
   // Remove unused imports
   {
-    pattern: /^import\s+{\s*[^}]*\buseMemo\b[^}]*}\s+from\s+['"]react['"];?\s*$/gm,
+    pattern:
+      /^import\s+{\s*[^}]*\buseMemo\b[^}]*}\s+from\s+['"]react['"];?\s*$/gm,
     replacement: (match: string, content: string) => {
-      if (!content.includes('useMemo(')) {
-        return '';
+      if (!content.includes("useMemo(")) {
+        return "";
       }
       return match;
     },
-    description: 'Remove unused useMemo import'
+    description: "Remove unused useMemo import",
   },
 
   // Fix unused variables by prefixing with underscore
@@ -41,22 +42,24 @@ const commonFixes = [
     replacement: (match: string, content: string) => {
       // Only fix if variable is unused (simple heuristic)
       const varName = match.trim();
-      if (varName.startsWith('_')) return match;
+      if (varName.startsWith("_")) return match;
 
-      const usageCount = (content.match(new RegExp(`\\b${varName}\\b`, 'g')) || []).length;
+      const usageCount = (
+        content.match(new RegExp(`\\b${varName}\\b`, "g")) || []
+      ).length;
       if (usageCount <= 1) {
         return `_${varName}`;
       }
       return match;
     },
-    description: 'Prefix unused variables with underscore'
+    description: "Prefix unused variables with underscore",
   },
 
   // Replace any with unknown for better type safety
   {
     pattern: /:\s*any\b/g,
-    replacement: ': unknown',
-    description: 'Replace any with unknown'
+    replacement: ": unknown",
+    description: "Replace any with unknown",
   },
 
   // Fix img tags to use next/image
@@ -69,27 +72,30 @@ const commonFixes = [
 
       if (srcMatch) {
         const src = srcMatch[1];
-        const alt = altMatch ? altMatch[1] : '';
-        const className = classMatch ? classMatch[1] : '';
+        const alt = altMatch ? altMatch[1] : "";
+        const className = classMatch ? classMatch[1] : "";
 
-        return `<Image src="${src}" alt="${alt}"${className ? ` className="${className}"` : ''} width={100} height={100} />`;
+        return `<Image src="${src}" alt="${alt}"${className ? ` className="${className}"` : ""} width={100} height={100} />`;
       }
       return match;
     },
-    description: 'Replace img with Next.js Image component'
+    description: "Replace img with Next.js Image component",
   },
 
   // Add Image import when img tags are replaced
   {
     pattern: /^(import.*from\s+['"]react['"];?\s*)$/m,
     replacement: (match: string, content: string) => {
-      if (content.includes('<Image ') && !content.includes('import Image from')) {
+      if (
+        content.includes("<Image ") &&
+        !content.includes("import Image from")
+      ) {
         return `${match}\nimport Image from 'next/image';`;
       }
       return match;
     },
-    description: 'Add Image import when needed'
-  }
+    description: "Add Image import when needed",
+  },
 ];
 
 /**
@@ -97,16 +103,18 @@ const commonFixes = [
  */
 function fixFile(filePath: string): number {
   try {
-    let content = readFileSync(filePath, 'utf-8');
+    let content = readFileSync(filePath, "utf-8");
     let fixCount = 0;
     const originalContent = content;
 
     for (const fix of commonFixes) {
       const before = content;
 
-      if (typeof fix.replacement === 'function') {
-        content = content.replace(fix.pattern, (match, ...args) => {
-          const result = fix.replacement(match, content);
+      if (typeof fix.replacement === "function") {
+        content = content.replace(fix.pattern, (match) => {
+          const result = (
+            fix.replacement as (match: string, content: string) => string
+          )(match, content);
           if (result !== match) {
             fixCount++;
           }
@@ -122,12 +130,12 @@ function fixFile(filePath: string): number {
 
     // Apply specific fixes for common unused variables
     const unusedVarFixes = [
-      { pattern: /const\s+setNodes\s*=/, replacement: 'const _setNodes =' },
-      { pattern: /const\s+startTime\s*=/, replacement: 'const _startTime =' },
-      { pattern: /\(\s*request\s*:/g, replacement: '(_request:' },
-      { pattern: /\(\s*e\s*\)/g, replacement: '(_e)' },
-      { pattern: /\(\s*index\s*:/g, replacement: '(_index:' },
-      { pattern: /\(\s*rowIndex\s*:/g, replacement: '(_rowIndex:' }
+      { pattern: /const\s+setNodes\s*=/, replacement: "const setNodes =" },
+      { pattern: /const\s+startTime\s*=/, replacement: "const startTime =" },
+      { pattern: /\(\s*request\s*:/g, replacement: "(_request:" },
+      { pattern: /\(\s*e\s*\)/g, replacement: "(_e)" },
+      { pattern: /\(\s*index\s*:/g, replacement: "(_index:" },
+      { pattern: /\(\s*rowIndex\s*:/g, replacement: "(_rowIndex:" },
     ];
 
     for (const fix of unusedVarFixes) {
@@ -140,8 +148,10 @@ function fixFile(filePath: string): number {
 
     // Write back if changes were made
     if (content !== originalContent) {
-      writeFileSync(filePath, content, 'utf-8');
-      console.log(`✅ Fixed ${fixCount} issues in ${path.relative(process.cwd(), filePath)}`);
+      writeFileSync(filePath, content, "utf-8");
+      console.log(
+        `✅ Fixed ${fixCount} issues in ${path.relative(process.cwd(), filePath)}`,
+      );
     }
 
     return fixCount;
@@ -157,18 +167,20 @@ function fixFile(filePath: string): number {
  * Main execution function
  */
 async function main() {
-  console.log('🔧 InternetFriends ESLint Quick Fix\n');
+  console.log("🔧 InternetFriends ESLint Quick Fix\n");
 
   const patterns = [
-    'app/**/*.{ts,tsx}',
-    'components/**/*.{ts,tsx}',
-    'lib/**/*.{ts,tsx}'
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "lib/**/*.{ts,tsx}",
   ];
 
   const files: string[] = [];
 
   for (const pattern of patterns) {
-    const matches = await glob(pattern, { ignore: ['node_modules/**', '.next/**'] });
+    const matches = await glob(pattern, {
+      ignore: ["node_modules/**", ".next/**"],
+    });
     files.push(...matches);
   }
 
@@ -181,26 +193,26 @@ async function main() {
   }
 
   // Summary
-  console.log('\n========================================');
-  console.log('🎯 ESLINT QUICK FIX SUMMARY');
-  console.log('========================================');
+  console.log("\n========================================");
+  console.log("🎯 ESLINT QUICK FIX SUMMARY");
+  console.log("========================================");
   console.log(`📄 Files processed: ${stats.filesProcessed}`);
   console.log(`🔧 Total fixes applied: ${stats.fixesApplied}`);
 
   if (stats.errors.length > 0) {
     console.log(`❌ Errors encountered: ${stats.errors.length}`);
-    stats.errors.forEach(error => console.log(`   • ${error}`));
+    stats.errors.forEach((error) => console.log(`   • ${error}`));
   }
 
-  console.log('========================================\n');
+  console.log("========================================\n");
 
   if (stats.fixesApplied > 0) {
-    console.log('💡 Next steps:');
+    console.log("💡 Next steps:");
     console.log('   • Run "bun run lint" to verify fixes');
     console.log('   • Run "bun run dev" to test the application');
-    console.log('   • Review and commit the changes');
+    console.log("   • Review and commit the changes");
   } else {
-    console.log('✨ No common issues found to fix automatically');
+    console.log("✨ No common issues found to fix automatically");
   }
 }
 

@@ -1,14 +1,9 @@
 "use client";
 
 import React, { useMemo } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { MermaidViewer } from "./mermaid-viewer";
-import {
-  extractMermaidDiagrams,
-  extractDiagramTitle,
-  processMermaidMarkdown,
-} from "../utils";
+import { extractDiagramTitle, processMermaidMarkdown } from "../utils";
 
 export interface MarkdownRendererProps {
   /** Markdown content to render */
@@ -85,7 +80,7 @@ function simpleMarkdownToHTML(markdown: string): string {
       // Links
       .replace(
         /\[([^\]]+)\]\(([^)]+)\)/g,
-        '<a href="$2" class="text-primary _hover:text-primary/80 underline underline-offset-2 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>',
+        '<a href="$2" class="text-primary hover:text-primary/80 underline underline-offset-2 transition-colors" target="_blank" rel="noopener noreferrer">$1</a>',
       )
 
       // Images
@@ -176,7 +171,7 @@ function processContentByFileType(
         const parsed = JSON.parse(content);
         const formatted = JSON.stringify(parsed, null, 2);
         return `# ${displayName}\n\n\`\`\`json\n${formatted}\n\`\`\``;
-      } catch (e) {
+      } catch {
         return `# ${displayName} (Parse Error)\n\n\`\`\`json\n${content}\n\`\`\``;
       }
 
@@ -385,7 +380,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({
       )}
       data-testid={testId}
       data-mode={mode}
-      data-diagrams-_count={diagramsWithTitles.length}
+      data-diagrams-count={diagramsWithTitles.length}
     >
       {renderContent()}
     </div>

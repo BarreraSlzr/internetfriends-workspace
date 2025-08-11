@@ -8,9 +8,11 @@ import { BgGoo } from "./backgrounds/gloo";
 import { getRandomColors } from "../lib/color-palette";
 
 const DefaultHero = () => (
-  <div className="text-3xl md:text-4xl lg:text-5xl leading-relaxed">
+  <div className="text-3xl md:text-4xl lg:text-5xl leading-relaxed text-foreground">
     <h1 className="font-bold">{content.hero.title}</h1>
-    <p className="text-lg mb-6 font-mono">{content.hero.description}</p>
+    <p className="text-lg mb-6 font-mono text-muted-foreground">
+      {content.hero.description}
+    </p>
   </div>
 );
 
@@ -36,12 +38,13 @@ export default function HeroText({
           color2={randomColors[1]}
           color3={randomColors[2]}
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background/80 backdrop-blur-[2px]" />
       </div>
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="relative sm:px-6 px-2 md:px-8 py-12 max-w-4xl text-white"
+        className="relative sm:px-6 px-2 md:px-8 py-12 max-w-4xl text-foreground drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
       >
         {children}
       </motion.div>

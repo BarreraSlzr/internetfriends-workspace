@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ButtonAtomic } from "@/components/atomic/button";
@@ -179,7 +180,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
             onClick={() => logo.onClick?.()}
           >
             {logo.src ? (
-              <img
+              <Image
                 src={logo.src}
                 alt={logo.alt || "Logo"}
                 width={logo.width || 32}
@@ -264,7 +265,7 @@ export const NavigationMolecular: React.FC<NavigationMolecularProps> = ({
               <div className="flex items-center justify-between p-4 border-b border-glass-border">
                 <div className="flex items-center gap-2">
                   {logo?.src ? (
-                    <img
+                    <Image
                       src={logo.src}
                       alt={logo.alt || "Logo"}
                       width={24}

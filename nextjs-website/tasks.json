@@ -21,9 +21,7 @@
       "status": "completed",
       "category": "bug",
       "estimatedTime": 20,
-      "dependencies": [
-        "fix-broken-exports"
-      ],
+      "dependencies": ["fix-broken-exports"],
       "createdAt": "2025-08-07T07:33:56.086Z",
       "updatedAt": "2025-08-07T07:33:56.086Z",
       "completedAt": "2025-08-07T07:33:56.086Z"
@@ -43,7 +41,7 @@
     {
       "id": "fix-react-prop-warnings",
       "title": "Fix React Prop Warnings",
-      "description": "Fix _className, _onSubmit, _onChange props and missing keys in lists",
+      "description": "Fix className, onSubmit, onChange props and missing keys in lists",
       "priority": "medium",
       "status": "completed",
       "category": "eslint",

@@ -85,8 +85,27 @@
     @apply border-border;
   }
 
+  html {
+    background: var(--app-canvas-gradient);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
   body {
-    @apply bg-background text-foreground antialiased min-h-screen;
+    @apply text-foreground antialiased;
+    background: transparent;
+    min-height: 100vh;
+    /* Optional: Use animated canvas */
+    /* background: var(--app-canvas-gradient-animated);
+       background-size: 200% 200%;
+       animation: canvas-flow 20s ease-in-out infinite; */
+    font-family:
+      var(--font-geist-sans),
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      system-ui,
+      sans-serif;
     font-feature-settings:
       "rlig" 1,
       "calt" 1;
@@ -129,6 +148,74 @@
     outline: none;
     border: 2px dashed var(--color-border-focus);
     border-radius: var(--radius-sm);
+  }
+
+  /* Surface utilities for glass morphism architecture */
+  .surface-glass {
+    background: var(--surface-glass);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+    transition: var(--transition-glass);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .surface-glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.02) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .surface-glass > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  .surface-glass:hover {
+    background: var(--surface-glass-hover);
+    border-color: var(--surface-border-enhanced);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.08);
+  }
+
+  .surface-solid {
+    background: var(--surface-solid);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-md);
+  }
+
+  .canvas-full {
+    background: var(--app-canvas-gradient);
+    min-height: 100%;
+  }
+
+  .canvas-animated {
+    background: var(--app-canvas-gradient-animated);
+    background-size: 200% 200%;
+    animation: canvas-flow 20s ease-in-out infinite;
+    min-height: 100%;
+  }
+
+  @keyframes canvas-flow {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 
   /* InternetFriends specific button styles */
@@ -181,6 +268,19 @@
 
   .border-if-primary {
     border-color: var(--if-primary);
+  }
+
+  /* Accent border utilities */
+  .border-accent-subtle {
+    border-color: hsl(var(--border-accent-subtle, var(--color-border-primary)));
+  }
+
+  .border-accent-medium {
+    border-color: hsl(var(--border-accent-medium, var(--if-primary)));
+  }
+
+  .border-accent-strong {
+    border-color: hsl(var(--border-accent-strong, var(--if-primary-hover)));
   }
 
   /* Glass morphism utilities */
@@ -288,16 +388,38 @@
   }
 }
 
+/* Dark mode surface adjustments */
+@media (prefers-color-scheme: dark) {
+  .surface-glass::before {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0.01) 50%,
+      transparent 100%
+    );
+  }
+}
+
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {
   .animate-glass-float,
   .btn-primary,
   .glass-header,
   .glass-card,
+  .surface-glass,
   input,
   textarea,
   select {
     animation: none !important;
     transition: none !important;
+  }
+
+  .surface-glass::before {
+    display: none;
+  }
+
+  .canvas-animated {
+    animation: none !important;
+    background: var(--app-canvas-gradient) !important;
   }
 }

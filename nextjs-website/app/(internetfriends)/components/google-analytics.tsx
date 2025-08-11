@@ -8,7 +8,7 @@ export const GA_TRACKING_ID = "G-XXXXXXXXXX"; // Replace with your Google Analyt
 
 declare global {
   interface Window {
-    gtag: (_option: string, _gaTrackingId: string, _options: object) => void;
+    gtag: (option: string, gaTrackingId: string, options: object) => void;
   }
 }
 

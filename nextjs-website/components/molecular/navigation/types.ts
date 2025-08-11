@@ -1,4 +1,4 @@
-import { ReactNode, ComponentProps } from "react";
+import { ReactNode } from "react";
 import { HeaderAtomicProps } from "@/components/atomic/header";
 
 export interface NavigationItem {

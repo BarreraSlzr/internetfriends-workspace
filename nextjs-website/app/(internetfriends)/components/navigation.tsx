@@ -5,7 +5,7 @@ import content from "../content.json";
 export default function Navigation() {
   return (
     <nav
-      className="_sm:px-6 px-2 _md:px-8 flex flex-wrap gap-8 border-2 border-b-0 border-brand-blue-800 bg-foreground"
+      className="sm:px-6 px-2 md:px-8 flex flex-wrap gap-8 border-2 border-b-0 border-accent-medium surface-glass"
       aria-label="Main Navigation"
     >
       {content.navigation.map((item) => (

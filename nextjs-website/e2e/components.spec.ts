@@ -65,7 +65,7 @@ test.describe("Atomic Components", () => {
     });
 
     test("should have proper border radius", async ({ page }) => {
-      const glassCard = page.locator(".glass-card").first();
+      page.locator(".glass-card").first();
 
       const borderRadius = await page.evaluate(() => {
         const card = document.querySelector(".glass-card");
@@ -85,7 +85,7 @@ test.describe("Atomic Components", () => {
       await glassCard.hover();
 
       // Should have hover effects (transform or shadow changes)
-      const hasTransform = await page.evaluate(() => {
+      await page.evaluate(() => {
         const card = document.querySelector(".glass-card:hover");
         if (!card) return false;
         const style = getComputedStyle(card);
@@ -138,7 +138,7 @@ test.describe("Molecular Components", () => {
       await expect(navigationNode).toBeVisible();
 
       // Should show composition with HeaderAtomic and ButtonAtomic
-      const compositionText = navigationNode.locator('text=HeaderAtomic');
+      const compositionText = navigationNode.locator("text=HeaderAtomic");
       await expect(compositionText).toBeVisible();
     });
 
@@ -149,14 +149,16 @@ test.describe("Molecular Components", () => {
       await expect(navigationNode).toBeVisible();
 
       // Check for mobile responsive feature
-      const mobileFeature = navigationNode.locator('text=Mobile responsive');
+      const mobileFeature = navigationNode.locator("text=Mobile responsive");
       await expect(mobileFeature).toBeVisible();
     });
   });
 });
 
 test.describe("Component Integration", () => {
-  test("should show component relationships in React Flow", async ({ page }) => {
+  test("should show component relationships in React Flow", async ({
+    page,
+  }) => {
     await page.goto("/design-system");
 
     // Wait for React Flow to load
@@ -167,7 +169,9 @@ test.describe("Component Integration", () => {
     expect(await edges.count()).toBeGreaterThan(0);
 
     // Should have composition edges (solid lines)
-    const compositionEdges = page.locator('.react-flow__edge[data-testid*="smoothstep"]');
+    const compositionEdges = page.locator(
+      '.react-flow__edge[data-testid*="smoothstep"]',
+    );
     expect(await compositionEdges.count()).toBeGreaterThan(0);
   });
 
@@ -185,7 +189,9 @@ test.describe("Component Integration", () => {
 });
 
 test.describe("Design System Validation", () => {
-  test("should apply consistent styling across components", async ({ page }) => {
+  test("should apply consistent styling across components", async ({
+    page,
+  }) => {
     await page.goto("/design-system");
 
     // Check for consistent border radius usage
@@ -201,7 +207,9 @@ test.describe("Design System Validation", () => {
     await page.goto("/design-system");
 
     // Check for consistent padding/margin classes
-    const spacingElements = await page.locator('[class*="p-"], [class*="m-"]').all();
+    const spacingElements = await page
+      .locator('[class*="p-"], [class*="m-"]')
+      .all();
     expect(spacingElements.length).toBeGreaterThan(0);
   });
 
@@ -210,10 +218,10 @@ test.describe("Design System Validation", () => {
 
     // Check all glass elements have backdrop-filter
     const glassElements = await page.evaluate(() => {
-      const elements = document.querySelectorAll('.glass-header, .glass-card');
-      return Array.from(elements).every(el => {
+      const elements = document.querySelectorAll(".glass-header, .glass-card");
+      return Array.from(elements).every((el) => {
         const style = getComputedStyle(el);
-        return style.backdropFilter && style.backdropFilter.includes('blur');
+        return style.backdropFilter && style.backdropFilter.includes("blur");
       });
     });
 
@@ -247,11 +255,11 @@ test.describe("Component Props and Variants", () => {
     await expect(buttonNode).toBeVisible();
 
     // Should show variant prop
-    const variantProp = buttonNode.locator('text=variant');
+    const variantProp = buttonNode.locator("text=variant");
     await expect(variantProp).toBeVisible();
 
     // Should show size prop
-    const sizeProp = buttonNode.locator('text=size');
+    const sizeProp = buttonNode.locator("text=size");
     await expect(sizeProp).toBeVisible();
   });
 });
@@ -266,7 +274,7 @@ test.describe("Accessibility Testing", () => {
 
     // Check interactive elements are keyboard accessible
     const searchInput = page.locator('input[type="text"]');
-    if (await searchInput.count() > 0) {
+    if ((await searchInput.count()) > 0) {
       await searchInput.focus();
       await expect(searchInput).toBeFocused();
     }
@@ -279,7 +287,7 @@ test.describe("Accessibility Testing", () => {
     await page.keyboard.press("Tab");
 
     // Should focus on interactive elements
-    const focusedElement = page.locator(':focus');
+    const focusedElement = page.locator(":focus");
     await expect(focusedElement).toBeVisible();
   });
 
@@ -318,7 +326,7 @@ test.describe("Performance Testing", () => {
     await page.goto("/design-system");
 
     // Check multiple nodes render without performance issues
-    const allNodes = page.locator('[data-id]');
+    const allNodes = page.locator("[data-id]");
     const nodeCount = await allNodes.count();
 
     expect(nodeCount).toBeGreaterThan(5);

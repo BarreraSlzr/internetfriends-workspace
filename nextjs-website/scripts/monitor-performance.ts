@@ -76,7 +76,7 @@ class PerformanceMonitor {
     try {
       this.logStream = createWriteStream(logFile, { flags: "a" });
       this.log("Performance monitoring started", "info");
-    } catch (error) {
+    } catch {
       console.warn("Could not initialize log file, logging to console only");
     }
   }
@@ -432,7 +432,6 @@ class PerformanceMonitor {
   // Print real-time dashboard
   printDashboard(): void {
     const report = this.generateReport();
-    const stats = this.generateBasicStats();
 
     console.clear();
     console.log("🔍 InternetFriends Performance Monitor Dashboard");

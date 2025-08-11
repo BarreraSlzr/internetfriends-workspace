@@ -8,12 +8,17 @@ import React, {
   useRef,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { eventSystem, UIEvents } from "../../../../../lib/events/event.system";
+import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./data-table.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
 type ColumnType = "string" | "number" | "date" | "boolean" | "custom";
 type SortDirection = "asc" | "desc";
+
+interface TableRow {
+  id: string | number;
+  [key: string]: React.ReactNode;
+}
 
 interface TableColumn {
   key: string;
@@ -25,6 +30,8 @@ interface TableColumn {
   minWidth?: string;
   align?: "left" | "center" | "right";
   fixed?: boolean;
+  visible?: boolean;
+  format?: (value: React.ReactNode, row: TableRow) => React.ReactNode;
 }
 
 interface SortConfig {
@@ -33,8 +40,8 @@ interface SortConfig {
 }
 
 interface FilterConfig {
-  value: unknown;
-  type: string;
+  value: React.ReactNode;
+  type: "text" | "number" | "date" | "boolean" | "select";
 }
 
 interface PaginationConfig {
@@ -48,13 +55,15 @@ interface PaginationConfig {
   hasPrevious: boolean;
 }
 
-interface SelectionConfig {
-  enabled: boolean;
-  multiple: boolean;
-}
+// SelectionConfig interface commented out as it's not used
+// interface SelectionConfig {
+//   enabled: boolean;
+//   multiple?: boolean;
+//   selectAll?: boolean;
+// }
 
 interface DataTableProps {
-  data: unknown[];
+  data: TableRow[];
   columns: TableColumn[];
   loading?: boolean;
   error?: string | null;
@@ -67,11 +76,26 @@ interface DataTableProps {
   virtualScrolling?: boolean;
   stickyHeader?: boolean;
   zebra?: boolean;
+  compact?: boolean;
+  showRowNumbers?: boolean;
   className?: string;
+  userId?: string;
+  sessionId?: string;
+  onRowClick?: (row: TableRow, index: number) => void;
+  onRowSelect?: (rows: (string | number)[]) => void;
+  onSort?: (config: SortConfig) => void;
+  onFilter?: (filters: Record<string, FilterConfig>) => void;
+  onExport?: (payload: {
+    data: TableRow[];
+    filters: Record<string, FilterConfig>;
+    sort: SortConfig | null;
+    search: string;
+  }) => void;
+  onRefresh?: () => void;
   [key: string]: unknown;
 }
 
-type TableRow = any;
+// (legacy) TableRow type replaced by interface above
 
 export const DataTableOrganism: React.FC<DataTableProps> = ({
   data,
@@ -84,7 +108,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   selectable = false,
   searchable = true,
   exportable = true,
-  virtualScrolling = false,
+  // virtualScrolling = false, // Feature not yet implemented
   stickyHeader = true,
   zebra = true,
   compact = false,
@@ -104,7 +128,9 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   const [sortConfig, setSortConfig] = useState<SortConfig | null>(null);
   const [filters, setFilters] = useState<Record<string, FilterConfig>>({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
+  const [selectedRows, setSelectedRows] = useState<Set<string | number>>(
+    new Set(),
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(25);
   const [columnVisibility, setColumnVisibility] = useState<
@@ -117,19 +143,19 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
 
   // Initialize column visibility
   useEffect(() => {
-    const initialVisibility = columns.reduce(
-      (acc: unknown, col: unknown) => {
+    const initialVisibility = columns.reduce<Record<string, boolean>>(
+      (acc, col) => {
         acc[col.key] = col.visible !== false;
         return acc;
       },
-      {} as Record<string, boolean>,
+      {},
     );
     setColumnVisibility(initialVisibility);
   }, [columns]);
 
   // Data processing
-  const processedData = useMemo(() => {
-    let result = [...data];
+  const processedData = useMemo<TableRow[]>(() => {
+    let result: TableRow[] = [...data];
 
     // Apply filters
     Object.entries(filters).forEach(([key, filter]) => {
@@ -150,6 +176,16 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             case "number":
               return Number(cellValue) === Number(filterValue);
             case "date":
+              if (cellValue == null || filterValue == null) return false;
+              if (
+                (typeof cellValue !== "string" &&
+                  typeof cellValue !== "number" &&
+                  !(cellValue instanceof Date)) ||
+                (typeof filterValue !== "string" &&
+                  typeof filterValue !== "number" &&
+                  !(filterValue instanceof Date))
+              )
+                return false;
               return (
                 new Date(cellValue).toDateString() ===
                 new Date(filterValue).toDateString()
@@ -168,7 +204,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     // Apply search
     if (searchTerm) {
       result = result.filter((row) =>
-        columns.some((col: unknown) => {
+        columns.some((col) => {
           if (!columnVisibility[col.key]) return false;
           const value = row[col.key];
           return String(value).toLowerCase().includes(searchTerm.toLowerCase());
@@ -178,9 +214,14 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
 
     // Apply sorting
     if (sortConfig) {
-      result.sort((a, b) => {
+      result.sort((a: TableRow, b: TableRow) => {
         const aVal = a[sortConfig.column];
         const bVal = b[sortConfig.column];
+
+        // Handle null/undefined values
+        if (aVal == null && bVal == null) return 0;
+        if (aVal == null) return 1;
+        if (bVal == null) return -1;
 
         let comparison = 0;
         if (aVal < bVal) comparison = -1;
@@ -249,10 +290,10 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   );
 
   const handleFilter = useCallback(
-    (columnKey: string, value: unknown, type: string = "text") => {
+    (columnKey: string, value: string, type: FilterConfig["type"] = "text") => {
       if (!filterable) return;
 
-      const newFilters = {
+      const newFilters: Record<string, FilterConfig> = {
         ...filters,
         [columnKey]: { value, type },
       };
@@ -276,7 +317,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   );
 
   const handleRowSelect = useCallback(
-    (rowId: string, selected: boolean) => {
+    (rowId: string | number, selected: boolean) => {
       if (!selectable) return;
 
       const newSelection = new Set(selectedRows);
@@ -303,9 +344,9 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     (selected: boolean) => {
       if (!selectable) return;
 
-      const newSelection = selected
-        ? new Set(visibleData.map((row) => row.id))
-        : new Set<string>();
+      const newSelection: Set<string | number> = selected
+        ? new Set<string | number>(visibleData.map((row) => row.id))
+        : new Set<string | number>();
 
       setSelectedRows(newSelection);
       onRowSelect?.(Array.from(newSelection));
@@ -323,7 +364,12 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   const handleRowClick = useCallback(
     (row: TableRow, index: number) => {
       onRowClick?.(row, index);
-      UIEvents.interaction("table_row_click", row.id, userId, sessionId);
+      UIEvents.interaction(
+        "table_row_click",
+        String(row.id),
+        userId,
+        sessionId,
+      );
     },
     [onRowClick, userId, sessionId],
   );
@@ -370,7 +416,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
         className={`
           ${styles.headerCell}
           ${sortable && column.sortable !== false ? styles.sortable : ""}
-          ${isSorted ? styles._sorted : ""}
+          ${isSorted ? styles.sorted : ""}
           ${column.align ? styles[`align-${column.align}`] : ""}
         `}
         onClick={() => column.sortable !== false && handleSort(column.key)}
@@ -400,6 +446,8 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   // Render column filter
   const renderColumnFilter = (column: TableColumn) => {
     const filterValue = filters[column.key]?.value || "";
+    const stringValue =
+      typeof filterValue === "string" ? filterValue : String(filterValue || "");
 
     return (
       <div
@@ -408,8 +456,8 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
       >
         <input
           type="text"
-          value={filterValue}
-          onChange={(e) => handleFilter(column.key, e.target.value, "text")}
+          value={stringValue}
+          onChange={(e) => handleFilter(column.key, e.target.value)}
           placeholder={`Filter ${column.header}...`}
           className={styles.filterInput}
         />
@@ -418,12 +466,18 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
   };
 
   // Render table cell
-  const renderCell = (row: TableRow, column: TableColumn, rowIndex: number) => {
+  const renderCell = (row: TableRow, column: TableColumn) => {
     const value = row[column.key];
-    let displayValue = value;
+    let displayValue: React.ReactNode = value;
 
     // Apply column formatting
-    if (column.type === "date" && value) {
+    if (
+      column.type === "date" &&
+      value &&
+      (typeof value === "string" ||
+        typeof value === "number" ||
+        value instanceof Date)
+    ) {
       displayValue = new Date(value).toLocaleDateString();
     } else if (column.type === "number" && typeof value === "number") {
       displayValue = new Intl.NumberFormat("en-US", {
@@ -431,16 +485,19 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
         currency: "USD",
       }).format(value);
     } else if (column.type === "boolean") {
-      displayValue = value ? "✓" : "✗";
+      displayValue = value ? "Yes" : "No";
+    }
+
+    // Apply custom formatting if provided
+    if (column.format) {
+      displayValue = column.format(value, row);
     }
 
     return (
       <td
         key={column.key}
-        className={`
-          ${styles.cell}
-          ${column.align ? styles[`align-${column.align}`] : ""}
-        `}
+        className={`${styles.cell} ${column.align ? styles[`align-${column.align}`] : ""}`}
+        style={{ width: column.width, minWidth: column.minWidth }}
       >
         {displayValue}
       </td>
@@ -494,7 +551,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
             <button
               key={page}
               onClick={() => handlePageChange(page)}
-              className={`${styles.paginationButton} ${page === currentPage ? styles._active : ""}`}
+              className={`${styles.paginationButton} ${page === currentPage ? styles.active : ""}`}
             >
               {page}
             </button>
@@ -538,7 +595,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     visible: {
       opacity: 1,
       transition: {
-        _staggerChildren: 0.02,
+        staggerChildren: 0.02,
       },
     },
   };
@@ -548,7 +605,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { _duration: 0.3 },
+      transition: { duration: 0.3 },
     },
   };
 
@@ -704,7 +761,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                     className={`
                       ${styles.row}
                       ${selectedRows.has(row.id) ? styles.selected : ""}
-                      ${onRowClick ? styles._clickable : ""}
+                      ${onRowClick ? styles.clickable : ""}
                     `}
                     variants={rowVariants}
                     onClick={() => handleRowClick(row, index)}
@@ -729,7 +786,7 @@ export const DataTableOrganism: React.FC<DataTableProps> = ({
                     )}
                     {columns
                       .filter((col) => columnVisibility[col.key])
-                      .map((col) => renderCell(row, col, index))}
+                      .map((col) => renderCell(row, col))}
                   </motion.tr>
                 ))
               )}

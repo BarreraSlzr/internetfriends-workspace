@@ -2,12 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  eventSystem,
-  UIEvents,
-  APIEvents,
-  ComputeEvents,
-} from "../../../../../lib/events/event.system";
+import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./dashboard.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
@@ -27,7 +22,6 @@ interface DashboardProps {
   initialTab?: DashboardTab;
   showMetrics?: boolean;
   showActivity?: boolean;
-  showAnalytics?: boolean;
   className?: string;
   [key: string]: unknown;
 }
@@ -57,7 +51,6 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
   initialTab = "overview",
   showMetrics = true,
   showActivity = true,
-  showAnalytics = true,
   className,
   ...props
 }) => {
@@ -236,7 +229,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
       y: 0,
       transition: {
         duration: 0.6,
-        _staggerChildren: 0.1,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -300,7 +293,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            transition={{ _delay: index * 0.1 }}
+            transition={{ delay: index * 0.1 }}
           >
             <div className={styles.activityIcon}>{activity.icon}</div>
             <div className={styles.activityContent}>
@@ -390,7 +383,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = ({
           <h1 className={styles.title}>InternetFriends Dashboard</h1>
           <div className={styles.headerActions}>
             <span className={styles.lastUpdate}>
-              Last _updated: {formattedLastUpdate}
+              Last updated: {formattedLastUpdate}
             </span>
             <button
               onClick={handleRefresh}

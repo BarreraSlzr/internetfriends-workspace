@@ -84,8 +84,8 @@ function parseArgs(argv: string[]): Options | null {
     return null;
   }
 
-  const flags = new Set(argv.filter(a => a.startsWith("--")));
-  const positional = argv.filter(a => !a.startsWith("--"));
+  const flags = new Set(argv.filter((a) => a.startsWith("--")));
+  const positional = argv.filter((a) => !a.startsWith("--"));
 
   if (positional.length === 0) {
     console.error("ERROR: Missing <Name> argument.");
@@ -99,14 +99,14 @@ function parseArgs(argv: string[]): Options | null {
 
   if (!VALID_NAME_PATTERN.test(name)) {
     console.error(
-      `ERROR: Invalid name '${name}'. Use PascalCase (e.g., UserProfile, ComputeJob).`
+      `ERROR: Invalid name '${name}'. Use PascalCase (e.g., UserProfile, ComputeJob).`,
     );
     return null;
   }
 
   if (!VALID_DOMAIN_PATTERN.test(domain)) {
     console.error(
-      `ERROR: Invalid domain '${domain}'. Use lowercase alphanumerics / hyphen (e.g., compute, auth, forms).`
+      `ERROR: Invalid domain '${domain}'. Use lowercase alphanumerics / hyphen (e.g., compute, auth, forms).`,
     );
     return null;
   }
@@ -135,12 +135,7 @@ function buildFilePath(name: string, isForm: boolean): string {
 }
 
 function buildContent(opts: Options): string {
-  const {
-    name,
-    domain,
-    description,
-    isForm,
-  } = opts;
+  const { name, domain, description, isForm } = opts;
 
   const tags = isForm ? `["form","${domain}"]` : `["${domain}"]`;
 
@@ -180,8 +175,8 @@ export type ${name} = z.infer<typeof ${name}Schema>;
  *
  * 1. Open schemas/registry.ts
  * 2. Add: import { ${name}Schema } from "./${pascalToKebab(name)}${
-    isForm ? ".form.schema" : ".schema"
-  }";
+   isForm ? ".form.schema" : ".schema"
+ }";
  * 3. Append registry entry:
  *
  *    {
@@ -209,7 +204,7 @@ async function main() {
 
   if (fs.existsSync(outPath) && !opts.force) {
     console.error(
-      `ERROR: File already exists at ${outPath} (use --force to overwrite)`
+      `ERROR: File already exists at ${outPath} (use --force to overwrite)`,
     );
     process.exit(2);
   }
@@ -226,10 +221,13 @@ async function main() {
     fs.writeFileSync(outPath, content, "utf-8");
     console.log(`✅ Created schema file: ${outPath}`);
     console.log(
-      "Next: Register schema in schemas/registry.ts and (optionally) add a fixture."
+      "Next: Register schema in schemas/registry.ts and (optionally) add a fixture.",
     );
-  } catch (e: any) {
-    console.error("ERROR: Failed to write file:", e?.message || e);
+  } catch (e: unknown) {
+    console.error(
+      "ERROR: Failed to scaffold schema:",
+      e instanceof Error ? e.message : String(e),
+    );
     process.exit(3);
   }
 }

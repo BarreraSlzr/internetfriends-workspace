@@ -1,0 +1,86 @@
+{
+  "timestamp": "2025-08-10T09:56:28.649Z",
+  "totalFontReferences": 8,
+  "uniqueFamilies": [
+    "var(--font-geist-sans),\n    -apple-system,\n    BlinkMacSystemFont,\n    \"Segoe UI\",\n    system-ui,\n    sans-serif",
+    "inherit",
+    "\\s*([^",
+    "\\s*/i, '').replace(/",
+    "\\\\s*([^",
+    "\\\\s*/i, '').replace(/"
+  ],
+  "uniqueWeights": [
+    "500",
+    "map-get($font-weight, \"medium\")",
+    "\\s*([^",
+    "\\s*/i, '').replace(/",
+    "\\\\s*([^",
+    "\\\\s*/i, '').replace(/"
+  ],
+  "usageByFile": [
+    {
+      "file": "nextjs-website/types/index.ts",
+      "families": [],
+      "weights": [],
+      "styles": [],
+      "sources": ["string[]"]
+    },
+    {
+      "file": "nextjs-website/app/(internetfriends)/manifest.ts",
+      "families": [],
+      "weights": [],
+      "styles": [],
+      "sources": [
+        "\"/icon/192\",\n        sizes: \"192x192\",\n        type: \"image/png\",\n        purpose: \"any\",\n      },\n      {\n        src: \"/icon/384\",\n        sizes: \"384x384\",\n        type: \"image/png\",\n      },\n      {\n        src: \"/icon/512\",\n        sizes: \"512x512\",\n        type: \"image/png\",\n      },\n    ],\n    orientation: \"portrait\",\n    categories: [\"business\", \"productivity\", \"marketing\"],\n    shortcuts: [\n      {\n        name: \"Contact Us\",\n        short_name: \"Contact\",\n        description: \"Get in touch with our team\",\n        url: \"/contact\",\n        icons: [{ src: \"/icon/96\", sizes: \"96x96\" }],\n      },\n      {\n        name: \"Enterprise Solutions\",\n        short_name: \"Pricing\",\n        description: \"Learn about our pricing\",\n        url: \"/pricing\",\n        icons: [{ src: \"/icon/96.png\", sizes: \"96x96\" }],\n      },\n    ],\n    // screenshots: [\n    //   {\n    //     src: '/screenshot1.png',\n    //     sizes: '1170x2532',\n    //     type: 'image/png',\n    //     label: 'Homepage of Hire Digital',\n    //   },\n    //   {\n    //     src: '/screenshot2.png',\n    //     sizes: '1170x2532',\n    //     type: 'image/png',\n    //     label: 'Enterprise Solutions page',\n    //   },\n    // ],\n    prefer_related_applications: false,\n    // related_applications: [\n    //   {\n    //     platform: 'play',\n    //     url: 'https://play.google.com/store/apps/details?id=com.hiredigital.app',\n    //     id: 'com.hiredigital.app',\n    //   },\n    //   {\n    //     platform: 'itunes',\n    //     url: 'https://apps.apple.com/app/hiredigital/id123456789',\n    //   },\n    // ],\n    // share_target: {\n    //   action: '/share-target',\n    //   method: 'POST',\n    //   enctype: 'multipart/form-data',\n    //   params: {\n    //     title: 'title',\n    //     text: 'text',\n    //     url: 'url',\n    //     files: [\n    //       {\n    //         name: 'media',\n    //         accept: ['image/*', 'video/*'],\n    //       },\n    //     ],\n    //   },\n    // },\n  }"
+      ]
+    },
+    {
+      "file": "nextjs-website/styles/index.scss",
+      "families": [
+        "var(--font-geist-sans),\n    -apple-system,\n    BlinkMacSystemFont,\n    \"Segoe UI\",\n    system-ui,\n    sans-serif"
+      ],
+      "weights": ["500"],
+      "styles": [],
+      "sources": []
+    },
+    {
+      "file": "nextjs-website/styles/mixins.scss",
+      "families": ["inherit"],
+      "weights": ["map-get($font-weight, \"medium\")"],
+      "styles": [],
+      "sources": []
+    },
+    {
+      "file": "nextjs-website/components/atomic/button/button.styles.module.scss",
+      "families": ["inherit"],
+      "weights": ["500"],
+      "styles": ["italic"],
+      "sources": []
+    },
+    {
+      "file": "nextjs-website/components/atomic/glass-card/types.ts",
+      "families": [],
+      "weights": [],
+      "styles": [],
+      "sources": ["string"]
+    },
+    {
+      "file": "scripts/perf/font_inventory.ts",
+      "families": ["\\s*([^", "\\s*/i, '').replace(/"],
+      "weights": ["\\s*([^", "\\s*/i, '').replace(/"],
+      "styles": ["\\s*([^", "\\s*/i, '').replace(/"],
+      "sources": ["\\s*([^", "\\s*/i, '').replace(/"]
+    },
+    {
+      "file": "scripts/perf/start_phase2.ts",
+      "families": ["\\\\s*([^", "\\\\s*/i, '').replace(/"],
+      "weights": ["\\\\s*([^", "\\\\s*/i, '').replace(/"],
+      "styles": ["\\\\s*([^", "\\\\s*/i, '').replace(/"],
+      "sources": ["\\\\s*([^", "\\\\s*/i, '').replace(/"]
+    }
+  ],
+  "recommendations": [
+    "Too many font families (6) - consider consolidating",
+    "Custom fonts detected - implement preloading strategy"
+  ]
+}

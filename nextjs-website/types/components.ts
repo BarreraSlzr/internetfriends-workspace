@@ -1,15 +1,14 @@
 // InternetFriends Component Type Definitions
 // Component-specific props, variants, and utility types
 
-import { ComponentProps, ReactNode, ElementType, HTMLAttributes } from 'react';
-import { VariantProps } from 'class-variance-authority';
+import { ComponentProps, ReactNode, ElementType } from "react";
 
 // Base component props that all components should extend
 export interface BaseComponentProps {
   /** Additional CSS classes */
   className?: string;
   /** Test identifier for testing */
-  'data-testid'?: string;
+  "data-testid"?: string;
   /** Component children */
   children?: ReactNode;
   /** Component ID */
@@ -17,42 +16,37 @@ export interface BaseComponentProps {
 }
 
 // Polymorphic component props for components that can render as different elements
-export type PolymorphicProps<T extends ElementType = 'div'> = {
+export type PolymorphicProps<T extends ElementType = "div"> = {
   as?: T;
 } & BaseComponentProps &
-  Omit<ComponentProps<T>, keyof BaseComponentProps | 'as'>;
+  Omit<ComponentProps<T>, keyof BaseComponentProps | "as">;
 
 // Size variants used across components
-export type SizeVariant = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type SizeVariant = "xs" | "sm" | "md" | "lg" | "xl";
 
 // Color variants for interactive elements
 export type ColorVariant =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'warning'
-  | 'error'
-  | 'info'
-  | 'neutral';
+  | "primary"
+  | "secondary"
+  | "success"
+  | "warning"
+  | "error"
+  | "info"
+  | "neutral";
 
 // Visual variants for styling
-export type VisualVariant =
-  | 'solid'
-  | 'outline'
-  | 'ghost'
-  | 'link'
-  | 'gradient';
+export type VisualVariant = "solid" | "outline" | "ghost" | "link" | "gradient";
 
 // Loading states
-export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
+export type LoadingState = "idle" | "loading" | "success" | "error";
 
 // Animation directions
-export type AnimationDirection = 'up' | 'down' | 'left' | 'right' | 'fade';
+export type AnimationDirection = "up" | "down" | "left" | "right" | "fade";
 
 // Button component types
 export interface ButtonProps extends BaseComponentProps {
   /** Button variant */
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'link';
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "link";
   /** Button size */
   size?: SizeVariant;
   /** Loading state */
@@ -68,17 +62,17 @@ export interface ButtonProps extends BaseComponentProps {
   /** Click handler */
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   /** Button type */
-  type?: 'button' | 'submit' | 'reset';
+  type?: "button" | "submit" | "reset";
 }
 
 // Input component types
 export interface InputProps extends BaseComponentProps {
   /** Input variant */
-  variant?: 'default' | 'outline' | 'filled';
+  variant?: "default" | "outline" | "filled";
   /** Input size */
   size?: SizeVariant;
   /** Input type */
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  type?: "text" | "email" | "password" | "number" | "tel" | "url" | "search";
   /** Placeholder text */
   placeholder?: string;
   /** Input value */
@@ -106,27 +100,36 @@ export interface InputProps extends BaseComponentProps {
   /** Icon to display in input */
   icon?: ReactNode;
   /** Icon position */
-  iconPosition?: 'start' | 'end';
+  iconPosition?: "start" | "end";
 }
 
 // Text component types
 export interface TextProps extends BaseComponentProps {
   /** Text variant/semantic meaning */
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'caption' | 'overline';
+  variant?:
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "body"
+    | "caption"
+    | "overline";
   /** Text size (can override variant) */
   size?: SizeVariant;
   /** Font weight */
-  weight?: 'light' | 'normal' | 'medium' | 'semibold' | 'bold';
+  weight?: "light" | "normal" | "medium" | "semibold" | "bold";
   /** Text color */
-  color?: ColorVariant | 'inherit';
+  color?: ColorVariant | "inherit";
   /** Text alignment */
-  align?: 'left' | 'center' | 'right' | 'justify';
+  align?: "left" | "center" | "right" | "justify";
   /** Text decoration */
-  decoration?: 'none' | 'underline' | 'line-through';
+  decoration?: "none" | "underline" | "line-through";
   /** Text transform */
-  transform?: 'none' | 'uppercase' | 'lowercase' | 'capitalize';
+  transform?: "none" | "uppercase" | "lowercase" | "capitalize";
   /** Line height */
-  lineHeight?: 'tight' | 'normal' | 'relaxed';
+  lineHeight?: "tight" | "normal" | "relaxed";
   /** Truncate text */
   truncate?: boolean;
   /** Maximum lines before truncation */
@@ -136,7 +139,7 @@ export interface TextProps extends BaseComponentProps {
 // Card component types
 export interface CardProps extends BaseComponentProps {
   /** Card variant */
-  variant?: 'default' | 'outlined' | 'elevated' | 'glass';
+  variant?: "default" | "outlined" | "elevated" | "glass";
   /** Card padding */
   padding?: SizeVariant;
   /** Card radius */
@@ -169,9 +172,9 @@ export interface NavigationProps extends BaseComponentProps {
   /** Navigation items */
   items: NavigationItem[];
   /** Navigation orientation */
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
   /** Navigation variant */
-  variant?: 'default' | 'pills' | 'underline' | 'sidebar';
+  variant?: "default" | "pills" | "underline" | "sidebar";
   /** Current pathname for active state */
   pathname?: string;
   /** Collapse navigation on mobile */
@@ -185,7 +188,7 @@ export interface NavigationProps extends BaseComponentProps {
 // Header component types
 export interface HeaderProps extends BaseComponentProps {
   /** Header variant */
-  variant?: 'default' | 'transparent' | 'glass';
+  variant?: "default" | "transparent" | "glass";
   /** Sticky header */
   sticky?: boolean;
   /** Show border on scroll */
@@ -203,7 +206,7 @@ export interface HeaderProps extends BaseComponentProps {
 // Footer component types
 export interface FooterProps extends BaseComponentProps {
   /** Footer variant */
-  variant?: 'default' | 'minimal' | 'detailed';
+  variant?: "default" | "minimal" | "detailed";
   /** Logo component */
   logo?: ReactNode;
   /** Footer navigation */
@@ -223,9 +226,9 @@ export interface FormProps extends BaseComponentProps {
   /** Form submission handler */
   onSubmit?: (event: React.FormEvent<HTMLFormElement>) => void;
   /** Form validation mode */
-  mode?: 'onChange' | 'onBlur' | 'onSubmit';
+  mode?: "onChange" | "onBlur" | "onSubmit";
   /** Form layout */
-  layout?: 'vertical' | 'horizontal' | 'inline';
+  layout?: "vertical" | "horizontal" | "inline";
   /** Form spacing */
   spacing?: SizeVariant;
   /** Loading state */
@@ -246,7 +249,7 @@ export interface FormFieldProps extends BaseComponentProps {
   /** Error message */
   errorMessage?: string;
   /** Field layout */
-  layout?: 'vertical' | 'horizontal';
+  layout?: "vertical" | "horizontal";
 }
 
 // Modal component types
@@ -258,7 +261,7 @@ export interface ModalProps extends BaseComponentProps {
   /** Modal title */
   title?: string;
   /** Modal size */
-  size?: SizeVariant | 'fullscreen';
+  size?: SizeVariant | "fullscreen";
   /** Close on overlay click */
   closeOnOverlayClick?: boolean;
   /** Close on escape key */
@@ -298,7 +301,7 @@ export interface BadgeProps extends BaseComponentProps {
   /** Dot variant (no content) */
   dot?: boolean;
   /** Badge position (for positioned badges) */
-  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+  position?: "top-right" | "top-left" | "bottom-right" | "bottom-left";
 }
 
 // Avatar component types
@@ -310,13 +313,13 @@ export interface AvatarProps extends BaseComponentProps {
   /** Avatar size */
   size?: SizeVariant;
   /** Avatar shape */
-  shape?: 'circle' | 'square' | 'rounded';
+  shape?: "circle" | "square" | "rounded";
   /** Fallback initials */
   initials?: string;
   /** Fallback background color */
   fallbackColor?: ColorVariant;
   /** Status indicator */
-  status?: 'online' | 'offline' | 'away' | 'busy';
+  status?: "online" | "offline" | "away" | "busy";
   /** Loading state */
   loading?: boolean;
 }
@@ -324,13 +327,13 @@ export interface AvatarProps extends BaseComponentProps {
 // Skeleton component types
 export interface SkeletonProps extends BaseComponentProps {
   /** Skeleton variant */
-  variant?: 'text' | 'rectangle' | 'circle';
+  variant?: "text" | "rectangle" | "circle";
   /** Skeleton width */
   width?: string | number;
   /** Skeleton height */
   height?: string | number;
   /** Animation type */
-  animation?: 'pulse' | 'wave' | 'none';
+  animation?: "pulse" | "wave" | "none";
   /** Number of lines (for text variant) */
   lines?: number;
 }
@@ -358,15 +361,15 @@ export interface TooltipProps extends BaseComponentProps {
   /** Tooltip content */
   content: ReactNode;
   /** Tooltip position */
-  position?: 'top' | 'bottom' | 'left' | 'right';
+  position?: "top" | "bottom" | "left" | "right";
   /** Tooltip trigger */
-  trigger?: 'hover' | 'click' | 'focus';
+  trigger?: "hover" | "click" | "focus";
   /** Tooltip delay (ms) */
   delay?: number;
   /** Tooltip arrow */
   arrow?: boolean;
   /** Tooltip theme */
-  theme?: 'dark' | 'light';
+  theme?: "dark" | "light";
 }
 
 // Dropdown component types
@@ -391,7 +394,7 @@ export interface DropdownProps extends BaseComponentProps {
   /** Dropdown trigger */
   trigger: ReactNode;
   /** Dropdown position */
-  position?: 'bottom-start' | 'bottom-end' | 'top-start' | 'top-end';
+  position?: "bottom-start" | "bottom-end" | "top-start" | "top-end";
   /** Close on item click */
   closeOnClick?: boolean;
   /** Dropdown disabled state */
@@ -422,9 +425,9 @@ export interface TabsProps extends BaseComponentProps {
   /** Tab change handler */
   onChange?: (value: string) => void;
   /** Tabs orientation */
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: "horizontal" | "vertical";
   /** Tabs variant */
-  variant?: 'default' | 'pills' | 'underline';
+  variant?: "default" | "pills" | "underline";
 }
 
 // Accordion component types
@@ -451,31 +454,31 @@ export interface AccordionProps extends BaseComponentProps {
   /** Change handler */
   onChange?: (value: string | string[]) => void;
   /** Accordion variant */
-  variant?: 'default' | 'bordered' | 'separated';
+  variant?: "default" | "bordered" | "separated";
 }
 
 // Section component types (for organisms)
 export interface SectionProps extends BaseComponentProps {
   /** Section variant */
-  variant?: 'default' | 'hero' | 'features' | 'testimonials' | 'contact';
+  variant?: "default" | "hero" | "features" | "testimonials" | "contact";
   /** Section background */
-  background?: 'none' | 'muted' | 'gradient' | 'image';
+  background?: "none" | "muted" | "gradient" | "image";
   /** Section spacing */
   spacing?: SizeVariant;
   /** Container size */
-  container?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  container?: "sm" | "md" | "lg" | "xl" | "full";
   /** Section content alignment */
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
 }
 
 // Animation component types
 export interface AnimatedProps extends BaseComponentProps {
   /** Animation type */
-  animation?: 'fadeIn' | 'slideIn' | 'scaleIn' | 'bounceIn';
+  animation?: "fadeIn" | "slideIn" | "scaleIn" | "bounceIn";
   /** Animation direction */
   direction?: AnimationDirection;
   /** Animation duration */
-  duration?: 'fast' | 'normal' | 'slow';
+  duration?: "fast" | "normal" | "slow";
   /** Animation delay */
   delay?: number;
   /** Trigger animation on scroll */
@@ -487,7 +490,7 @@ export interface AnimatedProps extends BaseComponentProps {
 // Layout component types
 export interface ContainerProps extends BaseComponentProps {
   /** Container size */
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'full';
+  size?: "sm" | "md" | "lg" | "xl" | "full";
   /** Container padding */
   padding?: SizeVariant;
   /** Center container */
@@ -496,13 +499,13 @@ export interface ContainerProps extends BaseComponentProps {
 
 export interface FlexProps extends BaseComponentProps {
   /** Flex direction */
-  direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
+  direction?: "row" | "column" | "row-reverse" | "column-reverse";
   /** Justify content */
-  justify?: 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
+  justify?: "start" | "center" | "end" | "between" | "around" | "evenly";
   /** Align items */
-  align?: 'start' | 'center' | 'end' | 'stretch' | 'baseline';
+  align?: "start" | "center" | "end" | "stretch" | "baseline";
   /** Flex wrap */
-  wrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
+  wrap?: "nowrap" | "wrap" | "wrap-reverse";
   /** Gap between items */
   gap?: SizeVariant;
 }
@@ -527,13 +530,15 @@ export interface GridProps extends BaseComponentProps {
 }
 
 // Responsive type utilities
-export type ResponsiveProps<T> = T | {
-  xs?: T;
-  sm?: T;
-  md?: T;
-  lg?: T;
-  xl?: T;
-};
+export type ResponsiveProps<T> =
+  | T
+  | {
+      xs?: T;
+      sm?: T;
+      md?: T;
+      lg?: T;
+      xl?: T;
+    };
 
 // Component state types
 export interface ComponentState {
@@ -556,7 +561,7 @@ export interface ComponentState {
 // Event handler types
 export type ClickHandler = (event: React.MouseEvent) => void;
 export type ChangeHandler<T = string> = (value: T) => void;
-export type SubmitHandler<T = any> = (data: T) => void | Promise<void>;
+export type SubmitHandler<T = unknown> = (data: T) => void | Promise<void>;
 
 // Render prop types
 export type RenderProp<T> = (props: T) => ReactNode;

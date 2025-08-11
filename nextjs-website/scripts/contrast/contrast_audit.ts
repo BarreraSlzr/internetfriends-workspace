@@ -10,6 +10,7 @@ interface ContrastResult {
   recommendation?: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface AuditReport {
   timestamp: string;
   totalPairings: number;
@@ -32,6 +33,7 @@ interface AuditReport {
  * @param hslString - HSL string like "217 89% 60%"
  * @returns HSL object
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function parseHSL(hslString: string): { h: number; s: number; l: number } {
   const parts = hslString.trim().split(/\s+/);
   return {
@@ -44,6 +46,7 @@ function parseHSL(hslString: string): { h: number; s: number; l: number } {
 /**
  * Convert HSL to RGB
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function hslToRgb(
   h: number,
   s: number,

@@ -15,7 +15,7 @@ const ProfileProjectsTab = () => {
     return sortedSkills.map((skill) => (
       <Badge
         key={skill?.id}
-        className="bg-brand-blue-100 text-brand-blue-800 hover:text-blue-100"
+        className="surface-glass border-accent-medium text-foreground hover:border-accent-strong"
       >
         {skill?.name}
       </Badge>
@@ -50,7 +50,6 @@ const ProfileProjectsTab = () => {
     </div>
   );
 };
-
 
 export { ProfileProjectsTab };
 

@@ -283,10 +283,10 @@ export function validateFixtures(
         const raw = JSON.parse(fs.readFileSync(fPath, "utf-8"));
         entry.schema.parse(raw);
         validated++;
-      } catch (e: any) {
+      } catch (e: unknown) {
         failures.push({
           name: entry.name,
-          error: e?.message || "Unknown parse error",
+          error: (e as Error)?.message || "Unknown parse error",
         });
       }
     }

@@ -29,11 +29,11 @@ import { performance } from "perf_hooks";
 
 // Dynamic import paths so that running this early in the epic (before full
 // integration) won't crash if modules shift. Fallback to no-op if unavailable.
-type EmitFn = (type: string, payload: any) => any;
-type OnFn = (type: string, handler: (payload: any) => void) => any;
+type EmitFn = (type: string, payload: unknown) => unknown;
+type OnFn = (type: string, handler: (payload: unknown) => void) => unknown;
 
-let emit: EmitFn;
-let on: OnFn;
+let emit: EmitFn | undefined;
+let on: OnFn | undefined;
 
 async function resolveEventSystem() {
   const candidates = [
@@ -44,7 +44,7 @@ async function resolveEventSystem() {
     try {
       const mod = await import(c);
       if (mod.emitValidated) {
-        emit = (type: string, payload: any) =>
+        emit = (type: string, payload: unknown) =>
           mod.emitValidated(type, payload, { injectTimestamp: true });
       } else if (mod.emit) {
         emit = mod.emit;
@@ -54,14 +54,14 @@ async function resolveEventSystem() {
       } else if (mod.on) {
         on = mod.on;
       }
-      if (emit && on) return;
+      if (emit && on) break;
     } catch {
       // ignore – try next candidate
     }
   }
   // Graceful fallback
-  emit = (type: string, payload: any) => {};
-  on = (type: string, handler: (p: any) => void) => {};
+  if (!emit) emit = () => {};
+  if (!on) on = () => {};
 }
 
 interface BenchmarkResult {
@@ -106,16 +106,15 @@ async function main() {
   const jsonOnly = process.argv.includes("--json");
 
   // Attach listeners
-  let received = 0;
   for (let l = 0; l < listenersPerEvent; l++) {
-    on(eventType, () => {
-      received++;
+    on!(eventType, () => {
+      // Event received
     });
   }
 
   // Warmup phase
   for (let i = 0; i < warmupEvents; i++) {
-    emit(eventType, {
+    emit!(eventType, {
       type: eventType,
       timestamp: new Date().toISOString(),
       status: "ok",
@@ -126,7 +125,7 @@ async function main() {
   // Measured phase
   const start = performance.now();
   for (let i = 0; i < totalEvents; i++) {
-    emit(eventType, {
+    emit!(eventType, {
       type: eventType,
       timestamp: new Date().toISOString(),
       status: "ok",
@@ -155,7 +154,7 @@ async function main() {
     process: {
       pid: process.pid,
       nodeVersion: process.version,
-      bunVersion: (globalThis as any).Bun?.version,
+      bunVersion: (globalThis as { Bun?: { version?: string } }).Bun?.version,
       memoryMB: +memoryMB.toFixed(2),
     },
   };

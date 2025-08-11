@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { eventSystem, APIEvents } from "../../../lib/events/event.system";
 
 // Type definitions for health check response
@@ -14,7 +14,7 @@ type HealthResponse = {
       status: "pass" | "fail" | "warn";
       message: string;
       duration?: number;
-      data?: Record<string, any>;
+      data?: Record<string, unknown>;
     }
   >;
   metrics: {
@@ -38,7 +38,7 @@ type HealthResponse = {
 };
 
 // System start time for uptime calculation
-const startTime = Date.now();
+const global_startTime = Date.now();
 
 // Helper function to get memory usage
 function getMemoryUsage() {
@@ -122,7 +122,7 @@ async function checkDatabase(): Promise<{
 async function checkEventSystem(): Promise<{
   status: "pass" | "fail" | "warn";
   message: string;
-  data: unknown;
+  data?: Record<string, unknown>;
 }> {
   try {
     const isHealthy = await eventSystem.healthCheck();
@@ -131,8 +131,8 @@ async function checkEventSystem(): Promise<{
     if (!isHealthy) {
       return {
         status: "fail",
-        message: "Event system is unhealthy",
-        data: stats,
+        message: "Event system is not healthy",
+        data: stats as unknown as Record<string, unknown>,
       };
     }
 
@@ -140,14 +140,14 @@ async function checkEventSystem(): Promise<{
       return {
         status: "warn",
         message: "Event system queue is getting large",
-        data: stats,
+        data: stats as unknown as Record<string, unknown>,
       };
     }
 
     return {
       status: "pass",
       message: "Event system is healthy",
-      data: stats,
+      data: stats as unknown as Record<string, unknown>,
     };
   } catch (error) {
     return {
@@ -217,13 +217,13 @@ async function checkFileSystem(): Promise<{
   } catch (error) {
     return {
       status: "fail",
-      message: `Filesystem check failed: ${error instanceof Error ? error.message : "Unknown error"}`,
+      message: `Event system check failed: ${error instanceof Error ? error.message : "Unknown error"}`,
     };
   }
 }
 
 // Main health check handler
-export async function GET(request: NextRequest) {
+export async function GET() {
   const requestId = crypto.randomUUID();
   const startTime = Date.now();
 
@@ -245,7 +245,15 @@ export async function GET(request: NextRequest) {
     ]);
 
     // Process check results
-    const checks: Record<string, any> = {
+    const checks: Record<
+      string,
+      {
+        status: "pass" | "fail" | "warn";
+        message: string;
+        duration?: number;
+        data?: Record<string, unknown>;
+      }
+    > = {
       database:
         databaseCheck.status === "fulfilled"
           ? databaseCheck.value
@@ -260,9 +268,9 @@ export async function GET(request: NextRequest) {
           : {
               status: "fail",
               message: "Health check failed to run",
-              data: {},
+              data: {} as Record<string, unknown>,
             },
-      _externalServices:
+      externalServices:
         externalServicesCheck.status === "fulfilled"
           ? externalServicesCheck.value
           : {
@@ -270,7 +278,7 @@ export async function GET(request: NextRequest) {
               message: "Health check failed to run",
               duration: 0,
             },
-      _fileSystem:
+      fileSystem:
         fileSystemCheck.status === "fulfilled"
           ? fileSystemCheck.value
           : {
@@ -305,7 +313,7 @@ export async function GET(request: NextRequest) {
     const response: HealthResponse = {
       status: overallStatus,
       timestamp: new Date().toISOString(),
-      uptime: Date.now() - startTime,
+      uptime: Math.floor((Date.now() - global_startTime) / 1000),
       version: process.env.npm_package_version || "1.0.0",
       environment: process.env.NODE_ENV || "development",
       checks,
@@ -360,7 +368,7 @@ export async function GET(request: NextRequest) {
     const errorResponse = {
       status: "unhealthy" as const,
       timestamp: new Date().toISOString(),
-      uptime: Date.now() - startTime,
+      uptime: Math.floor((Date.now() - global_startTime) / 1000),
       version: process.env.npm_package_version || "1.0.0",
       environment: process.env.NODE_ENV || "development",
       error: errorMessage,
@@ -379,7 +387,7 @@ export async function GET(request: NextRequest) {
 }
 
 // OPTIONS handler for CORS
-export async function OPTIONS(request: NextRequest) {
+export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
     headers: {

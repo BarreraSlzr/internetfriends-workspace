@@ -14,7 +14,7 @@ const ProfileSkillsTab = () => {
           .map((skill, index) => (
             <Badge
               key={`skill-${index}`}
-              className="bg-brand-blue-100 text-brand-blue-800 hover:text-blue-100"
+              className="surface-glass border-accent-medium text-foreground hover:border-accent-strong"
             >
               {skill?.name}
             </Badge>
@@ -23,7 +23,6 @@ const ProfileSkillsTab = () => {
     </div>
   );
 };
-
 
 export { ProfileSkillsTab };
 

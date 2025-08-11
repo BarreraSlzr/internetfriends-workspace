@@ -6,7 +6,7 @@ import { ProfileTabs } from "./profile-tabs";
 import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import content from "@/app/(internetfriends)/content.json";
 
-export const cardCss = `sm:p-4 p-2 bg-brand-blue-900 rounded-sm`;
+export const cardCss = `sm:p-4 p-2 surface-glass rounded-sm`;
 
 const ProfileCard = () => {
   return (
@@ -22,10 +22,7 @@ const ProfileCard = () => {
           content={`Hire ${curriculum.contactInfo.fullname}, ${curriculum.professionalPosition}, ${curriculum.skills.map((skill) => skill.name).join(", ")}`}
         />
         <meta name="author" content={curriculum.contactInfo.fullname} />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-_scale=1.0"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           property="og:title"
           content={`Hire ${curriculum.contactInfo.fullname}`}

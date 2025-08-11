@@ -7,6 +7,7 @@ import "@/app/(internetfriends)/globals.css";
 import GoogleAnalytics from "@/app/(internetfriends)/components/google-analytics";
 import { ThemeProvider } from "@/hooks/use-theme";
 import content from "@/app/(internetfriends)/content.json";
+import { ClientRUMWrapper } from "@/components/perf/client-rum-wrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,11 +37,13 @@ export const metadata: Metadata = {
   publisher: content.companyName,
   icons: {
     icon: [
-      { url: "/icon" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/icon/32", sizes: "32x32", type: "image/png" },
       { url: "/icon/48", sizes: "48x48", type: "image/png" },
       { url: "/icon/72", sizes: "72x72", type: "image/png" },
       { url: "/icon/96", sizes: "96x96", type: "image/png" },
+      { url: "/icon/192", sizes: "192x192", type: "image/png" },
+      { url: "/icon/512", sizes: "512x512", type: "image/png" },
     ],
     apple: [
       { url: "/600x600.jpg" },
@@ -103,6 +106,10 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#3b82f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#1d4ed8" },
+  ],
 };
 
 export default function RootLayout({
@@ -119,6 +126,7 @@ export default function RootLayout({
             <SpeedInsights />
             <Analytics />
             <GoogleAnalytics />
+            <ClientRUMWrapper />
           </Suspense>
         </ThemeProvider>
       </body>

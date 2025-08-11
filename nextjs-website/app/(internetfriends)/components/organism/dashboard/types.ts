@@ -72,7 +72,7 @@ export interface ActivityItem {
   icon?: string;
   userId?: string;
   sessionId?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string | number | boolean>;
   actions?: ActivityAction[];
   read?: boolean;
   category?: string;
@@ -84,7 +84,7 @@ export interface ActivityItem {
 export interface ActivityAction {
   id: string;
   label: string;
-  _action: () => void;
+  action: () => void;
   icon?: string;
   variant?: "primary" | "secondary" | "danger";
   disabled?: boolean;
@@ -98,15 +98,15 @@ export interface DashboardState {
   isLoading: boolean;
   error: string | null;
   lastUpdate: Date;
-  _filters: DashboardFilters;
-  _preferences: DashboardPreferences;
+  filters: DashboardFilters;
+  preferences: DashboardPreferences;
 }
 
 // Dashboard Filters
 export interface DashboardFilters {
-  _timeRange: TimeRange;
+  timeRange: TimeRange;
   severity: ActivitySeverity[];
-  _activityTypes: ActivityType[];
+  activityTypes: ActivityType[];
   searchTerm?: string;
   userId?: string;
   source?: string;
@@ -123,29 +123,29 @@ export type TimeRange =
 
 // Dashboard Preferences
 export interface DashboardPreferences {
-  _theme: "light" | "dark" | "auto";
-  _density: "compact" | "normal" | "comfortable";
-  _autoRefresh: boolean;
+  theme: "light" | "dark" | "auto";
+  density: "compact" | "normal" | "comfortable";
+  autoRefresh: boolean;
   refreshInterval: number;
-  _defaultTab: DashboardTab;
+  defaultTab: DashboardTab;
   notifications: {
-    _enabled: boolean;
-    _sounds: boolean;
-    _desktop: boolean;
+    enabled: boolean;
+    sounds: boolean;
+    desktop: boolean;
     email: boolean;
     severity: ActivitySeverity[];
   };
   metrics: {
-    _showSparklines: boolean;
-    _showTrends: boolean;
-    _showTargets: boolean;
-    _customOrder: string[];
+    showSparklines: boolean;
+    showTrends: boolean;
+    showTargets: boolean;
+    customOrder: string[];
   };
   activity: {
-    _groupByType: boolean;
-    _showTimestamps: boolean;
+    groupByType: boolean;
+    showTimestamps: boolean;
     maxItems: number;
-    _autoMarkAsRead: boolean;
+    autoMarkAsRead: boolean;
   };
 }
 
@@ -169,36 +169,36 @@ export interface ChartData {
 // Analytics Data
 export interface AnalyticsData {
   overview: {
-    _totalUsers: number;
-    _activeUsers: number;
-    _sessionDuration: number;
-    _bounceRate: number;
+    totalUsers: number;
+    activeUsers: number;
+    sessionDuration: number;
+    bounceRate: number;
     conversionRate: number;
   };
-  _traffic: {
-    _pageViews: ChartData;
-    _uniqueVisitors: ChartData;
-    _sessions: ChartData;
+  traffic: {
+    pageViews: ChartData;
+    uniqueVisitors: ChartData;
+    sessions: ChartData;
   };
   performance: {
     responseTime: ChartData;
     errorRate: ChartData;
     throughput: ChartData;
-    _uptime: number;
+    uptime: number;
   };
-  _userBehavior: {
-    _topPages: Array<{
-      _path: string;
-      _views: number;
-      _uniqueViews: number;
-      _avgTime: number;
+  userBehavior: {
+    topPages: Array<{
+      path: string;
+      views: number;
+      uniqueViews: number;
+      avgTime: number;
     }>;
-    _userFlow: Array<{
-      _from: string;
-      _to: string;
+    userFlow: Array<{
+      from: string;
+      to: string;
       count: number;
     }>;
-    _events: Array<{
+    events: Array<{
       name: string;
       count: number;
       conversionRate: number;
@@ -211,24 +211,24 @@ export interface ProjectItem {
   id: string;
   name: string;
   description?: string;
-  _status: "active" | "paused" | "completed" | "archived";
-  _progress: number; // 0-100
+  status: "active" | "paused" | "completed" | "archived";
+  progress: number; // 0-100
   priority: "low" | "medium" | "high" | "critical";
-  _assignees: string[];
-  _tags: string[];
-  _createdAt: Date;
-  _updatedAt: Date;
+  assignees: string[];
+  tags: string[];
+  createdAt: Date;
+  updatedAt: Date;
   dueDate?: Date;
   metrics?: {
-    _tasks: {
+    tasks: {
       total: number;
       completed: number;
-      _inProgress: number;
+      inProgress: number;
     };
-    _commits: number;
-    _issues: {
-      _open: number;
-      _closed: number;
+    commits: number;
+    issues: {
+      open: number;
+      closed: number;
     };
   };
 }
@@ -236,59 +236,59 @@ export interface ProjectItem {
 // Performance Metrics
 export interface PerformanceMetrics {
   system: {
-    _cpu: number; // percentage
-    _memory: number; // percentage
-    _disk: number; // percentage
-    _network: {
-      _incoming: number; // bytes/sec
-      _outgoing: number; // bytes/sec
+    cpu: number; // percentage
+    memory: number; // percentage
+    disk: number; // percentage
+    network: {
+      incoming: number; // bytes/sec
+      outgoing: number; // bytes/sec
     };
   };
-  _application: {
+  application: {
     responseTime: number; // milliseconds
     throughput: number; // requests/sec
     errorRate: number; // percentage
-    _activeConnections: number;
+    activeConnections: number;
   };
-  _database: {
+  database: {
     connections: {
       active: number;
       idle: number;
       total: number;
     };
-    _queryTime: number; // milliseconds
-    _lockTime: number; // milliseconds
-    _cacheHitRate: number; // percentage
+    queryTime: number; // milliseconds
+    lockTime: number; // milliseconds
+    cacheHitRate: number; // percentage
   };
 }
 
 // Settings Configuration
 export interface SettingsConfig {
-  _general: {
-    _timezone: string;
-    _language: string;
-    _dateFormat: string;
-    _numberFormat: string;
+  general: {
+    timezone: string;
+    language: string;
+    dateFormat: string;
+    numberFormat: string;
   };
   dashboard: DashboardPreferences;
   notifications: {
     email: boolean;
-    _push: boolean;
-    _sms: boolean;
-    _channels: string[];
+    push: boolean;
+    sms: boolean;
+    channels: string[];
   };
-  _security: {
-    _twoFactorAuth: boolean;
-    _sessionTimeout: number; // minutes
-    _allowedIPs: string[];
+  security: {
+    twoFactorAuth: boolean;
+    sessionTimeout: number; // minutes
+    allowedIPs: string[];
   };
-  _api: {
-    _rateLimits: Record<string, number>;
-    _webhooks: string[];
-    _apiKeys: Array<{
+  api: {
+    rateLimits: Record<string, number>;
+    webhooks: string[];
+    apiKeys: Array<{
       id: string;
       name: string;
-      _permissions: string[];
+      permissions: string[];
       expiresAt?: Date;
     }>;
   };
@@ -302,7 +302,7 @@ export interface DashboardEvent {
     | "activity_click"
     | "refresh"
     | "settings_change";
-  data: unknown;
+  data: DashboardTab | MetricCard | ActivityItem | null;
   timestamp: Date;
   userId?: string;
   sessionId?: string;
@@ -311,12 +311,12 @@ export interface DashboardEvent {
 export interface EventHandler {
   id: string;
   event: string;
-  _handler: (event: DashboardEvent) => void;
+  handler: (event: DashboardEvent) => void;
   priority?: number;
 }
 
 // API Response Types
-export interface DashboardAPIResponse<T = any> {
+export interface DashboardAPIResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
@@ -334,8 +334,8 @@ export interface MetricsAPIResponse extends DashboardAPIResponse {
 export interface ActivitiesAPIResponse extends DashboardAPIResponse {
   data: {
     activities: ActivityItem[];
-    _totalCount: number;
-    _hasMore: boolean;
+    totalCount: number;
+    hasMore: boolean;
   };
 }
 
@@ -361,7 +361,7 @@ export interface DashboardHeaderProps {
 }
 
 export interface DashboardNavigationProps {
-  _tabs: Array<{
+  tabs: Array<{
     id: DashboardTab;
     label: string;
     icon?: string;
@@ -384,7 +384,7 @@ export interface ActivityFeedProps {
   maxItems?: number;
   showFilters?: boolean;
   onActivityClick?: (activity: ActivityItem) => void;
-  onMarkAsRead?: (_activityId: string) => void;
+  onMarkAsRead?: (activityId: string) => void;
   className?: string;
 }
 

@@ -9,12 +9,15 @@ import { BgGoo } from "./backgrounds/gloo";
 export default function Header() {
   const randomColors = getRandomColors();
   return (
-    <header className="flex items-center justify-between sm:p-6 p-2 py-4 md:p-8 rounded-t-lg bg-foreground border-2 border-brand-blue-800">
+    <header className="flex items-center justify-between sm:p-6 p-2 py-4 md:p-8 rounded-t-lg surface-glass border-accent-medium">
       <Link href="/">
         <div className="flex items-center gap-2">
-          <div className="relative overflow-hidden flex items-center h-10 w-32 rounded bg-gradient-to-br from-orange-500 to-pink-500">
-            <div className="absolute opacity-69 inset-0 w-full h-full pointer-events-none z-0 mix-blend-color">
-              <NoiseFilter className="opacity-26 mix-blend-hue" />
+          <div className="relative flex items-center h-10 w-32 rounded bg-gradient-to-br from-orange-500 to-pink-500 overflow-hidden">
+            <div
+              className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 mix-blend-overlay"
+              aria-hidden="true"
+            >
+              <NoiseFilter className="opacity-40 mix-blend-color" />
               <BgGoo
                 speed={0.2}
                 resolution={1.0}
@@ -26,11 +29,12 @@ export default function Header() {
               />
             </div>
             <Image
-              className="select-none pointer-events-none"
+              className="relative z-10 select-none pointer-events-none"
               alt={`${content.companyName}.xyz`}
               width={600}
               height={600}
               src="/600x600.jpg"
+              priority
             />
           </div>
         </div>
@@ -38,7 +42,7 @@ export default function Header() {
 
       <Link
         href="/samples"
-        className="flex items-center gap-1 _hover:opacity-70 transition-opacity"
+        className="flex items-center gap-1 hover:opacity-70 transition-opacity"
       >
         {content.headerLink}
         <ArrowUpRight className="h-4 w-4" />

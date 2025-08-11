@@ -27,25 +27,25 @@ export interface DataPoint {
   x: string;
   y: number;
   label?: string;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, string | number | boolean>;
 }
 
 export interface TrendData {
-  _current: number;
-  _previous: number;
+  current: number;
+  previous: number;
   change: number;
-  _changePercent: number;
+  changePercent: number;
   trend: TrendDirection;
 }
 
 export interface KPICard {
   id: string;
   title: string;
-  _value: number;
+  value: number;
   previousValue?: number;
   change?: number;
   trend?: TrendDirection;
-  _format: "number" | "percentage" | "currency" | "duration" | "bytes";
+  format: "number" | "percentage" | "currency" | "duration" | "bytes";
   description?: string;
   target?: number;
   unit?: string;
@@ -66,41 +66,41 @@ export interface MetricInsight {
   type?: string;
   title: string;
   description: string;
-  _severity: InsightSeverity;
+  severity: InsightSeverity;
   confidence?: number;
-  _actionable: boolean;
+  actionable: boolean;
   suggestion?: string | null;
   timestamp?: Date;
   category?: MetricCategory;
   relatedMetrics?: string[];
   action?: {
     label: string;
-    _url: string;
+    url: string;
   };
 }
 
 export interface AnalyticsFilter {
   timeRange: TimeRange;
   customRange?: {
-    _start: Date;
-    _end: Date;
+    start: Date;
+    end: Date;
   };
-  _categories: MetricCategory[];
+  categories: MetricCategory[];
   comparisonPeriod?: "previous_period" | "same_period_last_year" | "custom";
-  _granularity: "minute" | "hour" | "day" | "week" | "month";
+  granularity: "minute" | "hour" | "day" | "week" | "month";
 }
 
 export interface AnalyticsData {
-  _kpis: KPICard[];
-  _charts: ChartData[];
-  _insights: MetricInsight[];
-  _summary: {
-    _totalEvents: number;
-    _uniqueUsers: number;
-    _averageSessionDuration: number;
-    _bounceRate: number;
+  kpis: KPICard[];
+  charts: ChartData[];
+  insights: MetricInsight[];
+  summary: {
+    totalEvents: number;
+    uniqueUsers: number;
+    averageSessionDuration: number;
+    bounceRate: number;
   };
-  _lastUpdated: Date;
+  lastUpdated: Date;
 }
 
 // Component props
@@ -113,15 +113,15 @@ export interface AnalyticsProps {
   showCharts?: boolean;
   showInsights?: boolean;
   showFilters?: boolean;
-  customMetrics?: unknown[];
+  customMetrics?: KPICard[];
   data?: AnalyticsData;
   loading?: boolean;
   error?: string | null;
   onTimeRangeChange?: (range: TimeRange) => void;
-  onFilterChange?: (filter: Record<string, any>) => void;
-  onMetricClick?: (metric: unknown) => void;
+  onFilterChange?: (filter: AnalyticsFilter) => void;
+  onMetricClick?: (metric: KPICard) => void;
   onInsightAction?: (insight: MetricInsight) => void;
-  onExport?: (data: unknown) => void;
+  onExport?: (data: AnalyticsData) => void;
   onRefresh?: () => void;
   userId?: string;
   sessionId?: string;
@@ -139,7 +139,7 @@ export interface AnalyticsEvent {
     | "insight_action"
     | "export"
     | "refresh";
-  data: unknown;
+  data: AnalyticsFilter | KPICard | MetricInsight | AnalyticsData | null;
   timestamp: Date;
   userId?: string;
 }
@@ -147,7 +147,7 @@ export interface AnalyticsEvent {
 // API response types
 export interface AnalyticsApiResponse {
   data: AnalyticsData;
-  _status: "success" | "error";
+  status: "success" | "error";
   message?: string;
   timestamp: string;
 }
@@ -155,13 +155,13 @@ export interface AnalyticsApiResponse {
 // Utility types
 export type MetricValue = string | number;
 export type ChartDataMap = Record<string, DataPoint[]>;
-export type MetricMap = Record<string, any>;
+export type MetricMap = Record<string, KPICard>;
 
 export interface AnalyticsConfig {
   refreshInterval: number;
-  _maxInsights: number;
-  _defaultTimeRange: TimeRange;
-  _enableRealtime: boolean;
-  _chartHeight: number;
+  maxInsights: number;
+  defaultTimeRange: TimeRange;
+  enableRealtime: boolean;
+  chartHeight: number;
   compactMode: boolean;
 }

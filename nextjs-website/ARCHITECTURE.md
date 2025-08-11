@@ -1,6 +1,7 @@
 # InternetFriends Project Architecture
 
 ## Overview
+
 This Next.js 15.2.4 project follows atomic design principles integrated with shadcn/ui components, using the InternetFriends design system with snake_case.dots naming convention.
 
 ## Project Structure
@@ -79,17 +80,26 @@ website/
 │   │   └── types.ts               # API types
 │   └── constants.ts               # App constants
 │
-├── styles/                         # Global Styles
-│   ├── globals.scss               # Global SCSS
-│   ├── variables.scss             # SCSS variables
-│   ├── mixins.scss                # SCSS mixins
-│   ├── themes/                    # Theme definitions
-│   │   ├── light.scss            # Light theme
-│   │   ├── dark.scss             # Dark theme
-│   │   └── index.scss            # Theme exports
-│   └── components/                # Component-specific styles
-│       ├── base.scss             # Base component styles
-│       └── utilities.scss        # Utility classes
+├── styles/                         # Global Styles & Design System
+│   ├── index.scss                 # Design system aggregation (tokens + mixins)
+│   ├── legacy/                    # Deprecated SCSS (scheduled deletion)
+│   │   ├── README.md             # Migration guide
+│   │   ├── variables.scss        # DEPRECATED - Use tokens/* modules
+│   │   └── mixins.scss          # DEPRECATED - Use mixins/* modules
+│   ├── tokens/                    # Design Token Modules (@use syntax)
+│   │   ├── colors.scss           # Brand colors, themes, glass morphism
+│   │   ├── spacing.scss          # Layout, radius, breakpoints, z-index
+│   │   ├── typography.scss       # Font sizes, shadows, animations
+│   │   ├── fonts.scss            # Font families, semantic tokens
+│   │   └── accent.scss           # Dynamic accent system
+│   ├── mixins/                    # Modular Mixin Libraries (@use syntax)
+│   │   ├── focus.scss            # Focus states (Mermaid-inspired dashed)
+│   │   ├── media.scss            # Responsive breakpoints, feature queries
+│   │   └── components.scss       # Button, card, input, glass patterns
+│   └── themes/                    # Theme definitions
+│       ├── light.scss            # Light theme
+│       ├── dark.scss             # Dark theme
+│       └── index.scss            # Theme exports
 │
 ├── types/                          # TypeScript Definitions
 │   ├── global.ts                  # Global type definitions
@@ -114,6 +124,7 @@ website/
 ## Design System Integration
 
 ### Component Hierarchy
+
 1. **shadcn/ui Base** (`/components/ui/`)
    - Unstyled, accessible base components
    - Radix UI primitives with Tailwind styling
@@ -140,35 +151,38 @@ website/
    - Routing and data integration
 
 ### File Naming Conventions
+
 - Components: `[name].[level].tsx` (e.g., `button.atomic.tsx`)
 - Styles: `[name].styles.module.scss`
 - Types: `types.ts` or `[name].types.ts`
 - Index: `index.ts` (for exports)
 
 ### Import Patterns
+
 ```tsx
 // shadcn/ui base components
-import { Button } from '@/components/ui/button';
+import { Button } from "@/components/ui/button";
 
 // Atomic components
-import { ButtonAtomic } from '@/components/atomic/button';
+import { ButtonAtomic } from "@/components/atomic/button";
 
 // Molecular components
-import { NavigationMolecular } from '@/components/molecular/navigation';
+import { NavigationMolecular } from "@/components/molecular/navigation";
 
 // Organisms
-import { HeaderOrganism } from '@/components/organisms/header';
+import { HeaderOrganism } from "@/components/organisms/header";
 
 // Hooks
-import { useTheme } from '@/hooks/use-theme';
+import { useTheme } from "@/hooks/use-theme";
 
 // Utilities
-import { cn } from '@/lib/utils/cn';
+import { cn } from "@/lib/utils/cn";
 ```
 
 ## Color System Architecture
 
 ### CSS Custom Properties Structure
+
 ```scss
 // Base system variables
 :root {
@@ -205,6 +219,7 @@ import { cn } from '@/lib/utils/cn';
 ## Development Workflow
 
 ### Component Creation Process
+
 1. Start with shadcn/ui base component
 2. Create atomic variant with InternetFriends styling
 3. Compose into molecular components as needed
@@ -212,12 +227,14 @@ import { cn } from '@/lib/utils/cn';
 5. Create templates using organisms
 
 ### Testing Strategy
+
 - Unit tests for atomic components
 - Integration tests for molecular/organism components
 - E2E tests for complete user flows
 - Visual regression testing for design system consistency
 
 ### Build Process
+
 - Next.js with Turbopack for fast development
 - CSS Modules for scoped styling
 - TypeScript for type safety
@@ -226,24 +243,28 @@ import { cn } from '@/lib/utils/cn';
 ## Integration Guidelines
 
 ### shadcn/ui Integration
+
 - Keep base shadcn components unchanged
 - Extend functionality in atomic layer
 - Use composition over modification
 - Maintain accessibility standards
 
 ### State Management
+
 - React hooks for local state
 - Context for theme management
 - Server state via Next.js data fetching
 - Form state with controlled components
 
 ### Styling Strategy
+
 - CSS Modules for component styles
 - Global SCSS for theme variables
 - Tailwind utilities for rapid prototyping
 - Custom properties for theme switching
 
 ### Performance Considerations
+
 - Component lazy loading
 - CSS code splitting
 - Image optimization

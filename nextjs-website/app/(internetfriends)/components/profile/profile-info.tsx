@@ -10,7 +10,7 @@ import { Availability } from "../availability";
 
 const ProfileInfo = () => {
   const currentDate = new TZDate(Date.now(), curriculum.contactInfo.localTime);
-  const timeFormatted = format(currentDate, "_hh:mm aa");
+  const timeFormatted = format(currentDate, "hh:mm aa");
 
   return (
     <>

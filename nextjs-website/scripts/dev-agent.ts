@@ -69,7 +69,7 @@ const FLAGS = {
   generateDocs: args.includes("--generate-docs"),
 };
 
-function logVerbose(...m: any[]) {
+function logVerbose(...m: unknown[]) {
   if (FLAGS.verbose) console.log(color.dim("[verbose]"), ...m);
 }
 
@@ -106,14 +106,15 @@ const color = (() => {
 /*  Utility Helpers                                                           */
 /* -------------------------------------------------------------------------- */
 
-function safeImport<T = any>(p: string): T | null {
+function safeImport<T = unknown>(p: string): T | null {
   try {
     // Dynamic import relative to CWD with ESM path resolution
-    return require(path.resolve(p));
+    const resolved = path.resolve(p);
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    return require(resolved);
   } catch {
     try {
       // ESM (Bun/Node >18) dynamic import fallback
-      // eslint-disable-next-line no-new-func
       return new Function("p", "return import(p)")(path.resolve(p));
     } catch {
       return null;
@@ -130,11 +131,11 @@ function fileExists(p: string) {
   }
 }
 
-function readJSON(p: string): any {
+function readJSON(p: string): unknown {
   return JSON.parse(fs.readFileSync(p, "utf-8"));
 }
 
-function writeJSON(p: string, data: any) {
+function writeJSON(p: string, data: unknown) {
   fs.mkdirSync(path.dirname(p), { recursive: true });
   fs.writeFileSync(p, JSON.stringify(data, null, 2) + "\n", "utf-8");
 }
@@ -251,7 +252,7 @@ interface RegistrySummary {
 }
 
 function loadRegistrySummary(): RegistrySummary {
-  let summary: RegistrySummary = {
+  const summary: RegistrySummary = {
     totalRegistered: 0,
     domains: {},
     names: [],
@@ -259,11 +260,13 @@ function loadRegistrySummary(): RegistrySummary {
 
   try {
     // Use CLI helper if present to keep a single source of truth
-    const mod = safeImport<any>(REGISTRY_PATH);
+    const mod = safeImport<{
+      SchemaRegistry?: Array<{ name: string; domain: string }>;
+    }>(REGISTRY_PATH);
     if (mod && mod.SchemaRegistry) {
       const reg = mod.SchemaRegistry;
       summary.totalRegistered = reg.length;
-      summary.names = reg.map((r: any) => r.name);
+      summary.names = reg.map((r: { name: string; domain: string }) => r.name);
       const domains: Record<string, number> = {};
       for (const r of reg) {
         domains[r.domain] = (domains[r.domain] || 0) + 1;
@@ -272,8 +275,11 @@ function loadRegistrySummary(): RegistrySummary {
     } else {
       logVerbose("Registry module not resolved; returning empty summary.");
     }
-  } catch (e: any) {
-    logVerbose("Error loading registry summary:", e?.message);
+  } catch (e: unknown) {
+    logVerbose(
+      "Error loading registry summary:",
+      e instanceof Error ? e.message : String(e),
+    );
   }
   return summary;
 }
@@ -288,16 +294,21 @@ interface EventCatalogSummary {
 }
 
 function loadEventCatalogSummary(): EventCatalogSummary {
-  let summary: EventCatalogSummary = { count: 0, eventTypes: [] };
+  const summary: EventCatalogSummary = { count: 0, eventTypes: [] };
   try {
-    const mod = safeImport<any>(EVENTS_CATALOG_PATH);
+    const mod = safeImport<{ EventCatalog?: Record<string, unknown> }>(
+      EVENTS_CATALOG_PATH,
+    );
     if (mod && mod.EventCatalog) {
       const keys = Object.keys(mod.EventCatalog);
       summary.count = keys.length;
       summary.eventTypes = keys.sort();
     }
-  } catch (e: any) {
-    logVerbose("Event catalog not available:", e?.message);
+  } catch (e: unknown) {
+    logVerbose(
+      "Event catalog not available:",
+      e instanceof Error ? e.message : String(e),
+    );
   }
   return summary;
 }
@@ -316,7 +327,7 @@ interface BenchmarkResult {
   eventsPerSecond: number;
   avgPerEventMicro: number;
   timestamp: string;
-  process: Record<string, any>;
+  process: Record<string, unknown>;
 }
 
 function runBenchmark(): BenchmarkResult | null {
@@ -405,7 +416,7 @@ interface MetricsShape {
 function readExistingMetrics(): Partial<MetricsShape> {
   if (!fileExists(EPIC_METRICS_PATH)) return {};
   try {
-    return readJSON(EPIC_METRICS_PATH);
+    return readJSON(EPIC_METRICS_PATH) as Partial<MetricsShape>;
   } catch {
     return {};
   }
@@ -652,8 +663,11 @@ function printSummary(
     } else {
       process.exitCode = 0;
     }
-  } catch (err: any) {
-    console.error("Dev Agent Fatal Error:", err?.stack || err?.message || err);
+  } catch (err: unknown) {
+    console.error(
+      "Dev Agent Fatal Error:",
+      err instanceof Error ? err.stack || err.message : String(err),
+    );
     process.exit(2);
   }
 })();

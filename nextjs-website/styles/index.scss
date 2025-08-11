@@ -1,10 +1,15 @@
 // InternetFriends Design System - Main SCSS Index
 // Modern @use-based aggregation of all design system tokens and mixins
+//
+// ⚠️ LEGACY WARNING: Do not import variables.scss or mixins.scss
+// These files have been moved to ./legacy/ and are deprecated.
+// Use this index file or individual token/mixin modules instead.
 
 // Import all token modules using @use
 @use "./tokens/colors.scss" as colors;
 @use "./tokens/spacing.scss" as spacing;
 @use "./tokens/typography.scss" as typography;
+@use "./tokens/fonts.scss" as fonts;
 @use "./tokens/accent.scss" as accent;
 
 // Import all mixin modules using @use

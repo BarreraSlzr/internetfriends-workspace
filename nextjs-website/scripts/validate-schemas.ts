@@ -35,10 +35,10 @@ export const APIResponseSchema = z.object({
 async function validateSchemas() {
   console.log("🔍 InternetFriends Schema Validation");
   console.log("===================================");
-  
+
   // Test User Schema
   try {
-    const validUser = UserSchema.parse({
+    UserSchema.parse({
       id: "123e4567-e89b-12d3-a456-426614174000",
       email: "user@internetfriends.xyz",
       name: "John Doe",
@@ -50,17 +50,17 @@ async function validateSchemas() {
   } catch (error) {
     console.log("❌ User Schema validation failed:", error);
   }
-  
+
   // Test Project Schema
   try {
-    const validProject = ProjectSchema.parse({
-      id: "456e7890-e89b-12d3-a456-426614174001", 
+    ProjectSchema.parse({
+      id: "456e7890-e89b-12d3-a456-426614174001",
       name: "InternetFriends Landing Page",
       description: "Next.js landing page for InternetFriends platform",
       status: "active",
       owner: {
         id: "123e4567-e89b-12d3-a456-426614174000",
-        email: "owner@internetfriends.xyz", 
+        email: "owner@internetfriends.xyz",
         name: "Project Owner",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -74,7 +74,7 @@ async function validateSchemas() {
   } catch (error) {
     console.log("❌ Project Schema validation failed:", error);
   }
-  
+
   console.log("🎯 Schema validation complete!");
 }
 

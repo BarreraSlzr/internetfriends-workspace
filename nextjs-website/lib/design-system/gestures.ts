@@ -13,7 +13,10 @@ export const GestureConfigSchema = z.object({
 export type GestureConfig = z.infer<typeof GestureConfigSchema>;
 
 // Default Gesture Configuration
-export const _defaultGestureConfig: GestureConfig = {
+/**
+ * @deprecated Renamed to defaultGestureConfig (without underscore)
+ */
+export const defaultGestureConfig: GestureConfig = {
   enabled: true,
   sensitivity: 1.0,
   threshold: 50,
@@ -25,82 +28,91 @@ export type SwipeDirection = "up" | "down" | "left" | "right";
 export type PinchType = "in" | "out";
 
 export interface SwipeGesture {
-  _direction: SwipeDirection;
-  _distance: number;
-  _velocity: number;
-  _startPoint: { x: number; y: number };
-  _endPoint: { x: number; y: number };
+  direction: SwipeDirection;
+  distance: number;
+  velocity: number;
+  startPoint: { x: number; y: number };
+  endPoint: { x: number; y: number };
 }
 
 export interface PinchGesture {
   type: PinchType;
   scale: number;
-  _center: { x: number; y: number };
+  center: { x: number; y: number };
 }
 
 // Focus Management for Accessibility
-export const _FocusKeyPatterns = {
+/**
+ * @deprecated Renamed to FocusKeyPatterns (keys without underscores)
+ */
+export const FocusKeyPatterns = {
   // Keyboard navigation
   navigation: {
-    _next: ["Tab"],
-    _previous: ["Shift+Tab"],
-    _activate: ["Enter", "Space"],
-    _escape: ["Escape"],
+    next: ["Tab"],
+    previous: ["Shift+Tab"],
+    activate: ["Enter", "Space"],
+    escape: ["Escape"],
   },
   // Vim-style navigation (for power users)
-  _vim: {
+  vim: {
     up: ["k", "ArrowUp"],
     down: ["j", "ArrowDown"],
     left: ["h", "ArrowLeft"],
     right: ["l", "ArrowRight"],
   },
   // Modal/Dialog controls
-  _modal: {
-    _close: ["Escape", "Meta+w"],
-    _confirm: ["Enter", "Meta+Enter"],
-    _cancel: ["Escape"],
+  modal: {
+    close: ["Escape", "Meta+w"],
+    confirm: ["Enter", "Meta+Enter"],
+    cancel: ["Escape"],
   },
 } as const;
 
 // Animation Presets for InternetFriends
-export const _AnimationPresets = {
+/**
+ * @deprecated Renamed to AnimationPresets (keys without underscores)
+ */
+export const AnimationPresets = {
   // Glass morphism transitions
-  _glassTransition: {
+  glassTransition: {
     duration: 300,
     easing: "cubic-bezier(0.4, 0, 0.2, 1)",
   },
 
   // Micro-interactions
-  _microInteraction: {
+  microInteraction: {
     duration: 150,
     easing: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
   },
 
   // Page transitions
-  _pageTransition: {
+  pageTransition: {
     duration: 500,
     easing: "cubic-bezier(0.33, 1, 0.68, 1)",
   },
 
   // Focus indicators (dashed borders like Mermaid viewer)
-  _focusIndicator: {
+  focusIndicator: {
     duration: 200,
-    _borderStyle: "2px dashed var(--color-border-focus)",
+    borderStyle: "2px dashed var(--color-border-focus)",
     easing: "ease-in-out",
   },
 } as const;
 
 // Responsive Breakpoints
 export const Breakpoints = {
-  _mobile: "375px",
-  _tablet: "768px",
-  _desktop: "1024px",
-  _wide: "1440px",
-  _ultrawide: "1920px",
+  mobile: "375px",
+  tablet: "768px",
+  desktop: "1024px",
+  wide: "1440px",
+  ultrawide: "1920px",
 } as const;
 
 // Component State Patterns
-export const _ComponentStates = {
+/**
+ * @deprecated Renamed to ComponentStates (keys without underscores)
+ */
+export const ComponentStates = {
   // Interactive states
   interactive: {
     idle: "opacity-100 transform-none",
@@ -111,17 +123,17 @@ export const _ComponentStates = {
   },
 
   // Loading states
-  _loading: {
-    _skeleton: "animate-pulse bg-gray-200",
-    _spinner: "animate-spin",
+  loading: {
+    skeleton: "animate-pulse bg-gray-200",
+    spinner: "animate-spin",
     shimmer:
       "animate-shimmer bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200",
   },
 
   // Validation states
-  _validation: {
-    _success: "border-green-500 text-green-700",
-    _error: "border-red-500 text-red-700",
-    _warning: "border-yellow-500 text-yellow-700",
+  validation: {
+    success: "border-green-500 text-green-700",
+    error: "border-red-500 text-red-700",
+    warning: "border-yellow-500 text-yellow-700",
   },
 } as const;

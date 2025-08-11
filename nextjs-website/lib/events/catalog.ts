@@ -32,10 +32,10 @@ import { z } from "zod";
 /* -------------------------------------------------------------------------- */
 
 export const BaseEventEnvelopeSchema = z.object({
-  type: z.string(),                  // MUST be literal in concrete schemas
-  timestamp: z.string().min(1),      // ISO timestamp (UTC preferred)
-  id: z.string().uuid().optional(),  // Optional unique event id
-  origin: z.string().optional(),     // Source (service / subsystem)
+  type: z.string(), // MUST be literal in concrete schemas
+  timestamp: z.string().min(1), // ISO timestamp (UTC preferred)
+  id: z.string().uuid().optional(), // Optional unique event id
+  origin: z.string().optional(), // Source (service / subsystem)
   correlationId: z.string().optional(), // For tracing multi-event flows
   // Additional cross-cutting metadata can be added here when justified
 });
@@ -50,10 +50,10 @@ export const BaseEventEnvelopeSchema = z.object({
  * Emitted on periodic internal health probes / readiness signals.
  */
 export const SystemHealthCheckEventSchema = BaseEventEnvelopeSchema.extend({
-  type: z.literal("system.health.check"),
+  type: z.literal("system.health_check"),
   status: z.enum(["ok", "degraded", "error"]),
   latencyMs: z.number().nonnegative().optional(),
-  details: z.record(z.any()).optional(),
+  details: z.record(z.string(), z.unknown()).optional(),
 });
 
 /**
@@ -61,7 +61,7 @@ export const SystemHealthCheckEventSchema = BaseEventEnvelopeSchema.extend({
  * Emitted when a compute or AI workload is accepted for processing.
  */
 export const ComputeJobQueuedEventSchema = BaseEventEnvelopeSchema.extend({
-  type: z.literal("compute.job.queued"),
+  type: z.literal("compute.job_queued"),
   jobId: z.string(),
   jobType: z.string(), // consider enum refinement later
   priority: z.enum(["low", "normal", "high"]).default("normal"),
@@ -73,10 +73,10 @@ export const ComputeJobQueuedEventSchema = BaseEventEnvelopeSchema.extend({
  * Terminal success path for a compute job.
  */
 export const ComputeJobCompletedEventSchema = BaseEventEnvelopeSchema.extend({
-  type: z.literal("compute.job.completed"),
+  type: z.literal("compute.job_completed"),
   jobId: z.string(),
   durationMs: z.number().int().nonnegative(),
-  resultRef: z.string().optional(),   // pointer to artifact / cache key
+  resultRef: z.string().optional(), // pointer to artifact / cache key
   success: z.literal(true),
 });
 
@@ -85,7 +85,7 @@ export const ComputeJobCompletedEventSchema = BaseEventEnvelopeSchema.extend({
  * Terminal failure path for a compute job.
  */
 export const ComputeJobFailedEventSchema = BaseEventEnvelopeSchema.extend({
-  type: z.literal("compute.job.failed"),
+  type: z.literal("compute.job_failed"),
   jobId: z.string(),
   durationMs: z.number().int().nonnegative().optional(),
   errorType: z.string().optional(),
@@ -99,7 +99,7 @@ export const ComputeJobFailedEventSchema = BaseEventEnvelopeSchema.extend({
  * Emitted when a user initiates a fresh authenticated session.
  */
 export const UserAuthSessionStartEventSchema = BaseEventEnvelopeSchema.extend({
-  type: z.literal("auth.session.start"),
+  type: z.literal("auth.session_start"),
   userId: z.string(),
   sessionId: z.string(),
   method: z.enum(["email", "oauth", "token", "other"]).default("other"),
@@ -110,11 +110,11 @@ export const UserAuthSessionStartEventSchema = BaseEventEnvelopeSchema.extend({
 /* -------------------------------------------------------------------------- */
 
 export const EventCatalog = {
-  "system.health.check": SystemHealthCheckEventSchema,
-  "compute.job.queued": ComputeJobQueuedEventSchema,
-  "compute.job.completed": ComputeJobCompletedEventSchema,
-  "compute.job.failed": ComputeJobFailedEventSchema,
-  "auth.session.start": UserAuthSessionStartEventSchema,
+  "system.health_check": SystemHealthCheckEventSchema,
+  "compute.job_queued": ComputeJobQueuedEventSchema,
+  "compute.job_completed": ComputeJobCompletedEventSchema,
+  "compute.job_failed": ComputeJobFailedEventSchema,
+  "auth.session_start": UserAuthSessionStartEventSchema,
 } as const;
 
 /* -------------------------------------------------------------------------- */
@@ -123,10 +123,9 @@ export const EventCatalog = {
 
 export type EventType = keyof typeof EventCatalog;
 
-export type CanonicalEvent =
-  {
-    [K in keyof typeof EventCatalog]: z.infer<(typeof EventCatalog)[K]>;
-  }[keyof typeof EventCatalog];
+export type CanonicalEvent = {
+  [K in keyof typeof EventCatalog]: z.infer<(typeof EventCatalog)[K]>;
+}[keyof typeof EventCatalog];
 
 /**
  * Map type -> inferred payload
@@ -158,7 +157,7 @@ export function listEventTypes(): EventType[] {
  */
 export function validateEventPayload<T extends EventType>(
   type: T,
-  payload: unknown
+  payload: unknown,
 ):
   | { success: true; data: EventPayloadMap[T] }
   | { success: false; error: string } {
@@ -168,7 +167,7 @@ export function validateEventPayload<T extends EventType>(
   }
   const res = schema.safeParse(payload);
   if (res.success) {
-    return { success: true, data: res.data };
+    return { success: true, data: res.data as EventPayloadMap[T] };
   }
   return { success: false, error: res.error.message };
 }
@@ -179,7 +178,7 @@ export function validateEventPayload<T extends EventType>(
  */
 export function tryParseEvent<T extends EventType>(
   type: T,
-  payload: unknown
+  payload: unknown,
 ): EventPayloadMap[T] | undefined {
   const result = validateEventPayload(type, payload);
   if (result.success) return result.data;

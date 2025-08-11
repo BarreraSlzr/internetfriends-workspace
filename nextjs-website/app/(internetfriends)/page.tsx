@@ -101,7 +101,7 @@ export default function Page() {
       <Navigation />
       <SocialLinks />
       <HeroText className="min-h-fit" />
-      <div className="_sm:p-6 p-2 md:p-8 space-y-6 py-6 rounded-b-lg bg-foreground border-2 border-brand-blue-800">
+      <div className="sm:p-6 p-2 md:p-8 space-y-6 py-6 rounded-b-lg surface-glass border-accent-medium">
         <div className="grid md:grid-cols-2 gap-6">
           {mainIdeas.map((i) => (
             <Link

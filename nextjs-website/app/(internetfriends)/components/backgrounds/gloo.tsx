@@ -91,13 +91,14 @@ export function BgGoo({
     }
     vec3 col = mix(mix(uColor1, uColor2, 1.0-sin(p.x)), uColor3, cos(p.y+p.x));
     col *= uTint;
-    _gl_FragColor = vec4(col, 1.0);
+    gl_FragColor = vec4(col, 1.0);
   }
 `;
 
   useEffect(() => {
     if (!containerRef.current) return;
 
+    const container = containerRef.current;
     const resizeObserver = new ResizeObserver(() => {
       if (containerRef.current) {
         const { width, height } = containerRef.current.getBoundingClientRect();
@@ -105,14 +106,12 @@ export function BgGoo({
       }
     });
 
-    resizeObserver.observe(containerRef.current);
+    resizeObserver.observe(container);
 
     return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
-      }
+      resizeObserver.unobserve(container);
     };
-  }, [, containerRef]);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -161,7 +160,7 @@ export function BgGoo({
 
     glRef.current = gl;
     shaderProgramRef.current = shaderProgram;
-  }, []);
+  }, [fragmentShaderSource, still, vertexShaderSource]);
 
   useEffect(() => {
     const gl = glRef.current;

@@ -33,7 +33,6 @@
 
 import * as fs from "fs";
 import * as path from "path";
-import { fileURLToPath } from "url";
 
 // Dynamic imports to avoid hard crashes if modules move mid‑epic
 async function safeImport(modulePath: string) {
@@ -74,11 +73,14 @@ interface Summary {
 
 function getFlag(name: string): string | undefined {
   const prefix = `--${name}=`;
-  const arg = process.argv.find(a => a.startsWith(prefix));
+  const arg = process.argv.find((a) => a.startsWith(prefix));
   return arg ? arg.slice(prefix.length) : undefined;
 }
 function hasFlag(name: string): boolean {
-  return process.argv.includes(`--${name}`) || process.argv.includes(`--${name}=true`);
+  return (
+    process.argv.includes(`--${name}`) ||
+    process.argv.includes(`--${name}=true`)
+  );
 }
 
 const OUT_DIR = getFlag("out-dir") || "docs/generated";
@@ -90,44 +92,48 @@ const INCLUDE_SHAPE = hasFlag("include-shape");
 async function loadSchemas(): Promise<SchemaDocEntry[]> {
   const mod = await safeImport("../schemas/registry");
   if (!mod) return [];
-  const listFn = (mod.getSchemaDocModel || (() => [])) as () => any[];
+  const listFn = (mod.getSchemaDocModel || (() => [])) as () => unknown[];
   const model = listFn();
 
   // We also want to pull actual schema objects to attempt shape keys
-  const registry = (mod.SchemaRegistry || []) as any[];
+  const registry = (mod.SchemaRegistry || []) as Array<{
+    name: string;
+    schema?: unknown;
+  }>;
 
   const entries: SchemaDocEntry[] = [];
 
   for (const meta of model) {
-    const regEntry = registry.find((r: any) => r.name === meta.name);
+    const regEntry = registry.find((r) => r.name === meta.name);
     let shapeKeys: string[] | undefined;
     let zodType: string | undefined;
 
     if (INCLUDE_SHAPE && regEntry?.schema) {
       try {
-        const schema: any = regEntry.schema;
+        const schema: unknown = regEntry.schema;
         // Zod object detection
-        if (schema?._def?.typeName === "ZodObject") {
+        const zodSchema = schema as any;
+        if (zodSchema?._def?.typeName === "ZodObject") {
           const shapeDef =
-            typeof schema._def.shape === "function"
-              ? schema._def.shape()
-              : schema._def.shape;
+            typeof zodSchema._def.shape === "function"
+              ? zodSchema._def.shape()
+              : zodSchema._def.shape;
           if (shapeDef && typeof shapeDef === "object") {
             shapeKeys = Object.keys(shapeDef);
           }
         }
-        zodType = schema?._def?.typeName;
+        zodType = (schema as any)?._def?.typeName;
       } catch {
         // ignore shape extraction errors
       }
     }
 
     entries.push({
-      name: meta.name,
-      domain: meta.domain,
-      version: meta.version,
-      description: meta.description,
-      tags: meta.tags || [],
+      name: (meta as any).name,
+      domain: (meta as any).domain,
+      version: (meta as any).version,
+      description: (meta as any).description,
+      tags: (meta as any).tags || [],
       shapeKeys,
       zodType,
     });
@@ -139,19 +145,20 @@ async function loadSchemas(): Promise<SchemaDocEntry[]> {
 async function loadEvents(): Promise<EventDocEntry[]> {
   const mod = await safeImport("../lib/events/catalog");
   if (!mod) return [];
-  const catalog = (mod.EventCatalog || {}) as Record<string, any>;
+  const catalog = (mod.EventCatalog || {}) as Record<string, unknown>;
   const result: EventDocEntry[] = [];
 
   for (const type of Object.keys(catalog).sort()) {
     let fields: string[] | undefined;
     if (INCLUDE_SHAPE) {
       try {
-        const schema: any = catalog[type];
-        if (schema?._def?.typeName === "ZodObject") {
+        const schema: unknown = catalog[type];
+        const zodSchema = schema as any;
+        if (zodSchema?._def?.typeName === "ZodObject") {
           const shapeDef =
-            typeof schema._def.shape === "function"
-              ? schema._def.shape()
-              : schema._def.shape;
+            typeof zodSchema._def.shape === "function"
+              ? zodSchema._def.shape()
+              : zodSchema._def.shape;
           if (shapeDef && typeof shapeDef === "object") {
             fields = Object.keys(shapeDef);
           }
@@ -177,7 +184,8 @@ function renderSchemasMarkdown(schemas: SchemaDocEntry[]): string {
     lines.push("");
     lines.push(`- Domain: \`${s.domain}\``);
     lines.push(`- Version: \`${s.version}\``);
-    if (s.tags?.length) lines.push(`- Tags: ${s.tags.map(t => "`" + t + "`").join(", ")}`);
+    if (s.tags?.length)
+      lines.push(`- Tags: ${s.tags.map((t) => "`" + t + "`").join(", ")}`);
     if (s.zodType) lines.push(`- Zod Type: \`${s.zodType}\``);
     lines.push("");
     if (s.description) {
@@ -243,7 +251,11 @@ async function main() {
     fs.mkdirSync(OUT_DIR, { recursive: true });
     fs.writeFileSync(path.join(OUT_DIR, "schemas.md"), schemasMd, "utf-8");
     fs.writeFileSync(path.join(OUT_DIR, "events.md"), eventsMd, "utf-8");
-    fs.writeFileSync(path.join(OUT_DIR, "summary.json"), JSON.stringify(summary, null, 2), "utf-8");
+    fs.writeFileSync(
+      path.join(OUT_DIR, "summary.json"),
+      JSON.stringify(summary, null, 2),
+      "utf-8",
+    );
   }
 
   if (JSON_ONLY) {
@@ -262,12 +274,12 @@ async function main() {
     console.log(
       `Docs generated: schemas=${schemas.length} events=${events.length} -> ${OUT_DIR} (write=${
         NO_WRITE ? "no" : "yes"
-      })`
+      })`,
     );
   }
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error("generate-docs failed:", err);
   process.exit(1);
 });

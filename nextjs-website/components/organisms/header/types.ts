@@ -221,64 +221,64 @@ export interface HeaderOrganismProps {
 // Header state interface
 export interface HeaderState {
   /** Is header sticky */
-  _isSticky: boolean;
+  isSticky: boolean;
 
   /** Is mobile menu open */
-  _isMobileMenuOpen: boolean;
+  isMobileMenuOpen: boolean;
 
   /** Current scroll position */
-  _scrollPosition: number;
+  scrollPosition: number;
 
   /** Is header hidden (scroll behavior) */
-  _isHidden: boolean;
+  isHidden: boolean;
 
   /** Is search active */
-  _isSearchActive: boolean;
+  isSearchActive: boolean;
 
   /** Current search query */
-  _searchQuery: string;
+  searchQuery: string;
 
   /** Is announcement visible */
-  _isAnnouncementVisible: boolean;
+  isAnnouncementVisible: boolean;
 }
 
 // Header context value
 export interface HeaderContextValue extends HeaderState {
   /** Toggle mobile menu */
-  _toggleMobileMenu: () => void;
+  toggleMobileMenu: () => void;
 
   /** Close mobile menu */
-  _closeMobileMenu: () => void;
+  closeMobileMenu: () => void;
 
   /** Toggle search */
-  _toggleSearch: () => void;
+  toggleSearch: () => void;
 
   /** Set search query */
-  _setSearchQuery: (query: string) => void;
+  setSearchQuery: (query: string) => void;
 
   /** Dismiss announcement */
-  _dismissAnnouncement: () => void;
+  dismissAnnouncement: () => void;
 
   /** Update header state */
-  _updateState: (_updates: Partial<HeaderState>) => void;
+  updateState: (updates: Partial<HeaderState>) => void;
 }
 
 // Header utilities
 export interface HeaderUtils {
   /** Get header height */
-  _getHeaderHeight: () => number;
+  getHeaderHeight: () => number;
 
   /** Scroll to top */
-  _scrollToTop: () => void;
+  scrollToTop: () => void;
 
   /** Focus main content */
-  _focusMainContent: () => void;
+  focusMainContent: () => void;
 
   /** Get current route */
-  _getCurrentRoute: () => string;
+  getCurrentRoute: () => string;
 
   /** Check if route is active */
-  _isRouteActive: (path: string) => boolean;
+  isRouteActive: (path: string) => boolean;
 }
 
 // Default configurations
@@ -319,8 +319,8 @@ export const isHeaderAction = (value: unknown): value is HeaderAction => {
   return (
     typeof value === "object" &&
     value !== null &&
-    typeof value.id === "string" &&
-    typeof value.label === "string"
+    typeof (value as HeaderAction).id === "string" &&
+    typeof (value as HeaderAction).label === "string"
   );
 };
 

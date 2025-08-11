@@ -1,16 +1,10 @@
 "use client";
 
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  createContext,
-  useContext,
-} from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
-  Menu,
   X,
   Search,
   Globe,
@@ -20,7 +14,6 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { HeaderAtomic } from "@/components/atomic/header";
 import { ButtonAtomic } from "@/components/atomic/button";
 import { NavigationMolecular } from "@/components/molecular/navigation";
 import { useTheme } from "@/hooks/use-theme";
@@ -140,7 +133,6 @@ const ThemeToggle: React.FC<{
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
             {themeOptions.map((option) => (
               <button
-                key={index}
                 key={option.value}
                 onClick={() => {
                   setTheme(option.value);
@@ -214,12 +206,11 @@ const LanguageSelector: React.FC<{
             aria-hidden="true"
           />
           <div className="absolute top-full right-0 mt-2 w-48 bg-glass-bg-header backdrop-blur-glass border border-glass-border rounded-compact-md shadow-lg z-50">
-            {availableLocales.map((lang: unknown) => (
+            {availableLocales.map((lang) => (
               <button
-                key={index}
                 key={lang.code}
                 onClick={() => {
-                  setLocale(lang.code);
+                  setLocale(lang.code as "fr" | "en" | "es");
                   setIsOpen(false);
                 }}
                 className={cn(
@@ -230,7 +221,7 @@ const LanguageSelector: React.FC<{
                     "bg-if-primary-light text-if-primary",
                 )}
               >
-                {lang.flag && <span className="text-lg">{lang.flag}</span>}
+                <span className="text-lg">{lang.flag}</span>
                 <span>{lang.name}</span>
                 <span className="text-xs opacity-75 uppercase ml-auto">
                   {lang.code}
@@ -321,9 +312,9 @@ const AnnouncementBar: React.FC<{
 
   const variantStyles = {
     info: "bg-blue-50 text-blue-900 border-blue-200",
-    _warning: "bg-yellow-50 text-yellow-900 border-yellow-200",
-    _success: "bg-green-50 text-green-900 border-green-200",
-    _error: "bg-red-50 text-red-900 border-red-200",
+    warning: "bg-yellow-50 text-yellow-900 border-yellow-200",
+    success: "bg-green-50 text-green-900 border-green-200",
+    error: "bg-red-50 text-red-900 border-red-200",
   };
 
   return (
@@ -433,7 +424,10 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
         isMobileMenuOpen: !prev.isMobileMenuOpen,
       })),
     closeMobileMenu: () =>
-      setHeaderState((prev) => ({ ...prev, isMobileMenuOpen: false })),
+      setHeaderState((prev) => ({
+        ...prev,
+        isMobileMenuOpen: false,
+      })),
     toggleSearch: () =>
       setHeaderState((prev) => ({
         ...prev,
@@ -450,7 +444,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   // Close mobile menu on route change
   useEffect(() => {
     contextValue.closeMobileMenu();
-  }, [pathname]);
+  }, [pathname, contextValue]);
 
   // Header size styles
   const sizeStyles = {
@@ -520,7 +514,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
                 onClick={logo.onClick}
               >
                 {logo.src ? (
-                  <img
+                  <Image
                     src={logo.src}
                     alt={logo.alt || "Logo"}
                     width={logo.width || 32}

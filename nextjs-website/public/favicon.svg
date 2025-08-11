@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="brand-bg" x1="0%" y1="100%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background with rounded corners -->
+  <rect width="128" height="128" rx="24" ry="24" fill="url(#brand-bg)"/>
+
+  <!-- Subtle overlay for depth -->
+  <rect width="128" height="128" rx="24" ry="24" fill="rgba(255,255,255,0.1)" opacity="0.6"/>
+
+  <!-- IF Text -->
+  <g fill="#ffffff" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-weight="700" filter="url(#glow)">
+    <text x="64" y="84" font-size="56" text-anchor="middle" letter-spacing="1px">IF</text>
+  </g>
+
+  <!-- Subtle accent dot for the "i" -->
+  <circle cx="48" cy="45" r="4" fill="#ffffff" opacity="0.8"/>
+</svg>

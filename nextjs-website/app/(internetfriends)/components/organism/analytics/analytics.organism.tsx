@@ -1,12 +1,8 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  eventSystem,
-  UIEvents,
-  APIEvents,
-} from "../../../../../lib/events/event.system";
+import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./analytics.styles.module.scss";
 // Define types inline to avoid module resolution issues
 type TimeRange =
@@ -56,13 +52,6 @@ interface MetricInsight {
   suggestion?: string | null;
 }
 
-interface AnalyticsFilter {
-  timeRange: TimeRange;
-  customRange?: { _start: Date; _end: Date };
-  _categories: string[];
-  _granularity: "minute" | "hour" | "day" | "week" | "month";
-}
-
 interface AnalyticsProps {
   title?: string;
   timeRange?: TimeRange;
@@ -71,10 +60,7 @@ interface AnalyticsProps {
   showKPIs?: boolean;
   showCharts?: boolean;
   showInsights?: boolean;
-  showFilters?: boolean;
-  customMetrics?: unknown[];
   onTimeRangeChange?: (range: TimeRange) => void;
-  onFilterChange?: (filter: Record<string, any>) => void;
   onExport?: (data: unknown) => void;
   userId?: string;
   sessionId?: string;
@@ -90,10 +76,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   showKPIs = true,
   showCharts = true,
   showInsights = true,
-  showFilters = true,
-  customMetrics = [],
   onTimeRangeChange,
-  onFilterChange,
   onExport,
   className,
   userId,
@@ -108,8 +91,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   const [kpis, setKpis] = useState<KPICard[]>([]);
   const [charts, setCharts] = useState<ChartData[]>([]);
   const [insights, setInsights] = useState<MetricInsight[]>([]);
-  const [filters, setFilters] = useState<AnalyticsFilter[]>([]);
-  const [activeFilters, setActiveFilters] = useState<Record<string, any>>({});
+
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
   // Time Range Options
@@ -319,43 +301,19 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     [onTimeRangeChange, userId, sessionId],
   );
 
-  const handleFilterChange = useCallback(
-    (filterId: string, value: unknown) => {
-      const newFilters = { ...activeFilters, [filterId]: value };
-      setActiveFilters(newFilters);
-      onFilterChange?.(newFilters);
-      UIEvents.interaction(
-        "analytics_filter",
-        `${filterId}:${value}`,
-        userId,
-        sessionId,
-      );
-    },
-    [activeFilters, onFilterChange, userId, sessionId],
-  );
-
   const handleExport = useCallback(() => {
     const exportData = {
       kpis,
       charts,
       insights,
       timeRange: selectedTimeRange,
-      filters: activeFilters,
-      _timestamp: new Date(),
+      // filters: activeFilters,  // removed (activeFilters state eliminated)
+      timestamp: new Date(),
     };
 
     onExport?.(exportData);
     UIEvents.interaction("analytics_export", "dashboard", userId, sessionId);
-  }, [
-    kpis,
-    charts,
-    insights,
-    selectedTimeRange,
-    activeFilters,
-    onExport,
-    userId,
-    sessionId,
-  ]);
+  }, [kpis, charts, insights, selectedTimeRange, onExport, userId, sessionId]);
 
   const handleRefresh = useCallback(() => {
     loadAnalyticsData();
@@ -389,7 +347,6 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     change: number,
     trend: "up" | "down" | "stable",
   ) => {
-    const absChange = Math.abs(change);
     const isPositive = change > 0;
 
     return {
@@ -519,7 +476,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
         <p className={styles.insightDescription}>{insight.description}</p>
         {insight.actionable && insight.suggestion && (
           <div className={styles.insightSuggestion}>
-            <strong>_Suggestion:</strong> {insight.suggestion}
+            <strong>Suggestion:</strong> {insight.suggestion}
           </div>
         )}
       </motion.div>
@@ -532,7 +489,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
     visible: {
       opacity: 1,
       transition: {
-        _staggerChildren: 0.1,
+        staggerChildren: 0.1,
       },
     },
   };
@@ -589,7 +546,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
               </select>
             </div>
             <div className={styles.lastUpdate}>
-              Last _updated: {lastUpdate.toLocaleTimeString()}
+              Last updated: {lastUpdate.toLocaleTimeString()}
             </div>
             <button
               onClick={handleRefresh}
