@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import { effectFunctions } from "./gloo-effects";
 import useRafInterval from "../../hooks/use-rafaga-interval";
 import { motion } from "framer-motion";
+import { useTheme } from "@/hooks/use-theme";
 
 // Simple implementation of useReducedMotion
 function useReducedMotion() {
@@ -27,6 +28,17 @@ function useReducedMotion() {
   return reducedMotion;
 }
 
+type Vec3 = [number, number, number];
+
+function hexToNormRgb(hex: string): Vec3 | null {
+  const clean = hex.replace("#", "").trim();
+  if (!/^([0-9a-fA-F]{6})$/.test(clean)) return null;
+  const r = parseInt(clean.slice(0, 2), 16) / 255;
+  const g = parseInt(clean.slice(2, 4), 16) / 255;
+  const b = parseInt(clean.slice(4, 6), 16) / 255;
+  return [r, g, b];
+}
+
 export function BgGoo({
   speed = 0.4,
   resolution = 2.0,
@@ -34,10 +46,11 @@ export function BgGoo({
   seed = 2.4,
   still = false,
   tint = [1.0, 1.0, 1.0],
-  color1 = [235 / 255, 231 / 255, 92 / 255],
-  color2 = [223 / 255, 72 / 255, 67 / 255],
-  color3 = [235 / 255, 64 / 255, 240 / 255],
+  color1 = [59 / 255, 130 / 255, 246 / 255], // brand primary
+  color2 = [37 / 255, 99 / 255, 235 / 255], // darker variant
+  color3 = [147 / 255, 197 / 255, 253 / 255], // lighter variant
 }) {
+  const { theme } = useTheme();
   const [, inView] = useInView({
     triggerOnce: true,
     rootMargin: "200px 0px",
@@ -52,6 +65,29 @@ export function BgGoo({
 
   const shaderProgramRef = useRef<WebGLProgram | null>(null);
   const reducedMotion = useReducedMotion();
+
+  // Theme-aware tint (fallback to prop)
+  const [tintVec, setTintVec] = useState<Vec3>(tint as Vec3);
+  const brightness = theme.colorScheme === "dark" ? 0.85 : 1.0;
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const style = getComputedStyle(document.documentElement);
+      const primary = style.getPropertyValue("--if-primary").trim();
+      const maybeHex = primary.startsWith("#")
+        ? primary
+        : primary.startsWith("rgb")
+          ? null
+          : primary;
+      if (maybeHex) {
+        const rgb = hexToNormRgb(maybeHex);
+        if (rgb) setTintVec(rgb);
+      }
+    } catch {
+      // Silent fallback
+    }
+  }, [theme.colorScheme]);
 
   // Randomly select an effect function
   const [selectedEffect] = useState(() => {
@@ -75,6 +111,7 @@ export function BgGoo({
   uniform vec3 uColor1;
   uniform vec3 uColor2;
   uniform vec3 uColor3;
+  uniform float uBrightness;
   float speed = ${speed.toFixed(2)};
 
   ${selectedEffect}
@@ -89,8 +126,8 @@ export function BgGoo({
       float fi = float(i);
       p += effect(p, fi, iTime * speed);
     }
-    vec3 col = mix(mix(uColor1, uColor2, 1.0-sin(p.x)), uColor3, cos(p.y+p.x));
-    col *= uTint;
+    vec3 col = mix(mix(uColor1, uColor2, 1.0 - sin(p.x)), uColor3, cos(p.y + p.x));
+    col *= uTint * uBrightness;
     gl_FragColor = vec4(col, 1.0);
   }
 `;
@@ -198,11 +235,16 @@ export function BgGoo({
       const color1Location = gl.getUniformLocation(shaderProgram, "uColor1");
       const color2Location = gl.getUniformLocation(shaderProgram, "uColor2");
       const color3Location = gl.getUniformLocation(shaderProgram, "uColor3");
+      const brightnessLocation = gl.getUniformLocation(
+        shaderProgram,
+        "uBrightness",
+      );
 
-      gl.uniform3fv(tintLocation, new Float32Array(tint));
+      gl.uniform3fv(tintLocation, new Float32Array(tintVec));
       gl.uniform3fv(color1Location, new Float32Array(color1));
       gl.uniform3fv(color2Location, new Float32Array(color2));
       gl.uniform3fv(color3Location, new Float32Array(color3));
+      gl.uniform1f(brightnessLocation, brightness);
 
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.drawArrays(gl.TRIANGLES, 0, 6);

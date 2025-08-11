@@ -27,8 +27,13 @@ export default function HeroText({
   const randomColors = useMemo(() => getRandomColors(), []);
   return (
     <section className={`relative min-h-[60vh] ${className}`}>
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0">
-        <NoiseFilter className="mix-blend-hue" />
+      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 glass-stack">
+        <div
+          className="glass-layer-3 glass-noise-overlay"
+          data-strength="strong"
+        >
+          <NoiseFilter className="mix-blend-overlay" />
+        </div>
         <BgGoo
           speed={0.3}
           resolution={2.0}

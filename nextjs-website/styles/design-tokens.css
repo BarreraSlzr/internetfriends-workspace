@@ -47,6 +47,15 @@
   --glass-border: rgba(255, 255, 255, 0.12);
   --glass-border-enhanced: rgba(255, 255, 255, 0.18);
   --glass-border-outset: rgba(59, 130, 246, 0.15);
+  /* Layered glass & ambient system */
+  --glass-layer-1: rgba(255, 255, 255, 0.65);
+  --glass-layer-2: rgba(255, 255, 255, 0.5);
+  --glass-layer-3: rgba(255, 255, 255, 0.35);
+  --glass-noise-opacity: 0.35;
+  --glass-noise-opacity-strong: 0.55;
+  /* Goo / procedural background tuning */
+  --goo-brightness: 1;
+  --goo-brightness-dark: 0.75;
 
   /* Spacing scale (0.25rem increments) */
   --spacing-xs: 0.25rem;
@@ -201,6 +210,14 @@
   --glass-bg-modal: rgba(17, 24, 39, 0.98);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-border-enhanced: rgba(255, 255, 255, 0.12);
+  /* Layered glass & ambient system (dark) */
+  --glass-layer-1: rgba(17, 24, 39, 0.6);
+  --glass-layer-2: rgba(17, 24, 39, 0.45);
+  --glass-layer-3: rgba(17, 24, 39, 0.3);
+  --glass-noise-opacity: 0.25;
+  --glass-noise-opacity-strong: 0.4;
+  /* Goo / procedural background tuning */
+  --goo-brightness: 0.85;
 
   /* Dark canvas adjustments */
   --app-canvas-accent-start: #1e3a8a;

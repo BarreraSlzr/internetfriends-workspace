@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { HeaderAtomicProps } from "./types";
+import { useTheme } from "@/hooks/use-theme";
 
 export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   children,
@@ -14,6 +15,7 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   ...props
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -53,7 +55,7 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
         className,
       )}
       data-scrolled={isScrolled}
-      data-theme="light" // Will be controlled by theme provider
+      data-theme={theme.colorScheme}
       {...props}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
