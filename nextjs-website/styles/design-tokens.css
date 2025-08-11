@@ -201,60 +201,84 @@
       var(--animation-easing-glass);
 }
 
-/* Dark theme overrides */
+/* Dark theme overrides - Rich Black & Colorful Glass */
 [data-theme="dark"] {
-  /* Glass system dark */
-  --glass-bg-header: rgba(17, 24, 39, 0.85);
-  --glass-bg-header-scrolled: rgba(17, 24, 39, 0.92);
-  --glass-bg-overlay: rgba(17, 24, 39, 0.95);
-  --glass-bg-modal: rgba(17, 24, 39, 0.98);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-border-enhanced: rgba(255, 255, 255, 0.12);
-  /* Layered glass & ambient system (dark) */
-  --glass-layer-1: rgba(17, 24, 39, 0.6);
-  --glass-layer-2: rgba(17, 24, 39, 0.45);
-  --glass-layer-3: rgba(17, 24, 39, 0.3);
-  --glass-noise-opacity: 0.25;
-  --glass-noise-opacity-strong: 0.4;
-  /* Goo / procedural background tuning */
-  --goo-brightness: 0.85;
+  /* Glass system dark - Rich black base with blue tints */
+  --glass-bg-header: rgba(0, 0, 0, 0.85);
+  --glass-bg-header-scrolled: rgba(0, 0, 0, 0.92);
+  --glass-bg-overlay: rgba(0, 0, 0, 0.95);
+  --glass-bg-modal: rgba(0, 0, 0, 0.98);
+  --glass-border: rgba(59, 130, 246, 0.15);
+  --glass-border-enhanced: rgba(59, 130, 246, 0.25);
+  /* Layered glass & ambient system (dark) - Black with blue tints */
+  --glass-layer-1: rgba(0, 0, 0, 0.75);
+  --glass-layer-2: rgba(10, 10, 20, 0.6);
+  --glass-layer-3: rgba(20, 20, 40, 0.45);
+  --glass-noise-opacity: 0.15;
+  --glass-noise-opacity-strong: 0.3;
+  /* Goo / procedural background tuning - Enhanced brightness for visibility */
+  --goo-brightness: 1.2;
 
-  /* Dark canvas adjustments */
-  --app-canvas-accent-start: #1e3a8a;
-  --app-canvas-accent-middle: #1d4ed8;
-  --app-canvas-accent-end: #2563eb;
+  /* Dark canvas adjustments - Rich colorful gradients */
+  --app-canvas-accent-start: #000000;
+  --app-canvas-accent-middle: #1e1b4b;
+  --app-canvas-accent-end: #312e81;
+  --app-canvas-gradient: linear-gradient(
+    145deg,
+    #000000 0%,
+    #1e1b4b 40%,
+    #312e81 70%,
+    #3730a3 100%
+  );
+  --app-canvas-gradient-animated:
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(96, 165, 250, 0.4) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(168, 85, 247, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(249, 115, 22, 0.2) 0%,
+      transparent 70%
+    ),
+    var(--app-canvas-gradient);
 
-  /* Dark surface tokens */
-  --surface-glass: rgba(17, 24, 39, 0.65);
-  --surface-glass-hover: rgba(17, 24, 39, 0.75);
-  --surface-solid: #1f2937;
-  --surface-border: rgba(255, 255, 255, 0.2);
-  --surface-border-enhanced: rgba(255, 255, 255, 0.3);
+  /* Dark surface tokens - True black base */
+  --surface-glass: rgba(0, 0, 0, 0.75);
+  --surface-glass-hover: rgba(0, 0, 0, 0.85);
+  --surface-solid: #000000;
+  --surface-border: rgba(59, 130, 246, 0.2);
+  --surface-border-enhanced: rgba(59, 130, 246, 0.35);
 
-  /* Dark theme colors */
+  /* Dark theme colors - High contrast on black */
   --color-text-primary: #ffffff;
-  --color-text-secondary: #d1d5db;
-  --color-text-tertiary: #9ca3af;
+  --color-text-secondary: #e2e8f0;
+  --color-text-tertiary: #cbd5e1;
   --color-text-contrast: #ffffff;
   --color-text-inverse: #000000;
 
-  --color-bg-primary: #111827;
-  --color-bg-secondary: #1f2937;
-  --color-bg-tertiary: #374151;
-  --color-bg-muted: #4b5563;
-  --color-bg-glass: rgba(17, 24, 39, 0.95);
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0f0f0f;
+  --color-bg-tertiary: #1a1a1a;
+  --color-bg-muted: #2a2a2a;
+  --color-bg-glass: rgba(0, 0, 0, 0.9);
 
-  --color-border-primary: #374151;
-  --color-border-secondary: #4b5563;
+  --color-border-primary: rgba(59, 130, 246, 0.3);
+  --color-border-secondary: rgba(59, 130, 246, 0.2);
   --color-border-focus: #60a5fa;
-  --color-border-error: #ef4444;
-  --color-border-success: #10b981;
-  --color-border-warning: #f59e0b;
+  --color-border-error: #f87171;
+  --color-border-success: #34d399;
+  --color-border-warning: #fbbf24;
 
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
+  --color-success: #34d399;
+  --color-warning: #fbbf24;
+  --color-error: #f87171;
+  --color-info: #60a5fa;
 }
 
 /* Print styles */

@@ -47,8 +47,8 @@ export function BgGoo({
   still = false,
   tint = [1.0, 1.0, 1.0],
   color1 = [59 / 255, 130 / 255, 246 / 255], // brand primary
-  color2 = [37 / 255, 99 / 255, 235 / 255], // darker variant
-  color3 = [147 / 255, 197 / 255, 253 / 255], // lighter variant
+  color2 = [147 / 255, 51 / 255, 234 / 255], // purple variant
+  color3 = [236 / 255, 72 / 255, 153 / 255], // pink accent
 }) {
   const { theme } = useTheme();
   const [, inView] = useInView({
@@ -66,26 +66,34 @@ export function BgGoo({
   const shaderProgramRef = useRef<WebGLProgram | null>(null);
   const reducedMotion = useReducedMotion();
 
-  // Theme-aware tint (fallback to prop)
+  // Theme-aware tint and colors
   const [tintVec, setTintVec] = useState<Vec3>(tint as Vec3);
-  const brightness = theme.colorScheme === "dark" ? 0.85 : 1.0;
+  const [themeColors, setThemeColors] = useState({
+    color1: color1 as Vec3,
+    color2: color2 as Vec3,
+    color3: color3 as Vec3,
+  });
+  const brightness = theme.colorScheme === "dark" ? 1.4 : 1.0;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    try {
-      const style = getComputedStyle(document.documentElement);
-      const primary = style.getPropertyValue("--if-primary").trim();
-      const maybeHex = primary.startsWith("#")
-        ? primary
-        : primary.startsWith("rgb")
-          ? null
-          : primary;
-      if (maybeHex) {
-        const rgb = hexToNormRgb(maybeHex);
-        if (rgb) setTintVec(rgb);
-      }
-    } catch {
-      // Silent fallback
+
+    if (theme.colorScheme === "dark") {
+      // Enhanced dark mode colors - more vibrant and colorful
+      setThemeColors({
+        color1: [96 / 255, 165 / 255, 250 / 255], // bright blue
+        color2: [168 / 255, 85 / 255, 247 / 255], // bright purple
+        color3: [249 / 255, 115 / 255, 22 / 255], // bright orange
+      });
+      setTintVec([1.0, 1.0, 1.0]); // Full brightness tint
+    } else {
+      // Light mode - use original colors but enhanced
+      setThemeColors({
+        color1: [59 / 255, 130 / 255, 246 / 255], // brand primary
+        color2: [147 / 255, 51 / 255, 234 / 255], // purple variant
+        color3: [236 / 255, 72 / 255, 153 / 255], // pink accent
+      });
+      setTintVec([0.9, 0.95, 1.0]); // Slightly blue-tinted
     }
   }, [theme.colorScheme]);
 
@@ -241,9 +249,9 @@ export function BgGoo({
       );
 
       gl.uniform3fv(tintLocation, new Float32Array(tintVec));
-      gl.uniform3fv(color1Location, new Float32Array(color1));
-      gl.uniform3fv(color2Location, new Float32Array(color2));
-      gl.uniform3fv(color3Location, new Float32Array(color3));
+      gl.uniform3fv(color1Location, new Float32Array(themeColors.color1));
+      gl.uniform3fv(color2Location, new Float32Array(themeColors.color2));
+      gl.uniform3fv(color3Location, new Float32Array(themeColors.color3));
       gl.uniform1f(brightnessLocation, brightness);
 
       gl.clear(gl.COLOR_BUFFER_BIT);
