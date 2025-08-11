@@ -9,25 +9,25 @@ const ProfileTabs = () => {
     <Tabs defaultValue="expertise">
       <TabsList>
         <TabsTrigger
-          className="data-[state=active]:surface-glass data-[state=active]:border-accent-medium"
+          className="data-[state=active]:glass-layer-2 data-[state=active]:glass-noise-overlay data-[state=active]:border-accent-medium"
           value="expertise"
         >
           Work experience
         </TabsTrigger>
         <TabsTrigger
-          className="data-[state=active]:surface-glass data-[state=active]:border-accent-medium"
+          className="data-[state=active]:glass-layer-2 data-[state=active]:glass-noise-overlay data-[state=active]:border-accent-medium"
           value="projects"
         >
           Projects
         </TabsTrigger>
         <TabsTrigger
-          className="data-[state=active]:surface-glass data-[state=active]:border-accent-medium"
+          className="data-[state=active]:glass-layer-2 data-[state=active]:glass-noise-overlay data-[state=active]:border-accent-medium"
           value="skills"
         >
           Skills
         </TabsTrigger>
         <TabsTrigger
-          className="data-[state=active]:surface-glass data-[state=active]:border-accent-medium"
+          className="data-[state=active]:glass-layer-2 data-[state=active]:glass-noise-overlay data-[state=active]:border-accent-medium"
           value="me"
         >
           More

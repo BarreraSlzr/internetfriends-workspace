@@ -14,7 +14,7 @@ export default function Page() {
         <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
           {content.curriculum.title}
         </h1>
-        <div className="surface-glass">
+        <div className="glass-stack glass-noise-overlay glass-layer-1">
           <div className="sm:px-6 px-2 md:px-8 py-12 pt-6">
             <ProfileCard />
           </div>

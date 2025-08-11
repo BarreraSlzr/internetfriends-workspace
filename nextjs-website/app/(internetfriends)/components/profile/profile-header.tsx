@@ -9,7 +9,7 @@ const ProfileHeader = () => {
       <h1 className="text-xl font-bold">{curriculum.professionalPosition}</h1>
       <Link
         href={"/contact"}
-        className="surface-glass border border-accent-medium font-semibold px-4 py-2 rounded-md hover:border-accent-strong"
+        className="glass-stack glass-noise-overlay glass-layer-2 border-accent-medium font-semibold px-4 py-2 rounded-md hover:border-accent-strong"
       >
         Hire me
       </Link>
