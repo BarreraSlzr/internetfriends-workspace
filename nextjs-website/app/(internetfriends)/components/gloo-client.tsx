@@ -44,20 +44,20 @@ interface GlooClientProps {
 // Productive brand colors from legacy repo (exact RGB tuples)
 const PRODUCTIVE_COLORS = {
   light: [
-    [235 / 255, 231 / 255, 92 / 255], // Yellow
-    [223 / 255, 72 / 255, 67 / 255], // Red
-    [235 / 255, 64 / 255, 240 / 255], // Purple
-  ] as const,
+    [235 / 255, 231 / 255, 92 / 255],
+    [223 / 255, 72 / 255, 67 / 255],
+    [235 / 255, 64 / 255, 240 / 255],
+  ] as [number, number, number][],
   dark: [
-    [235 / 255, 231 / 255, 92 / 255], // Yellow (same)
-    [255 / 255, 92 / 255, 87 / 255], // Lighter red for dark mode
-    [255 / 255, 84 / 255, 255 / 255], // Lighter purple for dark mode
-  ] as const,
+    [235 / 255, 231 / 255, 92 / 255],
+    [255 / 255, 92 / 255, 87 / 255],
+    [255 / 255, 84 / 255, 255 / 255],
+  ] as [number, number, number][],
 };
 
 // Convert RGB tuples to hex for palette API
 function tuplesToHex(
-  tuples: readonly [number, number, number][],
+  tuples: [number, number, number][],
 ): [string, string, string] {
   return tuples.map(
     ([r, g, b]) =>
@@ -105,7 +105,6 @@ export const GlooClient: React.FC<GlooClientProps> = ({
     mode: isDark ? "dark" : "light",
     metadata: {
       generated: false,
-      source: "productive-legacy",
     },
   };
 
@@ -116,7 +115,12 @@ export const GlooClient: React.FC<GlooClientProps> = ({
       config={{
         fallback: null,
         debug: process.env.NODE_ENV === "development",
-        epicContext,
+        epicContext: epicContext
+          ? {
+              epicName: epicContext.epicName || "unknown",
+              epicPhase: epicContext.epicPhase || "development",
+            }
+          : undefined,
       }}
     >
       <div
@@ -152,10 +156,8 @@ export const GlooClient: React.FC<GlooClientProps> = ({
           resolution={2.0}
           depth={4}
           seed={2.4}
-          // Stable configuration - no randomEffect prop
+          // Stable configuration
           effectIndex={effectIndex}
-          randomEffect={false}
-          autoEffectCycle={false}
           // Animation state
           animate={shouldAnimate}
           still={!shouldAnimate}

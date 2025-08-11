@@ -8,9 +8,9 @@ import GoogleAnalytics from "@/app/(internetfriends)/components/google-analytics
 import { ThemeProvider } from "@/hooks/use-theme";
 import { I18nProvider } from "@/i18n";
 import content from "@/app/(internetfriends)/content.json";
-import { ClientRUMWrapper } from "@/components/perf/client-rum-wrapper";
+
 import { AccentInitializer } from "@/components/theme/accent-initializer";
-import { GlooClient } from "@/app/(internetfriends)/components/gloo-client";
+import ClientLayout from "./client-layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -139,14 +139,13 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <AccentInitializer />
-          <GlooClient />
+          <ClientLayout />
           <I18nProvider>
             <Suspense fallback="Loading">
               {children}
               <SpeedInsights />
               <Analytics />
               <GoogleAnalytics />
-              <ClientRUMWrapper />
             </Suspense>
           </I18nProvider>
         </ThemeProvider>
