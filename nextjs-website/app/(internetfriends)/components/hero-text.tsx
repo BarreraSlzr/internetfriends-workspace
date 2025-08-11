@@ -1,6 +1,6 @@
 "use client";
 
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useMemo } from "react";
 import content from "../content.json";
 import NoiseFilter from "./backgrounds/noise-filter-div";
 import { motion } from "framer-motion";
@@ -29,7 +29,6 @@ export default function HeroText({
   children = <DefaultHero />,
   className,
 }: PropsWithChildren<Props>) {
-  // Adaptive teen mode: BgGoo will internally derive palette
   return (
     <section className={`relative min-h-[60vh] ${className}`}>
       <div className="absolute inset-0 w-full h-full pointer-events-none z-0 glass-stack">

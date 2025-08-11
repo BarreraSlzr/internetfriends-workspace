@@ -41,7 +41,11 @@ const FRAGMENT_TEMPLATE = (
   speed: number,
 ) =>
   `
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
 precision mediump float;
+#endif
 
 uniform vec2 iResolution;
 uniform float iTime;
@@ -101,6 +105,7 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   effectName,
   width,
   height,
+  dpr,
   className,
   style,
   animate = true,
@@ -222,10 +227,11 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   };
 
   // WebGL hook with enhanced error reporting
-  const { canvasRef, error, recompile, setPlaying } = useGlooWebGL({
+  const { canvasRef, error, setPlaying } = useGlooWebGL({
     fragment,
     effectKey: chosenEffectIndex,
     playing: shouldAnimate,
+    dpr,
     preserveDrawingBuffer,
     staticUniforms,
     dynamicUniforms: ({ time, canvas }) => ({
@@ -274,12 +280,12 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
     const dpr = () => window.devicePixelRatio || 1;
 
     function enforce() {
-      const rect = parent.getBoundingClientRect();
+      const rect = parent!.getBoundingClientRect();
       const targetW = Math.max(1, Math.floor(rect.width * dpr()));
       const targetH = Math.max(1, Math.floor(rect.height * dpr()));
-      if (canvas.width !== targetW || canvas.height !== targetH) {
-        canvas.width = targetW;
-        canvas.height = targetH;
+      if (canvas!.width !== targetW || canvas!.height !== targetH) {
+        canvas!.width = targetW;
+        canvas!.height = targetH;
       }
     }
 

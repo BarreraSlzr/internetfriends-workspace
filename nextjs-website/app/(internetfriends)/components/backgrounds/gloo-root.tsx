@@ -1,8 +1,16 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { BgGoo } from "./gloo-dom-backup";
+import React, { useEffect, useRef, useState, useMemo } from "react";
+import { BgGooSimple } from "./gloo-simple";
+import { getRandomColors } from "../../lib/color-palette";
 import { cn } from "@/lib/utils";
+
+// Global flag interface augmentation
+declare global {
+  interface Window {
+    [key: string]: unknown;
+  }
+}
 
 /**
  * GlooRoot - Global ambient "gloo" background layer.
@@ -26,15 +34,51 @@ interface GlooPresetConfig {
   quality: "low" | "medium" | "high";
 }
 
-type GlooPreset = "subtle" | "balanced" | "vivid" | "hero" | "badge" | "section";
+type GlooPreset =
+  | "subtle"
+  | "balanced"
+  | "vivid"
+  | "hero"
+  | "badge"
+  | "section";
 
 const PRESETS: Record<GlooPreset, GlooPresetConfig> = {
-  subtle: { speed: 0.10, intensity: 0.55, exposureMultiplier: 0.85, quality: "low" },
-  balanced: { speed: 0.18, intensity: 0.9, exposureMultiplier: 1.0, quality: "medium" },
-  vivid: { speed: 0.24, intensity: 1.2, exposureMultiplier: 1.15, quality: "high" },
-  hero: { speed: 0.28, intensity: 1.15, exposureMultiplier: 1.18, quality: "high" },
-  badge: { speed: 0.16, intensity: 0.95, exposureMultiplier: 1.05, quality: "medium" },
-  section: { speed: 0.14, intensity: 0.7, exposureMultiplier: 0.95, quality: "low" },
+  subtle: {
+    speed: 0.1,
+    intensity: 0.55,
+    exposureMultiplier: 0.85,
+    quality: "low",
+  },
+  balanced: {
+    speed: 0.18,
+    intensity: 0.9,
+    exposureMultiplier: 1.0,
+    quality: "medium",
+  },
+  vivid: {
+    speed: 0.24,
+    intensity: 1.2,
+    exposureMultiplier: 1.15,
+    quality: "high",
+  },
+  hero: {
+    speed: 0.28,
+    intensity: 1.15,
+    exposureMultiplier: 1.18,
+    quality: "high",
+  },
+  badge: {
+    speed: 0.16,
+    intensity: 0.95,
+    exposureMultiplier: 1.05,
+    quality: "medium",
+  },
+  section: {
+    speed: 0.14,
+    intensity: 0.7,
+    exposureMultiplier: 0.95,
+    quality: "low",
+  },
 };
 
 export interface GlooRootProps {
@@ -86,14 +130,17 @@ export const GlooRoot: React.FC<GlooRootProps> = ({
   const [canAnimate, setCanAnimate] = useState(false);
   const [alreadyMounted, setAlreadyMounted] = useState(false);
 
+  // Random colors once on mount, same approach as landingpage
+  const randomColors = useMemo(() => getRandomColors(), []);
+
   // Guard: single instance
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if ((window as any)[GLOBAL_FLAG]) {
+    if (window[GLOBAL_FLAG]) {
       setAlreadyMounted(true);
       return;
     }
-    (window as any)[GLOBAL_FLAG] = true;
+    window[GLOBAL_FLAG] = true;
     return () => {
       // do not unset on unmount intentionally (prevents thrash during route transitions)
     };
@@ -135,9 +182,8 @@ export const GlooRoot: React.FC<GlooRootProps> = ({
   }
 
   const cfg = PRESETS[preset];
-  const effIntensity = (intensity ?? cfg.intensity);
+  const effIntensity = intensity ?? cfg.intensity;
   const effSpeed = cfg.speed * speedScale;
-  const effExposure = cfg.exposureMultiplier;
 
   return (
     <div
@@ -158,24 +204,18 @@ export const GlooRoot: React.FC<GlooRootProps> = ({
       data-gloo-anim={canAnimate ? "on" : "off"}
     >
       <div className="absolute inset-0">
-        <BgGoo
-          animate={canAnimate}
-            variant={
-              preset === "vivid" || preset === "hero"
-                ? "vivid"
-                : preset === "subtle" || preset === "section"
-                  ? "subtle"
-                  : "balanced"
-            }
+        <BgGooSimple
           speed={effSpeed}
-          intensity={effIntensity}
-          exposureMultiplier={effExposure}
-          quality={cfg.quality}
-          suspendOffscreen={false}
-          staticFallback={!canAnimate}
-          adaptiveColors
-          modeStyle="teen"
-          blendMode={blendMode === "normal" ? undefined : blendMode}
+          resolution={
+            cfg.quality === "high" ? 2.5 : cfg.quality === "medium" ? 2.0 : 1.5
+          }
+          depth={cfg.quality === "high" ? 5 : cfg.quality === "medium" ? 4 : 3}
+          seed={Math.random() * 5}
+          still={!canAnimate}
+          parallaxIntensity={effIntensity}
+          color1={randomColors[0]}
+          color2={randomColors[1]}
+          color3={randomColors[2]}
         />
       </div>
 
