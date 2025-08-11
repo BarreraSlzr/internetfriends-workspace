@@ -138,6 +138,30 @@
   --if-primary-light: #{colors.$if-primary-light};
   --if-primary-active: #{colors.$if-primary-active};
 
+  // Teenage Engineering adaptive accent system
+  --if-accent-primary: var(--if-primary); // fallback, overridden at runtime
+  --if-accent-soft: rgba(60, 80, 120, 0.16);
+  --if-accent-faint: rgba(60, 80, 120, 0.08);
+
+  // Neutral surfaces (light mode defaults)
+  --if-surface-neutral: #f6f7f8;
+  --if-surface-neutral-alt: #eceeef;
+  --if-hairline: rgba(10, 15, 25, 0.08);
+
+  // Extended typography system - Teenage Engineering aesthetic
+  --font-display:
+    var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  --font-interface:
+    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  --font-body:
+    var(--font-geist-sans), -apple-system, BlinkMacSystemFont, system-ui,
+    sans-serif;
+  --font-mono:
+    var(--font-geist-mono), "SF Mono", Monaco, Inconsolata, monospace;
+  --font-accent: var(--font-orbitron), monospace;
+
   // Glass morphism tokens
   --glass-bg-header: #{colors.$glass-bg-header};
   --glass-bg-header-scrolled: #{colors.$glass-bg-header-scrolled};
@@ -171,6 +195,13 @@
 
 // Dark mode CSS custom properties
 [data-theme="dark"] {
+  // Dark surface overrides (near-black teenage engineering style)
+  --if-surface-neutral: #060708;
+  --if-surface-neutral-alt: #0b0d10;
+  --if-accent-soft: rgba(255, 255, 255, 0.12);
+  --if-accent-faint: rgba(255, 255, 255, 0.06);
+  --if-hairline: rgba(255, 255, 255, 0.07);
+
   --glass-bg-header: #{colors.$glass-dark-bg-header};
   --glass-bg-header-scrolled: #{colors.$glass-dark-bg-header-scrolled};
   --glass-border: #{colors.$glass-dark-border};

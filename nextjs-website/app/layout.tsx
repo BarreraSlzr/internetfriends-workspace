@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Orbitron } from "next/font/google";
 import { Suspense } from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "@/app/(internetfriends)/globals.css";
 import GoogleAnalytics from "@/app/(internetfriends)/components/google-analytics";
 import { ThemeProvider } from "@/hooks/use-theme";
+import { I18nProvider } from "@/i18n";
 import content from "@/app/(internetfriends)/content.json";
 import { ClientRUMWrapper } from "@/components/perf/client-rum-wrapper";
+import { AccentInitializer } from "@/components/theme/accent-initializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +19,19 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const orbitron = Orbitron({
+  variable: "--font-orbitron",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "700", "900"],
 });
 
 export const metadata: Metadata = {
@@ -119,15 +134,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${orbitron.variable}`}
+      >
         <ThemeProvider>
-          <Suspense fallback="Loading">
-            {children}
-            <SpeedInsights />
-            <Analytics />
-            <GoogleAnalytics />
-            <ClientRUMWrapper />
-          </Suspense>
+          <AccentInitializer />
+          <I18nProvider>
+            <Suspense fallback="Loading">
+              {children}
+              <SpeedInsights />
+              <Analytics />
+              <GoogleAnalytics />
+              <ClientRUMWrapper />
+            </Suspense>
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,37 +1,36 @@
 /* Import InternetFriends Design Tokens */
-@use "../../styles/design-tokens.css";
+@import "../../styles/design-tokens.css";
 
 /* Import Accent Theming System */
-@use "../theme/tokens/accent.css";
+@import "../theme/tokens/accent.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* -----------------------------------------------------------------------------
-   Migration Notice (Glass System)
-   -----------------------------------------------------------------------------
-   The legacy 'surface-glass' utility is being deprecated in favor of the
-   layered glass architecture:
-
-     glass-layer-1  → Primary container surfaces
-     glass-layer-2  → Nested panels / secondary blocks
-     glass-layer-3  → Sub-panels / overlay substrates
-     glass-noise-overlay (+ data-strength) → Optional grain overlay
-     glass-stack     → Ensures proper stacking context
-
-   Action:
-   - Replace 'surface-glass' usages with an appropriate combination of:
-       glass-stack glass-noise-overlay glass-layer-[1|2|3]
-   - Use data-strength="strong" on noise overlay where additional texture depth
-     is needed (hero / high-contrast regions).
-   - This comment block can be removed once migration is complete.
-
-   NOTE: The legacy class is retained below as a compatibility alias.
------------------------------------------------------------------------------ */
-
 @layer base {
   :root {
+    /* Glass System Tokens */
+    --glass-blur-1: 8px;
+    --glass-blur-2: 16px;
+    --glass-blur-3: 24px;
+    --glass-opacity-1: 0.75;
+    --glass-opacity-2: 0.55;
+    --glass-opacity-3: 0.35;
+    --glass-border-1: rgba(255, 255, 255, 0.12);
+    --glass-border-2: rgba(255, 255, 255, 0.08);
+    --glass-border-3: rgba(255, 255, 255, 0.04);
+    --glass-shadow-1: 0 2px 4px -1px rgba(0, 0, 0, 0.15);
+    --glass-shadow-2: 0 4px 12px -2px rgba(0, 0, 0, 0.25);
+    --glass-shadow-3: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
+    --glass-noise-weak: 0.03;
+    --glass-noise-strong: 0.08;
+
+    /* Atmospheric Effects - Light Mode */
+    --if-atmos-noise-ambient-opacity: 0.08;
+    --if-atmos-noise-accent-opacity: 0.12;
+    --if-atmos-goo-exposure: 0.9;
+
     /* Tailwind/shadcn integration */
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -74,6 +73,11 @@
   }
 
   .dark {
+    /* Atmospheric Effects - Dark Mode */
+    --if-atmos-noise-ambient-opacity: 0.14;
+    --if-atmos-noise-accent-opacity: 0.18;
+    --if-atmos-goo-exposure: 1;
+
     /* Tailwind/shadcn dark mode */
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -104,7 +108,7 @@
   }
 
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
 
   html {
@@ -114,9 +118,11 @@
   }
 
   body {
-    @apply text-foreground antialiased;
-    background: transparent;
+    color: hsl(var(--foreground));
+    /* Set a concrete light-mode base to eliminate white flash before gradients / theme init */
+    background: var(--if-surface-neutral, #f6f7f8);
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
     font-family:
       var(--font-geist-sans),
       -apple-system,
@@ -137,10 +143,10 @@
     animation: canvas-flow 30s ease-in-out infinite;
   }
 
-  /* Light mode keeps static gradient */
+  /* Light mode uses neutral surface (no transparent flash) */
   [data-theme="light"] body {
     color: var(--color-text-primary);
-    background: transparent;
+    background: var(--if-surface-neutral, #f6f7f8);
   }
 }
 
@@ -248,9 +254,9 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("_data:image/svg+xml,%3Csvg viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
     mix-blend-mode: overlay;
-    opacity: var(--glass-noise-opacity);
+    opacity: 0.4;
     pointer-events: none;
     z-index: 1;
   }
@@ -472,15 +478,25 @@
   input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
   textarea,
   select {
-    @apply bg-background border border-input rounded-compact-sm px-3 py-2;
-    @apply text-foreground placeholder:text-muted-foreground;
-    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
-    @apply focus:border-transparent;
+    background: hsl(var(--background));
+    border: 1px solid hsl(var(--input));
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.75rem;
+    color: hsl(var(--foreground));
     transition: all 0.2s ease;
   }
 
+  input:not([type="checkbox"]):not([type="radio"]):not(
+      [type="file"]
+    )::placeholder,
+  textarea::placeholder,
+  select::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
   /* Enhanced dark mode form styles */
-  [data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  [data-theme="dark"]
+    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
   [data-theme="dark"] textarea,
   [data-theme="dark"] select {
     background: rgba(0, 0, 0, 0.8);
@@ -498,7 +514,7 @@
   input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
   textarea:focus,
   select:focus {
-    @apply border-if-primary;
+    border-color: var(--if-primary);
     box-shadow: 0 0 0 3px var(--if-primary-light);
     outline: 2px solid var(--if-primary);
     outline-offset: 2px;
@@ -618,14 +634,126 @@
     display: none;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .canvas-animated {
-      animation: none !important;
-      background: var(--app-canvas-gradient) !important;
-    }
-
-    [data-theme="dark"] body {
-      animation: none !important;
-      background: var(--app-canvas-gradient) !important;
-    }
+  .canvas-animated {
+    animation: none !important;
+    background: var(--app-canvas-gradient) !important;
   }
+
+  [data-theme="dark"] body {
+    animation: none !important;
+    background: var(--app-canvas-gradient) !important;
+  }
+}
+
+/* Glass Panel Classes */
+.glass-panel {
+  position: relative;
+  backdrop-filter: blur(var(--glass-blur-1)) saturate(1.15);
+  border: 1px solid var(--glass-border-1);
+  transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: backdrop-filter, border-color, box-shadow;
+}
+
+.glass-layer-1 {
+  background: color-mix(
+    in srgb,
+    var(--if-primary) 4%,
+    var(--background) calc(var(--glass-opacity-1) * 100%)
+  );
+  backdrop-filter: blur(var(--glass-blur-1)) saturate(1.1);
+  border-color: var(--glass-border-1);
+}
+
+.glass-layer-2 {
+  background: color-mix(
+    in srgb,
+    var(--if-primary) 6%,
+    var(--background) calc(var(--glass-opacity-2) * 100%)
+  );
+  backdrop-filter: blur(var(--glass-blur-2)) saturate(1.15);
+  border-color: var(--glass-border-2);
+}
+
+.glass-layer-3 {
+  background: color-mix(
+    in srgb,
+    var(--if-primary) 8%,
+    var(--background) calc(var(--glass-opacity-3) * 100%)
+  );
+  backdrop-filter: blur(var(--glass-blur-3)) saturate(1.2);
+  border-color: var(--glass-border-3);
+}
+
+.glass-elevation-1 {
+  box-shadow: var(--glass-shadow-1);
+}
+
+.glass-elevation-2 {
+  box-shadow: var(--glass-shadow-2);
+}
+
+.glass-elevation-3 {
+  box-shadow: var(--glass-shadow-3);
+}
+
+.glass-noise-overlay {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(120, 120, 120, var(--glass-noise-weak)) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(120, 120, 120, var(--glass-noise-weak)) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 80%,
+      rgba(120, 120, 120, var(--glass-noise-weak)) 0%,
+      transparent 50%
+    );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.glass-noise-weak::before {
+  opacity: 0.6;
+}
+
+.glass-noise-strong::before {
+  opacity: 1;
+}
+
+/* Dark theme glass adjustments */
+[data-theme="dark"] {
+  --glass-border-1: rgba(255, 255, 255, 0.08);
+  --glass-border-2: rgba(255, 255, 255, 0.05);
+  --glass-border-3: rgba(255, 255, 255, 0.02);
+  --glass-shadow-1: 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  --glass-shadow-2: 0 4px 12px -2px rgba(0, 0, 0, 0.5);
+  --glass-shadow-3: 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .glass-panel {
+    transition: none;
+    backdrop-filter: none !important;
+    background: var(--background);
+    border: 1px solid var(--border);
+  }
+
+  .glass-noise-overlay::before {
+    display: none;
+  }
+}
