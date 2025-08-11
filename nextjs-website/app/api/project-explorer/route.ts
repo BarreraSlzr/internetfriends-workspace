@@ -257,7 +257,7 @@ class ServerMicroUXExplorer {
         type: node.extension || "file",
         importance: node.metadata.importance,
         complexity: node.metadata.complexity,
-        size: node.size,
+        size: node.size ?? 0,
         lastModified: node.metadata.lastModified,
         ui_props: {
           className: `grid-item complexity--${node.metadata.complexity} importance--${node.metadata.importance}`,
@@ -442,9 +442,14 @@ class ServerMicroUXExplorer {
         id: string;
         name: string;
         type: string;
+        importance?: string;
+        complexity?: string;
         size: number;
         lastModified?: Date;
-        importance?: string;
+        ui_props: {
+          className: string;
+          badge: string;
+        };
       }>;
       graph_data: {
         nodes: Array<{
@@ -628,12 +633,26 @@ export async function POST(request: NextRequest) {
           [...targetSet].some((needle) => node.label.includes(needle)),
       );
 
-      const gridNodes = analysis.transportable_ui_data.grid_view as GridNode[];
-      analysis.transportable_ui_data.grid_view = gridNodes.filter(
-        (node) =>
-          typeof node.name === "string" &&
-          [...targetSet].some((needle) => node.name.includes(needle)),
-      );
+      const gridNodes = analysis.transportable_ui_data.grid_view as any[];
+      analysis.transportable_ui_data.grid_view = gridNodes
+        .filter(
+          (node) =>
+            typeof node.name === "string" &&
+            [...targetSet].some((needle) => node.name.includes(needle)),
+        )
+        .map((node) => ({
+          id: node.id,
+          name: node.name,
+          type: typeof node.type === "string" ? node.type : "file",
+          importance: node.importance,
+          complexity: node.complexity,
+          size: typeof node.size === "number" ? node.size : 0,
+          lastModified: node.lastModified,
+          ui_props:
+            node.ui_props && typeof node.ui_props === "object"
+              ? node.ui_props
+              : { className: "", badge: "" },
+        }));
     }
 
     const response = {

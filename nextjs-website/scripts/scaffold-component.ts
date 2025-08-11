@@ -126,7 +126,9 @@ function parseArgs(argv: string[]): Options | null {
       .split(",")
       .map((s) => s.trim())
       .filter(Boolean),
-    styleVariant: (extractFlagValue(flags, "style") as StyleVariant) || "glass",
+    styleVariant:
+      (extractFlagValue(flags, "style") as "glass" | "panel" | "minimal") ||
+      "glass",
   };
 
   if (opts.phase && !PHASES.includes(opts.phase)) {

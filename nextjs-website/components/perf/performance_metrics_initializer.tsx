@@ -76,20 +76,6 @@ function getConnectionInfo(): Pick<
   return info;
 }
 
-// Debounce function to avoid excessive beacon calls
-function debounce<T extends (...args: any[]) => void>(
-  func: T,
-  wait: number,
-): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
-
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
-
-// Send metrics to the RUM endpoint
 function sendMetrics(payload: PerfPayload): void {
   if (!payload || Object.keys(payload).length === 0) {
     return;
@@ -114,8 +100,15 @@ function sendMetrics(payload: PerfPayload): void {
   }
 }
 
-// Debounced version to avoid spam
-const debouncedSendMetrics = debounce(sendMetrics, 1000);
+// Use direct sendMetrics call with simple throttling
+let lastSent = 0;
+const throttledSendMetrics = (payload: PerfPayload) => {
+  const now = Date.now();
+  if (now - lastSent > 1000) {
+    lastSent = now;
+    sendMetrics(payload);
+  }
+};
 
 function initRUM(): void {
   if (typeof window === "undefined") {
@@ -177,7 +170,7 @@ function initRUM(): void {
         for (const entry of list.getEntries()) {
           if (entry.name === "first-contentful-paint") {
             perf.fcp = entry.startTime;
-            debouncedSendMetrics({ ...perf });
+            throttledSendMetrics({ ...perf });
           }
         }
       }).observe({ type: "paint", buffered: true });
@@ -197,7 +190,7 @@ function initRUM(): void {
           lcpValue = entry.startTime;
           perf.lcp = lcpValue;
         }
-        debouncedSendMetrics({ ...perf });
+        throttledSendMetrics({ ...perf });
       }).observe({ type: "largest-contentful-paint", buffered: true });
     } catch {
       // PerformanceObserver not supported
@@ -222,7 +215,7 @@ function initRUM(): void {
             perf.cls = clsValue;
           }
         }
-        debouncedSendMetrics({ ...perf });
+        throttledSendMetrics({ ...perf });
       }).observe({ type: "layout-shift", buffered: true });
     } catch {
       // PerformanceObserver not supported
@@ -246,7 +239,7 @@ function initRUM(): void {
           () => {
             const processingTime = performance.now() - now;
             perf.fid_like = processingTime;
-            debouncedSendMetrics({ ...perf });
+            throttledSendMetrics({ ...perf });
           },
           { timeout: 100 },
         );
@@ -286,7 +279,7 @@ function initRUM(): void {
             }
 
             if (maxDelay > 0) {
-              debouncedSendMetrics({ ...perf });
+              throttledSendMetrics({ ...perf });
             }
           }).observe({ type: "first-input", buffered: true });
         } catch {
@@ -321,7 +314,7 @@ function initRUM(): void {
 
   // Send initial metrics after a short delay (for early metrics)
   setTimeout(() => {
-    debouncedSendMetrics({ ...perf });
+    throttledSendMetrics({ ...perf });
   }, 2000);
 
   // Mark as initialized

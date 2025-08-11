@@ -1,3 +1,5 @@
+"use client";
+
 // InternetFriends Internationalization Configuration
 // Complete i18n setup with context and utilities
 

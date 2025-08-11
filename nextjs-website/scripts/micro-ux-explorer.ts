@@ -236,10 +236,30 @@ class MicroUXExplorer {
     }
   }
 
-  async analyzeProject(): Promise<Record<string, unknown>> {
+  async analyzeProject(): Promise<{
+    structure: ProjectNode[];
+    statistics: {
+      totalFiles: number;
+      totalDirectories: number;
+      byType: Record<string, number>;
+      byImportance: {
+        critical: number;
+        high: number;
+        medium: number;
+        low: number;
+      };
+      byComplexity: { complex: number; moderate: number; simple: number };
+    };
+    insights: string[];
+    transportable_ui_data: {
+      tree_view: Record<string, unknown>[];
+      grid_view: Record<string, unknown>[];
+      graph_data: Record<string, unknown>;
+    };
+  }> {
     this.createEvent("ANALYZE", { status: "started" });
 
-    await this.scanDirectory(this.state.currentPath);
+    const structure = await this.scanDirectory(this.state.currentPath);
 
     // Count statistics
     const stats = {
@@ -289,12 +309,23 @@ class MicroUXExplorer {
   }
 
   // 🧠 Generate actionable insights
-  private generateInsights(stats: Record<string, unknown>): string[] {
+  private generateInsights(stats: {
+    totalFiles: number;
+    totalDirectories: number;
+    byType: Record<string, number>;
+    byImportance: {
+      critical: number;
+      high: number;
+      medium: number;
+      low: number;
+    };
+    byComplexity: { complex: number; moderate: number; simple: number };
+  }): string[] {
     const insights: string[] = [];
 
-    const totalFiles = stats.totalFiles as number;
-    const byImportance = stats.byImportance as Record<string, number>;
-    const byComplexity = stats.byComplexity as Record<string, number>;
+    const totalFiles = stats.totalFiles;
+    const byImportance = stats.byImportance;
+    const byComplexity = stats.byComplexity;
     const criticalFiles = byImportance.critical;
     const complexFiles = byComplexity.complex;
 
@@ -310,7 +341,7 @@ class MicroUXExplorer {
       );
     }
 
-    const byType = stats.byType as Record<string, number>;
+    const byType = stats.byType;
     if (byType[".tsx"] && byType[".ts"]) {
       insights.push(
         `⚛️  React TypeScript project detected - ${byType[".tsx"]} components, ${byType[".ts"]} utilities`,
@@ -522,9 +553,7 @@ class MicroUXExplorer {
     const insights = analysis.insights as string[];
     if (insights.length > 0) {
       console.log("\n🧠 Insights:");
-      analysis.insights.forEach((insight: string) =>
-        console.log(`   ${insight}`),
-      );
+      insights.forEach((insight: string) => console.log(`   ${insight}`));
     }
   }
 
@@ -553,13 +582,17 @@ class MicroUXExplorer {
     console.log(`   Files: ${stats.totalFiles}`);
     console.log(`   Directories: ${stats.totalDirectories}`);
     console.log("\n📁 By File Type:");
-    Object.entries(stats.byType).forEach(([ext, count]) => {
-      console.log(`   ${ext}: ${count}`);
-    });
+    Object.entries(stats.byType as Record<string, number>).forEach(
+      ([ext, count]) => {
+        console.log(`   ${ext}: ${count}`);
+      },
+    );
     console.log("\n⭐ By Importance:");
-    Object.entries(stats.byImportance).forEach(([level, count]) => {
-      console.log(`   ${level}: ${count}`);
-    });
+    Object.entries(stats.byImportance as Record<string, number>).forEach(
+      ([level, count]) => {
+        console.log(`   ${level}: ${count}`);
+      },
+    );
   }
 }
 

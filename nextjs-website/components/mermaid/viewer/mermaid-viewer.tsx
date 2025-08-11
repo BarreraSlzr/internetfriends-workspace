@@ -17,7 +17,6 @@ import {
   validateMermaidSyntax,
   getMermaidConfig,
   generateDiagramId,
-  debounce,
 } from "../utils";
 
 export interface MermaidViewerProps {
@@ -82,8 +81,17 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [lastMousePos, setLastMousePos] = useState({ x: 0, y: 0 });
 
+  // Mermaid API interface
+  interface MermaidAPI {
+    render: (
+      id: string,
+      code: string,
+    ) => Promise<{ svg: string; bindFunctions?: (element: Element) => void }>;
+    initialize: (config: unknown) => void;
+  }
+
   // Mermaid instance
-  const [mermaid, setMermaid] = useState<typeof import("mermaid") | null>(null);
+  const [mermaid, setMermaid] = useState<MermaidAPI | null>(null);
 
   // Initialize Mermaid
   useEffect(() => {
@@ -98,7 +106,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         const config = getMermaidConfig(theme.colorScheme);
 
         mermaidInstance.initialize(config);
-        setMermaid(mermaidInstance as any);
+        setMermaid(mermaidInstance as MermaidAPI);
       } catch (err) {
         console.error("Failed to initialize Mermaid:", err);
         if (isMounted) {
@@ -138,7 +146,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
       svgRef.current.innerHTML = "";
 
       // Render the diagram
-      const { svg, bindFunctions } = await (mermaid as any).render(
+      const { svg, bindFunctions } = await mermaid.render(
         diagramId,
         sanitizedCode,
       );
@@ -174,16 +182,14 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
     }
   }, [mermaid, code, diagramId, zoomState, isDragging, onRender, onError]);
 
-  // Debounced render function
-  const debouncedRender = useCallback(
-    debounce(() => renderDiagram(), 300),
-    [renderDiagram],
-  );
-
-  // Re-render when code or theme changes
+  // Debounced render function using useEffect instead of useCallback
   useEffect(() => {
-    debouncedRender();
-  }, [debouncedRender]);
+    const timeoutId = setTimeout(() => {
+      renderDiagram();
+    }, 300);
+
+    return () => clearTimeout(timeoutId);
+  }, [renderDiagram]);
 
   // Zoom controls
   const handleZoomIn = useCallback(() => {
