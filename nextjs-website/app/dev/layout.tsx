@@ -1,13 +1,13 @@
-import { ReactNode } from 'react';
-import { Metadata } from 'next';
-import { redirect } from 'next/navigation';
-import { GlassPanel } from '@/components/glass';
-import { Code2, Layers3, BarChart3, Settings, Home } from 'lucide-react';
-import Link from 'next/link';
+import { ReactNode } from "react";
+import { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { GlassPanel } from "@/components/glass";
+import { Code2, Layers3, BarChart3, Settings, Home } from "lucide-react";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: 'Dev Tools - InternetFriends',
-  description: 'Internal development tools and component explorer',
+  title: "Dev Tools - InternetFriends",
+  description: "Internal development tools and component explorer",
   robots: {
     index: false,
     follow: false,
@@ -20,8 +20,8 @@ interface DevLayoutProps {
 
 export default function DevLayout({ children }: DevLayoutProps) {
   // Only allow in development
-  if (process.env.NODE_ENV !== 'development') {
-    redirect('/');
+  if (process.env.NODE_ENV !== "development") {
+    redirect("/");
   }
 
   return (
@@ -31,16 +31,23 @@ export default function DevLayout({ children }: DevLayoutProps) {
         <div className="container mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link href="/" className="flex items-center gap-2 hover:opacity-70 transition-opacity">
+              <Link
+                href="/"
+                className="flex items-center gap-2 hover:opacity-70 transition-opacity"
+              >
                 <Home className="h-5 w-5" />
-                <span className="text-sm text-muted-foreground">← Back to Site</span>
+                <span className="text-sm text-muted-foreground">
+                  ← Back to Site
+                </span>
               </Link>
 
               <div className="w-px h-6 bg-border" />
 
               <div className="flex items-center gap-2">
                 <Code2 className="h-5 w-5 text-primary" />
-                <h1 className="text-lg font-semibold">InternetFriends Dev Tools</h1>
+                <h1 className="text-lg font-semibold">
+                  InternetFriends Dev Tools
+                </h1>
               </div>
             </div>
 
@@ -59,7 +66,7 @@ export default function DevLayout({ children }: DevLayoutProps) {
               Component Map
             </NavLink>
 
-            <NavLink href="/dev/tokens" icon={Settings} disabled>
+            <NavLink href="/dev/tokens" icon={Settings}>
               Token Inspector
             </NavLink>
 
@@ -71,9 +78,7 @@ export default function DevLayout({ children }: DevLayoutProps) {
       </nav>
 
       {/* Main Content */}
-      <main className="flex-1">
-        {children}
-      </main>
+      <main className="flex-1">{children}</main>
     </div>
   );
 }
@@ -85,7 +90,12 @@ interface NavLinkProps {
   disabled?: boolean;
 }
 
-function NavLink({ href, icon: Icon, children, disabled = false }: NavLinkProps) {
+function NavLink({
+  href,
+  icon: Icon,
+  children,
+  disabled = false,
+}: NavLinkProps) {
   if (disabled) {
     return (
       <div className="flex items-center gap-2 px-4 py-3 text-sm text-muted-foreground/50 cursor-not-allowed">

@@ -14,7 +14,10 @@ import {
   Panel,
 } from "reactflow";
 import "reactflow/dist/style.css";
-import { ComponentMetadata, ComponentGraphData } from "@/scripts/build-component-graph";
+import {
+  ComponentMetadata,
+  ComponentGraphData,
+} from "@/scripts/build-component-graph";
 import { useTheme } from "@/hooks/use-theme";
 import { GlassPanel } from "@/components/glass";
 import { DashboardMetric } from "@/components/data/metric-display";
@@ -32,10 +35,7 @@ import {
   Cpu,
 } from "lucide-react";
 
-// Node types for different component categories
-const nodeTypes = {
-  component: ComponentNode,
-};
+// Node types for different component categories - will be defined inline
 
 interface ComponentNodeData extends ComponentMetadata {
   selected?: boolean;
@@ -94,57 +94,69 @@ function ComponentNode({ data }: { data: ComponentNodeData }) {
       }}
     >
       {/* Header */}
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: "6px"
-      }}>
-        <span style={{
-          fontSize: "11px",
-          fontWeight: "600",
-          color: getCategoryColor(data.kind),
-          textTransform: "uppercase",
-          letterSpacing: "0.05em",
-        }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "6px",
+        }}
+      >
+        <span
+          style={{
+            fontSize: "11px",
+            fontWeight: "600",
+            color: getCategoryColor(data.kind),
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+          }}
+        >
           {data.kind}
         </span>
-        <div style={{
-          width: "12px",
-          height: "12px",
-          borderRadius: "50%",
-          backgroundColor: getRiskColor(data.riskScore),
-        }} />
+        <div
+          style={{
+            width: "12px",
+            height: "12px",
+            borderRadius: "50%",
+            backgroundColor: getRiskColor(data.riskScore),
+          }}
+        />
       </div>
 
       {/* Component name */}
-      <div style={{
-        fontSize: "13px",
-        fontWeight: "600",
-        color: isDark ? "#f3f4f6" : "#111827",
-        marginBottom: "4px",
-        lineHeight: "1.2",
-      }}>
+      <div
+        style={{
+          fontSize: "13px",
+          fontWeight: "600",
+          color: isDark ? "#f3f4f6" : "#111827",
+          marginBottom: "4px",
+          lineHeight: "1.2",
+        }}
+      >
         {data.exportName}
       </div>
 
       {/* File path */}
-      <div style={{
-        fontSize: "10px",
-        color: isDark ? "#9ca3af" : "#6b7280",
-        marginBottom: "6px",
-        fontFamily: "var(--font-mono)",
-      }}>
-        {data.filePath.split('/').slice(-2).join('/')}
+      <div
+        style={{
+          fontSize: "10px",
+          color: isDark ? "#9ca3af" : "#6b7280",
+          marginBottom: "6px",
+          fontFamily: "var(--font-mono)",
+        }}
+      >
+        {data.filePath.split("/").slice(-2).join("/")}
       </div>
 
       {/* Badges */}
       {badges.length > 0 && (
-        <div style={{
-          display: "flex",
-          gap: "3px",
-          flexWrap: "wrap",
-        }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "3px",
+            flexWrap: "wrap",
+          }}
+        >
           {badges.map((badge, i) => (
             <span
               key={i}
@@ -153,7 +165,9 @@ function ComponentNode({ data }: { data: ComponentNodeData }) {
                 fontWeight: "700",
                 padding: "2px 4px",
                 borderRadius: "3px",
-                backgroundColor: isDark ? "rgba(59, 130, 246, 0.2)" : "rgba(59, 130, 246, 0.1)",
+                backgroundColor: isDark
+                  ? "rgba(59, 130, 246, 0.2)"
+                  : "rgba(59, 130, 246, 0.1)",
                 color: isDark ? "#93c5fd" : "#2563eb",
                 border: "1px solid rgba(59, 130, 246, 0.3)",
               }}
@@ -165,14 +179,16 @@ function ComponentNode({ data }: { data: ComponentNodeData }) {
       )}
 
       {/* Metrics */}
-      <div style={{
-        display: "flex",
-        justifyContent: "space-between",
-        marginTop: "6px",
-        fontSize: "9px",
-        color: isDark ? "#9ca3af" : "#6b7280",
-        fontFamily: "var(--font-mono)",
-      }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "6px",
+          fontSize: "9px",
+          color: isDark ? "#9ca3af" : "#6b7280",
+          fontFamily: "var(--font-mono)",
+        }}
+      >
         <span>LOC: {data.size.loc}</span>
         <span>Props: {data.props.total}</span>
         <span>Risk: {data.riskScore}</span>
@@ -180,6 +196,11 @@ function ComponentNode({ data }: { data: ComponentNodeData }) {
     </div>
   );
 }
+
+// Node types for different component categories
+const nodeTypes = {
+  component: ComponentNode,
+};
 
 export default function ComponentMapPage() {
   const { theme } = useTheme();
@@ -192,7 +213,9 @@ export default function ComponentMapPage() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
-  const [selectedNode, setSelectedNode] = useState<ComponentMetadata | null>(null);
+  const [selectedNode, setSelectedNode] = useState<ComponentMetadata | null>(
+    null,
+  );
   const [filters, setFilters] = useState({
     showOnlyAtmospheric: false,
     showOnlyHighRisk: false,
@@ -206,7 +229,7 @@ export default function ComponentMapPage() {
       setLoading(true);
       setError(null);
 
-      const url = `/api/dev/component-graph${refresh ? '?refresh=true' : ''}`;
+      const url = `/api/dev/component-graph${refresh ? "?refresh=true" : ""}`;
       const response = await fetch(url);
 
       if (!response.ok) {
@@ -215,10 +238,9 @@ export default function ComponentMapPage() {
 
       const data: ComponentGraphData = await response.json();
       setGraphData(data);
-
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load data');
-      console.error('Error fetching component graph:', err);
+      setError(err instanceof Error ? err.message : "Failed to load data");
+      console.error("Error fetching component graph:", err);
     } finally {
       setLoading(false);
     }
@@ -237,37 +259,49 @@ export default function ComponentMapPage() {
 
     // Apply filters
     if (filters.showOnlyAtmospheric) {
-      filteredComponents = filteredComponents.filter(c =>
-        c.uses.glass || c.uses.goo || c.uses.noise || c.uses.vignette
+      filteredComponents = filteredComponents.filter(
+        (c) => c.uses.glass || c.uses.goo || c.uses.noise || c.uses.vignette,
       );
     }
 
     if (filters.showOnlyHighRisk) {
-      filteredComponents = filteredComponents.filter(c => c.riskScore > 6);
+      filteredComponents = filteredComponents.filter((c) => c.riskScore > 6);
     }
 
     if (filters.hideUtilities) {
-      filteredComponents = filteredComponents.filter(c => c.kind !== 'utility');
+      filteredComponents = filteredComponents.filter(
+        (c) => c.kind !== "utility",
+      );
     }
 
     if (filters.minTokens > 0) {
-      filteredComponents = filteredComponents.filter(c =>
-        c.tokensReferenced.length >= filters.minTokens
+      filteredComponents = filteredComponents.filter(
+        (c) => c.tokensReferenced.length >= filters.minTokens,
       );
     }
 
     // Layout nodes in a hierarchical structure
-    const nodesByKind = filteredComponents.reduce((acc, component) => {
-      if (!acc[component.kind]) acc[component.kind] = [];
-      acc[component.kind].push(component);
-      return acc;
-    }, {} as Record<string, ComponentMetadata[]>);
+    const nodesByKind = filteredComponents.reduce(
+      (acc, component) => {
+        if (!acc[component.kind]) acc[component.kind] = [];
+        acc[component.kind].push(component);
+        return acc;
+      },
+      {} as Record<string, ComponentMetadata[]>,
+    );
 
     const nodes: Node<ComponentNodeData>[] = [];
     let yOffset = 0;
-    const kindOrder = ['atomic', 'molecular', 'organism', 'utility', 'hook', 'page'];
+    const kindOrder = [
+      "atomic",
+      "molecular",
+      "organism",
+      "utility",
+      "hook",
+      "page",
+    ];
 
-    kindOrder.forEach(kind => {
+    kindOrder.forEach((kind) => {
       const components = nodesByKind[kind] || [];
       components.forEach((component, index) => {
         const x = (index % 6) * 200 + 50;
@@ -275,7 +309,7 @@ export default function ComponentMapPage() {
 
         nodes.push({
           id: component.id,
-          type: 'component',
+          type: "component",
           position: { x, y },
           data: {
             ...component,
@@ -297,43 +331,47 @@ export default function ComponentMapPage() {
     if (!graphData) return [];
 
     // Only show edges for visible nodes
-    const visibleNodeIds = new Set(flowNodes.map(n => n.id));
+    const visibleNodeIds = new Set(flowNodes.map((n) => n.id));
 
     return graphData.edges
-      .filter(edge =>
-        visibleNodeIds.has(edge.source) && visibleNodeIds.has(edge.target)
+      .filter(
+        (edge) =>
+          visibleNodeIds.has(edge.source) && visibleNodeIds.has(edge.target),
       )
-      .map(edge => ({
+      .map((edge) => ({
         id: edge.id,
         source: edge.source,
         target: edge.target,
-        type: 'smoothstep',
+        type: "smoothstep",
         style: {
-          stroke: isDark ? '#374151' : '#d1d5db',
+          stroke: isDark ? "#374151" : "#d1d5db",
           strokeWidth: Math.min(edge.weight + 1, 3),
         },
         animated: edge.weight > 2,
       }));
   }, [graphData, flowNodes, isDark]);
 
-  const onNodeClick = useCallback((event: React.MouseEvent, node: Node<ComponentNodeData>) => {
-    setSelectedNode(node.data);
-  }, []);
+  const onNodeClick = useCallback(
+    (event: React.MouseEvent, node: Node<ComponentNodeData>) => {
+      setSelectedNode(node.data);
+    },
+    [],
+  );
 
   // Rebuild graph
   const handleRebuild = useCallback(async () => {
     try {
-      const response = await fetch('/api/dev/component-graph', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'rebuild' }),
+      const response = await fetch("/api/dev/component-graph", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "rebuild" }),
       });
 
       if (response.ok) {
         await fetchGraphData(true);
       }
     } catch (err) {
-      console.error('Error rebuilding graph:', err);
+      console.error("Error rebuilding graph:", err);
     }
   }, [fetchGraphData]);
 
@@ -355,7 +393,9 @@ export default function ComponentMapPage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <div className="text-destructive mb-4">❌ Error loading component graph</div>
+          <div className="text-destructive mb-4">
+            ❌ Error loading component graph
+          </div>
           <p className="text-sm text-muted-foreground mb-4">{error}</p>
           <button
             onClick={() => fetchGraphData(true)}
@@ -370,7 +410,7 @@ export default function ComponentMapPage() {
 
   return (
     <div className="h-screen bg-background">
-      <div style={{ width: '100vw', height: '100vh' }}>
+      <div style={{ width: "100vw", height: "100vh" }}>
         <ReactFlow
           nodes={flowNodes}
           edges={flowEdges}
@@ -384,9 +424,13 @@ export default function ComponentMapPage() {
         >
           <Controls />
           <MiniMap
-            nodeColor={node => {
+            nodeColor={(node) => {
               const data = node.data as ComponentNodeData;
-              return data.riskScore > 7 ? '#ef4444' : data.riskScore > 4 ? '#f59e0b' : '#10b981';
+              return data.riskScore > 7
+                ? "#ef4444"
+                : data.riskScore > 4
+                  ? "#f59e0b"
+                  : "#10b981";
             }}
             maskColor="rgb(240, 242, 247, 0.7)"
           />
@@ -455,7 +499,12 @@ export default function ComponentMapPage() {
                   <input
                     type="checkbox"
                     checked={filters.showOnlyAtmospheric}
-                    onChange={(e) => setFilters(f => ({ ...f, showOnlyAtmospheric: e.target.checked }))}
+                    onChange={(e) =>
+                      setFilters((f) => ({
+                        ...f,
+                        showOnlyAtmospheric: e.target.checked,
+                      }))
+                    }
                   />
                   <Palette className="h-3 w-3" />
                   Only Atmospheric
@@ -465,7 +514,12 @@ export default function ComponentMapPage() {
                   <input
                     type="checkbox"
                     checked={filters.showOnlyHighRisk}
-                    onChange={(e) => setFilters(f => ({ ...f, showOnlyHighRisk: e.target.checked }))}
+                    onChange={(e) =>
+                      setFilters((f) => ({
+                        ...f,
+                        showOnlyHighRisk: e.target.checked,
+                      }))
+                    }
                   />
                   <Zap className="h-3 w-3" />
                   High Risk Only
@@ -475,7 +529,12 @@ export default function ComponentMapPage() {
                   <input
                     type="checkbox"
                     checked={filters.hideUtilities}
-                    onChange={(e) => setFilters(f => ({ ...f, hideUtilities: e.target.checked }))}
+                    onChange={(e) =>
+                      setFilters((f) => ({
+                        ...f,
+                        hideUtilities: e.target.checked,
+                      }))
+                    }
                   />
                   <EyeOff className="h-3 w-3" />
                   Hide Utilities
@@ -488,10 +547,17 @@ export default function ComponentMapPage() {
                     min="0"
                     max="10"
                     value={filters.minTokens}
-                    onChange={(e) => setFilters(f => ({ ...f, minTokens: Number(e.target.value) }))}
+                    onChange={(e) =>
+                      setFilters((f) => ({
+                        ...f,
+                        minTokens: Number(e.target.value),
+                      }))
+                    }
                     className="w-full"
                   />
-                  <span className="text-xs text-muted-foreground">{filters.minTokens}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {filters.minTokens}
+                  </span>
                 </div>
               </div>
             </GlassPanel>
@@ -514,31 +580,40 @@ export default function ComponentMapPage() {
 
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div>
-                    <div className="font-medium text-muted-foreground mb-1">File Path</div>
-                    <div className="font-mono text-xs">{selectedNode.filePath}</div>
-                  </div>
-
-                  <div>
-                    <div className="font-medium text-muted-foreground mb-1">Tokens Used</div>
-                    <div className="text-xs">
-                      {selectedNode.tokensReferenced.length > 0
-                        ? selectedNode.tokensReferenced.slice(0, 3).join(', ')
-                        : 'None'
-                      }
+                    <div className="font-medium text-muted-foreground mb-1">
+                      File Path
+                    </div>
+                    <div className="font-mono text-xs">
+                      {selectedNode.filePath}
                     </div>
                   </div>
 
                   <div>
-                    <div className="font-medium text-muted-foreground mb-1">Atmospheric</div>
+                    <div className="font-medium text-muted-foreground mb-1">
+                      Tokens Used
+                    </div>
+                    <div className="text-xs">
+                      {selectedNode.tokensReferenced.length > 0
+                        ? selectedNode.tokensReferenced.slice(0, 3).join(", ")
+                        : "None"}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="font-medium text-muted-foreground mb-1">
+                      Atmospheric
+                    </div>
                     <div className="flex gap-1">
                       {Object.entries(selectedNode.uses)
-                        .filter(([key, value]) => key !== 'hooks' && value)
+                        .filter(([key, value]) => key !== "hooks" && value)
                         .map(([key]) => (
-                          <span key={key} className="text-xs bg-accent px-1 rounded">
+                          <span
+                            key={key}
+                            className="text-xs bg-accent px-1 rounded"
+                          >
                             {key}
                           </span>
-                        ))
-                      }
+                        ))}
                     </div>
                   </div>
                 </div>
