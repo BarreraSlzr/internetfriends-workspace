@@ -103,14 +103,11 @@ export interface GlooCanvasProps {
   palette?: GlooPalette;
   effectIndex?: number;
   effectName?: GlooEffectName;
-  randomEffect?: boolean;
   width?: number;
   height?: number;
   className?: string;
   style?: React.CSSProperties;
   animate?: boolean;
-  autoEffectCycle?: boolean;
-  effectCycleMs?: number;
   preserveDrawingBuffer?: boolean;
   disabled?: boolean;
   reducedMotion?: boolean;

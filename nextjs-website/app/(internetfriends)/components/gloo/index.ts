@@ -130,8 +130,8 @@ export const createGlooConfig = (
 ) => ({
   speed: 0.4,
   resolution: 2.0,
-  depth: 5,
-  seed: 1.25,
+  depth: 4,
+  seed: 2.4,
   paletteStrategy: "brand-triad" as const,
   autoEffectCycle: false,
   effectCycleMs: 12000,

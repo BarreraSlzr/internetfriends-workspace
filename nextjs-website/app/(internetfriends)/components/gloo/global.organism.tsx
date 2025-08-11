@@ -18,14 +18,12 @@ import type {
 export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
   speed = 0.4,
   resolution = 2.0,
-  depth = 5,
-  seed = 1.25,
+  depth = 4,
+  seed = 2.4,
   still = false,
   effectIndex = 0,
   effectName,
-  randomEffect = false,
-  autoEffectCycle = false,
-  effectCycleMs = 12000,
+
   animate = true,
   preserveDrawingBuffer = false,
   paletteStrategy = "brand-triad",
@@ -281,9 +279,6 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
           still={still}
           effectIndex={effectIndex}
           effectName={effectName}
-          randomEffect={randomEffect}
-          autoEffectCycle={autoEffectCycle}
-          effectCycleMs={effectCycleMs}
           animate={animate}
           preserveDrawingBuffer={preserveDrawingBuffer}
           palette={currentPalette}

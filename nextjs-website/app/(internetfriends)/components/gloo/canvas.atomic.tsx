@@ -88,8 +88,8 @@ void main() {
 export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   speed = 0.4,
   resolution = 2.0,
-  depth = 5,
-  seed = 1.25,
+  depth = 4,
+  seed = 2.4,
   still = false,
   tint = [1, 1, 1],
   color1,
@@ -99,14 +99,11 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   palette: explicitPalette,
   effectIndex = 0,
   effectName,
-  randomEffect = false,
   width,
   height,
   className,
   style,
   animate = true,
-  autoEffectCycle = false,
-  effectCycleMs = 12000,
   preserveDrawingBuffer = false,
   disabled = false,
   reducedMotion = false,
@@ -148,12 +145,8 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
       return nameToIndex ? parseInt(nameToIndex[0]) : 0;
     }
 
-    if (randomEffect) {
-      return Math.floor(Math.random() * effectFunctions.length);
-    }
-
     return Math.max(0, Math.min(effectFunctions.length - 1, effectIndex));
-  }, [effectName, effectIndex, randomEffect]);
+  }, [effectName, effectIndex]);
 
   const effectSource = effectFunctions[chosenEffectIndex];
   const currentEffectName = EFFECT_NAME_MAP[chosenEffectIndex] || "default";
@@ -248,22 +241,6 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   }, [chosenEffectIndex, currentEffectName, onEffectChange]);
 
   // Auto effect cycling
-  useEffect(() => {
-    if (!autoEffectCycle || still || disabled || !shouldAnimate) return;
-
-    const id = setInterval(() => {
-      recompile();
-    }, effectCycleMs);
-
-    return () => clearInterval(id);
-  }, [
-    autoEffectCycle,
-    effectCycleMs,
-    recompile,
-    still,
-    disabled,
-    shouldAnimate,
-  ]);
 
   // Debug palette override (must be at top level)
   const debugPalette = useMemo(() => {
