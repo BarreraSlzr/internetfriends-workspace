@@ -4,9 +4,9 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useTheme } from "@/hooks/use-theme";
 
 // Import existing GlooCanvasAtomic and effects from the established system
-import { GlooCanvasAtomic } from "../gloo/canvas.atomic";
-import { effectFunctions } from "../gloo/effects";
-import type { GlooPalette } from "../gloo/types";
+import { GlooCanvasAtomic } from "../../app/(internetfriends)/components/gloo/canvas.atomic";
+import { effectFunctions } from "../../app/(internetfriends)/components/gloo/effects";
+import type { GlooPalette } from "../../app/(internetfriends)/components/gloo/types";
 
 export interface BgGooRefinedProps {
   /** Background mode for semantic configuration */
@@ -37,6 +37,8 @@ export interface BgGooRefinedProps {
   noise?: boolean;
   /** Respect reduced motion */
   respectReducedMotion?: boolean;
+  /** Custom style overrides */
+  style?: React.CSSProperties;
 }
 
 interface BgModeConfig {
@@ -133,7 +135,7 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
   colors,
   noise = false,
   respectReducedMotion = true,
-  ...props
+  style,
 }) => {
   const { isDark } = useTheme();
   const isSafari =
@@ -177,7 +179,7 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
     if (colors) {
       return {
         colors,
-        strategy: "custom",
+        strategy: "brand-triad",
         mode: isDark ? "dark" : "light",
         metadata: { generated: false },
       };
@@ -186,12 +188,10 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
     const colorTuples = REFINED_COLORS[isDark ? "dark" : "light"];
     return {
       colors: tuplesToHexPalette(colorTuples),
-      strategy: "refined-triad",
+      strategy: "brand-triad",
       mode: isDark ? "dark" : "light",
       metadata: {
         generated: false,
-        saturationMultiplier: modeConfig.saturation,
-        mode,
       },
     };
   }, [isDark, colors, modeConfig.saturation, mode]);
@@ -228,7 +228,7 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
         minHeight: "100vh",
         overflow: "hidden",
         ...glassStrengthStyles,
-        ...props.style,
+        ...style,
       }}
       data-bg-mode={mode}
       data-bg-strength={effectiveStrength}
@@ -248,8 +248,6 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
         still={!shouldAnimate}
         // Refined palette with saturation control
         palette={palette}
-        // Parallax integration
-        parallaxIntensity={effectiveParallax}
         // Motion settings
         reducedMotion={!shouldAnimate}
         // Performance optimizations
