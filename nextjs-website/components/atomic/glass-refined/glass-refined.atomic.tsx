@@ -27,7 +27,7 @@ export interface GlassRefinedAtomicProps {
   /** Custom style overrides */
   style?: React.CSSProperties;
   /** Element type */
-  as?: keyof JSX.IntrinsicElements;
+  as?: React.ElementType;
   /** Data attributes */
   [key: `data-${string}`]: unknown;
 }
@@ -69,19 +69,24 @@ export const GlassRefinedAtomic: React.FC<GlassRefinedAtomicProps> = ({
   // Calculate effective strength
   const modeConfig = mode ? GLASS_MODE_CONFIG[mode] : null;
   const variantConfig = GLASS_VARIANT_CONFIG[variant];
-  const effectiveStrength = propStrength ?? modeConfig?.strength ?? variantConfig.strength;
+  const effectiveStrength =
+    propStrength ?? modeConfig?.strength ?? variantConfig.strength;
 
   // Calculate derived properties
-  const glassAlpha = Math.max(0.2, Math.min(0.75, 0.2 + 0.55 * effectiveStrength));
+  const glassAlpha = Math.max(
+    0.2,
+    Math.min(0.75, 0.2 + 0.55 * effectiveStrength),
+  );
   const glassBlur = Math.max(2, Math.min(12, 2 + 10 * effectiveStrength));
   const glassBorderAlpha = 0.08 + 0.1 * effectiveStrength;
   const glassHighlightAlpha = 0.04 + 0.06 * effectiveStrength;
   const glassNoiseAlpha = Math.min(0.14, 0.04 + 0.1 * effectiveStrength);
 
   // Respect user's motion preferences
-  const prefersReducedMotion = typeof window !== "undefined"
-    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    : reducedMotion;
+  const prefersReducedMotion =
+    typeof window !== "undefined"
+      ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      : reducedMotion;
 
   const computedStyle: React.CSSProperties = {
     // Glass strength CSS custom properties
@@ -130,22 +135,21 @@ export const GlassRefinedAtomic: React.FC<GlassRefinedAtomicProps> = ({
         {
           "rounded-[var(--radius-sm)]": size === "sm" && !padding,
           "rounded-[var(--radius-md)]": size === "md" && !padding,
-          "rounded-[var(--radius-lg)]": size === "lg" && !padding,
-          "rounded-[var(--radius-lg)]": size === "xl" && !padding,
+          "rounded-[var(--radius-lg)]":
+            (size === "lg" || size === "xl") && !padding,
         },
 
         // Hover effects (respect reduced motion)
-        hover && !prefersReducedMotion && [
-          "transition-all duration-200 ease-out",
-          "hover:backdrop-blur-[14px]",
-          "hover:shadow-lg",
-          "hover:scale-[1.01]",
-        ],
+        hover &&
+          !prefersReducedMotion && [
+            "transition-all duration-200 ease-out",
+            "hover:backdrop-blur-[14px]",
+            "hover:shadow-lg",
+            "hover:scale-[1.01]",
+          ],
 
         // Reduced motion fallback
-        hover && prefersReducedMotion && [
-          "hover:shadow-lg",
-        ],
+        hover && prefersReducedMotion && ["hover:shadow-lg"],
 
         // Mode-specific classes
         mode && `glass-mode-${mode}`,

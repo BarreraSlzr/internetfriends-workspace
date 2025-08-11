@@ -96,7 +96,7 @@ export const GlooDebugUtils = {
   ): {
     visible: boolean;
     issues: string[];
-    debug: Record<string, any>;
+    debug: Record<string, unknown>;
   } => {
     const issues: string[] = [];
     const rect = canvas.getBoundingClientRect();
@@ -190,8 +190,11 @@ export const GlooDebugUtils = {
         GlooDebugUtils.logWebGLInfo(gl as WebGLRenderingContext);
 
         // Check for active program
-        const program = gl.getParameter(gl.CURRENT_PROGRAM);
-        console.log("Active Program:", program ? "✅" : "❌");
+        const webglContext = gl as WebGLRenderingContext;
+        const currentProgram = webglContext.getParameter(
+          webglContext.CURRENT_PROGRAM,
+        );
+        console.log("Active Program:", currentProgram ? "✅" : "❌");
       }
     }
 
@@ -614,7 +617,11 @@ export function useGlooWebGL(options: UseGlooWebGLOptions): UseGlooWebGLReturn {
 
         // Make diagnosis available globally in development
         if (typeof window !== "undefined") {
-          (window as any).GlooDebug = GlooDebugUtils.diagnoseGlooSystem;
+          (
+            window as Window & {
+              GlooDebug?: typeof GlooDebugUtils.diagnoseGlooSystem;
+            }
+          ).GlooDebug = GlooDebugUtils.diagnoseGlooSystem;
         }
       }
 
@@ -764,9 +771,12 @@ export function useGlooWebGL(options: UseGlooWebGLOptions): UseGlooWebGLReturn {
   /* -----------------------------------------
    * Public API Helpers
    * --------------------------------------- */
-  const updateStaticUniform = useCallback((name: string, value: Numeric) => {
-    staticUniformsRef.current[name] = value;
-  }, []);
+  const updateStaticUniform = useCallback(
+    (name: string, value: GlooUniformValue) => {
+      staticUniformsRef.current[name] = value;
+    },
+    [],
+  );
 
   return {
     canvasRef,

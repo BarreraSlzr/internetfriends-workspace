@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 
 export interface HeaderOrbitConfig {
   /** Scroll threshold in pixels before orbit begins (default: 64) */
@@ -69,9 +75,14 @@ function interpolate(start: number, end: number, progress: number): number {
   return start + (end - start) * progress;
 }
 
-export function useHeaderOrbit(config: HeaderOrbitConfig = {}): UseHeaderOrbitReturn {
-  const finalConfig = { ...DEFAULT_CONFIG, ...config };
-  const headerRef = useRef<HTMLElement>(null);
+export function useHeaderOrbit(
+  config: HeaderOrbitConfig = {},
+): UseHeaderOrbitReturn {
+  const finalConfig = useMemo(
+    () => ({ ...DEFAULT_CONFIG, ...config }),
+    [config],
+  );
+  const headerRef = useRef<HTMLElement | null>(null);
 
   // Orbit state
   const [state, setState] = useState<HeaderOrbitState>({
@@ -85,7 +96,7 @@ export function useHeaderOrbit(config: HeaderOrbitConfig = {}): UseHeaderOrbitRe
 
   // Throttling ref
   const lastUpdateRef = useRef(0);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | undefined>(undefined);
 
   // Check reduced motion preference
   useEffect(() => {
@@ -93,7 +104,7 @@ export function useHeaderOrbit(config: HeaderOrbitConfig = {}): UseHeaderOrbitRe
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const handleChange = () => {
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         prefersReducedMotion: mediaQuery.matches,
       }));
@@ -106,70 +117,88 @@ export function useHeaderOrbit(config: HeaderOrbitConfig = {}): UseHeaderOrbitRe
   }, []);
 
   // Calculate orbit state from scroll
-  const calculateOrbitState = useCallback((scrollY: number): Partial<HeaderOrbitState> => {
-    const { threshold, range, amplitudeX, amplitudeY, scaleRange } = finalConfig;
+  const calculateOrbitState = useCallback(
+    (scrollY: number): Partial<HeaderOrbitState> => {
+      const { threshold, range, amplitudeX, amplitudeY, scaleRange } =
+        finalConfig;
 
-    // Calculate progress (0 to 1)
-    const rawProgress = (scrollY - threshold) / range;
-    const progress = clamp(rawProgress);
+      // Calculate progress (0 to 1)
+      const rawProgress = (scrollY - threshold) / range;
+      const progress = clamp(rawProgress);
 
-    // Determine if scrolled past threshold
-    const isScrolled = scrollY > threshold;
+      // Determine if scrolled past threshold
+      const isScrolled = scrollY > threshold;
 
-    // Calculate transform values
-    let x = 0;
-    let y = 0;
-    let scale = scaleRange[0];
+      // Calculate transform values
+      let x = 0;
+      let y = 0;
+      let scale = scaleRange[0];
 
-    if (progress > 0 && !state.prefersReducedMotion) {
-      // Orbital motion using parametric equations
-      const tauHalf = Math.PI * 2 * 0.5;
-      x = amplitudeX * Math.sin(progress * tauHalf);
-      y = amplitudeY * Math.cos(progress * tauHalf);
-    }
+      const currentState = state;
+      if (progress > 0 && !currentState.prefersReducedMotion) {
+        // Orbital motion using parametric equations
+        const tauHalf = Math.PI * 2 * 0.5;
+        x = amplitudeX * Math.sin(progress * tauHalf);
+        y = amplitudeY * Math.cos(progress * tauHalf);
+      }
 
-    // Scale interpolation
-    scale = interpolate(scaleRange[0], scaleRange[1], progress);
+      // Scale interpolation
+      scale = interpolate(scaleRange[0], scaleRange[1], progress);
 
-    // Build transform string
-    const transformStyle = state.prefersReducedMotion
-      ? `scale(${scale})`
-      : `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
+      // Build transform string
+      const transformStyle = currentState.prefersReducedMotion
+        ? `scale(${scale})`
+        : `translate3d(${x}px, ${y}px, 0) scale(${scale})`;
 
-    return {
-      progress,
-      scrollY,
-      isScrolled,
-      transform: { x, y, scale },
-      transformStyle,
-    };
-  }, [finalConfig, state.prefersReducedMotion]);
+      return {
+        progress,
+        scrollY,
+        isScrolled,
+        transform: { x, y, scale },
+        transformStyle,
+      };
+    },
+    [finalConfig, state],
+  );
 
   // Throttled update function
   const updateOrbit = useCallback(() => {
     if (typeof window === "undefined") return;
 
     const now = performance.now();
-    if (now - lastUpdateRef.current < finalConfig.throttle) return;
+    const throttle = finalConfig.throttle;
+    if (now - lastUpdateRef.current < throttle) return;
 
     lastUpdateRef.current = now;
 
     const scrollY = window.scrollY;
     const newState = calculateOrbitState(scrollY);
 
-    setState(prev => ({ ...prev, ...newState }));
+    setState((prev) => ({ ...prev, ...newState }));
 
     // Apply CSS custom properties to header element
     const header = headerRef.current;
     if (header) {
-      header.style.setProperty("--orbit-progress", String(newState.progress));
-      header.style.setProperty("--orbit-x", `${newState.transform?.x || 0}px`);
-      header.style.setProperty("--orbit-y", `${newState.transform?.y || 0}px`);
-      header.style.setProperty("--orbit-scale", String(newState.transform?.scale || 1));
+      header.style.setProperty(
+        "--orbit-progress",
+        String(newState.progress ?? 0),
+      );
+      header.style.setProperty("--orbit-x", `${newState.transform?.x ?? 0}px`);
+      header.style.setProperty("--orbit-y", `${newState.transform?.y ?? 0}px`);
+      header.style.setProperty(
+        "--orbit-scale",
+        String(newState.transform?.scale ?? 1),
+      );
 
       // Data attributes for styling
-      header.setAttribute("data-orbit-active", String(newState.progress! > 0));
-      header.setAttribute("data-scrolled", String(newState.isScrolled!));
+      header.setAttribute(
+        "data-orbit-active",
+        String((newState.progress ?? 0) > 0),
+      );
+      header.setAttribute(
+        "data-scrolled",
+        String(newState.isScrolled ?? false),
+      );
     }
   }, [calculateOrbitState, finalConfig.throttle]);
 
@@ -196,7 +225,7 @@ export function useHeaderOrbit(config: HeaderOrbitConfig = {}): UseHeaderOrbitRe
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", updateOrbit);
 
-      if (rafRef.current) {
+      if (rafRef.current !== undefined) {
         cancelAnimationFrame(rafRef.current);
       }
     };
@@ -224,7 +253,7 @@ export function useHeaderOrbit(config: HeaderOrbitConfig = {}): UseHeaderOrbitRe
 
   return {
     state,
-    headerRef,
+    headerRef: headerRef as React.RefObject<HTMLElement>,
     cssProperties,
     orbitStyles,
     updateOrbit,
