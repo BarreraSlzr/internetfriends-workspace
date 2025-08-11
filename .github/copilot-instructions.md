@@ -199,15 +199,18 @@ app/
 
 ### Chat Modes Integration
 
+This project uses a set of predefined chat modes to guide AI interactions. Each mode is designed to provide context and structure for specific tasks or workflows. When interacting with AI, you can reference these modes to ensure the conversation stays focused and relevant.
+
 Reference existing chat modes in `.github/chatmodes/`:
 
-- `internetfriends-dev.md` - Development workflow with Bun and shadcn/ui
-- `internetfriends-test.md` - Testing strategies and automation
-- `internetfriends-eval.md` - Performance evaluation and metrics
-- `internetfriends-infra.md` - Infrastructure and deployment
-- `business-intelligence.md` - Data analysis and reporting
-- `execute.md` - Code execution and automation
-- `ask.md` - General inquiries and documentation
+- [internetfriends-dev.md](.github/chatmodes/internetfriends-dev.md) - Development workflow with Bun and shadcn/ui
+- [internetfriends-test.md](.github/chatmodes/internetfriends-test.md) - Testing strategies and automation
+- [internetfriends-eval.md](.github/chatmodes/internetfriends-eval.md) - Performance evaluation and metrics
+- [internetfriends-infra.md](.github/chatmodes/internetfriends-infra.md) - Infrastructure and deployment
+- [business-intelligence.md](.github/chatmodes/business-intelligence.md) - Data analysis and reporting
+- [execute.md](.github/chatmodes/execute.md) - Code execution and automation
+- [ask.md](.github/chatmodes/ask.md) - General inquiries and documentation
+</rewrite_this>
 
 ### Epic Context for AI Development
 
