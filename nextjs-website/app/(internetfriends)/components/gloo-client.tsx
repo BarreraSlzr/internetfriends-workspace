@@ -79,9 +79,16 @@ export const GlooClient: React.FC<GlooClientProps> = ({
   const { isDark } = useTheme();
 
   // Once-on-mount effect randomization - key steadiest addressability pattern
-  const [effectIndex] = useState(() =>
-    Math.floor(Math.random() * effectFunctions.length),
-  );
+  const [effectIndex] = useState(() => {
+    const randomIndex = Math.floor(Math.random() * effectFunctions.length);
+    console.log(
+      "🎲 Gloo Random Effect Selected:",
+      randomIndex,
+      "/",
+      effectFunctions.length,
+    );
+    return randomIndex;
+  });
 
   // Respect reduced motion preference
   const [shouldAnimate, setShouldAnimate] = useState(true);
@@ -107,6 +114,19 @@ export const GlooClient: React.FC<GlooClientProps> = ({
       generated: false,
     },
   };
+
+  // Debug logging
+  React.useEffect(() => {
+    console.log("🎨 Gloo Colors Debug:", {
+      theme: isDark ? "dark" : "light",
+      colors: palette.colors,
+      effectIndex,
+      webglSupported: !!window.WebGLRenderingContext,
+      safari:
+        /Safari/.test(navigator.userAgent) &&
+        !/Chrome/.test(navigator.userAgent),
+    });
+  }, [isDark, palette.colors, effectIndex]);
 
   if (disabled) return null;
 
@@ -167,6 +187,24 @@ export const GlooClient: React.FC<GlooClientProps> = ({
           reducedMotion={!shouldAnimate}
           // Keep WebGL simple
           preserveDrawingBuffer={false}
+          // Canvas debugging
+          width={typeof window !== "undefined" ? window.innerWidth : 800}
+          height={typeof window !== "undefined" ? window.innerHeight : 600}
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "block",
+            opacity: shouldAnimate ? 1 : 0.5,
+          }}
+          onError={(error) => {
+            console.error("🚨 Gloo Canvas Error:", error);
+            console.log("🔍 WebGL Support:", !!window.WebGLRenderingContext);
+            console.log(
+              "🔍 Safari:",
+              /Safari/.test(navigator.userAgent) &&
+                !/Chrome/.test(navigator.userAgent),
+            );
+          }}
         />
 
         {/* Development debug overlay */}
@@ -190,7 +228,21 @@ export const GlooClient: React.FC<GlooClientProps> = ({
             </div>
             <div>Theme: {isDark ? "dark" : "light"}</div>
             <div>Motion: {shouldAnimate ? "enabled" : "reduced"}</div>
-            <div>Colors: {palette.colors.length} brand</div>
+            <div>Colors: {palette.colors.join(", ")}</div>
+            <div>
+              WebGL:{" "}
+              {typeof window !== "undefined" && window.WebGLRenderingContext
+                ? "✅"
+                : "❌"}
+            </div>
+            <div>
+              Safari:{" "}
+              {typeof window !== "undefined" &&
+              /Safari/.test(navigator.userAgent) &&
+              !/Chrome/.test(navigator.userAgent)
+                ? "✅"
+                : "❌"}
+            </div>
             {epicContext && (
               <div className="mt-1 pt-1 border-t border-blue-300/30">
                 <div>Epic: {epicContext.epicName || "none"}</div>
@@ -199,6 +251,24 @@ export const GlooClient: React.FC<GlooClientProps> = ({
             )}
           </div>
         )}
+
+        {/* Canvas visibility test overlay */}
+        <div
+          className="absolute top-4 left-4 z-40 pointer-events-none"
+          style={{
+            fontSize: "12px",
+            fontFamily: "ui-monospace, monospace",
+            background: "rgba(255, 0, 0, 0.8)",
+            color: "white",
+            padding: "0.5rem",
+            borderRadius: "4px",
+            display: process.env.NODE_ENV === "development" ? "block" : "none",
+          }}
+        >
+          🔍 Canvas should be visible behind this overlay
+          <br />
+          Effect #{effectIndex}: {palette.colors[0]}
+        </div>
       </div>
     </ClientOnly>
   );
