@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import { ButtonAtomic } from "@/components/atomic/button";
 import { NavigationMolecular } from "@/components/molecular/navigation";
 import { useTheme } from "@/hooks/use-theme";
+import { useHeaderOrbit } from "@/hooks/use-header-orbit";
 import { useI18n } from "@/i18n";
 import { LOCALES } from "@/i18n/config";
 import {
@@ -380,69 +381,31 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
     isAnnouncementVisible: announcement?.show || false,
   });
 
-  // Simple orb effect state (scale + margin shift)
-  const [orbActive, setOrbActive] = useState(false);
-  const [mouseX, setMouseX] = useState(0);
+  // Refined orbital motion system
+  const {
+    state: orbitState,
+    headerRef,
+    cssProperties,
+    orbitStyles,
+  } = useHeaderOrbit({
+    threshold: sticky?.offset || 64,
+    range: 400,
+    amplitudeX: 6,
+    amplitudeY: 3,
+    scaleRange: [1, 0.75],
+    respectReducedMotion: true,
+    throttle: 16,
+  });
 
-  // Scroll handler for sticky behavior
+  // Update header state based on orbit state
   useEffect(() => {
-    if (!sticky?.enabled) return;
-
-    let lastScrollY = 0;
-    let ticking = false;
-
-    const updateScrollState = () => {
-      const scrollY = window.scrollY;
-      const isSticky = scrollY > (sticky.offset || 0);
-      const isHidden =
-        sticky.hideOnScroll && scrollY > lastScrollY && scrollY > 100;
-
-      setHeaderState((prev) => ({
-        ...prev,
-        isSticky,
-        isHidden: isHidden || false,
-        scrollPosition: scrollY,
-      }));
-
-      // Activate orb effect when scrolled
-      setOrbActive(scrollY > 50);
-
-      lastScrollY = scrollY;
-      ticking = false;
-    };
-
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(updateScrollState);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [sticky?.enabled, sticky?.offset, sticky?.hideOnScroll]);
-
-  // Mouse/touch position handler for orb effect
-  const handlePointerMove = (
-    e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>,
-  ) => {
-    if (!orbActive) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.width / 2;
-
-    // Handle both mouse and touch events
-    const clientX = "clientX" in e ? e.clientX : e.touches[0]?.clientX || 0;
-    const relativeX = clientX - rect.left - centerX;
-
-    // Normalize to -1 to 1, then scale for margin effect
-    const normalizedX = Math.max(-1, Math.min(1, relativeX / centerX));
-    setMouseX(normalizedX * 16); // Max 16px shift for subtlety
-  };
-
-  // Reset orb position when leaving header
-  const handlePointerLeave = () => {
-    setMouseX(0);
-  };
+    setHeaderState((prev) => ({
+      ...prev,
+      isSticky: orbitState.isScrolled,
+      isHidden: false, // Disable auto-hide when using orbital motion
+      scrollPosition: orbitState.scrollY,
+    }));
+  }, [orbitState.isScrolled, orbitState.scrollY]);
 
   // Context value
   const contextValue: HeaderContextValue = {
@@ -497,14 +460,11 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   return (
     <HeaderContext.Provider value={contextValue}>
       <header
-        onMouseMove={handlePointerMove}
-        onTouchMove={handlePointerMove}
-        onMouseLeave={handlePointerLeave}
-        onTouchEnd={handlePointerLeave}
+        ref={headerRef}
         className={cn(
           styles.headerOrganism,
           sizeStyles[size],
-          "w-full z-40 transition-all duration-500 ease-out",
+          "w-full z-40",
           "sticky top-0",
           headerState.isSticky && sticky?.stickyClassName,
           headerState.isHidden && "transform -translate-y-full",
@@ -520,15 +480,14 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
           className,
         )}
         style={{
+          ...orbitStyles,
+          ...cssProperties,
           transitionDuration: sticky?.transitionDuration,
-          transform: orbActive ? `scale(0.82)` : "scale(1)",
-          marginLeft: orbActive ? `${mouseX}px` : "0px",
-          marginRight: orbActive ? `${-mouseX}px` : "0px",
-          marginTop: orbActive ? "8px" : "0px",
-          borderRadius: orbActive ? "var(--radius-md)" : "0",
         }}
         data-testid={testId}
-        data-orb-active={orbActive}
+        data-orbit-active={orbitState.progress > 0}
+        data-orbit-progress={orbitState.progress}
+        data-scrolled={orbitState.isScrolled}
         id={id}
         aria-label={ariaLabel || t("accessibility.skipToContent")}
         {...props}

@@ -11,24 +11,32 @@
   width: 100%;
   min-height: var(--header-height, 4rem);
 
-  // Simple orb effect - scale + margin transitions
-  transition:
-    transform 500ms ease-out,
-    margin 500ms ease-out,
-    border-radius 300ms ease-out;
+  // Refined orbital motion - controlled by CSS custom properties
+  will-change: transform;
+  transform-origin: center center;
 
-  &[data-orb-active="true"] {
-    will-change: transform, margin, border-radius;
+  // CSS custom property integration
+  transform: translate3d(var(--orbit-x, 0px), var(--orbit-y, 0px), 0)
+    scale(var(--orbit-scale, 1));
+
+  // Smooth transitions for non-orbital properties
+  transition:
+    box-shadow 250ms ease-out,
+    background-color 250ms ease-out,
+    border-color 200ms ease-out;
+
+  // Orbital motion active state
+  &[data-orbit-active="true"] {
+    will-change: transform, box-shadow, background-color;
   }
 
-  // Reduced motion support
+  // Reduced motion support - disable orbital motion
   @media (prefers-reduced-motion: reduce) {
-    transition: none;
+    transform: scale(var(--orbit-scale, 1)) !important;
+    transition: none !important;
 
-    &[data-orb-active="true"] {
-      transform: scale(0.85) !important; // Subtle scale only
-      margin-left: 0 !important;
-      margin-right: 0 !important;
+    &[data-orbit-active="true"] {
+      will-change: auto !important;
     }
   }
 
@@ -79,11 +87,24 @@
     --header-height: 5rem; // 80px
   }
 
-  // Sticky behavior
+  // Sticky behavior with orbital integration
   &.sticky {
     position: sticky;
     top: 0;
     z-index: 40;
+  }
+
+  // Scrolled state enhancements
+  &[data-scrolled="true"] {
+    box-shadow:
+      0 4px 14px -4px rgba(0, 0, 0, 0.1),
+      0 2px 8px -2px rgba(59, 130, 246, 0.08);
+  }
+
+  // Glass variant orbital enhancements
+  &.glass[data-orbit-active="true"] {
+    background: var(--glass-bg-header-scrolled);
+    border-bottom-color: var(--glass-border-enhanced);
   }
 
   // Hidden state (scroll behavior)
