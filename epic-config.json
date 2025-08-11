@@ -84,7 +84,7 @@
   "steadiest-addressability-v1": {
     "name": "steadiest-addressability-v1",
     "status": "in-progress",
-    "completion": 0,
+    "completion": 33,
     "features": [
       "gloo-client-wrapper",
       "minimal-api-interfaces",
