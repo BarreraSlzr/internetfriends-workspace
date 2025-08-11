@@ -1,279 +1,674 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { effectFunctions } from "./gloo-effects";
-import useRafInterval from "../../hooks/use-rafaga-interval";
-import { motion } from "framer-motion";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useRef,
+  useId,
+  CSSProperties,
+  useCallback,
+  ElementType,
+} from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTheme } from "@/hooks/use-theme";
+import { getAdaptiveGooColorTuples } from "../../lib/color-palette";
 
-// Simple implementation of useReducedMotion
-function useReducedMotion() {
-  const [reducedMotion, setReducedMotion] = useState(false);
+/**
+ * Enhanced BgGoo (gloo) component
+ *
+ * Goals:
+ * - Motion preference awareness (`prefers-reduced-motion`)
+ * - Intensity / variant system (visual density + energy)
+ * - Flexible color API (array, single string, legacy triplets)
+ * - Accessibility friendly (decorative only, inert, respects reduced motion)
+ * - Performance conscious (pauses when offscreen, avoids unnecessary re-renders)
+ * - Backwards compatibility with existing props (color1 / color2 / color3 / still)
+ *
+ * Design Philosophy:
+ * - Fail soft: if animation libraries or hooks fail, still render a pleasant static gradient.
+ * - Progressive: add motion only after mount + preference check.
+ * - Configurable: provide pragmatic, minimal prop surface for most use cases.
+ */
 
-  useEffect(() => {
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mql.matches);
+/* -------------------------------------------------------
+ * Types
+ * ----------------------------------------------------- */
 
-    const handleChange = (e: MediaQueryListEvent) => {
-      setReducedMotion(e.matches);
-    };
+type RGB = [number, number, number];
 
-    mql.addEventListener("change", handleChange);
-    return () => {
-      mql.removeEventListener("change", handleChange);
-    };
-  }, []);
+type GooVariant = "subtle" | "balanced" | "vivid";
+type GooQuality = "low" | "medium" | "high";
+type GooBlend = CSSProperties["mixBlendMode"];
 
-  return reducedMotion;
+export interface BgGooProps {
+  /* Visual behavior */
+  animate?: boolean;
+  variant?: GooVariant;
+  quality?: GooQuality;
+  speed?: number;
+  blendMode?: GooBlend;
+  intensity?: number;
+  exposureMultiplier?: number;
+
+  /* Motion + performance */
+  suspendOffscreen?: boolean;
+  idleDelayMs?: number;
+  staticFallback?: boolean;
+
+  /* Color system */
+  colors?: string | string[];
+  tint?: RGB;
+  scheme?: "auto" | "light" | "dark";
+
+  /* Teenage Engineering presets */
+  modeStyle?: "default" | "teen";
+  adaptiveColors?: boolean;
+
+  /* Legacy compatibility (deprecated) */
+  still?: boolean;
+  color1?: RGB;
+  color2?: RGB;
+  color3?: RGB;
+  depth?: number;
+  resolution?: number;
+  seed?: number;
+
+  /* Accessibility / debug */
+  disabled?: boolean;
+  "data-debug"?: boolean;
+  className?: string;
+  style?: CSSProperties;
+  as?: ElementType;
+
+  /* Experimental flags */
+  enableIdleLoading?: boolean;
 }
 
-type Vec3 = [number, number, number];
+/* -------------------------------------------------------
+ * Internal Constants
+ * ----------------------------------------------------- */
 
-function hexToNormRgb(hex: string): Vec3 | null {
-  const clean = hex.replace("#", "").trim();
-  if (!/^([0-9a-fA-F]{6})$/.test(clean)) return null;
-  const r = parseInt(clean.slice(0, 2), 16) / 255;
-  const g = parseInt(clean.slice(2, 4), 16) / 255;
-  const b = parseInt(clean.slice(4, 6), 16) / 255;
-  return [r, g, b];
-}
+const LEGACY_BRAND: RGB[] = [
+  [59 / 255, 130 / 255, 246 / 255],
+  [147 / 255, 51 / 255, 234 / 255],
+  [236 / 255, 72 / 255, 153 / 255],
+];
 
-export function BgGoo({
-  speed = 0.4,
-  resolution = 2.0,
-  depth = 4,
-  seed = 2.4,
-  still = false,
-  tint = [1.0, 1.0, 1.0],
-  color1 = [59 / 255, 130 / 255, 246 / 255], // brand primary
-  color2 = [147 / 255, 51 / 255, 234 / 255], // purple variant
-  color3 = [236 / 255, 72 / 255, 153 / 255], // pink accent
-}) {
-  const { theme } = useTheme();
-  const [, inView] = useInView({
-    triggerOnce: true,
-    rootMargin: "200px 0px",
-  });
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState({ width: 0, height: 0 });
-
-  const mousePosRef = useRef({ x: 0, y: 0 });
-  const startRef = useRef(performance.now());
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const glRef = useRef<WebGLRenderingContext | null>(null);
-
-  const shaderProgramRef = useRef<WebGLProgram | null>(null);
-  const reducedMotion = useReducedMotion();
-
-  // Theme-aware tint and colors
-  const [tintVec, setTintVec] = useState<Vec3>(tint as Vec3);
-  const [themeColors, setThemeColors] = useState({
-    color1: color1 as Vec3,
-    color2: color2 as Vec3,
-    color3: color3 as Vec3,
-  });
-  const brightness = theme.colorScheme === "dark" ? 1.4 : 1.0;
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    if (theme.colorScheme === "dark") {
-      // Enhanced dark mode colors - more vibrant and colorful
-      setThemeColors({
-        color1: [96 / 255, 165 / 255, 250 / 255], // bright blue
-        color2: [168 / 255, 85 / 255, 247 / 255], // bright purple
-        color3: [249 / 255, 115 / 255, 22 / 255], // bright orange
-      });
-      setTintVec([1.0, 1.0, 1.0]); // Full brightness tint
-    } else {
-      // Light mode - use original colors but enhanced
-      setThemeColors({
-        color1: [59 / 255, 130 / 255, 246 / 255], // brand primary
-        color2: [147 / 255, 51 / 255, 234 / 255], // purple variant
-        color3: [236 / 255, 72 / 255, 153 / 255], // pink accent
-      });
-      setTintVec([0.9, 0.95, 1.0]); // Slightly blue-tinted
-    }
-  }, [theme.colorScheme]);
-
-  // Randomly select an effect function
-  const [selectedEffect] = useState(() => {
-    const randomIndex = Math.floor(Math.random() * effectFunctions.length);
-    return effectFunctions[randomIndex];
-  });
-
-  const vertexShaderSource = `
-    attribute vec2 position;
-    void main() {
-        _gl_Position = vec4(position, 0.0, 1.0);
-    }
-  `;
-
-  const fragmentShaderSource = `
-  precision mediump float;
-  uniform vec2 iResolution;
-  uniform float iTime;
-  uniform vec2 iMouse;
-  uniform vec3 uTint;
-  uniform vec3 uColor1;
-  uniform vec3 uColor2;
-  uniform vec3 uColor3;
-  uniform float uBrightness;
-  float speed = ${speed.toFixed(2)};
-
-  ${selectedEffect}
-
-  void main() {
-    vec2 p = (2.0 * gl_FragCoord.xy - iResolution.xy) / max(iResolution.x, iResolution.y);
-    p.x += ${seed.toFixed(1)}; // Use the seed prop to offset the starting position of the goo effect
-    p.y += ${seed.toFixed(1)};
-
-    p *= ${resolution.toFixed(1)};
-    for (int i = 1; i < ${depth}; i++) {
-      float fi = float(i);
-      p += effect(p, fi, iTime * speed);
-    }
-    vec3 col = mix(mix(uColor1, uColor2, 1.0 - sin(p.x)), uColor3, cos(p.y + p.x));
-    col *= uTint * uBrightness;
-    gl_FragColor = vec4(col, 1.0);
+const VARIANT_CONFIG: Record<
+  GooVariant,
+  {
+    blobCount: number;
+    baseOpacity: number;
+    movement: number;
+    scaleVariance: number;
   }
-`;
+> = {
+  subtle: {
+    blobCount: 2,
+    baseOpacity: 0.45,
+    movement: 14,
+    scaleVariance: 0.05,
+  },
+  balanced: {
+    blobCount: 3,
+    baseOpacity: 0.6,
+    movement: 22,
+    scaleVariance: 0.12,
+  },
+  vivid: { blobCount: 4, baseOpacity: 0.75, movement: 32, scaleVariance: 0.18 },
+};
+
+const QUALITY_BLUR: Record<GooQuality, number[]> = {
+  low: [36, 52, 60, 60],
+  medium: [40, 60, 72, 80],
+  high: [48, 72, 84, 96],
+};
+
+const QUALITY_SIZE: Record<GooQuality, number[]> = {
+  low: [40, 36, 32, 28],
+  medium: [48, 44, 40, 36],
+  high: [56, 52, 48, 44],
+};
+
+/* -------------------------------------------------------
+ * Utility Functions
+ * ----------------------------------------------------- */
+
+function clamp(n: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, n));
+}
+
+function hexToRgb(hex: string): RGB | null {
+  const normalized = hex.trim().replace("#", "");
+  if (![3, 6].includes(normalized.length)) return null;
+  const full =
+    normalized.length === 3
+      ? normalized
+          .split("")
+          .map((c) => c + c)
+          .join("")
+      : normalized;
+  const intVal = parseInt(full, 16);
+  return [
+    ((intVal >> 16) & 255) / 255,
+    ((intVal >> 8) & 255) / 255,
+    (intVal & 255) / 255,
+  ];
+}
+
+function parseColorInput(input?: string | string[]): RGB[] | null {
+  if (!input) return null;
+  const arr = Array.isArray(input) ? input : [input];
+  const parsed: RGB[] = [];
+  for (const raw of arr) {
+    if (!raw) continue;
+    if (raw.startsWith("#")) {
+      const rgb = hexToRgb(raw);
+      if (rgb) parsed.push(rgb);
+    } else {
+      const m = raw.match(/(\d+(\.\d+)?)/g);
+      if (m && (m.length === 3 || m.length === 4)) {
+        const [r, g, b] = m.map((n) => clamp(parseFloat(n), 0, 255) / 255);
+        parsed.push([r, g, b]);
+      }
+    }
+  }
+  return parsed.length ? parsed : null;
+}
+
+function rgbTupleToCss(rgb: RGB, alpha = 1) {
+  return `rgba(${Math.round(rgb[0] * 255)}, ${Math.round(
+    rgb[1] * 255,
+  )}, ${Math.round(rgb[2] * 255)}, ${alpha})`;
+}
+
+function chooseBlend(isDark: boolean, override?: GooBlend): GooBlend {
+  if (override) return override;
+  return (isDark ? "screen" : "multiply") as GooBlend;
+}
+
+/* -------------------------------------------------------
+ * Blob Generation
+ * ----------------------------------------------------- */
+
+interface BlobDef {
+  id: string;
+  sizeRem: number;
+  blurPx: number;
+  color: RGB;
+  origin: [number, number];
+  movementVector: [number, number];
+  scale: number;
+  duration: number;
+  delay: number;
+}
+
+function generateBlobs(
+  variant: GooVariant,
+  quality: GooQuality,
+  colors: RGB[],
+  speed: number,
+  seedKey: string,
+  movementBoost = 1,
+): BlobDef[] {
+  const cfg = VARIANT_CONFIG[variant];
+  const count = cfg.blobCount;
+  const sizes = QUALITY_SIZE[quality];
+  const blurs = QUALITY_BLUR[quality];
+
+  const palette = [...colors];
+  while (palette.length < count) {
+    palette.push(...palette);
+  }
+
+  let seed = 0;
+  for (let i = 0; i < seedKey.length; i++) {
+    seed = (seed * 31 + seedKey.charCodeAt(i)) % 1_000_000;
+  }
+  function rand() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  }
+
+  return Array.from({ length: count }).map((_, i) => {
+    const sizeRem = sizes[i] ?? sizes[sizes.length - 1];
+    const blurPx = blurs[i] ?? blurs[blurs.length - 1];
+    const mv = cfg.movement * movementBoost;
+    const movementVector: [number, number] = [
+      (rand() * mv + mv * 0.4) * (rand() > 0.5 ? 1 : -1),
+      (rand() * mv + mv * 0.4) * (rand() > 0.5 ? 1 : -1),
+    ];
+    const origin: [number, number] = [15 + rand() * 70, 15 + rand() * 70];
+    const scale = 1 + (rand() - 0.5) * cfg.scaleVariance * 2;
+    const duration = (8 + rand() * 6) / clamp(speed, 0.05, 4);
+    const delay = rand() * 2;
+    return {
+      id: `goo-blob-${i}`,
+      sizeRem,
+      blurPx,
+      color: palette[i],
+      origin,
+      movementVector,
+      scale,
+      duration,
+      delay,
+    };
+  });
+}
+
+/* -------------------------------------------------------
+ * Component
+ * ----------------------------------------------------- */
+
+export function BgGoo(props: BgGooProps) {
+  const {
+    animate = true,
+    variant = "balanced",
+    quality = "medium",
+    speed = 1,
+    blendMode,
+    intensity = 1,
+    suspendOffscreen = true,
+    idleDelayMs = 0,
+    staticFallback = false,
+    colors,
+    tint,
+    scheme = "auto",
+    modeStyle = "default",
+    adaptiveColors = false,
+    still,
+    color1,
+    color2,
+    color3,
+    disabled = false,
+    className,
+    style,
+    as: AsComponent = "div",
+  } = props;
+
+  const { theme } = useTheme();
+  const isDark =
+    scheme === "auto" ? theme.colorScheme === "dark" : scheme === "dark";
+  const prefersReducedMotion = useReducedMotion();
+
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const instanceId = useId();
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (color1 || color2 || color3) {
+      console.warn(
+        "[BgGoo] color1/color2/color3 props are deprecated. Use `colors` array instead.",
+      );
+    }
+    if (still !== undefined) {
+      console.warn(
+        "[BgGoo] `still` prop is deprecated. Use `animate={false}` instead.",
+      );
+    }
+  }, [color1, color2, color3, still]);
 
-    const container = containerRef.current;
-    const resizeObserver = new ResizeObserver(() => {
-      if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect();
-        setSize({ width, height });
-      }
-    });
-
-    resizeObserver.observe(container);
-
-    return () => {
-      resizeObserver.unobserve(container);
-    };
+  useEffect(() => {
+    setMounted(true);
   }, []);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const gl =
-      canvas.getContext("webgl", { preserveDrawingBuffer: still }) ||
-      (canvas.getContext("experimental-webgl") as WebGLRenderingContext);
-
-    if (!gl) {
-      console.error(
-        "Unable to initialize WebGL. Your browser may not support it.",
-      );
-      return;
+  const palette: RGB[] = useMemo(() => {
+    // Adaptive colors override everything if enabled
+    if (adaptiveColors && !colors) {
+      return getAdaptiveGooColorTuples(isDark ? "dark" : "light", {
+        desaturateLight: 0.5,
+        lightenLight: 0.05,
+        darkBoost: 1.07,
+        count: 3,
+      });
     }
 
-    const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-    if (!vertexShader) return;
+    const fromNew = parseColorInput(colors);
+    if (fromNew && fromNew.length) return fromNew.slice(0, 6);
+    const legacy = [color1, color2, color3].filter(Boolean) as unknown as
+      | RGB[]
+      | undefined;
+    if (legacy && legacy.length) return legacy;
+    return LEGACY_BRAND;
+  }, [colors, color1, color2, color3, adaptiveColors, isDark]);
 
-    gl.shaderSource(vertexShader, vertexShaderSource);
-    gl.compileShader(vertexShader);
+  // Apply Teenage Engineering mode adjustments
+  const teenAdjustments = useMemo(() => {
+    if (modeStyle !== "teen")
+      return { variant, quality, intensity, exposure: 1, movementBoost: 1 };
 
-    const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-    if (!fragmentShader) return;
+    if (isDark) {
+      return {
+        variant: "balanced" as GooVariant,
+        quality: "medium" as GooQuality,
+        intensity: Math.max(1.0, intensity * 1.05),
+        exposure: 1,
+        movementBoost: 1.1,
+      };
+    } else {
+      return {
+        variant: "balanced" as GooVariant,
+        quality: "low" as GooQuality,
+        intensity: Math.max(0.85, intensity * 0.9),
+        exposure: 0.9,
+        movementBoost: 1,
+      };
+    }
+  }, [modeStyle, isDark, variant, quality, intensity]);
 
-    gl.shaderSource(fragmentShader, fragmentShaderSource);
-    gl.compileShader(fragmentShader);
+  const effectiveVariant = teenAdjustments.variant;
+  const effectiveQuality = teenAdjustments.quality;
+  const effectiveIntensity = clamp(teenAdjustments.intensity, 0.2, 2);
+  const exposureMultiplier =
+    props.exposureMultiplier || teenAdjustments.exposure;
+  const movementBoost = teenAdjustments.movementBoost;
 
-    const shaderProgram = gl.createProgram();
-    if (!shaderProgram) return;
+  // Improve blend mode for light teen mode
+  const primaryBlend = useMemo(() => {
+    if (blendMode) return blendMode;
+    if (modeStyle === "teen" && !isDark && exposureMultiplier < 1) {
+      return "normal" as GooBlend;
+    }
+    return chooseBlend(isDark, blendMode);
+  }, [blendMode, modeStyle, isDark, exposureMultiplier]);
 
-    gl.attachShader(shaderProgram, vertexShader);
-    gl.attachShader(shaderProgram, fragmentShader);
-    gl.linkProgram(shaderProgram);
-    gl.useProgram(shaderProgram);
+  const shouldAnimate =
+    mounted &&
+    animate &&
+    !staticFallback &&
+    still !== true &&
+    !prefersReducedMotion &&
+    visible &&
+    !disabled;
 
-    const positionBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-    const positions = [
-      -1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
-    ];
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-
-    const positionLocation = gl.getAttribLocation(shaderProgram, "position");
-    gl.enableVertexAttribArray(positionLocation);
-    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
-
-    glRef.current = gl;
-    shaderProgramRef.current = shaderProgram;
-  }, [fragmentShaderSource, still, vertexShaderSource]);
+  const blobs = useMemo(
+    () =>
+      generateBlobs(
+        effectiveVariant,
+        effectiveQuality,
+        palette,
+        clamp(speed, 0.05, 4),
+        instanceId + JSON.stringify(palette),
+        movementBoost,
+      ),
+    [
+      effectiveVariant,
+      effectiveQuality,
+      palette,
+      speed,
+      instanceId,
+      movementBoost,
+    ],
+  );
 
   useEffect(() => {
-    const gl = glRef.current;
-    const shaderProgram = shaderProgramRef.current;
-    if (!gl || !shaderProgram) return;
-    gl.viewport(0, 0, size.width, size.height);
-    const iResolutionLocation = gl.getUniformLocation(
-      shaderProgram,
-      "iResolution",
+    if (!suspendOffscreen || !mounted) return;
+    const el = containerRef.current;
+    if (!el || typeof window === "undefined") return;
+
+    let rafId: number | null = null;
+    let lastVisible = true;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const currentlyVisible = entry.isIntersecting;
+          if (currentlyVisible !== lastVisible) {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
+              setVisible(currentlyVisible);
+              lastVisible = currentlyVisible;
+            });
+          }
+        }
+      },
+      { root: null, threshold: [0, 0.05, 0.15] },
     );
-    gl.uniform2f(iResolutionLocation, gl.canvas.width, gl.canvas.height);
-  }, [size]);
+    observer.observe(el);
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
+  }, [suspendOffscreen, mounted]);
 
-  useRafInterval(
-    () => {
-      const start = startRef.current;
-      const time = performance.now() - start;
-      const mousePos = mousePosRef.current;
+  const [idleReady, setIdleReady] = useState(idleDelayMs === 0);
+  useEffect(() => {
+    if (idleDelayMs <= 0) return;
+    const t = setTimeout(() => setIdleReady(true), idleDelayMs);
+    return () => clearTimeout(t);
+  }, [idleDelayMs]);
 
-      if ((reducedMotion || still) && time > 200) {
-        return;
+  const baseOpacity =
+    VARIANT_CONFIG[effectiveVariant].baseOpacity *
+    effectiveIntensity *
+    exposureMultiplier;
+  const gradientBackground = useMemo(() => {
+    const c = palette.slice(0, 3);
+    const layers = c
+      .map((col, idx) => {
+        const stop = rgbTupleToCss(col, baseOpacity * (0.85 - idx * 0.2));
+        const posX = idx === 0 ? "25%" : idx === 1 ? "75%" : "50%";
+        const posY = idx === 0 ? "30%" : idx === 1 ? "25%" : "70%";
+        return `radial-gradient(circle at ${posX} ${posY}, ${stop} 0%, transparent 65%)`;
+      })
+      .join(", ");
+    const wash = `linear-gradient(135deg, ${rgbTupleToCss(
+      palette[0],
+      0.08 * effectiveIntensity,
+    )} 0%, ${rgbTupleToCss(palette[1] || palette[0], 0.08 * effectiveIntensity)} 50%, ${rgbTupleToCss(
+      palette[2] || palette[1] || palette[0],
+      0.08 * effectiveIntensity,
+    )} 100%)`;
+    return `${layers}, ${wash}`;
+  }, [palette, baseOpacity, effectiveIntensity]);
+
+  const containerStyles: CSSProperties = {
+    position: "absolute",
+    inset: "0",
+    pointerEvents: "none",
+    mixBlendMode: primaryBlend,
+    background: gradientBackground,
+    filter: `blur(${mounted ? 1 : 0}px)`,
+    ...(style || {}),
+  };
+
+  palette.slice(0, 6).forEach((col, i) => {
+    (containerStyles as unknown as Record<string, string>)[
+      `--goo-color-${i + 1}`
+    ] = rgbTupleToCss(col, 1);
+  });
+  (containerStyles as unknown as Record<string, string>)["--goo-opacity-base"] =
+    baseOpacity.toString();
+  (containerStyles as unknown as Record<string, string>)["--goo-intensity"] =
+    effectiveIntensity.toString();
+
+  const renderBlob = useCallback(
+    (blob: BlobDef, index: number) => {
+      const alpha =
+        baseOpacity *
+        (0.95 - index * 0.15) *
+        clamp(effectiveIntensity * (1 + index * 0.05), 0, 1.2) *
+        exposureMultiplier;
+      const baseColor = rgbTupleToCss(blob.color, alpha);
+      const blur = blob.blurPx;
+      const sizeRem = blob.sizeRem;
+      const translate = blob.movementVector;
+
+      if (!shouldAnimate || !idleReady) {
+        return (
+          <div
+            key={blob.id}
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: `${blob.origin[1]}%`,
+              left: `${blob.origin[0]}%`,
+              width: `${sizeRem}rem`,
+              height: `${sizeRem}rem`,
+              transform: `translate(-50%, -50%) scale(${blob.scale})`,
+              background: `radial-gradient(circle, ${baseColor} 0%, transparent 70%)`,
+              filter: `blur(${blur}px)`,
+              borderRadius: "9999px",
+              willChange: "transform",
+            }}
+          />
+        );
       }
 
-      const gl = glRef.current;
-      const shaderProgram = shaderProgramRef.current;
-      if (!gl || !shaderProgram) return;
-
-      const iTimeLocation = gl.getUniformLocation(shaderProgram, "iTime");
-      const iMouseLocation = gl.getUniformLocation(shaderProgram, "iMouse");
-
-      gl.uniform2f(iMouseLocation, mousePos.x, mousePos.y);
-      gl.uniform1f(iTimeLocation, time * 0.001);
-
-      const tintLocation = gl.getUniformLocation(shaderProgram, "uTint");
-      const color1Location = gl.getUniformLocation(shaderProgram, "uColor1");
-      const color2Location = gl.getUniformLocation(shaderProgram, "uColor2");
-      const color3Location = gl.getUniformLocation(shaderProgram, "uColor3");
-      const brightnessLocation = gl.getUniformLocation(
-        shaderProgram,
-        "uBrightness",
+      return (
+        <motion.div
+          key={blob.id}
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: `${blob.origin[1]}%`,
+            left: `${blob.origin[0]}%`,
+            width: `${sizeRem}rem`,
+            height: `${sizeRem}rem`,
+            transform: `translate(-50%, -50%)`,
+            background: `radial-gradient(circle, ${baseColor} 0%, transparent 70%)`,
+            filter: `blur(${blur}px)`,
+            borderRadius: "9999px",
+            willChange: "transform",
+          }}
+          initial={{ opacity: 0, scale: 0.85 * blob.scale }}
+          animate={{
+            opacity: 1,
+            x: [0, translate[0], 0, -translate[0] * 0.6, 0],
+            y: [0, translate[1], 0, -translate[1] * 0.6, 0],
+            scale: [
+              blob.scale * 0.95,
+              blob.scale * 1.05,
+              blob.scale,
+              blob.scale * (1 + Math.min(0.05, blob.scale - 1)),
+              blob.scale,
+            ],
+          }}
+          transition={{
+            duration: blob.duration,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: blob.delay,
+          }}
+        />
       );
-
-      gl.uniform3fv(tintLocation, new Float32Array(tintVec));
-      gl.uniform3fv(color1Location, new Float32Array(themeColors.color1));
-      gl.uniform3fv(color2Location, new Float32Array(themeColors.color2));
-      gl.uniform3fv(color3Location, new Float32Array(themeColors.color3));
-      gl.uniform1f(brightnessLocation, brightness);
-
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawArrays(gl.TRIANGLES, 0, 6);
     },
-    inView ? 1000 / 60 : undefined,
+    [baseOpacity, effectiveIntensity, idleReady, shouldAnimate],
   );
+
+  if (disabled) return null;
+
+  const ComponentElement = AsComponent as ElementType;
 
   return (
-    <motion.div
+    <ComponentElement
       ref={containerRef}
-      className="w-full h-full"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
+      className={[
+        "if-bg-goo absolute inset-0 w-full h-full",
+        className || "",
+        prefersReducedMotion ? "reduced-motion" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={containerStyles}
+      aria-hidden="true"
+      role="presentation"
+      data-goo-variant={effectiveVariant}
+      data-goo-quality={effectiveQuality}
+      data-goo-mode-style={modeStyle}
+      data-goo-adaptive-colors={adaptiveColors}
+      data-goo-animate={shouldAnimate ? "true" : "false"}
+      data-goo-mounted={mounted ? "true" : "false"}
+      data-theme-scheme={isDark ? "dark" : "light"}
+      data-prefers-reduced-motion={prefersReducedMotion ? "true" : "false"}
+      data-offscreen-active={visible ? "true" : "false"}
+      data-intensity={effectiveIntensity}
+      data-debug={props["data-debug"] || undefined}
+      data-exposure-multiplier={exposureMultiplier}
+      data-movement-boost={movementBoost}
+      data-blend-mode={primaryBlend}
     >
-      <canvas
-        ref={canvasRef}
-        width={size.width}
-        height={size.height}
-        className="w-full h-full"
-      />
-    </motion.div>
+      {/* Debug overlay when data-debug is enabled */}
+      {props["data-debug"] && (
+        <div
+          style={{
+            position: "absolute",
+            top: 8,
+            left: 8,
+            background: "rgba(0,0,0,0.8)",
+            color: "white",
+            padding: "4px 8px",
+            fontSize: "10px",
+            fontFamily: "monospace",
+            borderRadius: "4px",
+            pointerEvents: "none",
+            zIndex: 999,
+          }}
+        >
+          variant: {effectiveVariant} | quality: {effectiveQuality} | intensity:{" "}
+          {effectiveIntensity.toFixed(2)} | exposure: {exposureMultiplier} |
+          blend: {primaryBlend}
+        </div>
+      )}
+      {tint && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(140deg, ${rgbTupleToCss(
+              tint,
+              0.05 * effectiveIntensity,
+            )}, transparent)`,
+            mixBlendMode: isDark ? "screen" : "multiply",
+          }}
+        />
+      )}
+
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          overflow: "hidden",
+          maskImage:
+            "radial-gradient(circle at 50% 50%, rgba(0,0,0,0.9), transparent 92%)",
+        }}
+      >
+        {blobs.map(renderBlob)}
+      </div>
+
+      {/* Optional overlay - only in non-teen mode or when explicitly needed */}
+      {modeStyle !== "teen" && (
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `linear-gradient(180deg, ${
+              isDark ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.1)"
+            }, transparent 70%)`,
+            mixBlendMode: "normal",
+            pointerEvents: "none",
+          }}
+        />
+      )}
+    </ComponentElement>
   );
 }
+
+/* -------------------------------------------------------
+ * Notes:
+ * - For a purely static usage: <BgGoo animate={false} />
+ * - For low-power mode: <BgGoo quality="low" variant="subtle" />
+ * - For brand hero: <BgGoo variant="vivid" quality="high" intensity={1.2} />
+ * - Colors example: <BgGoo colors={['#3b82f6','#9333ea','#ec4899']} />
+ * - Automatic dark/light adaptation uses existing theme hook; override with scheme prop.
+ *
+ * Future Enhancements:
+ * - Optional canvas / WebGL pipeline for ultra-high fidelity
+ * - Route-based dynamic palette transitions
+ * - User-controlled seed to replicate layouts
+ */
