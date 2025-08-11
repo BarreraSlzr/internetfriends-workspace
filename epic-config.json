@@ -124,8 +124,12 @@
   "glass-refinement-v1": {
     "name": "glass-refinement-v1",
     "status": "in-progress",
-    "completion": 0,
-    "features": [],
+    "completion": 33,
+    "features": [
+      "glass-strength-tokens",
+      "orbital-header-motion",
+      "background-mode-taxonomy"
+    ],
     "owner": "Emmanuel Barrera Salazar (BarreraSlzr)",
     "timeline": "2-3 weeks",
     "blockers": [],

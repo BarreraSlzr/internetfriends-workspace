@@ -1,0 +1,284 @@
+// Glass Refined Utilities - SCSS
+// Epic: glass-refinement-v1
+// Professional glass morphism system with strength-based coupling
+
+@use "../design-tokens.css";
+
+// Glass Refined Utility Classes
+// These classes provide quick access to the refined glass system
+
+// Strength-based glass utilities
+.glass-subtle {
+  --glass-strength: 0.3;
+  background: rgba(var(--glass-base-color, 255, 255, 255), var(--glass-alpha));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, var(--glass-border-alpha));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, var(--glass-highlight-alpha)),
+    0 4px 14px -4px rgba(0, 0, 0, calc(0.18 * var(--glass-strength)));
+}
+
+.glass-default {
+  --glass-strength: 0.45;
+  background: rgba(var(--glass-base-color, 255, 255, 255), var(--glass-alpha));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, var(--glass-border-alpha));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, var(--glass-highlight-alpha)),
+    0 4px 14px -4px rgba(0, 0, 0, calc(0.18 * var(--glass-strength)));
+}
+
+.glass-medium {
+  --glass-strength: 0.55;
+  background: rgba(var(--glass-base-color, 255, 255, 255), var(--glass-alpha));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, var(--glass-border-alpha));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, var(--glass-highlight-alpha)),
+    0 4px 14px -4px rgba(0, 0, 0, calc(0.18 * var(--glass-strength)));
+}
+
+.glass-strong {
+  --glass-strength: 0.65;
+  background: rgba(var(--glass-base-color, 255, 255, 255), var(--glass-alpha));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(255, 255, 255, var(--glass-border-alpha));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, var(--glass-highlight-alpha)),
+    0 4px 14px -4px rgba(0, 0, 0, calc(0.18 * var(--glass-strength)));
+}
+
+// Mode-based utilities
+.glass-mode-ambient {
+  --glass-strength: 0.4;
+  --bg-saturation: 0.9;
+}
+
+.glass-mode-focus {
+  --glass-strength: 0.55;
+  --bg-saturation: 1.05;
+}
+
+.glass-mode-narrative {
+  --glass-strength: 0.5;
+  --bg-saturation: 1.0;
+}
+
+.glass-mode-performance {
+  --glass-strength: 0.3;
+  --bg-saturation: 0.85;
+}
+
+.glass-mode-immersive {
+  --glass-strength: 0.6;
+  --bg-saturation: 1.15;
+}
+
+// Noise texture overlay utility
+.glass-noise {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, var(--glass-noise-alpha, 0.08)) 0 1px,
+        transparent 1px 2px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, calc(var(--glass-noise-alpha, 0.08) * 0.4)) 0 1px,
+        transparent 1px 2px
+      );
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    opacity: 1;
+  }
+}
+
+// Hover enhancements
+.glass-hover {
+  transition: all 200ms ease-out;
+
+  &:hover {
+    backdrop-filter: blur(calc(var(--glass-blur) + 2px));
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 2px));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) + 0.02)),
+      0 6px 20px -4px rgba(0, 0, 0, calc(0.22 * var(--glass-strength))),
+      0 0 0 1px rgba(59, 130, 246, calc(0.1 * var(--glass-strength)));
+    transform: scale(1.01);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+// Focus states with dashed borders (Mermaid-inspired)
+.glass-focus-dashed {
+  &:focus {
+    outline: none;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, var(--glass-highlight-alpha)),
+      0 4px 14px -4px rgba(0, 0, 0, calc(0.18 * var(--glass-strength))),
+      0 0 0 2px dashed rgb(var(--if-focus-ring));
+  }
+}
+
+// Orbital motion utilities
+.orbital-header {
+  will-change: transform;
+  transform-origin: center center;
+  transform:
+    translate3d(var(--orbit-x, 0px), var(--orbit-y, 0px), 0)
+    scale(var(--orbit-scale, 1));
+
+  transition:
+    box-shadow 250ms ease-out,
+    background-color 250ms ease-out,
+    border-color 200ms ease-out;
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: scale(var(--orbit-scale, 1)) !important;
+    transition: none !important;
+  }
+}
+
+// Mature color utilities
+.neutral-text-primary { color: rgb(var(--if-neutral-900)); }
+.neutral-text-secondary { color: rgb(var(--if-neutral-600)); }
+.neutral-text-muted { color: rgb(var(--if-neutral-400)); }
+
+.neutral-bg-subtle { background-color: rgb(var(--if-neutral-50)); }
+.neutral-bg-muted { background-color: rgb(var(--if-neutral-100)); }
+.neutral-bg-emphasis { background-color: rgb(var(--if-neutral-200)); }
+
+.accent-secondary { color: rgb(var(--if-accent-secondary)); }
+.accent-secondary-bg { background-color: rgb(var(--if-accent-secondary)); }
+.accent-secondary-light { background-color: var(--if-accent-secondary-light); }
+
+// Theme-aware glass base colors
+[data-theme="dark"] {
+  .glass-subtle,
+  .glass-default,
+  .glass-medium,
+  .glass-strong {
+    --glass-base-color: var(--glass-base-color-dark);
+    border-color: rgba(59, 130, 246, var(--glass-border-alpha));
+  }
+
+  .glass-noise::after {
+    background:
+      repeating-linear-gradient(
+        0deg,
+        rgba(96, 165, 250, calc(var(--glass-noise-alpha, 0.08) * 0.6)) 0 1px,
+        transparent 1px 2px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgba(0, 0, 0, calc(var(--glass-noise-alpha, 0.08) * 0.3)) 0 1px,
+        transparent 1px 2px
+      );
+  }
+
+  .neutral-text-primary { color: rgb(var(--if-neutral-50)); }
+  .neutral-text-secondary { color: rgb(var(--if-neutral-300)); }
+  .neutral-text-muted { color: rgb(var(--if-neutral-500)); }
+
+  .neutral-bg-subtle { background-color: rgb(var(--if-neutral-900)); }
+  .neutral-bg-muted { background-color: rgb(var(--if-neutral-800)); }
+  .neutral-bg-emphasis { background-color: rgb(var(--if-neutral-700)); }
+}
+
+// Compact radius system (max 12px for backgrounds)
+.radius-glass-sm { border-radius: var(--radius-sm); }
+.radius-glass-md { border-radius: var(--radius-md); }
+.radius-glass-lg { border-radius: var(--radius-lg); }
+
+// Animation utilities
+.animate-glass-float {
+  animation: glassFloat 6s ease-in-out infinite;
+}
+
+.animate-orbital-gentle {
+  animation: orbitalGentle 20s linear infinite;
+}
+
+@keyframes glassFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes orbitalGentle {
+  0% { transform: translate3d(0px, 0px, 0) scale(1); }
+  25% { transform: translate3d(3px, -1px, 0) scale(0.98); }
+  50% { transform: translate3d(0px, -2px, 0) scale(0.96); }
+  75% { transform: translate3d(-3px, -1px, 0) scale(0.98); }
+  100% { transform: translate3d(0px, 0px, 0) scale(1); }
+}
+
+// Reduced motion overrides
+@media (prefers-reduced-motion: reduce) {
+  .animate-glass-float,
+  .animate-orbital-gentle {
+    animation: none;
+  }
+
+  .glass-hover {
+    transition: none;
+  }
+
+  .orbital-header {
+    will-change: auto;
+    transform: scale(var(--orbit-scale, 1)) !important;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .glass-subtle,
+  .glass-default,
+  .glass-medium,
+  .glass-strong {
+    border-width: 2px;
+  }
+
+  .glass-focus-dashed:focus {
+    box-shadow: 0 0 0 3px dashed currentColor;
+  }
+}
+
+// Print styles - disable glass effects
+@media print {
+  .glass-subtle,
+  .glass-default,
+  .glass-medium,
+  .glass-strong {
+    background: white !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+  }
+
+  .glass-noise::after {
+    display: none !important;
+  }
+
+  .orbital-header {
+    transform: none !important;
+  }
+}
