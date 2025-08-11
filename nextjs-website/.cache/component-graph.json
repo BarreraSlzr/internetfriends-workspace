@@ -1,0 +1,6210 @@
+{
+  "nodes": [
+    {
+      "id": "app/not-found.tsx::default",
+      "filePath": "app/not-found.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/(internetfriends)/components/header",
+        "app/(internetfriends)/components/navigation",
+        "app/(internetfriends)/components/social-links",
+        "app/(internetfriends)/components/hero-text",
+        "app/(internetfriends)/components/company-info"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 80,
+        "linesJsx": 10,
+        "complexity": 4.5
+      },
+      "riskScore": 4.33,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-10T20:47:55.303Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/layout.tsx::default",
+      "filePath": "app/layout.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/app/(internetfriends)/globals.css",
+        "nextjs-website/app/(internetfriends)/components/google-analytics",
+        "nextjs-website/hooks/use-theme",
+        "nextjs-website/i18n",
+        "nextjs-website/app/(internetfriends)/content.json",
+        "nextjs-website/components/perf/client-rum-wrapper",
+        "nextjs-website/components/theme/accent-initializer"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 156,
+        "linesJsx": 10,
+        "complexity": 7.5
+      },
+      "riskScore": 6.44,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:57:04.941Z",
+      "category": "pages"
+    },
+    {
+      "id": "components/data/metric-display.tsx::MetricDisplay",
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "MetricDisplay",
+      "kind": "utility",
+      "props": {
+        "total": 11,
+        "required": 2,
+        "optional": 9,
+        "names": [
+          "value",
+          "label",
+          "unit",
+          "trend",
+          "trendValue",
+          "accent",
+          "size",
+          "flash",
+          "flashTrigger",
+          "className",
+          "style"
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useState",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-text-secondary",
+        "--if-surface-neutral",
+        "--if-surface-neutral-alt",
+        "--if-hairline",
+        "--if-accent-primary",
+        "--color-text-primary",
+        "--color-text-tertiary"
+      ],
+      "size": {
+        "loc": 322,
+        "linesJsx": 22,
+        "complexity": 14
+      },
+      "riskScore": 11.45,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T08:00:53.655Z",
+      "category": "data"
+    },
+    {
+      "id": "components/data/metric-display.tsx::MetricDisplayProps",
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "MetricDisplayProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useState",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-text-secondary",
+        "--if-surface-neutral",
+        "--if-surface-neutral-alt",
+        "--if-hairline",
+        "--if-accent-primary",
+        "--color-text-primary",
+        "--color-text-tertiary"
+      ],
+      "size": {
+        "loc": 322,
+        "linesJsx": 22,
+        "complexity": 10.7
+      },
+      "riskScore": 8.48,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T08:00:53.655Z",
+      "category": "data"
+    },
+    {
+      "id": "components/data/metric-display.tsx::KPIMetric",
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "KPIMetric",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useState",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-text-secondary",
+        "--if-surface-neutral",
+        "--if-surface-neutral-alt",
+        "--if-hairline",
+        "--if-accent-primary",
+        "--color-text-primary",
+        "--color-text-tertiary"
+      ],
+      "size": {
+        "loc": 322,
+        "linesJsx": 22,
+        "complexity": 10.7
+      },
+      "riskScore": 8.48,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T08:00:53.655Z",
+      "category": "data"
+    },
+    {
+      "id": "components/data/metric-display.tsx::DashboardMetric",
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "DashboardMetric",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useState",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-text-secondary",
+        "--if-surface-neutral",
+        "--if-surface-neutral-alt",
+        "--if-hairline",
+        "--if-accent-primary",
+        "--color-text-primary",
+        "--color-text-tertiary"
+      ],
+      "size": {
+        "loc": 322,
+        "linesJsx": 22,
+        "complexity": 10.7
+      },
+      "riskScore": 8.48,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T08:00:53.655Z",
+      "category": "data"
+    },
+    {
+      "id": "components/data/metric-display.tsx::CompactMetric",
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "CompactMetric",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useState",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-text-secondary",
+        "--if-surface-neutral",
+        "--if-surface-neutral-alt",
+        "--if-hairline",
+        "--if-accent-primary",
+        "--color-text-primary",
+        "--color-text-tertiary"
+      ],
+      "size": {
+        "loc": 322,
+        "linesJsx": 22,
+        "complexity": 10.7
+      },
+      "riskScore": 8.48,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T08:00:53.655Z",
+      "category": "data"
+    },
+    {
+      "id": "components/data/metric-display.tsx::MetricShowcase",
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "MetricShowcase",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useState",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-text-secondary",
+        "--if-surface-neutral",
+        "--if-surface-neutral-alt",
+        "--if-hairline",
+        "--if-accent-primary",
+        "--color-text-primary",
+        "--color-text-tertiary"
+      ],
+      "size": {
+        "loc": 322,
+        "linesJsx": 22,
+        "complexity": 10.7
+      },
+      "riskScore": 8.48,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T08:00:53.655Z",
+      "category": "data"
+    },
+    {
+      "id": "components/perf/performance_metrics_initializer.tsx::PerformanceMetricsInitializer",
+      "filePath": "components/perf/performance_metrics_initializer.tsx",
+      "exportName": "PerformanceMetricsInitializer",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 346,
+        "linesJsx": 1,
+        "complexity": 6.1
+      },
+      "riskScore": 5.44,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:10:28.833Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/perf/performance_metrics_initializer.tsx::default",
+      "filePath": "components/perf/performance_metrics_initializer.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 346,
+        "linesJsx": 1,
+        "complexity": 6.1
+      },
+      "riskScore": 5.44,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:10:28.833Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/perf/client-rum-wrapper.tsx::ClientRUMWrapper",
+      "filePath": "components/perf/client-rum-wrapper.tsx",
+      "exportName": "ClientRUMWrapper",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 18,
+        "linesJsx": 1,
+        "complexity": 0.1
+      },
+      "riskScore": 1.16,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T19:33:56.491Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/perf/client-rum-wrapper.tsx::default",
+      "filePath": "components/perf/client-rum-wrapper.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 18,
+        "linesJsx": 1,
+        "complexity": 0.1
+      },
+      "riskScore": 1.16,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T19:33:56.491Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassDepth",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassDepth",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:08:00.101Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassNoise",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassNoise",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:08:00.101Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassTint",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassTint",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:08:00.101Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassElevation",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassElevation",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:08:00.101Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassPanelProps",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassPanelProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:08:00.101Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassPanel",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassPanel",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:08:00.101Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassPanelComponentProps",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassPanelComponentProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:08:00.101Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/effects/dark-vignette.tsx::DarkVignette",
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "DarkVignette",
+      "kind": "utility",
+      "props": {
+        "total": 5,
+        "required": 0,
+        "optional": 5,
+        "names": [
+          "intensity",
+          "gradient",
+          "className",
+          "style",
+          "disabled"
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": true,
+        "motion": false,
+        "hooks": [
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 131,
+        "linesJsx": 7,
+        "complexity": 4.7
+      },
+      "riskScore": 4.7,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [
+          "presentation"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:58:00.541Z",
+      "category": "effects"
+    },
+    {
+      "id": "components/effects/dark-vignette.tsx::DarkVignetteProps",
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "DarkVignetteProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": true,
+        "motion": false,
+        "hooks": [
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 131,
+        "linesJsx": 7,
+        "complexity": 3.2
+      },
+      "riskScore": 3.35,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [
+          "presentation"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:58:00.541Z",
+      "category": "effects"
+    },
+    {
+      "id": "components/effects/dark-vignette.tsx::HeroVignette",
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "HeroVignette",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": true,
+        "motion": false,
+        "hooks": [
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 131,
+        "linesJsx": 7,
+        "complexity": 3.2
+      },
+      "riskScore": 3.35,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [
+          "presentation"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:58:00.541Z",
+      "category": "effects"
+    },
+    {
+      "id": "components/effects/dark-vignette.tsx::HeaderVignette",
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "HeaderVignette",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": true,
+        "motion": false,
+        "hooks": [
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 131,
+        "linesJsx": 7,
+        "complexity": 3.2
+      },
+      "riskScore": 3.35,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [
+          "presentation"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:58:00.541Z",
+      "category": "effects"
+    },
+    {
+      "id": "components/effects/dark-vignette.tsx::SectionVignette",
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "SectionVignette",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": true,
+        "motion": false,
+        "hooks": [
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 131,
+        "linesJsx": 7,
+        "complexity": 3.2
+      },
+      "riskScore": 3.35,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [
+          "presentation"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:58:00.541Z",
+      "category": "effects"
+    },
+    {
+      "id": "components/ui/input.tsx::Input",
+      "filePath": "components/ui/input.tsx",
+      "exportName": "Input",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 23,
+        "linesJsx": 2,
+        "complexity": 0.7
+      },
+      "riskScore": 1.63,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:00:25.082Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::Select",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "Select",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectGroup",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectGroup",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectValue",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectValue",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectTrigger",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectTrigger",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectContent",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectContent",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectLabel",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectLabel",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectItem",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectItem",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectSeparator",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectSeparator",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectScrollUpButton",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectScrollUpButton",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/select.tsx::SelectScrollDownButton",
+      "filePath": "components/ui/select.tsx",
+      "exportName": "SelectScrollDownButton",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 160,
+        "linesJsx": 33,
+        "complexity": 8.8
+      },
+      "riskScore": 6.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.301Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/button.tsx::ButtonProps",
+      "filePath": "components/ui/button.tsx",
+      "exportName": "ButtonProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 52,
+        "linesJsx": 4,
+        "complexity": 1.9
+      },
+      "riskScore": 2.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:28:45.407Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/button.tsx::Button",
+      "filePath": "components/ui/button.tsx",
+      "exportName": "Button",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 52,
+        "linesJsx": 4,
+        "complexity": 1.9
+      },
+      "riskScore": 2.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:28:45.407Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/badge.tsx::BadgeProps",
+      "filePath": "components/ui/badge.tsx",
+      "exportName": "BadgeProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 37,
+        "linesJsx": 3,
+        "complexity": 0.8
+      },
+      "riskScore": 1.77,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:52:51.640Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/badge.tsx::Badge",
+      "filePath": "components/ui/badge.tsx",
+      "exportName": "Badge",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 37,
+        "linesJsx": 3,
+        "complexity": 0.8
+      },
+      "riskScore": 1.77,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:52:51.640Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/avatar.tsx::Avatar",
+      "filePath": "components/ui/avatar.tsx",
+      "exportName": "Avatar",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 51,
+        "linesJsx": 9,
+        "complexity": 2.4
+      },
+      "riskScore": 2.5,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:21:57.745Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/avatar.tsx::AvatarImage",
+      "filePath": "components/ui/avatar.tsx",
+      "exportName": "AvatarImage",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 51,
+        "linesJsx": 9,
+        "complexity": 2.4
+      },
+      "riskScore": 2.5,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:21:57.745Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/avatar.tsx::AvatarFallback",
+      "filePath": "components/ui/avatar.tsx",
+      "exportName": "AvatarFallback",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 51,
+        "linesJsx": 9,
+        "complexity": 2.4
+      },
+      "riskScore": 2.5,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:21:57.745Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/language-selector.tsx::LanguageSelectorProps",
+      "filePath": "components/ui/language-selector.tsx",
+      "exportName": "LanguageSelectorProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/atomic/button",
+        "nextjs-website/i18n"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useI18n",
+          "useEffect",
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 232,
+        "linesJsx": 22,
+        "complexity": 9.7
+      },
+      "riskScore": 8.03,
+      "a11y": {
+        "ariaCount": 11,
+        "roles": [
+          "option",
+          "option"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:03:06.491Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/language-selector.tsx::LanguageSelector",
+      "filePath": "components/ui/language-selector.tsx",
+      "exportName": "LanguageSelector",
+      "kind": "utility",
+      "props": {
+        "total": 12,
+        "required": 6,
+        "optional": 6,
+        "names": [
+          "/** Additional CSS classes */",
+          "className",
+          "/** Show language names */",
+          "showNames",
+          "/** Show flags */",
+          "showFlags",
+          "/** Compact mode (icon only) */",
+          "compact",
+          "/** Disabled state */",
+          "disabled",
+          "/** Test identifier */",
+          "\"data-testid\""
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/atomic/button",
+        "nextjs-website/i18n"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useI18n",
+          "useEffect",
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 232,
+        "linesJsx": 22,
+        "complexity": 13.3
+      },
+      "riskScore": 11.27,
+      "a11y": {
+        "ariaCount": 11,
+        "roles": [
+          "option",
+          "option"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:03:06.491Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/language-selector.tsx::default",
+      "filePath": "components/ui/language-selector.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/atomic/button",
+        "nextjs-website/i18n"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useI18n",
+          "useEffect",
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 232,
+        "linesJsx": 22,
+        "complexity": 9.7
+      },
+      "riskScore": 8.03,
+      "a11y": {
+        "ariaCount": 11,
+        "roles": [
+          "option",
+          "option"
+        ],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:03:06.491Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/tabs.tsx::Tabs",
+      "filePath": "components/ui/tabs.tsx",
+      "exportName": "Tabs",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 56,
+        "linesJsx": 9,
+        "complexity": 2.4
+      },
+      "riskScore": 2.53,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:21:57.730Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/tabs.tsx::TabsList",
+      "filePath": "components/ui/tabs.tsx",
+      "exportName": "TabsList",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 56,
+        "linesJsx": 9,
+        "complexity": 2.4
+      },
+      "riskScore": 2.53,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:21:57.730Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/tabs.tsx::TabsTrigger",
+      "filePath": "components/ui/tabs.tsx",
+      "exportName": "TabsTrigger",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 56,
+        "linesJsx": 9,
+        "complexity": 2.4
+      },
+      "riskScore": 2.53,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:21:57.730Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/tabs.tsx::TabsContent",
+      "filePath": "components/ui/tabs.tsx",
+      "exportName": "TabsContent",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 56,
+        "linesJsx": 9,
+        "complexity": 2.4
+      },
+      "riskScore": 2.53,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:21:57.730Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/demo/accent-demo.tsx::AccentDemo",
+      "filePath": "components/demo/accent-demo.tsx",
+      "exportName": "AccentDemo",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "app/accent-demo/page.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 171,
+        "linesJsx": 68,
+        "complexity": 10.8
+      },
+      "riskScore": 6.86,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "demo"
+    },
+    {
+      "id": "components/demo/accent-demo.tsx::default",
+      "filePath": "components/demo/accent-demo.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "app/accent-demo/page.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 171,
+        "linesJsx": 68,
+        "complexity": 10.8
+      },
+      "riskScore": 6.86,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "demo"
+    },
+    {
+      "id": "app/dev/layout.tsx::default",
+      "filePath": "app/dev/layout.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/glass"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 109,
+        "linesJsx": 25,
+        "complexity": 5
+      },
+      "riskScore": 3.93,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-11T08:26:34.253Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeProvider",
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "ThemeProvider",
+      "kind": "utility",
+      "props": {
+        "total": 8,
+        "required": 1,
+        "optional": 7,
+        "names": [
+          "children",
+          "enableAccentCycling",
+          "enableDarkMode",
+          "logoSelector",
+          "debugMode",
+          "onThemeInitialized",
+          "onAccentChange",
+          "onThemeError"
+        ]
+      },
+      "dependencies": [
+        "app/theme/runtime/theme_init",
+        "app/theme/runtime/accent_cycle",
+        "app/theme/runtime/accent_engine"
+      ],
+      "dependents": [
+        "app/theme/components/accent-demo.tsx::AccentDemo",
+        "app/theme/components/accent-demo.tsx::default",
+        "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+        "app/theme/components/theme-layout-example.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useContext",
+          "useEffect",
+          "useState",
+          "useCallback",
+          "useTheme",
+          "useMemo",
+          "useAccent",
+          "useDarkMode",
+          "useThemeDebug"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 449,
+        "linesJsx": 7,
+        "complexity": 12.6
+      },
+      "riskScore": 9.84,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:01.162Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeContextValue",
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "ThemeContextValue",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/runtime/theme_init",
+        "app/theme/runtime/accent_cycle",
+        "app/theme/runtime/accent_engine"
+      ],
+      "dependents": [
+        "app/theme/components/accent-demo.tsx::AccentDemo",
+        "app/theme/components/accent-demo.tsx::default",
+        "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+        "app/theme/components/theme-layout-example.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useContext",
+          "useEffect",
+          "useState",
+          "useCallback",
+          "useTheme",
+          "useMemo",
+          "useAccent",
+          "useDarkMode",
+          "useThemeDebug"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 449,
+        "linesJsx": 7,
+        "complexity": 10.2
+      },
+      "riskScore": 7.68,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:01.162Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeProviderProps",
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "ThemeProviderProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/runtime/theme_init",
+        "app/theme/runtime/accent_cycle",
+        "app/theme/runtime/accent_engine"
+      ],
+      "dependents": [
+        "app/theme/components/accent-demo.tsx::AccentDemo",
+        "app/theme/components/accent-demo.tsx::default",
+        "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+        "app/theme/components/theme-layout-example.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useContext",
+          "useEffect",
+          "useState",
+          "useCallback",
+          "useTheme",
+          "useMemo",
+          "useAccent",
+          "useDarkMode",
+          "useThemeDebug"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 449,
+        "linesJsx": 7,
+        "complexity": 10.2
+      },
+      "riskScore": 7.68,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:01.162Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/accent-demo/page.tsx::default",
+      "filePath": "app/accent-demo/page.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/demo/accent-demo"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 18,
+        "linesJsx": 4,
+        "complexity": 0.9
+      },
+      "riskScore": 1.68,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:37:08.969Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/accent-demo/layout.tsx::default",
+      "filePath": "app/accent-demo/layout.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "styles/design-tokens.css",
+        "styles/accent-global.css"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 19,
+        "linesJsx": 1,
+        "complexity": 1.1
+      },
+      "riskScore": 1.97,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:37:17.319Z",
+      "category": "pages"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderLogoConfig",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderLogoConfig",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::ThemeToggleConfig",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "ThemeToggleConfig",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::LanguageSelectorConfig",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "LanguageSelectorConfig",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderAction",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderAction",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderSearchConfig",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderSearchConfig",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderAnnouncementConfig",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderAnnouncementConfig",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderStickyConfig",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderStickyConfig",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderResponsiveConfig",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderResponsiveConfig",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderOrganismProps",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderOrganismProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderState",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderState",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderContextValue",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderContextValue",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HeaderUtils",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HeaderUtils",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HEADER_DEFAULTS",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HEADER_DEFAULTS",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HEADER_STICKY_DEFAULTS",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HEADER_STICKY_DEFAULTS",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/types.ts::HEADER_RESPONSIVE_DEFAULTS",
+      "filePath": "components/organisms/header/types.ts",
+      "exportName": "HEADER_RESPONSIVE_DEFAULTS",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/molecular/navigation/types",
+        "nextjs-website/components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/organisms/header/header.organism.tsx::HeaderOrganism"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 341,
+        "linesJsx": 7,
+        "complexity": 7.7
+      },
+      "riskScore": 6.48,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:31:40.190Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/organisms/header/header.organism.tsx::HeaderOrganism",
+      "filePath": "components/organisms/header/header.organism.tsx",
+      "exportName": "HeaderOrganism",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/atomic/button",
+        "nextjs-website/components/molecular/navigation",
+        "nextjs-website/hooks/use-theme",
+        "nextjs-website/i18n",
+        "nextjs-website/i18n/config",
+        "components/organisms/header/types",
+        "components/organisms/header/header.organism.module.scss"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useContext",
+          "usePathname",
+          "useTheme",
+          "useI18n",
+          "useHeader",
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 584,
+        "linesJsx": 60,
+        "complexity": 21
+      },
+      "riskScore": 13,
+      "a11y": {
+        "ariaCount": 12,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-11T04:31:49.941Z",
+      "category": "organisms"
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps",
+      "filePath": "components/mermaid/viewer/markdown-renderer.tsx",
+      "exportName": "MarkdownRendererProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "components/mermaid/viewer/mermaid-viewer",
+        "components/mermaid/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useMemo"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 393,
+        "linesJsx": 48,
+        "complexity": 13.3
+      },
+      "riskScore": 8.92,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:42:09.287Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle",
+      "filePath": "components/mermaid/viewer/markdown-renderer.tsx",
+      "exportName": "DiagramWithTitle",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "components/mermaid/viewer/mermaid-viewer",
+        "components/mermaid/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useMemo"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 393,
+        "linesJsx": 48,
+        "complexity": 13.3
+      },
+      "riskScore": 8.92,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:42:09.287Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer",
+      "filePath": "components/mermaid/viewer/markdown-renderer.tsx",
+      "exportName": "MarkdownRenderer",
+      "kind": "utility",
+      "props": {
+        "total": 20,
+        "required": 14,
+        "optional": 6,
+        "names": [
+          "/** Markdown content to render */",
+          "content",
+          "/** Additional CSS classes */",
+          "className",
+          "/** Rendering mode */",
+          "mode",
+          "/** Show diagram titles */",
+          "showDiagramTitles",
+          "/** File type for syntax highlighting */",
+          "fileType",
+          "| \"markdown\"",
+          "| \"yaml\"",
+          "| \"json\"",
+          "| \"typescript\"",
+          "| \"javascript\"",
+          "| \"text\";",
+          "/** Original filename */",
+          "fileName",
+          "/** Test identifier */",
+          "\"data-testid\""
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "components/mermaid/viewer/mermaid-viewer",
+        "components/mermaid/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useMemo"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 393,
+        "linesJsx": 48,
+        "complexity": 19.3
+      },
+      "riskScore": 14.32,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:42:09.287Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::default",
+      "filePath": "components/mermaid/viewer/markdown-renderer.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "components/mermaid/viewer/mermaid-viewer",
+        "components/mermaid/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useMemo"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 393,
+        "linesJsx": 48,
+        "complexity": 13.3
+      },
+      "riskScore": 8.92,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:42:09.287Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "filePath": "components/mermaid/viewer/mermaid-viewer.tsx",
+      "exportName": "MermaidViewerProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/hooks/use-theme",
+        "nextjs-website/components/atomic/button",
+        "components/mermaid/utils"
+      ],
+      "dependents": [
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps",
+        "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle",
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer",
+        "components/mermaid/viewer/markdown-renderer.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useRef",
+          "useState",
+          "useCallback",
+          "useTheme",
+          "usePos",
+          "useDown",
+          "useEvent",
+          "useMove",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 488,
+        "linesJsx": 34,
+        "complexity": 16.4
+      },
+      "riskScore": 11.36,
+      "a11y": {
+        "ariaCount": 5,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T06:53:45.493Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/mermaid/viewer/mermaid-viewer.tsx::ZoomState",
+      "filePath": "components/mermaid/viewer/mermaid-viewer.tsx",
+      "exportName": "ZoomState",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/hooks/use-theme",
+        "nextjs-website/components/atomic/button",
+        "components/mermaid/utils"
+      ],
+      "dependents": [
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps",
+        "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle",
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer",
+        "components/mermaid/viewer/markdown-renderer.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useRef",
+          "useState",
+          "useCallback",
+          "useTheme",
+          "usePos",
+          "useDown",
+          "useEvent",
+          "useMove",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 488,
+        "linesJsx": 34,
+        "complexity": 16.4
+      },
+      "riskScore": 11.36,
+      "a11y": {
+        "ariaCount": 5,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T06:53:45.493Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewer",
+      "filePath": "components/mermaid/viewer/mermaid-viewer.tsx",
+      "exportName": "MermaidViewer",
+      "kind": "utility",
+      "props": {
+        "total": 24,
+        "required": 13,
+        "optional": 11,
+        "names": [
+          "/** Mermaid diagram code */",
+          "code",
+          "/** Optional title for the diagram */",
+          "title",
+          "/** Container height */",
+          "height",
+          "/** Container width */",
+          "width",
+          "/** Additional CSS classes */",
+          "className",
+          "/** Show zoom controls */",
+          "showZoomControls",
+          "/** Show fullscreen toggle */",
+          "showFullscreen",
+          "/** Show download button */",
+          "showDownload",
+          "/** Loading state */",
+          "loading",
+          "/** Error callback */",
+          "onError",
+          "/** Success callback */",
+          "onRender",
+          "/** Test identifier */",
+          "\"data-testid\""
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/hooks/use-theme",
+        "nextjs-website/components/atomic/button",
+        "components/mermaid/utils"
+      ],
+      "dependents": [
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps",
+        "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle",
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer",
+        "components/mermaid/viewer/markdown-renderer.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useEffect",
+          "useRef",
+          "useState",
+          "useCallback",
+          "useTheme",
+          "usePos",
+          "useDown",
+          "useEvent",
+          "useMove",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 488,
+        "linesJsx": 34,
+        "complexity": 23.6
+      },
+      "riskScore": 17.24,
+      "a11y": {
+        "ariaCount": 5,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T06:53:45.493Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "filePath": "components/mermaid/utils/index.ts",
+      "exportName": "MermaidDiagram",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps",
+        "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle",
+        "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer",
+        "components/mermaid/viewer/markdown-renderer.tsx::default",
+        "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+        "components/mermaid/viewer/mermaid-viewer.tsx::ZoomState",
+        "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewer"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 316,
+        "linesJsx": 10,
+        "complexity": 7
+      },
+      "riskScore": 5.8,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T04:31:18.395Z",
+      "category": "mermaid"
+    },
+    {
+      "id": "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic",
+      "filePath": "components/atomic/glass-card/glass-card.atomic.tsx",
+      "exportName": "GlassCardAtomic",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "components/atomic/glass-card/types"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 74,
+        "linesJsx": 2,
+        "complexity": 4.2
+      },
+      "riskScore": 4.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T08:59:55.540Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-card/types.ts::GlassCardAtomicProps",
+      "filePath": "components/atomic/glass-card/types.ts",
+      "exportName": "GlassCardAtomicProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 101,
+        "linesJsx": 1,
+        "complexity": 4.1
+      },
+      "riskScore": 4.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.302Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-card/types.ts::GlassCardHeaderProps",
+      "filePath": "components/atomic/glass-card/types.ts",
+      "exportName": "GlassCardHeaderProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 101,
+        "linesJsx": 1,
+        "complexity": 4.1
+      },
+      "riskScore": 4.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.302Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-card/types.ts::GlassCardContentProps",
+      "filePath": "components/atomic/glass-card/types.ts",
+      "exportName": "GlassCardContentProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 101,
+        "linesJsx": 1,
+        "complexity": 4.1
+      },
+      "riskScore": 4.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.302Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-card/types.ts::GlassCardFooterProps",
+      "filePath": "components/atomic/glass-card/types.ts",
+      "exportName": "GlassCardFooterProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 101,
+        "linesJsx": 1,
+        "complexity": 4.1
+      },
+      "riskScore": 4.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.302Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-card/types.ts::GlassCardImageProps",
+      "filePath": "components/atomic/glass-card/types.ts",
+      "exportName": "GlassCardImageProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 101,
+        "linesJsx": 1,
+        "complexity": 4.1
+      },
+      "riskScore": 4.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.302Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-card/types.ts::GlassCardActionsProps",
+      "filePath": "components/atomic/glass-card/types.ts",
+      "exportName": "GlassCardActionsProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 101,
+        "linesJsx": 1,
+        "complexity": 4.1
+      },
+      "riskScore": 4.31,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:47:55.302Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "filePath": "components/atomic/button/button.atomic.tsx",
+      "exportName": "ButtonAtomic",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/ui/button",
+        "components/atomic/button/button.styles.module.scss",
+        "components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/demo/accent-demo.tsx::AccentDemo",
+        "components/demo/accent-demo.tsx::default",
+        "components/atomic/button/types.ts::ButtonAtomicProps",
+        "components/atomic/button/types.ts::ButtonVariant",
+        "components/atomic/button/types.ts::ButtonSize",
+        "components/atomic/button/types.ts::ButtonState",
+        "components/atomic/button/types.ts::ButtonTheme",
+        "components/atomic/button/types.ts::ButtonA11yProps",
+        "components/atomic/button/types.ts::ButtonAtomicA11yProps",
+        "components/atomic/button/types.ts::ButtonGroupProps",
+        "components/atomic/button/types.ts::ButtonFormConfig",
+        "components/atomic/button/types.ts::ButtonAtomicCompleteProps",
+        "components/atomic/button/types.ts::ButtonEventHandlers",
+        "components/atomic/button/types.ts::ButtonRenderProps",
+        "components/atomic/button/types.ts::ButtonRenderProp",
+        "components/atomic/button/types.ts::BUTTON_DEFAULTS",
+        "components/atomic/button/types.ts::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--color-border-focus",
+        "--if-primary",
+        "--if-primary-hover",
+        "--if-primary-active",
+        "--color-bg-secondary",
+        "--color-text-primary",
+        "--color-border-primary",
+        "--color-bg-tertiary",
+        "--if-primary-light"
+      ],
+      "size": {
+        "loc": 233,
+        "linesJsx": 6,
+        "complexity": 8.6
+      },
+      "riskScore": 7.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:22:00.857Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/button.atomic.tsx::ButtonAtomicProps",
+      "filePath": "components/atomic/button/button.atomic.tsx",
+      "exportName": "ButtonAtomicProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/ui/button",
+        "components/atomic/button/button.styles.module.scss",
+        "components/atomic/button/types"
+      ],
+      "dependents": [
+        "components/demo/accent-demo.tsx::AccentDemo",
+        "components/demo/accent-demo.tsx::default",
+        "components/atomic/button/types.ts::ButtonAtomicProps",
+        "components/atomic/button/types.ts::ButtonVariant",
+        "components/atomic/button/types.ts::ButtonSize",
+        "components/atomic/button/types.ts::ButtonState",
+        "components/atomic/button/types.ts::ButtonTheme",
+        "components/atomic/button/types.ts::ButtonA11yProps",
+        "components/atomic/button/types.ts::ButtonAtomicA11yProps",
+        "components/atomic/button/types.ts::ButtonGroupProps",
+        "components/atomic/button/types.ts::ButtonFormConfig",
+        "components/atomic/button/types.ts::ButtonAtomicCompleteProps",
+        "components/atomic/button/types.ts::ButtonEventHandlers",
+        "components/atomic/button/types.ts::ButtonRenderProps",
+        "components/atomic/button/types.ts::ButtonRenderProp",
+        "components/atomic/button/types.ts::BUTTON_DEFAULTS",
+        "components/atomic/button/types.ts::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--color-border-focus",
+        "--if-primary",
+        "--if-primary-hover",
+        "--if-primary-active",
+        "--color-bg-secondary",
+        "--color-text-primary",
+        "--color-border-primary",
+        "--color-bg-tertiary",
+        "--if-primary-light"
+      ],
+      "size": {
+        "loc": 233,
+        "linesJsx": 6,
+        "complexity": 8.6
+      },
+      "riskScore": 7.79,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T20:22:00.857Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonAtomicProps",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonAtomicProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonVariant",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonVariant",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonSize",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonSize",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonState",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonState",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonTheme",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonTheme",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonA11yProps",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonA11yProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonAtomicA11yProps",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonAtomicA11yProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonGroupProps",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonGroupProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonFormConfig",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonFormConfig",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonAtomicCompleteProps",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonAtomicCompleteProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonEventHandlers",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonEventHandlers",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonRenderProps",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonRenderProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonRenderProp",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "ButtonRenderProp",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::BUTTON_DEFAULTS",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "BUTTON_DEFAULTS",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/button/types.ts::default",
+      "filePath": "components/atomic/button/types.ts",
+      "exportName": "default",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/atomic/button/button.atomic",
+        "styles/tokens/accent.types"
+      ],
+      "dependents": [
+        "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+        "components/atomic/button/button.atomic.tsx::ButtonAtomicProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent",
+          "useEnter",
+          "useLeave",
+          "useDown",
+          "useUp"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 312,
+        "linesJsx": 22,
+        "complexity": 9.2
+      },
+      "riskScore": 7.08,
+      "a11y": {
+        "ariaCount": 10,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T09:36:37.806Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderAtomicProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderAtomicProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T21:05:30.941Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderNavigationProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderNavigationProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T21:05:30.941Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::NavigationItem",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "NavigationItem",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T21:05:30.941Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderLogoProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderLogoProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T21:05:30.941Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderActionsProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderActionsProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T21:05:30.941Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::ThemeToggleProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "ThemeToggleProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-10T21:05:30.941Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/header.atomic.tsx::HeaderAtomic",
+      "filePath": "components/atomic/header/header.atomic.tsx",
+      "exportName": "HeaderAtomic",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "components/atomic/header/types",
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 71,
+        "linesJsx": 4,
+        "complexity": 2.9
+      },
+      "riskScore": 3.23,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-11T06:28:26.246Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/molecular/project-explorer/project-explorer.atomic.tsx::ProjectExplorerAtomic",
+      "filePath": "components/molecular/project-explorer/project-explorer.atomic.tsx",
+      "exportName": "ProjectExplorerAtomic",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useMemo",
+          "useCallback"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 458,
+        "linesJsx": 49,
+        "complexity": 15.9
+      },
+      "riskScore": 10.36,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:48:01.935Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/project-explorer/project-explorer.atomic.tsx::default",
+      "filePath": "components/molecular/project-explorer/project-explorer.atomic.tsx",
+      "exportName": "default",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useMemo",
+          "useCallback"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 458,
+        "linesJsx": 49,
+        "complexity": 15.9
+      },
+      "riskScore": 10.36,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:48:01.935Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationItem",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationItem",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:44.287Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationLogo",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationLogo",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:44.287Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationMolecularProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationMolecularProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:44.287Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationDropdownProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationDropdownProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:44.287Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::MobileMenuProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "MobileMenuProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:44.287Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationBreadcrumbProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationBreadcrumbProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:44.287Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationTabsProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationTabsProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:44.287Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular",
+      "filePath": "components/molecular/navigation/navigation.molecular.tsx",
+      "exportName": "NavigationMolecular",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/atomic/button",
+        "nextjs-website/components/atomic/header",
+        "components/molecular/navigation/types"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 316,
+        "linesJsx": 45,
+        "complexity": 14.5
+      },
+      "riskScore": 10.6,
+      "a11y": {
+        "ariaCount": 2,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-11T01:45:28.507Z",
+      "category": "molecular"
+    },
+    {
+      "id": "app/dev/component-map/page.tsx::default",
+      "filePath": "app/dev/component-map/page.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/scripts/build-component-graph",
+        "nextjs-website/hooks/use-theme",
+        "nextjs-website/components/glass",
+        "nextjs-website/components/data/metric-display"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": true,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useCallback",
+          "useMemo",
+          "useNodesState",
+          "useEdgesState",
+          "useTheme",
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 553,
+        "linesJsx": 82,
+        "complexity": 23.2
+      },
+      "riskScore": 14.08,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T08:26:14.590Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/components/accent-demo.tsx::AccentDemo",
+      "filePath": "app/theme/components/accent-demo.tsx",
+      "exportName": "AccentDemo",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/theme-provider",
+        "app/theme/runtime/accent_cycle"
+      ],
+      "dependents": [
+        "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+        "app/theme/components/theme-layout-example.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useAccent",
+          "useDarkMode"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-primary"
+      ],
+      "size": {
+        "loc": 343,
+        "linesJsx": 110,
+        "complexity": 20
+      },
+      "riskScore": 12.4,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:42:26.546Z",
+      "category": "accent-demo.tsx"
+    },
+    {
+      "id": "app/theme/components/accent-demo.tsx::default",
+      "filePath": "app/theme/components/accent-demo.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/theme-provider",
+        "app/theme/runtime/accent_cycle"
+      ],
+      "dependents": [
+        "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+        "app/theme/components/theme-layout-example.tsx::default"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useAccent",
+          "useDarkMode"
+        ]
+      },
+      "tokensReferenced": [
+        "--color-primary"
+      ],
+      "size": {
+        "loc": 343,
+        "linesJsx": 110,
+        "complexity": 20
+      },
+      "riskScore": 12.4,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:42:26.546Z",
+      "category": "accent-demo.tsx"
+    },
+    {
+      "id": "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+      "filePath": "app/theme/components/theme-layout-example.tsx",
+      "exportName": "ThemeLayoutExample",
+      "kind": "utility",
+      "props": {
+        "total": 3,
+        "required": 0,
+        "optional": 3,
+        "names": [
+          "children",
+          "enableDemo",
+          "debugMode"
+        ]
+      },
+      "dependencies": [
+        "app/theme/theme-provider",
+        "app/theme/components/accent-demo"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useState",
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 310,
+        "linesJsx": 74,
+        "complexity": 15.3
+      },
+      "riskScore": 9.97,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-10T08:21:57.388Z",
+      "category": "theme-layout-example.tsx"
+    },
+    {
+      "id": "app/theme/components/theme-layout-example.tsx::default",
+      "filePath": "app/theme/components/theme-layout-example.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/theme-provider",
+        "app/theme/components/accent-demo"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useState",
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 310,
+        "linesJsx": 74,
+        "complexity": 14.4
+      },
+      "riskScore": 9.16,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-10T08:21:57.388Z",
+      "category": "theme-layout-example.tsx"
+    },
+    {
+      "id": "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "filePath": "app/theme/runtime/theme_init.ts",
+      "exportName": "ThemeInitOptions",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/runtime/accent_engine",
+        "app/theme/runtime/accent_cycle"
+      ],
+      "dependents": [
+        "app/theme/theme-provider.tsx::ThemeProvider",
+        "app/theme/theme-provider.tsx::ThemeContextValue",
+        "app/theme/theme-provider.tsx::ThemeProviderProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect",
+          "useThemeInit"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 459,
+        "linesJsx": 13,
+        "complexity": 11.3
+      },
+      "riskScore": 7.92,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:34.367Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/runtime/theme_init.ts::ThemeDebug",
+      "filePath": "app/theme/runtime/theme_init.ts",
+      "exportName": "ThemeDebug",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/runtime/accent_engine",
+        "app/theme/runtime/accent_cycle"
+      ],
+      "dependents": [
+        "app/theme/theme-provider.tsx::ThemeProvider",
+        "app/theme/theme-provider.tsx::ThemeContextValue",
+        "app/theme/theme-provider.tsx::ThemeProviderProps"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect",
+          "useThemeInit"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 459,
+        "linesJsx": 13,
+        "complexity": 11.3
+      },
+      "riskScore": 7.92,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:36:34.367Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "filePath": "app/theme/runtime/accent_cycle.ts",
+      "exportName": "AccentPreset",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/runtime/accent_engine"
+      ],
+      "dependents": [
+        "app/theme/theme-provider.tsx::ThemeProvider",
+        "app/theme/theme-provider.tsx::ThemeContextValue",
+        "app/theme/theme-provider.tsx::ThemeProviderProps",
+        "app/theme/components/accent-demo.tsx::AccentDemo",
+        "app/theme/components/accent-demo.tsx::default",
+        "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+        "app/theme/runtime/theme_init.ts::ThemeDebug"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 496,
+        "linesJsx": 9,
+        "complexity": 10.4
+      },
+      "riskScore": 7.36,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:09:37.770Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/runtime/accent_cycle.ts::ACCENT_PRESETS",
+      "filePath": "app/theme/runtime/accent_cycle.ts",
+      "exportName": "ACCENT_PRESETS",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/runtime/accent_engine"
+      ],
+      "dependents": [
+        "app/theme/theme-provider.tsx::ThemeProvider",
+        "app/theme/theme-provider.tsx::ThemeContextValue",
+        "app/theme/theme-provider.tsx::ThemeProviderProps",
+        "app/theme/components/accent-demo.tsx::AccentDemo",
+        "app/theme/components/accent-demo.tsx::default",
+        "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+        "app/theme/runtime/theme_init.ts::ThemeDebug"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 496,
+        "linesJsx": 9,
+        "complexity": 10.4
+      },
+      "riskScore": 7.36,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:09:37.770Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/theme/runtime/accent_cycle.ts::LogoInteractionOptions",
+      "filePath": "app/theme/runtime/accent_cycle.ts",
+      "exportName": "LogoInteractionOptions",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "app/theme/runtime/accent_engine"
+      ],
+      "dependents": [
+        "app/theme/theme-provider.tsx::ThemeProvider",
+        "app/theme/theme-provider.tsx::ThemeContextValue",
+        "app/theme/theme-provider.tsx::ThemeProviderProps",
+        "app/theme/components/accent-demo.tsx::AccentDemo",
+        "app/theme/components/accent-demo.tsx::default",
+        "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+        "app/theme/runtime/theme_init.ts::ThemeDebug"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEvent"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 496,
+        "linesJsx": 9,
+        "complexity": 10.4
+      },
+      "riskScore": 7.36,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T00:09:37.770Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/api/project-explorer/route.ts::GET",
+      "filePath": "app/api/project-explorer/route.ts",
+      "exportName": "GET",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 697,
+        "linesJsx": 9,
+        "complexity": 13.9
+      },
+      "riskScore": 8.56,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:30:21.832Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/api/project-explorer/route.ts::POST",
+      "filePath": "app/api/project-explorer/route.ts",
+      "exportName": "POST",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 697,
+        "linesJsx": 9,
+        "complexity": 13.9
+      },
+      "riskScore": 8.56,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T07:30:21.832Z",
+      "category": "pages"
+    }
+  ],
+  "edges": [
+    {
+      "id": "components/demo/accent-demo.tsx::AccentDemo->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/demo/accent-demo.tsx::AccentDemo",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/demo/accent-demo.tsx::default->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/demo/accent-demo.tsx::default",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeProvider->app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "source": "app/theme/theme-provider.tsx::ThemeProvider",
+      "target": "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeProvider->app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "source": "app/theme/theme-provider.tsx::ThemeProvider",
+      "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeContextValue->app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "source": "app/theme/theme-provider.tsx::ThemeContextValue",
+      "target": "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeContextValue->app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "source": "app/theme/theme-provider.tsx::ThemeContextValue",
+      "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeProviderProps->app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "source": "app/theme/theme-provider.tsx::ThemeProviderProps",
+      "target": "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/theme-provider.tsx::ThemeProviderProps->app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "source": "app/theme/theme-provider.tsx::ThemeProviderProps",
+      "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/accent-demo/page.tsx::default->components/demo/accent-demo.tsx::AccentDemo",
+      "source": "app/accent-demo/page.tsx::default",
+      "target": "components/demo/accent-demo.tsx::AccentDemo",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/organisms/header/header.organism.tsx::HeaderOrganism->components/organisms/header/types.ts::HeaderLogoConfig",
+      "source": "components/organisms/header/header.organism.tsx::HeaderOrganism",
+      "target": "components/organisms/header/types.ts::HeaderLogoConfig",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps->components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps",
+      "target": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps->components/mermaid/utils/index.ts::MermaidDiagram",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRendererProps",
+      "target": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle->components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle",
+      "target": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle->components/mermaid/utils/index.ts::MermaidDiagram",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::DiagramWithTitle",
+      "target": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer->components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer",
+      "target": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer->components/mermaid/utils/index.ts::MermaidDiagram",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::MarkdownRenderer",
+      "target": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::default->components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::default",
+      "target": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/markdown-renderer.tsx::default->components/mermaid/utils/index.ts::MermaidDiagram",
+      "source": "components/mermaid/viewer/markdown-renderer.tsx::default",
+      "target": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps->components/mermaid/utils/index.ts::MermaidDiagram",
+      "source": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewerProps",
+      "target": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/mermaid-viewer.tsx::ZoomState->components/mermaid/utils/index.ts::MermaidDiagram",
+      "source": "components/mermaid/viewer/mermaid-viewer.tsx::ZoomState",
+      "target": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewer->components/mermaid/utils/index.ts::MermaidDiagram",
+      "source": "components/mermaid/viewer/mermaid-viewer.tsx::MermaidViewer",
+      "target": "components/mermaid/utils/index.ts::MermaidDiagram",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic->components/atomic/glass-card/types.ts::GlassCardAtomicProps",
+      "source": "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic",
+      "target": "components/atomic/glass-card/types.ts::GlassCardAtomicProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/button.atomic.tsx::ButtonAtomic->components/atomic/button/types.ts::ButtonAtomicProps",
+      "source": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "target": "components/atomic/button/types.ts::ButtonAtomicProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/button.atomic.tsx::ButtonAtomicProps->components/atomic/button/types.ts::ButtonAtomicProps",
+      "source": "components/atomic/button/button.atomic.tsx::ButtonAtomicProps",
+      "target": "components/atomic/button/types.ts::ButtonAtomicProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonAtomicProps->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonAtomicProps",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonVariant->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonVariant",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonSize->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonSize",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonState->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonState",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonTheme->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonTheme",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonA11yProps->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonA11yProps",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonAtomicA11yProps->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonAtomicA11yProps",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonGroupProps->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonGroupProps",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonFormConfig->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonFormConfig",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonAtomicCompleteProps->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonAtomicCompleteProps",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonEventHandlers->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonEventHandlers",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonRenderProps->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonRenderProps",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::ButtonRenderProp->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::ButtonRenderProp",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::BUTTON_DEFAULTS->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::BUTTON_DEFAULTS",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/button/types.ts::default->components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "source": "components/atomic/button/types.ts::default",
+      "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/header/header.atomic.tsx::HeaderAtomic->components/atomic/header/types.ts::HeaderAtomicProps",
+      "source": "components/atomic/header/header.atomic.tsx::HeaderAtomic",
+      "target": "components/atomic/header/types.ts::HeaderAtomicProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular->components/molecular/navigation/types.ts::NavigationItem",
+      "source": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular",
+      "target": "components/molecular/navigation/types.ts::NavigationItem",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/accent-demo.tsx::AccentDemo->app/theme/theme-provider.tsx::ThemeProvider",
+      "source": "app/theme/components/accent-demo.tsx::AccentDemo",
+      "target": "app/theme/theme-provider.tsx::ThemeProvider",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/accent-demo.tsx::AccentDemo->app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "source": "app/theme/components/accent-demo.tsx::AccentDemo",
+      "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/accent-demo.tsx::default->app/theme/theme-provider.tsx::ThemeProvider",
+      "source": "app/theme/components/accent-demo.tsx::default",
+      "target": "app/theme/theme-provider.tsx::ThemeProvider",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/accent-demo.tsx::default->app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "source": "app/theme/components/accent-demo.tsx::default",
+      "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample->app/theme/theme-provider.tsx::ThemeProvider",
+      "source": "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+      "target": "app/theme/theme-provider.tsx::ThemeProvider",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample->app/theme/components/accent-demo.tsx::AccentDemo",
+      "source": "app/theme/components/theme-layout-example.tsx::ThemeLayoutExample",
+      "target": "app/theme/components/accent-demo.tsx::AccentDemo",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/theme-layout-example.tsx::default->app/theme/theme-provider.tsx::ThemeProvider",
+      "source": "app/theme/components/theme-layout-example.tsx::default",
+      "target": "app/theme/theme-provider.tsx::ThemeProvider",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/components/theme-layout-example.tsx::default->app/theme/components/accent-demo.tsx::AccentDemo",
+      "source": "app/theme/components/theme-layout-example.tsx::default",
+      "target": "app/theme/components/accent-demo.tsx::AccentDemo",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/runtime/theme_init.ts::ThemeInitOptions->app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "source": "app/theme/runtime/theme_init.ts::ThemeInitOptions",
+      "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/theme/runtime/theme_init.ts::ThemeDebug->app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "source": "app/theme/runtime/theme_init.ts::ThemeDebug",
+      "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
+      "type": "import",
+      "weight": 1
+    }
+  ],
+  "stats": {
+    "totalComponents": 134,
+    "tokenCoverage": 7.46,
+    "avgRiskScore": 6.14,
+    "atmoshericUsage": 10.45,
+    "legacyPatterns": 0
+  },
+  "generatedAt": "2025-08-11T08:28:32.985Z"
+}
