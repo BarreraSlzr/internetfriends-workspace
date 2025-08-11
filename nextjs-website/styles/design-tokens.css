@@ -79,9 +79,9 @@
     0.75
   );
   --glass-blur: clamp(
-    2px,
-    calc(2px + (10px * var(--glass-strength-default))),
-    12px
+    3px,
+    calc(3px + (12px * var(--glass-strength-default))),
+    16px
   );
   --glass-border-alpha: calc(0.08 + (0.1 * var(--glass-strength-default)));
   --glass-highlight-alpha: calc(0.04 + (0.06 * var(--glass-strength-default)));

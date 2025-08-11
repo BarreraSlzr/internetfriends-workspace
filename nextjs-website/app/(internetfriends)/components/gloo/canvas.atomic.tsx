@@ -39,6 +39,7 @@ const FRAGMENT_TEMPLATE = (
   resolution: number,
   seed: number,
   speed: number,
+  motionScale: number,
 ) =>
   `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -55,6 +56,7 @@ uniform vec3 uColor3;
 uniform vec3 uTint;
 
 const float speed = ${speed.toFixed(3)};
+const float MOTION_SCALE = ${motionScale.toFixed(3)};
 
 ${effectSource}
 
@@ -68,7 +70,8 @@ void main() {
   // Iterative warp
   for (int i = 1; i < ${depth}; i++) {
     float fi = float(i);
-    p += effect(p, fi, iTime);
+    // Master motion scale softly attenuates spatial warp to keep movement subtle
+    p += effect(p, fi, iTime) * MOTION_SCALE;
   }
 
   // Color mixing
@@ -89,8 +92,11 @@ void main() {
 }
 `.trim();
 
-export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
-  speed = 0.4,
+export const GlooCanvasAtomic: React.FC<
+  GlooCanvasProps & { motionScale?: number }
+> = ({
+  // Slower default speed for gentler temporal evolution
+  speed = 0.25,
   resolution = 2.0,
   depth = 4,
   seed = 2.4,
@@ -114,7 +120,12 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   reducedMotion = false,
   onError,
   onEffectChange,
+  // Optional external master motion scale (not yet in shared types – tolerated via augmentation)
+  motionScale: motionScaleProp,
 }) => {
+  // Master motion scale (amplitude attenuator). Could be overridden via prop or CSS var hook later.
+  const motionScale =
+    typeof motionScaleProp === "number" ? motionScaleProp : 0.55;
   // Debug mode detection (must be at top level)
   const isDebugMode = useMemo(() => {
     if (typeof window === "undefined") return false;
@@ -190,8 +201,16 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
 
   // Build fragment shader
   const fragment = useMemo(
-    () => FRAGMENT_TEMPLATE(effectSource, depth, resolution, seed, speed),
-    [effectSource, depth, resolution, seed, speed],
+    () =>
+      FRAGMENT_TEMPLATE(
+        effectSource,
+        depth,
+        resolution,
+        seed,
+        speed,
+        motionScale,
+      ),
+    [effectSource, depth, resolution, seed, speed, motionScale],
   );
 
   // Static uniforms
@@ -322,6 +341,7 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
       data-gloo-resolution={resolution}
       data-gloo-palette-strategy={finalPalette.strategy}
       data-gloo-palette-mode={finalPalette.mode}
+      data-gloo-motion-scale={motionScale}
       data-gloo-debug={isDebugMode}
     >
       <canvas
