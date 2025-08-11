@@ -371,7 +371,7 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
 
   // Header state
   const [headerState, setHeaderState] = useState<HeaderState>({
-    isSticky: false,
+    isSticky: true,
     isMobileMenuOpen: false,
     scrollPosition: 0,
     isHidden: false,
@@ -379,6 +379,10 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
     searchQuery: "",
     isAnnouncementVisible: announcement?.show || false,
   });
+
+  // Simple orb effect state (scale + margin shift)
+  const [orbActive, setOrbActive] = useState(false);
+  const [mouseX, setMouseX] = useState(0);
 
   // Scroll handler for sticky behavior
   useEffect(() => {
@@ -400,6 +404,9 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
         scrollPosition: scrollY,
       }));
 
+      // Activate orb effect when scrolled
+      setOrbActive(scrollY > 50);
+
       lastScrollY = scrollY;
       ticking = false;
     };
@@ -414,6 +421,28 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [sticky?.enabled, sticky?.offset, sticky?.hideOnScroll]);
+
+  // Mouse/touch position handler for orb effect
+  const handlePointerMove = (
+    e: React.MouseEvent<HTMLElement> | React.TouchEvent<HTMLElement>,
+  ) => {
+    if (!orbActive) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.width / 2;
+
+    // Handle both mouse and touch events
+    const clientX = "clientX" in e ? e.clientX : e.touches[0]?.clientX || 0;
+    const relativeX = clientX - rect.left - centerX;
+
+    // Normalize to -1 to 1, then scale for margin effect
+    const normalizedX = Math.max(-1, Math.min(1, relativeX / centerX));
+    setMouseX(normalizedX * 16); // Max 16px shift for subtlety
+  };
+
+  // Reset orb position when leaving header
+  const handlePointerLeave = () => {
+    setMouseX(0);
+  };
 
   // Context value
   const contextValue: HeaderContextValue = {
@@ -468,11 +497,15 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   return (
     <HeaderContext.Provider value={contextValue}>
       <header
+        onMouseMove={handlePointerMove}
+        onTouchMove={handlePointerMove}
+        onMouseLeave={handlePointerLeave}
+        onTouchEnd={handlePointerLeave}
         className={cn(
           styles.headerOrganism,
           sizeStyles[size],
-          "w-full z-40 transition-all duration-300",
-          sticky?.enabled && "sticky top-0",
+          "w-full z-40 transition-all duration-500 ease-out",
+          "sticky top-0",
           headerState.isSticky && sticky?.stickyClassName,
           headerState.isHidden && "transform -translate-y-full",
           variant === "glass" &&
@@ -488,8 +521,14 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
         )}
         style={{
           transitionDuration: sticky?.transitionDuration,
+          transform: orbActive ? `scale(0.82)` : "scale(1)",
+          marginLeft: orbActive ? `${mouseX}px` : "0px",
+          marginRight: orbActive ? `${-mouseX}px` : "0px",
+          marginTop: orbActive ? "8px" : "0px",
+          borderRadius: orbActive ? "var(--radius-md)" : "0",
         }}
         data-testid={testId}
+        data-orb-active={orbActive}
         id={id}
         aria-label={ariaLabel || t("accessibility.skipToContent")}
         {...props}

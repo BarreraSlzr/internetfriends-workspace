@@ -11,6 +11,27 @@
   width: 100%;
   min-height: var(--header-height, 4rem);
 
+  // Simple orb effect - scale + margin transitions
+  transition:
+    transform 500ms ease-out,
+    margin 500ms ease-out,
+    border-radius 300ms ease-out;
+
+  &[data-orb-active="true"] {
+    will-change: transform, margin, border-radius;
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &[data-orb-active="true"] {
+      transform: scale(0.85) !important; // Subtle scale only
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+
   // Glass morphism integration
   &.glass {
     background: var(--glass-bg-header);

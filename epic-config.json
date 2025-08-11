@@ -80,5 +80,21 @@
       "quality": "+85%",
       "maintainability": "+90%"
     }
+  },
+  "steadiest-addressability-v1": {
+    "name": "steadiest-addressability-v1",
+    "status": "in-progress",
+    "completion": 0,
+    "features": [
+      "gloo-client-wrapper",
+      "minimal-api-interfaces",
+      "boundary-pattern-system"
+    ],
+    "owner": "Emmanuel Barrera Salazar (BarreraSlzr)",
+    "timeline": "3-5 days",
+    "blockers": [],
+    "goals": [
+      "Apply Gloo WebGL learnings to systematize minimal, addressable interfaces across the project"
+    ]
   }
 }

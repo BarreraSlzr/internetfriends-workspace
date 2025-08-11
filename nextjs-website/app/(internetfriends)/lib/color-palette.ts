@@ -122,9 +122,9 @@ interface AdaptiveOptions {
 export function getAdaptiveGooColors(
   mode: "light" | "dark",
   {
-    desaturateLight = 0.55,
-    lightenLight = 0.06,
-    darkBoost = 1.05,
+    desaturateLight = 0.85,
+    lightenLight = 0.02,
+    darkBoost = 1.15,
     rotateHue = 0,
     count = 3,
     sourcePalette = colors,
@@ -140,7 +140,7 @@ export function getAdaptiveGooColors(
       l = Math.min(1, l + lightenLight);
     } else {
       s = Math.min(1, s * darkBoost);
-      l = Math.min(1, l * 0.95 + 0.02);
+      l = Math.min(1, l * 0.92 + 0.05);
     }
     return hslToRgb([h, s, l]);
   });
