@@ -3,22 +3,42 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Sun, Moon } from "lucide-react";
+import { useState, useEffect } from "react";
 import content from "../content.json";
 
-import { BgGoo } from "./backgrounds/gloo";
 import { useTheme } from "@/hooks/use-theme";
 import { GlassPanel } from "@/components/glass";
 import { HeaderVignette } from "@/components/effects/dark-vignette";
 
 export default function Header() {
   const { toggleTheme, isDark } = useTheme();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 50;
+      setIsScrolled(scrolled);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <GlassPanel
       as="header"
       depth={3}
       noise="weak"
       elevation={2}
-      className="flex items-center justify-between sm:p-6 p-2 py-4 md:p-8 rounded-t-lg border-accent-medium"
+      className={`
+        sticky top-0 z-50 flex items-center justify-between sm:p-6 p-2 py-4 md:p-8
+        border-b border-accent-medium rounded-t-lg
+        transition-all duration-300 ease-in-out
+        ${isScrolled ? "rounded-t-lg rounded-b-none shadow-sm" : "rounded-t-lg rounded-b-none"}
+      `}
+      data-scrolled={isScrolled}
     >
       <Link href="/">
         <div className="flex items-center gap-2">
@@ -28,12 +48,6 @@ export default function Header() {
               aria-hidden="true"
             >
               <HeaderVignette />
-              <BgGoo
-                modeStyle="teen"
-                adaptiveColors
-                speed={0.18}
-                suspendOffscreen
-              />
             </div>
             <Image
               className="relative z-10 select-none pointer-events-none"

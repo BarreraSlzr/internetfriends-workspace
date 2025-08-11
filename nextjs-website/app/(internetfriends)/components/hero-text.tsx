@@ -4,7 +4,7 @@ import { PropsWithChildren } from "react";
 import content from "../content.json";
 import NoiseFilter from "./backgrounds/noise-filter-div";
 import { motion } from "framer-motion";
-import { BgGoo } from "./backgrounds/gloo";
+
 import { HeroVignette } from "@/components/effects/dark-vignette";
 
 const DefaultHero = () => (
@@ -39,13 +39,7 @@ export default function HeroText({
           role="ambient"
           strength="normal"
         />
-        <BgGoo
-          modeStyle="teen"
-          adaptiveColors
-          speed={0.28}
-          intensity={1.0}
-          suspendOffscreen
-        />
+
         <HeroVignette />
         <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/50 to-background/70 backdrop-blur-[1px]" />
       </div>

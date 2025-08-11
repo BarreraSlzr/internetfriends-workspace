@@ -5,6 +5,12 @@ import { cn } from "@/lib/utils";
 import { HeaderAtomicProps } from "./types";
 import { useTheme } from "@/hooks/use-theme";
 
+/**
+ * Simplified HeaderAtomic
+ * - Clean sticky header with glass morphism
+ * - Minimal scroll state management
+ * - Standard border radius (md/tiny)
+ */
 export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   children,
   className,
@@ -33,8 +39,8 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   return (
     <header
       className={cn(
-        // Base header styles
-        "w-full transition-all duration-300 ease-in-out",
+        // Base header styles with standard border radius
+        "relative w-full transition-all duration-300 ease-in-out border-b border-border rounded-std",
 
         // Positioning
         sticky && "sticky top-0 z-50",
@@ -47,10 +53,10 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
         ],
 
         // Non-transparent fallback
-        !transparent && [
-          "bg-background border-b border-border",
-          isScrolled && "shadow-glass",
-        ],
+        !transparent && ["bg-background", isScrolled && "shadow-sm"],
+
+        // Scrolled state: subtle elevation
+        isScrolled && "shadow-sm",
 
         className,
       )}

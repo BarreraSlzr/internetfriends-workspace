@@ -10,6 +10,7 @@ import { I18nProvider } from "@/i18n";
 import content from "@/app/(internetfriends)/content.json";
 import { ClientRUMWrapper } from "@/components/perf/client-rum-wrapper";
 import { AccentInitializer } from "@/components/theme/accent-initializer";
+import { GlooClient } from "@/app/(internetfriends)/components/gloo-client";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -101,11 +102,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  // verification: {
-  //   google: 'your-google-verification-code',
-  //   yandex: 'your-yandex-verification-code',
-  //   yahoo: 'your-yahoo-verification-code',
-  // },
   alternates: {
     canonical: content.siteConfig.url,
     languages: {
@@ -136,9 +132,14 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${orbitron.variable}`}
+        style={{
+          background:
+            "linear-gradient(135deg, rgba(59,130,246,0.03) 0%, rgba(147,51,234,0.03) 50%, rgba(236,72,153,0.03) 100%)",
+        }}
       >
         <ThemeProvider>
           <AccentInitializer />
+          <GlooClient />
           <I18nProvider>
             <Suspense fallback="Loading">
               {children}

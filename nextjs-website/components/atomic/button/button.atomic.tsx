@@ -61,11 +61,11 @@ const buttonVariants = cva(
         ],
       },
       size: {
-        xs: [styles.xs, "h-7 px-2 text-xs rounded-[var(--radius-xs)]"],
-        sm: [styles.sm, "h-8 px-3 text-sm rounded-[var(--radius-sm)]"],
-        md: [styles.md, "h-10 px-4 text-sm rounded-[var(--radius-md)]"],
-        lg: [styles.lg, "h-12 px-6 text-base rounded-[var(--radius-lg)]"],
-        xl: [styles.xl, "h-14 px-8 text-lg rounded-[var(--radius-lg)]"],
+        xs: [styles.xs, "h-7 px-2 text-xs rounded-compact"],
+        sm: [styles.sm, "h-8 px-3 text-sm rounded-compact"],
+        md: [styles.md, "h-10 px-4 text-sm rounded-std"],
+        lg: [styles.lg, "h-12 px-6 text-base rounded-std"],
+        xl: [styles.xl, "h-14 px-8 text-lg rounded-std"],
       },
       fullWidth: {
         true: "w-full",
