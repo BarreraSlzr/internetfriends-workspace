@@ -101,5 +101,19 @@
       "maintainability": "+85%",
       "addressability": "+100%"
     }
+  },
+  "background-landingpage-parity-v1": {
+    "name": "background-landingpage-parity-v1",
+    "status": "in-progress",
+    "completion": 0,
+    "features": [
+      "bggoo-simple-core"
+    ],
+    "owner": "Emmanuel Barrera Salazar (BarreraSlzr)",
+    "timeline": "2 days",
+    "blockers": [],
+    "goals": [
+      "Replace complex WebGL framework with landingpage's simple BgGooSimple approach, add parallax, maintain visual parity"
+    ]
   }
 }
