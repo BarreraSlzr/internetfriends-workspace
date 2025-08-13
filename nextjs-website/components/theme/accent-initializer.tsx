@@ -1,9 +1,8 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
-import { useEffect } from "react";
-import { useTheme } from "@/hooks/use-theme";
 import { getAdaptiveGooColorTuples } from "@/app/(internetfriends)/lib/color-palette";
+import { useTheme } from "@/hooks/use-theme";
+import { useEffect } from "react";
 
 /**
  * AccentInitializer - Runtime adaptive color injection

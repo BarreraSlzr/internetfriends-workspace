@@ -1,4 +1,3 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
 /**
@@ -17,17 +16,10 @@ import { generateStamp } from "@/lib/utils/timestamp";
  */
 
 import React from "react";
-import type { Metadata } from "next";
 import { HeaderOrganism } from "@/components/organisms/header/header.organism";
 import { ThemeLayoutExample } from "../../theme/components/theme-layout-example";
 import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
 import { ButtonAtomic } from "@/components/atomic/button";
-
-export const metadata: Metadata = {
-  title: "Theme Demo | InternetFriends",
-  description:
-    "Interactive demonstration of the InternetFriends dynamic accent theming system",
-};
 
 export default function ThemeDemoPage() {
   return (
@@ -57,7 +49,7 @@ export default function ThemeDemoPage() {
             🚀 Welcome to the InternetFriends Theme System
           </h2>
 
-            {/* Narrative */}
+          {/* Narrative */}
           <div className="prose prose-sm md:prose-base max-w-none">
             <p className="text-secondary leading-relaxed mb-6">
               This page demonstrates the dynamic accent engine. The interface

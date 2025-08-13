@@ -18,4 +18,3 @@ export default function SocialLinks() {
   );
 }
 
-import { generateStamp } from "@/lib/utils/timestamp";

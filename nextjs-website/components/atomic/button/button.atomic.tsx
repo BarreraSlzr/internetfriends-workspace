@@ -1,4 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 // InternetFriends Atomic Button Component
 // Extends shadcn/ui Button with InternetFriends design system
 

@@ -1,5 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-("use client");
+"use client";
 
 import React, { useState, useEffect, useMemo } from "react";
 import { useTheme } from "@/hooks/use-theme";

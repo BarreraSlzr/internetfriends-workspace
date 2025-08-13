@@ -1,4 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 interface GridBackgroundProps {
   size?: number;
   className?: string;

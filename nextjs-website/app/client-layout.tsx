@@ -1,4 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 "use client";
 /**
  * client-layout.tsx - Client-side wrapper for layout components

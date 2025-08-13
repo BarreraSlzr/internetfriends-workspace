@@ -42,4 +42,3 @@ export function CustomCard({
   );
 }
 
-import { generateStamp } from "@/lib/utils/timestamp";

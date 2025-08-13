@@ -1,19 +1,20 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
-("use client");
+"use client"
+
+import { getTimestamp } from "@/lib/utils/timestamp";
 /**
  * global.organism.tsx - Epic Gloo Global Organism Component
  * Theme-aware WebGL background with InternetFriends palette integration
  */
 
-import React, { useMemo, useEffect, useState } from "react";
 import { useTheme } from "@/hooks/use-theme";
+import React, { useEffect, useMemo, useState } from "react";
 import { GlooCanvasAtomic } from "./canvas.atomic";
 import { generateGlooPalette } from "./palette";
 import type {
+  GlooEffectName,
   GlooGlobalProps,
   GlooPalette,
   GlooThemeMode,
-  GlooEffectName,
 } from "./types";
 
 export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({

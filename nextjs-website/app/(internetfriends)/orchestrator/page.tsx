@@ -1,30 +1,4 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
-("use client");
-// NOTE: Pending orchestrator diagnostics fix requires:
-// 1. Replace custom node/edge change handlers with applyNodeChanges/applyEdgeChanges/addEdge
-// 2. Import BackgroundVariant and use variant={BackgroundVariant.Dots}
-// 3. Remove unused 'Connection' import
-// 4. Update RealTimeMonitor props from state/metrics -> orchestratorState/projectMetrics (confirm actual prop names)
-// To proceed precisely I need the exact surrounding code blocks (imports section, onNodesChange/onEdgesChange/onConnect implementations, and the RealTimeMonitor JSX) with line numbers. Provide those snippets and I'll apply minimal targeted replacements.
-
-/**
- * Orchestrator Page
- *
- * Restored & reconstructed from legacy .bak (partial source was available).
- * Updated to use the new HeaderOrganism and modernized patterns:
- *  - Dynamic ReactFlow import (heavy / client-only)
- *  - Modular node types (project/state/process)
- *  - Real-time metrics simulation
- *  - Accessible skip-to-main via HeaderOrganism
- *
- * Epic: glass-refinement-v1
- *
- * Future Enhancements:
- *  - Persist orchestrator graph state (server action / KV)
- *  - Hook into actual build / lint / test pipelines
- *  - Display epic progress overlays
- *  - AI agent thread visualization (agent orchestration)
- */
+"use client";
 
 import React, {
   useCallback,
@@ -34,6 +8,7 @@ import React, {
   useState,
   Suspense,
 } from "react";
+import { getTimestamp } from "@/lib/utils/timestamp";
 import dynamic from "next/dynamic";
 import { HeaderOrganism } from "@/components/organisms/header/header.organism";
 import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";

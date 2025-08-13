@@ -43,4 +43,3 @@ export default function HeaderSimple() {
   );
 }
 
-import { generateStamp } from "@/lib/utils/timestamp";

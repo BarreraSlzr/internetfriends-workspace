@@ -2,7 +2,7 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { generateStamp } from "@/lib/utils/timestamp";
+import { useClientSide } from "@/hooks/use-client-side";
 
 export interface GlassRefinedAtomicProps {
   children?: React.ReactNode;
@@ -70,7 +70,12 @@ export const GlassRefinedAtomic = React.memo(
       },
       ref,
     ) => {
-      const stamp = React.useMemo(() => generateStamp(), []);
+      // Use client-side detection hook to prevent hydration mismatches
+      const { isClient, isMobile, isDarkMode, prefersReducedMotion } =
+        useClientSide();
+
+      // Static stamp to avoid hydration mismatches
+      const stamp = React.useMemo(() => "static-stamp", []);
 
       // Calculate effective strength with responsive adjustments
       const modeConfig = mode ? GLASS_MODE_CONFIG[mode] : null;
@@ -78,23 +83,10 @@ export const GlassRefinedAtomic = React.memo(
       const baseStrength =
         propStrength ?? modeConfig?.strength ?? variantConfig.strength;
 
-      // Reduce strength slightly on mobile for better performance and readability
-      const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+      // Use client-side values or fallback to server-safe defaults
       const effectiveStrength = isMobile
         ? Math.max(0.2, baseStrength * 0.85)
         : baseStrength;
-
-      // Detect dark mode
-      const isDarkMode =
-        typeof window !== "undefined" &&
-        (window.matchMedia("(prefers-color-scheme: dark)").matches ||
-          document.documentElement.getAttribute("data-theme") === "dark");
-
-      // Respect user's motion preferences
-      const prefersReducedMotion =
-        typeof window !== "undefined"
-          ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          : false;
 
       // Calculate derived properties with improved scaling for better transparency
       const glassAlpha = Math.max(
@@ -107,34 +99,63 @@ export const GlassRefinedAtomic = React.memo(
       const glassNoiseAlpha = Math.min(0.06, 0.01 + 0.05 * effectiveStrength);
 
       const computedStyle: React.CSSProperties = {
-        // Glass strength CSS custom properties
-        "--glass-strength": effectiveStrength,
-        "--glass-alpha": glassAlpha,
+        // Glass strength CSS custom properties (must be strings for consistency)
+        "--glass-strength": effectiveStrength.toString(),
+        "--glass-alpha": glassAlpha.toString(),
         "--glass-blur": `${glassBlur}px`,
-        "--glass-border-alpha": glassBorderAlpha,
-        "--glass-highlight-alpha": glassHighlightAlpha,
-        "--glass-noise-alpha": glassNoiseAlpha,
+        "--glass-border-alpha": glassBorderAlpha.toString(),
+        "--glass-highlight-alpha": glassHighlightAlpha.toString(),
+        "--glass-noise-alpha": glassNoiseAlpha.toString(),
 
         // Apply glass effects with enhanced transparency and stronger backdrop effects
-        background: isDarkMode
-          ? `rgba(var(--if-neutral-900, 15, 23, 42), ${glassAlpha})`
-          : `rgba(var(--if-neutral-100, 241, 245, 249), ${glassAlpha})`,
-        backdropFilter: `blur(${glassBlur}px) saturate(1.25) brightness(${isDarkMode ? "1.1" : "0.95"})`,
-        WebkitBackdropFilter: `blur(${glassBlur}px) saturate(1.25) brightness(${isDarkMode ? "1.1" : "0.95"})`,
-        border: bordered
-          ? isDarkMode
-            ? `1px solid rgba(var(--if-primary, 59, 130, 246), ${glassBorderAlpha * 1.5})`
-            : `1px solid rgba(var(--if-neutral-300, 203, 213, 225), ${glassBorderAlpha * 1.2})`
-          : "none",
+        ...(isClient
+          ? {
+              background: isDarkMode
+                ? `rgba(var(--if-neutral-900, 15, 23, 42), ${glassAlpha})`
+                : `rgba(var(--if-neutral-100, 241, 245, 249), ${glassAlpha})`,
+              backdropFilter: `blur(${glassBlur}px) saturate(1.25) brightness(${isDarkMode ? "1.1" : "0.95"})`,
+              WebkitBackdropFilter: `blur(${glassBlur}px) saturate(1.25) brightness(${isDarkMode ? "1.1" : "0.95"})`,
+              border: bordered
+                ? isDarkMode
+                  ? `1px solid rgba(var(--if-primary, 59, 130, 246), ${glassBorderAlpha * 1.5})`
+                  : `1px solid rgba(var(--if-neutral-300, 203, 213, 225), ${glassBorderAlpha * 1.2})`
+                : "none",
+              color: isDarkMode
+                ? "rgba(255, 255, 255, 0.95)"
+                : "rgba(0, 0, 0, 0.87)",
+              textShadow: isDarkMode
+                ? "0 1px 2px rgba(0, 0, 0, 0.4)"
+                : "0 1px 2px rgba(255, 255, 255, 0.8)",
+            }
+          : {
+              // Server-safe fallbacks
+              background: "rgba(var(--if-neutral-100, 241, 245, 249), 0.1)",
+              backdropFilter: "blur(10px) saturate(1.25) brightness(0.95)",
+              WebkitBackdropFilter:
+                "blur(10px) saturate(1.25) brightness(0.95)",
+              border: bordered
+                ? "1px solid rgba(var(--if-neutral-300, 203, 213, 225), 0.15)"
+                : "none",
+              color: "rgba(0, 0, 0, 0.87)",
+              textShadow: "0 1px 2px rgba(255, 255, 255, 0.8)",
+            }),
 
         // Enhanced shadow system for better depth perception with softer shadows
-        boxShadow: bordered
-          ? isDarkMode
-            ? `inset 0 1px 0 rgba(var(--if-primary, 59, 130, 246), ${glassHighlightAlpha * 0.5}), 0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(0, 0, 0, ${0.3 + 0.2 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.05)`
-            : `inset 0 1px 0 rgba(var(--if-neutral-100, 241, 245, 249), ${glassHighlightAlpha * 1.2}), 0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(var(--if-neutral-900, 15, 23, 42), ${0.08 + 0.07 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.1)`
-          : isDarkMode
-            ? `0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(0, 0, 0, ${0.3 + 0.2 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.05)`
-            : `0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(var(--if-neutral-900, 15, 23, 42), ${0.08 + 0.07 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.1)`,
+        ...(isClient
+          ? {
+              boxShadow: bordered
+                ? isDarkMode
+                  ? `inset 0 1px 0 rgba(var(--if-primary, 59, 130, 246), ${glassHighlightAlpha * 0.5}), 0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(0, 0, 0, ${0.3 + 0.2 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.05)`
+                  : `inset 0 1px 0 rgba(var(--if-neutral-100, 241, 245, 249), ${glassHighlightAlpha * 1.2}), 0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(var(--if-neutral-900, 15, 23, 42), ${0.08 + 0.07 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.1)`
+                : isDarkMode
+                  ? `0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(0, 0, 0, ${0.3 + 0.2 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.05)`
+                  : `0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(var(--if-neutral-900, 15, 23, 42), ${0.08 + 0.07 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.1)`,
+            }
+          : {
+              boxShadow: bordered
+                ? "inset 0 1px 0 rgba(var(--if-neutral-100, 241, 245, 249), 0.1), 0 8px 24px -8px rgba(var(--if-neutral-900, 15, 23, 42), 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1)"
+                : "0 8px 24px -8px rgba(var(--if-neutral-900, 15, 23, 42), 0.08), 0 0 0 1px rgba(255, 255, 255, 0.1)",
+            }),
 
         // Position for noise overlay with performance hints
         position: "relative",
@@ -146,12 +167,6 @@ export const GlassRefinedAtomic = React.memo(
             ? "transform, backdrop-filter"
             : "auto",
         isolation: "isolate", // Create stacking context for better compositing
-
-        // Text contrast enhancement
-        color: isDarkMode ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.87)",
-        textShadow: isDarkMode
-          ? "0 1px 2px rgba(0, 0, 0, 0.4)"
-          : "0 1px 2px rgba(255, 255, 255, 0.8)",
       } as React.CSSProperties;
 
       return (
@@ -184,8 +199,8 @@ export const GlassRefinedAtomic = React.memo(
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-if-primary focus-visible:ring-offset-2",
             "focus-visible:border-if-primary/50",
 
-            // Text contrast classes
-            isDarkMode ? "text-white/95" : "text-black/87",
+            // Text contrast classes (only apply on client)
+            isClient && (isDarkMode ? "text-white/95" : "text-black/87"),
 
             // Hover effects (respect reduced motion)
             hover &&
@@ -221,7 +236,7 @@ export const GlassRefinedAtomic = React.memo(
           {children}
 
           {/* Noise overlay layer */}
-          {noise && (
+          {noise && isClient && (
             <div
               className="absolute inset-0 pointer-events-none"
               style={{

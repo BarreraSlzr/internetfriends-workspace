@@ -21,4 +21,3 @@ Textarea.displayName = "Textarea";
 
 export { Textarea };
 
-import { generateStamp } from "@/lib/utils/timestamp";

@@ -1,4 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 // InternetFriends Accent Token Demo Component
 // Demonstrates the accent token system integration with button components
 

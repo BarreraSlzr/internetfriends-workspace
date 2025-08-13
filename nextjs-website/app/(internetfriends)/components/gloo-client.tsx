@@ -1,4 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 "use client";
 /**
  * gloo-client.tsx - Simplified Gloo Client using landingpage approach

@@ -29,4 +29,3 @@ export { ProfileExpertiseTab };
 
 export default ProfileExpertiseTab;
 
-import { generateStamp } from "@/lib/utils/timestamp";

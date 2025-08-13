@@ -25,4 +25,3 @@ export { ProfileSkillsTab };
 
 export default ProfileSkillsTab;
 
-import { generateStamp } from "@/lib/utils/timestamp";

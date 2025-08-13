@@ -45,17 +45,16 @@ const messages = [
 ];
 
 export default function NotFoundPage() {
-  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  // Use first message to avoid hydration mismatch from Math.random()
+  const message = messages[0];
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8">
       <div className="text-center max-w-2xl">
         <h1 className="text-4xl font-bold mb-4 font-mono text-foreground">
-          404 - {randomMessage.main}
+          404 - {message.main}
         </h1>
-        <p className="text-lg mb-6 text-muted-foreground">
-          {randomMessage.subtitle}
-        </p>
+        <p className="text-lg mb-6 text-muted-foreground">{message.subtitle}</p>
         <Link
           href="/"
           className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity text-primary"
@@ -67,5 +66,3 @@ export default function NotFoundPage() {
     </main>
   );
 }
-
-import { generateStamp } from "@/lib/utils/timestamp";

@@ -7,8 +7,8 @@
  */
 
 import { $ } from 'bun';
-import { generateStamp, getIsoTimestamp } from '../../components/utils/stamp';
 import { mkdir, writeFile } from 'node:fs/promises';
+import { generateStamp, getIsoTimestamp } from '../../components/utils/stamp';
 
 interface ProgressState {
   sessionId: string;

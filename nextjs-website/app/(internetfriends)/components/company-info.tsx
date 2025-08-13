@@ -25,4 +25,3 @@ export default async function CompanyInfo() {
   );
 }
 
-import { generateStamp } from "@/lib/utils/timestamp";

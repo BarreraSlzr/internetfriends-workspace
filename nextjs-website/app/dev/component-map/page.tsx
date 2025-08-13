@@ -1,7 +1,5 @@
 "use client";
 
-import { generateStamp } from "@/lib/utils/timestamp";
-
 // Force dynamic rendering to bypass SSR hook issues
 export const dynamic = "force-dynamic";
 

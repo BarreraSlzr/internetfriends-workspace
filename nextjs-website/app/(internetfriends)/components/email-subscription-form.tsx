@@ -1,10 +1,9 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
-import { PropsWithChildren, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { PropsWithChildren, useState } from "react";
 
 export function EmailSubscriptionForm({
   url,

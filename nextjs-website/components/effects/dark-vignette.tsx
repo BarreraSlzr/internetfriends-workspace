@@ -1,8 +1,7 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
-import React from "react";
 import { useTheme } from "@/hooks/use-theme";
+import React from "react";
 
 export interface DarkVignetteProps {
   intensity?: "subtle" | "medium" | "strong";

@@ -24,7 +24,6 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { ClientOnly } from "../patterns/boundary-patterns";
 import {
   CANVAS_DEFAULTS,
   createCanvasContext,
@@ -400,56 +399,54 @@ export const CanvasBackgroundClient: React.FC<CanvasBackgroundClientProps> = ({
     epicContext?.epicName,
   ]);
 
+  // Hydration-safe client detection
+  const [isClient, setIsClient] = useState(false);
+  
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   if (disabled) return null;
 
+  // Don't render anything during SSR
+  if (!isClient) return null;
+
   return (
-    <ClientOnly
-      config={{
-        fallback: null,
-        debug: process.env.NODE_ENV === "development",
-        epicContext: epicContext
-          ? {
-              epicName: epicContext.epicName || "unknown",
-              epicPhase: epicContext.epicPhase || "development",
-            }
-          : undefined,
+    <div
+      className={[
+        "canvas-background-client",
+        "fixed inset-0 pointer-events-none select-none",
+        className || "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={{
+        zIndex,
+        isolation: "isolate",
+        willChange: shouldAnimate ? "transform" : "auto",
+        width: "100vw",
+        height: "100vh",
+        minWidth: "100vw",
+        minHeight: "100vh",
+        overflow: "hidden",
+        ...style,
       }}
+      data-testid={testId}
+      data-canvas-client="true"
+      data-canvas-effect-index={effectIndex}
+      data-canvas-theme={isDark ? "dark" : "light"}
+      data-epic={epicContext?.epicName}
+      data-epic-phase={epicContext?.epicPhase}
     >
-      <div
-        className={[
-          "canvas-background-client",
-          "fixed inset-0 pointer-events-none select-none",
-          className || "",
-        ]
-          .filter(Boolean)
-          .join(" ")}
+      <canvas
+        ref={canvasRef}
         style={{
-          zIndex,
-          isolation: "isolate",
-          willChange: shouldAnimate ? "transform" : "auto",
-          width: "100vw",
-          height: "100vh",
-          minWidth: "100vw",
-          minHeight: "100vh",
-          overflow: "hidden",
-          ...style,
+          width: "100%",
+          height: "100%",
+          display: "block",
+          opacity: shouldAnimate ? 1 : 0.5,
         }}
-        data-testid={testId}
-        data-canvas-client="true"
-        data-canvas-effect-index={effectIndex}
-        data-canvas-theme={isDark ? "dark" : "light"}
-        data-epic={epicContext?.epicName}
-        data-epic-phase={epicContext?.epicPhase}
-      >
-        <canvas
-          ref={canvasRef}
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "block",
-            opacity: shouldAnimate ? 1 : 0.5,
-          }}
-        />
+      />
 
         {/* Development debug info */}
         {process.env.NODE_ENV === "development" && (
@@ -502,8 +499,7 @@ export const CanvasBackgroundClient: React.FC<CanvasBackgroundClientProps> = ({
           Colors: {colors[0]}
         </div>
       </div>
-    </ClientOnly>
-  );
-};
+    );
+  };
 
-export default CanvasBackgroundClient;
+  export default CanvasBackgroundClient;

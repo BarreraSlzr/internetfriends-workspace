@@ -1,5 +1,6 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
-("use client");
+"use client";
+
+import { getTimestamp } from "@/lib/utils/timestamp";
 
 import MotionDiv from "@/app/(internetfriends)/components/motion-div";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

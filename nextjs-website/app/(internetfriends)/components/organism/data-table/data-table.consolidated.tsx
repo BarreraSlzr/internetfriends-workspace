@@ -1,5 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-("use client");
+"use client"
 /**
  * data-table.consolidated.tsx - Consolidated DataTable Component
  *
@@ -10,7 +9,7 @@ import { generateStamp } from "@/lib/utils/timestamp";
  * - Applies productive defaults from usage patterns
  */
 
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { ClientOnly } from "../../../patterns/boundary-patterns";
 
 // Consolidated interface - 6 props maximum
@@ -38,7 +37,7 @@ const TABLE_DEFAULTS = {
 // Types (simplified)
 interface TableRow {
   id: string | number;
-  [key: string]: any;
+  [key: string]: string | number | boolean | null | undefined;
 }
 
 interface TableColumn {
@@ -83,6 +82,11 @@ export const DataTableConsolidated: React.FC<DataTableConsolidatedProps> = ({
         const aValue = a[sortConfig.key];
         const bValue = b[sortConfig.key];
         const modifier = sortConfig.direction === "desc" ? -1 : 1;
+
+        // Handle null/undefined values
+        if (aValue == null && bValue == null) return 0;
+        if (aValue == null) return -1 * modifier; // null/undefined sorts to beginning
+        if (bValue == null) return 1 * modifier;
 
         if (aValue < bValue) return -1 * modifier;
         if (aValue > bValue) return 1 * modifier;
