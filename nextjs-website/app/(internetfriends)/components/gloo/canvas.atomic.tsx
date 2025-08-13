@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * canvas.atomic.tsx - Epic Gloo Canvas Atomic Component

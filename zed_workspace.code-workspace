@@ -1,7 +1,7 @@
 {
   "folders": [
     {
-      "path": "production-landing"
+      "path": "nextjs-website"
     },
     {
       "path": "shared"
@@ -19,6 +19,8 @@
   "settings": {
     "auto_save": "on_focus_change",
     "format_on_save": "on",
-    "tab_size": 2
+    "tab_size": 2,
+    "cursor.composer.shouldAllowCustomModes": true,
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true
   }
 }

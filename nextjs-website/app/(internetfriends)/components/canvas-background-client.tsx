@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * canvas-background-client.tsx - Canvas-based Background Client
@@ -215,7 +216,7 @@ export const CanvasBackgroundClient: React.FC<CanvasBackgroundClientProps> = ({
   const { isDark } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationFrameRef = useRef<number>();
-  const startTimeRef = useRef<number>(Date.now());
+  const startTimeRef = useRef<number>(getIsoTimestamp()());
   const [fps, setFps] = useState(0);
   const frameCountRef = useRef(0);
   const lastTimeRef = useRef(0);
@@ -299,7 +300,7 @@ export const CanvasBackgroundClient: React.FC<CanvasBackgroundClientProps> = ({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const now = Date.now();
+    const now = getIsoTimestamp()();
     const elapsed = (now - startTimeRef.current) * speedMultiplier;
 
     // Update FPS counter
@@ -355,7 +356,7 @@ export const CanvasBackgroundClient: React.FC<CanvasBackgroundClientProps> = ({
     updateSize();
 
     // Start animation
-    startTimeRef.current = Date.now();
+    startTimeRef.current = getIsoTimestamp()();
     animate();
 
     // Handle resize

@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * boundary-patterns.tsx - Client/Server Boundary Pattern System

@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
@@ -92,7 +93,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   const [charts, setCharts] = useState<ChartData[]>([]);
   const [insights, setInsights] = useState<MetricInsight[]>([]);
 
-  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
+  const [lastUpdate, setLastUpdate] = useState<Date>(generateStamp()());
 
   // Time Range Options
   const timeRangeOptions: Array<{ value: TimeRange; label: string }> = [
@@ -157,7 +158,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
 
   const generateMockCharts = useCallback((): ChartData[] => {
     const dates = Array.from({ length: 30 }, (_, i) => {
-      const date = new Date();
+      const date = generateStamp()();
       date.setDate(date.getDate() - (29 - i));
       return date;
     });
@@ -264,7 +265,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       setKpis(generateMockKPIs());
       setCharts(generateMockCharts());
       setInsights(generateMockInsights());
-      setLastUpdate(new Date());
+      setLastUpdate(generateStamp()());
 
       UIEvents.pageLoad("analytics", performance.now(), userId);
     } catch (err) {
@@ -308,7 +309,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       insights,
       timeRange: selectedTimeRange,
       // filters: activeFilters,  // removed (activeFilters state eliminated)
-      timestamp: new Date(),
+      timestamp: generateStamp()(),
     };
 
     onExport?.(exportData);

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Search, ChevronDown, ChevronRight, Grid, List } from "lucide-react";
+import { getIsoTimestamp } from "@/lib/utils/timestamp";
 
 // Event-driven types matching the micro-ux-explorer
 interface ExplorerEvent {
@@ -113,7 +114,7 @@ export const ProjectExplorerAtomic: React.FC<ProjectExplorerProps> = ({
     (type: ExplorerEvent["type"], data: unknown) => {
       const event: ExplorerEvent = {
         type,
-        timestamp: new Date().toISOString(),
+        timestamp: getIsoTimestamp(),
         data,
         metadata: {
           source: "project-explorer-client",

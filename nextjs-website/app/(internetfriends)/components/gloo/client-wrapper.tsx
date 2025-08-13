@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * client-wrapper.tsx - Client-side wrapper for GlooGlobal

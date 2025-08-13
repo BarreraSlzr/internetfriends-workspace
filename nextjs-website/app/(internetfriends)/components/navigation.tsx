@@ -21,3 +21,5 @@ export default function Navigation() {
     </nav>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * global.organism.tsx - Epic Gloo Global Organism Component
@@ -48,7 +49,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
     null,
   );
   const [paletteGenerationSeed, setPaletteGenerationSeed] = useState(
-    seed || Date.now(),
+    seed || getIsoTimestamp()(),
   );
 
   // Detect reduced motion preference
@@ -120,7 +121,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
     if (!autoRegeneratePalette || still || disabled) return;
 
     const intervalId = setInterval(() => {
-      setPaletteGenerationSeed(Date.now());
+      setPaletteGenerationSeed(getIsoTimestamp()());
     }, paletteRegenerateMs);
 
     return () => clearInterval(intervalId);

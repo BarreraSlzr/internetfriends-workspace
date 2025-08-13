@@ -13,3 +13,5 @@ export const Availability = ({ className = "" }: { className?: string }) => {
     </div>
   );
 };
+
+import { generateStamp } from "@/lib/utils/timestamp";

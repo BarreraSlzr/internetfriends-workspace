@@ -71,3 +71,5 @@ const ProfileCard = () => {
 export { ProfileCard };
 
 export default ProfileCard;
+
+import { generateStamp } from "@/lib/utils/timestamp";

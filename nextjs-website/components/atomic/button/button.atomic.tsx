@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 // InternetFriends Atomic Button Component
 // Extends shadcn/ui Button with InternetFriends design system
 
@@ -29,7 +30,7 @@ const buttonVariants = cva(
       variant: {
         primary: [
           styles.primary,
-          "bg-[var(--if-primary)] text-white",
+          "bg-[var(--if-primary)] text-[var(--color-text-inverse)]",
           "hover:bg-[var(--if-primary-hover)]",
           "active:bg-[var(--if-primary-active)]",
           "shadow-sm hover:shadow-md",

@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
 import MotionDiv from "@/app/(internetfriends)/components/motion-div";
@@ -9,7 +10,7 @@ import { cardCss } from "./profile-card";
 import { Availability } from "../availability";
 
 const ProfileInfo = () => {
-  const currentDate = new TZDate(Date.now(), curriculum.contactInfo.localTime);
+  const currentDate = new TZDate(getIsoTimestamp()(), curriculum.contactInfo.localTime);
   const timeFormatted = format(currentDate, "hh:mm aa");
 
   return (

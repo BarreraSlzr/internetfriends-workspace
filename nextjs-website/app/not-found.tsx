@@ -67,3 +67,5 @@ export default function NotFoundPage() {
     </main>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

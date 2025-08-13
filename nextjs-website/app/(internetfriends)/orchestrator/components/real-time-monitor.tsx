@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { generateStamp } from "@/lib/utils/timestamp";
 import {
   Activity,
   Server,
@@ -72,11 +73,18 @@ interface LogEntry {
 
 interface RealTimeMonitorProps {
   className?: string;
+  disabled?: boolean;
+  "data-testid"?: string;
 }
 
 export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   className = "",
+  disabled = false,
+  "data-testid": testId = "real-time-monitor",
 }) => {
+  const stamp = React.useMemo(() => generateStamp(), []);
+  const currentTime = generateStamp()().toISOString();
+
   const [metrics, setMetrics] = useState<SystemMetrics>({
     cpu: 45,
     memory: 62,
@@ -84,24 +92,24 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
     database: "connected",
     server: "running",
     buildStatus: "success",
-    lastUpdate: new Date().toISOString(),
+    lastUpdate: currentTime,
   });
 
   const [logs, setLogs] = useState<LogEntry[]>([
     {
-      timestamp: new Date().toISOString(),
+      timestamp: currentTime,
       level: "success",
       message: "Orchestrator initialized successfully",
       source: "system",
     },
     {
-      timestamp: new Date(Date.now() - 5000).toISOString(),
+      timestamp: generateStamp()(getIsoTimestamp()() - 5000).toISOString(),
       level: "info",
       message: "Development server started on port 3001",
       source: "next",
     },
     {
-      timestamp: new Date(Date.now() - 12000).toISOString(),
+      timestamp: generateStamp()(getIsoTimestamp()() - 12000).toISOString(),
       level: "success",
       message: "Database connection established",
       source: "database",
@@ -231,7 +239,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   };
 
   const formatTime = (timestamp: string) => {
-    return new Date(timestamp).toLocaleTimeString();
+    return generateStamp()(timestamp).toLocaleTimeString();
   };
 
   const getMetricColor = (

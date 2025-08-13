@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * boundary-examples.tsx - Comprehensive Boundary Pattern Application Examples

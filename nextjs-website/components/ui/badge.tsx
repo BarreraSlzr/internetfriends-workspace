@@ -34,3 +34,5 @@ function Badge({ className, variant, ...props }: BadgeProps) {
 }
 
 export { Badge, badgeVariants };
+
+import { generateStamp } from "@/lib/utils/timestamp";

@@ -24,6 +24,12 @@ export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
 
   /** Whether to apply floating animation */
   animated?: boolean;
+
+  /** Whether the card is disabled (affects styling and interactions) */
+  disabled?: boolean;
+
+  /** Test identifier for automated testing */
+  "data-testid"?: string;
 }
 
 export interface GlassCardHeaderProps {

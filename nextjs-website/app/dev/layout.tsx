@@ -116,3 +116,5 @@ function NavLink({
     </Link>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

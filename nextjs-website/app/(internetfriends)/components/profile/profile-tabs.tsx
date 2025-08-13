@@ -52,3 +52,5 @@ const ProfileTabs = () => {
 export { ProfileTabs };
 
 export default ProfileTabs;
+
+import { generateStamp } from "@/lib/utils/timestamp";

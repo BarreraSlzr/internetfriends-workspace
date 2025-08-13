@@ -26,3 +26,5 @@ const ProfileHeader = () => {
 export { ProfileHeader };
 
 export default ProfileHeader;
+
+import { generateStamp } from "@/lib/utils/timestamp";

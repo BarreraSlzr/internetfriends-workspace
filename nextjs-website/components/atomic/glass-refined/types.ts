@@ -1,7 +1,7 @@
 // Types for GlassRefined atomic component
 // Glass morphism system with strength-based coupling
 
-import { HTMLAttributes } from "react";
+import React, { HTMLAttributes } from "react";
 
 export type GlassStrength = number; // 0 to 1
 
@@ -35,46 +35,38 @@ export interface GlassComputedProperties {
   noiseAlpha: number;
 }
 
+// Consolidated glass configuration to reduce prop count
+export interface GlassConfig {
+  /** Glass strength from 0 to 1 (default: 0.45) */
+  strength?: GlassStrength;
+  /** Semantic glass mode for automatic strength mapping */
+  mode?: GlassMode;
+  /** Enable noise layer overlay */
+  noise?: boolean;
+  /** Variant for different use cases */
+  variant?: GlassVariant;
+  /** Size preset */
+  size?: GlassSize;
+}
+
 export interface GlassRefinedProps
   extends Omit<HTMLAttributes<HTMLElement>, "children"> {
   children?: React.ReactNode;
   className?: string;
-
-  /** Glass strength from 0 to 1 (default: 0.45) */
-  strength?: GlassStrength;
-
-  /** Semantic glass mode for automatic strength mapping */
-  mode?: GlassMode;
-
-  /** Enable noise layer overlay */
-  noise?: boolean;
-
-  /** Variant for different use cases */
-  variant?: GlassVariant;
-
-  /** Size preset */
-  size?: GlassSize;
-
+  /** Glass configuration object */
+  glass?: GlassConfig;
   /** Enable hover effects */
   hover?: boolean;
-
   /** Include padding */
   padding?: boolean;
-
   /** Show border */
   bordered?: boolean;
-
-  /** Respect reduced motion */
-  reducedMotion?: boolean;
-
-  /** Custom style overrides */
-  style?: React.CSSProperties;
-
+  /** Disabled state */
+  disabled?: boolean;
+  /** Test identifier */
+  "data-testid"?: string;
   /** Element type */
-  as?: keyof JSX.IntrinsicElements;
-
-  /** Data attributes for testing and styling */
-  [key: `data-${string}`]: unknown;
+  as?: React.ElementType;
 }
 
 export type GlassRefinedAtomicProps = GlassRefinedProps;

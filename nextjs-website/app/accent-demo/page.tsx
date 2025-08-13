@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 // InternetFriends Accent System Demo Page
 // Test page to showcase the modernized SCSS design system with accent tokens
 

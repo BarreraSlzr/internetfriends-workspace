@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
 import React, { PropsWithChildren, useRef, useEffect } from "react";
@@ -124,9 +125,9 @@ function SimpleGlooCanvas() {
     resize();
     window.addEventListener("resize", resize);
 
-    const startTime = Date.now();
+    const startTime = getIsoTimestamp()();
     function render() {
-      const time = (Date.now() - startTime) / 1000;
+      const time = (getIsoTimestamp()() - startTime) / 1000;
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       if (timeLoc) gl.uniform1f(timeLoc, time);

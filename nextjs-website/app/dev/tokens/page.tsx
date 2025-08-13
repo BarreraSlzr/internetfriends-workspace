@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
 // Force dynamic rendering to bypass SSR hook issues
@@ -257,7 +258,7 @@ export default function TokenInspectorPage() {
     const exportData = {
       tokens: tokens.flatMap((group) => group.tokens),
       overrides,
-      generatedAt: new Date().toISOString(),
+      generatedAt: generateStamp()().toISOString(),
       theme: isDark ? "dark" : "light",
     };
 

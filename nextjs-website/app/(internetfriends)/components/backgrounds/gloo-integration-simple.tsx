@@ -1,4 +1,5 @@
 "use client";
+import { generateStamp } from "@/lib/utils/timestamp";
 /**
  * gloo-integration-simple.tsx - Example Gloo Integration Component
  *

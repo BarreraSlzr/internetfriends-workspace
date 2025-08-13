@@ -59,3 +59,5 @@ export default function Page() {
     </main>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

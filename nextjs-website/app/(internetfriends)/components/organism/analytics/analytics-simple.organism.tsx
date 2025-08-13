@@ -1,3 +1,4 @@
+import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * analytics-simple.organism.tsx - Simplified Analytics Component

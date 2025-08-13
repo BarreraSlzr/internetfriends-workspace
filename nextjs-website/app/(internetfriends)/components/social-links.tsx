@@ -17,3 +17,5 @@ export default function SocialLinks() {
     </div>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

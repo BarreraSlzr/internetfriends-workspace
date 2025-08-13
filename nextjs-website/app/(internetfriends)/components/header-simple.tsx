@@ -42,3 +42,5 @@ export default function HeaderSimple() {
     </header>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

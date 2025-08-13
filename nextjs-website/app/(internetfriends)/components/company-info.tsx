@@ -24,3 +24,5 @@ export default async function CompanyInfo() {
     </section>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

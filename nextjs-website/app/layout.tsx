@@ -49,3 +49,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";

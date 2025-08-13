@@ -1,4 +1,5 @@
-"use client";
+import { generateStamp } from "@/lib/utils/timestamp";
+("use client");
 /**
  * data-table.consolidated.tsx - Consolidated DataTable Component
  *

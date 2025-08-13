@@ -41,3 +41,5 @@ export function CustomCard({
     </div>
   );
 }
+
+import { generateStamp } from "@/lib/utils/timestamp";
