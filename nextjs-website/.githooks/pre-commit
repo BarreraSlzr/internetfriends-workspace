@@ -17,12 +17,52 @@ if command -v bun &> /dev/null && [ -f "package.json" ]; then
   bun run lint --fix 2>/dev/null || true
 fi
 
+# Validate diagrams
+echo "📋 Validating mermaid diagrams..."
+if bun run validate:diagrams 2>/dev/null; then
+  echo "✅ All diagrams have valid frontmatter"
+else
+  echo "⚠️  Some diagrams missing required tokens (non-blocking)"
+fi
+
+# Run component analysis for staged components
+echo "🎭 Analyzing staged components..."
+staged_components=$(git diff --cached --name-only | grep -E "components/.*(atomic|molecular|organisms)/.*\.tsx$" | head -3)
+if [ -n "$staged_components" ]; then
+  echo "📊 Components changed: $(echo $staged_components | tr '\n' ' ')"
+  # Run quick component analysis (non-blocking but informative)
+  if bun run analyze:components:summary --quiet 2>/dev/null | tail -5; then
+    echo "💡 Consider improving component scores before commit"
+  fi
+else
+  echo "📝 No component changes detected"
+fi
+
+# Run helper scoring tests if helper files changed
+if git diff --cached --name-only | grep -E "helper|scoring" > /dev/null; then
+  echo "🧪 Running helper scoring tests..."
+  if ! bun run test:helper --reporter=minimal 2>/dev/null; then
+    echo "❌ Helper scoring tests failed"
+    echo "💡 Fix test failures before committing"
+    exit 1
+  fi
+  echo "✅ Helper tests passed"
+fi
+
 # Check for secrets
 echo "🔐 Checking for secrets..."
 if git diff --cached --name-only | xargs grep -l "sk-\|pk_\|AKIA\|AIza" 2>/dev/null; then
   echo "❌ Potential secrets detected in staged files!"
   echo "💡 Please remove API keys and secrets before committing."
   exit 1
+fi
+
+# Check for console.log and debugger statements in TypeScript files
+echo "🐛 Checking for debugging statements..."
+if git diff --cached --name-only | grep -E '\.(ts|tsx)$' | xargs grep -l "console\.log\|debugger" 2>/dev/null; then
+  echo "⚠️  Debugging statements found in staged files"
+  echo "💡 Consider removing console.log/debugger before commit"
+  # Non-blocking - just a warning
 fi
 
 echo "✅ Pre-commit checks passed"

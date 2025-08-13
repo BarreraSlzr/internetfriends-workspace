@@ -21,7 +21,9 @@
       "status": "completed",
       "category": "bug",
       "estimatedTime": 20,
-      "dependencies": ["fix-broken-exports"],
+      "dependencies": [
+        "fix-broken-exports"
+      ],
       "createdAt": "2025-08-07T07:33:56.086Z",
       "updatedAt": "2025-08-07T07:33:56.086Z",
       "completedAt": "2025-08-07T07:33:56.086Z"
@@ -116,6 +118,138 @@
       "estimatedTime": 120,
       "createdAt": "2025-08-07T07:33:56.086Z",
       "updatedAt": "2025-08-07T07:33:56.086Z"
+    },
+    {
+      "title": "Analyze component coverage for helper scoring",
+      "description": "analysis / high — Run helper with --all --json; Aggregate missing pattern categories; Propose new scoring factors if needed; Document decisions in PR description",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049015895",
+      "createdAt": "2025-08-13T01:36:55.895Z",
+      "updatedAt": "2025-08-13T01:36:55.895Z"
+    },
+    {
+      "title": "Refactor helper to emit event hooks (future fossilization)",
+      "description": "refactor / normal — Define minimal Emitter interface; Add --events flag to enable emission; Emit analysis: { component, score, suggestions }; Update README with usage",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049015911",
+      "createdAt": "2025-08-13T01:36:55.911Z",
+      "updatedAt": "2025-08-13T01:36:55.911Z"
+    },
+    {
+      "title": "Add sequence diagram for component analysis loop",
+      "description": "docs / normal — Create orchestration.analysis.sequence.mmd; Follow guide frontmatter; Link from state README index",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049015927",
+      "createdAt": "2025-08-13T01:36:55.927Z",
+      "updatedAt": "2025-08-13T01:36:55.927Z"
+    },
+    {
+      "title": "Add unit tests for scoring edge cases",
+      "description": "test / high — Create tests/helper.scoring.test.ts; Mock component content variations; Assert expected deductions and suggestions; Integrate into existing test script",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049015943",
+      "createdAt": "2025-08-13T01:36:55.943Z",
+      "updatedAt": "2025-08-13T01:36:55.943Z"
+    },
+    {
+      "title": "Prepare diagram lint script scaffold",
+      "description": "validation / low — List all *.mmd under docs/state; Check for required comment tokens (id,title,createdAt,stamp,description); Print JSON summary; Exit non-zero if any missing",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049015962",
+      "createdAt": "2025-08-13T01:36:55.962Z",
+      "updatedAt": "2025-08-13T01:36:55.962Z"
+    },
+    {
+      "title": "Analyze component coverage for helper scoring",
+      "description": "analysis / high — Run helper with --all --json; Aggregate missing pattern categories; Propose new scoring factors if needed; Document decisions in PR description",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049331501",
+      "createdAt": "2025-08-13T01:42:11.501Z",
+      "updatedAt": "2025-08-13T01:42:11.501Z"
+    },
+    {
+      "title": "Refactor helper to emit event hooks (future fossilization)",
+      "description": "refactor / normal — Define minimal Emitter interface; Add --events flag to enable emission; Emit analysis: { component, score, suggestions }; Update README with usage",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049331515",
+      "createdAt": "2025-08-13T01:42:11.515Z",
+      "updatedAt": "2025-08-13T01:42:11.515Z"
+    },
+    {
+      "title": "Add sequence diagram for component analysis loop",
+      "description": "docs / normal — Create orchestration.analysis.sequence.mmd; Follow guide frontmatter; Link from state README index",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049331530",
+      "createdAt": "2025-08-13T01:42:11.530Z",
+      "updatedAt": "2025-08-13T01:42:11.530Z"
+    },
+    {
+      "title": "Add unit tests for scoring edge cases",
+      "description": "test / high — Create tests/helper.scoring.test.ts; Mock component content variations; Assert expected deductions and suggestions; Integrate into existing test script",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049331545",
+      "createdAt": "2025-08-13T01:42:11.545Z",
+      "updatedAt": "2025-08-13T01:42:11.545Z"
+    },
+    {
+      "title": "Prepare diagram lint script scaffold",
+      "description": "validation / low — List all *.mmd under docs/state; Check for required comment tokens (id,title,createdAt,stamp,description); Print JSON summary; Exit non-zero if any missing",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 60,
+      "id": "custom-1755049331560",
+      "createdAt": "2025-08-13T01:42:11.560Z",
+      "updatedAt": "2025-08-13T01:42:11.560Z"
+    },
+    {
+      "title": "Integrate Markdown/Mermaid rendering",
+      "description": "Render docs in docs/imported/if-portfolio with react-markdown/remark + mermaid, SSR-friendly, support .x.md",
+      "priority": "medium",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 90,
+      "id": "custom-1755049898092",
+      "createdAt": "2025-08-13T01:51:38.091Z",
+      "updatedAt": "2025-08-13T01:51:38.091Z"
+    },
+    {
+      "title": "Frontmatter schema and JSON fences",
+      "description": "Support rich frontmatter (yaml/json) and inline json.path fences to power automations",
+      "priority": "high",
+      "status": "pending",
+      "category": "feature",
+      "estimatedTime": 120,
+      "id": "custom-1755049898095",
+      "createdAt": "2025-08-13T01:51:38.095Z",
+      "updatedAt": "2025-08-13T01:51:38.095Z"
     }
   ],
   "metrics": {
@@ -124,5 +258,5 @@
     "testsCoverage": 0,
     "performanceScore": 85
   },
-  "lastUpdated": "2025-08-07T07:42:44.187Z"
+  "lastUpdated": "2025-08-13T01:51:38.095Z"
 }
