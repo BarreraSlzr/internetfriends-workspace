@@ -1,5 +1,6 @@
 import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
 import { Badge } from "@/components/ui/badge";
+import { GlassBadge } from "@/components/ui/glass-badge";
 import { cardCss } from "./profile-card";
 
 const ProfileProjectsTab = () => {
@@ -13,12 +14,9 @@ const ProfileProjectsTab = () => {
       .sort((a, b) => (b?.popularity || 0) - (a?.popularity || 0));
 
     return sortedSkills.map((skill) => (
-      <Badge
-        key={skill?.id}
-        className="glass-stack glass-noise-overlay glass-layer-3 border-accent-medium text-foreground hover:border-accent-strong"
-      >
+      <GlassBadge key={skill?.id} variant="default">
         {skill?.name}
-      </Badge>
+      </GlassBadge>
     ));
   };
   return (
