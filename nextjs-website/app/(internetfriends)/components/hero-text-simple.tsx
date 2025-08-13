@@ -32,7 +32,8 @@ function SimpleGlooCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    const gl =
+      canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     if (!gl) return;
 
     // Vertex shader (fullscreen quad)
@@ -90,6 +91,20 @@ function SimpleGlooCanvas() {
       gl.compileShader(shader);
 
       if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+        console.error("Shader compile error:", gl.getShaderInfoLog(shader));
         gl.deleteShader(shader);
-        return null
+        return null;
+      }
+
+      return shader;
+    }
+
+    return null;
+  }, []);
+
+  return (
+    <div className={styles.heroTextSimple}>
+      <canvas ref={canvasRef} className={styles.canvas} />
+    </div>
+  );
+}

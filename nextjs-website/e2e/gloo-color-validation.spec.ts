@@ -12,9 +12,39 @@ const EXPECTED_COLORS = {
   dark: ["#ffeb70", "#ff5c57", "#ff54ff"], // Brighter variants
 };
 
+test("Gloo WebGL canvas renders with expected InternetFriends colors", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  // Wait for gloo canvas to be present and WebGL to initialize
+  await page.waitForSelector('[data-testid="gloo-canvas"]', { timeout: 10000 });
+  await page.waitForTimeout(2000); // Allow WebGL initialization
+
+  const result = await analyzeGlooColors(page);
+
+  expect(result.present).toBe(true);
+
+  if (result.webgl) {
+    expect(result.colors).toBeDefined();
+    expect(result.theme).toMatch(/light|dark/);
+
+    // Verify colors are vibrant (not just black/transparent)
+    const { r, g, b } = result.colors;
+    const brightness = (r + g + b) / 3;
+    expect(brightness).toBeGreaterThan(30); // Not completely dark
+
+    console.log(`Gloo colors in ${result.theme} theme: rgb(${r}, ${g}, ${b})`);
+  } else {
+    console.warn("WebGL not available, skipping color validation");
+  }
+});
+
 async function analyzeGlooColors(page) {
   return await page.evaluate(() => {
-    const canvas = document.querySelector('[data-testid="gloo-canvas"]') as HTMLCanvasElement | null;
+    const canvas = document.querySelector(
+      '[data-testid="gloo-canvas"]',
+    ) as HTMLCanvasElement | null;
 
     if (!canvas) {
       return { present: false, error: "Canvas not found" };
@@ -22,14 +52,15 @@ async function analyzeGlooColors(page) {
 
     const wrapper = canvas.closest("[data-gloo-client]") as HTMLElement;
     const theme = wrapper?.getAttribute("data-gloo-theme") || "light";
-    const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+    const gl =
+      canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
 
     if (!gl) {
       return {
         present: true,
         webgl: false,
         theme,
-        error: "WebGL context not available"
+        error: "WebGL context not available",
       };
     }
 
@@ -60,9 +91,9 @@ async function analyzeGlooColors(page) {
 
     // Analyze pixel data
     let totalSamples = 0;
-    let totalR = 0, totalG = 0, totalB = 0;
-    let blackPixels = 0, whitePixels = 0, colorfulPixels = 0;
-    const colorSamples = [];
+    let totalR = 0,
+      totalG = 0,
+      totalB = 0;
 
     for (let i = 0; i < pixels.length; i += 4) {
       const r = pixels[i];
@@ -74,4 +105,21 @@ async function analyzeGlooColors(page) {
 
       totalSamples++;
       totalR += r;
-      total
+      totalG += g;
+      totalB += b;
+    }
+
+    if (totalSamples === 0) return { r: 0, g: 0, b: 0 };
+
+    return {
+      present: true,
+      webgl: true,
+      theme,
+      colors: {
+        r: Math.round(totalR / totalSamples),
+        g: Math.round(totalG / totalSamples),
+        b: Math.round(totalB / totalSamples),
+      },
+    };
+  });
+}
