@@ -18,7 +18,7 @@
 
 import React, { useMemo } from "react";
 import { BgGooSimple } from "./backgrounds/gloo-simple";
-import { getRandomColors } from "../lib/color-palette";
+import { getRandomColors } from "@/lib/color-palette";
 
 // Simple interface matching landingpage approach
 interface GlooClientProps {

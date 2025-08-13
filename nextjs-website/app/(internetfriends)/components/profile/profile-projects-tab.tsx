@@ -1,4 +1,4 @@
-import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
+import { curriculum } from "@/lib/data/curriculum";
 import { Badge } from "@/components/ui/badge";
 import { GlassBadge } from "@/components/ui/glass-badge";
 import { cardCss } from "./profile-card";

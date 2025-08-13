@@ -21,7 +21,7 @@ describe("Atomic Components Unit Tests", () => {
         "../../components/atomic/glass-card"
       );
       expect(GlassCardAtomic).toBeDefined();
-      expect(typeof GlassCardAtomic).toBe("function");
+      expect(typeof GlassCardAtomic).toBe("object"); // React.forwardRef wrapped in React.memo returns an object
       expect(GlassCardAtomic.displayName).toBe("GlassCardAtomic");
     });
 

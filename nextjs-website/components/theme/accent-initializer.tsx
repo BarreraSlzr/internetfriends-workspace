@@ -1,7 +1,7 @@
 "use client";
 
-import { getAdaptiveGooColorTuples } from "@/app/(internetfriends)/lib/color-palette";
 import { useTheme } from "@/hooks/use-theme";
+import { getAdaptiveGooColorTuples } from "@/lib/color-palette";
 import { useEffect } from "react";
 
 /**
@@ -48,7 +48,6 @@ export function AccentInitializer() {
       // Mark as accent-ready for progressive enhancement
       root.setAttribute("data-accent-ready", "true");
       root.setAttribute("data-accent-mode", isDark ? "dark" : "light");
-
     } catch (error) {
       console.warn("[AccentInitializer] Failed to inject adaptive colors:", error);
       // Fallback: ensure data attributes are still set for CSS

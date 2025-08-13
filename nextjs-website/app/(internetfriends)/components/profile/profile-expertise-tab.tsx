@@ -1,4 +1,4 @@
-import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
+import { curriculum } from "@/lib/data/curriculum";
 import { Badge } from "@/components/ui/badge";
 import { cardCss } from "./profile-card";
 
@@ -28,4 +28,3 @@ const ProfileExpertiseTab = () => {
 export { ProfileExpertiseTab };
 
 export default ProfileExpertiseTab;
-

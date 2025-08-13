@@ -1,8 +1,10 @@
 import { sql } from "kysely";
-import { db } from "../connection";
+import { dbService } from "../service";
 
 export async function createContactSubmissionsTable() {
   try {
+    const db = dbService.getDb();
+
     await db.schema
       .createTable("contact_submissions")
       .ifNotExists()
@@ -26,6 +28,6 @@ export async function createContactSubmissionsTable() {
 
     console.log('Table "contact_submissions" is ready');
   } catch (error) {
-    console.error("Error creating table:", error);
+    console.error("Error creating contact_submissions table:", error);
   }
 }

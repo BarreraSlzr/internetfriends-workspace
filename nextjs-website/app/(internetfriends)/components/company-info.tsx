@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import content from "../content.json";
-import { latinAmericanCountries } from "@/app/(internetfriends)/lib/latinAmericanCountries";
+import { latinAmericanCountries } from "@/lib/data/latin-american-countries";
 import { Availability } from "./availability";
 
 export default async function CompanyInfo() {
@@ -19,9 +19,8 @@ export default async function CompanyInfo() {
         <h1 className="text-lg font-medium h-5">{content.companyInfo.title}</h1>
         <p>{content.companyInfo.address1}</p>
         <p>{address}</p>
-        <Availability className="pt-12" />
+        <Availability availability="Available" className="pt-12" />
       </div>
     </section>
   );
 }
-

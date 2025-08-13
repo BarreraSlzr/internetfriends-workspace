@@ -1,6 +1,10 @@
-import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
-
-export const Availability = ({ className = "" }: { className?: string }) => {
+export const Availability = ({ 
+  availability, 
+  className = "" 
+}: { 
+  availability: string;
+  className?: string;
+}) => {
   return (
     <div className={`inline-flex gap-2 items-center ${className}`.trim()}>
       <span className="relative flex h-3 w-3">
@@ -8,7 +12,7 @@ export const Availability = ({ className = "" }: { className?: string }) => {
         <span className="bg-yellow-500 relative inline-flex rounded-full h-3 w-3" />
       </span>
       <p className="opacity-50 font-medium">
-        {curriculum.contactInfo.availability}
+        {availability}
       </p>
     </div>
   );

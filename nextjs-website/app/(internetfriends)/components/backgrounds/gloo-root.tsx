@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { BgGooSimple } from "./gloo-simple";
-import { getRandomColors } from "../../lib/color-palette";
+import { getRandomColors } from "@/lib/color-palette";
 import { cn } from "@/lib/utils";
 
 // Global flag interface augmentation

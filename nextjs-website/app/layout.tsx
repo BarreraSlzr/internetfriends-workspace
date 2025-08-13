@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/(internetfriends)/globals.css";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { AccentInitializer } from "@/components/theme/accent-initializer";
+import { I18nProvider } from "@/i18n/provider";
 
 // Force dynamic rendering globally to bypass SSR hook issues
 export const dynamic = "force-dynamic";
@@ -42,8 +43,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ThemeProvider>
-          <AccentInitializer />
-          {children}
+          <I18nProvider>
+            <AccentInitializer />
+            {children}
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>

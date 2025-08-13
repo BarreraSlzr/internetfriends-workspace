@@ -4,7 +4,7 @@ import HeroText from "@/app/(internetfriends)/components/hero-text";
 import Navigation from "@/app/(internetfriends)/components/navigation";
 import SocialLinks from "@/app/(internetfriends)/components/social-links";
 import content from "@/app/(internetfriends)/content.json";
-import engagementOptions from "@/app/(internetfriends)/lib/engagementOptions";
+import engagementOptions from "@/lib/data/engagement-options";
 import { Badge } from "@/components/ui/badge";
 import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
 
@@ -101,4 +101,3 @@ export default function Page() {
     </main>
   );
 }
-

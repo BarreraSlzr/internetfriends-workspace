@@ -1,4 +1,6 @@
 import { Node, Edge } from "reactflow";
+import { ButtonAtomic } from "@/components/atomic/button/button.atomic";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 
 export interface ComponentRegistryItem {
   id: string;
@@ -14,6 +16,12 @@ export interface ComponentRegistryItem {
   documentation?: string;
   status: "stable" | "beta" | "deprecated" | "planned";
   lastUpdated: Date;
+  // Enhanced properties for live showcase
+  liveComponent?: React.ComponentType<any>;
+  liveProps?: Record<string, any>;
+  testStatus?: "passing" | "warning" | "failing" | "not-tested";
+  usageCount?: number;
+  variants?: Array<{ name: string; props: Record<string, any> }>;
 }
 
 export interface ComponentProp {
@@ -115,12 +123,153 @@ export class ComponentRegistry {
   private initializeRegistry() {
     // Initialize with existing components
     this.registerComponent({
+      id: "button-atomic",
+      name: "ButtonAtomic",
+      category: "atomic",
+      description:
+        "InternetFriends styled button with multiple variants, loading states, and icon support",
+      filePath: "/components/atomic/button/button.atomic.tsx",
+      // Live component data
+      liveComponent: ButtonAtomic,
+      liveProps: { children: "Primary" },
+      testStatus: "passing",
+      usageCount: 42,
+      variants: [
+        { name: "Primary", props: { variant: "primary", children: "Primary" } },
+        { name: "Glass", props: { variant: "glass", children: "Glass" } },
+        { name: "Outline", props: { variant: "outline", children: "Outline" } },
+        { name: "Ghost", props: { variant: "ghost", children: "Ghost" } },
+      ],
+      props: [
+        {
+          name: "variant",
+          type: "'primary' | 'secondary' | 'outline' | 'ghost' | 'glass' | 'destructive' | 'link'",
+          required: false,
+          defaultValue: "primary",
+          description: "Visual variant of the button",
+        },
+        {
+          name: "size",
+          type: "'sm' | 'md' | 'lg' | 'xl' | 'icon'",
+          required: false,
+          defaultValue: "md",
+          description: "Size variant affecting padding and height",
+        },
+        {
+          name: "loading",
+          type: "boolean",
+          required: false,
+          defaultValue: false,
+          description: "Whether button is in loading state",
+        },
+        {
+          name: "fullWidth",
+          type: "boolean",
+          required: false,
+          defaultValue: false,
+          description: "Whether button should take full width",
+        },
+      ],
+      features: [
+        "Multiple variants with InternetFriends styling",
+        "Loading states with spinner",
+        "Icon support (left and right)",
+        "Hover and active animations",
+        "Accessibility compliance",
+        "Radix Slot integration for asChild prop",
+      ],
+      dependencies: [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "@/lib/utils",
+        "react",
+      ],
+      status: "stable",
+      lastUpdated: new Date(),
+    });
+
+    this.registerComponent({
+      id: "glass-card-atomic",
+      name: "GlassCardAtomic",
+      category: "atomic",
+      description:
+        "Glass morphism card component with multiple variants and animation support",
+      filePath: "/components/atomic/glass-card/glass-card.atomic.tsx",
+      // Live component data
+      liveComponent: GlassCardAtomic,
+      liveProps: { children: "Glass Card Content", variant: "default" },
+      testStatus: "passing",
+      usageCount: 28,
+      variants: [
+        {
+          name: "Default",
+          props: { variant: "default", children: "Default Card" },
+        },
+        {
+          name: "Elevated",
+          props: { variant: "elevated", children: "Elevated Card" },
+        },
+        {
+          name: "Subtle",
+          props: { variant: "subtle", children: "Subtle Card" },
+        },
+        {
+          name: "Primary",
+          props: { variant: "primary", children: "Primary Card" },
+        },
+      ],
+      props: [
+        {
+          name: "variant",
+          type: "'default' | 'elevated' | 'subtle' | 'primary' | 'destructive'",
+          required: false,
+          defaultValue: "default",
+          description: "Visual variant of the card",
+        },
+        {
+          name: "size",
+          type: "'sm' | 'md' | 'lg' | 'xl'",
+          required: false,
+          defaultValue: "md",
+          description: "Size variant affecting padding and border radius",
+        },
+        {
+          name: "hover",
+          type: "boolean",
+          required: false,
+          defaultValue: true,
+          description: "Whether to show hover effects",
+        },
+        {
+          name: "animated",
+          type: "boolean",
+          required: false,
+          defaultValue: false,
+          description: "Whether to apply floating animation",
+        },
+      ],
+      features: [
+        "Multiple visual variants",
+        "Size variations",
+        "Hover animations",
+        "Glass morphism backdrop",
+        "Configurable padding and borders",
+      ],
+      dependencies: ["@/lib/utils", "react"],
+      status: "stable",
+      lastUpdated: new Date(),
+    });
+
+    this.registerComponent({
       id: "header-atomic",
       name: "HeaderAtomic",
       category: "atomic",
       description:
         "Glass morphism header with scroll detection and responsive navigation",
       filePath: "/components/atomic/header/header.atomic.tsx",
+      // No live component for complex header (would need full context)
+      testStatus: "warning",
+      usageCount: 8,
       props: [
         {
           name: "sticky",
@@ -270,6 +419,9 @@ export class ComponentRegistry {
       description:
         "Complete navigation component with mobile menu, dropdowns, and glass morphism",
       filePath: "/components/molecular/navigation/navigation.molecular.tsx",
+      // No live component (complex requiring full context)
+      testStatus: "warning",
+      usageCount: 5,
       props: [
         {
           name: "items",
@@ -511,8 +663,8 @@ export class ComponentRegistry {
         id: comp.id,
         type: "component",
         position: {
-          x: 100 + (index % 3) * 250,
-          y: 200 + Math.floor(index / 3) * 200,
+          x: 100 + (index % 3) * 350,
+          y: 200 + Math.floor(index / 3) * 300,
         },
         data: {
           label: comp.name,
@@ -521,6 +673,12 @@ export class ComponentRegistry {
           props: comp.props?.map((p) => p.name) || [],
           features: comp.features || [],
           composition: comp.composition || [],
+          // Enhanced data for live showcase
+          liveComponent: comp.liveComponent,
+          liveProps: comp.liveProps,
+          testStatus: comp.testStatus,
+          usageCount: comp.usageCount,
+          variants: comp.variants,
         },
       });
     });
