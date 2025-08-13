@@ -66,21 +66,33 @@ export const GlassRefinedAtomic: React.FC<GlassRefinedAtomicProps> = ({
   as: Element = "div",
   ...props
 }) => {
-  // Calculate effective strength
+  // Calculate effective strength with responsive adjustments
   const modeConfig = mode ? GLASS_MODE_CONFIG[mode] : null;
   const variantConfig = GLASS_VARIANT_CONFIG[variant];
-  const effectiveStrength =
+  const baseStrength =
     propStrength ?? modeConfig?.strength ?? variantConfig.strength;
 
-  // Calculate derived properties
+  // Reduce strength slightly on mobile for better performance and readability
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const effectiveStrength = isMobile
+    ? Math.max(0.2, baseStrength * 0.85)
+    : baseStrength;
+
+  // Detect dark mode
+  const isDarkMode =
+    typeof window !== "undefined" &&
+    (window.matchMedia("(prefers-color-scheme: dark)").matches ||
+      document.documentElement.getAttribute("data-theme") === "dark");
+
+  // Calculate derived properties with improved scaling for better transparency
   const glassAlpha = Math.max(
-    0.2,
-    Math.min(0.75, 0.2 + 0.55 * effectiveStrength),
+    0.08, // Much more transparent base
+    Math.min(0.35, 0.08 + 0.27 * effectiveStrength), // Lower max opacity
   );
-  const glassBlur = Math.max(2, Math.min(12, 2 + 10 * effectiveStrength));
-  const glassBorderAlpha = 0.08 + 0.1 * effectiveStrength;
-  const glassHighlightAlpha = 0.04 + 0.06 * effectiveStrength;
-  const glassNoiseAlpha = Math.min(0.14, 0.04 + 0.1 * effectiveStrength);
+  const glassBlur = Math.max(6, Math.min(20, 6 + 14 * effectiveStrength)); // Stronger blur range
+  const glassBorderAlpha = 0.08 + 0.15 * effectiveStrength;
+  const glassHighlightAlpha = 0.03 + 0.12 * effectiveStrength;
+  const glassNoiseAlpha = Math.min(0.06, 0.01 + 0.05 * effectiveStrength);
 
   // Respect user's motion preferences
   const prefersReducedMotion =
@@ -97,22 +109,41 @@ export const GlassRefinedAtomic: React.FC<GlassRefinedAtomicProps> = ({
     "--glass-highlight-alpha": glassHighlightAlpha,
     "--glass-noise-alpha": glassNoiseAlpha,
 
-    // Apply glass effects
-    background: `rgba(var(--glass-base-color, 255, 255, 255), ${glassAlpha})`,
-    backdropFilter: `blur(${glassBlur}px)`,
-    WebkitBackdropFilter: `blur(${glassBlur}px)`,
+    // Apply glass effects with enhanced transparency and stronger backdrop effects
+    background: isDarkMode
+      ? `rgba(var(--if-neutral-900, 15, 23, 42), ${glassAlpha})`
+      : `rgba(var(--if-neutral-100, 241, 245, 249), ${glassAlpha})`,
+    backdropFilter: `blur(${glassBlur}px) saturate(1.25) brightness(${isDarkMode ? "1.1" : "0.95"})`,
+    WebkitBackdropFilter: `blur(${glassBlur}px) saturate(1.25) brightness(${isDarkMode ? "1.1" : "0.95"})`,
     border: bordered
-      ? `1px solid rgba(255, 255, 255, ${glassBorderAlpha})`
+      ? isDarkMode
+        ? `1px solid rgba(var(--if-primary, 59, 130, 246), ${glassBorderAlpha * 1.5})`
+        : `1px solid rgba(var(--if-neutral-300, 203, 213, 225), ${glassBorderAlpha * 1.2})`
       : "none",
 
-    // Subtle inner highlight
+    // Enhanced shadow system for better depth perception with softer shadows
     boxShadow: bordered
-      ? `inset 0 1px 0 rgba(255, 255, 255, ${glassHighlightAlpha}), 0 4px 14px -4px rgba(0, 0, 0, ${0.18 * effectiveStrength})`
-      : `0 4px 14px -4px rgba(0, 0, 0, ${0.18 * effectiveStrength})`,
+      ? isDarkMode
+        ? `inset 0 1px 0 rgba(var(--if-primary, 59, 130, 246), ${glassHighlightAlpha * 0.5}), 0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(0, 0, 0, ${0.3 + 0.2 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.05)`
+        : `inset 0 1px 0 rgba(var(--if-neutral-100, 241, 245, 249), ${glassHighlightAlpha * 1.2}), 0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(var(--if-neutral-900, 15, 23, 42), ${0.08 + 0.07 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.1)`
+      : isDarkMode
+        ? `0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(0, 0, 0, ${0.3 + 0.2 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.05)`
+        : `0 ${Math.max(8, 12 * effectiveStrength)}px ${Math.max(24, 32 * effectiveStrength)}px -8px rgba(var(--if-neutral-900, 15, 23, 42), ${0.08 + 0.07 * effectiveStrength}), 0 0 0 1px rgba(255, 255, 255, 0.1)`,
 
-    // Position for noise overlay
+    // Position for noise overlay with performance hints
     position: "relative",
     overflow: "hidden",
+
+    // Performance optimizations
+    willChange:
+      hover && !prefersReducedMotion ? "transform, backdrop-filter" : "auto",
+    isolation: "isolate", // Create stacking context for better compositing
+
+    // Text contrast enhancement
+    color: isDarkMode ? "rgba(255, 255, 255, 0.95)" : "rgba(0, 0, 0, 0.87)",
+    textShadow: isDarkMode
+      ? "0 1px 2px rgba(0, 0, 0, 0.4)"
+      : "0 1px 2px rgba(255, 255, 255, 0.8)",
 
     ...style,
   } as React.CSSProperties;
@@ -139,13 +170,19 @@ export const GlassRefinedAtomic: React.FC<GlassRefinedAtomicProps> = ({
             (size === "lg" || size === "xl") && !padding,
         },
 
+        // Focus states for accessibility
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-if-primary focus-visible:ring-offset-2",
+        "focus-visible:border-if-primary/50",
+
+        // Text contrast classes
+        isDarkMode ? "text-white/95" : "text-black/87",
+
         // Hover effects (respect reduced motion)
         hover &&
           !prefersReducedMotion && [
-            "transition-all duration-200 ease-out",
-            "hover:backdrop-blur-[14px]",
-            "hover:shadow-lg",
-            "hover:scale-[1.01]",
+            "transition-all duration-300 ease-out",
+            "hover:scale-[1.02]",
+            "hover:shadow-xl",
           ],
 
         // Reduced motion fallback
@@ -164,6 +201,7 @@ export const GlassRefinedAtomic: React.FC<GlassRefinedAtomicProps> = ({
       data-glass-mode={mode}
       data-glass-variant={variant}
       data-glass-noise={noise}
+      data-reduced-motion={prefersReducedMotion}
       data-testid="glass-refined"
       {...props}
     >
@@ -174,20 +212,36 @@ export const GlassRefinedAtomic: React.FC<GlassRefinedAtomicProps> = ({
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: `
-              repeating-linear-gradient(
-                0deg,
-                rgba(255, 255, 255, ${glassNoiseAlpha}) 0 1px,
-                transparent 1px 2px
-              ),
-              repeating-linear-gradient(
-                90deg,
-                rgba(0, 0, 0, ${glassNoiseAlpha * 0.4}) 0 1px,
-                transparent 1px 2px
-              )
-            `,
+            background: isDarkMode
+              ? `
+                repeating-linear-gradient(
+                  0deg,
+                  rgba(var(--if-primary, 59, 130, 246), ${glassNoiseAlpha * 0.6}) 0 1px,
+                  transparent 1px 2px
+                ),
+                repeating-linear-gradient(
+                  90deg,
+                  rgba(0, 0, 0, ${glassNoiseAlpha * 0.3}) 0 1px,
+                  transparent 1px 2px
+                )
+              `
+              : `
+                repeating-linear-gradient(
+                  0deg,
+                  rgba(var(--if-neutral-100, 241, 245, 249), ${glassNoiseAlpha}) 0 1px,
+                  transparent 1px 2px
+                ),
+                repeating-linear-gradient(
+                  90deg,
+                  rgba(var(--if-neutral-800, 30, 41, 59), ${glassNoiseAlpha * 0.4}) 0 1px,
+                  transparent 1px 2px
+                )
+              `,
             mixBlendMode: "overlay",
-            opacity: 1,
+            opacity: isMobile ? 0.4 : 0.6,
+            // Performance: Prevent noise from affecting paint layers
+            transform: "translateZ(0)",
+            willChange: "auto",
           }}
           aria-hidden="true"
         />

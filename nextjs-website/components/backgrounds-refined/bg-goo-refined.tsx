@@ -25,7 +25,7 @@ export interface BgGooRefinedProps {
   seed?: number;
   /** Disable rendering entirely */
   disabled?: boolean;
-  /** Z-index for positioning (default: -1) */
+  /** Z-index for positioning (default: 0) */
   zIndex?: number;
   /** Additional CSS class */
   className?: string;
@@ -129,7 +129,7 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
   depth = 4,
   seed = 2.4,
   disabled = false,
-  zIndex = -1,
+  zIndex = 0,
   className,
   absolute = false,
   colors,
@@ -185,16 +185,14 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
       };
     }
 
-    const colorTuples = REFINED_COLORS[isDark ? "dark" : "light"];
+    // TEMP: Use bright brand colors for visibility test
     return {
-      colors: tuplesToHexPalette(colorTuples),
-      strategy: "brand-triad",
+      colors: ["#3b82f6", "#9333ea", "#ec4899"], // BRAND TEST
+      strategy: "brand-test",
       mode: isDark ? "dark" : "light",
-      metadata: {
-        generated: false,
-      },
+      metadata: { generated: true },
     };
-  }, [isDark, colors, modeConfig.saturation, mode]);
+  }, [isDark, colors]);
 
   if (disabled || typeof window === "undefined") {
     return null;
@@ -227,6 +225,11 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
         minWidth: "100vw",
         minHeight: "100vh",
         overflow: "hidden",
+        // Fallback gradient so pure black = clear signal WebGL not drawing
+        background:
+          mode === "focus"
+            ? "radial-gradient(circle at 30% 40%, rgba(59,130,246,0.25), transparent 60%), radial-gradient(circle at 70% 60%, rgba(236,72,153,0.20), transparent 65%)"
+            : "radial-gradient(circle at 50% 50%, rgba(59,130,246,0.12), transparent 70%)",
         ...glassStrengthStyles,
         ...style,
       }}
@@ -277,40 +280,6 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
           }}
           aria-hidden="true"
         />
-      )}
-
-      {/* Development debug info */}
-      {process.env.NODE_ENV === "development" && (
-        <div
-          className="absolute bottom-2 left-2 z-50 pointer-events-none"
-          style={{
-            fontSize: "10px",
-            fontFamily: "ui-monospace, monospace",
-            background: isDark
-              ? "rgba(59, 130, 246, 0.9)"
-              : "rgba(0, 0, 0, 0.8)",
-            color: isDark ? "#000000" : "#00ff88",
-            padding: "0.5rem",
-            borderRadius: "4px",
-            border: isDark
-              ? "1px solid rgba(96, 165, 250, 0.3)"
-              : "1px solid rgba(0, 255, 136, 0.3)",
-          }}
-        >
-          <div>🎭 BgGooRefined v1.0</div>
-          <div>Mode: {mode}</div>
-          <div>Strength: {effectiveStrength.toFixed(2)}</div>
-          <div>Parallax: {effectiveParallax.toFixed(2)}</div>
-          <div>Speed: {effectiveSpeed.toFixed(2)}</div>
-          <div>
-            Effect: {effectIndex}/{effectFunctions.length}
-          </div>
-          <div>Saturation: {modeConfig.saturation.toFixed(2)}</div>
-          <div>Animate: {shouldAnimate ? "yes" : "no"}</div>
-          <div>
-            Noise: {noise && modeConfig.noise > 0 ? "enabled" : "disabled"}
-          </div>
-        </div>
       )}
     </div>
   );
