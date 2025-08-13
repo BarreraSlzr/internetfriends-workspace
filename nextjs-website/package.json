@@ -102,7 +102,9 @@
     "db:migrate": "bun run scripts/migrate-fossilization.ts",
     "db:dashboard": "bun run scripts/migrate-fossilization.ts export",
     "db:health": "bun -e \"import { dbService } from './lib/database/service'; console.log(await dbService.healthCheck())\"",
-    "quality:dashboard": "bun run db:dashboard && echo 'Dashboard: http://localhost:3000/postgresql-quality-dashboard.html'"
+    "quality:dashboard": "bun run db:dashboard && echo 'Dashboard: http://localhost:3000/postgresql-quality-dashboard.html'",
+    "dev:monitor": "bun run scripts/dev-monitor.ts",
+    "dev:check": "bun run scripts/dev-monitor.ts --check"
   },
   "dependencies": {
     "@date-fns/tz": "^1.2.0",
