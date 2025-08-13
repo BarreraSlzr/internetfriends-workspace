@@ -1,15 +1,13 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import Header from "./(internetfriends)/components/header";
-import Navigation from "./(internetfriends)/components/navigation";
-import SocialLinks from "./(internetfriends)/components/social-links";
-import HeroText from "./(internetfriends)/components/hero-text";
-import CompanyInfo from "./(internetfriends)/components/company-info";
+
+// Force dynamic rendering to avoid SSR hook issues
+export const dynamic = "force-dynamic";
 
 const messages = [
   {
-    main: "This page doesn’t exist... yet.",
+    main: "This page doesn't exist... yet.",
     subtitle: "Maybe it's waiting for a business solution!",
   },
   {
@@ -18,7 +16,7 @@ const messages = [
   },
   {
     main: "Oops! Lost in automation.",
-    subtitle: "Let’s simplify that workflow and find your way.",
+    subtitle: "Let's simplify that workflow and find your way.",
   },
   {
     main: "Not here yet.",
@@ -26,7 +24,7 @@ const messages = [
   },
   {
     main: "Nothing to see here.",
-    subtitle: "Let’s create something amazing instead!",
+    subtitle: "Let's create something amazing instead!",
   },
   {
     main: "Page not found.",
@@ -34,7 +32,7 @@ const messages = [
   },
   {
     main: "Missing in action.",
-    subtitle: "Maybe it’s busy creating creative solutions for you.",
+    subtitle: "Maybe it's busy creating creative solutions for you.",
   },
   {
     main: "Content unavailable.",
@@ -42,7 +40,7 @@ const messages = [
   },
   {
     main: "This page is taking a creative break.",
-    subtitle: "Let’s brainstorm your next big idea!",
+    subtitle: "Let's brainstorm your next big idea!",
   },
 ];
 
@@ -50,30 +48,22 @@ export default function NotFoundPage() {
   const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
   return (
-    <main>
-      {/* Header */}
-      <Header />
-
-      <HeroText>
-        <h1 className="text-4xl font-bold mb-4 font-mono">
+    <main className="min-h-screen flex flex-col items-center justify-center p-8">
+      <div className="text-center max-w-2xl">
+        <h1 className="text-4xl font-bold mb-4 font-mono text-foreground">
           404 - {randomMessage.main}
         </h1>
-        <p className="text-lg mb-6">{randomMessage.subtitle}</p>
+        <p className="text-lg mb-6 text-muted-foreground">
+          {randomMessage.subtitle}
+        </p>
         <Link
           href="/"
-          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+          className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity text-primary"
         >
           Go Home
           <ArrowUpRight className="h-4 w-4" />
         </Link>
-      </HeroText>
-
-      {/* Main Navigation */}
-      <Navigation />
-
-      {/* Social Links */}
-      <SocialLinks />
-      <CompanyInfo />
+      </div>
     </main>
   );
 }
