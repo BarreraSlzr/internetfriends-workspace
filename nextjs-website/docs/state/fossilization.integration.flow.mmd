@@ -1,0 +1,64 @@
+<!--
+id: 20250813-023530-fossilization-flow
+title: Event Fossilization Integration Flow
+createdAt: 2025-08-13T02:35:30.000Z
+stamp: 20250813-023530-fossil
+description: Flow diagram showing how component analysis events integrate with fossilization storage
+-->
+
+flowchart TD
+    subgraph "Component Analysis"
+        A[Helper Execution] --> B[Component Scanning]
+        B --> C[Pattern Analysis]
+        C --> D[Scoring Calculation]
+        D --> E[Event Generation]
+    end
+
+    subgraph "Event Processing"
+        E --> F{Events Flag?}
+        F -->|Yes| G[EventEmitter.emit]
+        F -->|No| H[Skip Events]
+        G --> I[Event Queue]
+    end
+
+    subgraph "Fossilization System"
+        I --> J[Event Filter]
+        J --> K{Event Type?}
+        K -->|component.analysis| L[Component Analysis Store]
+        K -->|helper.scoring| M[Scoring History Store]  
+        K -->|validation.result| N[Validation Results Store]
+        
+        L --> O[Fossil Record Creation]
+        M --> O
+        N --> O
+        
+        O --> P[Timestamp + Metadata]
+        P --> Q[Persistent Storage]
+    end
+
+    subgraph "Analysis & Insights"
+        Q --> R[Pattern Trends]
+        Q --> S[Score Evolution]
+        Q --> T[Quality Metrics]
+        
+        R --> U[Dashboard/Reports]
+        S --> U
+        T --> U
+    end
+
+    subgraph "Feedback Loop"
+        U --> V[Recommendations Engine]
+        V --> W[Developer Insights]
+        W --> X[Component Improvements]
+        X --> A
+    end
+
+    classDef processing fill:#e1f5fe
+    classDef storage fill:#f3e5f5
+    classDef analysis fill:#e8f5e8
+    classDef feedback fill:#fff3e0
+
+    class A,B,C,D,E processing
+    class I,J,L,M,N,O,P,Q storage
+    class R,S,T,U analysis
+    class V,W,X feedback

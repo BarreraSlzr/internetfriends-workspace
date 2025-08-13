@@ -1,0 +1,72 @@
+<!--
+id: 20250813-023600-orchestrator-workflow
+title: OpenCode Orchestrator Workflow
+createdAt: 2025-08-13T02:36:00.000Z
+stamp: 20250813-023600-workflow
+description: Complete workflow diagram for OpenCode orchestrator from invocation to OpenCode CLI
+-->
+
+graph TB
+    subgraph "Orchestrator Invocation"
+        A[User runs orchestrator] --> B{--helper flag?}
+        B -->|Yes| C[Enable helper analysis]
+        B -->|No| D[Skip helper]
+    end
+
+    subgraph "Delegation Generation"  
+        C --> E[Execute opencode-delegate.ts]
+        D --> E
+        E --> F[Generate task plan JSON]
+        F --> G[Set priorities & dependencies]
+        G --> H[Return delegation structure]
+    end
+
+    subgraph "Helper Analysis" 
+        H --> I{Helper enabled?}
+        I -->|Yes| J[Execute helper.ts --all --events]
+        I -->|No| K[Skip analysis]
+        
+        J --> L[Scan components]
+        L --> M[Score patterns]  
+        M --> N[Generate recommendations]
+        N --> O[Output analysis text]
+    end
+
+    subgraph "Prompt Assembly"
+        O --> P[Build context prompt]
+        K --> P
+        P --> Q[Add delegation JSON]
+        Q --> R[Add helper output]
+        R --> S[Add instructions]
+        S --> T[Generate session ID & timestamp]
+    end
+
+    subgraph "OpenCode Integration"
+        T --> U{OpenCode CLI available?}
+        U -->|Yes| V[Pipe prompt to opencode]
+        U -->|No| W[Save prompt to file]
+        
+        V --> X[OpenCode processes prompt]
+        W --> Y[Show manual instructions]
+        
+        X --> Z[AI analysis & recommendations]
+        Y --> AA[User runs manually]
+    end
+
+    subgraph "Output & Results"
+        Z --> BB[Prioritized task recommendations]
+        AA --> BB
+        BB --> CC[Component improvement plan] 
+        CC --> DD[Next actionable steps]
+        DD --> EE[Developer workflow integration]
+    end
+
+    classDef start fill:#e3f2fd
+    classDef process fill:#f1f8e9  
+    classDef decision fill:#fff3e0
+    classDef output fill:#fce4ec
+
+    class A start
+    class E,F,G,J,L,M,N,P,Q,R,S,T process
+    class B,I,U decision
+    class BB,CC,DD,EE output

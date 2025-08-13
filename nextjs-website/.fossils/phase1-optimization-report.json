@@ -1,0 +1,851 @@
+{
+  "timestamp": "2025-08-13T03:10:24.266Z",
+  "phase": "1 - Critical Fixes",
+  "componentsFixed": 102,
+  "totalImprovements": 2735,
+  "averageImprovement": 27,
+  "fixes": [
+    {
+      "file": "app/not-found.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/layout.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/client-layout.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/dev/layout.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/theme/theme-provider.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/accent-demo/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/accent-demo/layout.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "components/data/metric-display.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "components/perf/performance_metrics_initializer.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Raw Date usage detected"
+      ],
+      "improvement": 30
+    },
+    {
+      "file": "components/perf/client-rum-wrapper.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "components/effects/dark-vignette.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/theme/accent-initializer.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/glass/glass-panel.atomic.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/backgrounds/selective-background.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/input.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/textarea.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/select.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/button.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/badge.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/avatar.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/language-selector.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "components/ui/tabs.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/ui/glass-badge.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/backgrounds-refined/bg-goo-refined.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "components/demo/accent-demo.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/dev/tokens/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop",
+        "Raw Date usage detected"
+      ],
+      "improvement": 40
+    },
+    {
+      "file": "app/dev/component-map/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/dev/glass-refinement/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/theme/components/accent-demo.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/theme/components/theme-layout-example.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/orchestrator/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop",
+        "Raw Date usage detected"
+      ],
+      "improvement": 40
+    },
+    {
+      "file": "app/(internetfriends)/pricing/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/design-system/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/icon/route.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/theme-demo/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/samples/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/curriculum/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/patterns/boundary-patterns.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/patterns/boundary-examples.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/contact/page.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/contact-form.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/social-links.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/navigation.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/canvas-background-client.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Raw Date usage detected"
+      ],
+      "improvement": 20
+    },
+    {
+      "file": "app/(internetfriends)/components/gloo-client.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/header.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/card-description-toggle.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/email-subscription-form.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/hero-text-complete.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop",
+        "Raw Date usage detected"
+      ],
+      "improvement": 40
+    },
+    {
+      "file": "app/(internetfriends)/components/custom-card.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/availability.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/motion-div.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/google-analytics.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Raw Date usage detected"
+      ],
+      "improvement": 30
+    },
+    {
+      "file": "app/(internetfriends)/components/hero-text-simple.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/hero-text.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop",
+        "Raw Date usage detected"
+      ],
+      "improvement": 40
+    },
+    {
+      "file": "app/(internetfriends)/components/header-simple.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/company-info.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/organisms/header/header.organism.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "components/mermaid/viewer/markdown-renderer.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing disabled prop"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/mermaid/viewer/mermaid-viewer.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "components/molecular/navigation/navigation.molecular.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/molecular/project-explorer/project-explorer.atomic.tsx",
+      "issues": [
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 20
+    },
+    {
+      "file": "components/atomic/glass-card/glass-card.atomic.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "components/atomic/header/header.atomic.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "components/atomic/button/button.atomic.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/orchestrator/components/project-node.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/orchestrator/components/process-node.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/orchestrator/components/state-node.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/orchestrator/components/real-time-monitor.tsx",
+      "issues": [
+        "Raw Date usage detected"
+      ],
+      "improvement": 5
+    },
+    {
+      "file": "app/(internetfriends)/design-system/nodes/hook.node.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/design-system/nodes/component.node.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/design-system/nodes/page.node.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/design-system/nodes/utility.node.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/icon/[size]/route.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-more-tab.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-info.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop",
+        "Raw Date usage detected"
+      ],
+      "improvement": 40
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-card.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-tabs.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-header.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-projects-tab.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-skills-tab.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/profile/profile-expertise-tab.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/gloo-simple.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/gloo-integration-simple.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/gloo-root.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/noise-filter-div.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/grid-background.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/gloo-integration.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/gloo/client-wrapper.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/gloo/background-simple.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/components/gloo/canvas.atomic.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/components/gloo/global.organism.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Raw Date usage detected"
+      ],
+      "improvement": 20
+    },
+    {
+      "file": "app/(internetfriends)/components/organism/data-table/data-table.consolidated.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/organism/analytics/analytics.organism.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Raw Date usage detected"
+      ],
+      "improvement": 30
+    },
+    {
+      "file": "app/(internetfriends)/components/organism/analytics/analytics-simple.organism.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+      "issues": [
+        "Raw Date usage detected"
+      ],
+      "improvement": 5
+    },
+    {
+      "file": "app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID"
+      ],
+      "improvement": 25
+    },
+    {
+      "file": "app/(internetfriends)/components/organism/project-showcase/project-showcase.consolidated.tsx",
+      "issues": [
+        "Missing unique stamp generation"
+      ],
+      "improvement": 15
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/renderers/canvas-gloo.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    },
+    {
+      "file": "app/(internetfriends)/components/backgrounds/renderers/webgl-gloo.tsx",
+      "issues": [
+        "Missing unique stamp generation",
+        "Missing test ID",
+        "Missing disabled prop"
+      ],
+      "improvement": 35
+    }
+  ]
+}

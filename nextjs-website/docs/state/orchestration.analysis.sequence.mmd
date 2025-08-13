@@ -1,0 +1,51 @@
+<!--
+id: 20250813-022900-abc123
+title: Component Analysis Flow
+createdAt: 2025-08-13T02:29:00.000Z
+stamp: 20250813-022900-xyz789
+description: Sequence diagram describing helper invocation -> iteration -> aggregate -> output
+-->
+
+sequenceDiagram
+    participant O as Orchestrator
+    participant D as Delegate
+    participant H as Helper
+    participant FS as FileSystem
+    participant E as EventEmitter
+    participant A as Aggregator
+
+    Note over O,A: OpenCode Component Analysis Orchestration Flow
+
+    O->>D: Generate delegation plan
+    D-->>O: JSON task list with priorities
+    
+    O->>H: Execute helper.ts --all --events
+    
+    Note over H: Helper Analysis Loop
+    H->>FS: Scan components/atomic/*
+    H->>FS: Scan components/molecular/*
+    H->>FS: Scan components/organisms/*
+    
+    loop For each component
+        FS-->>H: Component file content
+        H->>H: scoreComponent(path, content)
+        Note right of H: Pattern Analysis:<br/>- Theme usage<br/>- Memoization<br/>- Props count<br/>- Type interfaces<br/>- Test IDs
+        H->>E: Emit analysis event
+        E-->>H: Event recorded
+        H->>A: Add to components array
+    end
+
+    H->>A: Generate summary statistics
+    A->>A: Calculate averages, gaps, recommendations
+    
+    H-->>O: JSON report with analysis
+    
+    Note over O: Output formatted results
+    O->>O: Format as markdown/JSON/summary
+    O-->>User: Display analysis results
+    
+    alt If --events flag enabled
+        E-->>O: Event log for fossilization
+    end
+
+    Note over O,A: Analysis complete with actionable insights

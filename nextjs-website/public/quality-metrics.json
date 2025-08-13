@@ -1,0 +1,65 @@
+{
+  "metrics": [
+    {
+      "timestamp": "2025-08-13T02:58:33.367Z",
+      "totalComponents": 147,
+      "averageScore": 62.2108843537415,
+      "scoreDistribution": {
+        "excellent": 18,
+        "good": 42,
+        "fair": 80,
+        "poor": 7,
+        "critical": 0
+      },
+      "categoryBreakdown": {
+        "utility": {
+          "count": 139,
+          "avgScore": 61.76258992805755
+        },
+        "organism": {
+          "count": 2,
+          "avgScore": 72.5
+        },
+        "atomic": {
+          "count": 4,
+          "avgScore": 72.5
+        },
+        "molecular": {
+          "count": 2,
+          "avgScore": 62.5
+        }
+      },
+      "topIssues": {
+        "Missing disabled prop": 125,
+        "Missing test ID": 127,
+        "No unique stamp generation": 144,
+        "No Props interface found": 97,
+        "Raw Date usage detected": 9,
+        "Too many props (70/8)": 1,
+        "Too many props (50/8)": 1,
+        "Missing React optimization": 1
+      },
+      "improvements": [
+        {
+          "component": "GlassRefinedAtomic",
+          "before": 50,
+          "after": 75,
+          "improvement": 50
+        },
+        {
+          "component": "RealTimeMonitor",
+          "before": 50,
+          "after": 80,
+          "improvement": 60
+        },
+        {
+          "component": "DashboardOrganism",
+          "before": 35,
+          "after": 65,
+          "improvement": 86
+        }
+      ]
+    }
+  ],
+  "generated": "2025-08-13T03:00:20.592Z"
+}

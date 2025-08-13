@@ -1,0 +1,66 @@
+[
+  {
+    "type": "helper.scoring",
+    "data": {
+      "runId": "202508130238352",
+      "totalComponents": 8,
+      "averageScore": 15.5,
+      "scoreDistribution": {
+        "excellent": 1,
+        "good": 1
+      },
+      "gapAnalysis": {
+        "No Props interface found": 1,
+        "Too many props (14/8)": 1,
+        "Consider adding disabled prop": 2,
+        "Add data-testid for testing": 1
+      },
+      "recommendations": [
+        "Use generateStamp() for unique IDs",
+        "Consider adding disabled prop",
+        "Add data-testid for testing"
+      ]
+    },
+    "metadata": {
+      "source": "helper.ts",
+      "version": "1.0.0",
+      "environment": "development",
+      "session": "202508130238352"
+    },
+    "id": "202508130238352-bhyimu",
+    "timestamp": "2025-08-13T02:38:35.253Z",
+    "stamp": "202508130238352"
+  },
+  {
+    "type": "helper.scoring",
+    "data": {
+      "runId": "202508130244344",
+      "totalComponents": 8,
+      "averageScore": 15.5,
+      "scoreDistribution": {
+        "excellent": 1,
+        "good": 1
+      },
+      "gapAnalysis": {
+        "No Props interface found": 1,
+        "Too many props (14/8)": 1,
+        "Consider adding disabled prop": 2,
+        "Add data-testid for testing": 1
+      },
+      "recommendations": [
+        "Use generateStamp() for unique IDs",
+        "Consider adding disabled prop",
+        "Add data-testid for testing"
+      ]
+    },
+    "metadata": {
+      "source": "helper.ts",
+      "version": "1.0.0",
+      "environment": "development",
+      "session": "202508130244344"
+    },
+    "id": "202508130244344-6gcl3s",
+    "timestamp": "2025-08-13T02:44:34.430Z",
+    "stamp": "202508130244344"
+  }
+]

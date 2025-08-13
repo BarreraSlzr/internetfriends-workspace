@@ -1,0 +1,87 @@
+<!--
+id: 20250813-023500-precommit-flow
+title: Pre-commit Validation Flow
+createdAt: 2025-08-13T02:35:00.000Z
+stamp: 20250813-023500-validation
+description: Sequence diagram for pre-commit hook validation pipeline with component analysis
+-->
+
+sequenceDiagram
+    participant Dev as Developer
+    participant Git as Git
+    participant Hook as Pre-commit Hook  
+    participant Lint as ESLint
+    participant Diag as DiagramValidator
+    participant Comp as ComponentAnalyzer
+    participant Test as TestRunner
+    participant Sec as SecurityCheck
+
+    Note over Dev,Sec: Pre-commit Validation Pipeline
+
+    Dev->>Git: git commit -m "message"
+    Git->>Hook: Execute .githooks/pre-commit
+
+    Note over Hook: Branch Protection Check
+    Hook->>Hook: Check if branch is main/develop
+    alt On protected branch
+        Hook-->>Dev: ❌ Reject: Use feature branch
+        Hook->>Git: exit 1
+    end
+
+    Note over Hook: Code Quality Validation
+    Hook->>Lint: bun run lint --fix
+    Lint-->>Hook: ✅ Linting complete
+
+    Hook->>Diag: bun run validate:diagrams
+    Diag->>Diag: Scan docs/state/*.mmd
+    Diag->>Diag: Validate frontmatter tokens
+    Diag-->>Hook: ⚠️ Warning if invalid (non-blocking)
+
+    Note over Hook: Component Analysis
+    Hook->>Git: Get staged component files
+    Git-->>Hook: List of *.tsx in components/
+    
+    alt Components changed
+        Hook->>Comp: bun run analyze:components:summary --quiet
+        Comp->>Comp: Score component patterns
+        Comp-->>Hook: 💡 Improvement suggestions
+    else No components changed
+        Hook->>Hook: Skip component analysis
+    end
+
+    Note over Hook: Test Validation
+    Hook->>Git: Check if helper files changed
+    alt Helper files modified
+        Hook->>Test: bun run test:helper --reporter=minimal
+        Test->>Test: Run scoring edge case tests
+        alt Tests fail
+            Test-->>Hook: ❌ Test failures
+            Hook-->>Dev: Reject commit
+            Hook->>Git: exit 1
+        else Tests pass
+            Test-->>Hook: ✅ All tests passed
+        end
+    end
+
+    Note over Hook: Security Checks
+    Hook->>Sec: Check for secrets/API keys
+    Sec->>Git: Scan staged files for patterns
+    alt Secrets detected
+        Sec-->>Hook: ❌ Secrets found
+        Hook-->>Dev: Reject: Remove secrets
+        Hook->>Git: exit 1
+    else No secrets
+        Sec-->>Hook: ✅ Security check passed
+    end
+
+    Hook->>Sec: Check for debug statements
+    Sec->>Git: Scan for console.log/debugger
+    alt Debug statements found
+        Sec-->>Hook: ⚠️ Warning: Debug statements (non-blocking)
+    end
+
+    Hook-->>Git: ✅ All checks passed
+    Git->>Git: Create commit
+    Git-->>Dev: Commit successful
+
+    Note over Dev,Sec: Quality gates ensure consistent code standards

@@ -1,0 +1,120 @@
+[
+  {
+    "type": "component.analysis",
+    "data": {
+      "component": "GlassCardAtomic",
+      "level": "atomic",
+      "score": 85,
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 8
+      },
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "path": "/components/glasscardatomic/glasscardatomic.tsx"
+    },
+    "metadata": {
+      "source": "helper.ts",
+      "version": "1.0.0",
+      "environment": "development",
+      "session": "202508130238352"
+    },
+    "id": "202508130238352-cpxr93",
+    "timestamp": "2025-08-13T02:38:35.245Z",
+    "stamp": "202508130238352"
+  },
+  {
+    "type": "component.analysis",
+    "data": {
+      "component": "ProjectExplorer",
+      "level": "molecular",
+      "score": 75,
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 4
+      },
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing"
+      ],
+      "path": "/components/projectexplorer/projectexplorer.tsx"
+    },
+    "metadata": {
+      "source": "helper.ts",
+      "version": "1.0.0",
+      "environment": "development",
+      "session": "202508130238352"
+    },
+    "id": "202508130238352-bbixs0",
+    "timestamp": "2025-08-13T02:38:35.246Z",
+    "stamp": "202508130238352"
+  },
+  {
+    "type": "component.analysis",
+    "data": {
+      "component": "GlassCardAtomic",
+      "level": "atomic",
+      "score": 85,
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 8
+      },
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "path": "/components/glasscardatomic/glasscardatomic.tsx"
+    },
+    "metadata": {
+      "source": "helper.ts",
+      "version": "1.0.0",
+      "environment": "development",
+      "session": "202508130244344"
+    },
+    "id": "202508130244344-q9g5jy",
+    "timestamp": "2025-08-13T02:44:34.427Z",
+    "stamp": "202508130244344"
+  },
+  {
+    "type": "component.analysis",
+    "data": {
+      "component": "ProjectExplorer",
+      "level": "molecular",
+      "score": 75,
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 4
+      },
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing"
+      ],
+      "path": "/components/projectexplorer/projectexplorer.tsx"
+    },
+    "metadata": {
+      "source": "helper.ts",
+      "version": "1.0.0",
+      "environment": "development",
+      "session": "202508130244344"
+    },
+    "id": "202508130244344-qjcmd5",
+    "timestamp": "2025-08-13T02:44:34.430Z",
+    "stamp": "202508130244344"
+  }
+]

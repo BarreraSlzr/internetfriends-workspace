@@ -1,0 +1,3927 @@
+{
+  "timestamp": "2025-08-13T03:10:28.105Z",
+  "report": {
+    "totalComponents": 147,
+    "averageScore": 63.673469387755105,
+    "categoryBreakdown": {
+      "utility": {
+        "count": 139,
+        "avgScore": 63.30935251798561
+      },
+      "organism": {
+        "count": 2,
+        "avgScore": 72.5
+      },
+      "atomic": {
+        "count": 4,
+        "avgScore": 72.5
+      },
+      "molecular": {
+        "count": 2,
+        "avgScore": 62.5
+      }
+    },
+    "topIssues": {
+      "Missing disabled prop": 125,
+      "Missing test ID": 127,
+      "No unique stamp generation": 137,
+      "No Props interface found": 97,
+      "Missing React optimization": 1,
+      "Too many props (50/8)": 1,
+      "Too many props (70/8)": 1
+    },
+    "lowestPerformers": [
+      {
+        "filePath": "app/not-found.tsx",
+        "exportName": "dynamic",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add dynamicProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 19
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/not-found.tsx",
+        "exportName": "NotFoundPage",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add NotFoundPageProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 19
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/not-found.tsx",
+        "exportName": "function",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add functionProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 19
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/layout.tsx",
+        "exportName": "dynamic",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add dynamicProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 20
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/layout.tsx",
+        "exportName": "metadata",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add metadataProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 20
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/layout.tsx",
+        "exportName": "viewport",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add viewportProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 20
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/layout.tsx",
+        "exportName": "RootLayout",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add RootLayoutProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 20
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/layout.tsx",
+        "exportName": "function",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add functionProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 20
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "app/client-layout.tsx",
+        "exportName": "ClientLayout",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add ClientLayoutProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 2
+        },
+        "category": "utility"
+      },
+      {
+        "filePath": "components/perf/performance_metrics_initializer.tsx",
+        "exportName": "PerformanceMetricsInitializer",
+        "score": 55,
+        "issues": [
+          "Missing disabled prop",
+          "Missing test ID",
+          "No unique stamp generation",
+          "No Props interface found"
+        ],
+        "suggestions": [
+          "Consider adding disabled prop",
+          "Add data-testid for testing",
+          "Use generateStamp() for unique IDs",
+          "Add PerformanceMetricsInitializerProps interface"
+        ],
+        "patterns": {
+          "hasDisabled": false,
+          "hasTestId": false,
+          "hasStamp": false,
+          "hasIsoTimestamp": false,
+          "hasRawDateUsage": false,
+          "propsCount": 50
+        },
+        "category": "utility"
+      }
+    ],
+    "recommendations": [
+      "Use generateStamp() for unique IDs",
+      "Add data-testid for testing",
+      "Consider adding disabled prop",
+      "Add functionProps interface",
+      "Add dynamicProps interface"
+    ]
+  },
+  "components": [
+    {
+      "filePath": "app/not-found.tsx",
+      "exportName": "dynamic",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add dynamicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 19
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/not-found.tsx",
+      "exportName": "NotFoundPage",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add NotFoundPageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 19
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/not-found.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 19
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/layout.tsx",
+      "exportName": "dynamic",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add dynamicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/layout.tsx",
+      "exportName": "metadata",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add metadataProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/layout.tsx",
+      "exportName": "viewport",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add viewportProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/layout.tsx",
+      "exportName": "RootLayout",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add RootLayoutProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/layout.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/client-layout.tsx",
+      "exportName": "ClientLayout",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ClientLayoutProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 2
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/perf/performance_metrics_initializer.tsx",
+      "exportName": "PerformanceMetricsInitializer",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add PerformanceMetricsInitializerProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 50
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/perf/client-rum-wrapper.tsx",
+      "exportName": "ClientRUMWrapper",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ClientRUMWrapperProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 2
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "KPIMetric",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add KPIMetricProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 124
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "DashboardMetric",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add DashboardMetricProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 124
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "CompactMetric",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add CompactMetricProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 124
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "MetricShowcase",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add MetricShowcaseProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 124
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/theme/accent-initializer.tsx",
+      "exportName": "AccentInitializer",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add AccentInitializerProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 9
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/demo/accent-demo.tsx",
+      "exportName": "AccentDemo",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add AccentDemoProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 10
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/accent-demo/layout.tsx",
+      "exportName": "AccentDemoLayout",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add AccentDemoLayoutProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 1
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/accent-demo/layout.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 1
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "useTheme",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add useThemeProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 62
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "useAccent",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add useAccentProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 62
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "useDarkMode",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add useDarkModeProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 62
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "useThemeDebug",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add useThemeDebugProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 62
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/page.tsx",
+      "exportName": "dynamic",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add dynamicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 51
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/page.tsx",
+      "exportName": "Page",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add PageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 51
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 51
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/molecular/project-explorer/project-explorer.atomic.tsx",
+      "exportName": "ProjectExplorerAtomic",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProjectExplorerAtomicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 114
+      },
+      "category": "molecular"
+    },
+    {
+      "filePath": "app/dev/glass-refinement/page.tsx",
+      "exportName": "dynamic",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add dynamicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 40
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/glass-refinement/page.tsx",
+      "exportName": "GlassRefinementDemo",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add GlassRefinementDemoProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 40
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/glass-refinement/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 40
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/component-map/page.tsx",
+      "exportName": "dynamic",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add dynamicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 101
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/component-map/page.tsx",
+      "exportName": "ComponentMapPage",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ComponentMapPageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 101
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/component-map/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 101
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/theme/components/accent-demo.tsx",
+      "exportName": "AccentDemo",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add AccentDemoProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 24
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/orchestrator/page.tsx",
+      "exportName": "OrchestratorPage",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add OrchestratorPageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 133
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/orchestrator/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 133
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/pricing/page.tsx",
+      "exportName": "Page",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add PageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/pricing/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/contact/page.tsx",
+      "exportName": "Page",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add PageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 22
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/contact/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 22
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/samples/page.tsx",
+      "exportName": "dynamic",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add dynamicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 36
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/samples/page.tsx",
+      "exportName": "Page",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add PageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 36
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/samples/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 36
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/contact-form.tsx",
+      "exportName": "ContactForm",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ContactFormProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 26
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/social-links.tsx",
+      "exportName": "SocialLinks",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add SocialLinksProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 3
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/social-links.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 3
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/navigation.tsx",
+      "exportName": "Navigation",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add NavigationProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 3
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/navigation.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 3
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/header.tsx",
+      "exportName": "Header",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add HeaderProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 12
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/header.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 12
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/email-subscription-form.tsx",
+      "exportName": "EmailSubscriptionForm",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add EmailSubscriptionFormProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 2
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/hero-text-complete.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 23
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/availability.tsx",
+      "exportName": "Availability",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add AvailabilityProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 1
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/motion-div.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 7
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/hero-text.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 17
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/header-simple.tsx",
+      "exportName": "HeaderSimple",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add HeaderSimpleProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 4
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/header-simple.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 4
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/company-info.tsx",
+      "exportName": "async",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add asyncProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 2
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/theme-demo/page.tsx",
+      "exportName": "metadata",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add metadataProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 23
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/theme-demo/page.tsx",
+      "exportName": "ThemeDemoPage",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ThemeDemoPageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 23
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/theme-demo/page.tsx",
+      "exportName": "RootLayout",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add RootLayoutProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 23
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/theme-demo/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 23
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/design-system/page.tsx",
+      "exportName": "DesignSystemPage",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add DesignSystemPageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 47
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/design-system/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 47
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/patterns/boundary-patterns.tsx",
+      "exportName": "createDynamicBoundary",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add createDynamicBoundaryProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 149
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/curriculum/page.tsx",
+      "exportName": "Page",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add PageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 10
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/curriculum/page.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 10
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-more-tab.tsx",
+      "exportName": "ProfileMoreTab",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProfileMoreTabProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 12
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-info.tsx",
+      "exportName": "ProfileInfo",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProfileInfoProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 2
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-card.tsx",
+      "exportName": "cardCss",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add cardCssProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 14
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-card.tsx",
+      "exportName": "ProfileCard",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProfileCardProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 14
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-header.tsx",
+      "exportName": "ProfileHeader",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProfileHeaderProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 1
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-projects-tab.tsx",
+      "exportName": "ProfileProjectsTab",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProfileProjectsTabProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 2
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-expertise-tab.tsx",
+      "exportName": "ProfileExpertiseTab",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProfileExpertiseTabProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 1
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/gloo-simple.tsx",
+      "exportName": "BgGooSimple",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add BgGooSimpleProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 18
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/noise-filter-div.tsx",
+      "exportName": "NoiseFilter",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add NoiseFilterProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 19
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/noise-filter-div.tsx",
+      "exportName": "function",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 19
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/gloo/client-wrapper.tsx",
+      "exportName": "GlooGlobalClient",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add GlooGlobalClientProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 4
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/organism/data-table/data-table.organism.tsx",
+      "exportName": "DataTableOrganism",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add DataTableOrganismProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 128
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/organism/project-showcase/project-showcase.organism.tsx",
+      "exportName": "ProjectShowcaseOrganism",
+      "score": 55,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add ProjectShowcaseOrganismProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 164
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/tokens/page.tsx",
+      "exportName": "dynamic",
+      "score": 60,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Add dynamicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 61
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/tokens/page.tsx",
+      "exportName": "TokenInspectorPage",
+      "score": 60,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Add TokenInspectorPageProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 61
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/tokens/page.tsx",
+      "exportName": "function",
+      "score": 60,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 61
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/google-analytics.tsx",
+      "exportName": "GA_TRACKING_ID",
+      "score": 60,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Add GA_TRACKING_IDProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 8
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/google-analytics.tsx",
+      "exportName": "GoogleAnalytics",
+      "score": 60,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Add GoogleAnalyticsProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 8
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/google-analytics.tsx",
+      "exportName": "function",
+      "score": 60,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 8
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/organism/analytics/analytics.organism.tsx",
+      "exportName": "AnalyticsOrganism",
+      "score": 60,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Add AnalyticsOrganismProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 229
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/organisms/header/header.organism.tsx",
+      "exportName": "useHeader",
+      "score": 65,
+      "issues": [
+        "Missing disabled prop",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Use generateStamp() for unique IDs",
+        "Add useHeaderProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 95
+      },
+      "category": "organism"
+    },
+    {
+      "filePath": "components/atomic/header/header.atomic.tsx",
+      "exportName": "HeaderAtomic",
+      "score": 65,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation",
+        "Missing React optimization"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Consider React.memo or forwardRef"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 6
+      },
+      "category": "atomic"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/gloo/canvas.atomic.tsx",
+      "exportName": "GlooCanvasAtomic",
+      "score": 65,
+      "issues": [
+        "Missing disabled prop",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Use generateStamp() for unique IDs",
+        "Add GlooCanvasAtomicProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 82
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/gloo/global.organism.tsx",
+      "exportName": "GlooGlobalOrganism",
+      "score": 65,
+      "issues": [
+        "Missing disabled prop",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Use generateStamp() for unique IDs",
+        "Add GlooGlobalOrganismProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 83
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/data/metric-display.tsx",
+      "exportName": "MetricDisplay",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 124
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "HeroVignette",
+      "score": 70,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add HeroVignetteProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 28
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "HeaderVignette",
+      "score": 70,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add HeaderVignetteProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 28
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "SectionVignette",
+      "score": 70,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add SectionVignetteProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 28
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/backgrounds/selective-background.tsx",
+      "exportName": "SelectiveBackground",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 10
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassPanel",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 10
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/ui/glass-badge.tsx",
+      "exportName": "GlassBadge",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 13
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/layout.tsx",
+      "exportName": "metadata",
+      "score": 70,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add metadataProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 17
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/layout.tsx",
+      "exportName": "function",
+      "score": 70,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs",
+        "Add functionProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 17
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/accent-demo/page.tsx",
+      "exportName": "dynamic",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 0
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/accent-demo/page.tsx",
+      "exportName": "AccentDemoPage",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 0
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/accent-demo/page.tsx",
+      "exportName": "function",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 0
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/theme/theme-provider.tsx",
+      "exportName": "ThemeProvider",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 62
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/atomic/button/button.atomic.tsx",
+      "exportName": "ButtonAtomic",
+      "score": 70,
+      "issues": [
+        "Too many props (50/8)",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider refactoring to reduce props",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 50
+      },
+      "category": "atomic"
+    },
+    {
+      "filePath": "components/molecular/navigation/navigation.molecular.tsx",
+      "exportName": "NavigationMolecular",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 25
+      },
+      "category": "molecular"
+    },
+    {
+      "filePath": "app/theme/components/theme-layout-example.tsx",
+      "exportName": "ThemeLayoutExample",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 36
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/card-description-toggle.tsx",
+      "exportName": "CardDescriptionToggle",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 1
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/hero-text-complete.tsx",
+      "exportName": "HeroText",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 23
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/custom-card.tsx",
+      "exportName": "CustomCard",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 11
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/motion-div.tsx",
+      "exportName": "MotionDiv",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 7
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/hero-text.tsx",
+      "exportName": "HeroText",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 17
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/patterns/boundary-patterns.tsx",
+      "exportName": "ClientOnly",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 149
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/patterns/boundary-patterns.tsx",
+      "exportName": "EpicBoundary",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 149
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/patterns/boundary-patterns.tsx",
+      "exportName": "WebGLBoundary",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 149
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/orchestrator/components/project-node.tsx",
+      "exportName": "ProjectNode",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 13
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/orchestrator/components/process-node.tsx",
+      "exportName": "ProcessNode",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 17
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/orchestrator/components/state-node.tsx",
+      "exportName": "StateNode",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 11
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-tabs.tsx",
+      "exportName": "ProfileTabs",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 0
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/profile/profile-skills-tab.tsx",
+      "exportName": "ProfileSkillsTab",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 0
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/grid-background.tsx",
+      "exportName": "GridBackground",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 4
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/design-system/nodes/hook.node.tsx",
+      "exportName": "HookNode",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 13
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/design-system/nodes/component.node.tsx",
+      "exportName": "ComponentNode",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 16
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/design-system/nodes/page.node.tsx",
+      "exportName": "PageNode",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 12
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/design-system/nodes/utility.node.tsx",
+      "exportName": "UtilityNode",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 17
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/renderers/canvas-gloo.tsx",
+      "exportName": "CanvasGloo",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 8
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/renderers/webgl-gloo.tsx",
+      "exportName": "WebGLGloo",
+      "score": 70,
+      "issues": [
+        "Missing disabled prop",
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 8
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/atomic/glass-refined/glass-refined.atomic.tsx",
+      "exportName": "GlassRefinedAtomic",
+      "score": 75,
+      "issues": [
+        "Too many props (70/8)"
+      ],
+      "suggestions": [
+        "Consider refactoring to reduce props"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": true,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 70
+      },
+      "category": "atomic"
+    },
+    {
+      "filePath": "components/organisms/header/header.organism.tsx",
+      "exportName": "HeaderOrganism",
+      "score": 80,
+      "issues": [
+        "Missing disabled prop",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 95
+      },
+      "category": "organism"
+    },
+    {
+      "filePath": "components/mermaid/viewer/markdown-renderer.tsx",
+      "exportName": "MarkdownRenderer",
+      "score": 80,
+      "issues": [
+        "Missing disabled prop",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 48
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/mermaid/viewer/mermaid-viewer.tsx",
+      "exportName": "MermaidViewer",
+      "score": 80,
+      "issues": [
+        "Missing disabled prop",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 58
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/atomic/glass-card/glass-card.atomic.tsx",
+      "exportName": "GlassCardAtomic",
+      "score": 80,
+      "issues": [
+        "Missing disabled prop",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Consider adding disabled prop",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": false,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 4
+      },
+      "category": "atomic"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/organism/analytics/analytics-simple.organism.tsx",
+      "exportName": "AnalyticsSimpleOrganism",
+      "score": 80,
+      "issues": [
+        "No unique stamp generation",
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs",
+        "Add AnalyticsSimpleOrganismProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 67
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/effects/dark-vignette.tsx",
+      "exportName": "DarkVignette",
+      "score": 85,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 28
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/dev/layout.tsx",
+      "exportName": "DevLayout",
+      "score": 85,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 17
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/gloo-client.tsx",
+      "exportName": "GlooClient",
+      "score": 85,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 24
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/gloo-root.tsx",
+      "exportName": "GlooRoot",
+      "score": 85,
+      "issues": [
+        "Missing test ID",
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Add data-testid for testing",
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": false,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 70
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/organism/dashboard/dashboard.organism.tsx",
+      "exportName": "DashboardOrganism",
+      "score": 85,
+      "issues": [
+        "No Props interface found"
+      ],
+      "suggestions": [
+        "Add DashboardOrganismProps interface"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 134
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/backgrounds-refined/bg-goo-refined.tsx",
+      "exportName": "BgGooRefined",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 93
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "components/ui/language-selector.tsx",
+      "exportName": "LanguageSelector",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 20
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/canvas-background-client.tsx",
+      "exportName": "CanvasBackgroundClient",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 89
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/patterns/boundary-examples.tsx",
+      "exportName": "ComprehensiveBoundaryExample",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 104
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/backgrounds/gloo-integration-simple.tsx",
+      "exportName": "GlooIntegrationSimple",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 43
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/gloo/background-simple.tsx",
+      "exportName": "GlooBackgroundSimple",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 40
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/organism/data-table/data-table.consolidated.tsx",
+      "exportName": "DataTableConsolidated",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 64
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/components/organism/project-showcase/project-showcase.consolidated.tsx",
+      "exportName": "ProjectShowcaseConsolidated",
+      "score": 95,
+      "issues": [
+        "No unique stamp generation"
+      ],
+      "suggestions": [
+        "Use generateStamp() for unique IDs"
+      ],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": false,
+        "hasIsoTimestamp": false,
+        "hasRawDateUsage": false,
+        "propsCount": 88
+      },
+      "category": "utility"
+    },
+    {
+      "filePath": "app/(internetfriends)/orchestrator/components/real-time-monitor.tsx",
+      "exportName": "RealTimeMonitor",
+      "score": 100,
+      "issues": [],
+      "suggestions": [],
+      "patterns": {
+        "hasDisabled": true,
+        "hasTestId": true,
+        "hasStamp": true,
+        "hasIsoTimestamp": true,
+        "hasRawDateUsage": false,
+        "propsCount": 110
+      },
+      "category": "utility"
+    }
+  ]
+}
