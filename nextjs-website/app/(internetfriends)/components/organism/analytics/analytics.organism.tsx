@@ -1,8 +1,7 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+"use client"
 
-import React, { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import React, { useCallback, useEffect, useState } from "react";
 import { UIEvents } from "../../../../../lib/events/event.system";
 import styles from "./analytics.styles.module.scss";
 // Define types inline to avoid module resolution issues
@@ -93,7 +92,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
   const [charts, setCharts] = useState<ChartData[]>([]);
   const [insights, setInsights] = useState<MetricInsight[]>([]);
 
-  const [lastUpdate, setLastUpdate] = useState<Date>(generateStamp()());
+  const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
 
   // Time Range Options
   const timeRangeOptions: Array<{ value: TimeRange; label: string }> = [
@@ -158,7 +157,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
 
   const generateMockCharts = useCallback((): ChartData[] => {
     const dates = Array.from({ length: 30 }, (_, i) => {
-      const date = generateStamp()();
+      const date = new Date();
       date.setDate(date.getDate() - (29 - i));
       return date;
     });
@@ -265,7 +264,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       setKpis(generateMockKPIs());
       setCharts(generateMockCharts());
       setInsights(generateMockInsights());
-      setLastUpdate(generateStamp()());
+      setLastUpdate(new Date());
 
       UIEvents.pageLoad("analytics", performance.now(), userId);
     } catch (err) {
@@ -309,7 +308,7 @@ export const AnalyticsOrganism: React.FC<AnalyticsProps> = ({
       insights,
       timeRange: selectedTimeRange,
       // filters: activeFilters,  // removed (activeFilters state eliminated)
-      timestamp: generateStamp()(),
+      timestamp: new Date(),
     };
 
     onExport?.(exportData);

@@ -1,4 +1,3 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 /**
  * canvas.atomic.tsx - Epic Gloo Canvas Atomic Component
@@ -11,15 +10,15 @@ import { generateStamp } from "@/lib/utils/timestamp";
  *  - Optional defer of animation start until first successful frame
  */
 
-import React, { useMemo, useEffect, useRef, useCallback } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { useGlooWebGL } from "./core";
 import { effectFunctions } from "./effects";
-import { getInternetFriendsPalette, colorUtils } from "./palette";
+import { colorUtils, getInternetFriendsPalette } from "./palette";
 import type {
   GlooCanvasProps,
+  GlooColorTuple,
   GlooEffectName,
   GlooPalette,
-  GlooColorTuple,
 } from "./types";
 
 const DEFAULT_COLOR_1: GlooColorTuple = [59 / 255, 130 / 255, 246 / 255];
@@ -39,6 +38,8 @@ const EFFECT_NAME_MAP: Record<number, GlooEffectName> = {
   9: "swirl",
   10: "bounce",
 };
+// Strong WebGL context alias
+type GLContext = WebGLRenderingContext | WebGL2RenderingContext;
 
 const FRAGMENT_TEMPLATE = (
   effectSource: string,
@@ -279,8 +280,8 @@ export const GlooCanvasAtomic: React.FC<
     canvasRef,
     error,
     setPlaying,
-    glRef: internalGlRef,
-    programRef: internalProgramRef,
+    gl: internalGlRef,
+    program: internalProgramRef,
   } = useGlooWebGL({
     fragment,
     effectKey: chosenEffectIndex,
@@ -366,18 +367,19 @@ export const GlooCanvasAtomic: React.FC<
     if (!canvas) return;
     if (width || height) return; // Respect explicit dimensions
 
-    const parent = canvas.parentElement as HTMLElement | null;
+    const parent = canvas.parentElement;
     if (!parent) return;
 
-    const dpr = () => window.devicePixelRatio || 1;
+    const currentDpr = () => window.devicePixelRatio || 1;
 
     function enforce() {
-      const rect = parent!.getBoundingClientRect();
-      const targetW = Math.max(1, Math.floor(rect.width * dpr()));
-      const targetH = Math.max(1, Math.floor(rect.height * dpr()));
-      if (canvas!.width !== targetW || canvas!.height !== targetH) {
-        canvas!.width = targetW;
-        canvas!.height = targetH;
+      if (!parent || !canvas) return;
+      const rect = parent.getBoundingClientRect();
+      const targetW = Math.max(1, Math.floor(rect.width * currentDpr()));
+      const targetH = Math.max(1, Math.floor(rect.height * currentDpr()));
+      if (canvas.width !== targetW || canvas.height !== targetH) {
+        canvas.width = targetW;
+        canvas.height = targetH;
       }
     }
 
@@ -392,18 +394,16 @@ export const GlooCanvasAtomic: React.FC<
     };
   }, [canvasRef, width, height]);
 
-  // Uniform validation (dev only) - run once when size is ready & GL/program exist
+  // Uniform validation (dev only)
   useEffect(() => {
     if (process.env.NODE_ENV !== "development") return;
     if (validatedRef.current) return;
     if (!ensureParentSized()) return;
-    const gl = (internalGlRef as any)?.current as
-      | WebGLRenderingContext
-      | undefined;
-    const program = (internalProgramRef as any)?.current as
-      | WebGLProgram
-      | undefined;
+
+    const gl = internalGlRef as GLContext | null;
+    const program = internalProgramRef as WebGLProgram | null;
     if (!gl || !program) return;
+
     const expected = [
       "iResolution",
       "iTime",
@@ -413,15 +413,18 @@ export const GlooCanvasAtomic: React.FC<
       "uTint",
     ];
     const active = new Set<string>();
-    const n = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
-    for (let i = 0; i < n; i++) {
+    const uniformCount = gl.getProgramParameter(
+      program,
+      gl.ACTIVE_UNIFORMS,
+    ) as number;
+    for (let i = 0; i < uniformCount; i++) {
       const info = gl.getActiveUniform(program, i);
       if (info) active.add(info.name);
     }
     const missing = expected.filter((u) => !active.has(u));
-    if (missing.length && process.env.NODE_ENV === "development") {
+    if (missing.length) {
       console.warn("[Gloo] Missing uniforms:", missing);
-    } else if (process.env.NODE_ENV === "development") {
+    } else {
       console.debug("[Gloo] Uniforms OK:", expected.join(", "));
     }
     validatedRef.current = true;

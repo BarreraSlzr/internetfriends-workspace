@@ -112,6 +112,8 @@ export interface GlooCanvasProps {
   preserveDrawingBuffer?: boolean;
   disabled?: boolean;
   reducedMotion?: boolean;
+  autoEffectCycle?: boolean;
+  effectCycleMs?: number;
   onError?: (err: string) => void;
   onEffectChange?: (effectIndex: number, effectName: GlooEffectName) => void;
 }

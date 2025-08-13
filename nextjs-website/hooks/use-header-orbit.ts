@@ -29,7 +29,7 @@ export interface UseHeaderOrbitReturn {
   /** Whether the header is in scrolled state */
   isScrolled: boolean;
   /** Ref to attach to the header element */
-  headerRef: React.RefObject<HTMLElement>;
+  headerRef: React.RefObject<HTMLElement | null>;
   /** Current scroll progress (0-1) */
   scrollProgress: number;
 }
@@ -46,7 +46,9 @@ export interface UseHeaderOrbitReturn {
  * @param options Configuration options
  * @returns Orbital motion state and controls
  */
-export function useHeaderOrbit(options: UseHeaderOrbitOptions = {}): UseHeaderOrbitReturn {
+export function useHeaderOrbit(
+  options: UseHeaderOrbitOptions = {},
+): UseHeaderOrbitReturn {
   const {
     radius = 3,
     scrollThreshold = 50,

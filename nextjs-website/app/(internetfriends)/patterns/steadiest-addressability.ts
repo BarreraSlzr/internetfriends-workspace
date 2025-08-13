@@ -1,3 +1,5 @@
+import React from "react";
+
 /**
  * steadiest-addressability.ts - Pattern System for Consistent Component Interfaces
  *
@@ -39,13 +41,13 @@ export interface MinimalConfigPattern {
 export const MINIMAL_CONFIG: MinimalConfigPattern = {
   maxProps: 8,
   requiredProps: [], // Prefer zero required props when possible
-  optionalProps: ['disabled', 'className', 'style', 'zIndex'],
+  optionalProps: ["disabled", "className", "style", "zIndex"],
   bannedPatterns: [
-    'strategy-props', // e.g., paletteStrategy, renderMode with 5+ options
-    'micro-config', // e.g., speed1, speed2, speed3 instead of speed
-    'config-objects', // e.g., config={{ deeply: { nested: { options: true } } }}
-    'callback-soup', // e.g., onBefore, onAfter, onDuring, onMaybe, etc.
-  ]
+    "strategy-props", // e.g., paletteStrategy, renderMode with 5+ options
+    "micro-config", // e.g., speed1, speed2, speed3 instead of speed
+    "config-objects", // e.g., config={{ deeply: { nested: { options: true } } }}
+    "callback-soup", // e.g., onBefore, onAfter, onDuring, onMaybe, etc.
+  ],
 };
 
 // =====================================
@@ -58,22 +60,22 @@ export interface ClientBoundaryPattern {
    * No SSR complications or hydration mismatches
    */
   clientOnly: boolean;
-  ssrFallback: 'null' | 'placeholder' | 'static';
-  boundaryLocation: 'wrapper' | 'component' | 'lazy';
+  ssrFallback: "null" | "placeholder" | "static";
+  boundaryLocation: "wrapper" | "component" | "lazy";
   hydrationSafe: boolean;
 }
 
 export const CLIENT_BOUNDARY: ClientBoundaryPattern = {
   clientOnly: true,
-  ssrFallback: 'null', // Prefer null over placeholder for WebGL/Canvas
-  boundaryLocation: 'wrapper', // Wrap in dedicated client component
+  ssrFallback: "null", // Prefer null over placeholder for WebGL/Canvas
+  boundaryLocation: "wrapper", // Wrap in dedicated client component
   hydrationSafe: true,
 };
 
 // Helper for creating client boundary wrappers
 export function createClientWrapper<T extends Record<string, any>>(
   Component: React.ComponentType<T>,
-  fallback: React.ReactNode = null
+  fallback: React.ReactNode = null,
 ): React.FC<T> {
   return function ClientWrapper(props: T) {
     if (typeof window === "undefined") {
@@ -103,11 +105,11 @@ export const ONCE_ON_MOUNT: OnceOnMountPattern = {
   avoidEffectChurn: true,
   stableRefs: true,
   mountOnlyLogic: [
-    'randomization', // Pick random values once, not continuously
-    'initialization', // Setup WebGL context, canvas, etc.
-    'configuration', // Parse config, validate props
-    'registration', // Event listeners, observers
-  ]
+    "randomization", // Pick random values once, not continuously
+    "initialization", // Setup WebGL context, canvas, etc.
+    "configuration", // Parse config, validate props
+    "registration", // Event listeners, observers
+  ],
 };
 
 // Helper hook for once-on-mount randomization
@@ -130,7 +132,7 @@ export interface ProductiveDefaultsPattern {
    * Defaults that work reliably in production
    * Based on proven parameters from working implementations
    */
-  source: 'legacy' | 'production' | 'tested' | 'research';
+  source: "legacy" | "production" | "tested" | "research";
   parameters: Record<string, any>;
   reasoning: Record<string, string>;
   fallbackChain: string[];
@@ -138,36 +140,38 @@ export interface ProductiveDefaultsPattern {
 
 // Gloo WebGL productive defaults from troubleshooting
 export const GLOO_PRODUCTIVE_DEFAULTS: ProductiveDefaultsPattern = {
-  source: 'legacy',
+  source: "legacy",
   parameters: {
-    speed: 0.4,      // Smooth animation, not too fast
-    resolution: 2.0,  // Good quality without performance hit
-    depth: 4,        // Sufficient layers for visual interest
-    seed: 2.4,       // Proven seed value from legacy
+    speed: 0.4, // Smooth animation, not too fast
+    resolution: 2.0, // Good quality without performance hit
+    depth: 4, // Sufficient layers for visual interest
+    seed: 2.4, // Proven seed value from legacy
   },
   reasoning: {
-    speed: 'Tested in production - provides smooth motion without being distracting',
-    resolution: 'Balance between visual quality and performance on various devices',
-    depth: 'Creates sufficient visual depth without overwhelming the interface',
-    seed: 'Specific value that generates pleasing visual patterns',
+    speed:
+      "Tested in production - provides smooth motion without being distracting",
+    resolution:
+      "Balance between visual quality and performance on various devices",
+    depth: "Creates sufficient visual depth without overwhelming the interface",
+    seed: "Specific value that generates pleasing visual patterns",
   },
-  fallbackChain: ['webgl', 'canvas', 'dom', 'static']
+  fallbackChain: ["webgl", "canvas", "dom", "static"],
 };
 
 // InternetFriends brand colors (productive)
 export const IF_BRAND_COLORS = {
   productive: {
     light: [
-      [235/255, 231/255, 92/255],   // Yellow
-      [223/255, 72/255, 67/255],    // Red
-      [235/255, 64/255, 240/255],   // Purple
+      [235 / 255, 231 / 255, 92 / 255], // Yellow
+      [223 / 255, 72 / 255, 67 / 255], // Red
+      [235 / 255, 64 / 255, 240 / 255], // Purple
     ] as const,
     dark: [
-      [235/255, 231/255, 92/255],   // Yellow (same)
-      [255/255, 92/255, 87/255],    // Lighter red
-      [255/255, 84/255, 255/255],   // Lighter purple
+      [235 / 255, 231 / 255, 92 / 255], // Yellow (same)
+      [255 / 255, 92 / 255, 87 / 255], // Lighter red
+      [255 / 255, 84 / 255, 255 / 255], // Lighter purple
     ] as const,
-  }
+  },
 };
 
 // =====================================
@@ -179,10 +183,10 @@ export interface MatureAddressabilityPattern {
    * Simple, predictable interfaces that are easy to address/control
    * Avoid clever abstractions that make debugging harder
    */
-  explicitState: boolean;       // Expose important state explicitly
-  debuggableProps: boolean;     // Props that help with debugging
-  testableInterface: boolean;   // Easy to test and verify behavior
-  documentedBehavior: boolean;  // Clear documentation of what component does
+  explicitState: boolean; // Expose important state explicitly
+  debuggableProps: boolean; // Props that help with debugging
+  testableInterface: boolean; // Easy to test and verify behavior
+  documentedBehavior: boolean; // Clear documentation of what component does
 }
 
 export const MATURE_ADDRESSABILITY: MatureAddressabilityPattern = {
@@ -194,22 +198,22 @@ export const MATURE_ADDRESSABILITY: MatureAddressabilityPattern = {
 
 // Helper for creating debuggable components
 export interface DebuggableComponentProps {
-  'data-testid'?: string;
-  'data-component'?: string;
-  'data-state'?: string;
-  'data-epic'?: string;
+  "data-testid"?: string;
+  "data-component"?: string;
+  "data-state"?: string;
+  "data-epic"?: string;
 }
 
 export function createDebuggableProps(
   componentName: string,
   state?: Record<string, any>,
-  epicContext?: string
+  epicContext?: string,
 ): DebuggableComponentProps {
   return {
-    'data-testid': componentName.toLowerCase().replace(/([A-Z])/g, '-$1'),
-    'data-component': componentName,
-    'data-state': state ? JSON.stringify(state) : undefined,
-    'data-epic': epicContext,
+    "data-testid": componentName.toLowerCase().replace(/([A-Z])/g, "-$1"),
+    "data-component": componentName,
+    "data-state": state ? JSON.stringify(state) : undefined,
+    "data-epic": epicContext,
   };
 }
 
@@ -228,12 +232,12 @@ export interface SteadiestComponent<T = {}> {
   style?: React.CSSProperties;
 
   // Debug/test support
-  'data-testid'?: string;
+  "data-testid"?: string;
 
   // Epic context (optional)
   epicContext?: {
     epicName?: string;
-    epicPhase?: 'development' | 'review' | 'complete';
+    epicPhase?: "development" | "review" | "complete";
   };
 }
 
@@ -242,7 +246,7 @@ export interface SteadiestComponent<T = {}> {
  */
 export function validateSteadiestPattern<T>(
   componentProps: Record<string, any>,
-  pattern: Partial<SteadiestAddressabilityPatterns> = {}
+  pattern: Partial<SteadiestAddressabilityPatterns> = {},
 ): { valid: boolean; issues: string[] } {
   const issues: string[] = [];
 
@@ -254,24 +258,36 @@ export function validateSteadiestPattern<T>(
   }
 
   // Check for banned patterns
-  const bannedPatterns = pattern.minimalConfig?.bannedPatterns ?? MINIMAL_CONFIG.bannedPatterns;
+  const bannedPatterns =
+    pattern.minimalConfig?.bannedPatterns ?? MINIMAL_CONFIG.bannedPatterns;
   const propNames = Object.keys(componentProps);
 
-  bannedPatterns.forEach(banned => {
-    if (banned === 'strategy-props' && propNames.some(p => p.includes('Strategy'))) {
-      issues.push('Contains strategy props (over-configurable)');
+  bannedPatterns.forEach((banned) => {
+    if (
+      banned === "strategy-props" &&
+      propNames.some((p) => p.includes("Strategy"))
+    ) {
+      issues.push("Contains strategy props (over-configurable)");
     }
-    if (banned === 'micro-config' && propNames.filter(p => p.match(/^(speed|size|color)\d+$/)).length > 0) {
-      issues.push('Contains micro-config props');
+    if (
+      banned === "micro-config" &&
+      propNames.filter((p) => p.match(/^(speed|size|color)\d+$/)).length > 0
+    ) {
+      issues.push("Contains micro-config props");
     }
-    if (banned === 'config-objects' && propNames.some(p => typeof componentProps[p] === 'object' && p.includes('config'))) {
-      issues.push('Contains nested config objects');
+    if (
+      banned === "config-objects" &&
+      propNames.some(
+        (p) => typeof componentProps[p] === "object" && p.includes("config"),
+      )
+    ) {
+      issues.push("Contains nested config objects");
     }
   });
 
   return {
     valid: issues.length === 0,
-    issues
+    issues,
   };
 }
 

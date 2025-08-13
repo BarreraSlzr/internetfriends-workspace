@@ -73,6 +73,7 @@ import type {
   OnEdgesChange,
   OnNodesChange,
 } from "reactflow";
+import { BackgroundVariant } from "reactflow";
 
 interface OrchestratorState {
   currentTask: string;
@@ -267,6 +268,8 @@ export default function OrchestratorPage() {
         {
           ...connection,
           id: `${connection.source}-${connection.target}-${getTimestamp()}`,
+          source: connection.source || "",
+          target: connection.target || "",
         },
       ]),
     [],
@@ -380,7 +383,7 @@ export default function OrchestratorPage() {
                 className="bg-background"
               >
                 <Background
-                  variant="dots"
+                  variant={BackgroundVariant.Dots}
                   gap={22}
                   size={1}
                   color="var(--if-primary)"
@@ -459,10 +462,7 @@ export default function OrchestratorPage() {
                     position="top-right"
                     className="w-[320px] max-w-sm bg-glass-bg-header backdrop-blur-lg border border-glass-border rounded-compact-md p-4 shadow-sm"
                   >
-                    <RealTimeMonitor
-                      state={orchestratorState}
-                      metrics={projectMetrics}
-                    />
+                    <RealTimeMonitor />
                   </Panel>
                 )}
               </ReactFlow>

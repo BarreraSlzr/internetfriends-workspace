@@ -86,7 +86,7 @@ export function seededUnit(seed: number, step = 0): number {
 export interface GlooRuntimeOptions {
   seed?: number;
   effectOverride?: number | string; // explicit index or effect name
-  deterministic?: boolean;          // forces seed-based selection if seed provided
+  deterministic?: boolean; // forces seed-based selection if seed provided
   theme?: "light" | "dark";
   vivid?: boolean;
 }
@@ -168,9 +168,9 @@ export function getBrandPalette(
 
   return {
     colors: theme === "light" ? vividLight : vividDark,
-    strategy: "brand-vivid",
+    strategy: "brand-triad",
     mode: theme,
-    metadata: { generated: false, vivid: true },
+    metadata: { generated: false },
   };
 }
 

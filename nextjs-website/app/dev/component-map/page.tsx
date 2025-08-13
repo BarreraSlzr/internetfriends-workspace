@@ -1,5 +1,6 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
+
+import { generateStamp } from "@/lib/utils/timestamp";
 
 // Force dynamic rendering to bypass SSR hook issues
 export const dynamic = "force-dynamic";
@@ -11,6 +12,7 @@ import {
   Edge,
   Controls,
   Background,
+  BackgroundVariant,
   MiniMap,
   useNodesState,
   useEdgesState,
@@ -438,7 +440,7 @@ export default function ComponentMapPage() {
             }}
             maskColor="rgb(240, 242, 247, 0.7)"
           />
-          <Background variant="dots" gap={12} size={1} />
+          <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
 
           {/* Top Panel - Stats */}
           <Panel position="top-left">

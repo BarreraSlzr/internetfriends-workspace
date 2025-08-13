@@ -1,26 +1,25 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+"use client"
 
 // Force dynamic rendering to bypass SSR hook issues
 export const dynamic = "force-dynamic";
 
-import React, { useState, useEffect, useMemo } from "react";
-import { useTheme } from "@/hooks/use-theme";
-import { GlassPanel } from "@/components/glass";
 import { DashboardMetric } from "@/components/data/metric-display";
+import { GlassPanel } from "@/components/glass";
+import { useTheme } from "@/hooks/use-theme";
 import {
-  Palette,
+  AlertTriangle,
+  CheckCircle,
   Copy,
-  RotateCcw,
   Download,
-  Search,
   Eye,
   EyeOff,
+  Palette,
+  RotateCcw,
+  Search,
   Settings,
   Zap,
-  CheckCircle,
-  AlertTriangle,
 } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 
 interface TokenGroup {
   name: string;
@@ -258,7 +257,7 @@ export default function TokenInspectorPage() {
     const exportData = {
       tokens: tokens.flatMap((group) => group.tokens),
       overrides,
-      generatedAt: generateStamp()().toISOString(),
+      generatedAt: new Date().toISOString(),
       theme: isDark ? "dark" : "light",
     };
 

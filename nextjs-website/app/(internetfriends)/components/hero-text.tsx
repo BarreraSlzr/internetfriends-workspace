@@ -1,9 +1,9 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
+"use client"
 import { getWebGLContext } from "@/lib/utils";
-("use client");
+import { getTimestamp } from "@/lib/utils/timestamp";
 
-import React, { PropsWithChildren, useRef, useEffect } from "react";
 import { motion } from "motion/react";
+import { PropsWithChildren, useEffect, useRef } from "react";
 import content from "../content.json";
 
 interface HeroTextProps {
@@ -28,7 +28,7 @@ const DefaultHero = () => (
 
 function SimpleGlooCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -82,6 +82,7 @@ function SimpleGlooCanvas() {
 
     // Create shader helper
     function createShader(type: number, source: string) {
+      if (!gl) return null;
       const shader = gl.createShader(type);
       if (!shader) return null;
       gl.shaderSource(shader, source);
@@ -128,6 +129,7 @@ function SimpleGlooCanvas() {
 
     const startTime = getTimestamp();
     function render() {
+      if (!gl || !canvas) return;
       const time = (getTimestamp() - startTime) / 1000;
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
@@ -151,7 +153,6 @@ function SimpleGlooCanvas() {
 export default function HeroText({
   className = "",
   useGloo = false,
-  backgroundStrategy,
   children,
 }: PropsWithChildren<HeroTextProps>) {
   return (

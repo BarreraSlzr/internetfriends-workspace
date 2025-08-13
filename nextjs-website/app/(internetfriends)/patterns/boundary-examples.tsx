@@ -1,5 +1,5 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
+import { generateStamp } from "@/lib/utils/timestamp";
 /**
  * boundary-examples.tsx - Comprehensive Boundary Pattern Application Examples
  *
@@ -16,7 +16,12 @@ import { generateStamp } from "@/lib/utils/timestamp";
  */
 
 import React, { useState, useEffect } from "react";
-import { ClientOnly, createDynamicBoundary, EpicBoundary, WebGLBoundary } from "./boundary-patterns";
+import {
+  ClientOnly,
+  createDynamicBoundary,
+  EpicBoundary,
+  WebGLBoundary,
+} from "./boundary-patterns";
 import { useOnceOnMount, useStableRandom } from "./steadiest-addressability";
 
 // =====================================
@@ -148,19 +153,16 @@ const DataDashboardSimple: React.FC<DataDashboardSimpleProps> = (props) => {
 };
 
 // Simple content component (no over-configuration)
-const DataDashboardContent: React.FC<DataDashboardSimpleProps & { config: any }> = ({
-  disabled,
-  className,
-  "data-testid": testId,
-  config,
-}) => {
-  const [data, setData] = useState(null);
+const DataDashboardContent: React.FC<
+  DataDashboardSimpleProps & { config: any }
+> = ({ disabled, className, "data-testid": testId, config }) => {
+  const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Simple data fetching with productive defaults
     fetch(config.source)
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(setData)
       .catch(() => setData({ fallback: true }))
       .finally(() => setLoading(false));
@@ -183,146 +185,6 @@ const DataDashboardContent: React.FC<DataDashboardSimpleProps & { config: any }>
         </div>
       )}
     </div>
-  );
-};
-
-// =====================================
-// EXAMPLE 3: DYNAMIC BOUNDARY COMPONENT
-// =====================================
-
-/**
- * Heavy component that should be loaded dynamically
- */
-const HeavyInteractiveComponent: React.FC<{ title: string }> = ({ title }) => {
-  return (
-    <div className="heavy-component p-8 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">{title}</h2>
-      <div className="grid grid-cols-3 gap-4">
-        {Array.from({ length: 9 }).map((_, i) => (
-          <div key={i} className="bg-white/20 p-4 rounded aspect-square flex items-center justify-center">
-            Interactive {i + 1}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-/**
- * Dynamic boundary wrapper with steadiest addressability
- */
-const HeavyComponentBoundary = createDynamicBoundary(
-  () => Promise.resolve({ default: HeavyInteractiveComponent }),
-  {
-    fallback: <HeavyComponentSkeleton />,
-    debug: process.env.NODE_ENV === "development",
-    epicContext: {
-      epicName: "steadiest-addressability-v1",
-      epicPhase: "development",
-    },
-    errorBoundary: {
-      fallback: <HeavyComponentError />,
-      onError: (error) => console.warn("Heavy component failed:", error),
-    },
-  }
-);
-
-// =====================================
-// EXAMPLE 4: COMPLETE EPIC INTEGRATION
-// =====================================
-
-/**
- * Component that demonstrates all boundary patterns working together
- */
-interface ComprehensiveBoundaryExampleProps {
-  disabled?: boolean;
-  className?: string;
-  "data-testid"?: string;
-}
-
-const ComprehensiveBoundaryExample: React.FC<ComprehensiveBoundaryExampleProps> = ({
-  disabled = false,
-  className,
-  "data-testid": testId = "comprehensive-boundary-example",
-}) => {
-  // Once-on-mount configuration (steadiest pattern)
-  const examples = useOnceOnMount(() => [
-    { id: 1, title: "WebGL Visualization", type: "webgl" },
-    { id: 2, title: "Data Dashboard", type: "data" },
-    { id: 3, title: "Heavy Interactive", type: "dynamic" },
-  ]);
-
-  if (disabled) return null;
-
-  return (
-    <EpicBoundary
-      epicName="steadiest-addressability-v1"
-      epicPhase="development"
-      debug={process.env.NODE_ENV === "development"}
-    >
-      <div
-        className={`comprehensive-boundary-example space-y-8 ${className || ""}`}
-        data-testid={testId}
-      >
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            Steadiest Addressability Boundary Patterns
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            Comprehensive examples of boundary pattern applications
-          </p>
-        </div>
-
-        {/* WebGL Example */}
-        <section className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">1. WebGL Component Boundary</h2>
-          <WebGLVisualizerSimple className="h-48" />
-        </section>
-
-        {/* Data Example */}
-        <section className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">2. Data Component Boundary</h2>
-          <DataDashboardSimple />
-        </section>
-
-        {/* Dynamic Example */}
-        <section className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4">3. Dynamic Component Boundary</h2>
-          <HeavyComponentBoundary title="Dynamic Heavy Component" />
-        </section>
-
-        {/* Boundary Patterns Summary */}
-        <section className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-6">
-          <h2 className="text-xl font-semibold mb-4 text-blue-900 dark:text-blue-100">
-            Applied Boundary Patterns
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">✅ Implemented</h3>
-              <ul className="space-y-1 text-blue-700 dark:text-blue-300">
-                <li>• Client-only boundaries</li>
-                <li>• WebGL capability detection</li>
-                <li>• Error boundary wrapping</li>
-                <li>• Dynamic component loading</li>
-                <li>• Epic context integration</li>
-                <li>• Fallback state management</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">🚫 Avoided</h3>
-              <ul className="space-y-1 text-blue-700 dark:text-blue-300">
-                <li>• Over-configuration APIs</li>
-                <li>• Complex strategy props</li>
-                <li>• Nested config objects</li>
-                <li>• SSR hydration issues</li>
-                <li>• Callback soup patterns</li>
-                <li>• Micro-config parameters</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-      </div>
-    </EpicBoundary>
   );
 };
 
@@ -360,6 +222,161 @@ const HeavyComponentError: React.FC = () => (
     </div>
   </div>
 );
+
+// =====================================
+// EXAMPLE 3: DYNAMIC BOUNDARY COMPONENT
+// =====================================
+
+/**
+ * Heavy component that should be loaded dynamically
+ */
+const HeavyInteractiveComponent: React.FC<{ title: string }> = ({ title }) => {
+  return (
+    <div className="heavy-component p-8 bg-gradient-to-r from-purple-400 to-pink-400 text-white rounded-lg">
+      <h2 className="text-2xl font-bold mb-4">{title}</h2>
+      <div className="grid grid-cols-3 gap-4">
+        {Array.from({ length: 9 }).map((_, i) => (
+          <div
+            key={i}
+            className="bg-white/20 p-4 rounded aspect-square flex items-center justify-center"
+          >
+            Interactive {i + 1}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Dynamic boundary wrapper with steadiest addressability
+ */
+const HeavyComponentBoundary = createDynamicBoundary(
+  () => Promise.resolve({ default: HeavyInteractiveComponent }),
+  {
+    fallback: <HeavyComponentSkeleton />,
+    debug: process.env.NODE_ENV === "development",
+    epicContext: {
+      epicName: "steadiest-addressability-v1",
+      epicPhase: "development",
+    },
+    errorBoundary: {
+      fallback: <HeavyComponentError />,
+      onError: (error) => console.warn("Heavy component failed:", error),
+    },
+  },
+);
+
+// =====================================
+// EXAMPLE 4: COMPLETE EPIC INTEGRATION
+// =====================================
+
+/**
+ * Component that demonstrates all boundary patterns working together
+ */
+interface ComprehensiveBoundaryExampleProps {
+  disabled?: boolean;
+  className?: string;
+  "data-testid"?: string;
+}
+
+const ComprehensiveBoundaryExample: React.FC<
+  ComprehensiveBoundaryExampleProps
+> = ({
+  disabled = false,
+  className,
+  "data-testid": testId = "comprehensive-boundary-example",
+}) => {
+  // Once-on-mount configuration (steadiest pattern)
+  const examples = useOnceOnMount(() => [
+    { id: 1, title: "WebGL Visualization", type: "webgl" },
+    { id: 2, title: "Data Dashboard", type: "data" },
+    { id: 3, title: "Heavy Interactive", type: "dynamic" },
+  ]);
+
+  if (disabled) return null;
+
+  return (
+    <EpicBoundary
+      epicName="steadiest-addressability-v1"
+      epicPhase="development"
+      debug={process.env.NODE_ENV === "development"}
+    >
+      <div
+        className={`comprehensive-boundary-example space-y-8 ${className || ""}`}
+        data-testid={testId}
+      >
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            Steadiest Addressability Boundary Patterns
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400">
+            Comprehensive examples of boundary pattern applications
+          </p>
+        </div>
+
+        {/* WebGL Example */}
+        <section className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">
+            1. WebGL Component Boundary
+          </h2>
+          <WebGLVisualizerSimple className="h-48" />
+        </section>
+
+        {/* Data Example */}
+        <section className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">
+            2. Data Component Boundary
+          </h2>
+          <DataDashboardSimple />
+        </section>
+
+        {/* Dynamic Example */}
+        <section className="border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4">
+            3. Dynamic Component Boundary
+          </h2>
+          <HeavyComponentBoundary title="Dynamic Heavy Component" />
+        </section>
+
+        {/* Boundary Patterns Summary */}
+        <section className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-6">
+          <h2 className="text-xl font-semibold mb-4 text-blue-900 dark:text-blue-100">
+            Applied Boundary Patterns
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+            <div>
+              <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">
+                ✅ Implemented
+              </h3>
+              <ul className="space-y-1 text-blue-700 dark:text-blue-300">
+                <li>• Client-only boundaries</li>
+                <li>• WebGL capability detection</li>
+                <li>• Error boundary wrapping</li>
+                <li>• Dynamic component loading</li>
+                <li>• Epic context integration</li>
+                <li>• Fallback state management</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-blue-800 dark:text-blue-200 mb-2">
+                🚫 Avoided
+              </h3>
+              <ul className="space-y-1 text-blue-700 dark:text-blue-300">
+                <li>• Over-configuration APIs</li>
+                <li>• Complex strategy props</li>
+                <li>• Nested config objects</li>
+                <li>• SSR hydration issues</li>
+                <li>• Callback soup patterns</li>
+                <li>• Micro-config parameters</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </EpicBoundary>
+  );
+};
 
 // =====================================
 // EXPORTS

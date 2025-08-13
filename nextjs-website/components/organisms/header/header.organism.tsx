@@ -1,5 +1,5 @@
 import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+("use client");
 
 import React, { useState, useEffect, createContext, useContext } from "react";
 import Link from "next/link";
@@ -383,30 +383,23 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
   });
 
   // Refined orbital motion system
-  const {
-    state: orbitState,
-    headerRef,
-    cssProperties,
-    orbitStyles,
-  } = useHeaderOrbit({
-    threshold: sticky?.offset || 64,
-    range: 400,
-    amplitudeX: 6,
-    amplitudeY: 3,
-    scaleRange: [1, 0.75],
-    respectReducedMotion: true,
-    throttle: 16,
+  const { transform, isScrolled, headerRef, scrollProgress } = useHeaderOrbit({
+    scrollThreshold: sticky?.offset || 64,
+    orbitDistance: 400,
+    radius: 6,
+    verticalCompression: 0.5,
+    disabled: false,
   });
 
   // Update header state based on orbit state
   useEffect(() => {
     setHeaderState((prev) => ({
       ...prev,
-      isSticky: orbitState.isScrolled,
+      isSticky: isScrolled,
       isHidden: false, // Disable auto-hide when using orbital motion
-      scrollPosition: orbitState.scrollY,
+      scrollPosition: scrollProgress * 100,
     }));
-  }, [orbitState.isScrolled, orbitState.scrollY]);
+  }, [isScrolled, scrollProgress]);
 
   // Context value
   const contextValue: HeaderContextValue = {
@@ -472,14 +465,13 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
           className,
         )}
         style={{
-          ...orbitStyles,
-          ...cssProperties,
+          transform: `translate3d(${transform.x}px, ${transform.y}px, 0) scale(${transform.scale})`,
           transitionDuration: sticky?.transitionDuration,
         }}
         data-testid={testId}
-        data-orbit-active={orbitState.progress > 0}
-        data-orbit-progress={orbitState.progress}
-        data-scrolled={orbitState.isScrolled}
+        data-orbit-active={scrollProgress > 0}
+        data-orbit-progress={scrollProgress}
+        data-scrolled={isScrolled}
         id={id}
         aria-label={ariaLabel || t("accessibility.skipToContent")}
         {...props}

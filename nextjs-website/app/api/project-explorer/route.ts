@@ -444,7 +444,7 @@ class ServerMicroUXExplorer {
         type: string;
         importance?: string;
         complexity?: string;
-        size: number;
+        size?: number;
         lastModified?: Date;
         ui_props: {
           className: string;

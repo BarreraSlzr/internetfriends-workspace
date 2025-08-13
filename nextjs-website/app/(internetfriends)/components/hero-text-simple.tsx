@@ -1,10 +1,9 @@
 "use client";
 
-import { generateStamp } from "@/lib/utils/timestamp";
 import { getWebGLContext } from "@/lib/utils";
 
-import React, { useRef, useEffect, PropsWithChildren } from "react";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import content from "../content.json";
 
 interface HeroTextProps {
@@ -86,6 +85,7 @@ function SimpleGlooCanvas() {
     `;
 
     function createShader(type: number, source: string): WebGLShader | null {
+      if (!gl) return null;
       const shader = gl.createShader(type);
       if (!shader) return null;
 
@@ -132,6 +132,7 @@ function SimpleGlooCanvas() {
 
     const startTime = Date.now();
     function render() {
+      if (!gl || !canvas) return;
       const time = (Date.now() - startTime) / 1000;
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);

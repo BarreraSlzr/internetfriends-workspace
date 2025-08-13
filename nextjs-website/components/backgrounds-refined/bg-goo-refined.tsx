@@ -1,5 +1,5 @@
 import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+("use client");
 
 import React, { useState, useEffect, useMemo } from "react";
 import { useTheme } from "@/hooks/use-theme";
@@ -189,7 +189,7 @@ export const BgGooRefined: React.FC<BgGooRefinedProps> = ({
     // TEMP: Use bright brand colors for visibility test
     return {
       colors: ["#3b82f6", "#9333ea", "#ec4899"], // BRAND TEST
-      strategy: "brand-test",
+      strategy: "brand-triad",
       mode: isDark ? "dark" : "light",
       metadata: { generated: true },
     };

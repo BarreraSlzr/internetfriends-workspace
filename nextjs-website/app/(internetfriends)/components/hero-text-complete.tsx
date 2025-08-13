@@ -1,9 +1,10 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
-import { getWebGLContext } from "@/lib/utils";
-("use client");
+"use client"
 
-import React, { useRef, useEffect, PropsWithChildren } from "react";
+import { getWebGLContext } from "@/lib/utils";
+import { getTimestamp } from "@/lib/utils/timestamp";
+
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import content from "../content.json";
 
 interface HeroTextProps {
@@ -27,7 +28,7 @@ const DefaultHero = () => (
 
 function SimpleGlooCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(0);
   const programRef = useRef<WebGLProgram | null>(null);
   const uniformsRef = useRef<{
     time: WebGLUniformLocation | null;
@@ -107,6 +108,7 @@ function SimpleGlooCanvas() {
 
     // Create shader helper
     function createShader(type: number, source: string): WebGLShader | null {
+      if (!gl) return null;
       const shader = gl.createShader(type);
       if (!shader) return null;
 
@@ -171,7 +173,7 @@ function SimpleGlooCanvas() {
     // Animation loop
     const startTime = getTimestamp();
     function render() {
-      if (!canvas || !programRef.current) return;
+      if (!canvas || !programRef.current || !gl) return;
 
       const currentTime = (getTimestamp() - startTime) / 1000;
 

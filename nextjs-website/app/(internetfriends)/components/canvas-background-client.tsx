@@ -1,5 +1,6 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
-("use client");
+"use client"
+
+import { getTimestamp } from "@/lib/utils/timestamp";
 /**
  * canvas-background-client.tsx - Canvas-based Background Client
  *
@@ -15,20 +16,20 @@ import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
  * <CanvasBackgroundClient disabled={reducedMotion} />
  */
 
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
 import { useTheme } from "@/hooks/use-theme";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { ClientOnly } from "../patterns/boundary-patterns";
 import {
-  getCanvasDebugOverrides,
-  createCanvasContext,
-  setupCanvasSize,
   CANVAS_DEFAULTS,
+  createCanvasContext,
+  getCanvasDebugOverrides,
+  setupCanvasSize,
 } from "./canvas-background-utils";
 
 // InternetFriends brand colors (from productive version)
@@ -215,7 +216,7 @@ export const CanvasBackgroundClient: React.FC<CanvasBackgroundClientProps> = ({
 }) => {
   const { isDark } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number>(0);
   const startTimeRef = useRef<number>(getTimestamp());
   const [fps, setFps] = useState(0);
   const frameCountRef = useRef(0);

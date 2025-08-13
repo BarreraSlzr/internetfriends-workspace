@@ -65,7 +65,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
     ...props
   }) => {
     const stamp = useMemo(() => generateStamp(), []);
-    const currentTime = generateStamp()().toISOString();
+    const currentTime = new Date().toISOString();
 
     // State Management
     const [activeTab, setActiveTab] = useState<DashboardTab>(initialTab);
@@ -181,7 +181,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
           );
         } finally {
           setIsLoading(false);
-          setLastUpdate(generateStamp()().toISOString());
+          setLastUpdate(new Date().toISOString());
         }
       };
 
@@ -191,7 +191,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
       const updateInterval = setInterval(() => {
         setMetrics(generateMockMetrics());
         setActivities(generateMockActivities());
-        setLastUpdate(generateStamp()().toISOString());
+        setLastUpdate(new Date().toISOString());
       }, 30000); // Update every 30 seconds
 
       return () => clearInterval(updateInterval);
@@ -217,7 +217,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
         await new Promise((resolve) => setTimeout(resolve, 500));
         setMetrics(generateMockMetrics());
         setActivities(generateMockActivities());
-        setLastUpdate(generateStamp()().toISOString());
+        setLastUpdate(new Date().toISOString());
       } catch (err) {
         setError(err instanceof Error ? err.message : "Refresh failed");
       } finally {
@@ -227,7 +227,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
 
     // Computed Values
     const formattedLastUpdate = useMemo(() => {
-      return generateStamp()(lastUpdate).toLocaleTimeString("en-US", {
+      return new Date(lastUpdate).toLocaleTimeString("en-US", {
         hour: "2-digit",
         minute: "2-digit",
         second: "2-digit",
@@ -312,7 +312,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
               <div className={styles.activityContent}>
                 <p className={styles.activityMessage}>{activity.message}</p>
                 <time className={styles.activityTime}>
-                  {generateStamp()(activity.timestamp).toLocaleTimeString()}
+                  {new Date(activity.timestamp).toLocaleTimeString()}
                 </time>
               </div>
             </motion.div>
