@@ -1,23 +1,12 @@
-
 "use client";
 
 import React, {
-  useEffect,
-  useState,
-  useMemo,
   useRef,
-  useId,
   useCallback,
-  ReactNode,
   ElementType,
-  Suspense,
   lazy,
   CSSProperties,
 } from "react";
-import { motion, useReducedMotion } from "framer-motion";
-import { useTheme } from "../../../../hooks/use-theme";
-import { getAdaptiveGooColorTuples } from "../../lib/color-palette";
-import { effectFunctions } from "./gloo-effects";
 
 /**
  * GlooIntegration - Unified ambient background component

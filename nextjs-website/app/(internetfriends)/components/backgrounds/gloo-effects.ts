@@ -8,7 +8,10 @@
 // Effect function type definitions
 export interface EffectFunction {
   name: string;
-  execute: (context: any, params?: any) => void;
+  execute: (
+    context: CanvasRenderingContext2D | WebGLRenderingContext,
+    params?: EffectConfig,
+  ) => void;
   requirements?: string[];
   performance?: "low" | "medium" | "high";
 }
@@ -77,17 +80,24 @@ export const effectFunctions = {
 
 // Effect utilities
 export const createEffectChain = (effects: string[], config?: EffectConfig) => {
-  return effects.map(effectName => {
-    const effect = effectFunctions[effectName as keyof typeof effectFunctions];
-    if (!effect) {
-      console.warn(`Effect "${effectName}" not found`);
-      return null;
-    }
-    return { effect, config };
-  }).filter(Boolean);
+  return effects
+    .map((effectName) => {
+      const effect =
+        effectFunctions[effectName as keyof typeof effectFunctions];
+      if (!effect) {
+        console.warn(`Effect "${effectName}" not found`);
+        return null;
+      }
+      return { effect, config };
+    })
+    .filter(Boolean);
 };
 
-export const applyEffects = (context: any, effectChain: any[], params?: any) => {
+export const applyEffects = (
+  context: CanvasRenderingContext2D | WebGLRenderingContext,
+  effectChain: Array<{ effect: EffectFunction; config?: EffectConfig }>,
+  params?: EffectConfig,
+) => {
   effectChain.forEach(({ effect, config }) => {
     if (effect) {
       effect.execute(context, { ...config, ...params });
