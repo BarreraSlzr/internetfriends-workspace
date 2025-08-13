@@ -463,20 +463,11 @@ export const HeaderOrganism: React.FC<HeaderOrganismProps> = ({
         ref={headerRef}
         className={cn(
           styles.headerOrganism,
+          styles[variant], // Applies .glass, .solid, or .transparent
           sizeStyles[size],
           "w-full z-40",
           "sticky top-0",
-          headerState.isSticky && sticky?.stickyClassName,
-          headerState.isHidden && "transform -translate-y-full",
-          variant === "glass" &&
-            "bg-glass-bg-header backdrop-blur-glass border-b border-glass-border",
-          variant === "solid" && "bg-background border-b border-border",
-          variant === "transparent" &&
-            !headerState.isSticky &&
-            "bg-transparent",
-          variant === "transparent" &&
-            headerState.isSticky &&
-            "bg-glass-bg-header backdrop-blur-glass",
+          headerState.isHidden && styles.hidden,
           className,
         )}
         style={{
