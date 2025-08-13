@@ -11,13 +11,7 @@
         "optional": 0,
         "names": []
       },
-      "dependencies": [
-        "app/(internetfriends)/components/header",
-        "app/(internetfriends)/components/navigation",
-        "app/(internetfriends)/components/social-links",
-        "app/(internetfriends)/components/hero-text",
-        "app/(internetfriends)/components/company-info"
-      ],
+      "dependencies": [],
       "dependents": [],
       "uses": {
         "glass": false,
@@ -29,17 +23,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 80,
-        "linesJsx": 10,
-        "complexity": 4.5
+        "loc": 70,
+        "linesJsx": 6,
+        "complexity": 1.6
       },
-      "riskScore": 4.33,
+      "riskScore": 2.11,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": true
       },
-      "lastModified": "2025-08-10T20:47:55.303Z",
+      "lastModified": "2025-08-13T01:23:36.601Z",
       "category": "pages"
     },
     {
@@ -55,11 +49,7 @@
       },
       "dependencies": [
         "nextjs-website/app/(internetfriends)/globals.css",
-        "nextjs-website/app/(internetfriends)/components/google-analytics",
         "nextjs-website/hooks/use-theme",
-        "nextjs-website/i18n",
-        "nextjs-website/app/(internetfriends)/content.json",
-        "nextjs-website/components/perf/client-rum-wrapper",
         "nextjs-website/components/theme/accent-initializer"
       ],
       "dependents": [],
@@ -73,17 +63,93 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 156,
-        "linesJsx": 10,
-        "complexity": 7.5
+        "loc": 52,
+        "linesJsx": 4,
+        "complexity": 2.9
       },
-      "riskScore": 6.44,
+      "riskScore": 3.11,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T07:57:04.941Z",
+      "lastModified": "2025-08-13T01:23:36.600Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/client-layout.tsx::ClientLayout",
+      "filePath": "app/client-layout.tsx",
+      "exportName": "ClientLayout",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/perf/client-rum-wrapper"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 30,
+        "linesJsx": 2,
+        "complexity": 0.7
+      },
+      "riskScore": 1.68,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.599Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/client-layout.tsx::default",
+      "filePath": "app/client-layout.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/perf/client-rum-wrapper"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 30,
+        "linesJsx": 2,
+        "complexity": 0.7
+      },
+      "riskScore": 1.68,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.599Z",
       "category": "pages"
     },
     {
@@ -145,7 +211,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T08:00:53.655Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "data"
     },
     {
@@ -195,7 +261,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T08:00:53.655Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "data"
     },
     {
@@ -245,7 +311,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T08:00:53.655Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "data"
     },
     {
@@ -295,7 +361,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T08:00:53.655Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "data"
     },
     {
@@ -345,7 +411,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T08:00:53.655Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "data"
     },
     {
@@ -395,422 +461,8 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T08:00:53.655Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "data"
-    },
-    {
-      "id": "components/perf/performance_metrics_initializer.tsx::PerformanceMetricsInitializer",
-      "filePath": "components/perf/performance_metrics_initializer.tsx",
-      "exportName": "PerformanceMetricsInitializer",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": [
-          "useEffect"
-        ]
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 346,
-        "linesJsx": 1,
-        "complexity": 6.1
-      },
-      "riskScore": 5.44,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:10:28.833Z",
-      "category": "perf"
-    },
-    {
-      "id": "components/perf/performance_metrics_initializer.tsx::default",
-      "filePath": "components/perf/performance_metrics_initializer.tsx",
-      "exportName": "default",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": [
-          "useEffect"
-        ]
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 346,
-        "linesJsx": 1,
-        "complexity": 6.1
-      },
-      "riskScore": 5.44,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:10:28.833Z",
-      "category": "perf"
-    },
-    {
-      "id": "components/perf/client-rum-wrapper.tsx::ClientRUMWrapper",
-      "filePath": "components/perf/client-rum-wrapper.tsx",
-      "exportName": "ClientRUMWrapper",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 18,
-        "linesJsx": 1,
-        "complexity": 0.1
-      },
-      "riskScore": 1.16,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-10T19:33:56.491Z",
-      "category": "perf"
-    },
-    {
-      "id": "components/perf/client-rum-wrapper.tsx::default",
-      "filePath": "components/perf/client-rum-wrapper.tsx",
-      "exportName": "default",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 18,
-        "linesJsx": 1,
-        "complexity": 0.1
-      },
-      "riskScore": 1.16,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-10T19:33:56.491Z",
-      "category": "perf"
-    },
-    {
-      "id": "components/glass/glass-panel.atomic.tsx::GlassDepth",
-      "filePath": "components/glass/glass-panel.atomic.tsx",
-      "exportName": "GlassDepth",
-      "kind": "atomic",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": true,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 83,
-        "linesJsx": 3,
-        "complexity": 1.8
-      },
-      "riskScore": 2.47,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:08:00.101Z",
-      "category": "glass"
-    },
-    {
-      "id": "components/glass/glass-panel.atomic.tsx::GlassNoise",
-      "filePath": "components/glass/glass-panel.atomic.tsx",
-      "exportName": "GlassNoise",
-      "kind": "atomic",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": true,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 83,
-        "linesJsx": 3,
-        "complexity": 1.8
-      },
-      "riskScore": 2.47,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:08:00.101Z",
-      "category": "glass"
-    },
-    {
-      "id": "components/glass/glass-panel.atomic.tsx::GlassTint",
-      "filePath": "components/glass/glass-panel.atomic.tsx",
-      "exportName": "GlassTint",
-      "kind": "atomic",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": true,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 83,
-        "linesJsx": 3,
-        "complexity": 1.8
-      },
-      "riskScore": 2.47,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:08:00.101Z",
-      "category": "glass"
-    },
-    {
-      "id": "components/glass/glass-panel.atomic.tsx::GlassElevation",
-      "filePath": "components/glass/glass-panel.atomic.tsx",
-      "exportName": "GlassElevation",
-      "kind": "atomic",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": true,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 83,
-        "linesJsx": 3,
-        "complexity": 1.8
-      },
-      "riskScore": 2.47,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:08:00.101Z",
-      "category": "glass"
-    },
-    {
-      "id": "components/glass/glass-panel.atomic.tsx::GlassPanelProps",
-      "filePath": "components/glass/glass-panel.atomic.tsx",
-      "exportName": "GlassPanelProps",
-      "kind": "atomic",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": true,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 83,
-        "linesJsx": 3,
-        "complexity": 1.8
-      },
-      "riskScore": 2.47,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:08:00.101Z",
-      "category": "glass"
-    },
-    {
-      "id": "components/glass/glass-panel.atomic.tsx::GlassPanel",
-      "filePath": "components/glass/glass-panel.atomic.tsx",
-      "exportName": "GlassPanel",
-      "kind": "atomic",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": true,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 83,
-        "linesJsx": 3,
-        "complexity": 1.8
-      },
-      "riskScore": 2.47,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:08:00.101Z",
-      "category": "glass"
-    },
-    {
-      "id": "components/glass/glass-panel.atomic.tsx::GlassPanelComponentProps",
-      "filePath": "components/glass/glass-panel.atomic.tsx",
-      "exportName": "GlassPanelComponentProps",
-      "kind": "atomic",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": true,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 83,
-        "linesJsx": 3,
-        "complexity": 1.8
-      },
-      "riskScore": 2.47,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:08:00.101Z",
-      "category": "glass"
     },
     {
       "id": "components/effects/dark-vignette.tsx::DarkVignette",
@@ -857,7 +509,7 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T07:58:00.541Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "effects"
     },
     {
@@ -899,7 +551,7 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T07:58:00.541Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "effects"
     },
     {
@@ -941,7 +593,7 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T07:58:00.541Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "effects"
     },
     {
@@ -983,7 +635,7 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T07:58:00.541Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "effects"
     },
     {
@@ -1025,8 +677,597 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T07:58:00.541Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "effects"
+    },
+    {
+      "id": "components/perf/performance_metrics_initializer.tsx::PerformanceMetricsInitializer",
+      "filePath": "components/perf/performance_metrics_initializer.tsx",
+      "exportName": "PerformanceMetricsInitializer",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 346,
+        "linesJsx": 1,
+        "complexity": 6.1
+      },
+      "riskScore": 5.44,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.040Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/perf/performance_metrics_initializer.tsx::default",
+      "filePath": "components/perf/performance_metrics_initializer.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 346,
+        "linesJsx": 1,
+        "complexity": 6.1
+      },
+      "riskScore": 5.44,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.040Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/perf/client-rum-wrapper.tsx::ClientRUMWrapper",
+      "filePath": "components/perf/client-rum-wrapper.tsx",
+      "exportName": "ClientRUMWrapper",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 18,
+        "linesJsx": 1,
+        "complexity": 0.1
+      },
+      "riskScore": 1.16,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.039Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/perf/client-rum-wrapper.tsx::default",
+      "filePath": "components/perf/client-rum-wrapper.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 18,
+        "linesJsx": 1,
+        "complexity": 0.1
+      },
+      "riskScore": 1.16,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.039Z",
+      "category": "perf"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassDepth",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassDepth",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.034Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassNoise",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassNoise",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.034Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassTint",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassTint",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.034Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassElevation",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassElevation",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.034Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassPanelProps",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassPanelProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.034Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassPanel",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassPanel",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.034Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/glass/glass-panel.atomic.tsx::GlassPanelComponentProps",
+      "filePath": "components/glass/glass-panel.atomic.tsx",
+      "exportName": "GlassPanelComponentProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 83,
+        "linesJsx": 3,
+        "complexity": 1.8
+      },
+      "riskScore": 2.47,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.034Z",
+      "category": "glass"
+    },
+    {
+      "id": "components/backgrounds/selective-background.tsx::BackgroundStrategy",
+      "filePath": "components/backgrounds/selective-background.tsx",
+      "exportName": "BackgroundStrategy",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/backgrounds-refined/bg-goo-refined"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--if-neutral-50",
+        "--if-neutral-100"
+      ],
+      "size": {
+        "loc": 133,
+        "linesJsx": 8,
+        "complexity": 3.3
+      },
+      "riskScore": 3.41,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "backgrounds"
+    },
+    {
+      "id": "components/backgrounds/selective-background.tsx::SelectiveBackgroundProps",
+      "filePath": "components/backgrounds/selective-background.tsx",
+      "exportName": "SelectiveBackgroundProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/backgrounds-refined/bg-goo-refined"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--if-neutral-50",
+        "--if-neutral-100"
+      ],
+      "size": {
+        "loc": 133,
+        "linesJsx": 8,
+        "complexity": 3.3
+      },
+      "riskScore": 3.41,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "backgrounds"
+    },
+    {
+      "id": "components/backgrounds/selective-background.tsx::SelectiveBackground",
+      "filePath": "components/backgrounds/selective-background.tsx",
+      "exportName": "SelectiveBackground",
+      "kind": "utility",
+      "props": {
+        "total": 10,
+        "required": 5,
+        "optional": 5,
+        "names": [
+          "/** Background strategy - defaults to flat for productivity */",
+          "strategy",
+          "/** Custom className */",
+          "className",
+          "/** Custom styles */",
+          "style",
+          "/** Children content */",
+          "children",
+          "/** Z-index for positioning */",
+          "zIndex"
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/components/backgrounds-refined/bg-goo-refined"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--if-neutral-50",
+        "--if-neutral-100"
+      ],
+      "size": {
+        "loc": 133,
+        "linesJsx": 8,
+        "complexity": 6.3
+      },
+      "riskScore": 6.11,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "backgrounds"
+    },
+    {
+      "id": "components/backgrounds/selective-background.tsx::default",
+      "filePath": "components/backgrounds/selective-background.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/backgrounds-refined/bg-goo-refined"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--if-neutral-50",
+        "--if-neutral-100"
+      ],
+      "size": {
+        "loc": 133,
+        "linesJsx": 8,
+        "complexity": 3.3
+      },
+      "riskScore": 3.41,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "backgrounds"
     },
     {
       "id": "components/ui/input.tsx::Input",
@@ -1063,7 +1304,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:00:25.082Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1101,7 +1342,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1139,7 +1380,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1177,7 +1418,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1215,7 +1456,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1253,7 +1494,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1291,7 +1532,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1329,7 +1570,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1367,7 +1608,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1405,7 +1646,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1443,7 +1684,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.301Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1481,7 +1722,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:28:45.407Z",
+      "lastModified": "2025-08-11T19:22:35.040Z",
       "category": "ui"
     },
     {
@@ -1519,7 +1760,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:28:45.407Z",
+      "lastModified": "2025-08-11T19:22:35.040Z",
       "category": "ui"
     },
     {
@@ -1557,7 +1798,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T08:52:51.640Z",
+      "lastModified": "2025-08-11T19:22:35.040Z",
       "category": "ui"
     },
     {
@@ -1595,7 +1836,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T08:52:51.640Z",
+      "lastModified": "2025-08-11T19:22:35.040Z",
       "category": "ui"
     },
     {
@@ -1757,7 +1998,7 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:03:06.491Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1818,7 +2059,7 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:03:06.491Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -1866,7 +2107,7 @@
         ],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:03:06.491Z",
+      "lastModified": "2025-08-11T19:22:35.041Z",
       "category": "ui"
     },
     {
@@ -2022,6 +2263,308 @@
       "category": "ui"
     },
     {
+      "id": "components/ui/glass-badge.tsx::GlassBadgeProps",
+      "filePath": "components/ui/glass-badge.tsx",
+      "exportName": "GlassBadgeProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/glass-refined",
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 51,
+        "linesJsx": 2,
+        "complexity": 2.2
+      },
+      "riskScore": 2.62,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.605Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/glass-badge.tsx::GlassBadge",
+      "filePath": "components/ui/glass-badge.tsx",
+      "exportName": "GlassBadge",
+      "kind": "utility",
+      "props": {
+        "total": 6,
+        "required": 1,
+        "optional": 5,
+        "names": [
+          "children",
+          "className",
+          "strength",
+          "noise",
+          "hover",
+          "variant"
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/glass-refined",
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 51,
+        "linesJsx": 2,
+        "complexity": 4
+      },
+      "riskScore": 4.24,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.605Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/ui/glass-badge.tsx::default",
+      "filePath": "components/ui/glass-badge.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/glass-refined",
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 51,
+        "linesJsx": 2,
+        "complexity": 2.2
+      },
+      "riskScore": 2.62,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.605Z",
+      "category": "ui"
+    },
+    {
+      "id": "components/backgrounds-refined/bg-goo-refined.tsx::BgGooRefinedProps",
+      "filePath": "components/backgrounds-refined/bg-goo-refined.tsx",
+      "exportName": "BgGooRefinedProps",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme",
+        "app/(internetfriends)/components/gloo/canvas.atomic",
+        "app/(internetfriends)/components/gloo/effects",
+        "app/(internetfriends)/components/gloo/types"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useMemo",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-mode"
+      ],
+      "size": {
+        "loc": 291,
+        "linesJsx": 5,
+        "complexity": 9.5
+      },
+      "riskScore": 8.54,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "backgrounds-refined"
+    },
+    {
+      "id": "components/backgrounds-refined/bg-goo-refined.tsx::BgGooRefined",
+      "filePath": "components/backgrounds-refined/bg-goo-refined.tsx",
+      "exportName": "BgGooRefined",
+      "kind": "utility",
+      "props": {
+        "total": 30,
+        "required": 15,
+        "optional": 15,
+        "names": [
+          "/** Background mode for semantic configuration */",
+          "mode",
+          "/** Manual strength override (0-1) */",
+          "strength",
+          "/** Parallax intensity (0-1, default",
+          "parallaxIntensity",
+          "/** Speed multiplier (default",
+          "speed",
+          "/** Resolution multiplier (default",
+          "resolution",
+          "/** Depth layers (default",
+          "depth",
+          "/** Random seed (default",
+          "seed",
+          "/** Disable rendering entirely */",
+          "disabled",
+          "/** Z-index for positioning (default",
+          "zIndex",
+          "/** Additional CSS class */",
+          "className",
+          "/** Use absolute positioning instead of fixed */",
+          "absolute",
+          "/** Custom color palette override */",
+          "colors",
+          "/** Enable noise texture overlay */",
+          "noise",
+          "/** Respect reduced motion */",
+          "respectReducedMotion",
+          "/** Custom style overrides */",
+          "style"
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme",
+        "app/(internetfriends)/components/gloo/canvas.atomic",
+        "app/(internetfriends)/components/gloo/effects",
+        "app/(internetfriends)/components/gloo/types"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useMemo",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-mode"
+      ],
+      "size": {
+        "loc": 291,
+        "linesJsx": 5,
+        "complexity": 18.5
+      },
+      "riskScore": 15.14,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "backgrounds-refined"
+    },
+    {
+      "id": "components/backgrounds-refined/bg-goo-refined.tsx::default",
+      "filePath": "components/backgrounds-refined/bg-goo-refined.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme",
+        "app/(internetfriends)/components/gloo/canvas.atomic",
+        "app/(internetfriends)/components/gloo/effects",
+        "app/(internetfriends)/components/gloo/types"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useMemo",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-mode"
+      ],
+      "size": {
+        "loc": 291,
+        "linesJsx": 5,
+        "complexity": 9.5
+      },
+      "riskScore": 8.54,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "backgrounds-refined"
+    },
+    {
       "id": "components/demo/accent-demo.tsx::AccentDemo",
       "filePath": "components/demo/accent-demo.tsx",
       "exportName": "AccentDemo",
@@ -2059,7 +2602,7 @@
         "roles": [],
         "hasSemanticHtml": true
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "demo"
     },
     {
@@ -2100,7 +2643,7 @@
         "roles": [],
         "hasSemanticHtml": true
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "demo"
     },
     {
@@ -2128,17 +2671,94 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 109,
+        "loc": 119,
         "linesJsx": 25,
         "complexity": 5
       },
-      "riskScore": 3.93,
+      "riskScore": 3.99,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": true
       },
-      "lastModified": "2025-08-11T08:26:34.253Z",
+      "lastModified": "2025-08-11T19:22:35.030Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/accent-demo/page.tsx::default",
+      "filePath": "app/accent-demo/page.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "components/demo/accent-demo"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 24,
+        "linesJsx": 4,
+        "complexity": 0.9
+      },
+      "riskScore": 1.72,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.597Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/accent-demo/layout.tsx::default",
+      "filePath": "app/accent-demo/layout.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "styles/design-tokens.css",
+        "styles/accent-global.css"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 19,
+        "linesJsx": 1,
+        "complexity": 1.1
+      },
+      "riskScore": 1.97,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.028Z",
       "category": "pages"
     },
     {
@@ -2202,7 +2822,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:36:01.162Z",
+      "lastModified": "2025-08-11T19:22:35.032Z",
       "category": "pages"
     },
     {
@@ -2257,7 +2877,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:36:01.162Z",
+      "lastModified": "2025-08-11T19:22:35.032Z",
       "category": "pages"
     },
     {
@@ -2312,84 +2932,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:36:01.162Z",
-      "category": "pages"
-    },
-    {
-      "id": "app/accent-demo/page.tsx::default",
-      "filePath": "app/accent-demo/page.tsx",
-      "exportName": "default",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "components/demo/accent-demo"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 18,
-        "linesJsx": 4,
-        "complexity": 0.9
-      },
-      "riskScore": 1.68,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-10T09:37:08.969Z",
-      "category": "pages"
-    },
-    {
-      "id": "app/accent-demo/layout.tsx::default",
-      "filePath": "app/accent-demo/layout.tsx",
-      "exportName": "default",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "styles/design-tokens.css",
-        "styles/accent-global.css"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 19,
-        "linesJsx": 1,
-        "complexity": 1.1
-      },
-      "riskScore": 1.97,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-10T09:37:17.319Z",
+      "lastModified": "2025-08-11T19:22:35.032Z",
       "category": "pages"
     },
     {
@@ -2430,7 +2973,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2471,7 +3014,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2512,7 +3055,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2553,7 +3096,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2594,7 +3137,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2635,7 +3178,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2676,7 +3219,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2717,7 +3260,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2758,7 +3301,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2799,7 +3342,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2840,7 +3383,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2881,7 +3424,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2922,7 +3465,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -2963,7 +3506,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -3004,7 +3547,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:31:40.190Z",
+      "lastModified": "2025-08-11T19:22:35.038Z",
       "category": "organisms"
     },
     {
@@ -3023,6 +3566,7 @@
         "nextjs-website/components/atomic/button",
         "nextjs-website/components/molecular/navigation",
         "nextjs-website/hooks/use-theme",
+        "nextjs-website/hooks/use-header-orbit",
         "nextjs-website/i18n",
         "nextjs-website/i18n/config",
         "components/organisms/header/types",
@@ -3041,6 +3585,7 @@
           "useContext",
           "usePathname",
           "useTheme",
+          "useHeaderOrbit",
           "useI18n",
           "useHeader",
           "useEvent"
@@ -3048,17 +3593,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 584,
+        "loc": 573,
         "linesJsx": 60,
-        "complexity": 21
+        "complexity": 21.5
       },
-      "riskScore": 13,
+      "riskScore": 13.4,
       "a11y": {
         "ariaCount": 12,
         "roles": [],
         "hasSemanticHtml": true
       },
-      "lastModified": "2025-08-11T04:31:49.941Z",
+      "lastModified": "2025-08-13T01:49:40.431Z",
       "category": "organisms"
     },
     {
@@ -3100,7 +3645,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:42:09.287Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "mermaid"
     },
     {
@@ -3142,7 +3687,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:42:09.287Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "mermaid"
     },
     {
@@ -3205,7 +3750,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:42:09.287Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "mermaid"
     },
     {
@@ -3247,7 +3792,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:42:09.287Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "mermaid"
     },
     {
@@ -3304,7 +3849,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T06:53:45.493Z",
+      "lastModified": "2025-08-11T19:22:35.035Z",
       "category": "mermaid"
     },
     {
@@ -3361,7 +3906,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T06:53:45.493Z",
+      "lastModified": "2025-08-11T19:22:35.035Z",
       "category": "mermaid"
     },
     {
@@ -3443,7 +3988,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T06:53:45.493Z",
+      "lastModified": "2025-08-11T19:22:35.035Z",
       "category": "mermaid"
     },
     {
@@ -3487,8 +4032,418 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T04:31:18.395Z",
+      "lastModified": "2025-08-11T19:22:35.034Z",
       "category": "mermaid"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationItem",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationItem",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationLogo",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationLogo",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationMolecularProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationMolecularProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationDropdownProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationDropdownProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::MobileMenuProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "MobileMenuProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationBreadcrumbProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationBreadcrumbProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/types.ts::NavigationTabsProps",
+      "filePath": "components/molecular/navigation/types.ts",
+      "exportName": "NavigationTabsProps",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/header"
+      ],
+      "dependents": [
+        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 186,
+        "linesJsx": 3,
+        "complexity": 3.8
+      },
+      "riskScore": 3.96,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular",
+      "filePath": "components/molecular/navigation/navigation.molecular.tsx",
+      "exportName": "NavigationMolecular",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "nextjs-website/components/atomic/button",
+        "nextjs-website/components/atomic/header",
+        "components/molecular/navigation/types"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 316,
+        "linesJsx": 45,
+        "complexity": 14.5
+      },
+      "riskScore": 10.6,
+      "a11y": {
+        "ariaCount": 2,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-11T19:22:35.035Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/project-explorer/project-explorer.atomic.tsx::ProjectExplorerAtomic",
+      "filePath": "components/molecular/project-explorer/project-explorer.atomic.tsx",
+      "exportName": "ProjectExplorerAtomic",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils/timestamp"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useMemo",
+          "useCallback"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 459,
+        "linesJsx": 49,
+        "complexity": 16.4
+      },
+      "riskScore": 10.76,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T02:34:31.763Z",
+      "category": "molecular"
+    },
+    {
+      "id": "components/molecular/project-explorer/project-explorer.atomic.tsx::default",
+      "filePath": "components/molecular/project-explorer/project-explorer.atomic.tsx",
+      "exportName": "default",
+      "kind": "molecular",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils/timestamp"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useMemo",
+          "useCallback"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 459,
+        "linesJsx": 49,
+        "complexity": 16.4
+      },
+      "riskScore": 10.76,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T02:34:31.763Z",
+      "category": "molecular"
     },
     {
       "id": "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic",
@@ -3516,17 +4471,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 74,
+        "loc": 98,
         "linesJsx": 2,
         "complexity": 4.2
       },
-      "riskScore": 4.57,
+      "riskScore": 4.73,
       "a11y": {
-        "ariaCount": 0,
+        "ariaCount": 1,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T08:59:55.540Z",
+      "lastModified": "2025-08-13T02:33:22.311Z",
       "category": "atomic"
     },
     {
@@ -3554,17 +4509,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 101,
+        "loc": 107,
         "linesJsx": 1,
         "complexity": 4.1
       },
-      "riskScore": 4.31,
+      "riskScore": 4.35,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.302Z",
+      "lastModified": "2025-08-13T02:33:03.659Z",
       "category": "atomic"
     },
     {
@@ -3592,17 +4547,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 101,
+        "loc": 107,
         "linesJsx": 1,
         "complexity": 4.1
       },
-      "riskScore": 4.31,
+      "riskScore": 4.35,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.302Z",
+      "lastModified": "2025-08-13T02:33:03.659Z",
       "category": "atomic"
     },
     {
@@ -3630,17 +4585,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 101,
+        "loc": 107,
         "linesJsx": 1,
         "complexity": 4.1
       },
-      "riskScore": 4.31,
+      "riskScore": 4.35,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.302Z",
+      "lastModified": "2025-08-13T02:33:03.659Z",
       "category": "atomic"
     },
     {
@@ -3668,17 +4623,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 101,
+        "loc": 107,
         "linesJsx": 1,
         "complexity": 4.1
       },
-      "riskScore": 4.31,
+      "riskScore": 4.35,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.302Z",
+      "lastModified": "2025-08-13T02:33:03.659Z",
       "category": "atomic"
     },
     {
@@ -3706,17 +4661,17 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 101,
+        "loc": 107,
         "linesJsx": 1,
         "complexity": 4.1
       },
-      "riskScore": 4.31,
+      "riskScore": 4.35,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.302Z",
+      "lastModified": "2025-08-13T02:33:03.659Z",
       "category": "atomic"
     },
     {
@@ -3744,17 +4699,289 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 101,
+        "loc": 107,
         "linesJsx": 1,
         "complexity": 4.1
       },
-      "riskScore": 4.31,
+      "riskScore": 4.35,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:47:55.302Z",
+      "lastModified": "2025-08-13T02:33:03.659Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderAtomicProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderAtomicProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.033Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderNavigationProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderNavigationProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.033Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::NavigationItem",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "NavigationItem",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.033Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderLogoProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderLogoProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.033Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::HeaderActionsProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "HeaderActionsProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.033Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/types.ts::ThemeToggleProps",
+      "filePath": "components/atomic/header/types.ts",
+      "exportName": "ThemeToggleProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [
+        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
+      ],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 110,
+        "linesJsx": 1,
+        "complexity": 2.1
+      },
+      "riskScore": 2.57,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.033Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/header/header.atomic.tsx::HeaderAtomic",
+      "filePath": "components/atomic/header/header.atomic.tsx",
+      "exportName": "HeaderAtomic",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils",
+        "components/atomic/header/types",
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useState",
+          "useEffect",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 77,
+        "linesJsx": 4,
+        "complexity": 2.9
+      },
+      "riskScore": 3.27,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": true
+      },
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -3804,6 +5031,7 @@
       "tokensReferenced": [
         "--color-border-focus",
         "--if-primary",
+        "--color-text-inverse",
         "--if-primary-hover",
         "--if-primary-active",
         "--color-bg-secondary",
@@ -3823,7 +5051,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:22:00.857Z",
+      "lastModified": "2025-08-13T01:45:18.587Z",
       "category": "atomic"
     },
     {
@@ -3873,6 +5101,7 @@
       "tokensReferenced": [
         "--color-border-focus",
         "--if-primary",
+        "--color-text-inverse",
         "--if-primary-hover",
         "--if-primary-active",
         "--color-bg-secondary",
@@ -3892,7 +5121,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T20:22:00.857Z",
+      "lastModified": "2025-08-13T01:45:18.587Z",
       "category": "atomic"
     },
     {
@@ -3940,7 +5169,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -3988,7 +5217,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4036,7 +5265,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4084,7 +5313,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4132,7 +5361,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4180,7 +5409,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4228,7 +5457,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4276,7 +5505,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4324,7 +5553,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4372,7 +5601,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4420,7 +5649,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4468,7 +5697,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4516,7 +5745,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4564,7 +5793,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
@@ -4612,13 +5841,13 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T09:36:37.806Z",
+      "lastModified": "2025-08-11T19:22:35.033Z",
       "category": "atomic"
     },
     {
-      "id": "components/atomic/header/types.ts::HeaderAtomicProps",
-      "filePath": "components/atomic/header/types.ts",
-      "exportName": "HeaderAtomicProps",
+      "id": "components/atomic/glass-refined/types.ts::GlassStrength",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassStrength",
       "kind": "atomic",
       "props": {
         "total": 0,
@@ -4627,9 +5856,7 @@
         "names": []
       },
       "dependencies": [],
-      "dependents": [
-        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
-      ],
+      "dependents": [],
       "uses": {
         "glass": false,
         "goo": false,
@@ -4638,25 +5865,33 @@
         "motion": false,
         "hooks": []
       },
-      "tokensReferenced": [],
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
       "size": {
-        "loc": 110,
-        "linesJsx": 1,
-        "complexity": 2.1
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
       },
-      "riskScore": 2.57,
+      "riskScore": 3.46,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T21:05:30.941Z",
+      "lastModified": "2025-08-13T01:23:36.603Z",
       "category": "atomic"
     },
     {
-      "id": "components/atomic/header/types.ts::HeaderNavigationProps",
-      "filePath": "components/atomic/header/types.ts",
-      "exportName": "HeaderNavigationProps",
+      "id": "components/atomic/glass-refined/types.ts::GlassMode",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassMode",
       "kind": "atomic",
       "props": {
         "total": 0,
@@ -4665,9 +5900,7 @@
         "names": []
       },
       "dependencies": [],
-      "dependents": [
-        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
-      ],
+      "dependents": [],
       "uses": {
         "glass": false,
         "goo": false,
@@ -4676,25 +5909,33 @@
         "motion": false,
         "hooks": []
       },
-      "tokensReferenced": [],
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
       "size": {
-        "loc": 110,
-        "linesJsx": 1,
-        "complexity": 2.1
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
       },
-      "riskScore": 2.57,
+      "riskScore": 3.46,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T21:05:30.941Z",
+      "lastModified": "2025-08-13T01:23:36.603Z",
       "category": "atomic"
     },
     {
-      "id": "components/atomic/header/types.ts::NavigationItem",
-      "filePath": "components/atomic/header/types.ts",
-      "exportName": "NavigationItem",
+      "id": "components/atomic/glass-refined/types.ts::GlassVariant",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassVariant",
       "kind": "atomic",
       "props": {
         "total": 0,
@@ -4703,9 +5944,7 @@
         "names": []
       },
       "dependencies": [],
-      "dependents": [
-        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
-      ],
+      "dependents": [],
       "uses": {
         "glass": false,
         "goo": false,
@@ -4714,25 +5953,33 @@
         "motion": false,
         "hooks": []
       },
-      "tokensReferenced": [],
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
       "size": {
-        "loc": 110,
-        "linesJsx": 1,
-        "complexity": 2.1
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
       },
-      "riskScore": 2.57,
+      "riskScore": 3.46,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T21:05:30.941Z",
+      "lastModified": "2025-08-13T01:23:36.603Z",
       "category": "atomic"
     },
     {
-      "id": "components/atomic/header/types.ts::HeaderLogoProps",
-      "filePath": "components/atomic/header/types.ts",
-      "exportName": "HeaderLogoProps",
+      "id": "components/atomic/glass-refined/types.ts::GlassSize",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassSize",
       "kind": "atomic",
       "props": {
         "total": 0,
@@ -4741,9 +5988,7 @@
         "names": []
       },
       "dependencies": [],
-      "dependents": [
-        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
-      ],
+      "dependents": [],
       "uses": {
         "glass": false,
         "goo": false,
@@ -4752,25 +5997,33 @@
         "motion": false,
         "hooks": []
       },
-      "tokensReferenced": [],
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
       "size": {
-        "loc": 110,
-        "linesJsx": 1,
-        "complexity": 2.1
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
       },
-      "riskScore": 2.57,
+      "riskScore": 3.46,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T21:05:30.941Z",
+      "lastModified": "2025-08-13T01:23:36.603Z",
       "category": "atomic"
     },
     {
-      "id": "components/atomic/header/types.ts::HeaderActionsProps",
-      "filePath": "components/atomic/header/types.ts",
-      "exportName": "HeaderActionsProps",
+      "id": "components/atomic/glass-refined/types.ts::GlassModeConfig",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassModeConfig",
       "kind": "atomic",
       "props": {
         "total": 0,
@@ -4779,9 +6032,7 @@
         "names": []
       },
       "dependencies": [],
-      "dependents": [
-        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
-      ],
+      "dependents": [],
       "uses": {
         "glass": false,
         "goo": false,
@@ -4790,25 +6041,33 @@
         "motion": false,
         "hooks": []
       },
-      "tokensReferenced": [],
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
       "size": {
-        "loc": 110,
-        "linesJsx": 1,
-        "complexity": 2.1
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
       },
-      "riskScore": 2.57,
+      "riskScore": 3.46,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T21:05:30.941Z",
+      "lastModified": "2025-08-13T01:23:36.603Z",
       "category": "atomic"
     },
     {
-      "id": "components/atomic/header/types.ts::ThemeToggleProps",
-      "filePath": "components/atomic/header/types.ts",
-      "exportName": "ThemeToggleProps",
+      "id": "components/atomic/glass-refined/types.ts::GlassVariantConfig",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassVariantConfig",
       "kind": "atomic",
       "props": {
         "total": 0,
@@ -4817,9 +6076,7 @@
         "names": []
       },
       "dependencies": [],
-      "dependents": [
-        "components/atomic/header/header.atomic.tsx::HeaderAtomic"
-      ],
+      "dependents": [],
       "uses": {
         "glass": false,
         "goo": false,
@@ -4828,25 +6085,561 @@
         "motion": false,
         "hooks": []
       },
-      "tokensReferenced": [],
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
       "size": {
-        "loc": 110,
-        "linesJsx": 1,
-        "complexity": 2.1
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
       },
-      "riskScore": 2.57,
+      "riskScore": 3.46,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-10T21:05:30.941Z",
+      "lastModified": "2025-08-13T01:23:36.603Z",
       "category": "atomic"
     },
     {
-      "id": "components/atomic/header/header.atomic.tsx::HeaderAtomic",
-      "filePath": "components/atomic/header/header.atomic.tsx",
-      "exportName": "HeaderAtomic",
+      "id": "components/atomic/glass-refined/types.ts::GlassComputedProperties",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassComputedProperties",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GlassRefinedProps",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassRefinedProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GlassRefinedAtomicProps",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassRefinedAtomicProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GLASS_STRENGTH_PRESETS",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GLASS_STRENGTH_PRESETS",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GLASS_MODE_CONFIGS",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GLASS_MODE_CONFIGS",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GLASS_VARIANT_CONFIGS",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GLASS_VARIANT_CONFIGS",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::ValidGlassStrength",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "ValidGlassStrength",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GlassCSSProperties",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassCSSProperties",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::ThemeGlassProperties",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "ThemeGlassProperties",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GLASS_THEME_PROPERTIES",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GLASS_THEME_PROPERTIES",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::EpicGlassContext",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "EpicGlassContext",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/types.ts::GlassRefinedWithEpicProps",
+      "filePath": "components/atomic/glass-refined/types.ts",
+      "exportName": "GlassRefinedWithEpicProps",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--glass-base-color"
+      ],
+      "size": {
+        "loc": 165,
+        "linesJsx": 4,
+        "complexity": 3.4
+      },
+      "riskScore": 3.46,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.603Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/glass-refined.atomic.tsx::GlassRefinedAtomicProps",
+      "filePath": "components/atomic/glass-refined/glass-refined.atomic.tsx",
+      "exportName": "GlassRefinedAtomicProps",
       "kind": "atomic",
       "props": {
         "total": 0,
@@ -4855,9 +6648,7 @@
         "names": []
       },
       "dependencies": [
-        "nextjs-website/lib/utils",
-        "components/atomic/header/types",
-        "nextjs-website/hooks/use-theme"
+        "nextjs-website/lib/utils"
       ],
       "dependents": [],
       "uses": {
@@ -4866,432 +6657,214 @@
         "noise": false,
         "vignette": false,
         "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--if-neutral-900",
+        "--if-neutral-100",
+        "--if-primary",
+        "--if-neutral-300",
+        "--if-neutral-800"
+      ],
+      "size": {
+        "loc": 256,
+        "linesJsx": 3,
+        "complexity": 5.8
+      },
+      "riskScore": 5.23,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.602Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/glass-refined.atomic.tsx::GlassRefinedAtomic",
+      "filePath": "components/atomic/glass-refined/glass-refined.atomic.tsx",
+      "exportName": "GlassRefinedAtomic",
+      "kind": "atomic",
+      "props": {
+        "total": 26,
+        "required": 13,
+        "optional": 13,
+        "names": [
+          "children",
+          "className",
+          "/** Glass strength from 0 to 1 (default",
+          "strength",
+          "/** Semantic glass mode for automatic strength mapping */",
+          "mode",
+          "/** Enable noise layer overlay */",
+          "noise",
+          "/** Variant for different use cases */",
+          "variant",
+          "/** Size preset */",
+          "size",
+          "/** Enable hover effects */",
+          "hover",
+          "/** Include padding */",
+          "padding",
+          "/** Show border */",
+          "bordered",
+          "/** Respect reduced motion */",
+          "reducedMotion",
+          "/** Custom style overrides */",
+          "style",
+          "/** Element type */",
+          "as",
+          "/** Data attributes */",
+          "[key"
+        ]
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--if-neutral-900",
+        "--if-neutral-100",
+        "--if-primary",
+        "--if-neutral-300",
+        "--if-neutral-800"
+      ],
+      "size": {
+        "loc": 256,
+        "linesJsx": 3,
+        "complexity": 13.6
+      },
+      "riskScore": 11.35,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.602Z",
+      "category": "atomic"
+    },
+    {
+      "id": "components/atomic/glass-refined/glass-refined.atomic.tsx::default",
+      "filePath": "components/atomic/glass-refined/glass-refined.atomic.tsx",
+      "exportName": "default",
+      "kind": "atomic",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/lib/utils"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": []
+      },
+      "tokensReferenced": [
+        "--glass-strength",
+        "--glass-alpha",
+        "--glass-blur",
+        "--glass-border-alpha",
+        "--glass-highlight-alpha",
+        "--glass-noise-alpha",
+        "--if-neutral-900",
+        "--if-neutral-100",
+        "--if-primary",
+        "--if-neutral-300",
+        "--if-neutral-800"
+      ],
+      "size": {
+        "loc": 256,
+        "linesJsx": 3,
+        "complexity": 5.8
+      },
+      "riskScore": 5.23,
+      "a11y": {
+        "ariaCount": 1,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.602Z",
+      "category": "atomic"
+    },
+    {
+      "id": "app/dev/tokens/page.tsx::default",
+      "filePath": "app/dev/tokens/page.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/hooks/use-theme",
+        "nextjs-website/components/glass",
+        "nextjs-website/components/data/metric-display"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": true,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": true,
         "hooks": [
           "useState",
           "useEffect",
+          "useMemo",
           "useTheme"
         ]
       },
-      "tokensReferenced": [],
+      "tokensReferenced": [
+        "--if-primary",
+        "--if-accent-primary",
+        "--if-surface-neutral",
+        "--if-atmos-noise-ambient-opacity",
+        "--if-atmos-goo-exposure",
+        "--glass-blur-1",
+        "--glass-opacity-1"
+      ],
       "size": {
-        "loc": 71,
-        "linesJsx": 4,
-        "complexity": 2.9
+        "loc": 513,
+        "linesJsx": 71,
+        "complexity": 20.6
       },
-      "riskScore": 3.23,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": true
-      },
-      "lastModified": "2025-08-11T06:28:26.246Z",
-      "category": "atomic"
-    },
-    {
-      "id": "components/molecular/project-explorer/project-explorer.atomic.tsx::ProjectExplorerAtomic",
-      "filePath": "components/molecular/project-explorer/project-explorer.atomic.tsx",
-      "exportName": "ProjectExplorerAtomic",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": true,
-        "hooks": [
-          "useState",
-          "useEffect",
-          "useMemo",
-          "useCallback"
-        ]
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 458,
-        "linesJsx": 49,
-        "complexity": 15.9
-      },
-      "riskScore": 10.36,
+      "riskScore": 12.84,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:48:01.935Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/project-explorer/project-explorer.atomic.tsx::default",
-      "filePath": "components/molecular/project-explorer/project-explorer.atomic.tsx",
-      "exportName": "default",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": true,
-        "hooks": [
-          "useState",
-          "useEffect",
-          "useMemo",
-          "useCallback"
-        ]
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 458,
-        "linesJsx": 49,
-        "complexity": 15.9
-      },
-      "riskScore": 10.36,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:48:01.935Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/types.ts::NavigationItem",
-      "filePath": "components/molecular/navigation/types.ts",
-      "exportName": "NavigationItem",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/components/atomic/header"
-      ],
-      "dependents": [
-        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
-      ],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 186,
-        "linesJsx": 3,
-        "complexity": 3.8
-      },
-      "riskScore": 3.96,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:36:44.287Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/types.ts::NavigationLogo",
-      "filePath": "components/molecular/navigation/types.ts",
-      "exportName": "NavigationLogo",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/components/atomic/header"
-      ],
-      "dependents": [
-        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
-      ],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 186,
-        "linesJsx": 3,
-        "complexity": 3.8
-      },
-      "riskScore": 3.96,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:36:44.287Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/types.ts::NavigationMolecularProps",
-      "filePath": "components/molecular/navigation/types.ts",
-      "exportName": "NavigationMolecularProps",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/components/atomic/header"
-      ],
-      "dependents": [
-        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
-      ],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 186,
-        "linesJsx": 3,
-        "complexity": 3.8
-      },
-      "riskScore": 3.96,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:36:44.287Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/types.ts::NavigationDropdownProps",
-      "filePath": "components/molecular/navigation/types.ts",
-      "exportName": "NavigationDropdownProps",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/components/atomic/header"
-      ],
-      "dependents": [
-        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
-      ],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 186,
-        "linesJsx": 3,
-        "complexity": 3.8
-      },
-      "riskScore": 3.96,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:36:44.287Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/types.ts::MobileMenuProps",
-      "filePath": "components/molecular/navigation/types.ts",
-      "exportName": "MobileMenuProps",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/components/atomic/header"
-      ],
-      "dependents": [
-        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
-      ],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 186,
-        "linesJsx": 3,
-        "complexity": 3.8
-      },
-      "riskScore": 3.96,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:36:44.287Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/types.ts::NavigationBreadcrumbProps",
-      "filePath": "components/molecular/navigation/types.ts",
-      "exportName": "NavigationBreadcrumbProps",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/components/atomic/header"
-      ],
-      "dependents": [
-        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
-      ],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 186,
-        "linesJsx": 3,
-        "complexity": 3.8
-      },
-      "riskScore": 3.96,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:36:44.287Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/types.ts::NavigationTabsProps",
-      "filePath": "components/molecular/navigation/types.ts",
-      "exportName": "NavigationTabsProps",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/components/atomic/header"
-      ],
-      "dependents": [
-        "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular"
-      ],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": []
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 186,
-        "linesJsx": 3,
-        "complexity": 3.8
-      },
-      "riskScore": 3.96,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T00:36:44.287Z",
-      "category": "molecular"
-    },
-    {
-      "id": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular",
-      "filePath": "components/molecular/navigation/navigation.molecular.tsx",
-      "exportName": "NavigationMolecular",
-      "kind": "molecular",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [
-        "nextjs-website/lib/utils",
-        "nextjs-website/components/atomic/button",
-        "nextjs-website/components/atomic/header",
-        "components/molecular/navigation/types"
-      ],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": true,
-        "hooks": [
-          "useState",
-          "useEffect"
-        ]
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 316,
-        "linesJsx": 45,
-        "complexity": 14.5
-      },
-      "riskScore": 10.6,
-      "a11y": {
-        "ariaCount": 2,
-        "roles": [],
-        "hasSemanticHtml": true
-      },
-      "lastModified": "2025-08-11T01:45:28.507Z",
-      "category": "molecular"
+      "lastModified": "2025-08-13T01:23:36.600Z",
+      "category": "pages"
     },
     {
       "id": "app/dev/component-map/page.tsx::default",
@@ -5330,17 +6903,141 @@
       },
       "tokensReferenced": [],
       "size": {
-        "loc": 553,
+        "loc": 631,
         "linesJsx": 82,
-        "complexity": 23.2
+        "complexity": 24.2
       },
-      "riskScore": 14.08,
+      "riskScore": 14.48,
       "a11y": {
         "ariaCount": 0,
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T08:26:14.590Z",
+      "lastModified": "2025-08-13T01:23:36.599Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/dev/glass-refinement/page.tsx::default",
+      "filePath": "app/dev/glass-refinement/page.tsx",
+      "exportName": "default",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [
+        "nextjs-website/components/atomic/glass-refined",
+        "nextjs-website/components/backgrounds-refined/bg-goo-refined",
+        "nextjs-website/components/atomic/button",
+        "nextjs-website/hooks/use-theme"
+      ],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": true,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useState",
+          "useTheme"
+        ]
+      },
+      "tokensReferenced": [
+        "--if-neutral-200",
+        "--if-accent-secondary",
+        "--if-focus-ring"
+      ],
+      "size": {
+        "loc": 331,
+        "linesJsx": 97,
+        "complexity": 17.7
+      },
+      "riskScore": 10.88,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-13T01:23:36.600Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/api/project-explorer/route.ts::GET",
+      "filePath": "app/api/project-explorer/route.ts",
+      "exportName": "GET",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 697,
+        "linesJsx": 9,
+        "complexity": 13.9
+      },
+      "riskScore": 8.56,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.029Z",
+      "category": "pages"
+    },
+    {
+      "id": "app/api/project-explorer/route.ts::POST",
+      "filePath": "app/api/project-explorer/route.ts",
+      "exportName": "POST",
+      "kind": "utility",
+      "props": {
+        "total": 0,
+        "required": 0,
+        "optional": 0,
+        "names": []
+      },
+      "dependencies": [],
+      "dependents": [],
+      "uses": {
+        "glass": false,
+        "goo": false,
+        "noise": false,
+        "vignette": false,
+        "motion": false,
+        "hooks": [
+          "useEffect"
+        ]
+      },
+      "tokensReferenced": [],
+      "size": {
+        "loc": 697,
+        "linesJsx": 9,
+        "complexity": 13.9
+      },
+      "riskScore": 8.56,
+      "a11y": {
+        "ariaCount": 0,
+        "roles": [],
+        "hasSemanticHtml": false
+      },
+      "lastModified": "2025-08-11T19:22:35.029Z",
       "category": "pages"
     },
     {
@@ -5388,7 +7085,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:42:26.546Z",
+      "lastModified": "2025-08-11T19:22:35.031Z",
       "category": "accent-demo.tsx"
     },
     {
@@ -5436,7 +7133,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:42:26.546Z",
+      "lastModified": "2025-08-11T19:22:35.031Z",
       "category": "accent-demo.tsx"
     },
     {
@@ -5482,7 +7179,7 @@
         "roles": [],
         "hasSemanticHtml": true
       },
-      "lastModified": "2025-08-10T08:21:57.388Z",
+      "lastModified": "2025-08-11T19:22:35.031Z",
       "category": "theme-layout-example.tsx"
     },
     {
@@ -5524,7 +7221,7 @@
         "roles": [],
         "hasSemanticHtml": true
       },
-      "lastModified": "2025-08-10T08:21:57.388Z",
+      "lastModified": "2025-08-11T19:22:35.031Z",
       "category": "theme-layout-example.tsx"
     },
     {
@@ -5570,7 +7267,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:36:34.367Z",
+      "lastModified": "2025-08-11T19:22:35.032Z",
       "category": "pages"
     },
     {
@@ -5616,7 +7313,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:36:34.367Z",
+      "lastModified": "2025-08-11T19:22:35.032Z",
       "category": "pages"
     },
     {
@@ -5664,7 +7361,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:09:37.770Z",
+      "lastModified": "2025-08-11T19:22:35.031Z",
       "category": "pages"
     },
     {
@@ -5712,7 +7409,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:09:37.770Z",
+      "lastModified": "2025-08-11T19:22:35.031Z",
       "category": "pages"
     },
     {
@@ -5760,83 +7457,7 @@
         "roles": [],
         "hasSemanticHtml": false
       },
-      "lastModified": "2025-08-11T00:09:37.770Z",
-      "category": "pages"
-    },
-    {
-      "id": "app/api/project-explorer/route.ts::GET",
-      "filePath": "app/api/project-explorer/route.ts",
-      "exportName": "GET",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": [
-          "useEffect"
-        ]
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 697,
-        "linesJsx": 9,
-        "complexity": 13.9
-      },
-      "riskScore": 8.56,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:30:21.832Z",
-      "category": "pages"
-    },
-    {
-      "id": "app/api/project-explorer/route.ts::POST",
-      "filePath": "app/api/project-explorer/route.ts",
-      "exportName": "POST",
-      "kind": "utility",
-      "props": {
-        "total": 0,
-        "required": 0,
-        "optional": 0,
-        "names": []
-      },
-      "dependencies": [],
-      "dependents": [],
-      "uses": {
-        "glass": false,
-        "goo": false,
-        "noise": false,
-        "vignette": false,
-        "motion": false,
-        "hooks": [
-          "useEffect"
-        ]
-      },
-      "tokensReferenced": [],
-      "size": {
-        "loc": 697,
-        "linesJsx": 9,
-        "complexity": 13.9
-      },
-      "riskScore": 8.56,
-      "a11y": {
-        "ariaCount": 0,
-        "roles": [],
-        "hasSemanticHtml": false
-      },
-      "lastModified": "2025-08-11T07:30:21.832Z",
+      "lastModified": "2025-08-11T19:22:35.031Z",
       "category": "pages"
     }
   ],
@@ -5852,6 +7473,13 @@
       "id": "components/demo/accent-demo.tsx::default->components/atomic/button/button.atomic.tsx::ButtonAtomic",
       "source": "components/demo/accent-demo.tsx::default",
       "target": "components/atomic/button/button.atomic.tsx::ButtonAtomic",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "app/accent-demo/page.tsx::default->components/demo/accent-demo.tsx::AccentDemo",
+      "source": "app/accent-demo/page.tsx::default",
+      "target": "components/demo/accent-demo.tsx::AccentDemo",
       "type": "import",
       "weight": 1
     },
@@ -5894,13 +7522,6 @@
       "id": "app/theme/theme-provider.tsx::ThemeProviderProps->app/theme/runtime/accent_cycle.ts::AccentPreset",
       "source": "app/theme/theme-provider.tsx::ThemeProviderProps",
       "target": "app/theme/runtime/accent_cycle.ts::AccentPreset",
-      "type": "import",
-      "weight": 1
-    },
-    {
-      "id": "app/accent-demo/page.tsx::default->components/demo/accent-demo.tsx::AccentDemo",
-      "source": "app/accent-demo/page.tsx::default",
-      "target": "components/demo/accent-demo.tsx::AccentDemo",
       "type": "import",
       "weight": 1
     },
@@ -5989,9 +7610,23 @@
       "weight": 1
     },
     {
+      "id": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular->components/molecular/navigation/types.ts::NavigationItem",
+      "source": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular",
+      "target": "components/molecular/navigation/types.ts::NavigationItem",
+      "type": "import",
+      "weight": 1
+    },
+    {
       "id": "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic->components/atomic/glass-card/types.ts::GlassCardAtomicProps",
       "source": "components/atomic/glass-card/glass-card.atomic.tsx::GlassCardAtomic",
       "target": "components/atomic/glass-card/types.ts::GlassCardAtomicProps",
+      "type": "import",
+      "weight": 1
+    },
+    {
+      "id": "components/atomic/header/header.atomic.tsx::HeaderAtomic->components/atomic/header/types.ts::HeaderAtomicProps",
+      "source": "components/atomic/header/header.atomic.tsx::HeaderAtomic",
+      "target": "components/atomic/header/types.ts::HeaderAtomicProps",
       "type": "import",
       "weight": 1
     },
@@ -6115,20 +7750,6 @@
       "weight": 1
     },
     {
-      "id": "components/atomic/header/header.atomic.tsx::HeaderAtomic->components/atomic/header/types.ts::HeaderAtomicProps",
-      "source": "components/atomic/header/header.atomic.tsx::HeaderAtomic",
-      "target": "components/atomic/header/types.ts::HeaderAtomicProps",
-      "type": "import",
-      "weight": 1
-    },
-    {
-      "id": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular->components/molecular/navigation/types.ts::NavigationItem",
-      "source": "components/molecular/navigation/navigation.molecular.tsx::NavigationMolecular",
-      "target": "components/molecular/navigation/types.ts::NavigationItem",
-      "type": "import",
-      "weight": 1
-    },
-    {
       "id": "app/theme/components/accent-demo.tsx::AccentDemo->app/theme/theme-provider.tsx::ThemeProvider",
       "source": "app/theme/components/accent-demo.tsx::AccentDemo",
       "target": "app/theme/theme-provider.tsx::ThemeProvider",
@@ -6200,11 +7821,11 @@
     }
   ],
   "stats": {
-    "totalComponents": 134,
-    "tokenCoverage": 7.46,
-    "avgRiskScore": 6.14,
-    "atmoshericUsage": 10.45,
+    "totalComponents": 169,
+    "tokenCoverage": 23.67,
+    "avgRiskScore": 5.85,
+    "atmoshericUsage": 13.61,
     "legacyPatterns": 0
   },
-  "generatedAt": "2025-08-11T08:28:32.985Z"
+  "generatedAt": "2025-08-13T02:44:15.390Z"
 }
