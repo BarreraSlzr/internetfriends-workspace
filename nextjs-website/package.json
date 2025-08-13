@@ -7,7 +7,7 @@
     "dev": "bun --bun next dev --turbopack",
     "dev:with-validation": "bun run validate:quick && bun --bun next dev --turbopack",
     "dev:skip-validation": "bun --bun next dev --turbopack",
-    "build": "bun --bun next build",
+    "build": "NODE_ENV=production bun --bun next build",
     "start": "bun --bun next start",
     "lint": "bunx eslint .",
     "typecheck": "bunx tsc --noEmit --strict",

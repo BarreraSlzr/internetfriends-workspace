@@ -1,67 +1,24 @@
-import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 import React from "react";
 
 // Force dynamic rendering to avoid SSR hook issues
 export const dynamic = "force-dynamic";
 
-const messages = [
-  {
-    main: "This page doesn't exist... yet.",
-    subtitle: "Maybe it's waiting for a business solution!",
-  },
-  {
-    main: "Looks like this project went missing.",
-    subtitle: "Time to bring in the project management tools!",
-  },
-  {
-    main: "Oops! Lost in automation.",
-    subtitle: "Let's simplify that workflow and find your way.",
-  },
-  {
-    main: "Not here yet.",
-    subtitle: "Could it be your next high-performance tool?",
-  },
-  {
-    main: "Nothing to see here.",
-    subtitle: "Let's create something amazing instead!",
-  },
-  {
-    main: "Page not found.",
-    subtitle: "A great opportunity to explore business automation!",
-  },
-  {
-    main: "Missing in action.",
-    subtitle: "Maybe it's busy creating creative solutions for you.",
-  },
-  {
-    main: "Content unavailable.",
-    subtitle: "It might be waiting for distribution!",
-  },
-  {
-    main: "This page is taking a creative break.",
-    subtitle: "Let's brainstorm your next big idea!",
-  },
-];
-
 export default function NotFoundPage() {
-  // Use first message to avoid hydration mismatch from Math.random()
-  const message = messages[0];
-
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8">
       <div className="text-center max-w-2xl">
         <h1 className="text-4xl font-bold mb-4 font-mono text-foreground">
-          404 - {message.main}
+          404 - Page Not Found
         </h1>
-        <p className="text-lg mb-6 text-muted-foreground">{message.subtitle}</p>
-        <Link
+        <p className="text-lg mb-6 text-muted-foreground">
+          This page doesn't exist... yet.
+        </p>
+        <a
           href="/"
           className="inline-flex items-center gap-1 hover:opacity-70 transition-opacity text-primary"
         >
           Go Home
-          <ArrowUpRight className="h-4 w-4" />
-        </Link>
+        </a>
       </div>
     </main>
   );
