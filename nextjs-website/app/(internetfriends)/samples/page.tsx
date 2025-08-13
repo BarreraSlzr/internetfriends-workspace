@@ -6,6 +6,10 @@ import SocialLinks from "@/app/(internetfriends)/components/social-links";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import content from "../content.json";
+import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+
+// Force dynamic rendering to bypass SSR hook issues
+export const dynamic = "force-dynamic";
 
 const defaultProject = {
   title: "LuxonFilms.com",
@@ -51,16 +55,26 @@ export default function Page() {
   return (
     <main>
       <Header />
-      <HeroText>
+      <HeroText useGloo={false} backgroundStrategy="flat">
         <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
           {content.samples.title}
         </h1>
-        <div className="glass-stack glass-noise-overlay sm:p-6 p-2 py-4 md:p-8 flex flex-col glass-layer-2">
+        <GlassRefinedAtomic
+          variant="card"
+          strength={0.45}
+          noise={false}
+          className="sm:p-6 p-2 py-4 md:p-8 flex flex-col"
+        >
           <p className="text-lg mb-2 max-w-2xl">
             {content.samples.description}
           </p>
-        </div>
-        <div className="glass-stack glass-noise-overlay sm:p-6 p-2 py-4 md:p-8 pt-0 flex flex-col glass-layer-3">
+        </GlassRefinedAtomic>
+        <GlassRefinedAtomic
+          variant="card"
+          strength={0.35}
+          noise={false}
+          className="sm:p-6 p-2 py-4 md:p-8 pt-0 flex flex-col"
+        >
           {projects.map((p, index) => (
             <Link
               key={p.href}
@@ -78,7 +92,7 @@ export default function Page() {
               </span>
             </Link>
           ))}
-        </div>
+        </GlassRefinedAtomic>
       </HeroText>
       <Navigation />
       <SocialLinks />
