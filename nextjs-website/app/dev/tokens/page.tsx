@@ -1,5 +1,8 @@
 "use client";
 
+// Force dynamic rendering to bypass SSR hook issues
+export const dynamic = "force-dynamic";
+
 import React, { useState, useEffect, useMemo } from "react";
 import { useTheme } from "@/hooks/use-theme";
 import { GlassPanel } from "@/components/glass";
@@ -216,7 +219,9 @@ export default function TokenInspectorPage() {
           const matchesSearch = searchQuery
             ? token.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
               (token.description &&
-                token.description.toLowerCase().includes(searchQuery.toLowerCase()))
+                token.description
+                  .toLowerCase()
+                  .includes(searchQuery.toLowerCase()))
             : true;
 
           const matchesCategory =
@@ -281,7 +286,10 @@ export default function TokenInspectorPage() {
     );
   }
 
-  const totalTokens = tokens.reduce((sum, group) => sum + group.tokens.length, 0);
+  const totalTokens = tokens.reduce(
+    (sum, group) => sum + group.tokens.length,
+    0,
+  );
   const overrideCount = Object.keys(overrides).length;
   const deprecatedCount = tokens.reduce(
     (sum, group) => sum + group.tokens.filter((t) => t.deprecated).length,
@@ -312,7 +320,11 @@ export default function TokenInspectorPage() {
                   : "bg-muted hover:bg-muted/80"
               }`}
             >
-              {showOverridePanel ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              {showOverridePanel ? (
+                <EyeOff className="h-4 w-4" />
+              ) : (
+                <Eye className="h-4 w-4" />
+              )}
               Override Panel
             </button>
 
@@ -393,14 +405,18 @@ export default function TokenInspectorPage() {
             <GlassPanel key={group.name} depth={1} noise="weak" className="p-6">
               <div className="mb-4">
                 <h2 className="text-lg font-semibold flex items-center gap-2">
-                  {group.category === "color" && <Palette className="h-5 w-5" />}
+                  {group.category === "color" && (
+                    <Palette className="h-5 w-5" />
+                  )}
                   {group.category === "effects" && <Zap className="h-5 w-5" />}
                   {group.name}
                   <span className="text-sm text-muted-foreground">
                     ({group.tokens.length})
                   </span>
                 </h2>
-                <p className="text-sm text-muted-foreground">{group.description}</p>
+                <p className="text-sm text-muted-foreground">
+                  {group.description}
+                </p>
               </div>
 
               <div className="space-y-3">
@@ -463,7 +479,8 @@ export default function TokenInspectorPage() {
                           className="w-24 px-2 py-1 text-xs bg-background border border-input rounded"
                           onKeyDown={(e) => {
                             if (e.key === "Enter") {
-                              const value = (e.target as HTMLInputElement).value;
+                              const value = (e.target as HTMLInputElement)
+                                .value;
                               if (value) {
                                 applyOverride(token.name, value);
                                 (e.target as HTMLInputElement).value = "";

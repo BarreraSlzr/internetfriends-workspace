@@ -1,5 +1,8 @@
 "use client";
 
+// Force dynamic rendering to bypass SSR hook issues
+export const dynamic = "force-dynamic";
+
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import {
   ReactFlow,

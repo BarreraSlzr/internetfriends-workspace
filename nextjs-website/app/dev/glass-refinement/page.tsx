@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
+
+// Force dynamic rendering to bypass SSR hook issues
+export const dynamic = "force-dynamic";
 import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
 import { BgGooRefined } from "@/components/backgrounds-refined/bg-goo-refined";
 import { ButtonAtomic } from "@/components/atomic/button";
