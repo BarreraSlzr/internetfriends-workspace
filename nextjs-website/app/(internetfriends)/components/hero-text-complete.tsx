@@ -1,5 +1,6 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
+import { getWebGLContext } from "@/lib/utils";
+("use client");
 
 import React, { useRef, useEffect, PropsWithChildren } from "react";
 import { motion } from "framer-motion";
@@ -37,7 +38,7 @@ function SimpleGlooCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext("webgl");
+    const gl = getWebGLContext(canvas);
     if (!gl) return;
 
     // Size canvas to container
@@ -168,11 +169,11 @@ function SimpleGlooCanvas() {
     window.addEventListener("resize", resizeCanvas);
 
     // Animation loop
-    const startTime = getIsoTimestamp()();
+    const startTime = getTimestamp();
     function render() {
       if (!canvas || !programRef.current) return;
 
-      const currentTime = (getIsoTimestamp()() - startTime) / 1000;
+      const currentTime = (getTimestamp() - startTime) / 1000;
 
       // Clear and render
       gl.clearColor(0, 0, 0, 1);

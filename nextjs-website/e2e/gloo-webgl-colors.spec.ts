@@ -16,7 +16,7 @@ const EXPECTED_COLORS = {
   dark: ["#ffeb70", "#ff5c57", "#ff54ff"], // Brighter variants
 };
 
-async function checkWebGLAvailability(page) {
+async function checkWebGLAvailability(page: any) {
   return await page.evaluate(() => {
     const canvas = document.createElement("canvas");
     const gl =
@@ -24,18 +24,19 @@ async function checkWebGLAvailability(page) {
 
     if (!gl) return { available: false, reason: "No WebGL context" };
 
+    const webglContext = gl as WebGLRenderingContext;
     return {
       available: true,
-      vendor: gl.getParameter(gl.VENDOR),
-      renderer: gl.getParameter(gl.RENDERER),
-      version: gl.getParameter(gl.VERSION),
-      maxTextureSize: gl.getParameter(gl.MAX_TEXTURE_SIZE),
-      extensions: gl.getSupportedExtensions()?.slice(0, 5) || [],
+      vendor: webglContext.getParameter(webglContext.VENDOR),
+      renderer: webglContext.getParameter(webglContext.RENDERER),
+      version: webglContext.getParameter(webglContext.VERSION),
+      maxTextureSize: webglContext.getParameter(webglContext.MAX_TEXTURE_SIZE),
+      extensions: webglContext.getSupportedExtensions()?.slice(0, 5) || [],
     };
   });
 }
 
-async function analyzeGlooCanvasColors(page) {
+async function analyzeGlooCanvasColors(page: any) {
   return await page.evaluate(() => {
     const canvas = document.querySelector(
       '[data-testid="gloo-canvas"]',
@@ -55,6 +56,7 @@ async function analyzeGlooCanvasColors(page) {
       };
     }
 
+    const webglContext = gl as WebGLRenderingContext;
     // Sample pixels from center area
     const centerX = Math.floor(canvas.width / 2);
     const centerY = Math.floor(canvas.height / 2);
@@ -62,20 +64,20 @@ async function analyzeGlooCanvasColors(page) {
     const pixels = new Uint8Array(sampleSize * sampleSize * 4);
 
     try {
-      gl.readPixels(
+      webglContext.readPixels(
         centerX - sampleSize / 2,
         centerY - sampleSize / 2,
         sampleSize,
         sampleSize,
-        gl.RGBA,
-        gl.UNSIGNED_BYTE,
+        webglContext.RGBA,
+        webglContext.UNSIGNED_BYTE,
         pixels,
       );
     } catch (error) {
       return {
         present: true,
         webglActive: true,
-        error: `Failed to read pixels: ${error.message}`,
+        error: `Failed to read pixels: ${(error as Error).message}`,
       };
     }
 
@@ -149,7 +151,7 @@ test.describe("Gloo WebGL Color Validation", () => {
       const webglInfo = await checkWebGLAvailability(page);
 
       if (!webglInfo.available) {
-        test.skip("WebGL not available in this environment");
+        test.skip();
       }
 
       console.log("🎮 WebGL Info:", webglInfo);
@@ -219,7 +221,7 @@ test.describe("Gloo WebGL Color Validation", () => {
     const webglInfo = await checkWebGLAvailability(page);
 
     if (webglInfo.available) {
-      test.skip("WebGL is available - testing unavailable scenario");
+      test.skip();
     }
 
     await test.step("Navigate to homepage", async () => {

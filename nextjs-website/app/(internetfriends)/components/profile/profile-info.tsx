@@ -1,5 +1,5 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
+("use client");
 
 import MotionDiv from "@/app/(internetfriends)/components/motion-div";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -10,7 +10,10 @@ import { cardCss } from "./profile-card";
 import { Availability } from "../availability";
 
 const ProfileInfo = () => {
-  const currentDate = new TZDate(getIsoTimestamp()(), curriculum.contactInfo.localTime);
+  const currentDate = new TZDate(
+    getTimestamp(),
+    curriculum.contactInfo.localTime,
+  );
   const timeFormatted = format(currentDate, "hh:mm aa");
 
   return (

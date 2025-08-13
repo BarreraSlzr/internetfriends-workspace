@@ -1,5 +1,5 @@
 import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+("use client");
 /**
  * boundary-patterns.tsx - Client/Server Boundary Pattern System
  *
@@ -28,7 +28,7 @@ export interface BoundaryConfig {
   /** Epic context for tracking */
   epicContext?: {
     epicName: string;
-    epicPhase: 'development' | 'review' | 'complete';
+    epicPhase: "development" | "review" | "complete";
   };
   /** Error boundary configuration */
   errorBoundary?: {
@@ -67,7 +67,7 @@ export interface DynamicBoundaryProps<T = {}> {
  */
 export const ClientOnly: React.FC<ClientOnlyProps> = ({
   children,
-  config = {}
+  config = {},
 }) => {
   const { fallback = null, debug = false, epicContext } = config;
 
@@ -139,13 +139,13 @@ export const ClientOnly: React.FC<ClientOnlyProps> = ({
  */
 export function createDynamicBoundary<T extends Record<string, any>>(
   importFn: () => Promise<{ default: ComponentType<T> }>,
-  boundaryConfig: BoundaryConfig = {}
+  boundaryConfig: BoundaryConfig = {},
 ): ComponentType<T> {
   const {
     fallback = null,
     debug = false,
     epicContext,
-    errorBoundary
+    errorBoundary,
   } = boundaryConfig;
 
   const DynamicComponent = dynamic(importFn, {
@@ -195,7 +195,7 @@ export function createDynamicBoundary<T extends Record<string, any>>(
     );
   };
 
-  BoundaryWrappedComponent.displayName = `DynamicBoundary(${importFn.name || 'Anonymous'})`;
+  BoundaryWrappedComponent.displayName = `DynamicBoundary(${importFn.name || "Anonymous"})`;
 
   return BoundaryWrappedComponent;
 }
@@ -263,7 +263,9 @@ class ErrorBoundaryWrapper extends React.Component<
               </div>
               <div>{this.state.error?.message}</div>
               <button
-                onClick={() => this.setState({ hasError: false, error: undefined })}
+                onClick={() =>
+                  this.setState({ hasError: false, error: undefined })
+                }
                 style={{
                   background: "rgba(255, 255, 255, 0.2)",
                   border: "1px solid rgba(255, 255, 255, 0.3)",
@@ -294,7 +296,7 @@ class ErrorBoundaryWrapper extends React.Component<
 export interface EpicBoundaryProps {
   /** Epic context for tracking */
   epicName: string;
-  epicPhase: 'development' | 'review' | 'complete';
+  epicPhase: "development" | "review" | "complete";
   /** Children to wrap */
   children: ReactNode;
   /** Enable debug info */
@@ -364,7 +366,7 @@ export interface WebGLBoundaryProps<T = {}> {
   /** Epic context */
   epicContext?: {
     epicName: string;
-    epicPhase: 'development' | 'review' | 'complete';
+    epicPhase: "development" | "review" | "complete";
   };
 }
 
@@ -383,19 +385,29 @@ export function WebGLBoundary<T extends Record<string, any>>({
   fallback,
   epicContext,
 }: WebGLBoundaryProps<T>) {
-  const [webglSupported, setWebglSupported] = React.useState<boolean | null>(null);
+  const [webglSupported, setWebglSupported] = React.useState<boolean | null>(
+    null,
+  );
 
   React.useEffect(() => {
     // Check WebGL support
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    const canvas = document.createElement("canvas");
+    const gl =
+      canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
     setWebglSupported(!!gl);
 
     if (process.env.NODE_ENV === "development") {
-      console.log('🎮 WebGL Support:', !!gl);
+      console.log("🎮 WebGL Support:", !!gl);
       if (gl) {
-        console.log('🔧 WebGL Renderer:', gl.getParameter(gl.RENDERER));
-        console.log('🏢 WebGL Vendor:', gl.getParameter(gl.VENDOR));
+        const webglContext = gl as WebGLRenderingContext;
+        console.log(
+          "🔧 WebGL Renderer:",
+          webglContext.getParameter(webglContext.RENDERER),
+        );
+        console.log(
+          "🏢 WebGL Vendor:",
+          webglContext.getParameter(webglContext.VENDOR),
+        );
       }
     }
   }, []);

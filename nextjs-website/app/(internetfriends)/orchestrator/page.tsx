@@ -1,5 +1,5 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
+("use client");
 // NOTE: Pending orchestrator diagnostics fix requires:
 // 1. Replace custom node/edge change handlers with applyNodeChanges/applyEdgeChanges/addEdge
 // 2. Import BackgroundVariant and use variant={BackgroundVariant.Dots}
@@ -266,7 +266,7 @@ export default function OrchestratorPage() {
         ...eds,
         {
           ...connection,
-          id: `${connection.source}-${connection.target}-${getIsoTimestamp()()}`,
+          id: `${connection.source}-${connection.target}-${getTimestamp()}`,
         },
       ]),
     [],

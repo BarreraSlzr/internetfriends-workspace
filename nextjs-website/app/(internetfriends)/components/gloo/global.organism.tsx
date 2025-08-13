@@ -1,5 +1,5 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
+("use client");
 /**
  * global.organism.tsx - Epic Gloo Global Organism Component
  * Theme-aware WebGL background with InternetFriends palette integration
@@ -49,7 +49,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
     null,
   );
   const [paletteGenerationSeed, setPaletteGenerationSeed] = useState(
-    seed || getIsoTimestamp()(),
+    seed || getTimestamp(),
   );
 
   // Detect reduced motion preference
@@ -121,7 +121,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
     if (!autoRegeneratePalette || still || disabled) return;
 
     const intervalId = setInterval(() => {
-      setPaletteGenerationSeed(getIsoTimestamp()());
+      setPaletteGenerationSeed(getTimestamp());
     }, paletteRegenerateMs);
 
     return () => clearInterval(intervalId);

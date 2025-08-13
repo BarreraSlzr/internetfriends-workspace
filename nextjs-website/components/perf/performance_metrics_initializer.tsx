@@ -1,5 +1,5 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+import { getTimestamp } from "@/lib/utils/timestamp";
+("use client");
 
 import { useEffect } from "react";
 
@@ -47,7 +47,7 @@ declare global {
 
 // Generate a session ID for this page session
 function generateSessionId(): string {
-  return `${getIsoTimestamp()()}-${Math.random().toString(36).substr(2, 9)}`;
+  return `${getTimestamp()}-${Math.random().toString(36).substring(2, 11)}`;
 }
 
 // Get connection information if available
@@ -104,7 +104,7 @@ function sendMetrics(payload: PerfPayload): void {
 // Use direct sendMetrics call with simple throttling
 let lastSent = 0;
 const throttledSendMetrics = (payload: PerfPayload) => {
-  const now = getIsoTimestamp()();
+  const now = getTimestamp();
   if (now - lastSent > 1000) {
     lastSent = now;
     sendMetrics(payload);

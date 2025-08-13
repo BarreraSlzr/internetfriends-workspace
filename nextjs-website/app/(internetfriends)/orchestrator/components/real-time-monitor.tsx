@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { generateStamp } from "@/lib/utils/timestamp";
+import {
+  generateStamp,
+  getTimestamp,
+  getIsoTimestamp,
+} from "@/lib/utils/timestamp";
 import {
   Activity,
   Server,
@@ -83,7 +87,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   "data-testid": testId = "real-time-monitor",
 }) => {
   const stamp = React.useMemo(() => generateStamp(), []);
-  const currentTime = generateStamp()().toISOString();
+  const currentTime = getIsoTimestamp();
 
   const [metrics, setMetrics] = useState<SystemMetrics>({
     cpu: 45,
@@ -103,13 +107,13 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
       source: "system",
     },
     {
-      timestamp: generateStamp()(getIsoTimestamp()() - 5000).toISOString(),
+      timestamp: new Date(getTimestamp() - 5000).toISOString(),
       level: "info",
       message: "Development server started on port 3001",
       source: "next",
     },
     {
-      timestamp: generateStamp()(getIsoTimestamp()() - 12000).toISOString(),
+      timestamp: new Date(getTimestamp() - 12000).toISOString(),
       level: "success",
       message: "Database connection established",
       source: "database",
@@ -239,7 +243,7 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   };
 
   const formatTime = (timestamp: string) => {
-    return generateStamp()(timestamp).toLocaleTimeString();
+    return new Date(timestamp).toLocaleTimeString();
   };
 
   const getMetricColor = (

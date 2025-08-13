@@ -1,5 +1,6 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
+import { getWebGLContext } from "@/lib/utils";
+("use client");
 
 import React, { PropsWithChildren, useRef, useEffect } from "react";
 import { motion } from "motion/react";
@@ -33,7 +34,7 @@ function SimpleGlooCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const gl = canvas.getContext("webgl");
+    const gl = getWebGLContext(canvas);
     if (!gl) return;
 
     // Shaders
@@ -125,9 +126,9 @@ function SimpleGlooCanvas() {
     resize();
     window.addEventListener("resize", resize);
 
-    const startTime = getIsoTimestamp()();
+    const startTime = getTimestamp();
     function render() {
-      const time = (getIsoTimestamp()() - startTime) / 1000;
+      const time = (getTimestamp() - startTime) / 1000;
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       if (timeLoc) gl.uniform1f(timeLoc, time);

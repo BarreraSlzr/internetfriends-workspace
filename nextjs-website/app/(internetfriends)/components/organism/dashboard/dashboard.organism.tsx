@@ -3,7 +3,11 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UIEvents } from "../../../../../lib/events/event.system";
-import { generateStamp } from "@/lib/utils/timestamp";
+import {
+  generateStamp,
+  getTimestamp,
+  getIsoTimestamp,
+} from "@/lib/utils/timestamp";
 import styles from "./dashboard.styles.module.scss";
 
 // Define types inline to avoid module resolution issues
@@ -125,7 +129,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
         id: "1",
         type: "user_login",
         message: "New user registration from San Francisco",
-        timestamp: generateStamp()(getIsoTimestamp()() - 300000).toISOString(), // 5 min ago
+        timestamp: new Date(getTimestamp() - 300000).toISOString(), // 5 min ago
         severity: "info",
         icon: "👋",
       },
@@ -133,7 +137,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
         id: "2",
         type: "system_alert",
         message: "API response time exceeded threshold",
-        timestamp: generateStamp()(getIsoTimestamp()() - 600000).toISOString(), // 10 min ago
+        timestamp: new Date(getTimestamp() - 600000).toISOString(), // 10 min ago
         severity: "warning",
         icon: "⚠️",
       },
@@ -141,7 +145,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
         id: "3",
         type: "deployment",
         message: "Successfully deployed v2.1.0 to production",
-        timestamp: generateStamp()(getIsoTimestamp()() - 900000).toISOString(), // 15 min ago
+        timestamp: new Date(getTimestamp() - 900000).toISOString(), // 15 min ago
         severity: "success",
         icon: "🚀",
       },
@@ -149,7 +153,7 @@ export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
         id: "4",
         type: "compute_job",
         message: "Background data processing completed",
-        timestamp: generateStamp()(getIsoTimestamp()() - 1200000).toISOString(), // 20 min ago
+        timestamp: new Date(getTimestamp() - 1200000).toISOString(), // 20 min ago
         severity: "info",
         icon: "💾",
       },

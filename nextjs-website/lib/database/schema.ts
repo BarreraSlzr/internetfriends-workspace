@@ -21,14 +21,14 @@ export interface ComponentQualityTable {
   quality_score: number;
   max_possible_score: number;
   optimization_status: "pending" | "in_progress" | "completed" | "failed";
-  last_analyzed: ColumnType<Date, never, never>;
+  last_analyzed: ColumnType<Date, string | Date, string | Date>;
   created_at: ColumnType<Date, never, never>;
-  updated_at: ColumnType<Date, never, string | undefined>;
+  updated_at: ColumnType<Date, never, string | Date | undefined>;
 }
 
 export interface OptimizationRunsTable {
   id: Generated<string>;
-  run_timestamp: ColumnType<Date, never, never>;
+  run_timestamp: ColumnType<Date, string | Date, string | Date>;
   total_components: number;
   components_optimized: number;
   average_score_before: number;
@@ -54,7 +54,7 @@ export interface QualityMetricsTable {
   metric_value: number;
   max_value: number;
   details: string | null;
-  measured_at: ColumnType<Date, never, never>;
+  measured_at: ColumnType<Date, string | Date, string | Date>;
   created_at: ColumnType<Date, never, never>;
 }
 

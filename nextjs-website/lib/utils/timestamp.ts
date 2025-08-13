@@ -12,6 +12,14 @@ export function getIsoTimestamp(): string {
 }
 
 /**
+ * Get current timestamp as number (milliseconds since epoch)
+ * @returns Timestamp as number for calculations
+ */
+export function getTimestamp(): number {
+  return Date.now();
+}
+
+/**
  * Generate compact timestamp stamp for IDs and tracking
  * Format: YYYYMMDDHHMMSSXXX (17 chars)
  * @returns Compact timestamp string suitable for IDs
