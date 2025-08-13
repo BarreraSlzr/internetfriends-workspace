@@ -1,0 +1,44 @@
+%%
+%% id: analysis-sequence
+%% title: OpenCode Helper Analysis Flow Sequence
+%% createdAt: USE getIsoTimestamp() VIA CODE, NOT MANUAL DATE
+%% stamp: generate with generateStamp()
+%% description: Step-by-step sequence of component analysis from invocation to aggregate output
+%%
+sequenceDiagram
+    participant CLI as CLI Args Parser
+    participant Helper as OpenCodeHelper
+    participant FS as File System
+    participant Emitter as EventEmitter
+    participant Console as Console Output
+    
+    CLI->>Helper: quickValidate(params)
+    Helper->>Helper: generateStamp() -> runId
+    Helper->>FS: findComponentFiles('.')
+    FS-->>Helper: string[] filePaths
+    
+    loop For Each Component File
+        Helper->>FS: Bun.file(filePath).text()
+        FS-->>Helper: component source code
+        Helper->>Helper: analyzeComponent(params)
+        
+        Helper->>Helper: extract Props interface
+        Helper->>Helper: calculate score (100 baseline)
+        Helper->>Helper: apply deductions & suggestions
+        
+        opt Events Enabled
+            Helper->>Emitter: emit(AnalysisEvent)
+            Emitter->>Console: [EVENT] analysis: name score=X
+        end
+        
+        Helper->>Console: printAnalysis(analysis, progress)
+    end
+    
+    Helper->>Helper: buildAggregate(params)
+    Helper->>Console: printAggregateSummary(report)
+    
+    opt JSON Mode
+        Helper->>Console: JSON_REPORT + JSON.stringify(report)
+    end
+    
+    Helper-->>CLI: void | AggregateReport
