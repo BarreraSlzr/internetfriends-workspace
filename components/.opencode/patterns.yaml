@@ -1,0 +1,58 @@
+# Steadiest Addressability Patterns for InternetFriends Components
+
+patterns:
+  # Component interface naming
+  - "Props$": 
+    description: "Component prop interfaces"
+    example: "NavigationProps, ButtonProps"
+    
+  - ".molecular.tsx$":
+    description: "Molecular design components"
+    example: "navigation.molecular.tsx"
+    
+  - ".atomic.tsx$":
+    description: "Atomic design components"  
+    example: "button.atomic.tsx"
+
+# AI Orchestration Rules
+ai_orchestration:
+  max_props: 8
+  banned_patterns:
+    - "Strategy"
+    - "Config"
+    - "Options"
+    - regex: '\w+\d+$'  # e.g., color1, speed2
+  
+  productive_defaults:
+    - variant: "primary"
+    - theme: "auto"
+    - disabled: false
+    - className: ""
+    
+  required_patterns:
+    - generateStamp: "utils/stamp"
+    - getIsoTimestamp: "utils/stamp"
+    
+  component_structure:
+    - "Early disabled return"
+    - "Stable config with useMemo"
+    - "Client/server boundary with useEffect"
+    - "Theme-aware CSS classes"
+    - "Priority-based rendering"
+
+# OpenCode Session Helpers
+opencode_helpers:
+  search_patterns:
+    - "interface.*Props"
+    - "React.FC<"
+    - "generateStamp"
+    - "data-testid"
+  
+  validation_commands:
+    - "bun run typecheck"
+    - "bun scripts/validate-steadiest-api.ts"
+    
+  file_patterns:
+    components: "**/*.{atomic,molecular,organisms}.tsx"
+    types: "**/types.ts"
+    utils: "**/utils/**"

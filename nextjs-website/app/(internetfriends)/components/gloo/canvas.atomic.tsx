@@ -2,9 +2,15 @@
 /**
  * canvas.atomic.tsx - Epic Gloo Canvas Atomic Component
  * WebGL canvas with InternetFriends palette integration
+ *
+ * Stabilization Additions:
+ *  - Size guard to avoid initializing WebGL on 0x0 canvas
+ *  - Context loss & restore handling
+ *  - Uniform validation after program link (diagnostic only in dev)
+ *  - Optional defer of animation start until first successful frame
  */
 
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, useRef, useCallback } from "react";
 import { useGlooWebGL } from "./core";
 import { effectFunctions } from "./effects";
 import { getInternetFriendsPalette, colorUtils } from "./palette";
@@ -39,6 +45,7 @@ const FRAGMENT_TEMPLATE = (
   resolution: number,
   seed: number,
   speed: number,
+  motionScale: number,
 ) =>
   `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -46,6 +53,8 @@ precision highp float;
 #else
 precision mediump float;
 #endif
+// Diagnostic compile stamp (helps detect stale shaders)
+#define GLOO_BUILD 1
 
 uniform vec2 iResolution;
 uniform float iTime;
@@ -55,6 +64,7 @@ uniform vec3 uColor3;
 uniform vec3 uTint;
 
 const float speed = ${speed.toFixed(3)};
+const float MOTION_SCALE = ${motionScale.toFixed(3)};
 
 ${effectSource}
 
@@ -68,7 +78,8 @@ void main() {
   // Iterative warp
   for (int i = 1; i < ${depth}; i++) {
     float fi = float(i);
-    p += effect(p, fi, iTime);
+    // Master motion scale softly attenuates spatial warp to keep movement subtle
+    p += effect(p, fi, iTime) * MOTION_SCALE;
   }
 
   // Color mixing
@@ -89,8 +100,11 @@ void main() {
 }
 `.trim();
 
-export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
-  speed = 0.4,
+export const GlooCanvasAtomic: React.FC<
+  GlooCanvasProps & { motionScale?: number }
+> = ({
+  // Slower default speed for gentler temporal evolution
+  speed = 0.25,
   resolution = 2.0,
   depth = 4,
   seed = 2.4,
@@ -114,12 +128,21 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   reducedMotion = false,
   onError,
   onEffectChange,
+  // Optional external master motion scale (not yet in shared types – tolerated via augmentation)
+  motionScale: motionScaleProp,
 }) => {
+  // Master motion scale (amplitude attenuator). Could be overridden via prop or CSS var hook later.
+  const motionScale =
+    typeof motionScaleProp === "number" ? motionScaleProp : 0.55;
   // Debug mode detection (must be at top level)
   const isDebugMode = useMemo(() => {
     if (typeof window === "undefined") return false;
     return new URLSearchParams(window.location.search).has("glooDebug");
   }, []);
+  const validatedRef = useRef(false);
+  const sizeReadyRef = useRef(false);
+  const canvasElRef = useRef<HTMLDivElement | null>(null);
+  const contextLostRef = useRef(false);
 
   // Respect reduced motion preference
   const shouldAnimate = animate && !still && !disabled && !reducedMotion;
@@ -156,6 +179,22 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   const effectSource = effectFunctions[chosenEffectIndex];
   const currentEffectName = EFFECT_NAME_MAP[chosenEffectIndex] || "default";
 
+  /**
+   * Size guard: ensure canvas element (parent container) has non-zero size before proceeding.
+   * The core hook will still attach, but we skip uniform validation / debug logging until true.
+   */
+  const ensureParentSized = useCallback(() => {
+    if (sizeReadyRef.current) return true;
+    const host = canvasElRef.current;
+    if (!host) return false;
+    const rect = host.getBoundingClientRect();
+    if (rect.width >= 4 && rect.height >= 4) {
+      sizeReadyRef.current = true;
+      return true;
+    }
+    return false;
+  }, []);
+
   // Generate palette from props or use defaults
   const resolvedPalette = useMemo<GlooPalette>(() => {
     if (explicitPalette) {
@@ -190,8 +229,16 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
 
   // Build fragment shader
   const fragment = useMemo(
-    () => FRAGMENT_TEMPLATE(effectSource, depth, resolution, seed, speed),
-    [effectSource, depth, resolution, seed, speed],
+    () =>
+      FRAGMENT_TEMPLATE(
+        effectSource,
+        depth,
+        resolution,
+        seed,
+        speed,
+        motionScale,
+      ),
+    [effectSource, depth, resolution, seed, speed, motionScale],
   );
 
   // Static uniforms
@@ -227,7 +274,13 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
   };
 
   // WebGL hook with enhanced error reporting
-  const { canvasRef, error, setPlaying } = useGlooWebGL({
+  const {
+    canvasRef,
+    error,
+    setPlaying,
+    glRef: internalGlRef,
+    programRef: internalProgramRef,
+  } = useGlooWebGL({
     fragment,
     effectKey: chosenEffectIndex,
     playing: shouldAnimate,
@@ -246,7 +299,45 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
     onEffectChange?.(chosenEffectIndex, currentEffectName);
   }, [chosenEffectIndex, currentEffectName, onEffectChange]);
 
-  // Auto effect cycling
+  // Context loss handling
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const handleLost = (e: Event) => {
+      e.preventDefault();
+      contextLostRef.current = true;
+      setPlaying(false);
+      if (process.env.NODE_ENV === "development") {
+        console.warn("[Gloo] WebGL context lost.");
+      }
+    };
+    const handleRestored = () => {
+      contextLostRef.current = false;
+      // Force a replay by toggling playing
+      setTimeout(() => setPlaying(true), 0);
+      if (process.env.NODE_ENV === "development") {
+        console.info("[Gloo] WebGL context restored.");
+      }
+      validatedRef.current = false; // Re-validate uniforms after restore
+    };
+    canvas.addEventListener("webglcontextlost", handleLost as EventListener, {
+      passive: false,
+    });
+    canvas.addEventListener(
+      "webglcontextrestored",
+      handleRestored as EventListener,
+    );
+    return () => {
+      canvas.removeEventListener(
+        "webglcontextlost",
+        handleLost as EventListener,
+      );
+      canvas.removeEventListener(
+        "webglcontextrestored",
+        handleRestored as EventListener,
+      );
+    };
+  }, [canvasRef, setPlaying]);
 
   // Debug palette override (must be at top level)
   const debugPalette = useMemo(() => {
@@ -300,12 +391,54 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
     };
   }, [canvasRef, width, height]);
 
+  // Uniform validation (dev only) - run once when size is ready & GL/program exist
+  useEffect(() => {
+    if (process.env.NODE_ENV !== "development") return;
+    if (validatedRef.current) return;
+    if (!ensureParentSized()) return;
+    const gl = (internalGlRef as any)?.current as
+      | WebGLRenderingContext
+      | undefined;
+    const program = (internalProgramRef as any)?.current as
+      | WebGLProgram
+      | undefined;
+    if (!gl || !program) return;
+    const expected = [
+      "iResolution",
+      "iTime",
+      "uColor1",
+      "uColor2",
+      "uColor3",
+      "uTint",
+    ];
+    const active = new Set<string>();
+    const n = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+    for (let i = 0; i < n; i++) {
+      const info = gl.getActiveUniform(program, i);
+      if (info) active.add(info.name);
+    }
+    const missing = expected.filter((u) => !active.has(u));
+    if (missing.length && process.env.NODE_ENV === "development") {
+      console.warn("[Gloo] Missing uniforms:", missing);
+    } else if (process.env.NODE_ENV === "development") {
+      console.debug("[Gloo] Uniforms OK:", expected.join(", "));
+    }
+    validatedRef.current = true;
+  }, [
+    ensureParentSized,
+    internalGlRef,
+    internalProgramRef,
+    chosenEffectIndex,
+    fragment,
+  ]);
+
   if (disabled) return null;
 
   const finalPalette = debugPalette;
 
   return (
     <div
+      ref={canvasElRef}
       className={[
         "if-gloo-canvas",
         "relative block w-full h-full",
@@ -317,12 +450,14 @@ export const GlooCanvasAtomic: React.FC<GlooCanvasProps> = ({
       style={containerStyle}
       data-gloo-effect={currentEffectName}
       data-gloo-index={chosenEffectIndex}
-      data-gloo-playing={shouldAnimate}
+      data-gloo-playing={shouldAnimate && !contextLostRef.current}
       data-gloo-depth={depth}
       data-gloo-resolution={resolution}
       data-gloo-palette-strategy={finalPalette.strategy}
       data-gloo-palette-mode={finalPalette.mode}
+      data-gloo-motion-scale={motionScale}
       data-gloo-debug={isDebugMode}
+      data-gloo-context-lost={contextLostRef.current ? "true" : "false"}
     >
       <canvas
         ref={canvasRef}

@@ -11,59 +11,52 @@
   width: 100%;
   min-height: var(--header-height, 4rem);
 
-  // Simple orb effect - scale + margin transitions
-  transition:
-    transform 500ms ease-out,
-    margin 500ms ease-out,
-    border-radius 300ms ease-out;
+  // Refined orbital motion - controlled by CSS custom properties
+  will-change: transform;
+  transform-origin: center center;
 
-  &[data-orb-active="true"] {
-    will-change: transform, margin, border-radius;
+  // CSS custom property integration
+  transform: translate3d(var(--orbit-x, 0px), var(--orbit-y, 0px), 0)
+    scale(var(--orbit-scale, 1));
+
+  // Smooth transitions for non-orbital properties
+  transition:
+    box-shadow 250ms ease-out,
+    background-color 250ms ease-out,
+    border-color 200ms ease-out;
+
+  // Orbital motion active state
+  &[data-orbit-active="true"] {
+    will-change: transform, box-shadow, background-color;
   }
 
-  // Reduced motion support
+  // Reduced motion support - disable orbital motion
   @media (prefers-reduced-motion: reduce) {
-    transition: none;
+    transform: scale(var(--orbit-scale, 1)) !important;
+    transition: none !important;
 
-    &[data-orb-active="true"] {
-      transform: scale(0.85) !important; // Subtle scale only
-      margin-left: 0 !important;
-      margin-right: 0 !important;
+    &[data-orbit-active="true"] {
+      will-change: auto !important;
     }
   }
 
   // Glass morphism integration
   &.glass {
     background: var(--glass-bg-header);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px); // Subtle default blur
     border-bottom: 1px solid var(--glass-border);
-
-    // Enhanced glass effect when sticky
-    &.sticky {
-      background: var(--glass-bg-header-scrolled);
-      border-bottom-color: var(--glass-border-enhanced);
-      box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
-    }
   }
 
   // Solid variant
   &.solid {
     background: var(--color-bg-primary);
     border-bottom: 1px solid var(--color-border-primary);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   }
 
   // Transparent variant
   &.transparent {
     background: transparent;
     border-bottom: 1px solid transparent;
-
-    // Become glass when sticky
-    &.sticky {
-      background: var(--glass-bg-header);
-      backdrop-filter: blur(12px);
-      border-bottom-color: var(--glass-border);
-    }
   }
 
   // Size variants
@@ -79,11 +72,35 @@
     --header-height: 5rem; // 80px
   }
 
-  // Sticky behavior
+  // Sticky behavior with orbital integration
   &.sticky {
     position: sticky;
     top: 0;
     z-index: 40;
+  }
+
+  // --- Scrolled State Enhancements ---
+  // This is the "lifted" state when the user scrolls.
+  &[data-scrolled="true"] {
+    // "Coin of Value" shadow system
+    box-shadow:
+      0 0 0 1px var(--glass-border-outset),
+      // Subtle blue outset border
+      0 4px 12px -2px rgba(0, 0, 0, 0.08),
+      // Soft shadow
+      0 2px 8px -4px rgba(0, 0, 0, 0.05); // Deeper shadow
+
+    // Handle variants in their scrolled state
+    &.glass,
+    &.transparent {
+      background: var(--glass-bg-header-scrolled);
+      backdrop-filter: blur(16px); // Increase blur for more depth
+      border-bottom-color: var(--glass-border-enhanced);
+    }
+
+    &.solid {
+      border-bottom-color: var(--color-border-secondary);
+    }
   }
 
   // Hidden state (scroll behavior)

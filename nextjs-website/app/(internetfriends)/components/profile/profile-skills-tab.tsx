@@ -1,5 +1,5 @@
 import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
-import { Badge } from "@/components/ui/badge";
+import { GlassBadge } from "@/components/ui/glass-badge";
 import { cardCss } from "./profile-card";
 
 const ProfileSkillsTab = () => {
@@ -12,12 +12,9 @@ const ProfileSkillsTab = () => {
         {curriculum.skills
           .sort((a, b) => b.popularity - a.popularity)
           .map((skill, index) => (
-            <Badge
-              key={`skill-${index}`}
-              className="glass-stack glass-noise-overlay glass-layer-3 border-accent-medium text-foreground hover:border-accent-strong"
-            >
+            <GlassBadge key={`skill-${index}`} variant="default">
               {skill?.name}
-            </Badge>
+            </GlassBadge>
           ))}
       </div>
     </div>

@@ -1,8 +1,123 @@
-# InternetFriends Project Architecture
+# InternetFriends Project Architecture & Evolution Plan
 
 ## Overview
 
 This Next.js 15.2.4 project follows atomic design principles integrated with shadcn/ui components, using the InternetFriends design system with snake_case.dots naming convention.
+
+**Vision**: We are building a robust, scalable system using a hybrid cloud model, leveraging the best services for each layer of the application. This document outlines both the current state and the planned evolution of our architecture.
+
+## Master State Machine: From Monolith to Hybrid Cloud
+
+Our approach is visualized as a state machine, showing the progression from our initial setup to a full-scale, high-performance system.
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    
+    [*] --> Phase1: Initial Deployment
+    
+    state Phase1 {
+        direction TB
+        state "Vercel-Native Architecture" as VNA
+        [*] --> Frontend_Vercel
+        Frontend_Vercel --> Serverless_Functions: API routes
+        Serverless_Functions --> Managed_DB: Neon/PlanetScale
+        
+        note right of VNA
+            ✅ Current State
+            - Next.js on Vercel
+            - API routes as serverless functions
+            - External managed database
+        end note
+    }
+    
+    Phase1 --> Phase2: Need for background jobs & persistent connections
+    
+    state Phase2 {
+        direction TB
+        state "Hybrid Cloud Architecture" as HCA
+        [*] --> Vercel_Frontend
+        Vercel_Frontend --> Hetzner_Compute: Core API
+        Hetzner_Compute --> Managed_DB
+        
+        note right of HCA
+            🚧 Planned
+            - Frontend stays on Vercel
+            - Backend services on Hetzner
+            - Dockerized microservices
+        end note
+    }
+    
+    Phase2 --> Phase3: Need for specialized GPU/AI compute
+    
+    state Phase3 {
+        direction TB
+        state "Full Hybrid with AI Gateway" as FHAG
+        [*] --> Vercel_Frontend
+        Vercel_Frontend --> Vercel_AI_Gateway: AI requests
+        Vercel_AI_Gateway --> Replicate_GPU: Heavy AI tasks
+        Vercel_Frontend --> Hetzner_Compute: Core API
+        Hetzner_Compute --> Managed_DB
+        
+        note right of FHAG
+            🎯 Future
+            - AI Gateway for ML inference
+            - GPU compute on demand
+            - Multi-cloud orchestration
+        end note
+    }
+    
+    Phase3 --> [*]
+```
+
+## Current Implementation Map
+
+The following table shows how our existing components map to the hybrid architecture:
+
+| Component/Directory | Current State | Phase 1 (Vercel) | Phase 2 (Hybrid) | Phase 3 (AI Gateway) |
+|---------------------|---------------|-------------------|-------------------|----------------------|
+| `app/(internetfriends)/` | ✅ Implemented | Vercel Edge | Vercel Edge | Vercel Edge |
+| `components/organisms/header/` | ✅ Implemented | Client-side React | Client-side React | Client-side React + AI features |
+| `app/api/user/profile/` | ✅ Implemented | Serverless Function | Proxy to Hetzner | Proxy to Hetzner |
+| `app/api/settings/` | ✅ Implemented | Serverless Function | Proxy to Hetzner | Proxy to Hetzner |
+| `app/api/ai/` | ✅ Mock | Serverless Function | Hetzner Service | AI Gateway → Replicate |
+| `services/` | 📋 Planned | N/A | Docker containers | Docker containers + AI |
+| `infra/` | 📋 Planned | N/A | Terraform/Pulumi | Multi-cloud IaC |
+
+## Development Workflow Evolution
+
+```mermaid
+stateDiagram-v2
+    direction TB
+    
+    state "Development Cockpit (tmux)" as DevCockpit {
+        [*] --> frontend_session: Local Next.js dev
+        [*] --> api_mock_session: API development
+        [*] --> db_tunnel_session: Database connection
+        
+        frontend_session --> hot_reload: File changes
+        api_mock_session --> test_endpoints: API testing
+        db_tunnel_session --> secure_connection: SSH tunnel
+    }
+    
+    DevCockpit --> Phase1_Deploy: Vercel deployment
+    
+    state Phase1_Deploy {
+        [*] --> vercel_build: Build & deploy
+        vercel_build --> edge_distribution: Global CDN
+        edge_distribution --> serverless_runtime: Function execution
+    }
+    
+    Phase1_Deploy --> Phase2_Deploy: Hybrid deployment
+    
+    state Phase2_Deploy {
+        [*] --> vercel_frontend: Frontend to Vercel
+        [*] --> hetzner_backend: Backend to Hetzner
+        vercel_frontend --> docker_services: API calls
+        hetzner_backend --> docker_services
+        docker_services --> managed_db: Database queries
+    }
+```
 
 ## Project Structure
 
@@ -270,4 +385,52 @@ import { cn } from "@/lib/utils/cn";
 - Image optimization
 - Bundle size monitoring
 
-This architecture promotes maintainability, scalability, and consistent developer experience while integrating seamlessly with shadcn/ui components.
+## Focus Session Roadmap
+
+This documentation is structured to guide our deep-dive development sessions:
+
+### 🎯 Session 1: Frontend Layer Deep-Dive
+**Location**: `app/` directory
+- Connect existing components to API endpoints
+- Implement real data fetching patterns
+- Optimize for performance and UX
+
+### 🎯 Session 2: API Evolution Strategy  
+**Location**: `app/api/` directory
+- Transition from mock to real database connections
+- Plan serverless → dedicated compute migration
+- Design API versioning strategy
+
+### 🎯 Session 3: Services Architecture
+**Location**: `services/` directory (to be created)
+- Design microservices for Hetzner deployment
+- Plan Docker containerization
+- Define inter-service communication patterns
+
+### 🎯 Session 4: Infrastructure as Code
+**Location**: `infra/` directory (to be created)
+- Design hybrid cloud infrastructure
+- Plan deployment automation
+- Implement monitoring and observability
+
+### 🎯 Session 5: AI Integration Strategy
+**Location**: `app/api/ai/` and future AI components
+- Design AI Gateway integration
+- Plan GPU compute utilization
+- Implement AI-powered features
+
+## Epic Integration
+
+Each development phase aligns with our epic-based workflow:
+
+- **Epic: Foundation** → Phase 1 completion
+- **Epic: Scale** → Phase 2 migration  
+- **Epic: Intelligence** → Phase 3 AI integration
+
+Use epic tools to track progress:
+```bash
+./scripts/epic-tools/epic start foundation --timeline="4-6 weeks" --goal="Complete Phase 1 architecture"
+./scripts/epic-tools/epic dashboard
+```
+
+This architecture promotes maintainability, scalability, and consistent developer experience while providing a clear path from current implementation to enterprise-scale hybrid cloud deployment.

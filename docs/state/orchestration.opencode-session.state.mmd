@@ -1,0 +1,29 @@
+%%
+%% id: opencode-session
+%% title: OpenCode Session Helper State Machine
+%% createdAt: USE getIsoTimestamp() VIA CODE, NOT MANUAL DATE
+%% stamp: generate with generateStamp()
+%% description: Lifecycle of an OpenCode helper validation + aggregation run
+%%
+stateDiagram-v2
+    [*] --> Initialized: helper invoked
+    Initialized --> Scanning: locate component files
+    Scanning --> Analyzing: for each component (progress events planned)
+    Analyzing --> Aggregating: build aggregate report (scores, issues)
+    Aggregating --> EmittingJSON: optional JSON output (--json flag)
+    Aggregating --> Completed: no JSON flag
+    EmittingJSON --> Completed
+    Completed --> [*]
+
+    state Analyzing {
+        [*] --> LoadSource
+        LoadSource --> ParseProps
+        ParseProps --> Score
+        Score --> NextComponent
+        NextComponent --> LoadSource: more components
+        NextComponent --> [*]: done
+    }
+
+    note right of Score
+      Scoring Rules (initial set):\n      - Props >8: -10 ea\n      - Missing disabled: -10\n      - Missing testid: -5\n      - Missing stamp: -10\n      - Missing ISO timestamp: -5\n      - Raw Date usage: -15\n      - Banned patterns: -20 ea
+    end note

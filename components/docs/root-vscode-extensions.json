@@ -1,0 +1,21 @@
+{
+    // ADDRESSABILITY EXTENSIONS - Workspace Root Authoritative Configuration
+    // This file should be copied to workspace root .vscode/extensions.json
+    "recommendations": [
+        "github.copilot",
+        "github.copilot-chat",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "streetsidesoftware.code-spell-checker",
+        "bierner.markdown-preview-github-styles",
+        "usernamehw.errorlens",
+        "Gruntfuggly.todo-tree",
+        "yoavbls.pretty-ts-errors",
+        "orta.vscode-jest",
+        "ms-playwright.playwright",
+        "editorconfig.editorconfig"
+    ],
+    "unwantedRecommendations": [
+        "formulahendry.auto-close-tag"
+    ]
+}

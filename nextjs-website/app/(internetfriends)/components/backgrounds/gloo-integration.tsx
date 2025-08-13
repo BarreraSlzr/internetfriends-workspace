@@ -6,14 +6,15 @@ import React, {
   useMemo,
   useRef,
   useId,
-  CSSProperties,
   useCallback,
+  ReactNode,
   ElementType,
   Suspense,
   lazy,
+  CSSProperties,
 } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useTheme } from "@/hooks/use-theme";
+import { useTheme } from "../../../../hooks/use-theme";
 import { getAdaptiveGooColorTuples } from "../../lib/color-palette";
 import { effectFunctions } from "./gloo-effects";
 
@@ -156,13 +157,17 @@ function detectRenderCapabilities(): RenderCapabilities {
  * Lazy-loaded Renderer Components
  * ----------------------------------------------------- */
 
-const WebGLGloo = lazy(() => import("./renderers/webgl-gloo").catch(() => ({
-  default: () => <div data-gloo-error="webgl-load-failed" />
-})));
+const WebGLGloo = lazy(() =>
+  import("./renderers/webgl-gloo").catch(() => ({
+    default: () => <div data-gloo-error="webgl-load-failed" />,
+  })),
+);
 
-const CanvasGloo = lazy(() => import("./renderers/canvas-gloo").catch(() => ({
-  default: () => <div data-gloo-error="canvas-load-failed" />
-})));
+const CanvasGloo = lazy(() =>
+  import("./renderers/canvas-gloo").catch(() => ({
+    default: () => <div data-gloo-error="canvas-load-failed" />,
+  })),
+);
 
 // Use simplified BgGooSimple as fallback renderer
 import { BgGooSimple } from "./gloo-simple";
@@ -186,17 +191,25 @@ function useGlooPerformance(enabled: boolean, renderMode: string) {
     animationActive: false,
   });
 
-  const measureFrame = useCallback((startTime: number, endTime: number) => {
-    if (!enabled) return;
+  const measureFrame = useCallback(
+    (startTime: number, endTime: number) => {
+      if (!enabled) return;
 
-    metricsRef.current.frameTime = endTime - startTime;
-    metricsRef.current.renderMode = renderMode;
+      metricsRef.current.frameTime = endTime - startTime;
+      metricsRef.current.renderMode = renderMode;
 
-    // Log performance warnings in development
-    if (process.env.NODE_ENV === "development" && metricsRef.current.frameTime > 16) {
-      console.warn(`[GlooIntegration] Slow frame detected: ${metricsRef.current.frameTime.toFixed(2)}ms in ${renderMode} mode`);
-    }
-  }, [enabled, renderMode]);
+      // Log performance warnings in development
+      if (
+        process.env.NODE_ENV === "development" &&
+        metricsRef.current.frameTime > 16
+      ) {
+        console.warn(
+          `[GlooIntegration] Slow frame detected: ${metricsRef.current.frameTime.toFixed(2)}ms in ${renderMode} mode`,
+        );
+      }
+    },
+    [enabled, renderMode],
+  );
 
   return { metrics: metricsRef.current, measureFrame };
 }
@@ -208,3 +221,18 @@ function useGlooPerformance(enabled: boolean, renderMode: string) {
 function selectOptimalRenderMode(
   requestedMode: GooRenderMode,
   capabilities: RenderCapabilities,
+): GooRenderMode {
+  // If WebGL2 is not available, fall back to Canvas
+  if (!capabilities.webgl2) {
+    return "canvas";
+  }
+
+  // If high performance mode is requested but device doesn't support it
+  // For now, return the requested mode as capabilities checking is not implemented
+  if (requestedMode === "webgl" && !capabilities.webgl2) {
+    return "canvas";
+  }
+
+  // Return requested mode if supported
+  return requestedMode;
+}
