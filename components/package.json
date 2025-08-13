@@ -1,0 +1,30 @@
+{
+  "name": "internetfriends-components",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Steadiest addressability component library (glass-refinement-v1 epic)",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "echo 'Development of isolated components - integrate with production-landing app'",
+    "delegate:opencode": "bun scripts/opencode-delegate.ts --json",
+    "scan:diagrams": "bun scripts/scan-diagrams.ts",
+    "validate:helper": "bun .opencode/helper.ts --events --all",
+    "test": "bun test tests/",
+    "test:watch": "bun test --watch tests/"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}

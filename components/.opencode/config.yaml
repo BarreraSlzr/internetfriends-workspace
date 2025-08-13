@@ -1,0 +1,37 @@
+# InternetFriends Components - AI Orchestration Config
+# Based on steadiest-addressability-v1 epic patterns
+
+search_shortcuts:
+  props: "interface.*Props"
+  components: "React.FC<"
+  stamps: "generateStamp|getIsoTimestamp"
+  tests: "data-testid"
+  disabled: "if.*disabled.*return null"
+
+quick_validations:
+  typecheck: "bun run typecheck"
+  steadiest: "bun /Users/emmanuelbarrera/Projects/InternetFriends/zed_workspace/scripts/validate-steadiest-api.ts --component={{component_name}}"
+  build: "bun run build"
+
+patterns_to_suggest:
+  - "Early return for disabled state"
+  - "Stable config with React.useMemo"
+  - "Client-only features with useEffect"
+  - "Priority-based item sorting"
+  - "Theme-aware CSS class generation"
+  - "Stamp-based unique IDs"
+  - "Data attributes for testing and config"
+
+common_fixes:
+  too_many_props: "Consider grouping related props or using productive defaults"
+  missing_disabled: "Add disabled prop with early return pattern"
+  missing_testid: "Add data-testid prop for better testability"
+  raw_timestamps: "Replace raw Date with getIsoTimestamp() and generateStamp()"
+  complex_config: "Flatten config objects into direct props (max 8 total)"
+
+addressability_score_factors:
+  - "Props count (≤8 recommended)"
+  - "Productive defaults usage"
+  - "Banned pattern avoidance"
+  - "Required props minimization"
+  - "Type complexity reduction"

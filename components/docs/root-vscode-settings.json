@@ -1,0 +1,97 @@
+{
+    // ADDRESSABILITY SETTINGS - Workspace Root Authoritative Configuration
+    // Core Goals: centralize settings, avoid drift, enforce ≤8 props, canonical timestamps
+    // This file should be copied to workspace root .vscode/settings.json
+    
+    // Inline suggestions & AI orchestration
+    "editor.inlineSuggest.enabled": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.fixAll": "explicit",
+        "source.fixAll.eslint": "explicit"
+    },
+    
+    // Copilot configuration - enforcing maxCompletions=3 for addressability
+    "github.copilot.editor.enableAutoCompletions": true,
+    "github.copilot.inlineChat.enabled": true,
+    "github.copilot.maxCompletions": 3,
+    "github.copilot.suggestionDisplay": "multiline",
+    "github.copilot.advanced": {
+        "debug.testGeneration": false
+    },
+    
+    // TypeScript inlay hints and import preferences
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+    "typescript.suggestionActions.enabled": true,
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.inlayHints.parameterNames.enabled": "literals",
+    "typescript.inlayHints.parameterTypes.enabled": true,
+    "typescript.inlayHints.variableTypes.enabled": true,
+    "typescript.inlayHints.enumMemberValues.enabled": false,
+    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
+    "typescript.tsserver.useSeparateSyntaxServer": true,
+    
+    // Search & watcher excludes - performance optimization
+    "search.useIgnoreFiles": true,
+    "search.followSymlinks": true,
+    "search.exclude": {
+        "**/dist": true,
+        "**/node_modules": true,
+        "**/.next": true,
+        "**/.turbo": true,
+        "**/coverage": true,
+        "**/playwright-report": true,
+        "**/test-results": true
+    },
+    "files.watcherExclude": {
+        "**/dist/**": true,
+        "**/node_modules/**": true,
+        "**/.next/**": true,
+        "**/.turbo/**": true,
+        "**/coverage/**": true,
+        "**/playwright-report/**": true,
+        "**/test-results/**": true
+    },
+    
+    // TODO tree tags for addressability tracking
+    "todo-tree.general.tags": [
+        "TODO",
+        "FIXME",
+        "ADDRESSABILITY"
+    ],
+    "todo-tree.highlights.customHighlight": {
+        "ADDRESSABILITY": {
+            "icon": "organization",
+            "type": "tag",
+            "foreground": "#ffffff",
+            "background": "#264653"
+        }
+    },
+    
+    // File hygiene
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    
+    // Problem visibility
+    "problems.showCurrentInStatus": true,
+    "problems.sortOrder": "severity",
+    
+    // Editor preferences for productivity
+    "workbench.list.smoothScrolling": true,
+    "workbench.editor.enablePreview": true,
+    "breadcrumbs.enabled": true,
+    "editor.linkedEditing": true,
+    "editor.inlayHints.enabled": "on",
+    "editor.hover.delay": 200,
+    "editor.suggest.localityBonus": true,
+    "editor.suggest.shareSuggestSelections": true,
+    "editor.suggest.preview": true,
+    "editor.quickSuggestions": {
+        "strings": false
+    },
+    
+    // Terminal configuration
+    "terminal.integrated.defaultProfile.osx": "zsh"
+}
