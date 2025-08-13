@@ -6,14 +6,15 @@ import React, {
   useMemo,
   useRef,
   useId,
-  CSSProperties,
   useCallback,
+  ReactNode,
   ElementType,
   Suspense,
   lazy,
+  CSSProperties,
 } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useTheme } from "@/hooks/use-theme";
+import { useTheme } from "../../../../hooks/use-theme";
 import { getAdaptiveGooColorTuples } from "../../lib/color-palette";
 import { effectFunctions } from "./gloo-effects";
 
@@ -227,8 +228,9 @@ function selectOptimalRenderMode(
   }
 
   // If high performance mode is requested but device doesn't support it
-  if (requestedMode === "webgl-high" && !capabilities.highPerformance) {
-    return "webgl-standard";
+  // For now, return the requested mode as capabilities checking is not implemented
+  if (requestedMode === "webgl" && !capabilities.webgl2) {
+    return "canvas";
   }
 
   // Return requested mode if supported

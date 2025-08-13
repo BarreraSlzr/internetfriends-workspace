@@ -27,10 +27,10 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { useTheme } from "@/hooks/use-theme";
+import { useTheme } from "../../../../hooks/use-theme";
 import { ClientOnly } from "../../patterns/boundary-patterns";
 import { GlooCanvasAtomic } from "../gloo/canvas.atomic";
-import { effectFunctions } from "../gloo/effects";
+import { effectFunctions } from "./gloo-effects";
 import type { GlooPalette } from "../gloo/types";
 
 // Steadiest Component Interface - MAXIMUM 5 props
@@ -91,9 +91,10 @@ export const GlooIntegrationSimple: React.FC<GlooIntegrationSimpleProps> = ({
     !/Chrome/.test(navigator.userAgent);
 
   // Once-on-mount effect selection (key steadiest addressability pattern)
-  const [selectedEffect] = useState(() =>
-    Math.floor(Math.random() * effectFunctions.length),
-  );
+  const [selectedEffect] = useState(() => {
+    const effectNames = Object.keys(effectFunctions);
+    return Math.floor(Math.random() * effectNames.length);
+  });
 
   // Respect accessibility preferences
   const [motionEnabled, setMotionEnabled] = useState(true);
@@ -132,7 +133,7 @@ export const GlooIntegrationSimple: React.FC<GlooIntegrationSimpleProps> = ({
   return (
     <ClientOnly
       config={{
-        fallback: null,
+        fallback: <div data-gloo-loading="true" />,
         debug: process.env.NODE_ENV === "development",
       }}
     >
