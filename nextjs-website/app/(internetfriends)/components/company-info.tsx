@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import content from "../content.json";
 import { Availability } from "./availability";
 

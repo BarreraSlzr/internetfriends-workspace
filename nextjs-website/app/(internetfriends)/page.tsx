@@ -2,12 +2,11 @@ import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { CustomCard } from "@/app/(internetfriends)/components/custom-card";
 import CompanyInfo from "@/app/(internetfriends)/components/company-info";
-import Header from "@/app/(internetfriends)/components/header";
+import HeaderSimple from "@/app/(internetfriends)/components/header-simple";
 import HeroText from "@/app/(internetfriends)/components/hero-text";
 import Navigation from "@/app/(internetfriends)/components/navigation";
 import SocialLinks from "@/app/(internetfriends)/components/social-links";
 import { EmailSubscriptionForm } from "@/app/(internetfriends)/components/email-subscription-form";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
 
 // Force dynamic rendering to bypass SSR hook issues
 export const dynamic = "force-dynamic";
@@ -100,18 +99,12 @@ export default function Page() {
 
   return (
     <main className="pb-12">
-      <Header />
-      <HeroText useGloo={true} backgroundStrategy="gloo-hero" />
+      <HeaderSimple />
+      <HeroText useGloo={false} backgroundStrategy="simple" />
       <CompanyInfo />
       <Navigation />
       <SocialLinks />
-      <GlassRefinedAtomic
-        variant="card"
-        strength={0.35}
-        noise={false}
-        hover={true}
-        className="sm:p-6 p-2 md:p-8 space-y-6 py-6 rounded-b-lg border-accent-medium"
-      >
+      <div className="card sm:p-6 p-2 md:p-8 space-y-6 py-6">
         <div className="grid md:grid-cols-2 gap-6">
           {mainIdeas.map((i) => (
             <Link
@@ -148,7 +141,7 @@ export default function Page() {
             </EmailSubscriptionForm>
           }
         />
-      </GlassRefinedAtomic>
+      </div>
     </main>
   );
 }
