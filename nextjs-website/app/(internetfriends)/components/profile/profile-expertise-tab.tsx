@@ -5,7 +5,7 @@ import { cardCss } from "./profile-card";
 const ProfileExpertiseTab = () => {
   return (
     <div className="flex flex-col gap-2">
-      {curriculum.jobExperiences.map((job, index) => (
+       {(curriculum.jobExperiences || []).map((job, index) => (
         <div key={`experience-${index}`} className={cardCss}>
           <div className="flex flex-row flex-wrap justify-between">
             <p className="font-medium">

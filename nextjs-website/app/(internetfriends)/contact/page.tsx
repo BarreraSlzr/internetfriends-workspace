@@ -1,13 +1,12 @@
 import CompanyInfo from "@/app/(internetfriends)/components/company-info";
-import { HeaderOrganism } from "@/components/organisms/header/header.organism";
-import HeroText from "@/app/(internetfriends)/components/hero-text";
+import { HeaderEngineering } from "@/components/organisms/header/header.engineering";
 import Navigation from "@/app/(internetfriends)/components/navigation";
 import SocialLinks from "@/app/(internetfriends)/components/social-links";
 import content from "@/app/(internetfriends)/content.json";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { ContactForm } from "../components/contact-form";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import { ContactFormEngineering } from "../components/contact-form.engineering";
+import { Suspense } from "react";
 
 /**
  * Contact Page
@@ -28,72 +27,71 @@ const contact = [defaultProject];
 export default function Page() {
   return (
     <main id="main-content">
-      <HeaderOrganism
-        variant="glass"
-        size="md"
-        announcement={{
-          show: false,
+      <HeaderEngineering
+        logo={{
+          text: "InternetFriends",
+          href: "/",
         }}
         navigation={{
-          items: [],
+          items: [
+            { label: "Home", href: "/" },
+            { label: "Samples", href: "/samples" },
+            { label: "Pricing", href: "/pricing" },
+            { label: "Contact", href: "/contact" },
+          ],
         }}
-        themeToggle={{
-          show: true,
-          showLabels: false,
-        }}
-        languageSelector={{
-          show: false,
-        }}
-        skipToMain={true}
+        actions={[
+          { label: "Get Started", href: "/contact", variant: "primary" },
+        ]}
       />
-      <HeroText useGloo={false} backgroundStrategy="flat">
-        <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
-          {content.contact.title}
-        </h1>
 
-        <GlassRefinedAtomic
-          variant="card"
-            /* Slightly stronger glass for the heading block */
-          strength={0.45}
-          noise={false}
-          className="sm:p-6 p-2 py-4 md:p-8 flex flex-col"
-        >
-          <p className="text-lg mb-2 max-w-2xl">
+      <div className="container p-8">
+        <h1 className="heading-1 mb-6">{content.contact.title}</h1>
+
+        <div className="card p-6 mb-6">
+          <p className="body-text mb-4 max-w-2xl">
             {content.contact.description}
           </p>
-        </GlassRefinedAtomic>
+        </div>
 
-        <GlassRefinedAtomic
-          variant="card"
-          strength={0.35}
-          noise={false}
-          className="sm:p-6 p-2 py-4 md:p-8 pt-0 flex flex-col"
-        >
-          {contact.map((c) => (
-            <Link
-              key={c.href}
-              href={c.href}
-              title={c.title}
-              className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-b-2 border-brand-blue-800 text-brand-blue-100"
+        <div className="card p-6">
+          <div className="mb-6">
+            <p className="body-text mb-4">
+              Share Your Vision and Watch It Come to Life!
+            </p>
+            <Suspense
+              fallback={
+                <div className="text-small">Loading contact form...</div>
+              }
             >
-              <span className="flex-grow">{c.description}</span>
-              <span className="flex flex-row items-center text-right">
-                {c.title}
-                <ArrowUpRight className="h-4 w-4 rotate" />
-              </span>
-            </Link>
-          ))}
-
-          <div className="flex items-center sm:gap-4 gap-2 p-2 border-brand-blue-800 text-brand-blue-100">
-            <div className="flex-grow flex flex-col sm:pb-6 pb-4 md:pb-8">
-              <p className="text-lg mb-2 max-w-2xl">
-                Share Your Vision and Watch It Come to Life!
-              </p>
-              <ContactForm />
-            </div>
+              <ContactFormEngineering />
+            </Suspense>
           </div>
-        </GlassRefinedAtomic>
-      </HeroText>
+
+          <div
+            className="border-t pt-4"
+            style={{ borderColor: "var(--border-subtle)" }}
+          >
+            {contact.map((c) => (
+              <Link
+                key={c.href}
+                href={c.href}
+                title={c.title}
+                className="flex items-center justify-between p-3 transition-colors rounded-md hover:opacity-80"
+              >
+                <span className="body-text">{c.description}</span>
+                <span
+                  className="flex items-center gap-2 text-small"
+                  style={{ color: "var(--system-blue)" }}
+                >
+                  {c.title}
+                  <ArrowUpRight className="w-4 h-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <Navigation />
       <SocialLinks />
@@ -101,4 +99,3 @@ export default function Page() {
     </main>
   );
 }
-

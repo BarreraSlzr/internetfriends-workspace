@@ -6,7 +6,6 @@ import { UIEvents } from "../../../../../lib/events/event.system";
 import {
   generateStamp,
   getTimestamp,
-  getIsoTimestamp,
 } from "@/lib/utils/timestamp";
 import styles from "./dashboard.styles.module.scss";
 
@@ -53,17 +52,20 @@ interface ActivityItem {
 }
 
 export const DashboardOrganism: React.FC<DashboardProps> = React.memo(
-  ({
+  function DashboardOrganism({
     userId,
     sessionId,
     initialTab = "overview",
     showMetrics = true,
     showActivity = true,
     className,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     disabled = false,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     "data-testid": testId = "dashboard-organism",
     ...props
-  }) => {
+  }) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const stamp = useMemo(() => generateStamp(), []);
     const currentTime = new Date().toISOString();
 

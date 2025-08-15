@@ -74,7 +74,7 @@ export const AnalyticsSimpleOrganism: React.FC<AnalyticsSimpleProps> = ({
         // In real implementation, this would be an API call
         await new Promise(resolve => setTimeout(resolve, 1000));
         setData(PRODUCTIVE_ANALYTICS);
-      } catch (error) {
+      } catch {
         console.warn("Analytics data loading failed, using fallback");
         setData(PRODUCTIVE_ANALYTICS);
       } finally {

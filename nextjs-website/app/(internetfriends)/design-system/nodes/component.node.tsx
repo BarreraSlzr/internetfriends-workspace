@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { Handle, Position } from "reactflow";
 import { cn } from "@/lib/utils";
-import { ButtonAtomic } from "@/components/atomic/button/button.atomic";
-import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 import {
   Eye,
   EyeOff,
@@ -22,11 +20,11 @@ interface ComponentNodeData {
   props?: string[];
   features?: string[];
   composition?: string[];
-  liveComponent?: React.ComponentType<any>;
-  liveProps?: Record<string, any>;
+  liveComponent?: React.ComponentType<Record<string, unknown>>;
+  liveProps?: Record<string, unknown>;
   testStatus?: "passing" | "warning" | "failing" | "not-tested";
   usageCount?: number;
-  variants?: Array<{ name: string; props: Record<string, any> }>;
+  variants?: Array<{ name: string; props: Record<string, unknown> }>;
 }
 
 interface ComponentNodeProps {
@@ -123,7 +121,7 @@ export const ComponentNode: React.FC<ComponentNodeProps> = ({
           )}
         </div>
       );
-    } catch (error) {
+    } catch {
       return (
         <div className="mt-3 p-3 bg-red-50 border border-red-200 rounded-compact-md">
           <span className="text-xs text-red-600">Preview failed to render</span>

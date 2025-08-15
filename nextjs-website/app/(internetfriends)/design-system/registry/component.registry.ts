@@ -17,11 +17,11 @@ export interface ComponentRegistryItem {
   status: "stable" | "beta" | "deprecated" | "planned";
   lastUpdated: Date;
   // Enhanced properties for live showcase
-  liveComponent?: React.ComponentType<any>;
-  liveProps?: Record<string, any>;
+  liveComponent?: React.ComponentType<Record<string, unknown>>;
+  liveProps?: Record<string, unknown>;
   testStatus?: "passing" | "warning" | "failing" | "not-tested";
   usageCount?: number;
-  variants?: Array<{ name: string; props: Record<string, any> }>;
+  variants?: Array<{ name: string; props: Record<string, unknown> }>;
 }
 
 export interface ComponentProp {

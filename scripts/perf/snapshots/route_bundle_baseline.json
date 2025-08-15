@@ -1,0 +1,24 @@
+{
+  "timestamp": "2025-08-15T23:31:00.000Z",
+  "totalJsSize": 1638400,
+  "totalCssSize": 0,
+  "totalBundleSize": 1638400,
+  "routes": [
+    {
+      "route": "/",
+      "jsSize": 164864,
+      "description": "Main homepage route"
+    },
+    {
+      "route": "/curriculum", 
+      "jsSize": 179200,
+      "description": "Curriculum page (largest route)"
+    },
+    {
+      "route": "/orchestrator",
+      "jsSize": 192512, 
+      "description": "Orchestrator page"
+    }
+  ],
+  "analysis": "Production build analysis after content alignment and build fixes"
+}

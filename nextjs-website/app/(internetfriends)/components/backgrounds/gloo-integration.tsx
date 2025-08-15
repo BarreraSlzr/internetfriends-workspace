@@ -99,6 +99,7 @@ interface RenderCapabilities {
   performanceAPI: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function detectRenderCapabilities(): RenderCapabilities {
   if (typeof window === "undefined") {
     return {
@@ -119,7 +120,7 @@ function detectRenderCapabilities(): RenderCapabilities {
     const gl1 = testCanvas.getContext("webgl");
     webgl2 = !!gl;
     webgl = !!(gl || gl1);
-  } catch (e) {
+  } catch {
     webgl = false;
     webgl2 = false;
   }
@@ -130,7 +131,7 @@ function detectRenderCapabilities(): RenderCapabilities {
     const testCanvas = document.createElement("canvas");
     const ctx = testCanvas.getContext("2d");
     canvas = !!ctx;
-  } catch (e) {
+  } catch {
     canvas = false;
   }
 
@@ -147,12 +148,14 @@ function detectRenderCapabilities(): RenderCapabilities {
  * Lazy-loaded Renderer Components
  * ----------------------------------------------------- */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const WebGLGloo = lazy(() =>
   import("./renderers/webgl-gloo").catch(() => ({
     default: () => <div data-gloo-error="webgl-load-failed" />,
   })),
 );
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const CanvasGloo = lazy(() =>
   import("./renderers/canvas-gloo").catch(() => ({
     default: () => <div data-gloo-error="canvas-load-failed" />,
@@ -160,6 +163,7 @@ const CanvasGloo = lazy(() =>
 );
 
 // Use simplified BgGooSimple as fallback renderer
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BgGooSimple } from "./gloo-simple";
 
 /* -------------------------------------------------------
@@ -174,6 +178,7 @@ interface PerformanceMetrics {
   animationActive: boolean;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function useGlooPerformance(enabled: boolean, renderMode: string) {
   const metricsRef = useRef<PerformanceMetrics>({
     renderMode,
@@ -208,6 +213,7 @@ function useGlooPerformance(enabled: boolean, renderMode: string) {
  * Mode Selection Logic
  * ----------------------------------------------------- */
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function selectOptimalRenderMode(
   requestedMode: GooRenderMode,
   capabilities: RenderCapabilities,

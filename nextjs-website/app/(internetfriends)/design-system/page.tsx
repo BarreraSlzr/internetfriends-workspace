@@ -19,9 +19,9 @@ interface ComponentShowcaseProps {
   testStatus: "passing" | "warning" | "failing";
   usageCount: number;
   description: string;
-  variants?: Array<{ name: string; props: Record<string, any> }>;
-  component?: React.ComponentType<any>;
-  defaultProps?: Record<string, any>;
+  variants?: Array<{ name: string; props: Record<string, unknown> }>;
+  component?: React.ComponentType<Record<string, unknown>>;
+  defaultProps?: Record<string, unknown>;
 }
 
 const COMPONENTS: ComponentShowcaseProps[] = [
@@ -154,7 +154,7 @@ function ComponentNode({ data }: { data: ComponentShowcaseProps }) {
           )}
         </div>
       );
-    } catch (error) {
+    } catch {
       return (
         <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded">
           <span className="text-sm text-red-600">Preview failed to render</span>

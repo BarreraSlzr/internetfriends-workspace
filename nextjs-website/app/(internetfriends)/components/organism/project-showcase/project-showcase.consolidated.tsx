@@ -24,6 +24,7 @@ interface ProjectShowcaseConsolidatedProps {
 }
 
 // Productive defaults (all features enabled by default)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const SHOWCASE_DEFAULTS = {
   viewMode: "grid" as const,
   showFilters: true,

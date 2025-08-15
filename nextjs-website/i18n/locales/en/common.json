@@ -94,32 +94,62 @@
     "modernDevelopment": {
       "title": "Modern Development",
       "description": "Built with the latest technologies including Next.js, TypeScript, and cutting-edge frameworks for optimal performance.",
-      "features": ["Next.js 15", "TypeScript", "Server Components", "Edge Runtime"]
+      "features": [
+        "Next.js 15",
+        "TypeScript",
+        "Server Components",
+        "Edge Runtime"
+      ]
     },
     "designSystems": {
       "title": "Design Systems",
       "description": "Comprehensive design systems with atomic components, consistent theming, and scalable architecture.",
-      "features": ["Atomic Design", "CSS Modules", "Theme Support", "Responsive Design"]
+      "features": [
+        "Atomic Design",
+        "CSS Modules",
+        "Theme Support",
+        "Responsive Design"
+      ]
     },
     "performanceFirst": {
       "title": "Performance First",
       "description": "Optimized for speed with code splitting, lazy loading, and modern build tools for lightning-fast experiences.",
-      "features": ["Code Splitting", "Image Optimization", "Bundle Analysis", "Core Web Vitals"]
+      "features": [
+        "Code Splitting",
+        "Image Optimization",
+        "Bundle Analysis",
+        "Core Web Vitals"
+      ]
     },
     "securityReliability": {
       "title": "Security & Reliability",
       "description": "Enterprise-grade security with testing, monitoring, and deployment best practices built-in.",
-      "features": ["Security Headers", "Type Safety", "Error Boundaries", "Performance Monitoring"]
+      "features": [
+        "Security Headers",
+        "Type Safety",
+        "Error Boundaries",
+        "Performance Monitoring"
+      ]
     },
     "userExperience": {
       "title": "User Experience",
       "description": "Intuitive interfaces designed for accessibility, usability, and conversion optimization.",
-      "features": ["WCAG Compliance", "User Testing", "A/B Testing", "Analytics Integration"]
+      "features": [
+        "WCAG Compliance",
+        "User Testing",
+        "A/B Testing",
+        "Analytics Integration"
+      ]
     },
     "mobileOptimized": {
       "title": "Mobile Optimized",
       "description": "Responsive designs that work perfectly across all devices with progressive web app capabilities.",
-      "features": ["Responsive Design", "Touch Optimized", "Offline Support", "PWA Ready"]
+      "features": [
+        "Responsive Design",
+        "Touch Optimized",
+        "Offline Support",
+        "PWA Ready"
+      ]
     }
   },
   "testimonials": {
@@ -214,6 +244,7 @@
   },
   "accessibility": {
     "skipToContent": "Skip to content",
+    "skipToMain": "Skip to main content",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "toggleMobileMenu": "Toggle mobile menu",

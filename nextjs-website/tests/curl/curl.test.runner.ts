@@ -332,6 +332,24 @@ export const InternetFriendsTestSuites = {
       expectedStatus: 200,
     },
   ],
+  
+  // Authentication tests  
+  authentication: [
+    {
+      name: "Auth Session Endpoint",
+      url: "/api/auth/session",
+      method: "GET" as const,
+      expectedStatus: 200,
+      bodyContains: ["isAuthenticated"],
+    },
+    {
+      name: "User Profile Endpoint", 
+      url: "/api/user/profile",
+      method: "GET" as const,
+      expectedStatus: 200,
+      bodyContains: ["email"],
+    },
+  ],
 };
 
 // CLI Runner

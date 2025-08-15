@@ -101,7 +101,7 @@ async function getGlooColorAnalysis(page) {
     let totalR = 0,
       totalG = 0,
       totalB = 0;
-    let blackPixels = 0,
+    const blackPixels = 0,
       whitePixels = 0,
       colorfulPixels = 0;
     const colorSamples = [];

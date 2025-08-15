@@ -9,8 +9,8 @@ const ProfileSkillsTab = () => {
         <p className="font-medium">Skills & Aptitudes</p>
       </div>
       <div className={`${cardCss} flex flex-row flex-wrap gap-2`}>
-        {curriculum.skills
-          .sort((a, b) => b.popularity - a.popularity)
+        {(curriculum.skills || [])
+          .sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
           .map((skill, index) => (
             <GlassBadge key={`skill-${index}`} variant="default">
               {skill?.name}

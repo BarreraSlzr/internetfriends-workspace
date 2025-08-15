@@ -1,8 +1,5 @@
-/* Import InternetFriends Design Tokens */
-@import "../../styles/design-tokens.css";
-
-/* Import Accent Theming System */
-@import "../theme/tokens/accent.css";
+/* InternetFriends Engineering Interface - Global Styles */
+@import "../../styles/engineering-interface.css";
 
 @tailwind base;
 @tailwind components;

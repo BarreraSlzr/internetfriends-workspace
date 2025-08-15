@@ -2,7 +2,6 @@
 import { getWebGLContext } from "@/lib/utils";
 import { getTimestamp } from "@/lib/utils/timestamp";
 
-import { motion } from "motion/react";
 import { PropsWithChildren, useEffect, useRef } from "react";
 import content from "../content.json";
 
@@ -163,13 +162,9 @@ export default function HeroText({
         </div>
       )}
       <div className="relative" style={{ zIndex: 20 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
+        <div style={{ opacity: 1 }}>
           {children || <DefaultHero />}
-        </motion.div>
+        </div>
       </div>
     </div>
   );

@@ -11,14 +11,16 @@ import React from "react";
  */
 
 interface WebGLGlooProps {
-  palette?: any;
-  effects?: any[];
+  palette?: Record<string, unknown>;
+  effects?: unknown[];
   performance?: "low" | "medium" | "high";
   className?: string;
 }
 
 const WebGLGloo: React.FC<WebGLGlooProps> = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   palette,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   effects,
   performance = "medium",
   className = "",
