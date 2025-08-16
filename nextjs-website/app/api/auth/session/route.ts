@@ -102,7 +102,7 @@ export async function GET() {
       },
       isAuthenticated: true,
     })
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json(
       { 
         user: null, 

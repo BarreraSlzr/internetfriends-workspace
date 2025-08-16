@@ -11,7 +11,7 @@ import React, {
 import { getTimestamp } from "@/lib/utils/timestamp";
 import dynamic from "next/dynamic";
 import { HeaderOrganism } from "@/components/organisms/header/header.organism";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 import { ButtonAtomic } from "@/components/atomic/button";
 
 // ReactFlow (dynamic to avoid SSR mismatch)
@@ -226,7 +226,7 @@ export default function OrchestratorPage() {
   }, [initialNodes]);
 
   // ReactFlow handlers (lightweight placeholders)
-  const onNodesChange: OnNodesChange = useCallback((changes) => {
+  const onNodesChange: OnNodesChange = useCallback((_changes) => {
     // Future: allow repositioning & persist
     setNodes((nds) => nds.map((n) => ({ ...n })));
   }, []);
@@ -324,7 +324,7 @@ export default function OrchestratorPage() {
         <section className="flex-1 relative min-h-[60vh]">
           {!mounted && (
             <div className="flex items-center justify-center h-[50vh]">
-              <GlassRefinedAtomic
+              <GlassCardAtomic
                 variant="card"
                 strength={0.4}
                 className="p-8 flex flex-col gap-4 items-center"
@@ -332,7 +332,7 @@ export default function OrchestratorPage() {
                 <p className="text-sm opacity-70">
                   Initializing orchestration graph…
                 </p>
-              </GlassRefinedAtomic>
+              </GlassCardAtomic>
             </div>
           )}
 
@@ -381,7 +381,7 @@ export default function OrchestratorPage() {
                     </p>
                   </div>
 
-                  <GlassRefinedAtomic
+                  <GlassCardAtomic
                     variant="card"
                     strength={0.25}
                     className="p-3 flex flex-col gap-2"
@@ -411,7 +411,7 @@ export default function OrchestratorPage() {
                         Reset
                       </ButtonAtomic>
                     </div>
-                  </GlassRefinedAtomic>
+                  </GlassCardAtomic>
 
                   <div className="grid grid-cols-2 gap-2 text-[10px] leading-tight">
                     <Stat label="ESLint" value={projectMetrics.eslintIssues} />
@@ -448,7 +448,7 @@ export default function OrchestratorPage() {
         {/* Footer / Narrative */}
         <footer className="py-10">
           <div className="container mx-auto px-4">
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="card"
               strength={0.25}
               className="p-6 flex flex-col gap-4"
@@ -473,7 +473,7 @@ export default function OrchestratorPage() {
                   Back to Top
                 </ButtonAtomic>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
           </div>
         </footer>
       </div>

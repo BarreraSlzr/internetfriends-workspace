@@ -1,8 +1,7 @@
 "use client";
 
-import { CanvasBackgroundClient } from "@/app/(internetfriends)/components/canvas-background-client";
-import { GlooGlobalOrganism } from "@/app/(internetfriends)/components/gloo/global.organism";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined/glass-refined.atomic";
+import { GlooGlobalOrganism } from "@/components/gloo/global.organism";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 
 export default function TestHydrationPage() {
   return (
@@ -20,11 +19,6 @@ export default function TestHydrationPage() {
           className="w-full h-full"
           zIndex={1}
         />
-        <CanvasBackgroundClient
-          disabled={false}
-          className="absolute inset-0 opacity-60"
-          zIndex={2}
-        />
       </div>
 
       {/* Content with enhanced glass effects over canvas */}
@@ -36,66 +30,66 @@ export default function TestHydrationPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Test different variants */}
-            <GlassRefinedAtomic variant="default" strength={0.3}>
+            <GlassCardAtomic variant="default" strength={0.3}>
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">Default Variant</h3>
                 <p className="text-sm opacity-80">
                   Testing default glass effect with strength 0.3
                 </p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
-            <GlassRefinedAtomic variant="header" strength={0.5}>
+            <GlassCardAtomic variant="header" strength={0.5}>
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">Header Variant</h3>
                 <p className="text-sm opacity-80">
                   Testing header glass effect with strength 0.5
                 </p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
-            <GlassRefinedAtomic variant="card" strength={0.35} noise={true}>
+            <GlassCardAtomic variant="card" strength={0.35} noise={true}>
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">Card with Noise</h3>
                 <p className="text-sm opacity-80">
                   Testing card variant with noise overlay
                 </p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
-            <GlassRefinedAtomic variant="modal" strength={0.65} hover={true}>
+            <GlassCardAtomic variant="modal" strength={0.65} hover={true}>
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">Modal with Hover</h3>
                 <p className="text-sm opacity-80">
                   Testing modal variant with hover effects
                 </p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
-            <GlassRefinedAtomic variant="overlay" strength={0.55} size="lg">
+            <GlassCardAtomic variant="overlay" strength={0.55} size="lg">
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">Large Overlay</h3>
                 <p className="text-sm opacity-80">
                   Testing overlay variant with large size
                 </p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
             {/* Test with mode instead of strength */}
-            <GlassRefinedAtomic mode="immersive" noise={true} hover={true}>
+            <GlassCardAtomic mode="immersive" noise={true} hover={true}>
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">Immersive Mode</h3>
                 <p className="text-sm opacity-80">
                   Testing mode-based configuration
                 </p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
           </div>
 
           <div className="mt-12 text-center">
             <h2 className="text-xl font-semibold mb-4">Test Instructions</h2>
             <div className="text-sm space-y-2 max-w-2xl mx-auto">
-              <GlassRefinedAtomic variant="card" strength={0.4} className="p-6">
+              <GlassCardAtomic variant="card" strength={0.4} className="p-6">
                 <div className="space-y-3">
                   <p className="font-medium">🔍 Hydration Testing:</p>
                   <p>
@@ -133,13 +127,13 @@ export default function TestHydrationPage() {
                     10. Check canvas responsiveness on different screen sizes
                   </p>
                 </div>
-              </GlassRefinedAtomic>
+              </GlassCardAtomic>
             </div>
           </div>
 
           {/* Additional Canvas Test Section */}
           <div className="mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="modal"
               strength={0.6}
               noise={true}
@@ -160,9 +154,9 @@ export default function TestHydrationPage() {
                 <p>• Background blur should be visible</p>
                 <p>• No hydration mismatches should occur</p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="overlay"
               strength={0.5}
               hover={true}
@@ -179,7 +173,7 @@ export default function TestHydrationPage() {
                 <p>• Multiple backdrop-filter layers</p>
                 <p>• Should maintain 60fps performance</p>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
           </div>
         </div>
       </div>

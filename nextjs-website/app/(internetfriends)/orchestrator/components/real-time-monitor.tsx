@@ -83,7 +83,6 @@ interface RealTimeMonitorProps {
 
 export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   className = "",
-  disabled = false,
   "data-testid": testId = "real-time-monitor",
 }) => {
   const stamp = React.useMemo(() => generateStamp(), []);
@@ -258,6 +257,8 @@ export const RealTimeMonitor: React.FC<RealTimeMonitorProps> = ({
   return (
     <div
       className={`bg-gray-900 border border-gray-700 rounded-lg p-4 ${className}`}
+      data-testid={testId}
+      data-stamp={stamp}
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">

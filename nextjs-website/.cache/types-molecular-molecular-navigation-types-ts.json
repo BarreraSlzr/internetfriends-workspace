@@ -1,0 +1,265 @@
+{
+  "id": "types-molecular-molecular-navigation-types-ts",
+  "metadata": {
+    "id": "types-molecular-molecular-navigation-types-ts",
+    "name": "Types",
+    "category": "molecular",
+    "path": "molecular/navigation/types.ts",
+    "filePath": "components/molecular/navigation/types.ts",
+    "testStatus": "unknown",
+    "usageCount": 5,
+    "description": "Component description not available",
+    "dependencies": [
+      "components/atomic/header"
+    ],
+    "usedBy": [
+      "headerorganism-organism-organisms-header-header-organism-tsx",
+      "navigationmolecular-molecular-molecular-navigation-navigation-molecular-tsx",
+      "glasscardatomic-atomic-atomic-glass-card-glass-card-atomic-tsx",
+      "buttonatomic-atomic-atomic-button-button-atomic-tsx",
+      "headeratomic-atomic-atomic-header-header-atomic-tsx"
+    ],
+    "hasTypes": true,
+    "hasTests": false,
+    "hasStories": false,
+    "lastModified": "2025-08-13T04:13:18.872Z",
+    "size": 3839,
+    "exports": [
+      "NavigationItem",
+      "NavigationLogo",
+      "NavigationMolecularProps",
+      "NavigationDropdownProps",
+      "MobileMenuProps",
+      "NavigationBreadcrumbProps",
+      "NavigationTabsProps"
+    ],
+    "props": [
+      {
+        "name": "items",
+        "type": "NavigationItem[]",
+        "required": true
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": true
+      },
+      {
+        "name": "trigger",
+        "type": "ReactNode",
+        "required": true
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "align",
+        "type": "\"start\" | \"center\" | \"end\"",
+        "required": false
+      },
+      {
+        "name": "side",
+        "type": "\"top\" | \"right\" | \"bottom\" | \"left\"",
+        "required": false
+      },
+      {
+        "name": "isOpen",
+        "type": "boolean",
+        "required": true
+      },
+      {
+        "name": "onOpenChange",
+        "type": "(open: boolean) => void",
+        "required": true
+      },
+      {
+        "name": "items",
+        "type": "NavigationItem[]",
+        "required": true
+      },
+      {
+        "name": "logo",
+        "type": "NavigationLogo",
+        "required": false
+      },
+      {
+        "name": "actions",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "animation",
+        "type": "\"slide\" | \"fade\" | \"scale\"",
+        "required": false
+      },
+      {
+        "name": "items",
+        "type": "Omit<NavigationItem, \"children\">[]",
+        "required": true
+      },
+      {
+        "name": "separator",
+        "type": "ReactNode",
+        "required": false
+      },
+      {
+        "name": "maxItems",
+        "type": "number",
+        "required": false
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "items",
+        "type": "Omit<NavigationItem, \"children\">[]",
+        "required": true
+      },
+      {
+        "name": "activeTab",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "onTabChange",
+        "type": "(tabId: string) => void",
+        "required": false
+      },
+      {
+        "name": "variant",
+        "type": "\"default\" | \"pills\" | \"underline\"",
+        "required": false
+      },
+      {
+        "name": "size",
+        "type": "\"sm\" | \"md\" | \"lg\"",
+        "required": false
+      },
+      {
+        "name": "className",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "scrollable",
+        "type": "boolean",
+        "required": false
+      }
+    ]
+  },
+  "stateMachine": {
+    "componentName": "Types",
+    "initialState": "disabled",
+    "states": [
+      {
+        "name": "disabled",
+        "description": "Component is disabled",
+        "triggers": [
+          "disabled prop true"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "opacity-50",
+          "cursor-not-allowed",
+          "pointer-events-none"
+        ],
+        "props": {
+          "disabled": true
+        }
+      },
+      {
+        "name": "success",
+        "description": "Component is in success state",
+        "triggers": [
+          "operation completed"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "border-green-500",
+          "text-green-600",
+          "bg-green-50"
+        ],
+        "props": {
+          "success": true
+        }
+      }
+    ],
+    "transitions": [],
+    "cssStates": [
+      {
+        "state": "default",
+        "styles": {
+          "borderColor": "var(--color-border)",
+          "backgroundColor": "var(--color-background)",
+          "color": "var(--color-text-primary)"
+        },
+        "classes": [
+          "border",
+          "rounded-lg",
+          "px-4",
+          "py-2"
+        ],
+        "pseudoStates": [
+          ":hover",
+          ":focus",
+          ":active"
+        ]
+      },
+      {
+        "state": "hover",
+        "styles": {
+          "backgroundColor": "var(--color-background-hover)",
+          "borderColor": "var(--color-border-hover)",
+          "transform": "translateY(-1px)"
+        },
+        "classes": [
+          "hover:bg-gray-50",
+          "hover:border-gray-300"
+        ],
+        "pseudoStates": [
+          ":hover"
+        ]
+      },
+      {
+        "state": "focus",
+        "styles": {
+          "borderColor": "var(--color-primary)",
+          "borderWidth": "2px"
+        },
+        "classes": [
+          "focus:border-dashed",
+          "focus:border-2",
+          "focus:border-blue-500"
+        ],
+        "pseudoStates": [
+          ":focus",
+          ":focus-visible"
+        ]
+      }
+    ],
+    "mermaidDiagram": "stateDiagram-v2\n    disabled : Component is disabled\n    success : Component is in success state\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset",
+    "documentation": "# Types State Machine\n\n## Overview\nComponent description not available\n\n## Component States\n\n### Logical States\n\n#### disabled\n- **Description**: Component is disabled\n- **Triggers**: disabled prop true\n- **CSS Classes**: `opacity-50 cursor-not-allowed pointer-events-none`\n- **Props**: `{\"disabled\":true}`\n\n#### success\n- **Description**: Component is in success state\n- **Triggers**: operation completed\n- **CSS Classes**: `border-green-500 text-green-600 bg-green-50`\n- **Props**: `{\"success\":true}`\n\n\n### CSS States & Styling\n\n\n#### default\n```css\nborderColor: var(--color-border);\nbackgroundColor: var(--color-background);\ncolor: var(--color-text-primary);\n```\n\n**Classes**: `border rounded-lg px-4 py-2`  \n**Pseudo-states**: :hover, :focus, :active\n\n#### hover\n```css\nbackgroundColor: var(--color-background-hover);\nborderColor: var(--color-border-hover);\ntransform: translateY(-1px);\n```\n\n**Classes**: `hover:bg-gray-50 hover:border-gray-300`  \n**Pseudo-states**: :hover\n\n#### focus\n```css\nborderColor: var(--color-primary);\nborderWidth: 2px;\n```\n\n**Classes**: `focus:border-dashed focus:border-2 focus:border-blue-500`  \n**Pseudo-states**: :focus, :focus-visible\n\n\n## State Transitions\n\n```mermaid\nstateDiagram-v2\n    disabled : Component is disabled\n    success : Component is in success state\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset\n```\n\n## CSS Custom Properties\n\nFollowing InternetFriends design system:\n\n```css\n:root {\n  --color-primary: #3b82f6;\n  --color-border: #e5e7eb;\n  --color-border-hover: #d1d5db;\n  --color-background: #ffffff;\n  --color-background-hover: #f9fafb;\n  --color-text-primary: #111827;\n}\n```\n\n## Focus States\n\nInternetFriends style focus states use **2px dashed borders**:\n\n```css\n.component:focus-visible {\n  border: 2px dashed var(--color-primary);\n  outline: none;\n}\n```\n\n## Animation Transitions\n\n```css\n.component {\n  transition: all 0.2s ease-in-out;\n}\n```\n\n## Usage Examples\n\n```tsx\n// Default state\n<Types />\n\n// Loading state\n<Types loading />\n\n// Error state\n<Types error=\"Something went wrong\" />\n\n// Success state\n<Types success />\n```\n\n## Testing States\n\n```tsx\n// Test all states\ndescribe('Types States', () => {\n  it('renders default state', () => {\n    render(<Types />);\n  });\n  \n  it('renders loading state', () => {\n    render(<Types loading />);\n  });\n  \n  it('handles error state', () => {\n    render(<Types error=\"Test error\" />);\n  });\n});\n```\n"
+  },
+  "renderedMarkdown": "<h1>Types State Machine</h1>\n<h2>Overview</h2>\n<p>Component description not available</p>\n<h2>Component States</h2>\n<h3>Logical States</h3>\n<h4>disabled</h4>\n<ul>\n<li><strong>Description</strong>: Component is disabled</li>\n<li><strong>Triggers</strong>: disabled prop true</li>\n<li><strong>CSS Classes</strong>: <code>opacity-50 cursor-not-allowed pointer-events-none</code></li>\n<li><strong>Props</strong>: <code>{\"disabled\":true}</code></li>\n</ul>\n<h4>success</h4>\n<ul>\n<li><strong>Description</strong>: Component is in success state</li>\n<li><strong>Triggers</strong>: operation completed</li>\n<li><strong>CSS Classes</strong>: <code>border-green-500 text-green-600 bg-green-50</code></li>\n<li><strong>Props</strong>: <code>{\"success\":true}</code></li>\n</ul>\n<h3>CSS States &#x26; Styling</h3>\n<h4>default</h4>\n<pre><code class=\"language-css\">borderColor: var(--color-border);\nbackgroundColor: var(--color-background);\ncolor: var(--color-text-primary);\n</code></pre>\n<p><strong>Classes</strong>: <code>border rounded-lg px-4 py-2</code><br>\n<strong>Pseudo-states</strong>: :hover, :focus, :active</p>\n<h4>hover</h4>\n<pre><code class=\"language-css\">backgroundColor: var(--color-background-hover);\nborderColor: var(--color-border-hover);\ntransform: translateY(-1px);\n</code></pre>\n<p><strong>Classes</strong>: <code>hover:bg-gray-50 hover:border-gray-300</code><br>\n<strong>Pseudo-states</strong>: :hover</p>\n<h4>focus</h4>\n<pre><code class=\"language-css\">borderColor: var(--color-primary);\nborderWidth: 2px;\n</code></pre>\n<p><strong>Classes</strong>: <code>focus:border-dashed focus:border-2 focus:border-blue-500</code><br>\n<strong>Pseudo-states</strong>: :focus, :focus-visible</p>\n<h2>State Transitions</h2>\n<pre><code class=\"language-mermaid\">stateDiagram-v2\n    disabled : Component is disabled\n    success : Component is in success state\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset\n</code></pre>\n<h2>CSS Custom Properties</h2>\n<p>Following InternetFriends design system:</p>\n<pre><code class=\"language-css\">:root {\n  --color-primary: #3b82f6;\n  --color-border: #e5e7eb;\n  --color-border-hover: #d1d5db;\n  --color-background: #ffffff;\n  --color-background-hover: #f9fafb;\n  --color-text-primary: #111827;\n}\n</code></pre>\n<h2>Focus States</h2>\n<p>InternetFriends style focus states use <strong>2px dashed borders</strong>:</p>\n<pre><code class=\"language-css\">.component:focus-visible {\n  border: 2px dashed var(--color-primary);\n  outline: none;\n}\n</code></pre>\n<h2>Animation Transitions</h2>\n<pre><code class=\"language-css\">.component {\n  transition: all 0.2s ease-in-out;\n}\n</code></pre>\n<h2>Usage Examples</h2>\n<pre><code class=\"language-tsx\">// Default state\n&#x3C;Types />\n\n// Loading state\n&#x3C;Types loading />\n\n// Error state\n&#x3C;Types error=\"Something went wrong\" />\n\n// Success state\n&#x3C;Types success />\n</code></pre>\n<h2>Testing States</h2>\n<pre><code class=\"language-tsx\">// Test all states\ndescribe('Types States', () => {\n  it('renders default state', () => {\n    render(&#x3C;Types />);\n  });\n  \n  it('renders loading state', () => {\n    render(&#x3C;Types loading />);\n  });\n  \n  it('handles error state', () => {\n    render(&#x3C;Types error=\"Test error\" />);\n  });\n});\n</code></pre>\n",
+  "generatedAt": "2025-08-16T06:53:07.044Z",
+  "version": "1.0.0",
+  "performance": {
+    "analysisTime": 0,
+    "renderTime": 9,
+    "fileSize": 3839
+  }
+}

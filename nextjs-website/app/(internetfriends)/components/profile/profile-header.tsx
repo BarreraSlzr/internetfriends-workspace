@@ -2,14 +2,14 @@ import MotionDiv from "@/app/(internetfriends)/components/motion-div";
 import { curriculum } from "@/lib/data/curriculum";
 import Link from "next/link";
 import { cardCss } from "./profile-card";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 
 const ProfileHeader = () => {
   return (
     <MotionDiv className={`flex justify-between items-center mb-2 ${cardCss}`}>
       <h1 className="text-xl font-bold">{curriculum.professionalPosition}</h1>
       <Link href={"/contact"}>
-        <GlassRefinedAtomic
+        <GlassCardAtomic
           variant="default"
           strength={0.45}
           noise={true}
@@ -17,7 +17,7 @@ const ProfileHeader = () => {
           className="border-accent-medium font-semibold px-4 py-2 rounded-md hover:border-accent-strong inline-block"
         >
           Hire me
-        </GlassRefinedAtomic>
+        </GlassCardAtomic>
       </Link>
     </MotionDiv>
   );
