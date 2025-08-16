@@ -11,6 +11,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // InternetFriends specific colors for tests
+        "if-primary": "#3b82f6",
+        "if-accent": "#8b5cf6", 
+        "if-surface": "#f8fafc",
+        "brand-blue": "#3b82f6", // Legacy alias for tests
+        
+        // Glass system colors
+        glass: {
+          DEFAULT: "rgba(255, 255, 255, 0.1)",
+          light: "rgba(255, 255, 255, 0.2)",
+          dark: "rgba(0, 0, 0, 0.1)",
+        },
+        
         // Engineering Interface System Colors
         "system-blue": "var(--system-blue)",
         "system-blue-hover": "var(--system-blue-hover)",
@@ -91,6 +104,13 @@ const config: Config = {
       },
 
       borderRadius: {
+        // InternetFriends compact radius system
+        "compact-xs": "2px",
+        "compact-sm": "4px", 
+        "compact-md": "6px",
+        "compact-lg": "8px",
+        "compact-xl": "12px",
+        
         // Engineering radius system
         sm: "var(--radius-sm)",
         md: "var(--radius-md)",
@@ -128,6 +148,40 @@ const config: Config = {
       fontFamily: {
         sans: ["system-ui", "-apple-system", "sans-serif"],
         mono: ["Menlo", "Monaco", "monospace"],
+      },
+
+      animation: {
+        // InternetFriends animations
+        "fade-in": "fadeIn 0.3s ease-in-out",
+        "slide-up": "slideUp 0.3s ease-out",
+        "scale-in": "scaleIn 0.2s ease-out",
+        "gloo-morph": "glooMorph 8s ease-in-out infinite",
+        "glass-float": "glassFloat 6s ease-in-out infinite", // Test expects this
+      },
+
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        slideUp: {
+          "0%": { transform: "translateY(20px)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
+        scaleIn: {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        glooMorph: {
+          "0%, 100%": { borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%" },
+          "25%": { borderRadius: "58% 42% 75% 25% / 76% 46% 54% 24%" },
+          "50%": { borderRadius: "50% 50% 33% 67% / 55% 27% 73% 45%" },
+          "75%": { borderRadius: "33% 67% 58% 42% / 63% 68% 32% 37%" },
+        },
+        "glass-float": {
+          "0%, 100%": { transform: "translateY(0px) scale(1)" },
+          "50%": { transform: "translateY(-10px) scale(1.02)" },
+        },
       },
     },
   },

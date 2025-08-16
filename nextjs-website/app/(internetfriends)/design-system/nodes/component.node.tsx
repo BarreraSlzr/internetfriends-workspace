@@ -11,9 +11,9 @@ export const ComponentNode: React.FC<NodeProps<ComponentNodeData>> = ({ data }) 
   const getCategoryColor = (category: string) => {
     switch (category) {
       case 'atomic':
-        return 'bg-blue-100 border-blue-300 text-blue-800';
-      case 'molecular':
         return 'bg-green-100 border-green-300 text-green-800';
+      case 'molecular':
+        return 'bg-blue-100 border-blue-300 text-blue-800';
       case 'organism':
         return 'bg-purple-100 border-purple-300 text-purple-800';
       case 'template':
@@ -27,19 +27,21 @@ export const ComponentNode: React.FC<NodeProps<ComponentNodeData>> = ({ data }) 
 
   return (
     <div
-      className={`px-4 py-2 shadow-md rounded-md border-2 ${getCategoryColor(
+      className={`px-4 py-3 shadow-md rounded-lg border ${getCategoryColor(
         data.category
       )} min-w-[150px]`}
     >
-      <div className="font-bold text-sm">{data.label}</div>
-      <div className="text-xs opacity-75 capitalize">{data.category}</div>
-      <div className="text-xs mt-1 max-w-[140px] truncate" title={data.description}>
-        {data.description}
-      </div>
+      <div className="font-semibold text-sm">{data.label}</div>
+      <div className="text-xs opacity-75 mt-1 capitalize">{data.category}</div>
+      <div className="text-xs mt-2">{data.description}</div>
     </div>
   );
 };
 
+ComponentNode.displayName = 'ComponentNode';
+
 export const nodeTypes = {
   component: ComponentNode,
 };
+
+export default ComponentNode;

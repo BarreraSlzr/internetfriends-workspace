@@ -29,11 +29,13 @@ export const UtilityNode: React.FC<NodeProps<UtilityNodeData>> = ({ data }) => {
         data.type
       )} min-w-[120px]`}
     >
-      <div className="font-medium text-xs">{data.label}</div>
-      <div className="text-xs opacity-75 capitalize">{data.type}</div>
-      <div className="text-xs mt-1 max-w-[110px] truncate" title={data.description}>
-        {data.description}
-      </div>
+      <div className="font-semibold text-sm">{data.label}</div>
+      <div className="text-xs opacity-75 mt-1">{data.type}</div>
+      <div className="text-xs mt-1">{data.description}</div>
     </div>
   );
 };
+
+UtilityNode.displayName = 'UtilityNode';
+
+export default UtilityNode;
