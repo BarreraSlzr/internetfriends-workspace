@@ -1,5 +1,5 @@
 "use client";
-import { generateStamp } from "@/lib/utils/timestamp";
+
 /**
  * boundary-examples.tsx - Comprehensive Boundary Pattern Application Examples
  *
@@ -71,14 +71,14 @@ const WebGLVisualizerSimple: React.FC<WebGLVisualizerSimpleProps> = (props) => {
     <WebGLBoundary
       component={({ disabled, className, style, "data-testid": testId }) => (
         <canvas
-          className={className}
-          style={style}
-          data-testid={testId}
+          className={className as string}
+          style={style as React.CSSProperties}
+          data-testid={testId as string}
           data-webgl-effect={effectIndex}
           data-webgl-config={JSON.stringify(webglConfig)}
         />
       )}
-      props={props}
+      props={props as Record<string, unknown>}
       fallback={
         <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 text-center">
           <div className="text-4xl mb-2">🎨</div>

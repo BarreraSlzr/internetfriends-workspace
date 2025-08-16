@@ -1,9 +1,10 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
-("use client");
+"use client";
+
+import { getTimestamp } from "@/lib/utils/timestamp";
 
 import MotionDiv from "@/app/(internetfriends)/components/motion-div";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
+import { curriculum } from "@/lib/data/curriculum";
 import { TZDate } from "@date-fns/tz";
 import { format } from "date-fns";
 import { cardCss } from "./profile-card";
@@ -35,7 +36,7 @@ const ProfileInfo = () => {
         <div className="grid grid-cols-2 gap-2">
           <div>
             <p className="font-medium">Availability</p>
-            <Availability />
+            <Availability availability="Available" />
           </div>
           <div>
             <p className="font-medium">Local Time</p>

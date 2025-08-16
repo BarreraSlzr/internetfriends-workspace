@@ -1,5 +1,5 @@
 import React from "react";
-import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
+import { curriculum } from "@/lib/data/curriculum";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { cardCss } from "./profile-card";
@@ -41,4 +41,3 @@ export const ProfileMoreTab = () => {
 
 export default ProfileMoreTab;
 
-import { generateStamp } from "@/lib/utils/timestamp";

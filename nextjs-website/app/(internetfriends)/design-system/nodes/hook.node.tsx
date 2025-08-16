@@ -1,135 +1,41 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-"use client";
+import React from 'react';
+import type { NodeProps } from '@xyflow/react';
 
-import React from "react";
-import { Handle, Position } from "reactflow";
-import { cn } from "@/lib/utils";
-
-interface HookNodeData {
+export interface HookNodeData {
   label: string;
   description: string;
-  returns: string;
-  usage: string;
-  parameters?: string[];
-  examples?: string[];
-  dependencies?: string[];
+  hookType: 'state' | 'effect' | 'custom' | 'context';
 }
 
-interface HookNodeProps {
-  data: HookNodeData;
-  isConnectable: boolean;
-  selected?: boolean;
-}
+export const HookNode: React.FC<NodeProps<HookNodeData>> = ({ data }) => {
+  const getHookTypeColor = (type: string) => {
+    switch (type) {
+      case 'state':
+        return 'bg-green-100 border-green-300 text-green-800';
+      case 'effect':
+        return 'bg-orange-100 border-orange-300 text-orange-800';
+      case 'custom':
+        return 'bg-blue-100 border-blue-300 text-blue-800';
+      case 'context':
+        return 'bg-purple-100 border-purple-300 text-purple-800';
+      default:
+        return 'bg-gray-100 border-gray-300 text-gray-800';
+    }
+  };
 
-export const HookNode: React.FC<HookNodeProps> = ({
-  data,
-  isConnectable,
-  selected,
-}) => {
   return (
     <div
-      className={cn(
-        "min-w-[240px] max-w-[300px] bg-gradient-to-br from-emerald-50 to-emerald-100 border-2 border-emerald-200 text-emerald-900 rounded-compact-lg shadow-glass transition-all duration-200",
-        selected && "ring-2 ring-if-primary ring-offset-2",
-        "hover:shadow-glass-hover hover:scale-[1.02]",
-      )}
+      className={`px-3 py-2 shadow-sm rounded border ${getHookTypeColor(
+        data.hookType
+      )} min-w-[120px]`}
     >
-      <Handle
-        type="target"
-        position={Position.Top}
-        isConnectable={isConnectable}
-        className="w-3 h-3 bg-emerald-500 border-2 border-white"
-      />
-
-      <div className="p-4 space-y-3">
-        {/* Header */}
-        <div className="flex items-center gap-2">
-          <span className="text-lg">🪝</span>
-          <div>
-            <h3 className="font-semibold text-sm">{data.label}</h3>
-            <span className="text-xs opacity-70">Hook</span>
-          </div>
-        </div>
-
-        {/* Description */}
-        <p className="text-xs opacity-80 leading-relaxed">{data.description}</p>
-
-        {/* Parameters */}
-        {data.parameters && data.parameters.length > 0 && (
-          <div>
-            <h4 className="text-xs font-medium mb-1">Parameters</h4>
-            <div className="space-y-1">
-              {data.parameters.map((param, index) => (
-                <span
-                  key={index}
-                  className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono"
-                >
-                  {param}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Returns */}
-        <div>
-          <h4 className="text-xs font-medium mb-1">Returns</h4>
-          <div className="px-2 py-1 bg-white/80 rounded-compact-xs text-xs font-mono border-l-2 border-emerald-400">
-            {data.returns}
-          </div>
-        </div>
-
-        {/* Usage */}
-        <div>
-          <h4 className="text-xs font-medium mb-1">Usage</h4>
-          <p className="text-xs opacity-80 leading-relaxed bg-white/40 px-2 py-1 rounded-compact-xs">
-            {data.usage}
-          </p>
-        </div>
-
-        {/* Examples */}
-        {data.examples && data.examples.length > 0 && (
-          <div>
-            <h4 className="text-xs font-medium mb-1">Examples</h4>
-            <div className="space-y-1">
-              {data.examples.map((example, index) => (
-                <code
-                  key={index}
-                  className="block px-2 py-1 bg-white/60 rounded-compact-xs text-xs font-mono text-emerald-800"
-                >
-                  {example}
-                </code>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Dependencies */}
-        {data.dependencies && data.dependencies.length > 0 && (
-          <div>
-            <h4 className="text-xs font-medium mb-1">Dependencies</h4>
-            <div className="flex flex-wrap gap-1">
-              {data.dependencies.map((dep, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-0.5 bg-white/80 rounded-compact-xs text-xs"
-                >
-                  {dep}
-                </span>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        isConnectable={isConnectable}
-        className="w-3 h-3 bg-emerald-500 border-2 border-white"
-      />
+      <div className="font-semibold text-sm">{data.label}</div>
+      <div className="text-xs opacity-75 mt-1">{data.hookType}</div>
+      <div className="text-xs mt-1">{data.description}</div>
     </div>
   );
 };
 
-HookNode.displayName = "HookNode";
+HookNode.displayName = 'HookNode';
+
+export default HookNode;

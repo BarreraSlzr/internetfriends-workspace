@@ -1,4 +1,4 @@
-import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
+import { curriculum } from "@/lib/data/curriculum";
 import { GlassBadge } from "@/components/ui/glass-badge";
 import { cardCss } from "./profile-card";
 
@@ -9,8 +9,8 @@ const ProfileSkillsTab = () => {
         <p className="font-medium">Skills & Aptitudes</p>
       </div>
       <div className={`${cardCss} flex flex-row flex-wrap gap-2`}>
-        {curriculum.skills
-          .sort((a, b) => b.popularity - a.popularity)
+        {(curriculum.skills || [])
+          .sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
           .map((skill, index) => (
             <GlassBadge key={`skill-${index}`} variant="default">
               {skill?.name}
@@ -24,5 +24,3 @@ const ProfileSkillsTab = () => {
 export { ProfileSkillsTab };
 
 export default ProfileSkillsTab;
-
-import { generateStamp } from "@/lib/utils/timestamp";

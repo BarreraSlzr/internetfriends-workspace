@@ -1,12 +1,10 @@
 import CompanyInfo from "@/app/(internetfriends)/components/company-info";
-import { HeaderOrganism } from "@/components/organisms/header/header.organism";
-import HeroText from "@/app/(internetfriends)/components/hero-text";
+import { HeaderEngineering } from "@/components/organisms/header/header.engineering";
 import Navigation from "@/app/(internetfriends)/components/navigation";
 import SocialLinks from "@/app/(internetfriends)/components/social-links";
 import content from "@/app/(internetfriends)/content.json";
-import engagementOptions from "@/app/(internetfriends)/lib/engagementOptions";
-import { Badge } from "@/components/ui/badge";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import engagementOptions from "@/lib/data/engagement-options";
+import { PremiumContent, UserStatus, AdminOnly } from "@/lib/permissions/components";
 
 /**
  * Pricing Page
@@ -19,45 +17,76 @@ import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
 export default function Page() {
   return (
     <main id="main-content">
-      <HeaderOrganism
-        variant="glass"
-        size="md"
+      <HeaderEngineering
+        logo={{
+          text: "InternetFriends",
+          href: "/",
+        }}
         navigation={{
-          items: [],
+          items: [
+            { label: "Home", href: "/" },
+            { label: "Samples", href: "/samples" },
+            { label: "Pricing", href: "/pricing" },
+            { label: "Contact", href: "/contact" },
+          ],
         }}
-        themeToggle={{
-          show: true,
-          showLabels: false,
-        }}
-        languageSelector={{
-          show: false,
-        }}
-        skipToMain
+        actions={[
+          { label: "Get Started", href: "/contact", variant: "primary" },
+        ]}
       />
-      <HeroText useGloo={false} backgroundStrategy="flat">
-        <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
-          {content.pricing.title}
-        </h1>
 
-        {/* Intro / description block */}
-        <GlassRefinedAtomic
-          variant="card"
-          strength={0.45}
-          noise={false}
-          className="sm:p-6 p-2 py-4 md:p-8 flex flex-col"
-        >
-          <p className="text-lg mb-2 max-w-2xl">
-            {content.pricing.description}
-          </p>
-        </GlassRefinedAtomic>
+      <div className="container p-8">
+        <div className="flex justify-between items-start mb-6">
+          <h1 className="heading-1">{content.pricing.title}</h1>
+          <UserStatus />
+        </div>
 
-        {/* Engagement options */}
-        <GlassRefinedAtomic
-          variant="card"
-          strength={0.35}
-          noise={false}
-          className="sm:p-6 p-2 py-4 md:p-8 pt-0 flex flex-col"
-        >
+        <div className="card p-6 mb-6">
+          <p className="body-text max-w-2xl">{content.pricing.description}</p>
+        </div>
+
+        {/* Premium Features Section */}
+        <PremiumContent>
+          <div className="card mb-6 border-2 border-blue-200">
+            <div className="p-6 bg-blue-50">
+              <h2 className="heading-2 text-blue-800 mb-4">🎯 Premium Client Features</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                  <span className="text-blue-700">Priority support response</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                  <span className="text-blue-700">Advanced analytics dashboard</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                  <span className="text-blue-700">Custom integration options</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
+                  <span className="text-blue-700">Extended project timelines</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </PremiumContent>
+
+        {/* Admin Pricing Controls */}
+        <AdminOnly>
+          <div className="card mb-6 border-2 border-red-200">
+            <div className="p-6 bg-red-50">
+              <h2 className="heading-2 text-red-800 mb-4">⚙️ Admin Pricing Controls</h2>
+              <div className="flex gap-3">
+                <button className="btn-secondary text-sm">Edit Pricing</button>
+                <button className="btn-secondary text-sm">View Analytics</button>
+                <button className="btn-secondary text-sm">Client Dashboard</button>
+              </div>
+            </div>
+          </div>
+        </AdminOnly>
+
+        <div className="card">
           {engagementOptions.map(
             (
               option: {
@@ -70,30 +99,32 @@ export default function Page() {
             ) => (
               <div
                 key={option.title ?? index}
-                className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-t-2 border-brand-blue-800 text-brand-blue-100"
+                className="flex items-center gap-4 p-4 border-b border-var(--border-subtle) last:border-0 hover:bg-var(--surface-elevated) transition-colors"
               >
-                <span className="font-mono font-bold mb-auto">
+                <span className="text-small font-mono font-bold text-var(--text-tertiary) w-8">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <div className="flex flex-col flex-grow">
-                  <span className="flex flex-row gap-2 justify-between items-center">
-                    <Badge className="text-nowrap border-2 border-brand-blue-800 text-brand-blue">
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="btn-secondary text-xs px-2 py-1">
                       {option.duration}
-                    </Badge>
-                    <span className="font-mono font-bold">{option.price}</span>
-                  </span>
-                  <span className="flex flex-row items-center">
-                    {option.short_description}
-                  </span>
+                    </span>
+                    <span className="font-mono font-bold text-var(--system-blue)">
+                      {option.price}
+                    </span>
+                  </div>
+                  <p className="body-text">{option.short_description}</p>
                 </div>
               </div>
             ),
           )}
-          <div className="p-2 border-t-2 border-brand-blue-800 text-brand-blue-100 font-mono text-xs">
-            * Nonrefundable upfront payment
+          <div className="p-4 border-t border-var(--border-subtle) bg-var(--surface-elevated)">
+            <p className="text-small text-var(--text-secondary)">
+              * Nonrefundable upfront payment
+            </p>
           </div>
-        </GlassRefinedAtomic>
-      </HeroText>
+        </div>
+      </div>
 
       <Navigation />
       <SocialLinks />
@@ -101,5 +132,3 @@ export default function Page() {
     </main>
   );
 }
-
-import { generateStamp } from "@/lib/utils/timestamp";

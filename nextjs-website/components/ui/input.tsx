@@ -21,4 +21,3 @@ Input.displayName = "Input";
 
 export { Input };
 
-import { generateStamp } from "@/lib/utils/timestamp";

@@ -11,6 +11,7 @@ export interface Database {
   optimization_runs: OptimizationRunsTable;
   quality_metrics: QualityMetricsTable;
   component_analysis: ComponentAnalysisTable;
+  contact_submissions: ContactSubmissionsTable;
 }
 
 export interface ComponentQualityTable {
@@ -67,6 +68,19 @@ export interface ComponentAnalysisTable {
   created_at: ColumnType<Date, never, never>;
 }
 
+export interface ContactSubmissionsTable {
+  id: Generated<string>;
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  email: string;
+  project_start_date: string;
+  budget: string;
+  project_scope: string;
+  created_at: ColumnType<Date, never, never>;
+  updated_at: ColumnType<Date, never, string | Date | undefined>;
+}
+
 export type ComponentQuality = Selectable<ComponentQualityTable>;
 export type NewComponentQuality = Insertable<ComponentQualityTable>;
 export type ComponentQualityUpdate = Updateable<ComponentQualityTable>;
@@ -82,3 +96,7 @@ export type QualityMetricUpdate = Updateable<QualityMetricsTable>;
 export type ComponentAnalysis = Selectable<ComponentAnalysisTable>;
 export type NewComponentAnalysis = Insertable<ComponentAnalysisTable>;
 export type ComponentAnalysisUpdate = Updateable<ComponentAnalysisTable>;
+
+export type ContactFormData = Insertable<ContactSubmissionsTable>;
+export type ContactSubmission = Selectable<ContactSubmissionsTable>;
+export type ContactSubmissionUpdate = Updateable<ContactSubmissionsTable>;

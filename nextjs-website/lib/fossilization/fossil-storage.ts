@@ -247,7 +247,7 @@ export class FossilStorage {
     const cutoffDate = new Date();
     cutoffDate.setDate(cutoffDate.getDate() - retentionDays);
 
-    let deletedCount = 0;
+    const deletedCount = 0;
 
     // This would iterate through all files and remove old entries
     // Implementation details depend on file structure

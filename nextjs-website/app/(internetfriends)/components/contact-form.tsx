@@ -1,4 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 "use client";
 
 import { ArrowUpRight } from "lucide-react";

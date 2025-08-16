@@ -1,8 +1,9 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 // InternetFriends Atomic Button Component
 // Extends shadcn/ui Button with InternetFriends design system
 
-import React, { forwardRef } from "react";
+import * as React from "react";
+const { forwardRef } = React;
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Button as ShadcnButton } from "@/components/ui/button";

@@ -1,30 +1,4 @@
-import { generateStamp, getTimestamp } from "@/lib/utils/timestamp";
-("use client");
-// NOTE: Pending orchestrator diagnostics fix requires:
-// 1. Replace custom node/edge change handlers with applyNodeChanges/applyEdgeChanges/addEdge
-// 2. Import BackgroundVariant and use variant={BackgroundVariant.Dots}
-// 3. Remove unused 'Connection' import
-// 4. Update RealTimeMonitor props from state/metrics -> orchestratorState/projectMetrics (confirm actual prop names)
-// To proceed precisely I need the exact surrounding code blocks (imports section, onNodesChange/onEdgesChange/onConnect implementations, and the RealTimeMonitor JSX) with line numbers. Provide those snippets and I'll apply minimal targeted replacements.
-
-/**
- * Orchestrator Page
- *
- * Restored & reconstructed from legacy .bak (partial source was available).
- * Updated to use the new HeaderOrganism and modernized patterns:
- *  - Dynamic ReactFlow import (heavy / client-only)
- *  - Modular node types (project/state/process)
- *  - Real-time metrics simulation
- *  - Accessible skip-to-main via HeaderOrganism
- *
- * Epic: glass-refinement-v1
- *
- * Future Enhancements:
- *  - Persist orchestrator graph state (server action / KV)
- *  - Hook into actual build / lint / test pipelines
- *  - Display epic progress overlays
- *  - AI agent thread visualization (agent orchestration)
- */
+"use client";
 
 import React, {
   useCallback,
@@ -34,9 +8,10 @@ import React, {
   useState,
   Suspense,
 } from "react";
+import { getTimestamp } from "@/lib/utils/timestamp";
 import dynamic from "next/dynamic";
 import { HeaderOrganism } from "@/components/organisms/header/header.organism";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 import { ButtonAtomic } from "@/components/atomic/button";
 
 // ReactFlow (dynamic to avoid SSR mismatch)
@@ -251,7 +226,7 @@ export default function OrchestratorPage() {
   }, [initialNodes]);
 
   // ReactFlow handlers (lightweight placeholders)
-  const onNodesChange: OnNodesChange = useCallback((changes) => {
+  const onNodesChange: OnNodesChange = useCallback((_changes) => {
     // Future: allow repositioning & persist
     setNodes((nds) => nds.map((n) => ({ ...n })));
   }, []);
@@ -349,7 +324,7 @@ export default function OrchestratorPage() {
         <section className="flex-1 relative min-h-[60vh]">
           {!mounted && (
             <div className="flex items-center justify-center h-[50vh]">
-              <GlassRefinedAtomic
+              <GlassCardAtomic
                 variant="card"
                 strength={0.4}
                 className="p-8 flex flex-col gap-4 items-center"
@@ -357,7 +332,7 @@ export default function OrchestratorPage() {
                 <p className="text-sm opacity-70">
                   Initializing orchestration graph…
                 </p>
-              </GlassRefinedAtomic>
+              </GlassCardAtomic>
             </div>
           )}
 
@@ -406,7 +381,7 @@ export default function OrchestratorPage() {
                     </p>
                   </div>
 
-                  <GlassRefinedAtomic
+                  <GlassCardAtomic
                     variant="card"
                     strength={0.25}
                     className="p-3 flex flex-col gap-2"
@@ -436,7 +411,7 @@ export default function OrchestratorPage() {
                         Reset
                       </ButtonAtomic>
                     </div>
-                  </GlassRefinedAtomic>
+                  </GlassCardAtomic>
 
                   <div className="grid grid-cols-2 gap-2 text-[10px] leading-tight">
                     <Stat label="ESLint" value={projectMetrics.eslintIssues} />
@@ -473,7 +448,7 @@ export default function OrchestratorPage() {
         {/* Footer / Narrative */}
         <footer className="py-10">
           <div className="container mx-auto px-4">
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="card"
               strength={0.25}
               className="p-6 flex flex-col gap-4"
@@ -498,7 +473,7 @@ export default function OrchestratorPage() {
                   Back to Top
                 </ButtonAtomic>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
           </div>
         </footer>
       </div>

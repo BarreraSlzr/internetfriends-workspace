@@ -1,6 +1,6 @@
-import { getTimestamp } from "@/lib/utils/timestamp";
-("use client");
+"use client"
 
+import { getTimestamp } from "@/lib/utils/timestamp";
 import { useEffect } from "react";
 
 /**

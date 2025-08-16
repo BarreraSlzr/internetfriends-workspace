@@ -47,5 +47,9 @@
   },
   "engines": {
     "bun": ">=1.2.0"
+  },
+  "dependencies": {
+    "@vercel/sdk": "^1.10.4",
+    "jose": "^6.0.12"
   }
 }

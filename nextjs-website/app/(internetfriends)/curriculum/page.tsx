@@ -1,11 +1,14 @@
 import CompanyInfo from "@/app/(internetfriends)/components/company-info";
-import { HeaderOrganism } from "@/components/organisms/header/header.organism";
-import HeroText from "@/app/(internetfriends)/components/hero-text";
+import { HeaderEngineering } from "@/components/organisms/header/header.engineering";
 import Navigation from "@/app/(internetfriends)/components/navigation";
 import SocialLinks from "@/app/(internetfriends)/components/social-links";
 import content from "@/app/(internetfriends)/content.json";
-import ProfileCard from "../components/profile/profile-card";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import dynamic from "next/dynamic";
+
+// Dynamic import for heavy ProfileCard component
+const ProfileCard = dynamic(() => import("../components/profile/profile-card"), {
+  loading: () => <div className="animate-pulse bg-gray-200 h-96 rounded"></div>
+});
 
 /**
  * Curriculum Page
@@ -20,44 +23,35 @@ import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
 export default function Page() {
   return (
     <main id="main-content">
-      <HeaderOrganism
-        variant="glass"
-        size="md"
+      <HeaderEngineering
+        logo={{
+          text: "InternetFriends",
+          href: "/",
+        }}
         navigation={{
-          items: [],
+          items: [
+            { label: "Home", href: "/" },
+            { label: "Samples", href: "/samples" },
+            { label: "Pricing", href: "/pricing" },
+            { label: "Contact", href: "/contact" },
+          ],
         }}
-        themeToggle={{
-          show: true,
-          showLabels: false,
-        }}
-        languageSelector={{
-          show: false,
-        }}
-        skipToMain
+        actions={[
+          { label: "Get Started", href: "/contact", variant: "primary" },
+        ]}
       />
-      <HeroText
-        className="min-h-fit"
-        useGloo={false}
-        backgroundStrategy="subtle"
-      >
-        <h1 className="text-5xl font-bold sm:pb-6 pb-4 md:pb-8">
-          {content.curriculum.title}
-        </h1>
 
-        <GlassRefinedAtomic
-          variant="card"
-          strength={0.4}
-          noise={false}
-          className="sm:px-6 px-2 md:px-8 py-12 pt-6"
-        >
+      <div className="container p-8">
+        <h1 className="heading-1 mb-6">{content.curriculum.title}</h1>
+
+        <div className="card p-6">
           <ProfileCard />
-        </GlassRefinedAtomic>
-      </HeroText>
+        </div>
+      </div>
+
       <Navigation />
       <SocialLinks />
       <CompanyInfo />
     </main>
   );
 }
-
-import { generateStamp } from "@/lib/utils/timestamp";

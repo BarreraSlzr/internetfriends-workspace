@@ -23,20 +23,23 @@ export interface I18nProviderProps {
 /**
  * InternetFriends I18n Provider
  * Provides internationalization context to the entire application
+ * SSR-compatible with proper hydration handling
  */
 export const I18nProvider: React.FC<I18nProviderProps> = ({
   children,
   defaultLocale,
   initialTranslations,
 }) => {
+  // Use default locale for SSR, will be updated on client-side
   const [locale, setLocaleState] = useState<SupportedLocale>(
-    defaultLocale || getStoredLocale() || getDefaultLocale(),
+    defaultLocale || DEFAULT_LOCALE,
   );
   const [translations, setTranslations] = useState<Translations | null>(
     initialTranslations || null,
   );
   const [isLoading, setIsLoading] = useState(!initialTranslations);
   const [error, setError] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   // Load translations for the current locale
   const loadLocaleTranslations = useCallback(
@@ -72,12 +75,31 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
     [],
   );
 
-  // Initialize translations on mount
+  // Handle client-side hydration and locale initialization
   useEffect(() => {
+    setIsClient(true);
+
+    // Check for stored locale preference on client-side only
+    const storedLocale = getStoredLocale();
+    const browserLocale = getDefaultLocale();
+    const initialLocale = defaultLocale || storedLocale || browserLocale;
+
+    if (initialLocale !== locale) {
+      setLocaleState(initialLocale);
+    }
+
+    // Load translations if not already loaded
     if (!translations) {
+      loadLocaleTranslations(initialLocale);
+    }
+  }, []);
+
+  // Load translations when locale changes (client-side only)
+  useEffect(() => {
+    if (isClient && !translations) {
       loadLocaleTranslations(locale);
     }
-  }, [locale, translations, loadLocaleTranslations]);
+  }, [locale, translations, loadLocaleTranslations, isClient]);
 
   // Set locale and load new translations
   const setLocale = useCallback(
@@ -86,11 +108,15 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
 
       try {
         setLocaleState(newLocale);
-        storeLocale(newLocale);
 
-        // Update document language
-        if (typeof document !== "undefined") {
-          document.documentElement.lang = newLocale;
+        // Only store locale on client-side
+        if (isClient) {
+          storeLocale(newLocale);
+
+          // Update document language
+          if (typeof document !== "undefined") {
+            document.documentElement.lang = newLocale;
+          }
         }
 
         await loadLocaleTranslations(newLocale);
@@ -99,7 +125,7 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
         setError("Failed to change language");
       }
     },
-    [locale, loadLocaleTranslations],
+    [locale, loadLocaleTranslations, isClient],
   );
 
   // Create translation function
@@ -135,8 +161,8 @@ export const I18nProvider: React.FC<I18nProviderProps> = ({
     error,
   };
 
-  // Show loading state
-  if (isLoading && !translations) {
+  // Show loading state during SSR or when translations are loading
+  if ((!isClient && !initialTranslations) || (isLoading && !translations)) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="flex flex-col items-center gap-3">

@@ -1,4 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 // InternetFriends Accent Demo Layout
 // Layout with required CSS imports for accent token system demonstration
 

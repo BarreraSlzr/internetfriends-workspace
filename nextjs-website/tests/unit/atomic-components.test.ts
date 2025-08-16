@@ -21,7 +21,7 @@ describe("Atomic Components Unit Tests", () => {
         "../../components/atomic/glass-card"
       );
       expect(GlassCardAtomic).toBeDefined();
-      expect(typeof GlassCardAtomic).toBe("function");
+      expect(typeof GlassCardAtomic).toBe("object"); // React.forwardRef wrapped in React.memo returns an object
       expect(GlassCardAtomic.displayName).toBe("GlassCardAtomic");
     });
 
@@ -140,7 +140,7 @@ describe("Atomic Components Unit Tests", () => {
       expect(stats.stable).toBeGreaterThan(0);
 
       // Total should equal sum of categories
-      expect(stats.total).toBe(stats.atomic + stats.molecular + stats.organism);
+      expect(stats.total).toBe(stats.atomic + stats.molecular + stats.utility + stats.organism + stats.page);
     });
 
     test("should support component search", async () => {

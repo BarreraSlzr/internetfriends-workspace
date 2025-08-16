@@ -1,8 +1,8 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 "use client";
 
 import React from "react";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 import { cn } from "@/lib/utils";
 
 export interface GlassBadgeProps {
@@ -30,7 +30,7 @@ export const GlassBadge: React.FC<GlassBadgeProps> = ({
   };
 
   return (
-    <GlassRefinedAtomic
+    <GlassCardAtomic
       variant="default"
       strength={strength}
       noise={noise}
@@ -44,7 +44,7 @@ export const GlassBadge: React.FC<GlassBadgeProps> = ({
       {...props}
     >
       {children}
-    </GlassRefinedAtomic>
+    </GlassCardAtomic>
   );
 };
 

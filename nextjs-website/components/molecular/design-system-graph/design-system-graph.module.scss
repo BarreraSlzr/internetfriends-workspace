@@ -1,0 +1,579 @@
+// Design System Graph - Octopus.do Style
+.graphContainer {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  position: relative;
+}
+
+.reactFlow {
+  background: transparent;
+}
+
+// Enhanced Octopus.do-style nodes
+.octopusNode {
+  width: 240px;
+  height: 180px;
+  border: 1px solid;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 20px 25px -5px rgba(0, 0, 0, 0.1),
+      0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  &.selected {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 
+      0 25px 50px -12px rgba(0, 0, 0, 0.25),
+      0 0 0 2px currentColor;
+    z-index: 10;
+  }
+  
+  &.highlighted {
+    box-shadow: 
+      0 10px 15px -3px rgba(59, 130, 246, 0.2),
+      0 4px 6px -2px rgba(59, 130, 246, 0.1),
+      0 0 0 1px rgba(59, 130, 246, 0.3);
+  }
+}
+
+.nodeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 16px 0;
+}
+
+.nodeIcon {
+  padding: 8px;
+  border-radius: 8px;
+  background: rgba(248, 250, 252, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.categoryDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px white;
+}
+
+.nodeContent {
+  padding: 12px 16px;
+  flex: 1;
+}
+
+.nodeTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+  line-height: 1.2;
+}
+
+.nodeCategory {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+.nodeDescription {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.nodeFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px 16px;
+  border-top: 1px solid rgba(226, 232, 240, 0.5);
+  margin-top: 8px;
+}
+
+.nodeMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.metricValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.metricLabel {
+  font-size: 10px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nodeActions {
+  display: flex;
+  align-items: center;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+  
+  .octopusNode:hover & {
+    opacity: 1;
+  }
+}
+
+// Connection handles (invisible but functional)
+.nodeHandles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.handle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: #3b82f6;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  
+  .octopusNode:hover & {
+    opacity: 1;
+  }
+  
+  &.handleTop {
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  &.handleRight {
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  &.handleBottom {
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  &.handleLeft {
+    left: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+// Page nodes for site map
+.pageNode {
+  width: 220px;
+  height: 140px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+  
+  &.selected {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #667eea;
+  }
+}
+
+.pageIcon {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.pageContent {
+  margin-bottom: 12px;
+}
+
+.pageTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 4px 0;
+}
+
+.pagePath {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.pageComponents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.componentChip {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.componentMore {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+// Legacy node styling (for fallback)
+.componentNode {
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    border-color: var(--color-primary, #3b82f6);
+  }
+}
+
+.nodeCard {
+  width: 280px;
+  height: 200px;
+  margin: 0;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// Category-specific node styling
+.node-atomic {
+  .componentNode {
+    border-left: 4px solid #3b82f6;
+  }
+}
+
+.node-molecular {
+  .componentNode {
+    border-left: 4px solid #10b981;
+  }
+}
+
+.node-organism {
+  .componentNode {
+    border-left: 4px solid #f59e0b;
+  }
+}
+
+// Enhanced control panels
+.controlPanel {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  padding: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  min-width: 260px;
+}
+
+.panelContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panelTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  font-size: 16px;
+}
+
+.viewModeControls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.layoutControls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.controlLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 6px;
+}
+
+.viewButton,
+.layoutButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+// Enhanced legend
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.legendColor {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  
+  &.atomic {
+    background: #3b82f6;
+  }
+  
+  &.molecular {
+    background: #10b981;
+  }
+  
+  &.organism {
+    background: #f59e0b;
+  }
+}
+
+// Enhanced stats panel
+.statsPanel {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  padding: 16px 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 20px;
+}
+
+.stat {
+  text-align: center;
+  
+  strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    line-height: 1;
+  }
+  
+  span {
+    font-size: 11px;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 4px;
+    display: block;
+    font-weight: 500;
+  }
+}
+
+// Custom React Flow controls
+.controls {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    
+  :global(.react-flow__controls-button) {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    width: 36px;
+    height: 36px;
+    
+    &:hover {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+    
+    &:focus {
+      outline: 2px dashed #3b82f6;
+      outline-offset: 2px;
+    }
+  }
+}
+
+// Enhanced edge animations and styling
+.graphContainer {
+  :global(.react-flow__edge-path) {
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  :global(.react-flow__edge.animated .react-flow__edge-path) {
+    stroke-dasharray: 8,8;
+    animation: dash 2s linear infinite;
+  }
+  
+  :global(.react-flow__edge .react-flow__edge-path) {
+    transition: all 0.2s ease;
+  }
+  
+  :global(.react-flow__edge:hover .react-flow__edge-path) {
+    stroke-width: 3px;
+  }
+  
+  // Node selection styles
+  :global(.react-flow__node.selected) {
+    z-index: 100;
+  }
+  
+  // Background pattern
+  :global(.react-flow__background) {
+    opacity: 0.6;
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+// Responsive design
+@media (max-width: 1024px) {
+  .controlPanel {
+    min-width: 220px;
+    padding: 14px;
+  }
+  
+  .octopusNode {
+    width: 200px;
+    height: 160px;
+  }
+  
+  .pageNode {
+    width: 180px;
+    height: 120px;
+  }
+  
+  .statsPanel {
+    padding: 12px 16px;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .controlPanel {
+    min-width: 200px;
+    padding: 12px;
+  }
+  
+  .octopusNode {
+    width: 180px;
+    height: 140px;
+  }
+  
+  .nodeTitle {
+    font-size: 14px;
+  }
+  
+  .nodeDescription {
+    font-size: 11px;
+  }
+  
+  .pageNode {
+    width: 160px;
+    height: 100px;
+    padding: 12px;
+  }
+  
+  .statsPanel {
+    padding: 8px 12px;
+    gap: 12px;
+    
+    .stat strong {
+      font-size: 16px;
+    }
+  }
+}

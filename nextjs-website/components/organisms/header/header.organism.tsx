@@ -1,5 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-("use client");
+"use client";
 
 import React, { useState, useEffect, createContext, useContext } from "react";
 import Link from "next/link";

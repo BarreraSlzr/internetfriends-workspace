@@ -1,0 +1,142 @@
+{
+  "id": "tradingdashboard-organism-organisms-trading-dashboard-organism-tsx",
+  "metadata": {
+    "id": "tradingdashboard-organism-organisms-trading-dashboard-organism-tsx",
+    "name": "TradingDashboard",
+    "category": "organism",
+    "path": "organisms/trading-dashboard.organism.tsx",
+    "filePath": "components/organisms/trading-dashboard.organism.tsx",
+    "testStatus": "unknown",
+    "usageCount": 0,
+    "description": "Trading-Style Development Dashboard",
+    "dependencies": [
+      "lib/events/horse-race-pipeline",
+      "lib/events/pattern-monitor",
+      "trading-dashboard.module.scss"
+    ],
+    "usedBy": [],
+    "hasTypes": false,
+    "hasTests": false,
+    "hasStories": false,
+    "lastModified": "2025-08-13T04:13:18.991Z",
+    "size": 9826,
+    "exports": [],
+    "props": []
+  },
+  "stateMachine": {
+    "componentName": "TradingDashboard",
+    "initialState": "isLiveFalse",
+    "states": [
+      {
+        "name": "isLiveFalse",
+        "description": "isLive is false",
+        "triggers": [
+          "setIsLive(false)"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "}",
+          "/>",
+          "{isLive",
+          "?",
+          "LIVE",
+          "⏸️",
+          "Pause"
+        ],
+        "props": {
+          "isLive": false
+        }
+      },
+      {
+        "name": "isLiveTrue",
+        "description": "isLive is true",
+        "triggers": [
+          "setIsLive(true)"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "}",
+          "/>",
+          "{isLive",
+          "?",
+          "LIVE",
+          "⏸️",
+          "Pause"
+        ],
+        "props": {
+          "isLive": true
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsLive(!isLive)"
+      }
+    ],
+    "cssStates": [
+      {
+        "state": "default",
+        "styles": {
+          "borderColor": "var(--color-border)",
+          "backgroundColor": "var(--color-background)",
+          "color": "var(--color-text-primary)"
+        },
+        "classes": [
+          "border",
+          "rounded-lg",
+          "px-4",
+          "py-2"
+        ],
+        "pseudoStates": [
+          ":hover",
+          ":focus",
+          ":active"
+        ]
+      },
+      {
+        "state": "hover",
+        "styles": {
+          "backgroundColor": "var(--color-background-hover)",
+          "borderColor": "var(--color-border-hover)",
+          "transform": "translateY(-1px)"
+        },
+        "classes": [
+          "hover:bg-gray-50",
+          "hover:border-gray-300"
+        ],
+        "pseudoStates": [
+          ":hover"
+        ]
+      },
+      {
+        "state": "focus",
+        "styles": {
+          "borderColor": "var(--color-primary)",
+          "borderWidth": "2px"
+        },
+        "classes": [
+          "focus:border-dashed",
+          "focus:border-2",
+          "focus:border-blue-500"
+        ],
+        "pseudoStates": [
+          ":focus",
+          ":focus-visible"
+        ]
+      }
+    ],
+    "mermaidDiagram": "stateDiagram-v2\n    isLiveFalse : isLive is false\n    isLiveTrue : isLive is true\n    any --> new_state : Click\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset",
+    "documentation": "# TradingDashboard State Machine\n\n## Overview\nTrading-Style Development Dashboard\n\n## Component States\n\n### Logical States\n\n#### isLiveFalse\n- **Description**: isLive is false\n- **Triggers**: setIsLive(false)\n- **CSS Classes**: `} /> {isLive ? LIVE ⏸️ Pause`\n- **Props**: `{\"isLive\":false}`\n\n#### isLiveTrue\n- **Description**: isLive is true\n- **Triggers**: setIsLive(true)\n- **CSS Classes**: `} /> {isLive ? LIVE ⏸️ Pause`\n- **Props**: `{\"isLive\":true}`\n\n\n### CSS States & Styling\n\n\n#### default\n```css\nborderColor: var(--color-border);\nbackgroundColor: var(--color-background);\ncolor: var(--color-text-primary);\n```\n\n**Classes**: `border rounded-lg px-4 py-2`  \n**Pseudo-states**: :hover, :focus, :active\n\n#### hover\n```css\nbackgroundColor: var(--color-background-hover);\nborderColor: var(--color-border-hover);\ntransform: translateY(-1px);\n```\n\n**Classes**: `hover:bg-gray-50 hover:border-gray-300`  \n**Pseudo-states**: :hover\n\n#### focus\n```css\nborderColor: var(--color-primary);\nborderWidth: 2px;\n```\n\n**Classes**: `focus:border-dashed focus:border-2 focus:border-blue-500`  \n**Pseudo-states**: :focus, :focus-visible\n\n\n## State Transitions\n\n```mermaid\nstateDiagram-v2\n    isLiveFalse : isLive is false\n    isLiveTrue : isLive is true\n    any --> new_state : Click\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset\n```\n\n## CSS Custom Properties\n\nFollowing InternetFriends design system:\n\n```css\n:root {\n  --color-primary: #3b82f6;\n  --color-border: #e5e7eb;\n  --color-border-hover: #d1d5db;\n  --color-background: #ffffff;\n  --color-background-hover: #f9fafb;\n  --color-text-primary: #111827;\n}\n```\n\n## Focus States\n\nInternetFriends style focus states use **2px dashed borders**:\n\n```css\n.component:focus-visible {\n  border: 2px dashed var(--color-primary);\n  outline: none;\n}\n```\n\n## Animation Transitions\n\n```css\n.component {\n  transition: all 0.2s ease-in-out;\n}\n```\n\n## Usage Examples\n\n```tsx\n// Default state\n<TradingDashboard />\n\n// Loading state\n<TradingDashboard loading />\n\n// Error state\n<TradingDashboard error=\"Something went wrong\" />\n\n// Success state\n<TradingDashboard success />\n```\n\n## Testing States\n\n```tsx\n// Test all states\ndescribe('TradingDashboard States', () => {\n  it('renders default state', () => {\n    render(<TradingDashboard />);\n  });\n  \n  it('renders loading state', () => {\n    render(<TradingDashboard loading />);\n  });\n  \n  it('handles error state', () => {\n    render(<TradingDashboard error=\"Test error\" />);\n  });\n});\n```\n"
+  },
+  "renderedMarkdown": "<h1>TradingDashboard State Machine</h1>\n<h2>Overview</h2>\n<p>Trading-Style Development Dashboard</p>\n<h2>Component States</h2>\n<h3>Logical States</h3>\n<h4>isLiveFalse</h4>\n<ul>\n<li><strong>Description</strong>: isLive is false</li>\n<li><strong>Triggers</strong>: setIsLive(false)</li>\n<li><strong>CSS Classes</strong>: <code>} /> {isLive ? LIVE ⏸️ Pause</code></li>\n<li><strong>Props</strong>: <code>{\"isLive\":false}</code></li>\n</ul>\n<h4>isLiveTrue</h4>\n<ul>\n<li><strong>Description</strong>: isLive is true</li>\n<li><strong>Triggers</strong>: setIsLive(true)</li>\n<li><strong>CSS Classes</strong>: <code>} /> {isLive ? LIVE ⏸️ Pause</code></li>\n<li><strong>Props</strong>: <code>{\"isLive\":true}</code></li>\n</ul>\n<h3>CSS States &#x26; Styling</h3>\n<h4>default</h4>\n<pre><code class=\"language-css\">borderColor: var(--color-border);\nbackgroundColor: var(--color-background);\ncolor: var(--color-text-primary);\n</code></pre>\n<p><strong>Classes</strong>: <code>border rounded-lg px-4 py-2</code><br>\n<strong>Pseudo-states</strong>: :hover, :focus, :active</p>\n<h4>hover</h4>\n<pre><code class=\"language-css\">backgroundColor: var(--color-background-hover);\nborderColor: var(--color-border-hover);\ntransform: translateY(-1px);\n</code></pre>\n<p><strong>Classes</strong>: <code>hover:bg-gray-50 hover:border-gray-300</code><br>\n<strong>Pseudo-states</strong>: :hover</p>\n<h4>focus</h4>\n<pre><code class=\"language-css\">borderColor: var(--color-primary);\nborderWidth: 2px;\n</code></pre>\n<p><strong>Classes</strong>: <code>focus:border-dashed focus:border-2 focus:border-blue-500</code><br>\n<strong>Pseudo-states</strong>: :focus, :focus-visible</p>\n<h2>State Transitions</h2>\n<pre><code class=\"language-mermaid\">stateDiagram-v2\n    isLiveFalse : isLive is false\n    isLiveTrue : isLive is true\n    any --> new_state : Click\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset\n</code></pre>\n<h2>CSS Custom Properties</h2>\n<p>Following InternetFriends design system:</p>\n<pre><code class=\"language-css\">:root {\n  --color-primary: #3b82f6;\n  --color-border: #e5e7eb;\n  --color-border-hover: #d1d5db;\n  --color-background: #ffffff;\n  --color-background-hover: #f9fafb;\n  --color-text-primary: #111827;\n}\n</code></pre>\n<h2>Focus States</h2>\n<p>InternetFriends style focus states use <strong>2px dashed borders</strong>:</p>\n<pre><code class=\"language-css\">.component:focus-visible {\n  border: 2px dashed var(--color-primary);\n  outline: none;\n}\n</code></pre>\n<h2>Animation Transitions</h2>\n<pre><code class=\"language-css\">.component {\n  transition: all 0.2s ease-in-out;\n}\n</code></pre>\n<h2>Usage Examples</h2>\n<pre><code class=\"language-tsx\">// Default state\n&#x3C;TradingDashboard />\n\n// Loading state\n&#x3C;TradingDashboard loading />\n\n// Error state\n&#x3C;TradingDashboard error=\"Something went wrong\" />\n\n// Success state\n&#x3C;TradingDashboard success />\n</code></pre>\n<h2>Testing States</h2>\n<pre><code class=\"language-tsx\">// Test all states\ndescribe('TradingDashboard States', () => {\n  it('renders default state', () => {\n    render(&#x3C;TradingDashboard />);\n  });\n  \n  it('renders loading state', () => {\n    render(&#x3C;TradingDashboard loading />);\n  });\n  \n  it('handles error state', () => {\n    render(&#x3C;TradingDashboard error=\"Test error\" />);\n  });\n});\n</code></pre>\n",
+  "generatedAt": "2025-08-16T06:53:06.946Z",
+  "version": "1.0.0",
+  "performance": {
+    "analysisTime": 1,
+    "renderTime": 54,
+    "fileSize": 9826
+  }
+}

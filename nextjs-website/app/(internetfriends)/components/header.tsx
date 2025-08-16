@@ -1,16 +1,14 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
-import Link from "next/link";
+import { ArrowUpRight, Moon, Sun } from "lucide-react";
 import Image from "next/image";
-import { ArrowUpRight, Sun, Moon } from "lucide-react";
-import React from "react";
+import Link from "next/link";
 import content from "../content.json";
 
-import { useTheme } from "@/hooks/use-theme";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 import { HeaderVignette } from "@/components/effects/dark-vignette";
 import { useHeaderOrbit } from "@/hooks/use-header-orbit";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function Header() {
   const { toggleTheme, isDark } = useTheme();
@@ -32,7 +30,7 @@ export default function Header() {
       }}
       data-scrolled={isScrolled}
     >
-      <GlassRefinedAtomic
+      <GlassCardAtomic
         variant="header"
         noise={false}
         hover={false}
@@ -66,7 +64,7 @@ export default function Header() {
               className="transition-all duration-200"
               title="Toggle theme"
             >
-              <GlassRefinedAtomic
+              <GlassCardAtomic
                 variant="default"
                 strength={0.3}
                 noise={false}
@@ -79,7 +77,7 @@ export default function Header() {
                 ) : (
                   <Moon className="h-4 w-4 text-[color:var(--if-accent-primary)]" />
                 )}
-              </GlassRefinedAtomic>
+              </GlassCardAtomic>
             </button>
             <Link
               href="/samples"
@@ -90,7 +88,7 @@ export default function Header() {
             </Link>
           </div>
         </div>
-      </GlassRefinedAtomic>
+      </GlassCardAtomic>
     </header>
   );
 }

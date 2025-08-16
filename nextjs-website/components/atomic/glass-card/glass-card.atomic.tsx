@@ -1,7 +1,7 @@
-import { generateStamp } from "@/lib/utils/timestamp";
+
 "use client";
 
-import React from "react";
+import * as React from "react";
 import { cn } from "@/lib/utils";
 import { GlassCardAtomicProps } from "./types";
 

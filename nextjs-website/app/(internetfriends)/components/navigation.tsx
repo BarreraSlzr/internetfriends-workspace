@@ -5,7 +5,7 @@ import content from "../content.json";
 export default function Navigation() {
   return (
     <nav
-      className="sm:px-6 px-2 md:px-8 flex flex-wrap gap-8 border-2 border-b-0 border-accent-medium surface-glass"
+      className="sm:px-6 px-2 md:px-8 flex flex-wrap gap-8 border-b"
       aria-label="Main Navigation"
     >
       {content.navigation.map((item) => (
@@ -22,4 +22,3 @@ export default function Navigation() {
   );
 }
 
-import { generateStamp } from "@/lib/utils/timestamp";

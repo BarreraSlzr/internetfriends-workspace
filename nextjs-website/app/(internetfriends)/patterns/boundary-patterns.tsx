@@ -1,5 +1,4 @@
-import { generateStamp } from "@/lib/utils/timestamp";
-("use client");
+"use client"
 /**
  * boundary-patterns.tsx - Client/Server Boundary Pattern System
  *
@@ -13,8 +12,8 @@ import { generateStamp } from "@/lib/utils/timestamp";
  * 5. Epic-aware boundary management
  */
 
-import React, { Suspense, ComponentType, ReactNode } from "react";
 import dynamic from "next/dynamic";
+import React, { ComponentType, ReactNode, Suspense } from "react";
 
 // =====================================
 // TYPES & INTERFACES
@@ -356,7 +355,7 @@ export const EpicBoundary: React.FC<EpicBoundaryProps> = ({
 // WEBGL-SPECIFIC BOUNDARY
 // =====================================
 
-export interface WebGLBoundaryProps<T = {}> {
+export interface WebGLBoundaryProps<T> {
   /** Component to render with WebGL context */
   component: ComponentType<T>;
   /** Props for the WebGL component */
@@ -379,7 +378,7 @@ export interface WebGLBoundaryProps<T = {}> {
  * - Performance monitoring
  * - Epic integration
  */
-export function WebGLBoundary<T extends Record<string, any>>({
+export function WebGLBoundary<T extends Record<string, unknown>>({
   component: Component,
   props,
   fallback,

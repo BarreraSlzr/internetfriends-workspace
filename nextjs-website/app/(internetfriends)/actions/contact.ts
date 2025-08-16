@@ -1,7 +1,7 @@
 "use server";
 
-import { upsertContactSubmission } from "@/app/(internetfriends)/lib/db/queries/contact";
-import { ContactFormData } from "@/app/(internetfriends)/lib/db/schema";
+import { localDbService } from "@/lib/database/local-service";
+import { ContactFormData } from "@/lib/database/schema";
 
 export async function submitContactForm(formData: FormData) {
   try {
@@ -15,7 +15,7 @@ export async function submitContactForm(formData: FormData) {
       project_scope: formData.get("project_scope") as string,
     };
 
-    const result = await upsertContactSubmission(data);
+    const result = await localDbService.upsertContactSubmission(data);
 
     if (!result?.id) {
       return { error: "Failed to submit form" };

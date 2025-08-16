@@ -1,8 +1,7 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
-import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 interface CardDescriptionToggleProps {
   description: string;

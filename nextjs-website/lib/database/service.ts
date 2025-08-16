@@ -230,6 +230,50 @@ class DatabaseService {
       };
     }
   }
+
+  // Contact Form Operations
+  async upsertContactSubmission(data: {
+    first_name: string;
+    last_name: string;
+    company_name: string;
+    email: string;
+    project_start_date: string;
+    budget: string;
+    project_scope: string;
+  }) {
+    const existing = await this.db
+      .selectFrom("contact_submissions")
+      .where("email", "=", data.email)
+      .selectAll()
+      .executeTakeFirst();
+
+    if (existing) {
+      return await this.db
+        .updateTable("contact_submissions")
+        .set({
+          ...data,
+          updated_at: new Date(),
+        })
+        .where("id", "=", existing.id)
+        .returning(["id"])
+        .executeTakeFirst();
+    } else {
+      return await this.db
+        .insertInto("contact_submissions")
+        .values(data)
+        .returning(["id"])
+        .executeTakeFirst();
+    }
+  }
+
+  async getContactSubmissions(limit = 50) {
+    return await this.db
+      .selectFrom("contact_submissions")
+      .orderBy("created_at", "desc")
+      .limit(limit)
+      .selectAll()
+      .execute();
+  }
 }
 
 export const dbService = DatabaseService.getInstance();

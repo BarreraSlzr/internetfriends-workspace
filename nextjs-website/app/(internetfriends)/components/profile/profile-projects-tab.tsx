@@ -1,13 +1,14 @@
-import { curriculum } from "@/app/(internetfriends)/lib/curriculum/data";
+import { curriculum } from "@/lib/data/curriculum";
 import { Badge } from "@/components/ui/badge";
 import { GlassBadge } from "@/components/ui/glass-badge";
 import { cardCss } from "./profile-card";
 
 const ProfileProjectsTab = () => {
   const skillsMap = new Map(
-    curriculum.skills.map((skill) => [skill.id, skill]),
+    (curriculum.skills || []).map((skill) => [skill.id, skill]),
   );
-  const renderSkills = (skillsUsed: number[]) => {
+  const renderSkills = (skillsUsed: number[] | undefined) => {
+    if (!skillsUsed || !Array.isArray(skillsUsed)) return null;
     const sortedSkills = skillsUsed
       .map((id) => skillsMap.get(id))
       .filter((skill) => skill)
@@ -24,7 +25,7 @@ const ProfileProjectsTab = () => {
       <div className={cardCss}>
         <p className="font-medium">Enterprise projects</p>
       </div>
-      {curriculum.jobExperiences.map((job, index) => (
+       {(curriculum.jobExperiences || []).map((job, index) => (
         <div key={`project-${index}`} className={cardCss}>
           <div className="flex flex-row flex-wrap justify-between">
             <p className="font-medium">
@@ -34,12 +35,12 @@ const ProfileProjectsTab = () => {
               {job.startDate} - {job.endDate || "Present"}
             </Badge>
           </div>
-          {job.projects.map((project, pIndex) => (
+           {(job.projects || []).map((project, pIndex) => (
             <div key={`project-${pIndex}`} className="ml-4 mb-4">
               <h4 className="text-lg font-semibold">{project.name}</h4>
               <p className="text-gray-700 mb-2">{project.description}</p>
               <div className="flex flex-wrap gap-2">
-                {renderSkills(project.skillsUsed)}
+                 {renderSkills(project.skillsUsed || [])}
               </div>
             </div>
           ))}
@@ -53,4 +54,3 @@ export { ProfileProjectsTab };
 
 export default ProfileProjectsTab;
 
-import { generateStamp } from "@/lib/utils/timestamp";

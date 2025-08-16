@@ -1,417 +1,552 @@
-import { generateStamp } from "@/lib/utils/timestamp";
 "use client";
 
-/**
- * Design System Graph Page
- *
- * Restored & modernized from legacy .bak variant.
- * - Integrated new HeaderOrganism (glass variant)
- * - Preserves interactive ReactFlow visualization of component registry
- * - Adds accessibility improvements (skip link via HeaderOrganism)
- *
- * Epic: glass-refinement-v1
- * Future Enhancements:
- *  - Move node + edge generation to a server module with caching
- *  - Add export-to-Markdown / JSON snapshot action
- *  - Add filtering by stability / ownership / epic
- */
-
-import React, {
-  useCallback,
-  useMemo,
-  useState,
-  useEffect,
-  Suspense,
-} from "react";
-import dynamic from "next/dynamic";
-import { HeaderOrganism } from "@/components/organisms/header/header.organism";
-import { ButtonAtomic } from "@/components/atomic/button";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
-
-// Dynamic import (ReactFlow is client-only & large – avoid blocking hydration)
-const ReactFlow = dynamic(() => import("reactflow").then((m) => m.default), {
-  ssr: false,
-});
-const Background = dynamic(
-  () => import("reactflow").then((m) => m.Background),
-  { ssr: false },
-);
-const Panel = dynamic(() => import("reactflow").then((m) => m.Panel), {
-  ssr: false,
-});
-const MiniMap = dynamic(() => import("reactflow").then((m) => m.MiniMap), {
-  ssr: false,
-});
-const Controls = dynamic(() => import("reactflow").then((m) => m.Controls), {
-  ssr: false,
-});
-
-import "reactflow/dist/style.css";
+import * as React from "react";
+const { useState, useEffect } = React;
+import { componentRegistry, ComponentRegistryEntry, PageRegistryEntry } from "@/lib/design-system/component-registry";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
+import { ButtonAtomic } from "@/components/atomic/button/button.atomic";
 import {
-  BackgroundVariant,
-  applyNodeChanges,
-  applyEdgeChanges,
-  addEdge,
-} from "reactflow";
+  Search,
+  Filter,
+  RefreshCw,
+  BarChart3,
+  Component,
+  GitBranch,
+  X,
+  Globe,
+  Code,
+  Image,
+  TrendingUp,
+  Map,
+  Grid3x3,
+  Eye,
+  FileCode,
+  ExternalLink
+} from "lucide-react";
 
-// Node type components (kept local to design-system)
-import { ComponentNode } from "./nodes/component.node";
-import { UtilityNode } from "./nodes/utility.node";
-import { PageNode } from "./nodes/page.node";
-import { HookNode } from "./nodes/hook.node";
+type ViewMode = 'components' | 'pages' | 'sitemap' | 'usage';
+type VisualizationMode = 'graph' | 'grid' | 'mirror';
 
-// Component registry generator
-import { componentRegistry } from "./registry/component.registry";
-
-// Types from reactflow (typed lightly to avoid deep imports explosion)
-import type {
-  Edge,
-  Node,
-  OnConnect,
-  OnEdgesChange,
-  OnNodesChange,
-} from "reactflow";
-
-const nodeTypes = {
-  component: ComponentNode,
-  utility: UtilityNode,
-  page: PageNode,
-  hook: HookNode,
-};
-
-interface RegistryStats {
-  total: number;
-  atomic: number;
-  molecular: number;
-  organism: number;
-  utility: number;
-  hook: number;
-  page: number;
-}
-
-export default function DesignSystemPage() {
-  // --- UI State ---
+export default function EnhancedDesignSystemPage() {
+  // Registry data
+  const [components, setComponents] = useState<ComponentRegistryEntry[]>([]);
+  const [pages, setPages] = useState<PageRegistryEntry[]>([]);
+  const [statistics, setStatistics] = useState<any>(null);
+  
+  // UI state
+  const [viewMode, setViewMode] = useState<ViewMode>('components');
+  const [visualizationMode, setVisualizationMode] = useState<VisualizationMode>('graph');
+  const [selectedItem, setSelectedItem] = useState<ComponentRegistryEntry | PageRegistryEntry | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [showStats, setShowStats] = useState<boolean>(true);
-  const [mounted, setMounted] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Mark client mount (avoid hydration mismatch for ReactFlow)
-  useEffect(() => setMounted(true), []);
-
-  // --- Registry Data (initial snapshot) ---
-  const initialNodes: Node[] = useMemo(
-    () => componentRegistry.generateFlowNodes(),
-    [],
-  );
-  const initialEdges: Edge[] = useMemo(
-    () => componentRegistry.generateFlowEdges(),
-    [],
-  );
-
-  // ReactFlow managed state
-  const [nodes, setNodes] = useState<Node[]>(initialNodes);
-  const [edges, setEdges] = useState<Edge[]>(initialEdges);
-
-  const onNodesChange: OnNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [],
-  );
-
-  const onEdgesChange: OnEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    [],
-  );
-
-  const onConnect: OnConnect = useCallback(
-    (connection) => setEdges((eds) => addEdge(connection, eds)),
-    [],
-  );
-
-  // --- Filtering Logic ---
-  const filteredNodes = useMemo(() => {
-    let next = nodes;
-
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      next = next.filter(
-        (n) =>
-          n.data?.label?.toLowerCase().includes(q) ||
-          n.data?.description?.toLowerCase().includes(q),
-      );
-    }
-
-    if (selectedCategory !== "all") {
-      next = next.filter(
-        (n) =>
-          n.type === selectedCategory || n.data?.category === selectedCategory,
-      );
-    }
-    return next;
-  }, [nodes, searchQuery, selectedCategory]);
-
-  // Edges trimmed to only those connecting currently visible nodes
-  const visibleEdges = useMemo(() => {
-    const visibleIds = new Set(filteredNodes.map((n) => n.id));
-    return edges.filter(
-      (e) =>
-        visibleIds.has(e.source as string) &&
-        visibleIds.has(e.target as string),
-    );
-  }, [filteredNodes, edges]);
-
-  // Stats snapshot (could be dynamic, kept simple)
-  const stats: RegistryStats = useMemo(() => {
-    const raw =
-      (componentRegistry.getComponentStats() as Partial<RegistryStats>) || {};
-    return {
-      total: raw.total ?? 0,
-      atomic: raw.atomic ?? 0,
-      molecular: raw.molecular ?? 0,
-      organism: raw.organism ?? 0,
-      utility: raw.utility ?? 0,
-      hook: raw.hook ?? 0,
-      page: raw.page ?? 0,
-    };
+  // Load registry data
+  useEffect(() => {
+    loadRegistryData();
   }, []);
 
-  return (
-    <main id="main-content" className="flex flex-col min-h-screen">
-      <HeaderOrganism
-        variant="glass"
-        size="md"
-        navigation={{ items: [] }}
-        themeToggle={{ show: true, showLabels: false }}
-        languageSelector={{ show: false }}
-        skipToMain
-      />
+  const loadRegistryData = async () => {
+    setIsLoading(true);
+    try {
+      const registryComponents = await componentRegistry.getAllComponents();
+      const registryPages = await componentRegistry.getAllPages();
+      const registryStats = await componentRegistry.getStatistics();
+      
+      setComponents(registryComponents);
+      setPages(registryPages);
+      setStatistics(registryStats);
+    } catch (error) {
+      console.error('Failed to load registry data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      <div className="flex flex-col flex-1">
-        <section className="relative flex-1 min-h-[70vh]">
-          {!mounted && (
-            <div className="h-[60vh] flex items-center justify-center">
-              <GlassRefinedAtomic
-                variant="card"
-                strength={0.4}
-                className="p-8 flex flex-col gap-4 items-center"
-              >
-                <p className="text-sm opacity-70">
-                  Initializing component graph…
-                </p>
-              </GlassRefinedAtomic>
-            </div>
-          )}
+  const handleItemSelect = (item: ComponentRegistryEntry | PageRegistryEntry) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
 
-          {/* ReactFlow only after mount to avoid SSR mismatch */}
-          {mounted && (
-            <Suspense
-              fallback={
-                <div className="h-[60vh] flex items-center justify-center">
-                  <p className="text-sm opacity-60">Loading graph…</p>
-                </div>
-              }
-            >
-              <ReactFlow
-                nodes={filteredNodes}
-                edges={visibleEdges}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
-                fitView
-                proOptions={{ hideAttribution: true }}
-                nodeTypes={nodeTypes}
-                className="bg-background"
-              >
-                <Background
-                  variant={BackgroundVariant.Dots}
-                  gap={20}
-                  size={1}
-                  color="var(--if-primary)"
-                  style={{ opacity: 0.08 }}
-                />
-                <MiniMap pannable zoomable />
-                <Controls />
+  const getFilteredData = () => {
+    if (viewMode === 'pages') {
+      if (!searchQuery && selectedCategory === 'all') return pages;
+      
+      return pages.filter(page => {
+        const matchesSearch = !searchQuery || 
+          page.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          page.description.toLowerCase().includes(searchQuery.toLowerCase());
+        
+        const matchesCategory = selectedCategory === 'all' || page.category === selectedCategory;
+        
+        return matchesSearch && matchesCategory;
+      });
+    } else {
+      if (!searchQuery && selectedCategory === 'all') return components;
+      
+      return components.filter(component => {
+        const matchesSearch = !searchQuery ||
+          component.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          component.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          component.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+        
+        const matchesCategory = selectedCategory === 'all' || component.category === selectedCategory;
+        
+        return matchesSearch && matchesCategory;
+      });
+    }
+  };
 
-                {/* Left control panel */}
-                <Panel
-                  position="top-left"
-                  className="max-w-xs w-[320px] space-y-4 bg-glass-bg-header backdrop-blur-lg border border-glass-border rounded-compact-md p-4 shadow-sm"
-                >
-                  <div>
-                    <h1 className="text-base font-semibold">
-                      InternetFriends Design System
-                    </h1>
-                    <p className="text-xs opacity-70">
-                      Visual component architecture map
-                    </p>
-                  </div>
+  const renderViewModeSelector = () => (
+    <div className="flex items-center bg-gray-100 rounded-lg p-1 mb-4">
+      <ButtonAtomic
+        variant={viewMode === 'components' ? 'primary' : 'ghost'}
+        size="sm"
+        onClick={() => setViewMode('components')}
+        className="flex items-center gap-2 text-xs"
+      >
+        <Component className="w-4 h-4" />
+        Components
+      </ButtonAtomic>
+      <ButtonAtomic
+        variant={viewMode === 'pages' ? 'primary' : 'ghost'}
+        size="sm"
+        onClick={() => setViewMode('pages')}
+        className="flex items-center gap-2 text-xs"
+      >
+        <Globe className="w-4 h-4" />
+        Pages
+      </ButtonAtomic>
+      <ButtonAtomic
+        variant={viewMode === 'sitemap' ? 'primary' : 'ghost'}
+        size="sm"
+        onClick={() => setViewMode('sitemap')}
+        className="flex items-center gap-2 text-xs"
+      >
+        <Map className="w-4 h-4" />
+        Sitemap
+      </ButtonAtomic>
+      <ButtonAtomic
+        variant={viewMode === 'usage' ? 'primary' : 'ghost'}
+        size="sm"
+        onClick={() => setViewMode('usage')}
+        className="flex items-center gap-2 text-xs"
+      >
+        <TrendingUp className="w-4 h-4" />
+        Usage
+      </ButtonAtomic>
+    </div>
+  );
 
-                  <div className="space-y-2">
-                    <input
-                      type="text"
-                      placeholder="Search components, hooks..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-compact-sm border border-border focus:outline-none focus:ring-2 focus:ring-if-primary/60 bg-background/70"
-                    />
-                    <select
-                      value={selectedCategory}
-                      onChange={(e) => setSelectedCategory(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-compact-sm border border-border focus:outline-none focus:ring-2 focus:ring-if-primary/60 bg-background/70"
-                    >
-                      <option value="all">All Categories</option>
-                      <option value="component">Components</option>
-                      <option value="atomic">Atomic</option>
-                      <option value="molecular">Molecular</option>
-                      <option value="organism">Organism</option>
-                      <option value="utility">Utilities</option>
-                      <option value="hook">Hooks</option>
-                      <option value="page">Pages</option>
-                    </select>
+  const renderVisualizationSelector = () => (
+    <div className="flex items-center bg-gray-100 rounded-lg p-1">
+      <ButtonAtomic
+        variant={visualizationMode === 'graph' ? 'primary' : 'ghost'}
+        size="sm"
+        onClick={() => setVisualizationMode('graph')}
+        className="flex items-center gap-2 text-xs"
+      >
+        <GitBranch className="w-4 h-4" />
+        Graph
+      </ButtonAtomic>
+      <ButtonAtomic
+        variant={visualizationMode === 'grid' ? 'primary' : 'ghost'}
+        size="sm"
+        onClick={() => setVisualizationMode('grid')}
+        className="flex items-center gap-2 text-xs"
+      >
+        <Grid3x3 className="w-4 h-4" />
+        Grid
+      </ButtonAtomic>
+      <ButtonAtomic
+        variant={visualizationMode === 'mirror' ? 'primary' : 'ghost'}
+        size="sm"
+        onClick={() => setVisualizationMode('mirror')}
+        className="flex items-center gap-2 text-xs"
+      >
+        <Eye className="w-4 h-4" />
+        Mirror
+      </ButtonAtomic>
+    </div>
+  );
 
-                    <div className="flex flex-wrap gap-2">
-                      <ButtonAtomic
-                        size="xs"
-                        variant="outline"
-                        onClick={() => setShowStats((s) => !s)}
-                      >
-                        {showStats ? "Hide Stats" : "Show Stats"}
-                      </ButtonAtomic>
-                      <ButtonAtomic
-                        size="xs"
-                        variant="ghost"
-                        onClick={() => {
-                          setSearchQuery("");
-                          setSelectedCategory("all");
-                        }}
-                      >
-                        Clear
-                      </ButtonAtomic>
-                    </div>
-                  </div>
+  const renderStatisticsCards = () => (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      <GlassCardAtomic variant="default" className="p-6 text-center">
+        <Component className="w-8 h-8 mx-auto mb-3 text-blue-500" />
+        <div className="text-3xl font-bold text-gray-900">
+          {statistics?.totalComponents || components.length}
+        </div>
+        <div className="text-sm text-gray-600">Components</div>
+      </GlassCardAtomic>
 
-                  <div className="grid grid-cols-2 gap-2 text-[10px] leading-tight">
-                    {[
-                      ["Atomic", "from-blue-50 to-blue-100 border-blue-200"],
-                      [
-                        "Molecular",
-                        "from-green-50 to-green-100 border-green-200",
-                      ],
-                      [
-                        "Organism",
-                        "from-purple-50 to-purple-100 border-purple-200",
-                      ],
-                      [
-                        "Utility",
-                        "from-amber-50 to-amber-100 border-amber-200",
-                      ],
-                      [
-                        "Hook",
-                        "from-emerald-50 to-emerald-100 border-emerald-200",
-                      ],
-                      [
-                        "Page",
-                        "from-indigo-50 to-indigo-100 border-indigo-200",
-                      ],
-                    ].map(([label, gradient]) => (
-                      <div key={label} className="flex items-center gap-1">
-                        <div
-                          className={`w-3 h-3 bg-gradient-to-br ${gradient} border rounded-compact-xs`}
-                        />
-                        <span className="truncate">{label}</span>
-                      </div>
-                    ))}
-                  </div>
-                </Panel>
+      <GlassCardAtomic variant="default" className="p-6 text-center">
+        <Globe className="w-8 h-8 mx-auto mb-3 text-green-500" />
+        <div className="text-3xl font-bold text-gray-900">
+          {statistics?.totalPages || pages.length}
+        </div>
+        <div className="text-sm text-gray-600">Pages</div>
+      </GlassCardAtomic>
 
-                {/* Stats Panel */}
-                {showStats && (
-                  <Panel
-                    position="top-right"
-                    className="w-[240px] space-y-3 bg-glass-bg-header backdrop-blur-lg border border-glass-border rounded-compact-md p-4 shadow-sm"
-                  >
-                    <h3 className="text-xs font-semibold uppercase tracking-wide opacity-70">
-                      Registry Stats
-                    </h3>
-                    <ul className="text-xs grid grid-cols-2 gap-x-4 gap-y-1">
-                      <li className="flex justify-between">
-                        <span>Total</span>
-                        <span>{stats.total}</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Atomic</span>
-                        <span>{stats.atomic}</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Molecular</span>
-                        <span>{stats.molecular}</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Organism</span>
-                        <span>{stats.organism}</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Utility</span>
-                        <span>{stats.utility}</span>
-                      </li>
-                      <li className="flex justify-between">
-                        <span>Hook</span>
-                        <span>{stats.hook}</span>
-                      </li>
-                      <li className="flex justify-between col-span-2">
-                        <span>Page</span>
-                        <span>{stats.page}</span>
-                      </li>
-                    </ul>
-                  </Panel>
-                )}
-              </ReactFlow>
-            </Suspense>
-          )}
-        </section>
+      <GlassCardAtomic variant="default" className="p-6 text-center">
+        <TrendingUp className="w-8 h-8 mx-auto mb-3 text-purple-500" />
+        <div className="text-3xl font-bold text-gray-900">
+          {statistics?.reusabilityScore || 0}%
+        </div>
+        <div className="text-sm text-gray-600">Reusability</div>
+      </GlassCardAtomic>
 
-        {/* Footer meta / future actions */}
-        <footer className="py-8">
-          <div className="container mx-auto px-4 flex flex-col gap-4">
-            <GlassRefinedAtomic
-              variant="card"
-              strength={0.25}
-              className="p-4 md:p-6 flex flex-col gap-3"
-            >
-              <h2 className="text-sm font-semibold tracking-wide uppercase opacity-70">
-                Design System Graph
-              </h2>
-              <p className="text-xs opacity-70 leading-relaxed">
-                This visualization reflects the current registered components.
-                As the system evolves, nodes will gain metadata (stability,
-                ownership, epic lineage) and enable impact heat‑mapping.
+      <GlassCardAtomic variant="default" className="p-6 text-center">
+        <BarChart3 className="w-8 h-8 mx-auto mb-3 text-orange-500" />
+        <div className="text-3xl font-bold text-gray-900">
+          {statistics?.averageComponentsPerPage?.toFixed(1) || 0}
+        </div>
+        <div className="text-sm text-gray-600">Avg per Page</div>
+      </GlassCardAtomic>
+    </div>
+  );
+
+  const renderComponentCard = (component: ComponentRegistryEntry) => (
+    <GlassCardAtomic 
+      key={component.id} 
+      variant="default" 
+      className="p-4 cursor-pointer hover:shadow-lg transition-all duration-200 hover:border-blue-400 hover:border-dashed"
+      onClick={() => handleItemSelect(component)}
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <h3 className="font-semibold text-sm text-gray-900 mb-1">
+            {component.name}
+          </h3>
+          <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+            component.category === 'atomic' ? 'bg-blue-100 text-blue-700' :
+            component.category === 'molecular' ? 'bg-green-100 text-green-700' :
+            component.category === 'organism' ? 'bg-orange-100 text-orange-700' :
+            'bg-gray-100 text-gray-700'
+          }`}>
+            {component.category}
+          </span>
+        </div>
+        <div className={`w-3 h-3 rounded-full ${
+          component.status === 'active' ? 'bg-green-500' :
+          component.status === 'experimental' ? 'bg-yellow-500' :
+          'bg-red-500'
+        }`} />
+      </div>
+      
+      <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+        {component.description}
+      </p>
+      
+      <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+        <div className="text-gray-500">
+          Usage: <span className="font-medium text-gray-700">{component.usageCount}</span>
+        </div>
+        <div className="text-gray-500">
+          Pages: <span className="font-medium text-gray-700">{component.usedInPages.length}</span>
+        </div>
+      </div>
+      
+      <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+        <div className="flex flex-wrap gap-1">
+          {component.tags.slice(0, 2).map(tag => (
+            <span key={tag} className="px-1 py-0.5 bg-gray-100 text-gray-600 rounded text-xs">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center gap-1">
+          {component.hasScreenshot && <Image className="w-3 h-3 text-gray-400" />}
+          <Code className="w-3 h-3 text-gray-400" />
+        </div>
+      </div>
+    </GlassCardAtomic>
+  );
+
+  const renderPageCard = (page: PageRegistryEntry) => (
+    <GlassCardAtomic 
+      key={page.id} 
+      variant="default" 
+      className="p-4 cursor-pointer hover:shadow-lg transition-all duration-200 hover:border-green-400 hover:border-dashed"
+      onClick={() => handleItemSelect(page)}
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div>
+          <h3 className="font-semibold text-sm text-gray-900 mb-1">
+            {page.name}
+          </h3>
+          <span className="text-xs text-gray-500 font-mono">
+            {page.route}
+          </span>
+        </div>
+        <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${
+          page.category === 'marketing' ? 'bg-purple-100 text-purple-700' :
+          page.category === 'app' ? 'bg-blue-100 text-blue-700' :
+          page.category === 'admin' ? 'bg-red-100 text-red-700' :
+          'bg-gray-100 text-gray-700'
+        }`}>
+          {page.category}
+        </span>
+      </div>
+      
+      <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+        {page.description}
+      </p>
+      
+      <div className="grid grid-cols-2 gap-2 mb-3 text-xs">
+        <div className="text-gray-500">
+          Components: <span className="font-medium text-gray-700">{page.componentCount}</span>
+        </div>
+        <div className="text-gray-500">
+          Status: <span className={`font-medium ${
+            page.status === 'active' ? 'text-green-700' :
+            page.status === 'draft' ? 'text-yellow-700' :
+            'text-red-700'
+          }`}>
+            {page.status}
+          </span>
+        </div>
+      </div>
+      
+      <div className="flex items-center justify-between pt-2 border-t border-gray-200">
+        <div className="text-xs text-gray-500">
+          {new Date(page.lastModified).toLocaleDateString()}
+        </div>
+        <div className="flex items-center gap-1">
+          {page.hasScreenshot && <Image className="w-3 h-3 text-gray-400" />}
+          <FileCode className="w-3 h-3 text-gray-400" />
+          <ExternalLink className="w-3 h-3 text-gray-400" />
+        </div>
+      </div>
+    </GlassCardAtomic>
+  );
+
+  const renderContent = () => {
+    const filteredData = getFilteredData();
+
+    if (viewMode === 'sitemap' || visualizationMode === 'graph') {
+      return (
+        <div className="h-[calc(100vh-300px)]">
+          {/* Enhanced React Flow graph would go here */}
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <Map className="w-16 h-16 mx-auto mb-4 text-gray-400" />
+              <h3 className="text-lg font-medium text-gray-600 mb-2">
+                Interactive Sitemap View
+              </h3>
+              <p className="text-gray-500 mb-4">
+                {viewMode === 'sitemap' 
+                  ? 'Page relationships and navigation flow'
+                  : 'Component dependency graph'
+                }
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="text-sm text-gray-400">
+                Enhanced visualization coming soon...
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (visualizationMode === 'mirror') {
+      return (
+        <div className="space-y-6">
+          <div className="text-center mb-8">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              Project Mirror View
+            </h3>
+            <p className="text-gray-600">
+              Live screenshots and component usage across all pages
+            </p>
+          </div>
+          
+          {/* Mirror layout would show screenshot thumbnails */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pages.map(page => (
+              <div key={page.id} className="space-y-2">
+                <div className="aspect-video bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
+                  <div className="text-center">
+                    <Image className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                    <div className="text-sm font-medium text-gray-600">{page.name}</div>
+                    <div className="text-xs text-gray-500">{page.route}</div>
+                  </div>
+                </div>
+                <div className="text-xs text-gray-500">
+                  {page.componentCount} components • {page.status}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    // Grid view
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {viewMode === 'pages' 
+          ? (filteredData as PageRegistryEntry[]).map(renderPageCard)
+          : (filteredData as ComponentRegistryEntry[]).map(renderComponentCard)
+        }
+      </div>
+    );
+  };
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900 mb-1">
+                InternetFriends Design System
+              </h1>
+              <p className="text-sm text-gray-600">
+                Registry-based component and page visualization
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+              {renderVisualizationSelector()}
+              
+              <ButtonAtomic
+                variant="outline"
+                size="sm"
+                onClick={loadRegistryData}
+                disabled={isLoading}
+                className="flex items-center gap-2"
+              >
+                <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+                Refresh
+              </ButtonAtomic>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Statistics */}
+        {renderStatisticsCards()}
+        
+        {/* View Mode Selector */}
+        {renderViewModeSelector()}
+
+        {/* Filters */}
+        {(visualizationMode === 'grid' || visualizationMode === 'mirror') && (
+          <div className="flex flex-col md:flex-row gap-4 mb-8">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder={`Search ${viewMode}...`}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-dashed"
+              />
+            </div>
+
+            <div className="relative">
+              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="pl-10 pr-8 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-dashed appearance-none bg-white"
+              >
+                <option value="all">All Categories</option>
+                {viewMode === 'pages' ? (
+                  <>
+                    <option value="marketing">Marketing</option>
+                    <option value="app">App</option>
+                    <option value="admin">Admin</option>
+                    <option value="demo">Demo</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="atomic">Atomic</option>
+                    <option value="molecular">Molecular</option>
+                    <option value="organism">Organism</option>
+                    <option value="template">Template</option>
+                    <option value="page">Page</option>
+                  </>
+                )}
+              </select>
+            </div>
+          </div>
+        )}
+
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex items-center justify-center py-12">
+            <div className="text-center">
+              <RefreshCw className="w-8 h-8 mx-auto mb-4 text-blue-500 animate-spin" />
+              <p className="text-gray-600">Loading registry data...</p>
+            </div>
+          </div>
+        )}
+
+        {/* Content */}
+        {!isLoading && renderContent()}
+      </div>
+
+      {/* Item Detail Modal */}
+      {selectedItem && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-auto">
+            <div className="p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900 mb-1">
+                    {selectedItem.name}
+                  </h2>
+                  <p className="text-gray-600">{selectedItem.description}</p>
+                </div>
                 <ButtonAtomic
-                  size="xs"
-                  variant="outline"
-                  onClick={() => {
-                    // Placeholder export action
-                    // Real implementation: serialize nodes/edges + download JSON
-                    console.log("[design-system] export snapshot");
-                  }}
-                >
-                  Export Snapshot
-                </ButtonAtomic>
-                <ButtonAtomic
-                  size="xs"
                   variant="ghost"
-                  onClick={() =>
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                  }
+                  size="sm"
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    setSelectedItem(null);
+                  }}
+                  className="flex items-center gap-2"
                 >
-                  Back to Top
+                  <X className="w-4 h-4" />
+                  Close
                 </ButtonAtomic>
               </div>
-            </GlassRefinedAtomic>
+              
+              {/* Modal content would show detailed information */}
+              <div className="space-y-4">
+                {'usageCount' in selectedItem ? (
+                  // Component details
+                  <div>
+                    <h3 className="font-medium text-gray-900 mb-2">Component Details</h3>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>Category: {selectedItem.category}</div>
+                      <div>Status: {selectedItem.status}</div>
+                      <div>Usage: {selectedItem.usageCount} times</div>
+                      <div>Pages: {selectedItem.usedInPages.length}</div>
+                    </div>
+                  </div>
+                ) : (
+                  // Page details
+                  <div>
+                    <h3 className="font-medium text-gray-900 mb-2">Page Details</h3>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>Route: {'route' in selectedItem ? selectedItem.route : 'N/A'}</div>
+                      <div>Category: {'category' in selectedItem ? selectedItem.category : 'N/A'}</div>
+                      <div>Components: {'componentCount' in selectedItem ? selectedItem.componentCount : 'N/A'}</div>
+                      <div>Status: {'status' in selectedItem ? selectedItem.status : 'N/A'}</div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
-        </footer>
-      </div>
+        </div>
+      )}
     </main>
   );
 }

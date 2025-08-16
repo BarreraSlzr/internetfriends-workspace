@@ -3,9 +3,11 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/(internetfriends)/globals.css";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { AccentInitializer } from "@/components/theme/accent-initializer";
+import { I18nProvider } from "@/i18n/provider";
+import { InternetFriendsPermissionsProvider } from "@/lib/permissions/provider";
 
-// Force dynamic rendering globally to bypass SSR hook issues
-export const dynamic = "force-dynamic";
+// Import default translations to avoid loading states during SSR
+import defaultTranslations from "@/i18n/locales/en/common.json";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,12 +44,17 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ThemeProvider>
-          <AccentInitializer />
-          {children}
+          <I18nProvider
+            defaultLocale="en"
+            initialTranslations={defaultTranslations}
+          >
+            <InternetFriendsPermissionsProvider>
+              <AccentInitializer />
+              {children}
+            </InternetFriendsPermissionsProvider>
+          </I18nProvider>
         </ThemeProvider>
       </body>
     </html>
   );
 }
-
-import { generateStamp } from "@/lib/utils/timestamp";
