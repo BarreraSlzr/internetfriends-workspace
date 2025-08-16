@@ -100,10 +100,12 @@ export default function Page() {
   return (
     <main className="pb-12">
       <HeaderSimple />
-      <HeroText useGloo={false} backgroundStrategy="simple" />
       <CompanyInfo />
       <Navigation />
       <SocialLinks />
+      <section className="relative min-h-[60vh] min-h-fit">
+        <HeroText useGloo={false} backgroundStrategy="simple" />
+      </section>
       <div className="card sm:p-6 p-2 md:p-8 space-y-6 py-6">
         <div className="grid md:grid-cols-2 gap-6">
           {mainIdeas.map((i) => (

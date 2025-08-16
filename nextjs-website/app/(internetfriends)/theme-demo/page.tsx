@@ -18,7 +18,7 @@
 import React from "react";
 import { HeaderOrganism } from "@/components/organisms/header/header.organism";
 import { ThemeLayoutExample } from "../../theme/components/theme-layout-example";
-import { GlassRefinedAtomic } from "@/components/atomic/glass-refined";
+import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 import { ButtonAtomic } from "@/components/atomic/button";
 
 export default function ThemeDemoPage() {
@@ -60,7 +60,7 @@ export default function ThemeDemoPage() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6 not-prose">
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="card"
               strength={0.42}
               noise={false}
@@ -76,9 +76,9 @@ export default function ThemeDemoPage() {
                 <li>• Light/Dark adaptive semantic mapping</li>
                 <li>• Accent cycling via header logo interaction</li>
               </ul>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="card"
               strength={0.32}
               noise={false}
@@ -94,11 +94,11 @@ export default function ThemeDemoPage() {
                 <li>• Hydration-safe initialization</li>
                 <li>• Extensible hook-based API</li>
               </ul>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
           </div>
 
           <div className="mt-8 grid md:grid-cols-2 gap-6 not-prose">
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="card"
               strength={0.28}
               className="p-6 flex flex-col gap-4"
@@ -127,9 +127,9 @@ export default function ThemeDemoPage() {
                   </span>
                 ))}
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
 
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="card"
               strength={0.24}
               className="p-6 flex flex-col gap-4"
@@ -176,11 +176,11 @@ export function RootLayout({ children }) {
                   Back to Top
                 </ButtonAtomic>
               </div>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
           </div>
 
           <div className="mt-10">
-            <GlassRefinedAtomic
+            <GlassCardAtomic
               variant="card"
               strength={0.18}
               className="p-6 flex flex-col gap-4"
@@ -211,7 +211,7 @@ border-border-subtle`}
                 from raw chroma values, enabling accent & mode re-theming
                 without rewriting component markup.
               </p>
-            </GlassRefinedAtomic>
+            </GlassCardAtomic>
           </div>
         </section>
       </ThemeLayoutExample>

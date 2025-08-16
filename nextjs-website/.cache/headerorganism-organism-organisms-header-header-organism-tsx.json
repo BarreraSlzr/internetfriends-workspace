@@ -1,0 +1,309 @@
+{
+  "id": "headerorganism-organism-organisms-header-header-organism-tsx",
+  "metadata": {
+    "id": "headerorganism-organism-organisms-header-header-organism-tsx",
+    "name": "HeaderOrganism",
+    "category": "organism",
+    "path": "organisms/header/header.organism.tsx",
+    "filePath": "components/organisms/header/header.organism.tsx",
+    "testStatus": "unknown",
+    "usageCount": 0,
+    "description": "Header context",
+    "dependencies": [
+      "lib/utils",
+      "components/atomic/button",
+      "components/molecular/navigation",
+      "hooks/use-theme",
+      "hooks/use-header-orbit",
+      "i18n",
+      "i18n/config",
+      "types",
+      "header.organism.module.scss"
+    ],
+    "usedBy": [],
+    "hasTypes": true,
+    "hasTests": false,
+    "hasStories": false,
+    "lastModified": "2025-08-13T05:12:01.046Z",
+    "size": 17262,
+    "exports": [
+      "useHeader",
+      "HeaderOrganism"
+    ],
+    "props": []
+  },
+  "stateMachine": {
+    "componentName": "HeaderOrganism",
+    "initialState": "isOpenFalse",
+    "states": [
+      {
+        "name": "isOpenFalse",
+        "description": "isOpen is false",
+        "triggers": [
+          "setIsOpen(false)"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "rotate-180"
+        ],
+        "props": {
+          "isOpen": false
+        }
+      },
+      {
+        "name": "isOpenTrue",
+        "description": "isOpen is true",
+        "triggers": [
+          "setIsOpen(true)"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "rotate-180"
+        ],
+        "props": {
+          "isOpen": true
+        }
+      },
+      {
+        "name": "isOpenFalse",
+        "description": "isOpen is false",
+        "triggers": [
+          "setIsOpen(false)"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "rotate-180"
+        ],
+        "props": {
+          "isOpen": false
+        }
+      },
+      {
+        "name": "isOpenTrue",
+        "description": "isOpen is true",
+        "triggers": [
+          "setIsOpen(true)"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "rotate-180"
+        ],
+        "props": {
+          "isOpen": true
+        }
+      },
+      {
+        "name": "isVisibleFalse",
+        "description": "isVisible is false",
+        "triggers": [
+          "setIsVisible(false)"
+        ],
+        "transitions": [],
+        "cssClasses": [],
+        "props": {
+          "isVisible": false
+        }
+      },
+      {
+        "name": "isVisibleTrue",
+        "description": "isVisible is true",
+        "triggers": [
+          "setIsVisible(true)"
+        ],
+        "transitions": [],
+        "cssClasses": [],
+        "props": {
+          "isVisible": true
+        }
+      },
+      {
+        "name": "loading",
+        "description": "Component is in loading state",
+        "triggers": [
+          "async action started"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "animate-pulse",
+          "opacity-50",
+          "cursor-not-allowed"
+        ],
+        "props": {
+          "loading": true
+        }
+      },
+      {
+        "name": "disabled",
+        "description": "Component is disabled",
+        "triggers": [
+          "disabled prop true"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "opacity-50",
+          "cursor-not-allowed",
+          "pointer-events-none"
+        ],
+        "props": {
+          "disabled": true
+        }
+      },
+      {
+        "name": "error",
+        "description": "Component has error state",
+        "triggers": [
+          "error occurred"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "border-red-500",
+          "text-red-600",
+          "bg-red-50"
+        ],
+        "props": {
+          "error": true
+        }
+      },
+      {
+        "name": "success",
+        "description": "Component is in success state",
+        "triggers": [
+          "operation completed"
+        ],
+        "transitions": [],
+        "cssClasses": [
+          "border-green-500",
+          "text-green-600",
+          "bg-green-50"
+        ],
+        "props": {
+          "success": true
+        }
+      }
+    ],
+    "transitions": [
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsOpen(!isOpen)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsOpen(false)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setTheme(option.value)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsOpen(false)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsOpen(!isOpen)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsOpen(false)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setLocale(lang.code as \"fr\" | \"en\" | \"es\")"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsOpen(false)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "Click",
+        "effect": "setIsVisible(false)"
+      },
+      {
+        "from": "any",
+        "to": "new_state",
+        "trigger": "textValue",
+        "effect": "setHeaderState((prev)"
+      }
+    ],
+    "cssStates": [
+      {
+        "state": "default",
+        "styles": {
+          "borderColor": "var(--color-border)",
+          "backgroundColor": "var(--color-background)",
+          "color": "var(--color-text-primary)"
+        },
+        "classes": [
+          "border",
+          "rounded-lg",
+          "px-4",
+          "py-2"
+        ],
+        "pseudoStates": [
+          ":hover",
+          ":focus",
+          ":active"
+        ]
+      },
+      {
+        "state": "hover",
+        "styles": {
+          "backgroundColor": "var(--color-background-hover)",
+          "borderColor": "var(--color-border-hover)",
+          "transform": "translateY(-1px)"
+        },
+        "classes": [
+          "hover:bg-gray-50",
+          "hover:border-gray-300"
+        ],
+        "pseudoStates": [
+          ":hover"
+        ]
+      },
+      {
+        "state": "focus",
+        "styles": {
+          "borderColor": "var(--color-primary)",
+          "borderWidth": "2px"
+        },
+        "classes": [
+          "focus:border-dashed",
+          "focus:border-2",
+          "focus:border-blue-500"
+        ],
+        "pseudoStates": [
+          ":focus",
+          ":focus-visible"
+        ]
+      }
+    ],
+    "mermaidDiagram": "stateDiagram-v2\n    isOpenFalse : isOpen is false\n    isOpenTrue : isOpen is true\n    isOpenFalse : isOpen is false\n    isOpenTrue : isOpen is true\n    isVisibleFalse : isVisible is false\n    isVisibleTrue : isVisible is true\n    loading : Component is in loading state\n    disabled : Component is disabled\n    error : Component has error state\n    success : Component is in success state\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : textValue\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset",
+    "documentation": "# HeaderOrganism State Machine\n\n## Overview\nHeader context\n\n## Component States\n\n### Logical States\n\n#### isOpenFalse\n- **Description**: isOpen is false\n- **Triggers**: setIsOpen(false)\n- **CSS Classes**: `rotate-180`\n- **Props**: `{\"isOpen\":false}`\n\n#### isOpenTrue\n- **Description**: isOpen is true\n- **Triggers**: setIsOpen(true)\n- **CSS Classes**: `rotate-180`\n- **Props**: `{\"isOpen\":true}`\n\n#### isOpenFalse\n- **Description**: isOpen is false\n- **Triggers**: setIsOpen(false)\n- **CSS Classes**: `rotate-180`\n- **Props**: `{\"isOpen\":false}`\n\n#### isOpenTrue\n- **Description**: isOpen is true\n- **Triggers**: setIsOpen(true)\n- **CSS Classes**: `rotate-180`\n- **Props**: `{\"isOpen\":true}`\n\n#### isVisibleFalse\n- **Description**: isVisible is false\n- **Triggers**: setIsVisible(false)\n- **CSS Classes**: ``\n- **Props**: `{\"isVisible\":false}`\n\n#### isVisibleTrue\n- **Description**: isVisible is true\n- **Triggers**: setIsVisible(true)\n- **CSS Classes**: ``\n- **Props**: `{\"isVisible\":true}`\n\n#### loading\n- **Description**: Component is in loading state\n- **Triggers**: async action started\n- **CSS Classes**: `animate-pulse opacity-50 cursor-not-allowed`\n- **Props**: `{\"loading\":true}`\n\n#### disabled\n- **Description**: Component is disabled\n- **Triggers**: disabled prop true\n- **CSS Classes**: `opacity-50 cursor-not-allowed pointer-events-none`\n- **Props**: `{\"disabled\":true}`\n\n#### error\n- **Description**: Component has error state\n- **Triggers**: error occurred\n- **CSS Classes**: `border-red-500 text-red-600 bg-red-50`\n- **Props**: `{\"error\":true}`\n\n#### success\n- **Description**: Component is in success state\n- **Triggers**: operation completed\n- **CSS Classes**: `border-green-500 text-green-600 bg-green-50`\n- **Props**: `{\"success\":true}`\n\n\n### CSS States & Styling\n\n\n#### default\n```css\nborderColor: var(--color-border);\nbackgroundColor: var(--color-background);\ncolor: var(--color-text-primary);\n```\n\n**Classes**: `border rounded-lg px-4 py-2`  \n**Pseudo-states**: :hover, :focus, :active\n\n#### hover\n```css\nbackgroundColor: var(--color-background-hover);\nborderColor: var(--color-border-hover);\ntransform: translateY(-1px);\n```\n\n**Classes**: `hover:bg-gray-50 hover:border-gray-300`  \n**Pseudo-states**: :hover\n\n#### focus\n```css\nborderColor: var(--color-primary);\nborderWidth: 2px;\n```\n\n**Classes**: `focus:border-dashed focus:border-2 focus:border-blue-500`  \n**Pseudo-states**: :focus, :focus-visible\n\n\n## State Transitions\n\n```mermaid\nstateDiagram-v2\n    isOpenFalse : isOpen is false\n    isOpenTrue : isOpen is true\n    isOpenFalse : isOpen is false\n    isOpenTrue : isOpen is true\n    isVisibleFalse : isVisible is false\n    isVisibleTrue : isVisible is true\n    loading : Component is in loading state\n    disabled : Component is disabled\n    error : Component has error state\n    success : Component is in success state\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : textValue\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset\n```\n\n## CSS Custom Properties\n\nFollowing InternetFriends design system:\n\n```css\n:root {\n  --color-primary: #3b82f6;\n  --color-border: #e5e7eb;\n  --color-border-hover: #d1d5db;\n  --color-background: #ffffff;\n  --color-background-hover: #f9fafb;\n  --color-text-primary: #111827;\n}\n```\n\n## Focus States\n\nInternetFriends style focus states use **2px dashed borders**:\n\n```css\n.component:focus-visible {\n  border: 2px dashed var(--color-primary);\n  outline: none;\n}\n```\n\n## Animation Transitions\n\n```css\n.component {\n  transition: all 0.2s ease-in-out;\n}\n```\n\n## Usage Examples\n\n```tsx\n// Default state\n<HeaderOrganism />\n\n// Loading state\n<HeaderOrganism loading />\n\n// Error state\n<HeaderOrganism error=\"Something went wrong\" />\n\n// Success state\n<HeaderOrganism success />\n```\n\n## Testing States\n\n```tsx\n// Test all states\ndescribe('HeaderOrganism States', () => {\n  it('renders default state', () => {\n    render(<HeaderOrganism />);\n  });\n  \n  it('renders loading state', () => {\n    render(<HeaderOrganism loading />);\n  });\n  \n  it('handles error state', () => {\n    render(<HeaderOrganism error=\"Test error\" />);\n  });\n});\n```\n"
+  },
+  "renderedMarkdown": "<h1>HeaderOrganism State Machine</h1>\n<h2>Overview</h2>\n<p>Header context</p>\n<h2>Component States</h2>\n<h3>Logical States</h3>\n<h4>isOpenFalse</h4>\n<ul>\n<li><strong>Description</strong>: isOpen is false</li>\n<li><strong>Triggers</strong>: setIsOpen(false)</li>\n<li><strong>CSS Classes</strong>: <code>rotate-180</code></li>\n<li><strong>Props</strong>: <code>{\"isOpen\":false}</code></li>\n</ul>\n<h4>isOpenTrue</h4>\n<ul>\n<li><strong>Description</strong>: isOpen is true</li>\n<li><strong>Triggers</strong>: setIsOpen(true)</li>\n<li><strong>CSS Classes</strong>: <code>rotate-180</code></li>\n<li><strong>Props</strong>: <code>{\"isOpen\":true}</code></li>\n</ul>\n<h4>isOpenFalse</h4>\n<ul>\n<li><strong>Description</strong>: isOpen is false</li>\n<li><strong>Triggers</strong>: setIsOpen(false)</li>\n<li><strong>CSS Classes</strong>: <code>rotate-180</code></li>\n<li><strong>Props</strong>: <code>{\"isOpen\":false}</code></li>\n</ul>\n<h4>isOpenTrue</h4>\n<ul>\n<li><strong>Description</strong>: isOpen is true</li>\n<li><strong>Triggers</strong>: setIsOpen(true)</li>\n<li><strong>CSS Classes</strong>: <code>rotate-180</code></li>\n<li><strong>Props</strong>: <code>{\"isOpen\":true}</code></li>\n</ul>\n<h4>isVisibleFalse</h4>\n<ul>\n<li><strong>Description</strong>: isVisible is false</li>\n<li><strong>Triggers</strong>: setIsVisible(false)</li>\n<li><strong>CSS Classes</strong>: ``</li>\n<li><strong>Props</strong>: <code>{\"isVisible\":false}</code></li>\n</ul>\n<h4>isVisibleTrue</h4>\n<ul>\n<li><strong>Description</strong>: isVisible is true</li>\n<li><strong>Triggers</strong>: setIsVisible(true)</li>\n<li><strong>CSS Classes</strong>: ``</li>\n<li><strong>Props</strong>: <code>{\"isVisible\":true}</code></li>\n</ul>\n<h4>loading</h4>\n<ul>\n<li><strong>Description</strong>: Component is in loading state</li>\n<li><strong>Triggers</strong>: async action started</li>\n<li><strong>CSS Classes</strong>: <code>animate-pulse opacity-50 cursor-not-allowed</code></li>\n<li><strong>Props</strong>: <code>{\"loading\":true}</code></li>\n</ul>\n<h4>disabled</h4>\n<ul>\n<li><strong>Description</strong>: Component is disabled</li>\n<li><strong>Triggers</strong>: disabled prop true</li>\n<li><strong>CSS Classes</strong>: <code>opacity-50 cursor-not-allowed pointer-events-none</code></li>\n<li><strong>Props</strong>: <code>{\"disabled\":true}</code></li>\n</ul>\n<h4>error</h4>\n<ul>\n<li><strong>Description</strong>: Component has error state</li>\n<li><strong>Triggers</strong>: error occurred</li>\n<li><strong>CSS Classes</strong>: <code>border-red-500 text-red-600 bg-red-50</code></li>\n<li><strong>Props</strong>: <code>{\"error\":true}</code></li>\n</ul>\n<h4>success</h4>\n<ul>\n<li><strong>Description</strong>: Component is in success state</li>\n<li><strong>Triggers</strong>: operation completed</li>\n<li><strong>CSS Classes</strong>: <code>border-green-500 text-green-600 bg-green-50</code></li>\n<li><strong>Props</strong>: <code>{\"success\":true}</code></li>\n</ul>\n<h3>CSS States &#x26; Styling</h3>\n<h4>default</h4>\n<pre><code class=\"language-css\">borderColor: var(--color-border);\nbackgroundColor: var(--color-background);\ncolor: var(--color-text-primary);\n</code></pre>\n<p><strong>Classes</strong>: <code>border rounded-lg px-4 py-2</code><br>\n<strong>Pseudo-states</strong>: :hover, :focus, :active</p>\n<h4>hover</h4>\n<pre><code class=\"language-css\">backgroundColor: var(--color-background-hover);\nborderColor: var(--color-border-hover);\ntransform: translateY(-1px);\n</code></pre>\n<p><strong>Classes</strong>: <code>hover:bg-gray-50 hover:border-gray-300</code><br>\n<strong>Pseudo-states</strong>: :hover</p>\n<h4>focus</h4>\n<pre><code class=\"language-css\">borderColor: var(--color-primary);\nborderWidth: 2px;\n</code></pre>\n<p><strong>Classes</strong>: <code>focus:border-dashed focus:border-2 focus:border-blue-500</code><br>\n<strong>Pseudo-states</strong>: :focus, :focus-visible</p>\n<h2>State Transitions</h2>\n<pre><code class=\"language-mermaid\">stateDiagram-v2\n    isOpenFalse : isOpen is false\n    isOpenTrue : isOpen is true\n    isOpenFalse : isOpen is false\n    isOpenTrue : isOpen is true\n    isVisibleFalse : isVisible is false\n    isVisibleTrue : isVisible is true\n    loading : Component is in loading state\n    disabled : Component is disabled\n    error : Component has error state\n    success : Component is in success state\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : Click\n    any --> new_state : textValue\n    [*] --> default\n    default --> hover : mouse enter\n    hover --> default : mouse leave\n    default --> focus : tab/click\n    focus --> default : blur\n    default --> loading : async action\n    loading --> default : action complete\n    default --> error : error occurred\n    error --> default : reset\n</code></pre>\n<h2>CSS Custom Properties</h2>\n<p>Following InternetFriends design system:</p>\n<pre><code class=\"language-css\">:root {\n  --color-primary: #3b82f6;\n  --color-border: #e5e7eb;\n  --color-border-hover: #d1d5db;\n  --color-background: #ffffff;\n  --color-background-hover: #f9fafb;\n  --color-text-primary: #111827;\n}\n</code></pre>\n<h2>Focus States</h2>\n<p>InternetFriends style focus states use <strong>2px dashed borders</strong>:</p>\n<pre><code class=\"language-css\">.component:focus-visible {\n  border: 2px dashed var(--color-primary);\n  outline: none;\n}\n</code></pre>\n<h2>Animation Transitions</h2>\n<pre><code class=\"language-css\">.component {\n  transition: all 0.2s ease-in-out;\n}\n</code></pre>\n<h2>Usage Examples</h2>\n<pre><code class=\"language-tsx\">// Default state\n&#x3C;HeaderOrganism />\n\n// Loading state\n&#x3C;HeaderOrganism loading />\n\n// Error state\n&#x3C;HeaderOrganism error=\"Something went wrong\" />\n\n// Success state\n&#x3C;HeaderOrganism success />\n</code></pre>\n<h2>Testing States</h2>\n<pre><code class=\"language-tsx\">// Test all states\ndescribe('HeaderOrganism States', () => {\n  it('renders default state', () => {\n    render(&#x3C;HeaderOrganism />);\n  });\n  \n  it('renders loading state', () => {\n    render(&#x3C;HeaderOrganism loading />);\n  });\n  \n  it('handles error state', () => {\n    render(&#x3C;HeaderOrganism error=\"Test error\" />);\n  });\n});\n</code></pre>\n",
+  "generatedAt": "2025-08-16T06:53:06.980Z",
+  "version": "1.0.0",
+  "performance": {
+    "analysisTime": 1,
+    "renderTime": 17,
+    "fileSize": 17262
+  }
+}

@@ -52,15 +52,20 @@
   },
   "api-cleanup-v1": {
     "name": "api-cleanup-v1",
-    "status": "in-progress",
-    "completion": 0,
-    "features": [],
+    "status": "completed",
+    "completion": 100,
+    "features": [
+      "Remove unused API parameters"
+    ],
     "owner": "Emmanuel Barrera Salazar (BarreraSlzr)",
     "timeline": "1-2 days",
     "blockers": [],
     "goals": [
       "Resolve major diagnostic errors and improve API consistency"
-    ]
+    ],
+    "impact": {
+      "maintainability": "+30%"
+    }
   },
   "design-system-hardening-v1": {
     "name": "design-system-hardening-v1",

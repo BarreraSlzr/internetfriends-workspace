@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { CardDescriptionToggle } from "./card-description-toggle";
-import { GridBackground } from "./backgrounds/grid-background";
+import { GridBackground } from "./grid-background";
 
 interface CustomCardProps {
   subtitle: string;

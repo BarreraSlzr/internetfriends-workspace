@@ -1,0 +1,216 @@
+{
+  "components": [
+    {
+      "id": "tradingdashboard-organism-organisms-trading-dashboard-organism-tsx",
+      "name": "TradingDashboard",
+      "category": "organism",
+      "description": "Trading-Style Development Dashboard",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T04:13:18.991Z",
+      "generatedAt": "2025-08-16T06:53:06.946Z"
+    },
+    {
+      "id": "glasspanel-atomic-glass-glass-panel-atomic-tsx",
+      "name": "GlassPanel",
+      "category": "atomic",
+      "description": "GlassPanel - Atomic glass morphism component",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T05:53:43.759Z",
+      "generatedAt": "2025-08-16T06:53:06.962Z"
+    },
+    {
+      "id": "headerorganism-organism-organisms-header-header-organism-tsx",
+      "name": "HeaderOrganism",
+      "category": "organism",
+      "description": "Header context",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T05:12:01.046Z",
+      "generatedAt": "2025-08-16T06:53:06.980Z"
+    },
+    {
+      "id": "designsystemgraph-molecular-molecular-design-system-graph-design-system-graph-molecular-tsx",
+      "name": "DesignSystemGraph",
+      "category": "molecular",
+      "description": "Custom node component that renders our component cards",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T06:52:30.104Z",
+      "generatedAt": "2025-08-16T06:53:06.994Z"
+    },
+    {
+      "id": "designsystemsidebar-molecular-molecular-design-system-sidebar-design-system-sidebar-molecular-tsx",
+      "name": "DesignSystemSidebar",
+      "category": "molecular",
+      "description": "Component description not available",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T06:24:46.234Z",
+      "generatedAt": "2025-08-16T06:53:07.008Z"
+    },
+    {
+      "id": "componentstatedocviewer-molecular-molecular-component-state-doc-viewer-component-state-doc-viewer-molecular-tsx",
+      "name": "ComponentStateDocViewer",
+      "category": "molecular",
+      "description": "Component description not available",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T06:23:56.235Z",
+      "generatedAt": "2025-08-16T06:53:07.022Z"
+    },
+    {
+      "id": "projectexploreratomic-molecular-molecular-project-explorer-project-explorer-atomic-tsx",
+      "name": "ProjectExplorerAtomic",
+      "category": "molecular",
+      "description": "Event-driven types matching the micro-ux-explorer",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T04:13:18.860Z",
+      "generatedAt": "2025-08-16T06:53:07.034Z"
+    },
+    {
+      "id": "types-molecular-molecular-navigation-types-ts",
+      "name": "Types",
+      "category": "molecular",
+      "description": "Component description not available",
+      "testStatus": "unknown",
+      "usageCount": 5,
+      "lastModified": "2025-08-13T04:13:18.872Z",
+      "generatedAt": "2025-08-16T06:53:07.044Z"
+    },
+    {
+      "id": "navigationmolecular-molecular-molecular-navigation-navigation-molecular-tsx",
+      "name": "NavigationMolecular",
+      "category": "molecular",
+      "description": "Close mobile menu when resizing to desktop",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T05:53:43.858Z",
+      "generatedAt": "2025-08-16T06:53:07.058Z"
+    },
+    {
+      "id": "designsystemmaincontent-molecular-molecular-design-system-main-content-design-system-main-content-molecular-tsx",
+      "name": "DesignSystemMainContent",
+      "category": "molecular",
+      "description": "localhost:3000/design-system?component=${component.id}`,",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T06:25:33.670Z",
+      "generatedAt": "2025-08-16T06:53:07.065Z"
+    },
+    {
+      "id": "componentdetailmodal-molecular-molecular-component-detail-modal-component-detail-modal-molecular-tsx",
+      "name": "ComponentDetailModal",
+      "category": "molecular",
+      "description": "Handle escape key and click outside",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T06:36:28.956Z",
+      "generatedAt": "2025-08-16T06:53:07.075Z"
+    },
+    {
+      "id": "glasscardatomic-atomic-atomic-glass-card-glass-card-atomic-tsx",
+      "name": "GlassCardAtomic",
+      "category": "atomic",
+      "description": "Base glass card styles",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T05:39:34.139Z",
+      "generatedAt": "2025-08-16T06:53:07.082Z"
+    },
+    {
+      "id": "types-atomic-atomic-glass-card-types-ts",
+      "name": "Types",
+      "category": "atomic",
+      "description": "Component description not available",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T04:13:18.928Z",
+      "generatedAt": "2025-08-16T06:53:07.088Z"
+    },
+    {
+      "id": "componentcard-atomic-atomic-component-card-component-card-atomic-tsx",
+      "name": "ComponentCard",
+      "category": "atomic",
+      "description": "Quick action: View code",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T06:35:36.768Z",
+      "generatedAt": "2025-08-16T06:53:07.098Z"
+    },
+    {
+      "id": "markdownrendereratomic-atomic-atomic-markdown-renderer-markdown-renderer-atomic-tsx",
+      "name": "MarkdownRendererAtomic",
+      "category": "atomic",
+      "description": "Component description not available",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-16T06:29:10.811Z",
+      "generatedAt": "2025-08-16T06:53:07.108Z"
+    },
+    {
+      "id": "buttonatomic-atomic-atomic-button-button-atomic-tsx",
+      "name": "ButtonAtomic",
+      "category": "atomic",
+      "description": "InternetFriends Atomic Button Component",
+      "testStatus": "unknown",
+      "usageCount": 1,
+      "lastModified": "2025-08-16T05:39:26.266Z",
+      "generatedAt": "2025-08-16T06:53:07.118Z"
+    },
+    {
+      "id": "button_defaults-atomic-atomic-button-types-ts",
+      "name": "BUTTON_DEFAULTS",
+      "category": "atomic",
+      "description": "InternetFriends Button Component Types",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T04:13:18.892Z",
+      "generatedAt": "2025-08-16T06:53:07.123Z"
+    },
+    {
+      "id": "types-atomic-atomic-header-types-ts",
+      "name": "Types",
+      "category": "atomic",
+      "description": "Component description not available",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T04:13:18.922Z",
+      "generatedAt": "2025-08-16T06:53:07.134Z"
+    },
+    {
+      "id": "headeratomic-atomic-atomic-header-header-atomic-tsx",
+      "name": "HeaderAtomic",
+      "category": "atomic",
+      "description": "Simplified HeaderAtomic",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T05:53:43.865Z",
+      "generatedAt": "2025-08-16T06:53:07.141Z"
+    },
+    {
+      "id": "glass_strength_presets-atomic-atomic-glass-refined-types-ts",
+      "name": "GLASS_STRENGTH_PRESETS",
+      "category": "atomic",
+      "description": "Types for GlassRefined atomic component",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T04:13:18.882Z",
+      "generatedAt": "2025-08-16T06:53:07.151Z"
+    },
+    {
+      "id": "glassrefinedatomic-atomic-atomic-glass-refined-glass-refined-atomic-tsx",
+      "name": "GlassRefinedAtomic",
+      "category": "atomic",
+      "description": "Mode to strength mapping",
+      "testStatus": "unknown",
+      "usageCount": 0,
+      "lastModified": "2025-08-13T05:15:58.637Z",
+      "generatedAt": "2025-08-16T06:53:07.156Z"
+    }
+  ],
+  "lastGenerated": "2025-08-16T06:53:07.157Z",
+  "totalComponents": 21
+}
