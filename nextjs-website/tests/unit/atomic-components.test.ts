@@ -140,7 +140,7 @@ describe("Atomic Components Unit Tests", () => {
       expect(stats.stable).toBeGreaterThan(0);
 
       // Total should equal sum of categories
-      expect(stats.total).toBe(stats.atomic + stats.molecular + stats.organism);
+      expect(stats.total).toBe(stats.atomic + stats.molecular + stats.utility + stats.organism + stats.page);
     });
 
     test("should support component search", async () => {

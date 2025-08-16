@@ -48,19 +48,62 @@ export const molecularComponents: ComponentRegistryEntry[] = [
     id: 'design-system-graph-molecular',
     name: 'DesignSystemGraph',
     category: 'molecular',
-    description: 'Interactive graph visualization of component relationships',
+    description: 'React Flow based component dependency visualization',
     filePath: 'components/molecular/design-system-graph/design-system-graph.molecular.tsx',
     dependencies: ['@xyflow/react', '@/lib/design-system'],
-    props: ['components', 'onNodeSelect', 'className'],
-    examples: ['default', 'compact'],
+    props: ['components', 'onNodeClick', 'className'],
+    examples: ['default', 'filtered'],
+  },
+];
+
+export const utilityComponents: ComponentRegistryEntry[] = [
+  {
+    id: 'cn-utility',
+    name: 'cn',
+    category: 'utility',
+    description: 'Utility function for merging CSS classes with clsx and tailwind-merge',
+    filePath: 'lib/utils.ts',
+    dependencies: ['clsx', 'tailwind-merge'],
+    props: [],
+    examples: ['merge-classes'],
+  },
+  {
+    id: 'stamp-utility',
+    name: 'generateStamp',
+    category: 'utility', 
+    description: 'Generate timestamp stamps for consistent dating',
+    filePath: 'lib/utils/stamp.ts',
+    dependencies: [],
+    props: [],
+    examples: ['timestamp'],
+  },
+];
+
+export const pageComponents: ComponentRegistryEntry[] = [
+  {
+    id: 'design-system-page',
+    name: 'DesignSystemPage',
+    category: 'page',
+    description: 'Main design system exploration and documentation page',
+    filePath: 'app/(internetfriends)/design-system/page.tsx',
+    dependencies: ['@/components/molecular', '@/lib/design-system'],
+    props: [],
+    examples: ['default'],
+  },
+  {
+    id: 'orchestrator-page',
+    name: 'OrchestratorPage', 
+    category: 'page',
+    description: 'Project orchestration and monitoring dashboard',
+    filePath: 'app/(internetfriends)/orchestrator/page.tsx',
+    dependencies: ['@xyflow/react', '@/components/organisms'],
+    props: [],
+    examples: ['default'],
   },
 ];
 
 export const getAllComponents = (): ComponentRegistryEntry[] => {
-  return [
-    ...atomicComponents,
-    ...molecularComponents,
-  ];
+  return [...atomicComponents, ...molecularComponents, ...utilityComponents, ...pageComponents];
 };
 
 export const getComponentById = (id: string): ComponentRegistryEntry | undefined => {
@@ -82,7 +125,7 @@ export const searchComponents = (query: string): ComponentRegistryEntry[] => {
 export const generateFlowNodes = () => {
   return getAllComponents().map((component, index) => ({
     id: component.id,
-    type: 'component',
+    type: component.category === 'utility' ? 'utility' : component.category === 'page' ? 'page' : 'component',
     position: { x: (index % 3) * 300, y: Math.floor(index / 3) * 200 },
     data: {
       label: component.name,
@@ -93,7 +136,7 @@ export const generateFlowNodes = () => {
 };
 
 export const generateFlowEdges = () => {
-  const edges: Array<{ id: string; source: string; target: string }> = [];
+  const edges: Array<{ id: string; source: string; target: string; type?: string }> = [];
   
   molecularComponents.forEach(molecular => {
     atomicComponents.forEach(atomic => {
@@ -102,6 +145,7 @@ export const generateFlowEdges = () => {
           id: `${atomic.id}-${molecular.id}`,
           source: atomic.id,
           target: molecular.id,
+          type: 'default',
         });
       }
     });
@@ -116,19 +160,23 @@ export const getComponentStats = () => {
     total: components.length,
     atomic: atomicComponents.length,
     molecular: molecularComponents.length,
+    utility: utilityComponents.length,
     organism: 0,
     template: 0,
-    page: 0,
+    page: pageComponents.length,
+    stable: components.filter(c => !c.description.includes('experimental')).length,
   };
 };
 
 export const componentRegistry = {
   atomic: atomicComponents,
   molecular: molecularComponents,
+  utility: utilityComponents,
   organism: [],
   template: [],
-  page: [],
+  page: pageComponents,
   getAllComponents,
+  getComponent: getComponentById, // Add alias for test compatibility
   getComponentById,
   getComponentsByCategory,
   searchComponents,
