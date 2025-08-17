@@ -3,17 +3,31 @@
 
 @use "sass:map";
 
-// Spacing Scale (0.25rem increments)
+// Spacing Scale (0.25rem increments) - Octopus.do inspired
 $spacing: (
   "xs": 0.25rem,    // 4px
   "sm": 0.5rem,     // 8px
   "md": 0.75rem,    // 12px
-  "lg": 1rem,       // 16px
+  "lg": 1rem,       // 16px - PRIMARY (Octopus.do standard)
   "xl": 1.25rem,    // 20px
   "2xl": 1.5rem,    // 24px
   "3xl": 2rem,      // 32px
   "4xl": 2.5rem,    // 40px
   "5xl": 3rem,      // 48px
+  "6xl": 4rem,      // 64px
+  "7xl": 5rem,      // 80px
+  "8xl": 6rem,      // 96px
+);
+
+// Octopus.do-inspired Semantic Spacing
+$semantic-spacing: (
+  "card-padding": 1rem,        // Primary padding for cards
+  "card-margin": 1rem,         // Primary margin between cards
+  "section-spacing": 2rem,     // Between major sections
+  "component-gap": 0.75rem,    // Between related components
+  "element-gap": 0.5rem,       // Between small elements
+  "page-padding": 1rem,        // Page-level padding
+  "stack-gap": 1rem,           // Default vertical stacking
 );
 
 // Compact Border Radius System (max 12px for backgrounds)
@@ -61,13 +75,19 @@ $container-sizes: (
   "2xl": 1200px,    // Keep consistent at 1200px
 );
 
-// Layout Constants
-$header-height: 4rem;           // 64px
-$sidebar-width: 16rem;          // 256px
-$sidebar-collapsed: 4rem;       // 64px
+// Layout Constants - Octopus.do inspired sticky system
+$header-height: 4rem;                    // 64px - sticky header
+$header-sticky-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+$sidebar-width: 16rem;                   // 256px
+$sidebar-collapsed: 4rem;                // 64px
 $footer-height: auto;
 $container-padding: map.get($spacing, "lg");
 $container-max-width: map.get($container-sizes, "xl");
+
+// Sticky UI Constants
+$sticky-offset: map.get($spacing, "lg");  // 1rem offset for sticky elements
+$sticky-z-index: map.get($z-index, "sticky");
+$sticky-backdrop: rgba(255, 255, 255, 0.9);  // Glass-like sticky backgrounds
 
 // Touch Targets (for mobile accessibility)
 $touch-target-min: 44px;
@@ -93,6 +113,37 @@ $touch-spacing-recommended: 16px;
   @return map.get($breakpoints, $size);
 }
 
-@function container-size($size) {
-  @return map.get($container-sizes, $size);
+@function semantic-spacing($size) {
+  @return map.get($semantic-spacing, $size);
+}
+
+// Octopus.do-inspired utility mixins
+@mixin sticky-card {
+  position: sticky;
+  top: $sticky-offset;
+  z-index: $sticky-z-index;
+  backdrop-filter: blur(8px);
+  background-color: $sticky-backdrop;
+  border-radius: radius("lg");
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+@mixin card-spacing {
+  padding: semantic-spacing("card-padding");
+  margin-bottom: semantic-spacing("card-margin");
+  gap: semantic-spacing("component-gap");
+}
+
+@mixin section-spacing {
+  margin-bottom: semantic-spacing("section-spacing");
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@mixin stack($gap: "stack-gap") {
+  display: flex;
+  flex-direction: column;
+  gap: semantic-spacing($gap);
 }
