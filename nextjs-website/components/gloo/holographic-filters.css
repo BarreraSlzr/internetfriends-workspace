@@ -1,0 +1,290 @@
+/**
+ * Holographic Filter Effects for Gloo Backgrounds
+ * Pokemon card-style holographic and iridescent effects using color intensity (NO OPACITY)
+ */
+
+/* Holographic Base Variables - Pure Color Mixing */
+:root {
+  --holo-shimmer-1: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.04) 50%, transparent 70%);
+  --holo-shimmer-2: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.02) 50%, transparent 70%);
+  --holo-rainbow: linear-gradient(45deg, 
+    rgba(255,0,150,0.03) 0%,
+    rgba(0,255,255,0.03) 25%, 
+    rgba(255,255,0,0.03) 50%,
+    rgba(255,0,255,0.03) 75%,
+    rgba(0,255,0,0.03) 100%
+  );
+  --holo-prism: linear-gradient(90deg,
+    rgba(255,0,0,0.015) 0%,
+    rgba(255,127,0,0.015) 16.66%,
+    rgba(255,255,0,0.015) 33.33%,
+    rgba(0,255,0,0.015) 50%,
+    rgba(0,0,255,0.015) 66.66%,
+    rgba(75,0,130,0.015) 83.33%,
+    rgba(148,0,211,0.015) 100%
+  );
+}
+
+/* Retina Display Enhancements */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .holo-retina {
+    --holo-scale: 2;
+  }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3), (min-resolution: 288dpi) {
+  .holo-retina {
+    --holo-scale: 3;
+  }
+}
+
+/* Pokemon Holographic Effects */
+.holo-pokemon {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-pokemon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--holo-rainbow);
+  background-size: 300% 300%;
+  animation: holo-shift 3s ease-in-out infinite;
+  mix-blend-mode: color-dodge;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.holo-pokemon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--holo-shimmer-1);
+  background-size: 200% 200%;
+  animation: holo-shimmer 2s linear infinite;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Iridescent Oil Slick Effect */
+.holo-iridescent {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-iridescent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(255,0,150,0.025) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0,255,255,0.025) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255,255,0,0.02) 0%, transparent 50%);
+  animation: holo-bubble 4s ease-in-out infinite;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Prismatic Rainbow Effect */
+.holo-prism {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-prism::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--holo-prism);
+  background-size: 400% 100%;
+  animation: holo-prism-sweep 5s linear infinite;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pearl Luster Effect */
+.holo-pearl {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-pearl::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at top left, rgba(255,255,255,0.03) 0%, transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(255,255,255,0.02) 0%, transparent 60%),
+    linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.015) 50%, transparent 60%);
+  animation: holo-pearl-luster 6s ease-in-out infinite;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Metallic Shimmer */
+.holo-metallic {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-metallic::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--holo-shimmer-2);
+  background-size: 150% 150%;
+  animation: holo-metallic-flow 3.5s ease-in-out infinite;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Retina-Enhanced Holographic (High DPI) */
+.holo-retina {
+  position: relative;
+  overflow: hidden;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .holo-retina::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      linear-gradient(45deg, 
+        transparent 48%,
+        rgba(255,255,255,0.008) 49%,
+        rgba(255,0,255,0.012) 50%,
+        rgba(0,255,255,0.012) 51%,
+        transparent 52%
+      ),
+      linear-gradient(-45deg,
+        transparent 48%,
+        rgba(255,255,0,0.008) 49%,
+        rgba(255,0,0,0.012) 50%,
+        rgba(0,255,0,0.012) 51%,
+        transparent 52%
+      );
+    background-size: 8px 8px, 12px 12px;
+    animation: holo-retina-interference 4s linear infinite;
+    mix-blend-mode: color-burn;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* GSLS-inspired Fragment Pattern */
+.holo-fragment {
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-fragment::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255,100,200,0.015) 0%, transparent 40%),
+    radial-gradient(circle at 75% 25%, rgba(100,255,200,0.015) 0%, transparent 40%),
+    radial-gradient(circle at 25% 75%, rgba(200,100,255,0.015) 0%, transparent 40%),
+    radial-gradient(circle at 75% 75%, rgba(255,200,100,0.015) 0%, transparent 40%);
+  background-size: 50px 50px;
+  animation: holo-fragment-dance 7s ease-in-out infinite;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Animation Keyframes */
+@keyframes holo-shift {
+  0%, 100% { background-position: 0% 0%; }
+  25% { background-position: 100% 0%; }
+  50% { background-position: 100% 100%; }
+  75% { background-position: 0% 100%; }
+}
+
+@keyframes holo-shimmer {
+  0% { transform: translateX(-100%) translateY(-100%); }
+  100% { transform: translateX(100%) translateY(100%); }
+}
+
+@keyframes holo-bubble {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  33% { transform: scale(1.05) rotate(120deg); }
+  66% { transform: scale(0.95) rotate(240deg); }
+}
+
+@keyframes holo-prism-sweep {
+  0% { background-position: -100% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+@keyframes holo-pearl-luster {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(180deg); }
+}
+
+@keyframes holo-metallic-flow {
+  0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+  50% { transform: translateX(50%) translateY(50%) rotate(45deg); }
+}
+
+@keyframes holo-retina-interference {
+  0% { background-position: 0px 0px, 0px 0px; }
+  100% { background-position: 8px 8px, -12px 12px; }
+}
+
+@keyframes holo-fragment-dance {
+  0%, 100% { background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+  25% { background-position: 20% 10%, -10% 20%, 30% -10%, -20% 30%; }
+  50% { background-position: 40% 20%, -20% 40%, 60% -20%, -40% 60%; }
+  75% { background-position: 20% 30%, -30% 20%, 30% -30%, -20% 30%; }
+}
+
+/* Component Integration Classes - NO opacity classes */
+.gloo-pokemon {
+  @apply holo-pokemon;
+}
+
+.gloo-iridescent {
+  @apply holo-iridescent;
+}
+
+.gloo-prism {
+  @apply holo-prism;
+}
+
+.gloo-pearl {
+  @apply holo-pearl;
+}
+
+.gloo-metallic {
+  @apply holo-metallic;
+}
+
+.gloo-retina {
+  @apply holo-retina;
+}
+
+.gloo-fragment {
+  @apply holo-fragment;
+}
+
+/* Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+  .holo-pokemon::before,
+  .holo-pokemon::after,
+  .holo-iridescent::before,
+  .holo-prism::before,
+  .holo-pearl::before,
+  .holo-metallic::before,
+  .holo-retina::before,
+  .holo-fragment::before {
+    animation: none !important;
+  }
+}

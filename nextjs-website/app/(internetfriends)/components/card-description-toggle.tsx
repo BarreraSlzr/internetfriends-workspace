@@ -40,7 +40,7 @@ export function CardDescriptionToggle({
     >
       <p
         className={cn(
-          "text-lg opacity-90 transition-all duration-300",
+          "text-lg text-muted-foreground transition-all duration-300 text-inherit",
           isDescriptionVisible ? "block" : "hidden",
         )}
       >

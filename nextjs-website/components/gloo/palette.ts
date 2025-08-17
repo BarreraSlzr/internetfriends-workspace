@@ -224,12 +224,22 @@ export function generateGlooPalette(options: GlooPaletteOptions): GlooPalette {
   };
 }
 
-export function getInternetFriendsPalette(mode: GlooThemeMode): GlooPalette {
-  return generateGlooPalette({
-    mode,
+export function getInternetFriendsPalette(mode?: GlooThemeMode): GlooPalette {
+  // Always use the same beautiful colors regardless of theme mode
+  // This creates consistency and ignores dark/light mode switching
+  return {
+    colors: [
+      "#3b82f6", // Beautiful blue primary
+      "#60a5fa", // Lighter blue complement  
+      "#1d4ed8"  // Deeper blue accent
+    ],
     strategy: "brand-triad",
-    anchorColor: "#3b82f6",
-  });
+    mode: "light", // Fixed mode for consistency
+    metadata: {
+      generated: false,
+      themeIgnored: true, // Flag to indicate we ignore theme mode
+    },
+  };
 }
 
 export function getOctopusFlatPalette(mode: GlooThemeMode): GlooPalette {
