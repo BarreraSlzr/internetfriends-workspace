@@ -94,7 +94,7 @@ export default function Page() {
               title={p.title}
               referrerPolicy="origin"
               target="_blank"
-              className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-t border-gray-200 text-gray-700"
+              className="flex items-center sm:gap-4 gap-2 hover:brightness-75 transition-all p-2 border-t border-gray-200 text-gray-700"
             >
               <span className="font-mono font-bold mb-auto text-sm">0{index + 1}</span>
               <span className="flex-grow">{p.description}</span>
@@ -118,7 +118,7 @@ export default function Page() {
                 title={p.title}
                 referrerPolicy="origin"
                 target="_blank"
-                className="flex items-center sm:gap-4 gap-2 hover:opacity-70 transition-opacity p-2 border-t border-blue-200 text-blue-700"
+                className="flex items-center sm:gap-4 gap-2 hover:brightness-75 transition-all p-2 border-t border-blue-200 text-blue-700"
               >
                 <span className="font-mono font-bold mb-auto text-sm">0{index + 3}</span>
                 <span className="flex-grow">{p.description}</span>

@@ -77,7 +77,7 @@ export default function Page() {
                 key={c.href}
                 href={c.href}
                 title={c.title}
-                className="flex items-center justify-between p-3 transition-colors rounded-md hover:opacity-80"
+                className="flex items-center justify-between p-3 transition-colors rounded-md hover:brightness-90"
               >
                 <span className="body-text">{c.description}</span>
                 <span
