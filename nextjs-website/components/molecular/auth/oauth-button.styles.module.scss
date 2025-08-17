@@ -20,6 +20,10 @@
     background: var(--color-background-secondary);
     border-color: var(--color-border-primary);
   }
+
+  &:active {
+    border: 1px dashed var(--color-border-primary);
+  }
   
   &:disabled {
     opacity: 0.6;
