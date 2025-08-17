@@ -1,0 +1,476 @@
+'use client'
+
+import { useEffect, useState } from 'react'
+import { AuthProvider, useAuth, usePermissions } from '@/lib/auth/go-rich-auth'
+import GoRichDataDashboard from '@/components/steady/data-dashboard'
+import SteadyDashboard from '@/components/steady/dashboard'
+import FriendNetworkDashboard from '@/components/steady/friend-network-dashboard'
+import WebRTCFriendDashboard from '@/components/steady/webrtc-friend-dashboard'
+import MobileGoRich from '@/components/steady/mobile-go-rich'
+
+// Go.Rich - The Complete Data Gateway for Friends Network
+// Bloomberg Terminal + URL Shortener + Analytics + Friend Network
+// Responsive: Desktop dashboard + Mobile PWA + Authentication
+
+function GoRichContent() {
+  const [isMobile, setIsMobile] = useState(false)
+  const { user, isAuthenticated, logout } = useAuth()
+  const permissions = usePermissions()
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Show authentication notice for unauthenticated users
+  if (!isAuthenticated) {
+    return <PublicGoRichPage />
+  }
+
+  // Mobile-first PWA interface
+  if (isMobile) {
+    return (
+      <div className="relative">
+        {/* Mobile user menu */}
+        <div className="absolute top-4 right-4 z-20">
+          <button
+            onClick={logout}
+            className="bg-white bg-opacity-20 backdrop-blur text-white p-2 rounded-lg"
+          >
+            👤
+          </button>
+        </div>
+        <MobileGoRich />
+      </div>
+    )
+  }
+
+  // Desktop authenticated dashboard
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Enhanced Header */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-8">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">go.rich</h1>
+              <p className="text-xl opacity-90 mb-2">
+                Welcome back, {user?.name} • {user?.plan} Plan
+              </p>
+              <div className="flex items-center space-x-4">
+                <span className={`px-3 py-1 rounded-full text-sm ${
+                  user?.role === 'admin' ? 'bg-red-500' :
+                  user?.role === 'premium' ? 'bg-purple-500' : 'bg-gray-500'
+                }`}>
+                  {user?.plan}
+                </span>
+                {permissions.realTimeUpdates && <span className="text-sm">⚡ Real-time</span>}
+                {permissions.canShareData && <span className="text-sm">👥 Data Sharing</span>}
+              </div>
+            </div>
+            
+            {/* User Menu */}
+            <div className="flex items-center space-x-4">
+              <div className="text-right">
+                <div className="font-medium">{user?.name}</div>
+                <div className="text-sm opacity-75">@{user?.handle}</div>
+              </div>
+              <button
+                onClick={logout}
+                className="bg-white bg-opacity-20 px-4 py-2 rounded-lg hover:bg-opacity-30"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-8 space-y-12">
+        {/* Data Gateway Dashboard */}
+        <section id="data-gateway">
+          <GoRichDataDashboard 
+            title={`Real-time Data Gateway ${permissions.realTimeUpdates ? '(Live)' : '(Limited)'}`}
+            className="mb-8"
+            autoRefresh={permissions.realTimeUpdates}
+            showTickers={true}
+            showAnalytics={permissions.isPremium}
+            maxItems={permissions.isPremium ? 20 : 10}
+          />
+        </section>
+
+        {/* URL Shortener */}
+        <section id="url-shortener">
+          <SteadyDashboard 
+            domain="go.rich"
+            title="URL Shortener"
+            className="mb-8"
+            showStats={true}
+            showCreate={true}
+            maxLinks={permissions.isPremium ? 50 : 10}
+            onLinkCreate={(link) => {
+              console.log('🔗 New go.rich link:', link)
+            }}
+          />
+        </section>
+
+        {/* Friends Network - Premium Feature */}
+        {permissions.canShareData ? (
+          <>
+            <section id="friends-network">
+              <FriendNetworkDashboard 
+                title="Friend Network (Server-based)"
+                className="mb-8"
+                autoSync={permissions.realTimeUpdates}
+                maxFriends={permissions.maxFriends}
+                onDataReceived={(data) => {
+                  console.log('📡 Data from friend:', data)
+                }}
+              />
+            </section>
+
+            <section id="webrtc-friends">
+              <WebRTCFriendDashboard 
+                title="P2P Friends (Direct Connection)"
+                className="mb-8"
+                maxConnections={permissions.maxFriends}
+                onDataReceived={(data) => {
+                  console.log('🔗 P2P data from friend:', data)
+                }}
+              />
+            </section>
+          </>
+        ) : (
+          <section className="bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg text-white p-8 text-center">
+            <h2 className="text-2xl font-bold mb-4">🚀 Unlock Friend Data Sharing</h2>
+            <p className="text-lg opacity-90 mb-6">
+              Connect with friends, share market data, and build your network
+            </p>
+            <button className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100">
+              Upgrade to Premium
+            </button>
+          </section>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// Public version for unauthenticated users
+function PublicGoRichPage() {
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl font-bold mb-4">go.rich</h1>
+          <p className="text-xl opacity-90 mb-6">
+            Data Gateway for Friends Network • Market Tickers • URL Shortener • Real-time Analytics
+          </p>
+          <div className="flex space-x-4">
+            <a 
+              href="#demo" 
+              className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+            >
+              Try Demo
+            </a>
+            <a 
+              href="#features" 
+              className="border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600"
+            >
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-8 space-y-12">
+        {/* Demo Section */}
+        <section id="demo" className="bg-white rounded-lg shadow p-8">
+          <h2 className="text-2xl font-bold mb-4">🎯 Try go.rich Demo</h2>
+          <p className="text-gray-600 mb-6">
+            Experience the full power of go.rich with our demo account. Get instant access to:
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div className="text-center p-4 bg-blue-50 rounded-lg">
+              <div className="text-3xl mb-2">📊</div>
+              <h3 className="font-semibold">Real-time Market Data</h3>
+              <p className="text-sm text-gray-600">Live crypto & stock tickers</p>
+            </div>
+            <div className="text-center p-4 bg-purple-50 rounded-lg">
+              <div className="text-3xl mb-2">👥</div>
+              <h3 className="font-semibold">Friend Data Sharing</h3>
+              <p className="text-sm text-gray-600">Connect with your network</p>
+            </div>
+            <div className="text-center p-4 bg-green-50 rounded-lg">
+              <div className="text-3xl mb-2">🔗</div>
+              <h3 className="font-semibold">URL Shortener</h3>
+              <p className="text-sm text-gray-600">Branded go.rich links</p>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <button
+              onClick={() => window.location.reload()}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg"
+            >
+              Start Demo (No Signup Required)
+            </button>
+          </div>
+        </section>
+
+        {/* Features Overview */}
+        <section id="features" className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-4">📊</div>
+            <h3 className="text-lg font-semibold mb-2">Real-time Market Data</h3>
+            <p className="text-gray-600">Live cryptocurrency and stock tickers with SSE streaming</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-4">🔗</div>
+            <h3 className="text-lg font-semibold mb-2">URL Shortener</h3>
+            <p className="text-gray-600">Branded go.rich links with click analytics and management</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-4">🌐</div>
+            <h3 className="text-lg font-semibold mb-2">Friends Network</h3>
+            <p className="text-gray-600">Data sharing and sync with friend endpoints</p>
+          </div>
+        </section>
+
+        {/* API Documentation */}
+        <section className="bg-white rounded-lg shadow p-8">
+          <h2 className="text-2xl font-bold mb-6">API Reference</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Market Data APIs */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-blue-600">Market Data</h3>
+              <div className="space-y-3 text-sm font-mono">
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/gateway?action=tickers</div>
+                  <div className="text-gray-600">Get market ticker list</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/stream?feed=tickers</div>
+                  <div className="text-gray-600">Real-time ticker updates (SSE)</div>
+                </div>
+              </div>
+            </div>
+
+            {/* URL Shortener APIs */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-purple-600">URL Shortener</h3>
+              <div className="space-y-3 text-sm font-mono">
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/domains?action=links</div>
+                  <div className="text-gray-600">Get all go.rich links</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/go/[code]</div>
+                  <div className="text-gray-600">Redirect to destination + analytics</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  )
+}
+
+export default function GoRichPage() {
+  return (
+    <AuthProvider>
+      <GoRichContent />
+    </AuthProvider>
+  )
+}
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <h1 className="text-4xl font-bold mb-4">go.rich</h1>
+          <p className="text-xl opacity-90 mb-6">
+            Data Gateway for Friends Network • Market Tickers • URL Shortener • Real-time Analytics
+          </p>
+          <div className="flex space-x-4">
+            <a 
+              href="#data-gateway" 
+              className="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100"
+            >
+              Live Data Feed
+            </a>
+            <a 
+              href="#url-shortener" 
+              className="border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600"
+            >
+              URL Shortener
+            </a>
+            <a 
+              href="#friends-network" 
+              className="border border-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600"
+            >
+              Friends Network
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-6 py-8 space-y-12">
+        {/* Data Gateway Dashboard */}
+        <section id="data-gateway">
+          <GoRichDataDashboard 
+            title="Real-time Data Gateway"
+            className="mb-8"
+            autoRefresh={true}
+            showTickers={true}
+            showAnalytics={true}
+            maxItems={15}
+          />
+        </section>
+
+        {/* URL Shortener */}
+        <section id="url-shortener">
+          <SteadyDashboard 
+            domain="go.rich"
+            title="URL Shortener"
+            className="mb-8"
+            showStats={true}
+            showCreate={true}
+            maxLinks={20}
+            onLinkCreate={(link) => {
+              console.log('🔗 New go.rich link:', link)
+            }}
+          />
+        </section>
+
+        {/* Friends Network */}
+        <section id="friends-network">
+          <FriendNetworkDashboard 
+            title="Friend-to-Friend Data Sharing"
+            className="mb-8"
+            autoSync={true}
+            maxFriends={15}
+            onDataReceived={(data) => {
+              console.log('📡 Data from friend:', data)
+            }}
+          />
+        </section>
+
+        {/* API Documentation */}
+        <section className="bg-white rounded-lg shadow p-8">
+          <h2 className="text-2xl font-bold mb-6">API Reference</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Market Data APIs */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-blue-600">Market Data</h3>
+              <div className="space-y-3 text-sm font-mono">
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/gateway?action=tickers</div>
+                  <div className="text-gray-600">Get market ticker list</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/gateway?action=ticker&symbol=BTC</div>
+                  <div className="text-gray-600">Get specific ticker data</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/stream?feed=tickers</div>
+                  <div className="text-gray-600">Real-time ticker updates (SSE)</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Analytics APIs */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-green-600">Analytics</h3>
+              <div className="space-y-3 text-sm font-mono">
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/gateway?action=analytics</div>
+                  <div className="text-gray-600">Get analytics events</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">POST /api/steady/gateway</div>
+                  <div className="text-gray-600">{"{ action: 'track_event', type: 'click' }"}</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/stream?feed=analytics</div>
+                  <div className="text-gray-600">Real-time analytics (SSE)</div>
+                </div>
+              </div>
+            </div>
+
+            {/* URL Shortener APIs */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-purple-600">URL Shortener</h3>
+              <div className="space-y-3 text-sm font-mono">
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/domains?action=links</div>
+                  <div className="text-gray-600">Get all go.rich links</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">POST /api/steady/domains</div>
+                  <div className="text-gray-600">{"{ action: 'create_link', url: '...' }"}</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/go/[code]</div>
+                  <div className="text-gray-600">Redirect to destination + analytics</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Friends Network APIs */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4 text-orange-600">Friends Network</h3>
+              <div className="space-y-3 text-sm font-mono">
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/gateway?action=friends</div>
+                  <div className="text-gray-600">Get friends network status</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">POST /api/steady/gateway</div>
+                  <div className="text-gray-600">{"{ action: 'add_friend', friendId: '...' }"}</div>
+                </div>
+                <div className="bg-gray-100 p-3 rounded">
+                  <div className="font-bold">GET /api/steady/stream?feed=friends</div>
+                  <div className="text-gray-600">Friend sync events (SSE)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Overview */}
+        <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-4">📊</div>
+            <h3 className="text-lg font-semibold mb-2">Real-time Market Data</h3>
+            <p className="text-gray-600">Live cryptocurrency and stock tickers with SSE streaming</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-4">🔗</div>
+            <h3 className="text-lg font-semibold mb-2">URL Shortener</h3>
+            <p className="text-gray-600">Branded go.rich links with click analytics and management</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow p-6 text-center">
+            <div className="text-3xl mb-4">🌐</div>
+            <h3 className="text-lg font-semibold mb-2">Friends Network</h3>
+            <p className="text-gray-600">Data sharing and sync with friend endpoints</p>
+          </div>
+        </section>
+      </div>
+    </div>
+  )
+}

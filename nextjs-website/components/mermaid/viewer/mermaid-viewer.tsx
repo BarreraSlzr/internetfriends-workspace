@@ -67,7 +67,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
   onRender,
   "data-testid": testId,
 }) => {
-  const { theme } = useTheme();
+  const { isDarkMode } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(loading);
@@ -104,7 +104,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
         if (!isMounted) return;
 
         const mermaidInstance = mermaidModule.default;
-        const config = getMermaidConfig(theme.colorScheme);
+        const config = getMermaidConfig(isDarkMode ? "dark" : "light");
 
         mermaidInstance.initialize(config);
         setMermaid(mermaidInstance as MermaidAPI);
@@ -122,7 +122,7 @@ export const MermaidViewer: React.FC<MermaidViewerProps> = ({
     return () => {
       isMounted = false;
     };
-  }, [theme.colorScheme, onError]);
+  }, [isDarkMode, onError]);
 
   // Render diagram
   const renderDiagram = useCallback(async () => {

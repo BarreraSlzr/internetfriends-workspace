@@ -45,7 +45,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
   onError,
   onEffectChange,
 }): React.JSX.Element | null => {
-  const { isDark } = useTheme();
+  const { isDarkMode } = useTheme();
   const [currentPalette, setCurrentPalette] = useState<GlooPalette | null>(
     null,
   );
@@ -62,7 +62,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
 
   // Generate theme-aware palette
   const resolvedPalette = useMemo<GlooPalette>(() => {
-    const mode: GlooThemeMode = isDark ? "dark" : "light";
+    const mode: GlooThemeMode = isDarkMode ? "dark" : "light";
 
     // Priority 1: Explicit palette prop
     if (palette && palette.length >= 3) {
@@ -75,7 +75,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
     }
 
     // Priority 2: Theme-specific palettes
-    if (isDark && paletteDark && paletteDark.length >= 3) {
+    if (isDarkMode && paletteDark && paletteDark.length >= 3) {
       return {
         colors: paletteDark.slice(0, 3) as [string, string, string],
         strategy: paletteStrategy,
@@ -84,7 +84,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
       };
     }
 
-    if (!isDark && paletteLight && paletteLight.length >= 3) {
+    if (!isDarkMode && paletteLight && paletteLight.length >= 3) {
       return {
         colors: paletteLight.slice(0, 3) as [string, string, string],
         strategy: paletteStrategy,
@@ -103,7 +103,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
       anchorColor,
     });
   }, [
-    isDark,
+    isDarkMode,
     palette,
     paletteLight,
     paletteDark,
@@ -136,21 +136,21 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
         phase: epicContext.epicPhase,
         palette: currentPalette?.strategy,
         effect: effectName || effectIndex,
-        theme: isDark ? "dark" : "light",
+        theme: isDarkMode ? "dark" : "light",
       });
     }
-  }, [epicContext, currentPalette, effectName, effectIndex, isDark]);
+  }, [epicContext, currentPalette, effectName, effectIndex, isDarkMode]);
 
   // Theme-aware tint adjustment
   const themeTint = useMemo<[number, number, number]>(() => {
-    if (isDark) {
+    if (isDarkMode) {
       // Dark mode: slightly boost brightness and reduce harsh whites
       return [0.95, 0.98, 1.05];
     } else {
       // Light mode: standard tinting
       return [1, 1, 1];
     }
-  }, [isDark]);
+  }, [isDarkMode]);
 
   // Handle effect changes for epic tracking
   const handleEffectChange = (index: number, name: GlooEffectName) => {
@@ -266,7 +266,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
         ...style,
       }}
       data-gloo-global="true"
-      data-gloo-theme={isDark ? "dark" : "light"}
+      data-gloo-theme={isDarkMode ? "dark" : "light"}
       data-gloo-strategy={currentPalette?.strategy}
       data-gloo-epic={epicContext?.epicName}
       data-gloo-epic-phase={epicContext?.epicPhase}
@@ -277,17 +277,10 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
           speed={speed}
           resolution={resolution}
           depth={depth}
-          seed={seed}
-          still={still}
           effectIndex={effectIndex}
-          effectName={effectName}
           animate={animate}
-          preserveDrawingBuffer={preserveDrawingBuffer}
           palette={currentPalette}
-          tint={themeTint}
           reducedMotion={shouldRespectReducedMotion}
-          onError={handlePaletteError}
-          onEffectChange={handleEffectChange}
         />
       )}
 
@@ -341,7 +334,7 @@ export const GlooGlobalOrganism: React.FC<GlooGlobalProps> = ({
           >
             <div className="font-semibold">🔍 WebGL Debug Mode ACTIVE</div>
             <div>Canvas: {currentPalette ? "✓ Ready" : "✗ Missing"}</div>
-            <div>Theme: {isDark ? "dark" : "light"}</div>
+            <div>Theme: {isDarkMode ? "dark" : "light"}</div>
             <div>Z-Index: {zIndex}</div>
             <div>
               Animation: {shouldRespectReducedMotion ? "Reduced" : "Active"}

@@ -11,8 +11,7 @@ import { useEffect } from "react";
  * Follows Teenage Engineering aesthetic: subtle light mode, vivid dark mode.
  */
 export function AccentInitializer() {
-  const { theme } = useTheme();
-  const isDark = theme.colorScheme === "dark";
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     try {
@@ -20,7 +19,7 @@ export function AccentInitializer() {
       if (!root) return;
 
       // Generate adaptive color tuples
-      const tuples = getAdaptiveGooColorTuples(isDark ? "dark" : "light", {
+      const tuples = getAdaptiveGooColorTuples(isDarkMode ? "dark" : "light", {
         desaturateLight: 0.5,
         lightenLight: 0.05,
         darkBoost: 1.07,
@@ -38,22 +37,22 @@ export function AccentInitializer() {
       root.style.setProperty("--if-accent-primary", toCss(primaryTuple, 1));
       root.style.setProperty(
         "--if-accent-soft",
-        toCss(primaryTuple, isDark ? 0.22 : 0.18)
+        toCss(primaryTuple, isDarkMode ? 0.22 : 0.18)
       );
       root.style.setProperty(
         "--if-accent-faint",
-        toCss(primaryTuple, isDark ? 0.14 : 0.10)
+        toCss(primaryTuple, isDarkMode ? 0.14 : 0.10)
       );
 
       // Mark as accent-ready for progressive enhancement
       root.setAttribute("data-accent-ready", "true");
-      root.setAttribute("data-accent-mode", isDark ? "dark" : "light");
+      root.setAttribute("data-accent-mode", isDarkMode ? "dark" : "light");
     } catch (error) {
       console.warn("[AccentInitializer] Failed to inject adaptive colors:", error);
       // Fallback: ensure data attributes are still set for CSS
       document.documentElement?.setAttribute("data-accent-ready", "false");
     }
-  }, [isDark]);
+  }, [isDarkMode]);
 
   return null; // This is a headless component
 }

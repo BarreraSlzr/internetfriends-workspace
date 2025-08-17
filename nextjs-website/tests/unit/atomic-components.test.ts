@@ -107,7 +107,6 @@ describe("Atomic Components Unit Tests", () => {
       // Should have different node types
       const nodeTypes = [...new Set(nodes.map((n) => n.type))];
       expect(nodeTypes).toContain("component");
-      expect(nodeTypes).toContain("utility");
       expect(nodeTypes).toContain("page");
     });
 

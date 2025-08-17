@@ -22,6 +22,39 @@ const INTERNETFRIENDS_CORE = [
   "#06b6d4",
 ];
 
+const OCTOPUS_INSPIRED_FLAT = [
+  "#3b82f6", // Primary blue (octopus.do inspired)
+  "#1f2937", // Dark gray (flat design)
+  "#6b7280", // Medium gray
+  "#f9fafb", // Almost white
+  "#10b981", // Emerald green
+  "#06b6d4", // Cyan accent
+  "#f97316", // Orange
+  "#8b5cf6", // Purple
+];
+
+const MODERN_FLAT_CORE = [
+  "#000000", // Pure black
+  "#374151", // Dark blue-gray
+  "#9ca3af", // Light gray
+  "#ffffff", // Pure white
+  "#3b82f6", // Blue
+  "#10b981", // Green
+  "#f59e0b", // Amber
+  "#ef4444", // Red
+];
+
+const RETINA_OPTIMIZED = [
+  "#0f172a", // Very dark blue (high contrast)
+  "#1e293b", // Dark blue-gray
+  "#475569", // Medium blue-gray
+  "#cbd5e1", // Light blue-gray
+  "#f1f5f9", // Very light blue-gray
+  "#06b6d4", // Cyan accent
+  "#3b82f6", // Primary blue
+  "#10b981", // Green
+];
+
 function createSeededRNG(seed: number) {
   let state = seed >>> 0;
   return function random() {
@@ -134,6 +167,30 @@ export function generateGlooPalette(options: GlooPaletteOptions): GlooPalette {
       }
       break;
 
+    case "octopus-flat":
+      if (mode === "dark") {
+        generatedColors = ["#3b82f6", "#1f2937", "#6b7280"];
+      } else {
+        generatedColors = ["#3b82f6", "#f9fafb", "#06b6d4"];
+      }
+      break;
+
+    case "modern-minimal":
+      if (mode === "dark") {
+        generatedColors = ["#374151", "#000000", "#3b82f6"];
+      } else {
+        generatedColors = ["#000000", "#ffffff", "#3b82f6"];
+      }
+      break;
+
+    case "retina-optimized":
+      if (mode === "dark") {
+        generatedColors = ["#0f172a", "#475569", "#06b6d4"];
+      } else {
+        generatedColors = ["#1e293b", "#f1f5f9", "#3b82f6"];
+      }
+      break;
+
     case "primary-accent":
       const primary = anchorColor || "#3b82f6";
       generatedColors = [
@@ -173,4 +230,44 @@ export function getInternetFriendsPalette(mode: GlooThemeMode): GlooPalette {
     strategy: "brand-triad",
     anchorColor: "#3b82f6",
   });
+}
+
+export function getOctopusFlatPalette(mode: GlooThemeMode): GlooPalette {
+  return generateGlooPalette({
+    mode,
+    strategy: "octopus-flat",
+    coreColors: OCTOPUS_INSPIRED_FLAT,
+  });
+}
+
+export function getModernMinimalPalette(mode: GlooThemeMode): GlooPalette {
+  return generateGlooPalette({
+    mode,
+    strategy: "modern-minimal",
+    coreColors: MODERN_FLAT_CORE,
+  });
+}
+
+export function getRetinaOptimizedPalette(mode: GlooThemeMode): GlooPalette {
+  return generateGlooPalette({
+    mode,
+    strategy: "retina-optimized",
+    coreColors: RETINA_OPTIMIZED,
+  });
+}
+
+export function createPaletteFromStrategy(
+  strategy: string,
+  mode: GlooThemeMode = "light"
+): GlooPalette {
+  switch (strategy) {
+    case "octopus-flat":
+      return getOctopusFlatPalette(mode);
+    case "modern-minimal":
+      return getModernMinimalPalette(mode);
+    case "retina-optimized":
+      return getRetinaOptimizedPalette(mode);
+    default:
+      return getInternetFriendsPalette(mode);
+  }
 }

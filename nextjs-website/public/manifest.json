@@ -1,0 +1,150 @@
+{
+  "name": "InternetFriends",
+  "short_name": "IFriends",
+  "description": "Connect with friends through advanced peer-to-peer networking and offline capabilities",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "categories": ["social", "communication", "productivity"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/desktop-home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home screen with friends network"
+    },
+    {
+      "src": "/screenshots/mobile-chat.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "P2P messaging interface"
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "features": [
+    "Cross-platform PWA",
+    "Offline-first architecture",
+    "P2P mesh networking",
+    "End-to-end encryption",
+    "Bluetooth connectivity",
+    "Real-time sync"
+  ],
+  "shortcuts": [
+    {
+      "name": "Friends Network",
+      "short_name": "Network",
+      "description": "Connect to peer-to-peer mesh network",
+      "url": "/friends-network",
+      "icons": [
+        {
+          "src": "/icons/shortcut-network.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Offline Messages",
+      "short_name": "Messages",
+      "description": "View cached messages and sync queue",
+      "url": "/messages?offline=true",
+      "icons": [
+        {
+          "src": "/icons/shortcut-messages.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+friends",
+      "url": "/connect?peer=%s"
+    },
+    {
+      "protocol": "web+bitchat",
+      "url": "/bitchat?invite=%s"
+    }
+  ],
+  "file_handlers": [
+    {
+      "action": "/share",
+      "accept": {
+        "text/plain": [".txt"],
+        "image/*": [".jpg", ".jpeg", ".png", ".gif", ".webp"],
+        "application/json": [".json"]
+      }
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "file",
+          "accept": ["text/*", "image/*", "application/json"]
+        }
+      ]
+    }
+  },
+  "permissions": [
+    "bluetooth",
+    "geolocation",
+    "notifications",
+    "background-sync",
+    "periodic-background-sync"
+  ],
+  "offline_capability": {
+    "messaging": true,
+    "content_caching": true,
+    "peer_discovery": true,
+    "data_sync": true
+  },
+  "network_features": {
+    "webrtc": true,
+    "bluetooth": true,
+    "mesh_networking": true,
+    "bitchat_protocol": true,
+    "offline_relay": true
+  }
+}

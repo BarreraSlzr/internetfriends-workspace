@@ -7,19 +7,7 @@ const ProfileProjectsTab = () => {
   const skillsMap = new Map(
     (curriculum.skills || []).map((skill) => [skill.id, skill]),
   );
-  const renderSkills = (skillsUsed: number[] | undefined) => {
-    if (!skillsUsed || !Array.isArray(skillsUsed)) return null;
-    const sortedSkills = skillsUsed
-      .map((id) => skillsMap.get(id))
-      .filter((skill) => skill)
-      .sort((a, b) => (b?.popularity || 0) - (a?.popularity || 0));
-
-    return sortedSkills.map((skill) => (
-      <GlassBadge key={skill?.id} variant="default">
-        {skill?.name}
-      </GlassBadge>
-    ));
-  };
+  
   return (
     <div className="flex flex-col gap-2">
       <div className={cardCss}>
@@ -40,7 +28,8 @@ const ProfileProjectsTab = () => {
               <h4 className="text-lg font-semibold">{project.name}</h4>
               <p className="text-gray-700 mb-2">{project.description}</p>
               <div className="flex flex-wrap gap-2">
-                 {renderSkills(project.skillsUsed || [])}
+                 {/* Job experience projects don't have technologies field */}
+                 <GlassBadge variant="default">Project Work</GlassBadge>
               </div>
             </div>
           ))}

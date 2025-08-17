@@ -1,353 +1,271 @@
 "use client";
 
-// InternetFriends Theme Hook
-// Comprehensive theme management with system preference detection and persistence
+/* InternetFriends Theme Provider */
+/* React context and hooks for accent theming system */
 
 import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useContext,
   createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
 } from "react";
-// Simplified types for basic functionality
-type ThemeMode = "light" | "dark" | "system";
-type ColorScheme = "light" | "dark";
 
-interface ThemeConfig {
-  mode: ThemeMode;
-  colorScheme: ColorScheme;
-  transitionDuration: string;
-  enableTransitions: boolean;
+// =================================================================
+// THEME CONTEXT INTERFACE
+// =================================================================
+
+export interface ThemeContextValue {
+  // State
+  isInitialized: boolean;
+  isHydrated: boolean;
+  isDarkMode: boolean;
+  systemPrefersDark: boolean;
+  errors: string[];
+
+  // Actions
+  toggleDarkMode: () => void;
+  setDarkMode: (enabled: boolean) => void;
+  reinitializeTheme: () => Promise<void>;
+
+  // Debug utilities (development only)
+  debug: {
+    logThemeState: () => void;
+    forceReinitialize: () => Promise<void>;
+  };
 }
 
-interface UseThemeReturn {
-  theme: ThemeConfig;
-  tokens: Record<string, unknown>;
-  components: Record<string, unknown>;
-  setTheme: (mode: ThemeMode) => void;
-  toggleTheme: () => void;
-  getColor: (property: string) => string;
-  isDark: boolean;
-  isLight: boolean;
-  systemPreference: ColorScheme;
-  mounted: boolean;
+// =================================================================
+// THEME CONTEXT CREATION
+// =================================================================
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+export function useTheme(): ThemeContextValue {
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
 }
 
-const HOOK_DEFAULTS = {
-  storagePrefix: "if_",
-};
+// =================================================================
+// THEME PROVIDER COMPONENT
+// =================================================================
 
-class HookError extends Error {
-  constructor(
-    message: string,
-    public readonly hook: string,
-    public readonly code?: string,
-  ) {
-    super(message);
-    this.name = "HookError";
-  }
+export interface ThemeProviderProps {
+  children: React.ReactNode;
+  debugMode?: boolean;
+  onThemeError?: (error: string) => void;
 }
 
-const createHookError = (hook: string, message: string, code?: string) => {
-  return new HookError(message, hook, code);
-};
-
-// Theme context
-const ThemeContext = createContext<UseThemeReturn | null>(null);
-
-// Storage key for theme persistence
-const STORAGE_KEY = `${HOOK_DEFAULTS.storagePrefix}theme`;
-
-// Media query for system dark mode preference
-const DARK_MODE_QUERY = "(prefers-color-scheme: dark)";
-
-// Utility to get system color scheme
-const getSystemColorScheme = (): ColorScheme => {
-  if (typeof window === "undefined") return "light";
-
-  try {
-    return window.matchMedia(DARK_MODE_QUERY).matches ? "dark" : "light";
-  } catch {
-    return "light";
-  }
-};
-
-// Utility to resolve theme mode to color scheme
-const resolveColorScheme = (
-  mode: ThemeMode,
-  systemScheme: ColorScheme,
-): ColorScheme => {
-  if (mode === "system") return systemScheme;
-  return mode;
-};
-
-// Utility to get stored theme
-const getStoredTheme = (): ThemeMode => {
-  if (typeof window === "undefined") return "system";
-
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored && ["light", "dark", "system"].includes(stored)) {
-      return stored as ThemeMode;
-    }
-  } catch (error) {
-    console.warn("Failed to read theme from localStorage:", error);
-  }
-
-  return "system";
-};
-
-// Utility to store theme
-const storeTheme = (mode: ThemeMode): void => {
-  if (typeof window === "undefined") return;
-
-  try {
-    localStorage.setItem(STORAGE_KEY, mode);
-  } catch (error) {
-    console.warn("Failed to store theme in localStorage:", error);
-  }
-};
-
-// Utility to apply theme to document
-const applyThemeToDocument = (colorScheme: ColorScheme): void => {
-  if (typeof document === "undefined") return;
-
-  try {
-    // Update data attribute
-    document.documentElement.setAttribute("data-theme", colorScheme);
-
-    // Update class for compatibility
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(colorScheme);
-
-    // Update meta theme-color for mobile browsers
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      const color = colorScheme === "dark" ? "#111827" : "#ffffff";
-      metaThemeColor.setAttribute("content", color);
-    }
-  } catch (error) {
-    console.warn("Failed to apply theme to document:", error);
-  }
-};
-
-// Theme provider component
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+export function ThemeProvider({
   children,
-}) => {
-  const [themeMode, setThemeMode] = useState<ThemeMode>("system");
-  const [systemColorScheme, setSystemColorScheme] =
-    useState<ColorScheme>("light");
-  const [mounted, setMounted] = useState(false);
+  debugMode = process.env.NODE_ENV === "development",
+  onThemeError,
+}: ThemeProviderProps) {
+  // =================================================================
+  // STATE MANAGEMENT
+  // =================================================================
 
-  // Initialize theme on mount
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [isHydrated, setIsHydrated] = useState(false);
+  const [errors, setErrors] = useState<string[]>([]);
+
+  // Dark mode state
+  const [isDarkMode, setIsDarkModeState] = useState(false);
+  const [systemPrefersDark, setSystemPrefersDark] = useState(false);
+
+  // =================================================================
+  // THEME INITIALIZATION
+  // =================================================================
+
   useEffect(() => {
-    const storedTheme = getStoredTheme();
-    const systemScheme = getSystemColorScheme();
-
-    setThemeMode(storedTheme);
-    setSystemColorScheme(systemScheme);
-    setMounted(true);
-
-    // Apply initial theme
-    const resolvedScheme = resolveColorScheme(storedTheme, systemScheme);
-    applyThemeToDocument(resolvedScheme);
+    setIsInitialized(true);
+    setIsHydrated(true);
   }, []);
 
-  // Listen for system theme changes
+  // =================================================================
+  // DARK MODE DETECTION
+  // =================================================================
+
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    const mediaQuery = window.matchMedia(DARK_MODE_QUERY);
+    // Detect system preference
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    setSystemPrefersDark(mediaQuery.matches);
 
+    // Set initial dark mode state
+    const savedTheme = localStorage.getItem("if-theme-mode");
+    if (savedTheme) {
+      setIsDarkModeState(savedTheme === "dark");
+    } else {
+      setIsDarkModeState(mediaQuery.matches);
+    }
+
+    // Listen for system changes
     const handleChange = (e: MediaQueryListEvent) => {
-      const newSystemScheme = e.matches ? "dark" : "light";
-      setSystemColorScheme(newSystemScheme);
+      setSystemPrefersDark(e.matches);
 
-      // Apply theme if in system mode
-      if (themeMode === "system") {
-        applyThemeToDocument(newSystemScheme);
+      // Only auto-switch if user hasn't manually set preference
+      if (!localStorage.getItem("if-theme-mode")) {
+        setIsDarkModeState(e.matches);
       }
     };
 
-    // Modern browsers
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    }
-    // Legacy browsers
-    else if (mediaQuery.addListener) {
-      mediaQuery.addListener(handleChange);
-      return () => mediaQuery.removeListener(handleChange);
-    }
-  }, [themeMode]);
-
-  // Apply theme when mode changes
-  useEffect(() => {
-    if (!mounted) return;
-
-    const resolvedScheme = resolveColorScheme(themeMode, systemColorScheme);
-    applyThemeToDocument(resolvedScheme);
-  }, [themeMode, systemColorScheme, mounted]);
-
-  // Set theme mode
-  const setTheme = useCallback(
-    (mode: ThemeMode) => {
-      try {
-        setThemeMode(mode);
-        storeTheme(mode);
-
-        // Immediately apply theme
-        const resolvedScheme = resolveColorScheme(mode, systemColorScheme);
-        applyThemeToDocument(resolvedScheme);
-      } catch (error) {
-        throw createHookError(
-          "useTheme",
-          `Failed to set theme: ${error}`,
-          "SET_THEME_ERROR",
-        );
-      }
-    },
-    [systemColorScheme],
-  );
-
-  // Toggle between light and dark
-  const toggleTheme = useCallback(() => {
-    const currentScheme = resolveColorScheme(themeMode, systemColorScheme);
-    const newMode = currentScheme === "light" ? "dark" : "light";
-    setTheme(newMode);
-  }, [themeMode, systemColorScheme, setTheme]);
-
-  // Get color value from CSS custom properties
-  const getColor = useCallback((property: string): string => {
-    if (typeof window === "undefined") return "";
-
-    try {
-      const value = getComputedStyle(document.documentElement)
-        .getPropertyValue(`--${property}`)
-        .trim();
-
-      return value || "";
-    } catch (error) {
-      console.warn(`Failed to get color property --${property}:`, error);
-      return "";
-    }
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
   }, []);
 
-  // Computed values
-  const resolvedColorScheme = resolveColorScheme(themeMode, systemColorScheme);
-  const isDark = resolvedColorScheme === "dark";
-  const isLight = resolvedColorScheme === "light";
+  // Apply dark mode to DOM
+  useEffect(() => {
+    if (typeof document === "undefined") return;
 
-  // Theme configuration
-  const theme: ThemeConfig = {
-    mode: themeMode,
-    colorScheme: resolvedColorScheme,
-    transitionDuration: "300ms",
-    enableTransitions: true,
-  };
+    if (isDarkMode) {
+      document.documentElement.setAttribute("data-theme", "dark");
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDarkMode]);
 
-  const contextValue: UseThemeReturn = {
-    theme,
-    tokens: {},
-    components: {},
-    setTheme,
-    toggleTheme,
-    getColor,
-    isDark,
-    isLight,
-    systemPreference: systemColorScheme,
-    mounted,
-  };
+  // =================================================================
+  // THEME CONTROL FUNCTIONS
+  // =================================================================
+
+  const toggleDarkMode = useCallback(() => {
+    const newMode = !isDarkMode;
+    setIsDarkModeState(newMode);
+    localStorage.setItem("if-theme-mode", newMode ? "dark" : "light");
+
+    if (debugMode) {
+      console.log("🌙 ThemeProvider: Dark mode toggled to", newMode);
+    }
+  }, [isDarkMode, debugMode]);
+
+  const setDarkMode = useCallback(
+    (enabled: boolean) => {
+      setIsDarkModeState(enabled);
+      localStorage.setItem("if-theme-mode", enabled ? "dark" : "light");
+
+      if (debugMode) {
+        console.log("🌙 ThemeProvider: Dark mode set to", enabled);
+      }
+    },
+    [debugMode],
+  );
+
+  const reinitializeTheme = useCallback(async () => {
+    try {
+      setIsInitialized(false);
+      setErrors([]);
+      setIsInitialized(true);
+      setIsHydrated(true);
+    } catch (error) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Reinitialize failed";
+      setErrors((prev) => [...prev, errorMessage]);
+      onThemeError?.(errorMessage);
+    }
+  }, [onThemeError]);
+
+  // =================================================================
+  // DEBUG UTILITIES
+  // =================================================================
+
+  const debug = React.useMemo(
+    () => ({
+      logThemeState: () => {
+        console.group("🎨 Theme Provider State");
+        console.log("Initialized:", isInitialized);
+        console.log("Hydrated:", isHydrated);
+        console.log("Dark mode:", isDarkMode);
+        console.log("System prefers dark:", systemPrefersDark);
+        console.log("Errors:", errors);
+        console.groupEnd();
+      },
+
+      forceReinitialize: async () => {
+        console.warn("🔄 Force reinitializing theme system...");
+        await reinitializeTheme();
+      },
+    }),
+    [
+      isInitialized,
+      isHydrated,
+      isDarkMode,
+      systemPrefersDark,
+      errors,
+      reinitializeTheme,
+    ],
+  );
+
+  // =================================================================
+  // CONTEXT VALUE
+  // =================================================================
+
+  const contextValue: ThemeContextValue = React.useMemo(
+    () => ({
+      // State
+      isInitialized,
+      isHydrated,
+      errors,
+
+      // Theme controls
+      isDarkMode,
+      systemPrefersDark,
+
+      // Actions
+      toggleDarkMode,
+      setDarkMode,
+      reinitializeTheme,
+
+      // Debug utilities
+      debug,
+    }),
+    [
+      isInitialized,
+      isHydrated,
+      errors,
+      isDarkMode,
+      systemPrefersDark,
+      toggleDarkMode,
+      setDarkMode,
+      reinitializeTheme,
+      debug,
+    ],
+  );
+
+  // =================================================================
+  // RENDER
+  // =================================================================
 
   return (
     <ThemeContext.Provider value={contextValue}>
       {children}
     </ThemeContext.Provider>
   );
-};
+}
 
-// Theme hook
-export const useTheme = (): UseThemeReturn => {
-  const context = useContext(ThemeContext);
+// =================================================================
+// ADDITIONAL HOOKS
+// =================================================================
 
-  if (!context) {
-    throw createHookError(
-      "useTheme",
-      "useTheme must be used within a ThemeProvider",
-      "MISSING_PROVIDER",
-    );
-  }
+/**
+ * Hook for accessing only dark mode functionality
+ */
+export function useDarkMode() {
+  const { isDarkMode, systemPrefersDark, toggleDarkMode, setDarkMode } =
+    useTheme();
+  return { isDarkMode, systemPrefersDark, toggleDarkMode, setDarkMode };
+}
 
-  return context;
-};
-
-// Hook for color scheme only
-export const useColorScheme = () => {
-  const { theme, isDark, isLight, systemPreference } = useTheme();
-
-  return {
-    colorScheme: theme.colorScheme,
-    isDark,
-    isLight,
-    systemPreference,
-  };
-};
-
-// Hook for theme-aware class names
-export const useThemeClassName = (
-  baseClassName: string,
-  variants?: Record<string, boolean>,
-) => {
-  const { isDark, isLight } = useTheme();
-
-  return useCallback(
-    (additionalClasses?: string) => {
-      const classes = [baseClassName];
-
-      // Add theme-specific classes
-      if (isDark) classes.push(`${baseClassName}--dark`);
-      if (isLight) classes.push(`${baseClassName}--light`);
-
-      // Add variant classes
-      if (variants) {
-        Object.entries(variants).forEach(([variant, active]) => {
-          if (active) {
-            classes.push(`${baseClassName}--${variant}`);
-          }
-        });
-      }
-
-      // Add additional classes
-      if (additionalClasses) {
-        classes.push(additionalClasses);
-      }
-
-      return classes.join(" ");
-    },
-    [baseClassName, isDark, isLight, variants],
-  );
-};
-
-// Hook for theme-aware CSS custom properties
-export const useThemeStyles = () => {
-  const { getColor, theme } = useTheme();
-
-  return {
-    getColor,
-    getCSSProperty: (property: string) => `var(--${property})`,
-    createThemeAwareStyle: (lightValue: string, darkValue: string) => {
-      return theme.colorScheme === "dark" ? darkValue : lightValue;
-    },
-  };
-};
-
-// Export theme utilities
-export const themeUtils = {
-  getSystemColorScheme,
-  resolveColorScheme,
-  applyThemeToDocument,
-  STORAGE_KEY,
-  DARK_MODE_QUERY,
-};
+/**
+ * Hook for theme debugging (development only)
+ */
+export function useThemeDebug() {
+  const { debug, errors, isInitialized, isHydrated } = useTheme();
+  return { debug, errors, isInitialized, isHydrated };
+}

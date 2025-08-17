@@ -7,7 +7,7 @@ import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomi
 const ProfileHeader = () => {
   return (
     <MotionDiv className={`flex justify-between items-center mb-2 ${cardCss}`}>
-      <h1 className="text-xl font-bold">{curriculum.professionalPosition}</h1>
+      <h1 className="text-xl font-bold">{curriculum.contactInfo.professionalPosition}</h1>
       <Link href={"/contact"}>
         <GlassCardAtomic
           variant="default"
