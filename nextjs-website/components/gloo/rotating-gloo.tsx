@@ -45,7 +45,6 @@ interface BgGooRotatingProps {
   color2?: number[];
   color3?: number[];
   colorRotation?: keyof typeof COLOR_ROTATION_PRESETS;
-  showControls?: boolean;
   context?: 'hero' | 'card' | 'background' | 'accent';
 }
 
@@ -60,7 +59,6 @@ export function BgGooRotating({
   color2,
   color3,
   colorRotation = 'normal',
-  showControls = false,
   context = 'background'
 }: BgGooRotatingProps) {
   const [, inView] = useInView({
@@ -77,7 +75,7 @@ export function BgGooRotating({
   const shaderProgramRef = useRef<WebGLProgram | null>(null)
   const reducedMotion = useReducedMotion()
 
-  // Base colors (before rotation)
+  // Base colors (before rotation) - Improved randomization
   const [baseColors] = useState(() => {
     const randomColors = getRandomColors();
     return [
@@ -87,16 +85,28 @@ export function BgGooRotating({
     ];
   });
 
-  // Current rotation preset
-  const [currentRotation, setCurrentRotation] = useState<keyof typeof COLOR_ROTATION_PRESETS>(colorRotation);
+  // Current rotation preset - Context-aware defaults
+  const [currentRotation] = useState<keyof typeof COLOR_ROTATION_PRESETS>(() => {
+    if (colorRotation !== 'normal') return colorRotation;
+    
+    // Smart defaults based on context
+    switch (context) {
+      case 'hero': return 'dynamic';
+      case 'card': return 'subtle';
+      case 'accent': return 'vibrant';
+      default: return 'normal';
+    }
+  });
 
   // Current rotated colors (will be updated in animation loop)
   const [rotatedColors, setRotatedColors] = useState(baseColors);
 
-  // Randomly select an effect function
+  // Randomly select an effect function - Context-aware selection
   const [selectedEffect] = useState(() => {
-    const randomIndex = Math.floor(Math.random() * effectFunctions.length);
-    return effectFunctions[randomIndex];
+    const effectIndex = context === 'hero' 
+      ? Math.floor(Math.random() * Math.min(3, effectFunctions.length)) // Prefer first 3 for hero
+      : Math.floor(Math.random() * effectFunctions.length);
+    return effectFunctions[effectIndex];
   });
 
   const vertexShaderSource = `
@@ -253,33 +263,7 @@ export function BgGooRotating({
   }, inView ? 1000 / 60 : undefined);
 
   // Color rotation controls
-  const RotationControls = () => {
-    if (!showControls) return null;
-
-    return (
-      <div className="absolute top-4 right-4 z-20 bg-background/90 backdrop-blur-sm rounded-lg p-3 border border-border shadow-lg">
-        <div className="text-xs font-medium text-foreground mb-2">Color Evolution</div>
-        <div className="space-y-2">
-          {(Object.keys(COLOR_ROTATION_PRESETS) as Array<keyof typeof COLOR_ROTATION_PRESETS>).map((preset) => (
-            <button
-              key={preset}
-              onClick={() => setCurrentRotation(preset)}
-              className={`text-xs px-2 py-1 rounded transition-colors ${
-                currentRotation === preset
-                  ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted hover:bg-muted/80 text-muted-foreground hover:text-foreground'
-              }`}
-            >
-              {preset.charAt(0).toUpperCase() + preset.slice(1)}
-            </button>
-          ))}
-        </div>
-        <div className="text-xs text-muted-foreground mt-2">
-          {describeColorRotation(currentRotation)}
-        </div>
-      </div>
-    );
-  };
+  const RotationControls = () => null; // Removed debug controls for production
 
   return (
     <motion.div
@@ -295,8 +279,6 @@ export function BgGooRotating({
         height={size.height}
         className="w-full h-full"
       />
-      
-      <RotationControls />
     </motion.div>
   )
 }

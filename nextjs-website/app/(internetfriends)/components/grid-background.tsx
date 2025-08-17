@@ -6,7 +6,7 @@ interface GridBackgroundProps {
 
 export function GridBackground({ 
   size = 20, 
-  opacity = 0.1, 
+  opacity = 0.3, 
   className = "" 
 }: GridBackgroundProps) {
   return (

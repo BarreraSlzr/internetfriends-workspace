@@ -90,7 +90,7 @@
   background: var(--color-background-glass);
   border-radius: var(--border-radius-sm);
   text-align: center;
-  border: 1px solid var(--color-border-glass);
+  border: 2px solid var(--color-border-glass); /* Thick border for design system nodes */
 }
 
 /* Category-specific enhancements for Gloo mode */

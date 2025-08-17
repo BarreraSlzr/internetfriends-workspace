@@ -6,7 +6,6 @@ import Link from "next/link";
 import content from "../content.json";
 
 import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
-import { HeaderVignette } from "@/components/effects/dark-vignette";
 import { useHeaderOrbit } from "@/hooks/use-header-orbit";
 import { useTheme } from "@/hooks/use-theme";
 
@@ -39,15 +38,9 @@ export default function Header() {
         <div className="flex items-center justify-between p-4 sm:p-6 md:p-8">
           <Link href="/">
             <div className="flex items-center gap-2">
-              <div className="relative flex items-center h-10 w-32 rounded overflow-hidden bg-[var(--if-surface-neutral-alt)] border border-[var(--if-hairline)] shadow-sm">
-                <div
-                  className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 mix-blend-overlay"
-                  aria-hidden="true"
-                >
-                  <HeaderVignette />
-                </div>
+              <div className="relative flex items-center h-10 w-32 rounded overflow-hidden bg-white border border-gray-200 shadow-sm">
                 <Image
-                  className="relative z-10 select-none pointer-events-none"
+                  className="w-full h-full object-cover select-none pointer-events-none"
                   alt={`${content.companyName}.xyz`}
                   width={600}
                   height={600}
