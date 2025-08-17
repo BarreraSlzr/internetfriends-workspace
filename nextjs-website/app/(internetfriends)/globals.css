@@ -9,37 +9,60 @@
 
 @layer base {
   :root {
-    /* Application background (light mode) */
-    --app-bg-light: #f5f7fa;
-    --app-bg-dark: #060708; /* referenced by dark mode scope */
+    /* Application background (light mode) - Blue-tinted for brand consistency */
+    --app-bg-light: #f0f4f8; /* Subtle blue-gray instead of pure gray */
+    --app-bg-dark: #0f1419; /* Dark blue-slate to match header approach */
 
-    /* Glass System Tokens */
+    /* Glass System Tokens - Enhanced for visibility */
     --glass-blur-1: 8px;
     --glass-blur-2: 16px;
     --glass-blur-3: 24px;
     --glass-opacity-1: 0.75;
     --glass-opacity-2: 0.55;
     --glass-opacity-3: 0.35;
-    --glass-border-1: rgba(255, 255, 255, 0.12);
-    --glass-border-2: rgba(255, 255, 255, 0.08);
-    --glass-border-3: rgba(255, 255, 255, 0.04);
-    --glass-shadow-1: 0 2px 4px -1px rgba(0, 0, 0, 0.15);
-    --glass-shadow-2: 0 4px 12px -2px rgba(0, 0, 0, 0.25);
-    --glass-shadow-3: 0 8px 24px -4px rgba(0, 0, 0, 0.35);
+    
+    /* Enhanced Glass Borders - Blue-tinted for visibility */
+    --glass-border-visible: rgba(59, 130, 246, 0.25);
+    --glass-border-medium: rgba(59, 130, 246, 0.15);
+    --glass-border-subtle: rgba(59, 130, 246, 0.08);
+    --glass-border-accent: rgba(59, 130, 246, 0.35);
+    
+    /* Legacy borders for compatibility */
+    --glass-border-1: var(--glass-border-visible);
+    --glass-border-2: var(--glass-border-medium);
+    --glass-border-3: var(--glass-border-subtle);
+    
+    /* Production website compatibility variables */
+    --glass-border: var(--glass-border-medium);
+    --glass-border-enhanced: var(--glass-border-accent);
+    --color-bg-glass: rgba(255, 255, 255, 0.8);
+    --color-border-glass: var(--glass-border-medium);
+    --transition-glass: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --glass-bg-header: rgba(249, 250, 251, 0.25); /* Much more transparent */
+    --glass-bg-header-scrolled: rgba(248, 250, 252, 0.35); /* More transparent when scrolled */
+    
+    /* Enhanced shadows - Blue-tinted for brand cohesion */
+    --glass-shadow-1: 0 2px 12px rgba(59, 130, 246, 0.08);
+    --glass-shadow-2: 0 4px 20px rgba(59, 130, 246, 0.12);
+    --glass-shadow-3: 0 8px 32px rgba(59, 130, 246, 0.16);
+    --glass-shadow-glow: 0 0 24px rgba(59, 130, 246, 0.2);
+    --shadow-glass-hover: var(--glass-shadow-glow);
+    --shadow-glass: var(--glass-shadow-2);
+    
     --glass-noise-weak: 0.03;
     --glass-noise-strong: 0.08;
 
     /* Atmospheric Effects - Light Mode */
-    --if-atmos-noise-ambient-opacity: 0.12;
-    --if-atmos-noise-accent-opacity: 0.18;
+    --if-atmos-noise-ambient-opacity: 0.4;
+    --if-atmos-noise-accent-opacity: 0.5;
     --if-atmos-goo-exposure: 1.2;
 
-    /* Tailwind/shadcn integration */
-    --background: 0 0% 100%;
+    /* Tailwind/shadcn integration - Blue-tinted backgrounds for brand consistency */
+    --background: 209 40% 98%; /* Very subtle blue-white instead of pure white */
     --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
+    --card: 209 40% 98%; /* Match main background */
     --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
+    --popover: 209 40% 98%; /* Match main background */
     --popover-foreground: 240 10% 3.9%;
     --primary: 221 83% 53%;
     --primary-foreground: 0 0% 98%;
@@ -93,17 +116,44 @@
     /* Application background (dark mode) */
     /* (Dark token moved to :root as --app-bg-dark) */
 
+    /* Enhanced Glass Borders - Dark Mode (brighter blue for contrast) */
+    --glass-border-visible: rgba(96, 165, 250, 0.35);
+    --glass-border-medium: rgba(96, 165, 250, 0.22);
+    --glass-border-subtle: rgba(96, 165, 250, 0.12);
+    --glass-border-accent: rgba(96, 165, 250, 0.45);
+    
+    /* Update legacy border references */
+    --glass-border-1: var(--glass-border-visible);
+    --glass-border-2: var(--glass-border-medium);
+    --glass-border-3: var(--glass-border-subtle);
+    
+    /* Production website compatibility - Dark mode with enhanced visibility */
+    --glass-border: var(--glass-border-medium);
+    --glass-border-enhanced: var(--glass-border-accent);
+    --color-bg-glass: rgba(17, 24, 39, 0.65);
+    --color-border-glass: var(--glass-border-medium);
+    --glass-bg-header: rgba(15, 23, 42, 0.25); /* Much more transparent dark mode */
+    --glass-bg-header-scrolled: rgba(15, 23, 42, 0.35); /* More transparent when scrolled */
+    
+    /* Enhanced shadows - Dark mode (brighter blue with depth) */
+    --glass-shadow-1: 0 2px 12px rgba(96, 165, 250, 0.18);
+    --glass-shadow-2: 0 4px 20px rgba(96, 165, 250, 0.25);
+    --glass-shadow-3: 0 8px 32px rgba(96, 165, 250, 0.3);
+    --glass-shadow-glow: 0 0 32px rgba(96, 165, 250, 0.35);
+    --shadow-glass-hover: var(--glass-shadow-glow);
+    --shadow-glass: var(--glass-shadow-2);
+
     /* Atmospheric Effects - Dark Mode */
-    --if-atmos-noise-ambient-opacity: 0.16;
-    --if-atmos-noise-accent-opacity: 0.22;
+    --if-atmos-noise-ambient-opacity: 0.5;
+    --if-atmos-noise-accent-opacity: 0.6;
     --if-atmos-goo-exposure: 1.3;
 
-    /* Tailwind/shadcn dark mode */
-    --background: 240 10% 3.9%;
+    /* Tailwind/shadcn dark mode - Blue-slate backgrounds for brand consistency */
+    --background: 215 25% 7%; /* Dark blue-slate instead of neutral gray */
     --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
+    --card: 215 25% 7%; /* Match main background */
     --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
+    --popover: 215 25% 7%; /* Match main background */
     --popover-foreground: 0 0% 98%;
     --primary: 221 83% 53%;
     --primary-foreground: 0 0% 98%;
@@ -209,20 +259,54 @@
 }
 
 @layer components {
-  /* Glass morphism components */
+  /* Glass morphism components - Octopus design system inspired */
   .glass-header {
     background: var(--glass-bg-header);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-radius: var(--radius-md);
+    border: 2px solid var(--glass-border); /* Thicker border for better definition */
+    backdrop-filter: blur(16px) saturate(180%); /* Enhanced blur for transparency */
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    /* Default: Top corners only, bottom corners 0 */
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
     transition: all 0.3s ease;
+    position: relative;
+  }
+
+  /* Add noise overlay to glass header for texture */
+  .glass-header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    opacity: 0.15; /* Subtle noise texture */
+    pointer-events: none;
+    z-index: 1;
+    border-radius: inherit;
   }
 
   .glass-header[data-scrolled="true"] {
     background: var(--glass-bg-header-scrolled);
-    border-color: var(--glass-border-enhanced);
+    border: 2px solid var(--glass-border-enhanced); /* Consistent thick border */
+    backdrop-filter: blur(20px) saturate(200%); /* Even stronger blur when scrolled */
+    -webkit-backdrop-filter: blur(20px) saturate(200%);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    /* Scrolled: All corners rounded */
+    border-radius: var(--radius-md);
+  }
+
+  /* Enhanced noise when scrolled */
+  .glass-header[data-scrolled="true"]::before {
+    opacity: 0.25; /* More visible noise when scrolled for texture */
+  }
+
+  /* Override Tailwind border-b when header is scrolled to prevent conflicts */
+  .glass-header[data-scrolled="true"] {
+    border-bottom: 2px solid var(--glass-border-enhanced) !important;
+    /* Add subtle glow for enhanced visibility */
+    box-shadow: 
+      0 2px 12px rgba(0, 0, 0, 0.05),
+      0 0 20px rgba(59, 130, 246, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   /* Standard radius utilities - md/tiny focus */
@@ -238,7 +322,7 @@
 
   .glass-card {
     background: var(--color-bg-glass);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border); /* Thick border for core containers */
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border-radius: var(--radius-lg);
@@ -250,69 +334,65 @@
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
   }
 
-  /* Layered glass utility classes */
+  /* Layered glass utility classes - Enhanced with thick borders */
   .glass-layer-1 {
     background: var(--glass-layer-1);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border-visible); /* Thick border standard */
     border-radius: var(--radius-md);
     transition: var(--transition-glass);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: var(--glass-shadow-2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
 
   .glass-layer-2 {
     background: var(--glass-layer-2);
     backdrop-filter: blur(14px) saturate(130%);
     -webkit-backdrop-filter: blur(14px) saturate(130%);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border-medium); /* Thick border standard */
     border-radius: var(--radius-md);
     transition: var(--transition-glass);
-    box-shadow:
-      0 4px 16px rgba(0, 0, 0, 0.08),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: var(--glass-shadow-1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
   .glass-layer-3 {
     background: var(--glass-layer-3);
     backdrop-filter: blur(10px) saturate(120%);
     -webkit-backdrop-filter: blur(10px) saturate(120%);
-    border: 1px solid var(--glass-border);
+    border: 2px solid var(--glass-border-subtle); /* Thick border standard */
     border-radius: var(--radius-md);
     transition: var(--transition-glass);
-    box-shadow:
-      0 2px 8px rgba(0, 0, 0, 0.06),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    box-shadow: var(--glass-shadow-1), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
-  /* Dark mode enhanced glass with colorful borders and shadows */
-  [data-theme="dark"] .glass-layer-1 {
-    box-shadow:
-      0 8px 32px rgba(96, 165, 250, 0.15),
-      0 0 0 1px rgba(59, 130, 246, 0.1),
-      inset 0 1px 0 rgba(96, 165, 250, 0.2);
+  .glass-layer-2 {
+    background: var(--glass-layer-2);
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border: 1px solid var(--glass-border-medium);
+    border-radius: var(--radius-md);
+    transition: var(--transition-glass);
+    box-shadow: var(--glass-shadow-1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
-  [data-theme="dark"] .glass-layer-2 {
-    box-shadow:
-      0 4px 16px rgba(168, 85, 247, 0.12),
-      0 0 0 1px rgba(147, 51, 234, 0.08),
-      inset 0 1px 0 rgba(168, 85, 247, 0.15);
+  .glass-layer-3 {
+    background: var(--glass-layer-3);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: var(--radius-md);
+    transition: var(--transition-glass);
+    box-shadow: var(--glass-shadow-1), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
-  [data-theme="dark"] .glass-layer-3 {
-    box-shadow:
-      0 2px 8px rgba(249, 115, 22, 0.1),
-      0 0 0 1px rgba(236, 72, 153, 0.06),
-      inset 0 1px 0 rgba(249, 115, 22, 0.12);
-  }
+  /* Dark mode enhanced glass with colorful borders and shadows - REMOVED DUPLICATE */
+  /* Dark mode adjustments now handled in .dark section above */
 
   .glass-layer-1:hover,
   .glass-layer-2:hover,
   .glass-layer-3:hover {
-    border-color: var(--glass-border-enhanced);
+    border-color: var(--glass-border-accent);
+    box-shadow: var(--glass-shadow-glow);
   }
 
   /* Noise overlay (uses opacity tokens) */
@@ -347,25 +427,196 @@
     z-index: 1;
   }
 
-  /* Focus states - Mermaid viewer inspired */
+  /* Focus states - Mermaid viewer inspired with enhanced interaction patterns */
   .focus-dashed:focus {
     outline: none;
     border: 2px dashed var(--color-border-focus);
     border-radius: var(--radius-sm);
   }
 
-  /* Surface utilities for glass morphism architecture */
+  /* ============================
+     CONTEXT-AWARE BORDER SYSTEM
+     Different border styles for documentation vs app pages
+     ============================*/
+
+  /* Documentation pages - Octopus.do inspired thick borders for professional appearance */
+  .context-documentation {
+    /* Headers and primary containers */
+    .glass-header {
+      border: 3px solid var(--glass-border-medium);
+    }
+
+    .glass-card {
+      border: 2px solid var(--glass-border-medium);
+    }
+
+    /* Interactive elements */
+    .btn-primary {
+      border: 2px solid var(--if-primary);
+    }
+
+    .btn-secondary {
+      border: 2px solid var(--color-border-primary);
+    }
+
+    /* Form elements */
+    input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+    textarea,
+    select {
+      border: 2px solid hsl(var(--input));
+    }
+
+    /* Active states - dashed with thick borders */
+    .glass-header[data-scrolled="true"] {
+      border: 3px dashed var(--glass-border-enhanced);
+    }
+
+    .btn-primary:active {
+      border: 2px dashed var(--if-primary);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border: 2px dashed var(--if-primary);
+    }
+  }
+
+  /* App pages - Standard 1px borders for clean interface */
+  .context-app {
+    /* Keep existing styles as default */
+    .glass-header {
+      border: 2px solid var(--glass-border-medium); /* Headers still prominent */
+    }
+
+    .glass-card {
+      border: 1px solid var(--glass-border-medium);
+    }
+
+    .btn-primary {
+      border: 1px solid var(--if-primary);
+    }
+
+    /* Active states - dashed with standard borders */
+    .glass-header[data-scrolled="true"] {
+      border: 2px dashed var(--glass-border-enhanced);
+    }
+
+    .btn-primary:active {
+      border: 1px dashed var(--if-primary);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border: 1px dashed var(--if-primary);
+    }
+  }
+
+  /* Blog/content pages - Medium borders for readability */
+  .context-content {
+    .glass-header {
+      border: 2px solid var(--glass-border-medium);
+    }
+
+    .glass-card {
+      border: 1.5px solid var(--glass-border-medium);
+    }
+
+    /* Content-specific borders */
+    blockquote {
+      border-left: 3px solid var(--if-primary);
+    }
+
+    code {
+      border: 1px solid var(--glass-border-subtle);
+    }
+
+    pre {
+      border: 2px solid var(--glass-border-medium);
+    }
+  }
+
+  /* Interactive container states - Dashed borders for active gestures */
+  .container-interactive {
+    border: 2px solid var(--glass-border-medium);
+    transition: border-style 0.2s ease, border-color 0.2s ease, border-radius 0.3s ease;
+  }
+
+  .container-interactive:hover {
+    border-color: var(--glass-border-enhanced);
+  }
+
+  .container-interactive.active,
+  .container-interactive[data-active="true"] {
+    border: 2px dashed var(--glass-border-enhanced); /* Dashed when actively used */
+    border-radius: var(--radius-md); /* Full radius when active */
+  }
+
+  /* Gesture-activated containers (touch/drag states) */
+  .container-gesture-active {
+    border: 2px dashed var(--if-primary) !important; /* Strong dashed indicator */
+    background: color-mix(in srgb, var(--if-primary) 5%, transparent);
+    border-radius: var(--radius-md); /* Full radius for gesture feedback */
+  }
+
+  /* Component state utilities */
+  .component-default {
+    border: 2px solid var(--glass-border-medium);
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    transition: border-style 0.2s ease, border-color 0.2s ease, border-radius 0.3s ease;
+  }
+
+  .component-active {
+    border: 2px dashed var(--glass-border-enhanced);
+    border-radius: var(--radius-md);
+  }
+
+  .component-hover:hover {
+    border-color: var(--glass-border-enhanced);
+  }
+
+  /* Card component states */
+  .card-std {
+    border: 2px solid var(--glass-border-medium);
+    border-radius: var(--radius-md);
+    transition: border-style 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card-std:hover {
+    border-color: var(--glass-border-enhanced);
+  }
+
+  .card-std.active,
+  .card-std[data-active="true"] {
+    border: 2px dashed var(--glass-border-enhanced);
+  }
+
+  /* Button component states */
+  .button-std {
+    border: 2px solid var(--glass-border-medium);
+    transition: border-style 0.2s ease, border-color 0.2s ease;
+  }
+
+  .button-std:hover {
+    border-color: var(--glass-border-enhanced);
+  }
+
+  .button-std:active,
+  .button-std.active {
+    border: 2px dashed var(--glass-border-enhanced);
+  }
+
+  /* Surface utilities for glass morphism architecture - Thick borders */
   /* DEPRECATED: 'surface-glass' retained as migration alias.
      Prefer: glass-stack glass-noise-overlay glass-layer-2 (or -1 / -3 as needed). */
   .surface-glass {
     background: var(--surface-glass);
     backdrop-filter: blur(14px) saturate(130%);
     -webkit-backdrop-filter: blur(14px) saturate(130%);
-    border: 1px solid var(--surface-border);
+    border: 2px solid var(--surface-border); /* Thick border standard */
     border-radius: var(--radius-md);
     transition: var(--transition-glass);
-    position: relative;
-    overflow: hidden;
   }
 
   .surface-glass::before {
@@ -448,13 +699,83 @@
     box-shadow: 0 2px 4px rgba(59, 130, 246, 0.25);
   }
 
-  /* Compact spacing utilities */
-  .space-compact > * + * {
-    margin-top: 0.5rem;
+  /* ============================
+     OCTOPUS.DO DOCUMENTATION UTILITIES
+     Professional border styles for documentation pages
+     ============================*/
+
+  /* Documentation-specific border utilities */
+  .docs-border-primary {
+    border: 3px solid var(--glass-border-medium);
+    border-radius: var(--radius-md);
+    transition: border-style 0.2s ease, border-color 0.2s ease;
   }
 
-  .space-compact-sm > * + * {
-    margin-top: 0.25rem;
+  .docs-border-secondary {
+    border: 2px solid var(--glass-border-medium);
+    border-radius: var(--radius-md);
+    transition: border-style 0.2s ease, border-color 0.2s ease;
+  }
+
+  .docs-border-accent {
+    border: 2px solid var(--glass-border-accent);
+    border-radius: var(--radius-md);
+  }
+
+  /* Documentation hover states */
+  .docs-border-primary:hover,
+  .docs-border-secondary:hover {
+    border-color: var(--glass-border-enhanced);
+  }
+
+  /* Documentation active states - always dashed */
+  .docs-border-primary.active,
+  .docs-border-primary[data-active="true"] {
+    border: 3px dashed var(--glass-border-enhanced);
+  }
+
+  .docs-border-secondary.active,
+  .docs-border-secondary[data-active="true"] {
+    border: 2px dashed var(--glass-border-enhanced);
+  }
+
+  /* Documentation content styling */
+  .docs-content {
+    .docs-card {
+      @apply docs-border-secondary;
+      padding: 1.5rem;
+      background: var(--color-bg-glass);
+      backdrop-filter: blur(8px);
+    }
+
+    .docs-section {
+      @apply docs-border-primary;
+      margin: 1.5rem 0;
+      padding: 2rem;
+    }
+
+    .docs-highlight {
+      @apply docs-border-accent;
+      padding: 1rem;
+      background: color-mix(in srgb, var(--if-primary) 5%, transparent);
+    }
+  }
+
+  /* Documentation code blocks */
+  .docs-code {
+    border: 2px solid var(--glass-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-secondary);
+    padding: 1rem;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  }
+
+  .docs-code-block {
+    border: 2px solid var(--glass-border-medium);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-tertiary);
+    padding: 1.5rem;
+    margin: 1rem 0;
   }
 }
 
@@ -583,7 +904,7 @@
   input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
   textarea:focus,
   select:focus {
-    border-color: var(--if-primary);
+    border: 1px dashed var(--if-primary); /* Dashed border when focused */
     box-shadow: 0 0 0 3px var(--if-primary-light);
     outline: 2px solid var(--if-primary);
     outline-offset: 2px;
@@ -593,7 +914,7 @@
   [data-theme="dark"] textarea:focus,
   [data-theme="dark"] select:focus {
     background: rgba(0, 0, 0, 0.9);
-    border-color: #60a5fa;
+    border: 1px dashed #60a5fa; /* Dashed border when focused in dark mode */
     box-shadow:
       0 0 0 3px rgba(96, 165, 250, 0.2),
       0 4px 12px rgba(96, 165, 250, 0.1);
@@ -619,12 +940,12 @@
   }
 }
 
-/* Print styles */
+/* Print styles - Thick borders maintained */
 @media print {
   .glass-header,
   .glass-card {
     background: white !important;
-    border: 1px solid #e5e7eb !important;
+    border: 2px solid #e5e7eb !important; /* Maintain thick borders in print */
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
@@ -718,7 +1039,7 @@
 .glass-panel {
   position: relative;
   backdrop-filter: blur(var(--glass-blur-1)) saturate(1.15);
-  border: 1px solid var(--glass-border-1);
+  border: 2px solid var(--glass-border-1); /* Thick border standard */
   transition: all 0.24s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: backdrop-filter, border-color, box-shadow;
 }
@@ -803,14 +1124,10 @@
   opacity: 1;
 }
 
-/* Dark theme glass adjustments */
+/* Dark theme glass adjustments - CONSOLIDATED */
 [data-theme="dark"] {
-  --glass-border-1: rgba(255, 255, 255, 0.08);
-  --glass-border-2: rgba(255, 255, 255, 0.05);
-  --glass-border-3: rgba(255, 255, 255, 0.02);
-  --glass-shadow-1: 0 2px 4px -1px rgba(0, 0, 0, 0.4);
-  --glass-shadow-2: 0 4px 12px -2px rgba(0, 0, 0, 0.5);
-  --glass-shadow-3: 0 8px 24px -4px rgba(0, 0, 0, 0.6);
+  /* Use the CSS variables defined in .dark section above */
+  /* This provides a single source of truth for dark mode glass styling */
 }
 
 /* Reduced motion support */
