@@ -20,7 +20,7 @@ const mainIdeas = [
     project_scope: "Let's create a Creative Project",
     cta_word: "Let's Build",
     className:
-      "bg-gradient-to-tr from-brand-blue-300 via-brand-blue-300 to-brand-blue-500 text-brand-blue-900",
+      "bg-gradient-to-tr from-brand-blue-300 via-brand-blue-300 to-brand-blue-500 text-white dark:text-foreground",
   },
   {
     subtitle: "Ready for Anything",
@@ -30,7 +30,7 @@ const mainIdeas = [
     project_scope: "Let's create a Random Fun Project",
     cta_word: "Let's Talk",
     className:
-      "bg-gradient-to-br from-purple-300 via-purple-300 to-purple-500 text-brand-blue-100",
+      "bg-gradient-to-br from-purple-300 via-purple-300 to-purple-500 text-white dark:text-foreground",
   },
 ];
 
@@ -96,6 +96,34 @@ const randomIdea = [
 export default function Page() {
   const randomMessage =
     randomIdea[Math.floor(Math.random() * randomIdea.length)];
+  
+  // Random Gloo enablement for visual variety
+  const enableGlooOnFirstCard = Math.random() > 0.5;
+  const enableGlooOnSecondCard = Math.random() > 0.5;
+  const enableGlooOnRandomCard = Math.random() > 0.3;
+
+  // Random color rotation presets - favor normal and subtle
+  const colorRotationOptions: Array<'realtime' | 'subtle' | 'normal' | 'dynamic'> = 
+    ['realtime', 'subtle', 'normal', 'dynamic'];
+  
+  const getRandomColorRotation = () => {
+    const weights = [0.15, 0.35, 0.35, 0.15]; // Favor subtle and normal
+    const random = Math.random();
+    let cumulativeWeight = 0;
+    
+    for (let i = 0; i < weights.length; i++) {
+      cumulativeWeight += weights[i];
+      if (random <= cumulativeWeight) {
+        return colorRotationOptions[i];
+      }
+    }
+    return 'normal'; // fallback
+  };
+
+  const heroColorRotation = getRandomColorRotation();
+  const firstCardColorRotation = getRandomColorRotation();
+  const secondCardColorRotation = getRandomColorRotation();
+  const randomCardColorRotation = getRandomColorRotation();
 
   return (
     <main className="pb-12">
@@ -104,11 +132,16 @@ export default function Page() {
       <Navigation />
       <SocialLinks />
       <section className="relative min-h-[60vh] min-h-fit">
-        <HeroText useGloo={false} backgroundStrategy="simple" />
+        <HeroText 
+          useGloo={true} 
+          backgroundStrategy="gloo"
+          speed={Math.random() * 0.5 + 0.2} // Random speed between 0.2-0.7
+          colorRotation={heroColorRotation}
+        />
       </section>
       <div className="card sm:p-6 p-2 md:p-8 space-y-6 py-6">
         <div className="grid md:grid-cols-2 gap-6">
-          {mainIdeas.map((i) => (
+          {mainIdeas.map((i, index) => (
             <Link
               key={i.title}
               href={`/contact?project_scope=${encodeURIComponent(i.project_scope)}`}
@@ -118,7 +151,10 @@ export default function Page() {
                 title={i.title}
                 description={i.description}
                 className={i.className}
-                gridSize={0.23}
+                gridSize={Math.random() * 0.3 + 0.1} // Random grid size 0.1-0.4
+                useGloo={index === 0 ? enableGlooOnFirstCard : enableGlooOnSecondCard}
+                glooIntensity={Math.random() * 0.2 + 0.05} // Random intensity 0.05-0.25
+                colorRotation={index === 0 ? firstCardColorRotation : secondCardColorRotation}
                 cta={
                   <div className="flex items-center gap-1 hover:opacity-70 transition-opacity">
                     {i.cta_word}
@@ -133,8 +169,11 @@ export default function Page() {
           subtitle={randomMessage.title}
           title={randomMessage.subtitle}
           description={randomMessage.description}
-          className="bg-gradient-to-tl from-amber-300 via-amber-300 to-secondary text-brand-blue-100"
-          gridSize={0.23}
+          className="bg-gradient-to-tl from-amber-300 via-amber-300 to-secondary text-foreground dark:text-foreground"
+          gridSize={Math.random() * 0.3 + 0.15} // Random grid size 0.15-0.45
+          useGloo={enableGlooOnRandomCard}
+          glooIntensity={Math.random() * 0.25 + 0.1} // Random intensity 0.1-0.35
+          colorRotation={randomCardColorRotation}
           cta={
             <EmailSubscriptionForm
               url={`/contact?project_scope=${encodeURIComponent(randomMessage.project_scope)}`}

@@ -1,212 +1,81 @@
-/**
- * Auth Card Organism Styles - Octopus.do inspired flat design
- * Implements 1rem spacing system and sticky behavior patterns
- */
-
-@use "../../../styles/tokens/spacing";
-@use "../../../styles/tokens/colors";
-@use "../../../styles/utilities/glass-refined";
-
-.authContainer {
-  @include spacing.stack();
-  position: relative;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: spacing.semantic-spacing("page-padding");
-  
-  // Octopus.do inspired background pattern
-  background: linear-gradient(
-    135deg,
-    var(--glass-bg-hero) 0%,
-    rgba(59, 130, 246, 0.02) 100%
-  );
-}
+/* Auth Card - Octopus.do flat design with glass morphism */
 
 .authCard {
-  @include spacing.card-spacing();
-  position: relative;
   width: 100%;
   max-width: 400px;
-  
-  // Octopus.do flat design with subtle depth
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: spacing.radius("lg");
-  
-  // Subtle shadow for depth (Octopus.do style)
-  box-shadow: 
-    0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -2px rgba(0, 0, 0, 0.1);
-    
-  // Hover state for interactivity
-  transition: all 0.2s ease-in-out;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-      0 8px 25px -5px rgba(0, 0, 0, 0.1),
-      0 4px 10px -6px rgba(0, 0, 0, 0.1);
-  }
+  padding: 2rem;
+  background: var(--color-background-glass);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border-glass);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-glass);
 }
 
-.authHeader {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: spacing.semantic-spacing("section-spacing");
-  padding-bottom: spacing.semantic-spacing("component-gap");
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.titleSection {
-  flex: 1;
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .title {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--color-text-primary);
-  margin: 0;
-  line-height: 1.2;
+  margin-bottom: 0.5rem;
 }
 
 .subtitle {
-  font-size: 0.875rem;
   color: var(--color-text-secondary);
-  margin: spacing.semantic-spacing("element-gap") 0 0 0;
-  line-height: 1.4;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .modeBadge {
-  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  background: var(--color-primary);
+  color: white;
+  border-radius: var(--border-radius-full);
   font-size: 0.75rem;
-  font-weight: 500;
-  
-  // Octopus.do inspired badge styling
-  border-radius: spacing.radius("sm");
-  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
 }
 
-.authContent {
-  @include spacing.stack("component-gap");
-  
-  // Ensure consistent form spacing
-  :global {
-    .form-group {
-      margin-bottom: spacing.semantic-spacing("component-gap");
-    }
-    
-    .form-input {
-      padding: spacing.semantic-spacing("element-gap");
-      border-radius: spacing.radius("md");
-      border: 1px solid rgba(0, 0, 0, 0.2);
-      transition: border-color 0.2s ease-in-out;
-      
-      &:focus {
-        outline: none;
-        border-color: var(--if-primary);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-      }
-    }
-    
-    .form-button {
-      padding: spacing.semantic-spacing("element-gap") spacing.semantic-spacing("card-padding");
-      border-radius: spacing.radius("md");
-      font-weight: 500;
-      transition: all 0.2s ease-in-out;
-      
-      // Octopus.do inspired button styling
-      &.primary {
-        background: var(--if-primary);
-        color: white;
-        border: none;
-        
-        &:hover {
-          background: var(--if-primary-hover);
-          transform: translateY(-1px);
-        }
-      }
-      
-      &.secondary {
-        background: transparent;
-        color: var(--if-primary);
-        border: 1px solid var(--if-primary);
-        
-        &:hover {
-          background: var(--if-primary-light);
-        }
-      }
-    }
-  }
+.content {
+  margin-bottom: 1.5rem;
 }
 
-.authFooter {
-  margin-top: spacing.semantic-spacing("section-spacing");
-  padding-top: spacing.semantic-spacing("component-gap");
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  text-align: center;
-  
-  font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  
-  a {
-    color: var(--if-primary);
-    text-decoration: none;
-    font-weight: 500;
-    
-    &:hover {
-      text-decoration: underline;
-    }
-  }
+.footer {
+  border-top: 1px solid var(--color-border-secondary);
+  padding-top: 1rem;
+  margin-top: 1rem;
 }
 
 .loadingOverlay {
   position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(4px);
-  border-radius: spacing.radius("lg");
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-background-glass);
+  backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  border-radius: var(--border-radius-lg);
 }
 
 .loadingSpinner {
   width: 2rem;
   height: 2rem;
-  border: 2px solid rgba(59, 130, 246, 0.2);
-  border-top: 2px solid var(--if-primary);
+  border: 3px solid var(--color-border-secondary);
+  border-top: 3px solid var(--color-primary);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-// Responsive adjustments
-@media (max-width: spacing.breakpoint("sm")) {
-  .authContainer {
-    padding: spacing.semantic-spacing("element-gap");
-  }
-  
-  .authCard {
-    margin: spacing.semantic-spacing("element-gap");
-  }
-  
-  .authHeader {
-    flex-direction: column;
-    gap: spacing.semantic-spacing("element-gap");
-    align-items: flex-start;
-  }
-  
-  .modeBadge {
-    align-self: flex-start;
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

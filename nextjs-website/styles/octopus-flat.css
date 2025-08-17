@@ -1,0 +1,416 @@
+/* Octopus Flat Coloring System for InternetFriends */
+/* Consistent flat UI components that work over Gloo backgrounds */
+
+/* Core Octopus Color Palette */
+:root {
+  /* Primary Octopus Colors */
+  --octopus-blue: #3b82f6;
+  --octopus-blue-hover: #2563eb;
+  --octopus-blue-active: #1d4ed8;
+  --octopus-blue-light: #60a5fa;
+  --octopus-blue-dark: #1e40af;
+  
+  /* Secondary Octopus Colors */
+  --octopus-gray: #6b7280;
+  --octopus-gray-hover: #4b5563;
+  --octopus-gray-active: #374151;
+  --octopus-gray-light: #9ca3af;
+  --octopus-gray-dark: #1f2937;
+  
+  /* Accent Octopus Colors */
+  --octopus-purple: #8b5cf6;
+  --octopus-purple-hover: #7c3aed;
+  --octopus-green: #10b981;
+  --octopus-green-hover: #059669;
+  --octopus-red: #ef4444;
+  --octopus-red-hover: #dc2626;
+  --octopus-amber: #f59e0b;
+  --octopus-amber-hover: #d97706;
+  
+  /* Surface Colors for Flat UI */
+  --octopus-surface-white: rgba(255, 255, 255, 0.95);
+  --octopus-surface-white-hover: rgba(255, 255, 255, 0.98);
+  --octopus-surface-glass: rgba(255, 255, 255, 0.85);
+  --octopus-surface-glass-hover: rgba(255, 255, 255, 0.90);
+  
+  /* Shadow System */
+  --octopus-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --octopus-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --octopus-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --octopus-shadow-brand: 0 4px 16px rgba(59, 130, 246, 0.3);
+}
+
+/* Dark Mode Octopus Colors */
+[data-theme="dark"] {
+  --octopus-surface-white: rgba(15, 23, 42, 0.95);
+  --octopus-surface-white-hover: rgba(15, 23, 42, 0.98);
+  --octopus-surface-glass: rgba(15, 23, 42, 0.85);
+  --octopus-surface-glass-hover: rgba(15, 23, 42, 0.90);
+  
+  --octopus-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --octopus-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --octopus-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --octopus-shadow-brand: 0 4px 16px rgba(96, 165, 250, 0.4);
+}
+
+/* Octopus Button System */
+.octopus-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.octopus-btn:focus-visible {
+  outline: 2px solid var(--octopus-blue);
+  outline-offset: 2px;
+}
+
+/* Primary Button - Bold brand presence */
+.octopus-btn-primary {
+  background: linear-gradient(135deg, var(--octopus-blue) 0%, var(--octopus-blue-active) 100%);
+  color: white;
+  box-shadow: var(--octopus-shadow-brand);
+  border: 1px solid var(--octopus-blue-dark);
+}
+
+.octopus-btn-primary:hover {
+  background: linear-gradient(135deg, var(--octopus-blue-hover) 0%, var(--octopus-blue) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.octopus-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: var(--octopus-shadow-brand);
+}
+
+/* Secondary Button - Clear contrast */
+.octopus-btn-secondary {
+  background: var(--octopus-surface-white);
+  color: var(--octopus-blue);
+  border: 2px solid var(--octopus-blue);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--octopus-shadow-md);
+}
+
+.octopus-btn-secondary:hover {
+  background: var(--octopus-blue);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: var(--octopus-shadow-lg);
+}
+
+/* Ghost Button - Minimal but visible */
+.octopus-btn-ghost {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--octopus-shadow-sm);
+}
+
+.octopus-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+/* Danger Button */
+.octopus-btn-danger {
+  background: linear-gradient(135deg, var(--octopus-red) 0%, var(--octopus-red-hover) 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+  border: 1px solid var(--octopus-red-hover);
+}
+
+.octopus-btn-danger:hover {
+  background: linear-gradient(135deg, var(--octopus-red-hover) 0%, var(--octopus-red) 100%);
+  transform: translateY(-1px);
+}
+
+/* Button Sizes */
+.octopus-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.octopus-btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.octopus-btn-xl {
+  padding: 1.25rem 2.5rem;
+  font-size: 1.25rem;
+}
+
+/* Octopus Card System */
+.octopus-card {
+  background: var(--octopus-surface-white);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    var(--octopus-shadow-md),
+    0 0 0 1px rgba(59, 130, 246, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.octopus-card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 
+    var(--octopus-shadow-lg),
+    0 0 0 1px rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
+}
+
+.octopus-card-featured {
+  border-color: var(--octopus-blue);
+  box-shadow: 
+    var(--octopus-shadow-lg),
+    0 0 0 2px var(--octopus-blue-light);
+}
+
+.octopus-card-glass {
+  background: var(--octopus-surface-glass);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+/* Octopus Navigation System */
+.octopus-nav {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--octopus-surface-glass);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--octopus-shadow-md);
+}
+
+.octopus-nav-item {
+  color: var(--octopus-gray);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.octopus-nav-item:hover {
+  color: var(--octopus-blue);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.octopus-nav-item.active {
+  color: var(--octopus-blue);
+  background: rgba(59, 130, 246, 0.15);
+  font-weight: 600;
+}
+
+.octopus-nav-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--octopus-blue);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+
+/* Octopus Form System */
+.octopus-input {
+  background: var(--octopus-surface-white);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  color: var(--foreground);
+  font-size: 1rem;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+  width: 100%;
+  outline: none;
+}
+
+.octopus-input:focus {
+  border-color: var(--octopus-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background: var(--octopus-surface-white-hover);
+}
+
+.octopus-input::placeholder {
+  color: var(--octopus-gray);
+}
+
+.octopus-input-error {
+  border-color: var(--octopus-red);
+}
+
+.octopus-input-error:focus {
+  border-color: var(--octopus-red);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+.octopus-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--foreground);
+  font-size: 0.875rem;
+}
+
+.octopus-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Octopus Badge System */
+.octopus-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.octopus-badge-blue {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--octopus-blue);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.octopus-badge-green {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--octopus-green);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.octopus-badge-red {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--octopus-red);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.octopus-badge-amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--octopus-amber);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+/* Octopus Alert System */
+.octopus-alert {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-md);
+  border-left: 4px solid;
+  backdrop-filter: blur(8px);
+  margin: 1rem 0;
+}
+
+.octopus-alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  border-color: var(--octopus-blue);
+  color: var(--octopus-blue-dark);
+}
+
+.octopus-alert-success {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: var(--octopus-green);
+  color: var(--octopus-green-hover);
+}
+
+.octopus-alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: var(--octopus-amber);
+  color: var(--octopus-amber-hover);
+}
+
+.octopus-alert-error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--octopus-red);
+  color: var(--octopus-red-hover);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .octopus-btn {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .octopus-card {
+    padding: 1rem;
+  }
+  
+  .octopus-nav {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .octopus-nav-item {
+    text-align: center;
+    padding: 0.75rem;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .octopus-btn,
+  .octopus-card,
+  .octopus-nav-item,
+  .octopus-input {
+    transition: none !important;
+    transform: none !important;
+  }
+  
+  .octopus-card:hover {
+    transform: none !important;
+  }
+  
+  .octopus-btn-primary:hover,
+  .octopus-btn-secondary:hover {
+    transform: none !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .octopus-btn,
+  .octopus-card,
+  .octopus-input {
+    border-width: 2px;
+    border-style: solid;
+  }
+  
+  .octopus-btn-primary {
+    background: var(--octopus-blue) !important;
+    border-color: var(--octopus-blue-dark) !important;
+  }
+  
+  .octopus-card {
+    background: var(--background) !important;
+    border-color: var(--octopus-blue) !important;
+  }
+}

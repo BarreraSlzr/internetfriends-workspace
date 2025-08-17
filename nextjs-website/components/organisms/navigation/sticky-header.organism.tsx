@@ -3,9 +3,13 @@
  * Implements sticky behavior with glass morphism and flat design
  */
 
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { GlooCanvasAtomic } from '@/components/gloo/canvas.atomic';
+import { getInternetFriendsPalette } from '@/components/gloo/palette';
 import styles from './sticky-header.styles.module.scss';
 
 interface StickyHeaderProps {
@@ -14,6 +18,8 @@ interface StickyHeaderProps {
   actions?: React.ReactNode;
   className?: string;
   variant?: 'default' | 'minimal' | 'auth';
+  useGloo?: boolean;
+  glooIntensity?: number;
 }
 
 export const StickyHeaderOrganism: React.FC<StickyHeaderProps> = ({
@@ -22,8 +28,16 @@ export const StickyHeaderOrganism: React.FC<StickyHeaderProps> = ({
   actions,
   className = '',
   variant = 'default',
+  useGloo = false,
+  glooIntensity = 0.1,
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  // Random Gloo effects for visual variety
+  const randomEffect = Math.floor(Math.random() * 11);
+  const randomSeed = Math.random() * 2;
+  const randomSpeed = Math.random() * 0.2 + 0.05; // Very slow for header
+  const palette = getInternetFriendsPalette('light'); // Always use light mode for consistency
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +58,25 @@ export const StickyHeaderOrganism: React.FC<StickyHeaderProps> = ({
         ${className}
       `}
     >
+      {/* Gloo Background for Enhanced Visual Effect */}
+      {useGloo && (
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ opacity: glooIntensity }}
+        >
+          <GlooCanvasAtomic
+            effectIndex={randomEffect}
+            speed={randomSpeed}
+            resolution={0.8}
+            depth={2}
+            seed={randomSeed}
+            palette={palette}
+            animate={true}
+            tint={[0.99, 0.995, 1.0]} // Very subtle for header
+          />
+        </div>
+      )}
+      
       <div className={styles.container}>
         {/* Logo/Brand Section */}
         {showLogo && (

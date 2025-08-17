@@ -103,25 +103,25 @@ const SteadyDashboard: React.FC<SteadyDashboardProps> = ({
   return (
     <div className={`steady-dashboard ${className}`}>
       {/* Header */}
-      <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h1 className="text-2xl font-bold">{title}</h1>
-        <p className="text-gray-600">{domain}</p>
+      <div className="glass-layer-2 glass-elevation-1 rounded-lg p-6 mb-6">
+        <h1 className="text-2xl font-bold text-white">{title}</h1>
+        <p className="text-white/70">{domain}</p>
       </div>
 
       {/* Stats */}
       {showStats && (
         <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="text-xl font-bold">{stats.totalLinks}</div>
-            <div className="text-sm text-gray-600">Links</div>
+          <div className="glass-layer-2 glass-elevation-1 rounded-lg p-4">
+            <div className="text-xl font-bold text-white">{stats.totalLinks}</div>
+            <div className="text-sm text-white/70">Links</div>
           </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="text-xl font-bold text-green-600">{stats.totalClicks}</div>
-            <div className="text-sm text-gray-600">Clicks</div>
+          <div className="glass-layer-2 glass-elevation-1 rounded-lg p-4">
+            <div className="text-xl font-bold text-green-400">{stats.totalClicks}</div>
+            <div className="text-sm text-white/70">Clicks</div>
           </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <div className="text-xl font-bold text-blue-600">{stats.activeLinks}</div>
-            <div className="text-sm text-gray-600">Active</div>
+          <div className="glass-layer-2 glass-elevation-1 rounded-lg p-4">
+            <div className="text-xl font-bold text-blue-400">{stats.activeLinks}</div>
+            <div className="text-sm text-white/70">Active</div>
           </div>
         </div>
       )}

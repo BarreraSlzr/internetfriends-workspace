@@ -8,14 +8,14 @@ import { AuthCardOrganism } from '../organisms/auth/auth-card.organism';
 import { OAuthButtonMolecular } from '../molecular/auth/oauth-button.molecular';
 import { useAuth } from '../../lib/auth/go-rich-auth';
 import { Button } from '../ui/button';
-import styles from './enhanced-auth.styles.module.scss';
+import styles from './auth.styles.module.scss';
 
-interface EnhancedAuthPageProps {
+interface AuthPageProps {
   mode?: 'login' | 'register' | 'reset';
   onModeChange?: (mode: 'login' | 'register' | 'reset') => void;
 }
 
-export const EnhancedAuthPage: React.FC<EnhancedAuthPageProps> = ({
+export const AuthPage: React.FC<AuthPageProps> = ({
   mode = 'login',
   onModeChange,
 }) => {
@@ -127,4 +127,4 @@ export const EnhancedAuthPage: React.FC<EnhancedAuthPageProps> = ({
   );
 };
 
-export default EnhancedAuthPage;
+export default AuthPage;

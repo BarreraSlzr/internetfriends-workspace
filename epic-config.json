@@ -203,14 +203,15 @@
   },
   "design-system-octopus-v1": {
     "name": "design-system-octopus-v1",
-    "status": "in-progress",
-    "completion": 0,
+    "status": "completed",
+    "completion": 100,
     "features": [],
     "owner": "Emmanuel Barrera Salazar (BarreraSlzr)",
     "timeline": "2-3 weeks",
     "blockers": [],
     "goals": [
       "Implement Octopus.do-inspired flat design with sticky UI and expanded Gloo integration"
-    ]
+    ],
+    "impact": {}
   }
 }
