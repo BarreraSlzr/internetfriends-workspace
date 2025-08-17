@@ -74,7 +74,7 @@ async function main() {
   ];
   
   let successCount = 0;
-  let totalTests = testUrls.length * 2; // Screenshot + Image generation
+  const totalTests = testUrls.length * 2; // Screenshot + Image generation
   
   for (const test of testUrls) {
     // Test screenshot API

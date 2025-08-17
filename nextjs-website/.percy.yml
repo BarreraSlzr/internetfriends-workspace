@@ -3,7 +3,7 @@
   "snapshot": {
     "widths": [375, 768, 1024, 1440],
     "minHeight": 1024,
-    "percyCSS": ".percy-hide { visibility: hidden !important; }"
+    "percyCSS": ".percy-hide { visibility: hidden !important; } .real-time-updates { animation: none !important; } .ai-loading { display: none !important; } .chart-animation { animation: none !important; }"
   },
   "discovery": {
     "allowedHostnames": ["localhost", "internetfriends.xyz", "octopus.do"],
@@ -18,7 +18,12 @@
       "/visual-comparison",
       "/theme-demo",
       "/curriculum",
-      "/contact"
+      "/contact",
+      "/friends/economics",
+      "/friends/economics?tab=trading",
+      "/friends/economics?tab=mining", 
+      "/friends/economics?tab=token_flow",
+      "/friends/economics?tab=ai_analysis"
     ]
   }
 }

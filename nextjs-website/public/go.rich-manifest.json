@@ -1,0 +1,117 @@
+{
+  "name": "go.rich - Data Gateway",
+  "short_name": "go.rich",
+  "description": "Your personal data gateway for market data, URL shortening, and friend network sharing",
+  "start_url": "/go.rich",
+  "display": "standalone",
+  "background_color": "#3b82f6",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "scope": "/go.rich",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["finance", "productivity", "social"],
+  "screenshots": [
+    {
+      "src": "/screenshots/gorich-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop dashboard with real-time market data"
+    },
+    {
+      "src": "/screenshots/gorich-mobile.png", 
+      "sizes": "375x812",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Mobile market tickers and P2P friends"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/gorich-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/gorich-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/gorich-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Market Tickers",
+      "short_name": "Markets",
+      "description": "View real-time market data",
+      "url": "/go.rich#data-gateway",
+      "icons": [
+        {
+          "src": "/icons/shortcut-tickers.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "URL Shortener", 
+      "short_name": "Links",
+      "description": "Create and manage go.rich links",
+      "url": "/go.rich#url-shortener",
+      "icons": [
+        {
+          "src": "/icons/shortcut-links.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Friends Network",
+      "short_name": "Friends", 
+      "description": "Connect with friends and share data",
+      "url": "/go.rich#friends-network",
+      "icons": [
+        {
+          "src": "/icons/shortcut-friends.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "share_target": {
+    "action": "/go.rich/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text", 
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "gorich",
+      "url": "/go.rich/protocol?url=%s"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "permissions": [
+    "notifications",
+    "background-sync"
+  ],
+  "features": [
+    "Real-time market data",
+    "PWA notifications",
+    "WebRTC P2P connections", 
+    "Offline-capable",
+    "Mobile-optimized"
+  ]
+}

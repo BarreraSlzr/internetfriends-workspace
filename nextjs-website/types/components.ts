@@ -574,3 +574,9 @@ export type ForwardedRef<T> = React.ForwardedRef<T>;
 export type ComponentWithRef<T, P> = React.ForwardRefExoticComponent<
   P & React.RefAttributes<T>
 >;
+
+// Re-export component-specific types
+export type { ButtonAtomicProps } from "./button";
+export type { GlooCanvasProps, GlooGlobalProps } from "./gloo";
+export type { HeaderProps as HeaderAtomicProps } from "./header";
+export type { GlassCardProps } from "./glass-card";
