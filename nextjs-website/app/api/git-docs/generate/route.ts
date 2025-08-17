@@ -2,7 +2,23 @@ import { NextRequest, NextResponse } from 'next/server'
 import { execSync } from 'child_process'
 import path from 'path'
 import fs from 'fs'
-import { createApiResponse, createApiError } from '@/types/api'
+
+// Simple response helpers for this API
+function createApiResponse<T>(data: T) {
+  return {
+    success: true,
+    data,
+    timestamp: new Date().toISOString()
+  }
+}
+
+function createApiError(error: { code: string; message: string; statusCode: number }) {
+  return {
+    success: false,
+    error,
+    timestamp: new Date().toISOString()
+  }
+}
 
 interface GitDocGenerationRequest {
   files?: string[]
@@ -48,7 +64,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     // Execute Git documentation generation
-    const scriptPath = path.join(process.cwd(), 'scripts/git-docs/monitor-changes.sh')
+    const scriptPath = path.join(process.cwd(), '../scripts/git-docs/orchestrator.sh')
     
     if (!fs.existsSync(scriptPath)) {
       return NextResponse.json(
@@ -64,7 +80,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     let generationResult: string
     try {
       generationResult = execSync(`${scriptPath} generate`, {
-        cwd: process.cwd(),
+        cwd: path.join(process.cwd(), '..'),
         encoding: 'utf-8',
         timeout: 30000
       })
@@ -79,7 +95,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     // Load generated attribution data
-    const attributionPath = path.join(process.cwd(), 'docs/git-generated/source-attribution.json')
+    const attributionPath = path.join(process.cwd(), '../docs/git-generated/source-attribution.json')
     let attribution = null
     
     if (fs.existsSync(attributionPath)) {
@@ -94,15 +110,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     let breakingChanges = null
     if (detectBreakingChanges) {
       try {
-        const breakingChangeScript = path.join(process.cwd(), 'scripts/git-docs/breaking-change-detector.sh')
+        const breakingChangeScript = path.join(process.cwd(), '../scripts/git-docs/breaking-change-detector.sh')
         if (fs.existsSync(breakingChangeScript)) {
           execSync(`${breakingChangeScript} analyze`, {
-            cwd: process.cwd(),
+            cwd: path.join(process.cwd(), '..'),
             timeout: 15000
           })
 
           // Load the most recent breaking changes report
-          const reportsDir = path.join(process.cwd(), 'docs/git-generated')
+          const reportsDir = path.join(process.cwd(), '../docs/git-generated')
           const reportFiles = fs.readdirSync(reportsDir)
             .filter(file => file.startsWith('breaking-changes-') && file.endsWith('.json'))
             .sort()
@@ -119,7 +135,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     }
 
     // Count generated files
-    const outputDir = path.join(process.cwd(), 'docs/git-generated')
+    const outputDir = path.join(process.cwd(), '../docs/git-generated')
     const generatedFiles = fs.existsSync(outputDir)
       ? fs.readdirSync(outputDir).filter(file => file.endsWith('.md'))
       : []
@@ -153,7 +169,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 export async function GET(request: NextRequest): Promise<NextResponse> {
   try {
     // Get list of available documentation files
-    const outputDir = path.join(process.cwd(), 'docs/git-generated')
+    const outputDir = path.join(process.cwd(), '../docs/git-generated')
     
     if (!fs.existsSync(outputDir)) {
       return NextResponse.json(

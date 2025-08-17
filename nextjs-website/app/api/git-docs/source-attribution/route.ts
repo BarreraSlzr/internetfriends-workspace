@@ -1,7 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { execSync } from 'child_process'
 import path from 'path'
 import fs from 'fs'
-import { createApiResponse, createApiError } from '@/types/api'
+
+// Simple response helpers for this API
+function createApiResponse<T>(data: T) {
+  return {
+    success: true,
+    data,
+    timestamp: new Date().toISOString()
+  }
+}
+
+function createApiError(error: { code: string; message: string; statusCode: number }) {
+  return {
+    success: false,
+    error,
+    timestamp: new Date().toISOString()
+  }
+}
 
 interface SourceAttributionRequest {
   file?: string

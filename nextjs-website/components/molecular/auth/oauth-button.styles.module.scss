@@ -1,0 +1,116 @@
+/**
+ * OAuth Button Molecular Styles - Octopus.do flat design inspired
+ * Session repository patterns with modern enhancements
+ */
+
+@use "../../../styles/tokens/spacing";
+
+.oauthButton {
+  @include spacing.card-spacing();
+  
+  // Octopus.do inspired flat design
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: spacing.semantic-spacing("element-gap");
+  
+  padding: spacing.semantic-spacing("component-gap") spacing.semantic-spacing("card-padding");
+  border-radius: spacing.radius("md");
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  
+  // Enhanced from session repository patterns
+  background: white;
+  color: var(--color-text-primary);
+  font-weight: 500;
+  font-size: 0.875rem;
+  
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  
+  // Octopus.do hover effects
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: var(--provider-bg);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  // Provider-specific styles
+  &.google:hover:not(:disabled) {
+    background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+    color: white;
+    border-color: #4285f4;
+  }
+  
+  &.github:hover:not(:disabled) {
+    background: #333333;
+    color: white;
+    border-color: #333333;
+  }
+  
+  &.discord:hover:not(:disabled) {
+    background: #5865f2;
+    color: white;
+    border-color: #5865f2;
+  }
+  
+  &.twitter:hover:not(:disabled) {
+    background: #1da1f2;
+    color: white;
+    border-color: #1da1f2;
+  }
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  flex-shrink: 0;
+}
+
+.text {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Responsive design
+@media (max-width: spacing.breakpoint("sm")) {
+  .oauthButton {
+    padding: spacing.semantic-spacing("element-gap");
+    font-size: 0.8rem;
+  }
+  
+  .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}
