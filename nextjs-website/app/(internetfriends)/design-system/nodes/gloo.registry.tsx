@@ -24,6 +24,7 @@ export const glooEffectMap = {
   page: 8,       // fractal - complex patterns
   
   // Hook type effects
+  hook: 1,       // spiral - hook flow
   state: 1,      // spiral - state flow
   effect: 5,     // ripple - side effects
   custom: 7,     // oscillate - custom logic

@@ -24,12 +24,8 @@ export default function NotFoundPage() {
           resolution={2.5}     // High detail
           depth={3}            // More layers for complexity
           seed={1.5}           // Unique seed for errors
-          color1={errorColors[0]}
-          color2={errorColors[1]}
-          color3={errorColors[2]}
           colorRotation="static" // No color rotation for errors
-          showControls={false}
-          context="error"
+          context="background"
         />
       </div>
 

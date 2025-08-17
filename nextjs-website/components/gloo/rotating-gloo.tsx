@@ -93,7 +93,7 @@ export function BgGooRotating({
     switch (context) {
       case 'hero': return 'dynamic';
       case 'card': return 'subtle';
-      case 'accent': return 'vibrant';
+      case 'accent': return 'fast';
       default: return 'normal';
     }
   });

@@ -47,7 +47,6 @@ export default function HeroText({
             color2={randomColors[1]}
             color3={randomColors[2]}
             colorRotation={colorRotation}
-            showControls={true}
             context="hero"
           />
         </div>

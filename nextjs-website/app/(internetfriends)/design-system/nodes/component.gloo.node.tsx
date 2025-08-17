@@ -61,9 +61,8 @@ export const ComponentNode: React.FC<NodeProps<ComponentNodeData>> = ({ data }) 
     return generateGlooPalette({
       mode: 'light',
       strategy: 'category',
-      color1: config.glooColors[0].map(c => c / 255) as [number, number, number],
-      color2: config.glooColors[1].map(c => c / 255) as [number, number, number],
-      color3: config.glooColors[2].map(c => c / 255) as [number, number, number],
+      anchorColor: `rgb(${config.glooColors[0].join(', ')})`,
+      seed: 42
     })
   }, [data.useGloo, config.glooColors])
 

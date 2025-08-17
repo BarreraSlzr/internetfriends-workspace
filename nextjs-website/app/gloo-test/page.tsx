@@ -11,9 +11,8 @@ export default function GlooTestPage() {
   const palette = generateGlooPalette({
     mode: 'light',
     strategy: 'test',
-    color1: [1, 0, 0], // Red
-    color2: [0, 1, 0], // Green  
-    color3: [0, 0, 1], // Blue
+    anchorColor: '#ff0000', // Red
+    seed: 42
   })
 
   const effects = [

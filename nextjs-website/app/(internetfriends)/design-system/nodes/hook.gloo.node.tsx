@@ -60,9 +60,8 @@ export const HookNode: React.FC<NodeProps<HookNodeData>> = ({ data }) => {
     return generateGlooPalette({
       mode: 'light',
       strategy: 'hook',
-      color1: config.glooColors[0].map(c => c / 255) as [number, number, number],
-      color2: config.glooColors[1].map(c => c / 255) as [number, number, number],
-      color3: config.glooColors[2].map(c => c / 255) as [number, number, number],
+      anchorColor: '#8b5cf6', // Purple for hooks
+      seed: 42
     })
   }, [data.useGloo, config.glooColors])
 

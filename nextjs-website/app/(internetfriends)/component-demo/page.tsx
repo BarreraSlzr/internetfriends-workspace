@@ -22,7 +22,7 @@ export default function ComponentDemoPage({
               <h2 className="text-lg font-medium mb-4">Button Atomic</h2>
               <div className="space-y-3">
                 <ButtonAtomic variant="primary">Primary Button</ButtonAtomic>
-                <ButtonAtomic variant="glass">Glass Button</ButtonAtomic>
+                <ButtonAtomic variant="secondary">Glass Button</ButtonAtomic>
                 <ButtonAtomic variant="outline">Outline Button</ButtonAtomic>
                 <ButtonAtomic variant="ghost">Ghost Button</ButtonAtomic>
               </div>
@@ -67,7 +67,7 @@ export default function ComponentDemoPage({
             <ButtonAtomic variant="primary" className="w-full">
               Primary Button
             </ButtonAtomic>
-            <ButtonAtomic variant="glass" className="w-full">
+            <ButtonAtomic variant="secondary" className="w-full">
               Glass Button
             </ButtonAtomic>
             <ButtonAtomic variant="outline" className="w-full">
