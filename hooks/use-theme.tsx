@@ -20,11 +20,13 @@ export interface ThemeContextValue {
   isInitialized: boolean;
   isHydrated: boolean;
   isDarkMode: boolean;
+  isDark: boolean; // Alias for isDarkMode
   systemPrefersDark: boolean;
   errors: string[];
 
   // Actions
   toggleDarkMode: () => void;
+  toggleTheme: () => void; // Alias for toggleDarkMode
   setDarkMode: (enabled: boolean) => void;
   reinitializeTheme: () => Promise<void>;
 
@@ -215,10 +217,12 @@ export function ThemeProvider({
 
       // Theme controls
       isDarkMode,
+      isDark: isDarkMode, // Alias for compatibility
       systemPrefersDark,
 
       // Actions
       toggleDarkMode,
+      toggleTheme: toggleDarkMode, // Alias for compatibility
       setDarkMode,
       reinitializeTheme,
 

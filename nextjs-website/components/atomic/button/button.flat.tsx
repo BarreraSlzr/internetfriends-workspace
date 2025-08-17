@@ -3,7 +3,7 @@ import styles from "./button.flat.module.scss";
 import { cn } from "@/lib/utils";
 
 export interface FlatButtonBaseProps {
-  variant?: "primary" | "secondary" | "outline" | "ghost" | "minimal";
+  variant?: "primary" | "secondary" | "outline" | "ghost" | "minimal" | "glass";
   size?: "sm" | "md" | "lg" | "xl";
   fullWidth?: boolean;
   loading?: boolean;

@@ -13,7 +13,11 @@ export type GlooPaletteStrategy =
   | "complementary"
   | "octopus-flat"
   | "modern-minimal"
-  | "retina-optimized";
+  | "retina-optimized"
+  | "category"
+  | "hook"
+  | "test"
+  | "error";
 
 export type GlooThemeMode = "light" | "dark";
 

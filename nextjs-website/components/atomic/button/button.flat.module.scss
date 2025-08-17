@@ -280,6 +280,37 @@
   }
 }
 
+.glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: #1e293b;
+  border-color: rgba(255, 255, 255, 0.2);
+  
+  &:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
+  }
+  
+  &:active:not(.disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(0);
+  }
+  
+  /* Dark mode glass */
+  [data-theme="dark"] & {
+    background: rgba(15, 23, 42, 0.7);
+    color: #f8fafc;
+    border-color: rgba(255, 255, 255, 0.1);
+    
+    &:hover:not(.disabled) {
+      background: rgba(15, 23, 42, 0.8);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .flatButton {
