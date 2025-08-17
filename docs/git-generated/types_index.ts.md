@@ -1,9 +1,9 @@
 # Documentation: types/index.ts
 
 **Auto-generated from Git repository**  
-**Source**: [GitHub](/blob/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/index.ts)  
+**Source**: [GitHub](/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/index.ts)  
 **Last Modified**: 2025-08-17 11:09:03 -0600  
-**Generated**: 2025-08-17T17:36:27Z
+**Generated**: 2025-08-17T18:22:35Z
 
 ## File Overview
 
@@ -11,7 +11,7 @@
 Path: types/index.ts
 Lines:      325
 Last Author: Emmanuel Barrera Salazar (BarreraSlzr)
-Commit: da5d6e67
+Commit: 993590f5
 ```
 
 ## TypeScript Definitions
@@ -44,14 +44,14 @@ Commit: da5d6e67
 ```json
 {
     "file": "types/index.ts",
-    "github_url": "/blob/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/index.ts",
-    "github_blame_url": "/blame/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/index.ts",
-    "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/index.ts",
+    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/types/index.ts",
+    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      325,
     "last_modified": "2025-08-17 11:09:03 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T17:36:27Z"
+    "generated_at": "2025-08-17T18:22:35Z"
 }
 ```
 
@@ -63,4 +63,4 @@ Commit: da5d6e67
 
 ---
 *This documentation was automatically generated from the Git repository. 
-For the most up-to-date version, visit the [source file](/blob/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/index.ts).*
+For the most up-to-date version, visit the [source file](/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/index.ts).*

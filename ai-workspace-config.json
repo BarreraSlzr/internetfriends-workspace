@@ -1,0 +1,72 @@
+{
+  "workspace_name": "InternetFriends",
+  "ai_enhanced": true,
+  "configuration_version": "2.0.0",
+  "last_updated": "2025-08-17",
+  
+  "ai_integration": {
+    "primary_config": "CLAUDE.md",
+    "context_provider": "./scripts/ai-context/context-provider.ts",
+    "opencode_delegation": "./components/scripts/opencode-delegate.ts",
+    "epic_integration": "./scripts/epic-tools/epic",
+    "git_documentation": "./scripts/git-docs/orchestrator.sh"
+  },
+  
+  "development_utilities": {
+    "git_docs": {
+      "monitor_changes": "./scripts/git-docs/monitor-changes.sh",
+      "breaking_changes": "./scripts/git-docs/breaking-change-detector.sh",
+      "source_attribution": "./scripts/git-docs/source-attribution.sh",
+      "visual_integration": "./scripts/git-docs/visual-test-docs.sh",
+      "orchestrator": "./scripts/git-docs/orchestrator.sh"
+    },
+    "epic_management": {
+      "cli": "./scripts/epic-tools/epic",
+      "dashboard": "./scripts/epic-tools/epic dashboard",
+      "graph": "./scripts/epic-tools/epic graph"
+    },
+    "performance": {
+      "scripts_dir": "./scripts/perf/",
+      "budgets": "./perf.budgets.json"
+    },
+    "testing": {
+      "visual_regression": "./tests/visual-comparison.test.ts",
+      "unit_tests": "bun test",
+      "e2e_tests": "bun run test:e2e"
+    }
+  },
+  
+  "ai_quick_commands": {
+    "get_context": "bun ./scripts/ai-context/context-provider.ts --json",
+    "epic_status": "./scripts/epic-tools/epic dashboard",
+    "git_docs": "./scripts/git-docs/orchestrator.sh --ai-enhanced",
+    "breaking_changes": "./scripts/git-docs/breaking-change-detector.sh --ai-format",
+    "opencode_tasks": "./components/scripts/opencode-delegate.ts --json",
+    "component_context": "bun ./scripts/ai-context/context-provider.ts --component="
+  },
+  
+  "workspace_patterns": {
+    "component_naming": "snake_case.dots (e.g., header.molecular.tsx)",
+    "styling": "SCSS modules with CSS custom properties",
+    "architecture": "Atomic design pattern",
+    "git_strategy": "Epic-based development with visual timeline",
+    "documentation": "Git-sourced with GitHub attribution",
+    "runtime": "Bun (>=1.2.0)"
+  },
+  
+  "ai_context_triggers": [
+    "Before major refactoring: Check breaking changes",
+    "Before epic completion: Validate all milestones",
+    "Before component creation: Check atomic design patterns",
+    "Before deployment: Run performance analysis",
+    "Before git commits: Generate documentation updates"
+  ],
+  
+  "configuration_files": [
+    "CLAUDE.md - Primary OpenCode configuration",
+    "AGENTS.md - Quick reference for AI agents",
+    ".github/copilot-instructions.md - Comprehensive development guide",
+    ".zed/settings.json - Enhanced Zed editor configuration",
+    "epic-config.json - Epic management configuration"
+  ]
+}

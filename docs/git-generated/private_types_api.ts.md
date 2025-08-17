@@ -1,7 +1,7 @@
 # Private Documentation: types/api.ts
 
 **Full Git Attribution with Source Links**  
-**Generated**: 2025-08-17T17:36:28Z
+**Generated**: 2025-08-17T18:22:37Z
 
 ## Direct GitHub Access
 
@@ -14,14 +14,14 @@
     "attribution": {
     "file": "types/api.ts",
     "urls": {
-        "github_blob": "https://github.com/BarreraSlzr/internetfriends-workspace/blob/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/api.ts",
-        "github_blame": "https://github.com/BarreraSlzr/internetfriends-workspace/blame/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/api.ts",
+        "github_blob": "https://github.com/BarreraSlzr/internetfriends-workspace/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/api.ts",
+        "github_blame": "https://github.com/BarreraSlzr/internetfriends-workspace/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/types/api.ts",
         "github_history": "https://github.com/BarreraSlzr/internetfriends-workspace/commits/epic/git-sourced-documentation-v1/types/api.ts",
-        "github_raw": "https://github.com/BarreraSlzr/internetfriends-workspace/raw/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/api.ts"
+        "github_raw": "https://github.com/BarreraSlzr/internetfriends-workspace/raw/993590f5d3b3c057d3f529169116d9ae214f8bef/types/api.ts"
     },
     "metadata": {
-        "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
-        "commit_short": "da5d6e67",
+        "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+        "commit_short": "993590f5",
         "branch": "epic/git-sourced-documentation-v1",
         "line_count":      365,
         "file_size":     8695,
@@ -93,10 +93,10 @@
     "repository": {
   "url": "https://github.com/BarreraSlzr/internetfriends-workspace",
   "type": "private",
-  "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+  "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
   "branch": "epic/git-sourced-documentation-v1"
 },
-    "generated_at": "2025-08-17T17:36:28Z"
+    "generated_at": "2025-08-17T18:22:37Z"
 }
 ```
 

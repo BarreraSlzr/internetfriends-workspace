@@ -2,7 +2,7 @@
 
 **Auto-generated from repository**  
 **File**: `types/api.ts`  
-**Generated**: 2025-08-17T17:36:28Z
+**Generated**: 2025-08-17T18:22:37Z
 
 ## Overview
 

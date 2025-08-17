@@ -2,7 +2,7 @@
 
 **Auto-generated from repository**  
 **File**: `app/api/rum/route.ts`  
-**Generated**: 2025-08-17T17:36:29Z
+**Generated**: 2025-08-17T18:22:37Z
 
 ## Overview
 

@@ -120,6 +120,32 @@ console.log(epicStatus);
 "
 ```
 
+#### AI Context Provider Integration
+
+```sh
+# Get comprehensive workspace context for AI
+bun ./scripts/ai-context/context-provider.ts --json
+
+# Component-specific AI context
+bun ./scripts/ai-context/context-provider.ts --component=components/molecular/header.molecular.tsx
+
+# Git documentation with AI enhancement
+./scripts/git-docs/orchestrator.sh --ai-enhanced --opencode-integration
+```
+
+#### Git-Sourced Documentation Commands
+
+```sh
+# Generate documentation with GitHub attribution
+./scripts/git-docs/orchestrator.sh --mode=full --github-links
+
+# Breaking change analysis for AI context
+./scripts/git-docs/breaking-change-detector.sh --severity=all --format=json
+
+# Visual testing integration with Git attribution
+./scripts/git-docs/visual-test-docs.sh --trigger-visual-tests
+```
+
 #### List all exported functions/types from a module
 
 ```sh
@@ -217,10 +243,15 @@ Reference existing chat modes in `.github/chatmodes/`:
 When providing assistance:
 
 1. **Check current epic status**: `./scripts/epic-tools/epic dashboard`
-2. **Consider epic scope**: Align suggestions with current epic goals
-3. **Think in milestones**: Each epic should deliver complete value
-4. **Measure impact**: Suggest metrics for epic completion
-5. **Visual timeline**: Consider how changes appear in git graph
+2. **Get AI workspace context**: `bun ./scripts/ai-context/context-provider.ts`
+3. **Use Git documentation**: `./scripts/git-docs/orchestrator.sh` for comprehensive context
+4. **Consider epic scope**: Align suggestions with current epic goals
+5. **Check breaking changes**: `./scripts/git-docs/breaking-change-detector.sh` before major changes
+6. **Think in milestones**: Each epic should deliver complete value
+7. **Measure impact**: Suggest metrics for epic completion
+8. **Visual timeline**: Consider how changes appear in git graph
+9. **Source attribution**: Use GitHub links for professional documentation
+10. **OpenCode integration**: Reference CLAUDE.md for enhanced AI configuration
 
 ## 📁 File Naming Conventions
 
@@ -416,11 +447,25 @@ When generating code, always consider:
 # Check epic status before starting work
 ./scripts/epic-tools/epic dashboard
 
+# Get AI-optimized workspace context
+bun ./scripts/ai-context/context-provider.ts --json
+
+# Generate Git documentation with source attribution
+./scripts/git-docs/orchestrator.sh --ai-enhanced
+
+# OpenCode task delegation with epic context
+./components/scripts/opencode-delegate.ts --epic-context --json
+
+# Breaking change analysis
+./scripts/git-docs/breaking-change-detector.sh --ai-format
+
 # Start epic-aware development session
 bun -e "
 console.log('🎭 EPIC DEVELOPMENT SESSION');
 console.log('Current Epic Status:');
 require('child_process').execSync('./scripts/epic-tools/epic quick', { stdio: 'inherit' });
+console.log('AI Context:');
+require('child_process').execSync('bun ./scripts/ai-context/context-provider.ts', { stdio: 'inherit' });
 "
 
 # Generate epic progress report

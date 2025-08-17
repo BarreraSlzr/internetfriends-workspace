@@ -90,7 +90,26 @@
     "**/*.organism.tsx": ["tsx"],
     "**/GIT_*.md": ["markdown"],
     "**/EPIC_*.md": ["markdown"],
-    "**/*.styles.module.scss": ["scss"]
+    "**/*.styles.module.scss": ["scss"],
+    "CLAUDE.md": ["markdown"],
+    "**/git-generated/*.md": ["markdown"],
+    "**/ai-context/*.ts": ["typescript"],
+    "**/*opencode*.ts": ["typescript"]
+  },
+
+  "ai_integration": {
+    "context_provider": "./scripts/ai-context/context-provider.ts",
+    "git_documentation": "./scripts/git-docs/orchestrator.sh",
+    "epic_management": "./scripts/epic-tools/epic",
+    "opencode_delegation": "./components/scripts/opencode-delegate.ts"
+  },
+
+  "workspace_utilities": {
+    "git_docs_monitor": "./scripts/git-docs/monitor-changes.sh",
+    "breaking_change_detector": "./scripts/git-docs/breaking-change-detector.sh",
+    "visual_test_integration": "./scripts/git-docs/visual-test-docs.sh",
+    "performance_tracker": "./scripts/perf/",
+    "source_attribution": "./scripts/git-docs/source-attribution.sh"
   },
 
   "project_panel": {
