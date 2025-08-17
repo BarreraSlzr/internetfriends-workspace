@@ -126,12 +126,13 @@ export default function Page() {
   const randomCardColorRotation = getRandomColorRotation();
 
   return (
-    <main className="pb-12">
+    <main className="pb-12 context-app">
       <HeaderSimple />
       <CompanyInfo />
       <Navigation />
       <SocialLinks />
-      <section className="relative min-h-[60vh] min-h-fit">
+      <section className="relative min-h-[60vh] min-h-fit glass-layer-2 border-secondary spacing-responsive border-radius-default"
+               data-active="false">
         <HeroText 
           useGloo={true} 
           backgroundStrategy="gloo"
@@ -139,7 +140,7 @@ export default function Page() {
           colorRotation={heroColorRotation}
         />
       </section>
-      <div className="card sm:p-6 p-2 md:p-8 space-y-6 py-6">
+      <div className="card-spacing border-secondary glass-layer-1 space-y-6 py-6">
         <div className="grid md:grid-cols-2 gap-6">
           {mainIdeas.map((i, index) => (
             <Link

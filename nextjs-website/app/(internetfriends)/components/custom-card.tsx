@@ -44,15 +44,16 @@ export function CustomCard({
   return (
     <div
       className={cn(
-        "octopus-card relative overflow-hidden transition-all duration-300",
+        "octopus-card relative overflow-hidden transition-all duration-300 border-secondary glass-layer-1",
         className,
       )}
+      data-active="false"
     >
       {/* Production Gloo WebGL Background with Color Rotation - VERY SUBTLE ACCENT */}
       {useGloo && (
         <div 
           className="absolute inset-0 pointer-events-none"
-          style={{ opacity: 0.04 }} // Much more subtle - pure accent
+          style={{ opacity: 0.5 }} // Visible accent effect
         >
           <BgGooRotating
             speed={0.15}
@@ -63,7 +64,6 @@ export function CustomCard({
             color2={randomColors[1]}
             color3={randomColors[2]}
             colorRotation={colorRotation}
-            showControls={false}
             context="card"
           />
         </div>
