@@ -1,0 +1,12 @@
+[0;34m[source-attr][0m Extracting API signatures from app/api/rum/route.ts
+=== API ROUTE METHODS ===
+228:export async function POST(request: NextRequest) {
+296:export async function GET(request: NextRequest) {
+=== HANDLER FUNCTIONS ===
+228:export async function POST(request: NextRequest) {
+296:export async function GET(request: NextRequest) {
+343:export async function OPTIONS(request: NextRequest) {
+=== EXPORTS ===
+228:export async function POST(request: NextRequest) {
+296:export async function GET(request: NextRequest) {
+343:export async function OPTIONS(request: NextRequest) {

@@ -1,0 +1,43 @@
+{
+    "attribution": {
+    "file": "app/api/rum/route.ts",
+    "urls": {
+        "github_blob": "https://github.com/BarreraSlzr/internetfriends-workspace/blob/da5d6e6730c93466f69433826d7d6652c3c1c53c/app/api/rum/route.ts",
+        "github_blame": "https://github.com/BarreraSlzr/internetfriends-workspace/blame/da5d6e6730c93466f69433826d7d6652c3c1c53c/app/api/rum/route.ts",
+        "github_history": "https://github.com/BarreraSlzr/internetfriends-workspace/commits/epic/git-sourced-documentation-v1/app/api/rum/route.ts",
+        "github_raw": "https://github.com/BarreraSlzr/internetfriends-workspace/raw/da5d6e6730c93466f69433826d7d6652c3c1c53c/app/api/rum/route.ts"
+    },
+    "metadata": {
+        "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+        "commit_short": "da5d6e67",
+        "branch": "epic/git-sourced-documentation-v1",
+        "line_count":      352,
+        "file_size":     9282,
+        "last_modified": "2025-08-10 22:39:33 -0600",
+        "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
+        "last_commit_message": "🔧 Major TypeScript compilation fixes"
+    }
+},
+    "line_ranges": [0;34m[source-attr][0m Extracting line ranges for app/api/rum/route.ts
+{
+    "file": "app/api/rum/route.ts",
+    "constructs": {
+        "interfaces": [
+
+        ],
+        "types": [
+
+        ],
+        "schemas": [
+
+        ]
+    }
+},
+    "repository": {
+  "url": "https://github.com/BarreraSlzr/internetfriends-workspace",
+  "type": "private",
+  "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+  "branch": "epic/git-sourced-documentation-v1"
+},
+    "generated_at": "2025-08-17T17:36:28Z"
+}

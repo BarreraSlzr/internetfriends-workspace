@@ -1,0 +1,22 @@
+[0;34m[source-attr][0m Extracting API signatures from types/index.ts
+=== EXPORTS ===
+5:export type {
+34:export type {
+88:export type {
+136:export {
+223:export {
+233:export type Profile = FriendsProfile
+234:export type User = FriendsProfile
+235:export type GLevel = GLevelTier
+236:export type PaymentMethod = PaymentProvider
+241:export type WithRequired<T, K extends keyof T> = T & Required<Pick<T, K>>
+244:export type WithOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+247:export type ApiEndpointResponse<T> = ApiResponse<T>
+250:export type ApiPaginatedResponse<T> = ApiResponse<PaginatedResponse<T>>
+253:export type AsyncApiResponse<T> = Promise<ApiResponse<T>>
+256:export type ComponentPropsWithRef<T, R = HTMLElement> = T & {
+261:export type StrictComponentProps<T> = T & {
+267:export const FRONTEND_ROUTES = {
+276:export const API_ROUTES = {
+285:export const VALIDATION_ERRORS = {
+295:export const HTTP_STATUS_CODES = {

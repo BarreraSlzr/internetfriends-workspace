@@ -1,0 +1,24 @@
+# Public API Documentation: route.ts
+
+**Auto-generated from repository**  
+**File**: `app/api/rum/route.ts`  
+**Generated**: 2025-08-17T17:36:29Z
+
+## Overview
+
+This file contains TypeScript definitions for the InternetFriends API system.
+
+## Type Definitions
+
+```typescript
+
+```
+
+## Source Information
+
+```json
+
+```
+
+---
+*This is public documentation. For detailed source access, contact the development team.*

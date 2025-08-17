@@ -1,0 +1,88 @@
+{
+    "attribution": {
+    "file": "types/api.ts",
+    "urls": {
+        "github_blob": "https://github.com/BarreraSlzr/internetfriends-workspace/blob/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/api.ts",
+        "github_blame": "https://github.com/BarreraSlzr/internetfriends-workspace/blame/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/api.ts",
+        "github_history": "https://github.com/BarreraSlzr/internetfriends-workspace/commits/epic/git-sourced-documentation-v1/types/api.ts",
+        "github_raw": "https://github.com/BarreraSlzr/internetfriends-workspace/raw/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/api.ts"
+    },
+    "metadata": {
+        "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+        "commit_short": "da5d6e67",
+        "branch": "epic/git-sourced-documentation-v1",
+        "line_count":      365,
+        "file_size":     8695,
+        "last_modified": "2025-08-17 11:09:03 -0600",
+        "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
+        "last_commit_message": "feat(platform): complete platform stabilization with tests and documentation"
+    }
+},
+    "line_ranges": [0;34m[source-attr][0m Extracting line ranges for types/api.ts
+{
+    "file": "types/api.ts",
+    "constructs": {
+        "interfaces": [
+            {"name": "ApiResponse<T", "line": 7, "type": "interface"},
+            {"name": "ApiError", "line": 23, "type": "interface"},
+            {"name": "PaginationParams", "line": 41, "type": "interface"},
+            {"name": "PaginatedResponse<T>", "line": 49, "type": "interface"},
+            {"name": "AuthTokens", "line": 62, "type": "interface"},
+            {"name": "AuthUser", "line": 69, "type": "interface"},
+            {"name": "AuthRequest", "line": 80, "type": "interface"},
+            {"name": "AuthResponse", "line": 86, "type": "interface"},
+            {"name": "ProfileUpdateRequest", "line": 92, "type": "interface"},
+            {"name": "ProfileResponse", "line": 113, "type": "interface"},
+            {"name": "BalanceUpdateRequest", "line": 116, "type": "interface"},
+            {"name": "BalanceResponse", "line": 122, "type": "interface"},
+            {"name": "TransactionRecord", "line": 128, "type": "interface"},
+            {"name": "TransactionHistoryResponse", "line": 137, "type": "interface"},
+            {"name": "PaymentInitiationRequest", "line": 140, "type": "interface"},
+            {"name": "PaymentInitiationResponse", "line": 148, "type": "interface"},
+            {"name": "PaymentCompletionRequest", "line": 155, "type": "interface"},
+            {"name": "PaymentCompletionResponse", "line": 163, "type": "interface"},
+            {"name": "CommunityCreateRequest", "line": 170, "type": "interface"},
+            {"name": "CommunityResponse", "line": 178, "type": "interface"},
+            {"name": "CommunityListResponse", "line": 180, "type": "interface"},
+            {"name": "CommunityInviteRequest", "line": 182, "type": "interface"},
+            {"name": "CommunityInviteResponse", "line": 188, "type": "interface"},
+            {"name": "BandwidthShareRequest", "line": 191, "type": "interface"},
+            {"name": "BandwidthShareResponse", "line": 198, "type": "interface"},
+            {"name": "AchievementUnlockRequest", "line": 205, "type": "interface"},
+            {"name": "AchievementUnlockResponse", "line": 210, "type": "interface"},
+            {"name": "LeaderboardRequest", "line": 217, "type": "interface"},
+            {"name": "LeaderboardResponse", "line": 222, "type": "interface"},
+            {"name": "LeaderboardEntry", "line": 224, "type": "interface"},
+            {"name": "FileUploadRequest", "line": 232, "type": "interface"},
+            {"name": "FileUploadResponse", "line": 238, "type": "interface"},
+            {"name": "SearchRequest", "line": 246, "type": "interface"},
+            {"name": "SearchResponse", "line": 252, "type": "interface"},
+            {"name": "ValidationError", "line": 258, "type": "interface"},
+            {"name": "ValidationErrorResponse", "line": 265, "type": "interface"},
+            {"name": "RateLimitInfo", "line": 276, "type": "interface"},
+            {"name": "RateLimitResponse", "line": 283, "type": "interface"},
+            {"name": "WebSocketMessage<T", "line": 292, "type": "interface"},
+            {"name": "WebSocketAuth", "line": 299, "type": "interface"},
+            {"name": "ApiRouteConfig", "line": 309, "type": "interface"}
+        ],
+        "types": [
+            {"name": "HttpMethod", "line": 31, "type": "type"},
+            {"name": "HttpStatusCode", "line": 32, "type": "type"},
+            {"name": "ApiRouteHandler<T", "line": 35, "type": "type"},
+            {"name": "ApiEndpoint", "line": 305, "type": "type"},
+            {"name": "ApiVersion", "line": 307, "type": "type"},
+            {"name": "{", "line": 366, "type": "type"}
+        ],
+        "schemas": [
+
+        ]
+    }
+},
+    "repository": {
+  "url": "https://github.com/BarreraSlzr/internetfriends-workspace",
+  "type": "private",
+  "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+  "branch": "epic/git-sourced-documentation-v1"
+},
+    "generated_at": "2025-08-17T17:36:28Z"
+}

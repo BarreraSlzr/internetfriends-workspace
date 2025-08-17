@@ -1,0 +1,22 @@
+[0;34m[source-attr][0m Extracting API signatures from types/data.ts
+=== EXPORTS ===
+5:export interface FriendsProfile {
+53:export interface GLevelTier {
+67:export interface Achievement {
+84:export interface Community {
+113:export interface CommunityInvite {
+130:export interface CommunityMember {
+146:export type PaymentProvider = 'paypal' | 'apple_pay' | 'google_pay' | 'stripe' | 'mercado_pago' | 'oxxo' | 'gumroad' | 'revenuecat' | 'polar' | 'lemonsqueezy' | 'slash'
+148:export interface PaymentConfig {
+165:export interface PaymentTransaction {
+184:export interface GSPurchaseTier {
+199:export interface BandwidthRequest {
+230:export interface BandwidthSession {
+256:export interface Message {
+281:export interface Conversation {
+299:export interface Notification {
+315:export interface UserAnalytics {
+338:export interface SystemMetrics {
+361:export type RequiredFields<T, K extends keyof T> = T & Required<Pick<T, K>>
+362:export type OptionalFields<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+363:export type UpdateFields<T> = Partial<Omit<T, 'id' | 'createdAt' | 'updatedAt'>>

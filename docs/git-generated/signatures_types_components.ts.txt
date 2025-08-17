@@ -1,0 +1,22 @@
+[0;34m[source-attr][0m Extracting API signatures from types/components.ts
+=== EXPORTS ===
+16:export interface BaseComponentProps {
+26:export interface ButtonAtomicProps extends BaseComponentProps {
+39:export interface GlassCardProps extends BaseComponentProps {
+48:export interface HeaderAtomicProps extends BaseComponentProps {
+59:export type GlooPaletteStrategy =
+71:export type GlooThemeMode = "light" | "dark"
+73:export type GlooEffectName =
+90:export interface GlooCanvasProps extends BaseComponentProps {
+115:export interface GlooGlobalProps extends Omit<GlooCanvasProps, "colors"> {
+130:export interface NavigationItem {
+140:export interface NavigationProps extends BaseComponentProps {
+153:export interface GSPurchaseStoreProps extends BaseComponentProps {
+162:export interface ProfileComponentProps extends BaseComponentProps {
+171:export interface CommunityCardProps extends BaseComponentProps {
+180:export interface LeaderboardProps extends BaseComponentProps {
+189:export interface AchievementDisplayProps extends BaseComponentProps {
+199:export interface HeroTextProps extends BaseComponentProps {
+209:export interface FormProps extends BaseComponentProps {
+218:export interface FormFieldProps extends BaseComponentProps {
+228:export interface ModalProps extends BaseComponentProps {

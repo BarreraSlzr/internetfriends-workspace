@@ -1,0 +1,22 @@
+[0;34m[source-attr][0m Extracting API signatures from types/api.ts
+=== EXPORTS ===
+7:export interface ApiResponse<T = unknown> {
+23:export interface ApiError {
+31:export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'HEAD' | 'OPTIONS'
+32:export type HttpStatusCode = 200 | 201 | 204 | 400 | 401 | 403 | 404 | 409 | 422 | 429 | 500 | 503
+35:export type ApiRouteHandler<T = unknown> = (
+41:export interface PaginationParams {
+49:export interface PaginatedResponse<T> {
+62:export interface AuthTokens {
+69:export interface AuthUser {
+80:export interface AuthRequest {
+86:export interface AuthResponse extends ApiResponse<{
+92:export interface ProfileUpdateRequest {
+113:export interface ProfileResponse extends ApiResponse<FriendsProfile> {}
+116:export interface BalanceUpdateRequest {
+122:export interface BalanceResponse extends ApiResponse<{
+128:export interface TransactionRecord {
+137:export interface TransactionHistoryResponse extends ApiResponse<PaginatedResponse<TransactionRecord>> {}
+140:export interface PaymentInitiationRequest {
+148:export interface PaymentInitiationResponse extends ApiResponse<{
+155:export interface PaymentCompletionRequest {

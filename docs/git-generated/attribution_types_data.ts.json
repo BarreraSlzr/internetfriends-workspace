@@ -1,0 +1,61 @@
+{
+    "attribution": {
+    "file": "types/data.ts",
+    "urls": {
+        "github_blob": "https://github.com/BarreraSlzr/internetfriends-workspace/blob/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/data.ts",
+        "github_blame": "https://github.com/BarreraSlzr/internetfriends-workspace/blame/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/data.ts",
+        "github_history": "https://github.com/BarreraSlzr/internetfriends-workspace/commits/epic/git-sourced-documentation-v1/types/data.ts",
+        "github_raw": "https://github.com/BarreraSlzr/internetfriends-workspace/raw/da5d6e6730c93466f69433826d7d6652c3c1c53c/types/data.ts"
+    },
+    "metadata": {
+        "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+        "commit_short": "da5d6e67",
+        "branch": "epic/git-sourced-documentation-v1",
+        "line_count":      431,
+        "file_size":    10510,
+        "last_modified": "2025-08-17 11:09:03 -0600",
+        "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
+        "last_commit_message": "feat(platform): complete platform stabilization with tests and documentation"
+    }
+},
+    "line_ranges": [0;34m[source-attr][0m Extracting line ranges for types/data.ts
+{
+    "file": "types/data.ts",
+    "constructs": {
+        "interfaces": [
+            {"name": "FriendsProfile", "line": 5, "type": "interface"},
+            {"name": "GLevelTier", "line": 53, "type": "interface"},
+            {"name": "Achievement", "line": 67, "type": "interface"},
+            {"name": "Community", "line": 84, "type": "interface"},
+            {"name": "CommunityInvite", "line": 113, "type": "interface"},
+            {"name": "CommunityMember", "line": 130, "type": "interface"},
+            {"name": "PaymentConfig", "line": 148, "type": "interface"},
+            {"name": "PaymentTransaction", "line": 165, "type": "interface"},
+            {"name": "GSPurchaseTier", "line": 184, "type": "interface"},
+            {"name": "BandwidthRequest", "line": 199, "type": "interface"},
+            {"name": "BandwidthSession", "line": 230, "type": "interface"},
+            {"name": "Message", "line": 256, "type": "interface"},
+            {"name": "Conversation", "line": 281, "type": "interface"},
+            {"name": "Notification", "line": 299, "type": "interface"},
+            {"name": "UserAnalytics", "line": 315, "type": "interface"},
+            {"name": "SystemMetrics", "line": 338, "type": "interface"}
+        ],
+        "types": [
+            {"name": "PaymentProvider", "line": 146, "type": "type"},
+            {"name": "RequiredFields<T,", "line": 361, "type": "type"},
+            {"name": "OptionalFields<T,", "line": 362, "type": "type"},
+            {"name": "UpdateFields<T>", "line": 363, "type": "type"}
+        ],
+        "schemas": [
+
+        ]
+    }
+},
+    "repository": {
+  "url": "https://github.com/BarreraSlzr/internetfriends-workspace",
+  "type": "private",
+  "commit": "da5d6e6730c93466f69433826d7d6652c3c1c53c",
+  "branch": "epic/git-sourced-documentation-v1"
+},
+    "generated_at": "2025-08-17T17:36:27Z"
+}
