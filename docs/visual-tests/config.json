@@ -1,0 +1,26 @@
+{
+    "version": "1.0.0",
+    "initialized": "2025-08-17T17:45:26Z",
+    "integration": {
+        "git_docs_system": true,
+        "visual_comparison_api": true,
+        "design_system_snapshots": true,
+        "breaking_change_detection": true
+    },
+    "component_patterns": [
+        "components/atomic/**/*.tsx",
+        "components/molecular/**/*.tsx", 
+        "components/organisms/**/*.tsx"
+    ],
+    "snapshot_triggers": [
+        "component file changes",
+        "style file modifications",
+        "design token updates",
+        "breaking change detection"
+    ],
+    "visual_test_endpoints": [
+        "/api/visual-comparison",
+        "/api/design-system/snapshots",
+        "/api/git-docs/generate"
+    ]
+}
