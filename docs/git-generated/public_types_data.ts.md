@@ -2,7 +2,7 @@
 
 **Auto-generated from repository**  
 **File**: `types/data.ts`  
-**Generated**: 2025-08-17T18:22:36Z
+**Generated**: 2025-08-17T18:31:56Z
 
 ## Overview
 

@@ -1,7 +1,7 @@
 # Private Documentation: app/api/rum/route.ts
 
 **Full Git Attribution with Source Links**  
-**Generated**: 2025-08-17T18:22:37Z
+**Generated**: 2025-08-17T18:31:57Z
 
 ## Direct GitHub Access
 
@@ -14,14 +14,14 @@
     "attribution": {
     "file": "app/api/rum/route.ts",
     "urls": {
-        "github_blob": "https://github.com/BarreraSlzr/internetfriends-workspace/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/app/api/rum/route.ts",
-        "github_blame": "https://github.com/BarreraSlzr/internetfriends-workspace/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/app/api/rum/route.ts",
+        "github_blob": "https://github.com/BarreraSlzr/internetfriends-workspace/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/app/api/rum/route.ts",
+        "github_blame": "https://github.com/BarreraSlzr/internetfriends-workspace/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/app/api/rum/route.ts",
         "github_history": "https://github.com/BarreraSlzr/internetfriends-workspace/commits/epic/git-sourced-documentation-v1/app/api/rum/route.ts",
-        "github_raw": "https://github.com/BarreraSlzr/internetfriends-workspace/raw/993590f5d3b3c057d3f529169116d9ae214f8bef/app/api/rum/route.ts"
+        "github_raw": "https://github.com/BarreraSlzr/internetfriends-workspace/raw/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/app/api/rum/route.ts"
     },
     "metadata": {
-        "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
-        "commit_short": "993590f5",
+        "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
+        "commit_short": "5d05e083",
         "branch": "epic/git-sourced-documentation-v1",
         "line_count":      352,
         "file_size":     9282,
@@ -48,10 +48,10 @@
     "repository": {
   "url": "https://github.com/BarreraSlzr/internetfriends-workspace",
   "type": "private",
-  "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+  "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
   "branch": "epic/git-sourced-documentation-v1"
 },
-    "generated_at": "2025-08-17T18:22:37Z"
+    "generated_at": "2025-08-17T18:31:57Z"
 }
 ```
 

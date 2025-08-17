@@ -1,9 +1,9 @@
 # Documentation: schemas/validation.ts
 
 **Auto-generated from Git repository**  
-**Source**: [GitHub](/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/schemas/validation.ts)  
+**Source**: [GitHub](/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/schemas/validation.ts)  
 **Last Modified**: 2025-08-17 11:09:03 -0600  
-**Generated**: 2025-08-17T18:22:34Z
+**Generated**: 2025-08-17T18:31:54Z
 
 ## File Overview
 
@@ -11,7 +11,7 @@
 Path: schemas/validation.ts
 Lines:      433
 Last Author: Emmanuel Barrera Salazar (BarreraSlzr)
-Commit: 993590f5
+Commit: 5d05e083
 ```
 
 ## TypeScript Definitions
@@ -81,14 +81,14 @@ Commit: 993590f5
 ```json
 {
     "file": "schemas/validation.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/schemas/validation.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/schemas/validation.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/schemas/validation.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/schemas/validation.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      433,
     "last_modified": "2025-08-17 11:09:03 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:34Z"
+    "generated_at": "2025-08-17T18:31:54Z"
 }
 ```
 
@@ -100,4 +100,4 @@ Commit: 993590f5
 
 ---
 *This documentation was automatically generated from the Git repository. 
-For the most up-to-date version, visit the [source file](/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/schemas/validation.ts).*
+For the most up-to-date version, visit the [source file](/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/schemas/validation.ts).*

@@ -2,12 +2,12 @@
     "repository": {
         "url": "",
         "branch": "epic/git-sourced-documentation-v1",
-        "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
-        "commit_short": "993590f"
+        "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
+        "commit_short": "5d05e08"
     },
     "workspace": {
         "root": "/Users/emmanuelbarrera/Projects/InternetFriends/zed_workspace",
         "output": "/Users/emmanuelbarrera/Projects/InternetFriends/zed_workspace/docs/git-generated",
-        "timestamp": "2025-08-17T18:22:20Z"
+        "timestamp": "2025-08-17T18:31:37Z"
     }
 }

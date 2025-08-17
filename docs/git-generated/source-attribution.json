@@ -1,571 +1,571 @@
 [{
     "file": "app/api/rum/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/app/api/rum/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/app/api/rum/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/app/api/rum/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/app/api/rum/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      352,
     "last_modified": "2025-08-10 22:39:33 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:23Z"
+    "generated_at": "2025-08-17T18:31:42Z"
 },{
     "file": "nextjs-website/app/api/ai-component-analysis/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/ai-component-analysis/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/ai-component-analysis/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/ai-component-analysis/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/ai-component-analysis/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      148,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:23Z"
+    "generated_at": "2025-08-17T18:31:42Z"
 },{
     "file": "nextjs-website/app/api/ai/economics-analysis/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/ai/economics-analysis/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/ai/economics-analysis/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/ai/economics-analysis/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/ai/economics-analysis/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      333,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:24Z"
+    "generated_at": "2025-08-17T18:31:42Z"
 },{
     "file": "nextjs-website/app/api/ai/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/ai/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/ai/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/ai/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/ai/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       89,
     "last_modified": "2025-08-12 18:47:30 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:24Z"
+    "generated_at": "2025-08-17T18:31:43Z"
 },{
     "file": "nextjs-website/app/api/analytics/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/analytics/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/analytics/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/analytics/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/analytics/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      234,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:24Z"
+    "generated_at": "2025-08-17T18:31:43Z"
 },{
     "file": "nextjs-website/app/api/auth/session/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/auth/session/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/auth/session/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/auth/session/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/auth/session/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      114,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:24Z"
+    "generated_at": "2025-08-17T18:31:43Z"
 },{
     "file": "nextjs-website/app/api/component-analysis/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/component-analysis/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/component-analysis/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/component-analysis/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/component-analysis/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      213,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:25Z"
+    "generated_at": "2025-08-17T18:31:44Z"
 },{
     "file": "nextjs-website/app/api/deploy-staging/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/deploy-staging/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/deploy-staging/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/deploy-staging/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/deploy-staging/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       76,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:25Z"
+    "generated_at": "2025-08-17T18:31:44Z"
 },{
     "file": "nextjs-website/app/api/design-system/registry/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/registry/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/registry/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/registry/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/registry/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      194,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:25Z"
+    "generated_at": "2025-08-17T18:31:44Z"
 },{
     "file": "nextjs-website/app/api/design-system/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      221,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:25Z"
+    "generated_at": "2025-08-17T18:31:44Z"
 },{
     "file": "nextjs-website/app/api/design-system/snapshots/[id]/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/snapshots/[id]/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/snapshots/[id]/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/snapshots/[id]/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/snapshots/[id]/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       38,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:25Z"
+    "generated_at": "2025-08-17T18:31:45Z"
 },{
     "file": "nextjs-website/app/api/design-system/snapshots/generate/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/snapshots/generate/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/snapshots/generate/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/snapshots/generate/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/snapshots/generate/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       41,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:26Z"
+    "generated_at": "2025-08-17T18:31:45Z"
 },{
     "file": "nextjs-website/app/api/design-system/snapshots/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/snapshots/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/design-system/snapshots/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/snapshots/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/design-system/snapshots/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      118,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:26Z"
+    "generated_at": "2025-08-17T18:31:45Z"
 },{
     "file": "nextjs-website/app/api/dev/component-graph/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/dev/component-graph/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/dev/component-graph/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/dev/component-graph/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/dev/component-graph/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      140,
     "last_modified": "2025-08-11 02:28:57 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:26Z"
+    "generated_at": "2025-08-17T18:31:45Z"
 },{
     "file": "nextjs-website/app/api/domain/check/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/check/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/check/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/check/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/check/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      282,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:26Z"
+    "generated_at": "2025-08-17T18:31:46Z"
 },{
     "file": "nextjs-website/app/api/domain/pricing/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/pricing/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/pricing/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/pricing/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/pricing/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      243,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:26Z"
+    "generated_at": "2025-08-17T18:31:46Z"
 },{
     "file": "nextjs-website/app/api/domain/purchase/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/purchase/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/purchase/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/purchase/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/purchase/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      521,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:27Z"
+    "generated_at": "2025-08-17T18:31:46Z"
 },{
     "file": "nextjs-website/app/api/domain/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       81,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:27Z"
+    "generated_at": "2025-08-17T18:31:46Z"
 },{
     "file": "nextjs-website/app/api/domain/search/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/search/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/domain/search/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/search/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/domain/search/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      213,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:27Z"
+    "generated_at": "2025-08-17T18:31:46Z"
 },{
     "file": "nextjs-website/app/api/git-docs/breaking-changes/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/breaking-changes/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/breaking-changes/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/breaking-changes/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/breaking-changes/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
-    "line_count":      229,
+    "line_count":      245,
     "last_modified": "2025-08-17 11:37:33 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:27Z"
+    "generated_at": "2025-08-17T18:31:47Z"
 },{
     "file": "nextjs-website/app/api/git-docs/generate/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/generate/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/generate/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/generate/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/generate/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
-    "line_count":      218,
+    "line_count":      234,
     "last_modified": "2025-08-17 11:37:33 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:28Z"
+    "generated_at": "2025-08-17T18:31:47Z"
 },{
     "file": "nextjs-website/app/api/git-docs/source-attribution/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/source-attribution/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/source-attribution/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/source-attribution/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/source-attribution/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
-    "line_count":      259,
+    "line_count":      276,
     "last_modified": "2025-08-17 11:37:33 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:28Z"
+    "generated_at": "2025-08-17T18:31:47Z"
 },{
     "file": "nextjs-website/app/api/git-docs/visual-integration/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/visual-integration/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/git-docs/visual-integration/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/visual-integration/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/git-docs/visual-integration/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
-    "line_count":      427,
+    "line_count":      443,
     "last_modified": "2025-08-17 11:46:49 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:28Z"
+    "generated_at": "2025-08-17T18:31:47Z"
 },{
     "file": "nextjs-website/app/api/gs/economics-report/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/gs/economics-report/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/gs/economics-report/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/gs/economics-report/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/gs/economics-report/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      496,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:28Z"
+    "generated_at": "2025-08-17T18:31:47Z"
 },{
     "file": "nextjs-website/app/api/health/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/health/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/health/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/health/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/health/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       50,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:28Z"
+    "generated_at": "2025-08-17T18:31:48Z"
 },{
     "file": "nextjs-website/app/api/links/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/links/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/links/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/links/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/links/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      258,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:29Z"
+    "generated_at": "2025-08-17T18:31:48Z"
 },{
     "file": "nextjs-website/app/api/models/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/models/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/models/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/models/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/models/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      103,
     "last_modified": "2025-08-15 17:34:50 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:29Z"
+    "generated_at": "2025-08-17T18:31:48Z"
 },{
     "file": "nextjs-website/app/api/opencode-simple/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/opencode-simple/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/opencode-simple/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/opencode-simple/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/opencode-simple/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       90,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:29Z"
+    "generated_at": "2025-08-17T18:31:48Z"
 },{
     "file": "nextjs-website/app/api/opencode/[...path]/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/opencode/[...path]/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/opencode/[...path]/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/opencode/[...path]/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/opencode/[...path]/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      290,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:29Z"
+    "generated_at": "2025-08-17T18:31:49Z"
 },{
     "file": "nextjs-website/app/api/payments/mercado-pago/create-preference/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/mercado-pago/create-preference/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/mercado-pago/create-preference/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/mercado-pago/create-preference/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/mercado-pago/create-preference/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       78,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:29Z"
+    "generated_at": "2025-08-17T18:31:49Z"
 },{
     "file": "nextjs-website/app/api/payments/mercado-pago/webhook/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/mercado-pago/webhook/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/mercado-pago/webhook/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/mercado-pago/webhook/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/mercado-pago/webhook/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      137,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:30Z"
+    "generated_at": "2025-08-17T18:31:50Z"
 },{
     "file": "nextjs-website/app/api/payments/paypal/capture-order/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/paypal/capture-order/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/paypal/capture-order/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/paypal/capture-order/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/paypal/capture-order/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       98,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:30Z"
+    "generated_at": "2025-08-17T18:31:50Z"
 },{
     "file": "nextjs-website/app/api/payments/paypal/create-order/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/paypal/create-order/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/paypal/create-order/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/paypal/create-order/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/paypal/create-order/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       59,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:30Z"
+    "generated_at": "2025-08-17T18:31:50Z"
 },{
     "file": "nextjs-website/app/api/payments/slash/create-session/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/slash/create-session/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/slash/create-session/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/slash/create-session/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/slash/create-session/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       85,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:30Z"
+    "generated_at": "2025-08-17T18:31:50Z"
 },{
     "file": "nextjs-website/app/api/payments/slash/refund/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/slash/refund/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/slash/refund/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/slash/refund/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/slash/refund/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       66,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:30Z"
+    "generated_at": "2025-08-17T18:31:51Z"
 },{
     "file": "nextjs-website/app/api/payments/slash/webhook/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/slash/webhook/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/slash/webhook/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/slash/webhook/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/slash/webhook/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       69,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:31Z"
+    "generated_at": "2025-08-17T18:31:51Z"
 },{
     "file": "nextjs-website/app/api/payments/stripe/create-session/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/stripe/create-session/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/stripe/create-session/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/stripe/create-session/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/stripe/create-session/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       75,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:31Z"
+    "generated_at": "2025-08-17T18:31:51Z"
 },{
     "file": "nextjs-website/app/api/payments/stripe/webhook/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/stripe/webhook/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/payments/stripe/webhook/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/stripe/webhook/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/payments/stripe/webhook/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      135,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:31Z"
+    "generated_at": "2025-08-17T18:31:51Z"
 },{
     "file": "nextjs-website/app/api/project-explorer/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/project-explorer/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/project-explorer/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/project-explorer/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/project-explorer/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      696,
     "last_modified": "2025-08-12 23:04:50 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:31Z"
+    "generated_at": "2025-08-17T18:31:51Z"
 },{
     "file": "nextjs-website/app/api/redirect/go.rich/[shortCode]/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/redirect/go.rich/[shortCode]/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/redirect/go.rich/[shortCode]/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/redirect/go.rich/[shortCode]/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/redirect/go.rich/[shortCode]/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       94,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:31Z"
+    "generated_at": "2025-08-17T18:31:52Z"
 },{
     "file": "nextjs-website/app/api/screenshot/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/screenshot/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/screenshot/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/screenshot/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/screenshot/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      162,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:32Z"
+    "generated_at": "2025-08-17T18:31:52Z"
 },{
     "file": "nextjs-website/app/api/settings/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/settings/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/settings/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/settings/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/settings/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       97,
     "last_modified": "2025-08-12 18:47:30 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:32Z"
+    "generated_at": "2025-08-17T18:31:52Z"
 },{
     "file": "nextjs-website/app/api/steady/domains/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/domains/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/domains/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/domains/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/domains/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      103,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:32Z"
+    "generated_at": "2025-08-17T18:31:52Z"
 },{
     "file": "nextjs-website/app/api/steady/gateway/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/gateway/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/gateway/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/gateway/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/gateway/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      226,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:32Z"
+    "generated_at": "2025-08-17T18:31:53Z"
 },{
     "file": "nextjs-website/app/api/steady/go/[code]/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/go/[code]/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/go/[code]/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/go/[code]/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/go/[code]/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       21,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:33Z"
+    "generated_at": "2025-08-17T18:31:53Z"
 },{
     "file": "nextjs-website/app/api/steady/stream/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/stream/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/steady/stream/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/stream/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/steady/stream/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       78,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:33Z"
+    "generated_at": "2025-08-17T18:31:53Z"
 },{
     "file": "nextjs-website/app/api/subdomain/search/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/subdomain/search/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/subdomain/search/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/subdomain/search/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/subdomain/search/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      257,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:33Z"
+    "generated_at": "2025-08-17T18:31:53Z"
 },{
     "file": "nextjs-website/app/api/system/status/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/system/status/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/system/status/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/system/status/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/system/status/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      328,
     "last_modified": "2025-08-10 22:39:33 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:33Z"
+    "generated_at": "2025-08-17T18:31:54Z"
 },{
     "file": "nextjs-website/app/api/taxes/resico/submit/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/taxes/resico/submit/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/taxes/resico/submit/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/taxes/resico/submit/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/taxes/resico/submit/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      105,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:33Z"
+    "generated_at": "2025-08-17T18:31:54Z"
 },{
     "file": "nextjs-website/app/api/user/profile/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/user/profile/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/user/profile/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/user/profile/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/user/profile/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":       94,
     "last_modified": "2025-08-15 17:34:50 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:34Z"
+    "generated_at": "2025-08-17T18:31:54Z"
 },{
     "file": "nextjs-website/app/api/username/search/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/username/search/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/username/search/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/username/search/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/username/search/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      340,
     "last_modified": "2025-08-17 11:08:35 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:34Z"
+    "generated_at": "2025-08-17T18:31:54Z"
 },{
     "file": "nextjs-website/app/api/visual-comparison/route.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/visual-comparison/route.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/nextjs-website/app/api/visual-comparison/route.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/visual-comparison/route.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/nextjs-website/app/api/visual-comparison/route.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      815,
     "last_modified": "2025-08-16 11:02:44 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:34Z"
+    "generated_at": "2025-08-17T18:31:54Z"
 },{
     "file": "schemas/validation.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/schemas/validation.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/schemas/validation.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/schemas/validation.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/schemas/validation.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      433,
     "last_modified": "2025-08-17 11:09:03 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:34Z"
+    "generated_at": "2025-08-17T18:31:55Z"
 },{
     "file": "types/api.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/api.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/types/api.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/api.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/api.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      365,
     "last_modified": "2025-08-17 11:09:03 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:35Z"
+    "generated_at": "2025-08-17T18:31:55Z"
 },{
     "file": "types/components.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/components.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/types/components.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/components.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/components.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      384,
     "last_modified": "2025-08-17 11:09:03 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:35Z"
+    "generated_at": "2025-08-17T18:31:55Z"
 },{
     "file": "types/data.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/data.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/types/data.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/data.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/data.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      431,
     "last_modified": "2025-08-17 11:09:03 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:35Z"
+    "generated_at": "2025-08-17T18:31:55Z"
 },{
     "file": "types/index.ts",
-    "github_url": "/blob/993590f5d3b3c057d3f529169116d9ae214f8bef/types/index.ts",
-    "github_blame_url": "/blame/993590f5d3b3c057d3f529169116d9ae214f8bef/types/index.ts",
-    "commit": "993590f5d3b3c057d3f529169116d9ae214f8bef",
+    "github_url": "/blob/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/index.ts",
+    "github_blame_url": "/blame/5d05e08307cea4aa99bf92dd58d948d5e89cdebc/types/index.ts",
+    "commit": "5d05e08307cea4aa99bf92dd58d948d5e89cdebc",
     "branch": "epic/git-sourced-documentation-v1",
     "line_count":      325,
     "last_modified": "2025-08-17 11:09:03 -0600",
     "last_author": "Emmanuel Barrera Salazar (BarreraSlzr)",
-    "generated_at": "2025-08-17T18:22:35Z"
+    "generated_at": "2025-08-17T18:31:55Z"
 }]
