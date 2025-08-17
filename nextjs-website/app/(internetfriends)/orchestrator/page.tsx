@@ -362,7 +362,7 @@ export default function OrchestratorPage() {
                   gap={22}
                   size={1}
                   color="var(--if-primary)"
-                  style={{ opacity: 0.07 }}
+                  style={{ opacity: 0.4 }}
                 />
                 <MiniMap pannable zoomable />
                 <Controls />

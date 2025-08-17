@@ -290,29 +290,35 @@
   /* Glass base color override for dark theme */
   --glass-base-color: var(--glass-base-color-dark);
 
-  /* Glass system dark - Strength-based with blue tints */
+  /* Glass system dark - Strength-based with enhanced blue tints */
   --glass-bg-header: rgba(
     var(--glass-base-color-dark),
-    calc(0.2 + (0.55 * var(--glass-strength-header)))
+    calc(0.3 + (0.45 * var(--glass-strength-header)))
   );
   --glass-bg-header-scrolled: rgba(
     var(--glass-base-color-dark),
-    calc(0.25 + (0.55 * var(--glass-strength-header)))
+    calc(0.35 + (0.45 * var(--glass-strength-header)))
   );
   --glass-bg-overlay: rgba(
     var(--glass-base-color-dark),
-    calc(0.2 + (0.55 * var(--glass-strength-overlay)))
+    calc(0.25 + (0.5 * var(--glass-strength-overlay)))
   );
   --glass-bg-modal: rgba(
     var(--glass-base-color-dark),
-    calc(0.2 + (0.55 * var(--glass-strength-modal)))
+    calc(0.25 + (0.5 * var(--glass-strength-modal)))
   );
-  --glass-border: rgba(59, 130, 246, var(--glass-border-alpha));
+  --glass-border: rgba(96, 165, 250, var(--glass-border-alpha));
   --glass-border-enhanced: rgba(
-    59,
-    130,
-    246,
-    calc(var(--glass-border-alpha) + 0.1)
+    96,
+    165,
+    250,
+    calc(var(--glass-border-alpha) + 0.12)
+  );
+  --glass-border-outset: rgba(
+    96,
+    165,
+    250,
+    calc(0.2 * var(--glass-strength-default))
   );
 
   /* Layered glass & ambient system (dark) - Calculated from strength */
