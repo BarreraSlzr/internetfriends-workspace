@@ -6,30 +6,45 @@ export const atomicComponents: ComponentRegistryEntry[] = [
     name: 'HeaderAtomic',
     category: 'atomic',
     description: 'Primary navigation header with glass morphism design',
-    filePath: 'components/atomic/header/header.atomic.tsx',
+    path: 'components/atomic/header/header.atomic.tsx',
     dependencies: ['@/lib/utils', 'lucide-react'],
-    props: ['variant', 'className', 'children'],
-    examples: ['default', 'compact'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['navigation', 'header'],
+    status: 'active'
   },
   {
     id: 'glass-card-atomic',
     name: 'GlassCardAtomic',
     category: 'atomic',
     description: 'Glass morphism card component with backdrop blur',
-    filePath: 'components/atomic/glass-card/glass-card.atomic.tsx',
+    path: 'components/atomic/glass-card/glass-card.atomic.tsx',
     dependencies: ['@/lib/utils'],
-    props: ['className', 'children', 'variant'],
-    examples: ['default', 'elevated'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['card', 'glass'],
+    status: 'active'
   },
   {
     id: 'button-atomic',
     name: 'ButtonAtomic',
     category: 'atomic',
     description: 'Primary button component with InternetFriends styling',
-    filePath: 'components/atomic/button/button.atomic.tsx',
+    path: 'components/atomic/button/button.atomic.tsx',
     dependencies: ['@/lib/utils', 'class-variance-authority'],
-    props: ['variant', 'size', 'disabled', 'children'],
-    examples: ['primary', 'secondary', 'ghost'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['button', 'interaction'],
+    status: 'active'
   },
 ];
 
@@ -39,20 +54,30 @@ export const molecularComponents: ComponentRegistryEntry[] = [
     name: 'NavigationMolecular',
     category: 'molecular',
     description: 'Complete navigation system with mobile responsiveness',
-    filePath: 'components/molecular/navigation/navigation.molecular.tsx',
+    path: 'components/molecular/navigation/navigation.molecular.tsx',
     dependencies: ['@/components/atomic', '@/lib/utils'],
-    props: ['items', 'activeItem', 'className'],
-    examples: ['desktop', 'mobile'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['navigation', 'responsive'],
+    status: 'active'
   },
   {
     id: 'design-system-graph-molecular',
     name: 'DesignSystemGraph',
     category: 'molecular',
     description: 'React Flow based component dependency visualization',
-    filePath: 'components/molecular/design-system-graph/design-system-graph.molecular.tsx',
+    path: 'components/molecular/design-system-graph/design-system-graph.molecular.tsx',
     dependencies: ['@xyflow/react', '@/lib/design-system'],
-    props: ['components', 'onNodeClick', 'className'],
-    examples: ['default', 'filtered'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['visualization', 'graph'],
+    status: 'active'
   },
 ];
 
@@ -60,22 +85,32 @@ export const utilityComponents: ComponentRegistryEntry[] = [
   {
     id: 'cn-utility',
     name: 'cn',
-    category: 'utility',
+    category: 'atomic',
     description: 'Utility function for merging CSS classes with clsx and tailwind-merge',
-    filePath: 'lib/utils.ts',
+    path: 'lib/utils.ts',
     dependencies: ['clsx', 'tailwind-merge'],
-    props: [],
-    examples: ['merge-classes'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['utility', 'css'],
+    status: 'active'
   },
   {
     id: 'stamp-utility',
     name: 'generateStamp',
-    category: 'utility', 
+    category: 'atomic', 
     description: 'Generate timestamp stamps for consistent dating',
-    filePath: 'lib/utils/stamp.ts',
+    path: 'lib/utils/stamp.ts',
     dependencies: [],
-    props: [],
-    examples: ['timestamp'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['utility', 'timestamp'],
+    status: 'active'
   },
 ];
 
@@ -85,20 +120,30 @@ export const pageComponents: ComponentRegistryEntry[] = [
     name: 'DesignSystemPage',
     category: 'page',
     description: 'Main design system exploration and documentation page',
-    filePath: 'app/(internetfriends)/design-system/page.tsx',
+    path: 'app/(internetfriends)/design-system/page.tsx',
     dependencies: ['@/components/molecular', '@/lib/design-system'],
-    props: [],
-    examples: ['default'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['page', 'design-system'],
+    status: 'active'
   },
   {
     id: 'orchestrator-page',
     name: 'OrchestratorPage', 
     category: 'page',
     description: 'Project orchestration and monitoring dashboard',
-    filePath: 'app/(internetfriends)/orchestrator/page.tsx',
+    path: 'app/(internetfriends)/orchestrator/page.tsx',
     dependencies: ['@xyflow/react', '@/components/organisms'],
-    props: [],
-    examples: ['default'],
+    usedInPages: [],
+    usageCount: 0,
+    hasScreenshot: false,
+    dependents: [],
+    lastModified: new Date().toISOString(),
+    tags: ['page', 'orchestrator'],
+    status: 'active'
   },
 ];
 
@@ -110,7 +155,7 @@ export const getComponentById = (id: string): ComponentRegistryEntry | undefined
   return getAllComponents().find(component => component.id === id);
 };
 
-export const getComponentsByCategory = (category: string): ComponentRegistryEntry[] => {
+export const getComponentsByCategory = (category: ComponentRegistryEntry['category']): ComponentRegistryEntry[] => {
   return getAllComponents().filter(component => component.category === category);
 };
 

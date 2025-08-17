@@ -1,5 +1,5 @@
 import React from 'react';
-import type { NodeProps } from '@xyflow/react';
+import type { NodeProps } from 'reactflow';
 
 export interface ComponentNodeData {
   label: string;

@@ -13,7 +13,18 @@ export const dynamic = "force-dynamic";
 
 const mainIdeas = [
   {
-    subtitle: "Creative Projects",
+    subtitle: "Digital Identity Marketplace",
+    title: "Own Your Digital Presence",
+    description:
+      "Get domains & usernames with G's tokens. From traditional .com domains to @username subscriptions with verification badges.",
+    project_scope: "Explore Digital Identity Marketplace",
+    cta_word: "Browse Identity",
+    href: "/domain",
+    className:
+      "bg-gradient-to-tr from-green-300 via-green-300 to-green-500 text-green-900",
+  },
+  {
+    subtitle: "Creative Projects", 
     title: "Got a Big Idea?",
     description:
       "Whether it's a website, an app, or something wild and new, we help bring your vision to life—no idea is too crazy for us.",
@@ -104,14 +115,16 @@ export default function Page() {
       <Navigation />
       <SocialLinks />
       <section className="relative min-h-[60vh] min-h-fit">
-        <HeroText useGloo={false} backgroundStrategy="simple" />
+        <HeroText useGloo={false} backgroundStrategy="simple">
+          InternetFriends
+        </HeroText>
       </section>
       <div className="card sm:p-6 p-2 md:p-8 space-y-6 py-6">
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-3 gap-6">
           {mainIdeas.map((i) => (
             <Link
               key={i.title}
-              href={`/contact?project_scope=${encodeURIComponent(i.project_scope)}`}
+              href={i.href || `/contact?project_scope=${encodeURIComponent(i.project_scope)}`}
             >
               <CustomCard
                 subtitle={i.subtitle}

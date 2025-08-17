@@ -10,9 +10,9 @@ const CACHE_DIR = '.cache';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const componentId = params.id;
+  const { id: componentId } = await params;
   
   try {
     const snapshotPath = join(process.cwd(), CACHE_DIR, `${componentId}.json`);

@@ -91,13 +91,8 @@ const AnalysisSchema = z.object({
 
 // Import OpenCode integration
 async function getOpenCodeIntegration() {
-  try {
-    // Dynamic import to avoid build issues if script doesn't exist
-    const integration = await import('../../../scripts/opencode-visual-integration');
-    return integration;
-  } catch {
-    return null;
-  }
+  // OpenCode integration disabled during build - enables when script is available
+  return null;
 }
 
 interface VisualComparisonRequest {
@@ -665,7 +660,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Enhanced OpenCode Integration - With error handling
-    let actionableSession = null;
+    const actionableSession = null;
     let enhancedMarkdown;
     
     try {

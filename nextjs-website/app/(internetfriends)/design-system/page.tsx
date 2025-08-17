@@ -5,6 +5,7 @@ const { useState, useEffect } = React;
 import { componentRegistry, ComponentRegistryEntry, PageRegistryEntry } from "@/lib/design-system/component-registry";
 import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
 import { ButtonAtomic } from "@/components/atomic/button/button.atomic";
+import { OpenCodeIntegration } from "@/components/utils/opencode-integration";
 import {
   Search,
   Filter,
@@ -37,6 +38,7 @@ export default function EnhancedDesignSystemPage() {
   const [viewMode, setViewMode] = useState<ViewMode>('components');
   const [visualizationMode, setVisualizationMode] = useState<VisualizationMode>('graph');
   const [selectedItem, setSelectedItem] = useState<ComponentRegistryEntry | PageRegistryEntry | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [isLoading, setIsLoading] = useState(true);
@@ -394,19 +396,23 @@ export default function EnhancedDesignSystemPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-1">
-                InternetFriends Design System
-              </h1>
-              <p className="text-sm text-gray-600">
-                Registry-based component and page visualization
-              </p>
-            </div>
+    <OpenCodeIntegration>
+      <main className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+        {/* Header */}
+        <div className="bg-white border-b border-gray-200 sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-6 py-4">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900 mb-1">
+                  InternetFriends Design System
+                </h1>
+                <p className="text-sm text-gray-600">
+                  Registry-based component and page visualization
+                  <span className="ml-2 text-xs text-blue-600 font-mono">
+                    ⌘⇧A analyze • ⌘⇧D deploy
+                  </span>
+                </p>
+              </div>
 
             <div className="flex items-center gap-3">
               {renderVisualizationSelector()}
@@ -546,7 +552,8 @@ export default function EnhancedDesignSystemPage() {
             </div>
           </div>
         </div>
-      )}
-    </main>
+        )}
+      </main>
+    </OpenCodeIntegration>
   );
 }
