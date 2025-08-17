@@ -10,7 +10,10 @@ export type GlooPaletteStrategy =
   | "primary-accent"
   | "soft-glass"
   | "monochrome"
-  | "complementary";
+  | "complementary"
+  | "octopus-flat"
+  | "modern-minimal"
+  | "retina-optimized";
 
 export type GlooThemeMode = "light" | "dark";
 
@@ -25,7 +28,11 @@ export type GlooEffectName =
   | "oscillate"
   | "fractal"
   | "swirl"
-  | "bounce";
+  | "bounce"
+  | "octopus"
+  | "modernFlow"
+  | "minimalist"
+  | "retinal";
 
 export interface GlooPaletteOptions {
   mode: GlooThemeMode;

@@ -22,7 +22,7 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
   ...props
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -62,7 +62,7 @@ export const HeaderAtomic: React.FC<HeaderAtomicProps> = ({
         className,
       )}
       data-scrolled={isScrolled}
-      data-theme={theme.colorScheme}
+      data-theme={isDarkMode ? "dark" : "light"}
       {...props}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">

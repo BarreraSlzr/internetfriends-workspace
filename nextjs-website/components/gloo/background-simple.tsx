@@ -82,7 +82,7 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
   style,
   absolute = false,
 }) => {
-  const { isDark } = useTheme();
+  const { isDarkMode } = useTheme();
   const isSafari =
     typeof navigator !== "undefined" &&
     /Safari/.test(navigator.userAgent) &&
@@ -110,9 +110,9 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
 
   // Generate theme-aware palette
   const palette: GlooPalette = {
-    colors: tuplesToHexPalette(PRODUCTIVE_COLORS[isDark ? "dark" : "light"]),
+    colors: tuplesToHexPalette(PRODUCTIVE_COLORS[isDarkMode ? "dark" : "light"]),
     strategy: "brand-triad",
-    mode: isDark ? "dark" : "light",
+    mode: isDarkMode ? "dark" : "light",
     metadata: {
       generated: false,
     },
@@ -154,7 +154,7 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
       }}
       data-gloo-simple="true"
       data-gloo-effect-index={effectIndex}
-      data-gloo-theme={isDark ? "dark" : "light"}
+      data-gloo-theme={isDarkMode ? "dark" : "light"}
       data-testid="gloo-background-simple"
     >
       <GlooCanvasAtomic
@@ -162,11 +162,9 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
         speed={0.4}
         resolution={2.0}
         depth={4}
-        seed={2.4}
         // Stable configuration
         effectIndex={effectIndex}
         animate={shouldAnimate}
-        still={!shouldAnimate}
         // Brand palette
         palette={palette}
         // Reduced motion support
@@ -194,7 +192,7 @@ export const GlooBackgroundSimple: React.FC<GlooBackgroundSimpleProps> = ({
           <div>
             Effect: {effectIndex}/{effectFunctions.length}
           </div>
-          <div>Mode: {isDark ? "dark" : "light"}</div>
+          <div>Mode: {isDarkMode ? "dark" : "light"}</div>
           <div>Animate: {shouldAnimate ? "yes" : "no"}</div>
           <div>Colors: {palette.colors.length}</div>
           <div className="text-red-300 text-xs mt-1">

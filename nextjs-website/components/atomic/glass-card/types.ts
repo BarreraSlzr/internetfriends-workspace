@@ -8,7 +8,7 @@ export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 
   /** Visual variant of the card */
-  variant?: "default" | "elevated" | "subtle" | "primary" | "destructive";
+  variant?: "default" | "elevated" | "subtle" | "primary" | "destructive" | "header" | "card" | "modal" | "overlay";
 
   /** Size variant affecting padding and border radius */
   size?: "sm" | "md" | "lg" | "xl";
@@ -27,6 +27,15 @@ export interface GlassCardAtomicProps extends HTMLAttributes<HTMLDivElement> {
 
   /** Whether the card is disabled (affects styling and interactions) */
   disabled?: boolean;
+
+  /** Glass effect strength (0-1) */
+  strength?: number;
+
+  /** Whether to add noise overlay */
+  noise?: boolean;
+
+  /** Alternative mode setting */
+  mode?: string;
 
   /** Test identifier for automated testing */
   "data-testid"?: string;

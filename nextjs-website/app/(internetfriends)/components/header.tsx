@@ -6,12 +6,12 @@ import Link from "next/link";
 import content from "../content.json";
 
 import { GlassCardAtomic } from "@/components/atomic/glass-card/glass-card.atomic";
-import { HeaderVignette } from "@/components/effects/dark-vignette";
+import { DarkVignette } from "@/components/effects/dark-vignette";
 import { useHeaderOrbit } from "@/hooks/use-header-orbit";
 import { useTheme } from "@/hooks/use-theme";
 
 export default function Header() {
-  const { toggleTheme, isDark } = useTheme();
+  const { toggleDarkMode, isDarkMode } = useTheme();
   const { transform, isScrolled, headerRef } = useHeaderOrbit({
     radius: 3,
     scrollThreshold: 50,
@@ -44,7 +44,7 @@ export default function Header() {
                   className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 mix-blend-overlay"
                   aria-hidden="true"
                 >
-                  <HeaderVignette />
+                  <DarkVignette />
                 </div>
                 <Image
                   className="relative z-10 select-none pointer-events-none"
@@ -60,7 +60,7 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             <button
-              onClick={toggleTheme}
+              onClick={toggleDarkMode}
               className="transition-all duration-200"
               title="Toggle theme"
             >
@@ -72,7 +72,7 @@ export default function Header() {
                 size="sm"
                 className="p-2 border border-accent-medium hover:border-accent-strong"
               >
-                {isDark ? (
+                {isDarkMode ? (
                   <Sun className="h-4 w-4 text-yellow-400" />
                 ) : (
                   <Moon className="h-4 w-4 text-[color:var(--if-accent-primary)]" />

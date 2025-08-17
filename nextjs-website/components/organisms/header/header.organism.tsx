@@ -76,7 +76,7 @@ const SkipToMainContent: React.FC<{ selector: string }> = ({ selector }) => {
 const ThemeToggle: React.FC<{
   config?: HeaderOrganismProps["themeToggle"];
 }> = ({ config }) => {
-  const { theme, setTheme, isDark, isLight } = useTheme();
+  const { isDarkMode, systemPrefersDark, toggleDarkMode, setDarkMode } = useTheme();
   const { t } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -85,19 +85,19 @@ const ThemeToggle: React.FC<{
       value: "light" as const,
       label: config?.lightLabel || t("theme.light"),
       icon: Sun,
-      active: isLight,
+      active: !isDarkMode,
     },
     {
       value: "dark" as const,
       label: config?.darkLabel || t("theme.dark"),
       icon: Moon,
-      active: isDark,
+      active: isDarkMode,
     },
     {
       value: "system" as const,
       label: config?.systemLabel || t("theme.system"),
       icon: Monitor,
-      active: theme.mode === "system",
+      active: systemPrefersDark,
     },
   ];
 
@@ -136,7 +136,14 @@ const ThemeToggle: React.FC<{
               <button
                 key={option.value}
                 onClick={() => {
-                  setTheme(option.value);
+                  if (option.value === "light") {
+                    setDarkMode(false);
+                  } else if (option.value === "dark") {
+                    setDarkMode(true);
+                  } else {
+                    // System mode - use system preference
+                    setDarkMode(systemPrefersDark);
+                  }
                   setIsOpen(false);
                 }}
                 className={cn(

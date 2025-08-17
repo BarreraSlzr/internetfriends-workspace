@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProfileExpertiseTab } from "./profile-expertise-tab";
 import { ProfileSkillsTab } from "./profile-skills-tab";
 import { ProfileProjectsTab } from "./profile-projects-tab";
+import { ProfileDomainsTab } from "./profile-domains-tab";
 import { ProfileMoreTab } from "./profile-more-tab";
 
 const ProfileTabs = () => {
@@ -22,6 +23,12 @@ const ProfileTabs = () => {
         </TabsTrigger>
         <TabsTrigger
           className="data-[state=active]:glass-layer-2 data-[state=active]:glass-noise-overlay data-[state=active]:border-accent-medium"
+          value="domains"
+        >
+          Identity
+        </TabsTrigger>
+        <TabsTrigger
+          className="data-[state=active]:glass-layer-2 data-[state=active]:glass-noise-overlay data-[state=active]:border-accent-medium"
           value="skills"
         >
           Skills
@@ -38,6 +45,9 @@ const ProfileTabs = () => {
       </TabsContent>
       <TabsContent value="projects">
         <ProfileProjectsTab />
+      </TabsContent>
+      <TabsContent value="domains">
+        <ProfileDomainsTab />
       </TabsContent>
       <TabsContent value="skills">
         <ProfileSkillsTab />

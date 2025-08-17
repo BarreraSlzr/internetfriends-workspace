@@ -19,8 +19,14 @@
  */
 
 import { effectFunctions } from "./effects";
-import { getInternetFriendsPalette } from "./palette";
-import type { GlooPalette } from "./types";
+import { 
+  getInternetFriendsPalette, 
+  getOctopusFlatPalette, 
+  getModernMinimalPalette, 
+  getRetinaOptimizedPalette,
+  createPaletteFromStrategy 
+} from "./palette";
+import type { GlooPalette, GlooPaletteStrategy } from "./types";
 
 /* -------------------------------------------------- */
 /* Effect Mapping                                      */
@@ -38,6 +44,10 @@ const EFFECT_NAME_MAP: Record<number, string> = {
   8: "fractal",
   9: "swirl",
   10: "bounce",
+  11: "octopus",
+  12: "modernFlow",
+  13: "minimalist",
+  14: "retinal",
 };
 
 export interface SelectedEffect {
@@ -85,10 +95,13 @@ export function seededUnit(seed: number, step = 0): number {
 
 export interface GlooRuntimeOptions {
   seed?: number;
-  effectOverride?: number | string; // explicit index or effect name
-  deterministic?: boolean; // forces seed-based selection if seed provided
+  effectOverride?: number | string;
+  deterministic?: boolean;
   theme?: "light" | "dark";
   vivid?: boolean;
+  paletteStrategy?: GlooPaletteStrategy;
+  retinaOptimized?: boolean;
+  reducedMotion?: boolean;
 }
 
 export function pickRandomEffect(seed?: number): SelectedEffect {
@@ -107,10 +120,25 @@ export function pickRandomEffect(seed?: number): SelectedEffect {
 }
 
 /**
- * Resolve effect according to override / name / seed.
+ * Enhanced effect resolution with retina and reduced motion support
  */
 export function resolveEffect(opts: GlooRuntimeOptions = {}): SelectedEffect {
-  const { effectOverride, seed, deterministic = true } = opts;
+  const { effectOverride, seed, deterministic = true, retinaOptimized, reducedMotion } = opts;
+
+  // If reduced motion is enabled, use minimalist effect
+  if (reducedMotion) {
+    const idx = 13; // minimalist effect
+    return {
+      index: idx,
+      name: EFFECT_NAME_MAP[idx] || `effect-${idx}`,
+      source: effectFunctions[idx],
+    };
+  }
+
+  // Use retina-optimized effects for high-DPI displays
+  if (retinaOptimized || isRetinaDisplay()) {
+    return getRetinaOptimalEffect(deterministic ? seed : undefined);
+  }
 
   if (typeof effectOverride === "number") {
     const idx = clampEffectIndex(effectOverride);
@@ -143,13 +171,24 @@ export function resolveEffect(opts: GlooRuntimeOptions = {}): SelectedEffect {
 /* -------------------------------------------------- */
 
 /**
- * Standard brand triad palette (delegates to existing helper).
- * The vivid variant slightly intensifies mid/high saturation steps.
+ * Enhanced palette strategies supporting flat design and retina optimization.
  */
 export function getBrandPalette(
   theme: "light" | "dark" = "light",
   vivid = false,
+  strategy: GlooPaletteStrategy = "brand-triad",
+  retinaOptimized = false
 ): GlooPalette {
+  // Retina-optimized palette for high-DPI displays
+  if (retinaOptimized) {
+    return getRetinaOptimizedPalette(theme);
+  }
+
+  // Use specific palette strategy if provided
+  if (strategy !== "brand-triad") {
+    return createPaletteFromStrategy(strategy, theme);
+  }
+
   if (!vivid) {
     return getInternetFriendsPalette(theme);
   }
@@ -174,17 +213,86 @@ export function getBrandPalette(
   };
 }
 
+/**
+ * Octopus.do-inspired flat palette selection
+ */
+export function getOctopusInspiredPalette(
+  theme: "light" | "dark" = "light"
+): GlooPalette {
+  return getOctopusFlatPalette(theme);
+}
+
+/**
+ * Modern minimalist palette for clean designs
+ */
+export function getMinimalistPalette(
+  theme: "light" | "dark" = "light"
+): GlooPalette {
+  return getModernMinimalPalette(theme);
+}
+
+/**
+ * Detect if retina display and recommend appropriate effects
+ */
+export function isRetinaDisplay(): boolean {
+  if (typeof window === "undefined") return false;
+  return window.devicePixelRatio > 1;
+}
+
+/**
+ * Get optimal effect for retina displays
+ */
+export function getRetinaOptimalEffect(seed?: number): SelectedEffect {
+  // For retina displays, prefer subtler effects
+  const retinaFriendlyIndices = [0, 13, 14]; // default, minimalist, retinal
+  let index: number;
+  
+  if (typeof seed === "number") {
+    index = retinaFriendlyIndices[hashSeed(seed) % retinaFriendlyIndices.length];
+  } else {
+    index = retinaFriendlyIndices[Math.floor(Math.random() * retinaFriendlyIndices.length)];
+  }
+  
+  return {
+    index,
+    name: EFFECT_NAME_MAP[index] || `effect-${index}`,
+    source: effectFunctions[index],
+  };
+}
+
 /* -------------------------------------------------- */
 /* High-Level Init Helper                              */
 /* -------------------------------------------------- */
 
 /**
- * Gather everything needed for a hero background in one deterministic step.
- * This stays pure (no side effects) so components can call once and memoize.
+ * Enhanced initialization with octopus.do inspired features
  */
 export function initGlooForHero(opts: GlooRuntimeOptions = {}) {
   const effect = resolveEffect(opts);
-  const palette = getBrandPalette(opts.theme || "light", !!opts.vivid);
+  const palette = getBrandPalette(
+    opts.theme || "light", 
+    !!opts.vivid,
+    opts.paletteStrategy || "brand-triad",
+    opts.retinaOptimized
+  );
+  return { effect, palette };
+}
+
+/**
+ * Initialize with octopus.do flat design aesthetic
+ */
+export function initOctopusFlat(opts: Omit<GlooRuntimeOptions, 'paletteStrategy'> = {}) {
+  const effect = resolveEffect({ ...opts, retinaOptimized: true });
+  const palette = getOctopusFlatPalette(opts.theme || "light");
+  return { effect, palette };
+}
+
+/**
+ * Initialize with modern minimalist design
+ */
+export function initModernMinimal(opts: Omit<GlooRuntimeOptions, 'paletteStrategy'> = {}) {
+  const effect = resolveEffect({ ...opts, reducedMotion: true });
+  const palette = getModernMinimalPalette(opts.theme || "light");
   return { effect, palette };
 }
 
