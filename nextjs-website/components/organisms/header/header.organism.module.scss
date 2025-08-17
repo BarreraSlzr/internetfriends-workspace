@@ -43,33 +43,41 @@
   }
 
   // Default state (not scrolled) - Match website exactly with thick borders
-    &.glass {
-      background: var(--glass-bg-header-scrolled);
-      border: 2px dashed var(--glass-border-enhanced); // Dashed when scrolled (active)
-      border-radius: var(--radius-md); // All corners when scrolled
-      box-shadow: var(--glass-shadow-2);
-      backdrop-filter: blur(20px) saturate(200%); /* Even stronger blur when scrolled */
-      
-      // Enhanced noise when scrolled
-      &::before {
-        opacity: 0.22; // More visible noise for texture
-      }
+  &.glass {
+    background: var(--glass-bg-header);
+    backdrop-filter: blur(16px) saturate(180%); /* Enhanced blur */
+    border: 2px solid var(--glass-border-medium); // Thick border for Octopus design
+    border-radius: var(--radius-md) var(--radius-md) 0 0; // Top corners only
+    margin: 0.5rem 1rem 0 1rem; // Space from layout, no bottom margin
+    position: relative;
+    
+    // Add noise texture for transparency support
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: 0.12;
+      pointer-events: none;
+      z-index: 1;
+      border-radius: inherit;
     }
   }
 
-    &.solid {
-      background: var(--color-bg-accent);
-      border: 2px dashed var(--color-border-secondary); // Dashed when scrolled (active)
-      border-radius: var(--radius-md); // All corners when scrolled
-      box-shadow: var(--glass-shadow-1);
-    }
+  &.solid {
+    background: var(--color-bg-primary);
+    border: 2px solid var(--color-border-primary); // Thick border
+    border-radius: var(--radius-md) var(--radius-md) 0 0; // Top corners only
+    margin: 0.5rem 1rem 0 1rem; // Space from layout, no bottom margin
+  }
 
-    &.transparent {
-      background: rgba(255, 255, 255, 0.05);
-      border: 2px dashed var(--glass-border-visible); // Dashed when scrolled (active)
-      border-radius: var(--radius-md); // All corners when scrolled
-      backdrop-filter: blur(12px);
-    }
+  &.transparent {
+    background: transparent;
+    border: 2px solid var(--glass-border-subtle); // Thick border
+    border-radius: var(--radius-md) var(--radius-md) 0 0; // Top corners only
+    margin: 0.5rem 1rem 0 1rem; // Space from layout, no bottom margin
+  }
 
   // Size variants
   &.sm {
@@ -94,6 +102,9 @@
   // --- Scrolled State Enhancements ---
   // When scrolled down >1rem - all borders rounded with enhanced spacing
   &[data-scrolled="true"] {
+    // All corners rounded when scrolled
+    border-radius: var(--radius-md);
+    
     // Enhanced spacing for floating effect - responsive
     margin: 1rem;
     
@@ -106,21 +117,29 @@
       margin: 0.5rem; // Minimal margin on mobile to prevent overflow
     }
     
-    // All corners rounded when scrolled
-    border-radius: var(--radius-md);
-    
     // Enhanced glass effects for scrolled state with thick borders
-    &.glass,
-    &.transparent {
+    &.glass {
       background: var(--glass-bg-header-scrolled);
-      backdrop-filter: blur(16px);
-      border: 2px solid var(--glass-border-enhanced); // Thicker enhanced border
-      box-shadow: 0 4px 12px -2px var(--shadow-glass); // Optional subtle shadow
+      border: 2px dashed var(--glass-border-enhanced); // Dashed when scrolled (active)
+      backdrop-filter: blur(20px) saturate(200%); /* Even stronger blur when scrolled */
+      box-shadow: var(--glass-shadow-2);
+      
+      // Enhanced noise when scrolled
+      &::before {
+        opacity: 0.22; // More visible noise for texture
+      }
     }
 
     &.solid {
-      border: 2px solid var(--color-border-secondary); // Thicker border for solid variant
-      box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.1); // Subtle shadow for solid variant
+      background: var(--color-bg-accent);
+      border: 2px dashed var(--color-border-secondary); // Dashed when scrolled (active)
+      box-shadow: var(--glass-shadow-1);
+    }
+
+    &.transparent {
+      background: rgba(255, 255, 255, 0.05);
+      border: 2px dashed var(--glass-border-visible); // Dashed when scrolled (active)
+      backdrop-filter: blur(12px);
     }
   }
 
