@@ -1,0 +1,365 @@
+// Holographic Demo Component Styles
+.holoDemo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: var(--font-interface);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.controlGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.controlLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(var(--if-neutral-700));
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.variantButtons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.variantButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgb(var(--if-neutral-700));
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 200ms ease-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+  
+  &.active {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.5);
+    color: rgb(59, 130, 246);
+  }
+}
+
+.checkbox {
+  width: 1rem;
+  height: 1rem;
+  accent-color: rgb(59, 130, 246);
+}
+
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.holoCard {
+  max-width: 400px;
+  margin: 0 auto 2rem;
+  
+  .cardTitle {
+    margin: 0 0 1rem 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: rgb(var(--if-neutral-900));
+  }
+  
+  .cardDescription {
+    margin: 0 0 1.5rem 0;
+    line-height: 1.6;
+    color: rgb(var(--if-neutral-600));
+  }
+  
+  .cardActions {
+    display: flex;
+    gap: 0.75rem;
+    
+    .cardButton {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: var(--radius-md);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 200ms ease-out;
+      
+      &:first-child {
+        background: rgba(59, 130, 246, 0.9);
+        color: white;
+        
+        &:hover {
+          background: rgba(59, 130, 246, 1);
+          transform: translateY(-1px);
+        }
+      }
+      
+      &.secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgb(var(--if-neutral-700));
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+  }
+}
+
+.buttonGrid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  
+  .chip {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgb(var(--if-neutral-700));
+  }
+  
+  .badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-lg);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgb(var(--if-neutral-800));
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+}
+
+.holoHeader {
+  width: 100%;
+  padding: 1rem 0;
+  margin: 2rem 0;
+  border-radius: var(--radius-lg);
+  
+  .headerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    
+    .logoIcon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 0.875rem;
+    }
+    
+    .logoText {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: rgb(var(--if-neutral-900));
+    }
+  }
+  
+  .nav {
+    display: flex;
+    gap: 2rem;
+    
+    .navLink {
+      color: rgb(var(--if-neutral-600));
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 200ms ease-out;
+      
+      &:hover {
+        color: rgb(var(--if-neutral-900));
+      }
+    }
+  }
+}
+
+.elementsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  
+  .element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    transition: all 200ms ease-out;
+    cursor: pointer;
+    
+    .elementIcon {
+      font-size: 1.5rem;
+    }
+    
+    span {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: rgb(var(--if-neutral-700));
+    }
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.technicalInfo {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+  
+  h4 {
+    margin: 0 0 1rem 0;
+    color: rgb(var(--if-neutral-900));
+  }
+  
+  ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+    
+    li {
+      padding: 0.25rem 0;
+      color: rgb(var(--if-neutral-600));
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// Dark theme adjustments
+[data-theme="dark"] {
+  .controlLabel {
+    color: rgb(var(--if-neutral-300));
+  }
+  
+  .variantButton {
+    color: rgb(var(--if-neutral-300));
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    &.active {
+      color: rgb(96, 165, 250);
+      background: rgba(96, 165, 250, 0.15);
+      border-color: rgba(96, 165, 250, 0.5);
+    }
+  }
+  
+  .holoCard {
+    .cardTitle {
+      color: rgb(var(--if-neutral-100));
+    }
+    
+    .cardDescription {
+      color: rgb(var(--if-neutral-400));
+    }
+    
+    .cardActions .secondary {
+      color: rgb(var(--if-neutral-300));
+      border-color: rgba(255, 255, 255, 0.1);
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  }
+  
+  .holoHeader {
+    .logoText {
+      color: rgb(var(--if-neutral-100));
+    }
+    
+    .nav .navLink {
+      color: rgb(var(--if-neutral-400));
+      
+      &:hover {
+        color: rgb(var(--if-neutral-100));
+      }
+    }
+  }
+  
+  .elementsGrid .element span {
+    color: rgb(var(--if-neutral-300));
+  }
+  
+  .technicalInfo {
+    background: rgba(96, 165, 250, 0.05);
+    border-color: rgba(96, 165, 250, 0.1);
+    
+    h4 {
+      color: rgb(var(--if-neutral-100));
+    }
+    
+    li {
+      color: rgb(var(--if-neutral-400));
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .holoHeader .headerContent {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .holoHeader .nav {
+    gap: 1rem;
+  }
+  
+  .elementsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

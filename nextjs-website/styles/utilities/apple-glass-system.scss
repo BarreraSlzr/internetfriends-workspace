@@ -1,0 +1,218 @@
+// Modern Apple-Inspired Glass System
+// Based on macOS Sequoia, iOS 18, and Apple Vision Pro design language
+
+// Apple Material Hierarchy
+.apple-material-thin {
+  background: rgba(var(--glass-base-color, 255, 255, 255), 0.1);
+  backdrop-filter: blur(10px) saturate(1.8);
+  -webkit-backdrop-filter: blur(10px) saturate(1.8);
+  border: 0.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.apple-material-regular {
+  background: rgba(var(--glass-base-color, 255, 255, 255), 0.15);
+  backdrop-filter: blur(15px) saturate(1.8);
+  -webkit-backdrop-filter: blur(15px) saturate(1.8);
+  border: 0.5px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.apple-material-thick {
+  background: rgba(var(--glass-base-color, 255, 255, 255), 0.2);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border: 0.5px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.apple-material-ultra-thick {
+  background: rgba(var(--glass-base-color, 255, 255, 255), 0.25);
+  backdrop-filter: blur(25px) saturate(1.8);
+  -webkit-backdrop-filter: blur(25px) saturate(1.8);
+  border: 0.5px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+// Apple Vision Pro Glass - High-end glass with depth
+.apple-vision-glass {
+  background: linear-gradient(135deg, 
+    rgba(var(--glass-base-color, 255, 255, 255), 0.3) 0%,
+    rgba(var(--glass-base-color, 255, 255, 255), 0.15) 50%,
+    rgba(var(--glass-base-color, 255, 255, 255), 0.25) 100%
+  );
+  backdrop-filter: blur(30px) saturate(1.9) contrast(1.1);
+  -webkit-backdrop-filter: blur(30px) saturate(1.9) contrast(1.1);
+  
+  // Apple's sophisticated border system
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  
+  // Complex shadow system for depth
+  box-shadow: 
+    // Inner highlight
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05),
+    
+    // Border glow
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    
+    // Depth shadows
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.15),
+    0 32px 64px rgba(0, 0, 0, 0.1);
+}
+
+// Apple macOS Sequoia Glass (latest)
+.apple-sequoia-glass {
+  background: rgba(var(--glass-base-color, 255, 255, 255), 0.18);
+  backdrop-filter: blur(18px) saturate(1.85) brightness(1.05);
+  -webkit-backdrop-filter: blur(18px) saturate(1.85) brightness(1.05);
+  
+  // Apple's refined border approach
+  border: 0.5px solid rgba(255, 255, 255, 0.28);
+  
+  // Subtle inner glow
+  box-shadow: 
+    inset 0 0 0 0.5px rgba(255, 255, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+// Apple iOS 18 Glass (mobile optimized)
+.apple-ios-glass {
+  background: rgba(var(--glass-base-color, 255, 255, 255), 0.12);
+  backdrop-filter: blur(12px) saturate(1.75);
+  -webkit-backdrop-filter: blur(12px) saturate(1.75);
+  
+  // Mobile-optimized border
+  border: 0.33px solid rgba(255, 255, 255, 0.22);
+  
+  // Light shadows for mobile
+  box-shadow: 
+    inset 0 0.5px 0 rgba(255, 255, 255, 0.15),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+// Apple Accessibility Glass (high contrast mode)
+.apple-accessibility-glass {
+  background: rgba(var(--glass-base-color, 255, 255, 255), 0.35);
+  backdrop-filter: blur(8px) saturate(1.5);
+  -webkit-backdrop-filter: blur(8px) saturate(1.5);
+  
+  // High contrast borders
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  
+  // Enhanced visibility
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+// Dark mode variations
+[data-theme="dark"] {
+  .apple-material-thin,
+  .apple-material-regular,
+  .apple-material-thick,
+  .apple-material-ultra-thick,
+  .apple-vision-glass,
+  .apple-sequoia-glass,
+  .apple-ios-glass,
+  .apple-accessibility-glass {
+    --glass-base-color: 10, 10, 10;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .apple-vision-glass {
+    background: linear-gradient(135deg, 
+      rgba(10, 10, 10, 0.4) 0%,
+      rgba(10, 10, 10, 0.2) 50%,
+      rgba(10, 10, 10, 0.35) 100%
+    );
+    
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.15),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 2px 4px rgba(0, 0, 0, 0.4),
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 32px 64px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// Apple Motion Guidelines
+@media (prefers-reduced-motion: reduce) {
+  .apple-material-thin,
+  .apple-material-regular,
+  .apple-material-thick,
+  .apple-material-ultra-thick,
+  .apple-vision-glass,
+  .apple-sequoia-glass,
+  .apple-ios-glass,
+  .apple-accessibility-glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}
+
+// Apple Utility Classes
+.apple-glass-header {
+  @extend .apple-sequoia-glass;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.15);
+}
+
+.apple-glass-card {
+  @extend .apple-material-regular;
+  border-radius: 12px; /* Apple's standard radius */
+}
+
+.apple-glass-modal {
+  @extend .apple-vision-glass;
+  border-radius: 16px; /* Apple's modal radius */
+}
+
+.apple-glass-button {
+  @extend .apple-material-thick;
+  border-radius: 8px; /* Apple's button radius */
+  
+  &:hover {
+    background: rgba(var(--glass-base-color, 255, 255, 255), 0.25);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:active {
+    background: rgba(var(--glass-base-color, 255, 255, 255), 0.15);
+    box-shadow: 
+      inset 0 1px 2px rgba(0, 0, 0, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+// Apple Print Styles
+@media print {
+  .apple-material-thin,
+  .apple-material-regular,
+  .apple-material-thick,
+  .apple-material-ultra-thick,
+  .apple-vision-glass,
+  .apple-sequoia-glass,
+  .apple-ios-glass,
+  .apple-accessibility-glass {
+    background: white !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}

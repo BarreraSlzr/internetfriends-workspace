@@ -1,0 +1,776 @@
+// Glass Holographic Effects - SCSS
+// Enhanced glass morphism with holographic light refraction
+// Based on glass-refined.scss with holographic enhancements
+
+@use "../design-tokens.css";
+
+// Holographic base properties
+:root {
+  --holo-shift-x: 0px;
+  --holo-shift-y: 0px;
+  --holo-intensity: 0.4;
+  --holo-speed: 8s;
+  --holo-rainbow-opacity: 0.15;
+  --holo-noise-scale: 1;
+  --holo-chromatic-shift: 1px;
+}
+
+// Holographic glass layers with chromatic aberration
+.glass-holographic {
+  position: relative;
+  overflow: hidden;
+  
+  // Base glass layer
+  background: rgba(var(--glass-base-color, 255, 255, 255), var(--glass-alpha));
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  
+  // Glass thickness border system - creates beveled glass edge effect
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  
+  // Enhanced shadow with chromatic aberration and glass thickness
+  box-shadow:
+    // Inner glass highlight (top edge)
+    inset 0 2px 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) * 1.2)),
+    // Inner glass lowlight (bottom edge) 
+    inset 0 -1px 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.3)),
+    // Left edge highlight
+    inset 2px 0 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) * 0.6)),
+    // Right edge lowlight
+    inset -1px 0 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.2)),
+    
+    // Outer border layers for glass thickness
+    0 0 0 1px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 1.5)),
+    0 0 0 2px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 0.8)),
+    0 0 0 3px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 0.4)),
+    
+    // Main shadow
+    0 4px 14px -4px rgba(0, 0, 0, calc(0.18 * var(--glass-strength))),
+    
+    // Chromatic aberration
+    0 0 0 calc(var(--holo-chromatic-shift) + 3px) rgba(59, 130, 246, 0.05),
+    0 0 0 calc(var(--holo-chromatic-shift) * 2 + 3px) rgba(139, 69, 196, 0.03);
+  
+  // Holographic rainbow shimmer overlay
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -3px; // Adjusted to account for thicker borders
+    background: linear-gradient(
+      calc(45deg + var(--holo-shift-x, 0deg)),
+      transparent 30%,
+      rgba(255, 0, 150, var(--holo-rainbow-opacity)) 35%,
+      rgba(0, 255, 255, var(--holo-rainbow-opacity)) 40%,
+      rgba(255, 255, 0, var(--holo-rainbow-opacity)) 45%,
+      rgba(255, 0, 255, var(--holo-rainbow-opacity)) 50%,
+      rgba(0, 255, 0, var(--holo-rainbow-opacity)) 55%,
+      rgba(255, 128, 0, var(--holo-rainbow-opacity)) 60%,
+      transparent 70%
+    );
+    border-radius: inherit;
+    opacity: var(--holo-intensity);
+    animation: holoShift var(--holo-speed) ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: screen;
+    
+    // Add edge glow for glass thickness
+    filter: blur(0.5px);
+  }
+  
+  // Enhanced noise texture with holographic grain
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        calc(0deg + var(--holo-shift-y, 0deg)),
+        rgba(255, 255, 255, calc(var(--glass-noise-alpha, 0.08) * var(--holo-noise-scale))) 0 1px,
+        transparent 1px 2px
+      ),
+      repeating-linear-gradient(
+        calc(90deg + var(--holo-shift-x, 0deg)),
+        rgba(59, 130, 246, calc(var(--glass-noise-alpha, 0.08) * 0.3 * var(--holo-noise-scale))) 0 1px,
+        transparent 1px 2px
+      ),
+      repeating-linear-gradient(
+        calc(45deg + var(--holo-shift-x, 0deg)),
+        rgba(139, 69, 196, calc(var(--glass-noise-alpha, 0.08) * 0.2 * var(--holo-noise-scale))) 0 1px,
+        transparent 1px 3px
+      );
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 2;
+    animation: holoNoise calc(var(--holo-speed) * 1.3) linear infinite reverse;
+  }
+}
+
+// Holographic strength variants
+.glass-holographic-subtle {
+  @extend .glass-holographic;
+  --glass-strength: 0.3;
+  --holo-intensity: 0.2;
+  --holo-rainbow-opacity: 0.08;
+  --holo-chromatic-shift: 0.5px;
+}
+
+.glass-holographic-medium {
+  @extend .glass-holographic;
+  --glass-strength: 0.5;
+  --holo-intensity: 0.4;
+  --holo-rainbow-opacity: 0.15;
+  --holo-chromatic-shift: 1px;
+}
+
+.glass-holographic-strong {
+  @extend .glass-holographic;
+  --glass-strength: 0.7;
+  --holo-intensity: 0.6;
+  --holo-rainbow-opacity: 0.25;
+  --holo-chromatic-shift: 1.5px;
+  --holo-noise-scale: 1.2;
+}
+
+// Interactive holographic effects
+.glass-holographic-interactive {
+  @extend .glass-holographic;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  
+  &:hover {
+    --holo-intensity: 0.7;
+    --holo-rainbow-opacity: 0.3;
+    --holo-speed: 4s;
+    transform: translateY(-2px) scale(1.01);
+    
+    backdrop-filter: blur(calc(var(--glass-blur) + 4px));
+    -webkit-backdrop-filter: blur(calc(var(--glass-blur) + 4px));
+    
+    box-shadow:
+      // Enhanced inner bevels for hover
+      inset 0 3px 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) * 1.5)),
+      inset 0 -2px 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.4)),
+      inset 3px 0 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) * 0.8)),
+      inset -2px 0 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.3)),
+      
+      // Enhanced outer glass layers
+      0 0 0 1px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 2)),
+      0 0 0 2px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 1.2)),
+      0 0 0 3px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 0.6)),
+      0 0 0 4px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 0.3)),
+      
+      // Enhanced shadows
+      0 8px 24px -4px rgba(0, 0, 0, calc(0.25 * var(--glass-strength))),
+      
+      // Enhanced chromatic aberration
+      0 0 0 calc(var(--holo-chromatic-shift) + 4px) rgba(59, 130, 246, 0.1),
+      0 0 0 calc(var(--holo-chromatic-shift) * 2 + 4px) rgba(139, 69, 196, 0.08),
+      0 0 40px rgba(255, 0, 255, 0.1);
+  }
+  
+  &:active {
+    transform: translateY(-1px) scale(0.99);
+    --holo-intensity: 0.9;
+    --holo-speed: 2s;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      transform: none;
+      --holo-speed: 20s;
+    }
+    
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+// Holographic focus states
+.glass-holographic-focus {
+  &:focus {
+    outline: none;
+    --holo-intensity: 0.8;
+    --holo-rainbow-opacity: 0.35;
+    
+    box-shadow:
+      // Enhanced inner highlights for focus
+      inset 0 2px 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) * 1.3)),
+      inset 0 -1px 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.3)),
+      inset 2px 0 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) * 0.7)),
+      inset -1px 0 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.2)),
+      
+      // Focus ring with glass thickness
+      0 0 0 2px dashed rgb(var(--if-focus-ring)),
+      0 0 0 3px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 1.5)),
+      0 0 0 4px rgba(255, 255, 255, calc(var(--glass-border-alpha) * 0.8)),
+      
+      // Main shadow
+      0 4px 14px -4px rgba(0, 0, 0, calc(0.18 * var(--glass-strength))),
+      
+      // Enhanced chromatic aberration for focus
+      0 0 0 calc(var(--holo-chromatic-shift) + 4px) rgba(59, 130, 246, 0.15),
+      0 0 20px rgba(255, 0, 255, 0.2);
+  }
+}
+
+// Holographic keyframe animations
+@keyframes holoShift {
+  0% {
+    --holo-shift-x: 0deg;
+    --holo-shift-y: 0deg;
+    opacity: var(--holo-intensity);
+  }
+  25% {
+    --holo-shift-x: 15deg;
+    --holo-shift-y: -5deg;
+    opacity: calc(var(--holo-intensity) * 1.2);
+  }
+  50% {
+    --holo-shift-x: -10deg;
+    --holo-shift-y: 10deg;
+    opacity: calc(var(--holo-intensity) * 0.8);
+  }
+  75% {
+    --holo-shift-x: 20deg;
+    --holo-shift-y: -15deg;
+    opacity: calc(var(--holo-intensity) * 1.1);
+  }
+  100% {
+    --holo-shift-x: 0deg;
+    --holo-shift-y: 0deg;
+    opacity: var(--holo-intensity);
+  }
+}
+
+@keyframes holoNoise {
+  0% {
+    transform: translateX(0px) translateY(0px);
+  }
+  33% {
+    transform: translateX(2px) translateY(-1px);
+  }
+  66% {
+    transform: translateX(-1px) translateY(2px);
+  }
+  100% {
+    transform: translateX(0px) translateY(0px);
+  }
+}
+
+// Holographic prism effect for special elements
+.glass-holographic-prism {
+  @extend .glass-holographic;
+  
+  &::before {
+    background: conic-gradient(
+      from calc(var(--holo-shift-x, 0deg) + 0deg),
+      transparent 0deg,
+      rgba(255, 0, 0, var(--holo-rainbow-opacity)) 60deg,
+      rgba(255, 255, 0, var(--holo-rainbow-opacity)) 120deg,
+      rgba(0, 255, 0, var(--holo-rainbow-opacity)) 180deg,
+      rgba(0, 255, 255, var(--holo-rainbow-opacity)) 240deg,
+      rgba(0, 0, 255, var(--holo-rainbow-opacity)) 300deg,
+      rgba(255, 0, 255, var(--holo-rainbow-opacity)) 360deg,
+      transparent 360deg
+    );
+    animation: holoPrism calc(var(--holo-speed) * 1.5) linear infinite;
+  }
+}
+
+@keyframes holoPrism {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: var(--holo-intensity);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.05);
+    opacity: calc(var(--holo-intensity) * 1.5);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: var(--holo-intensity);
+  }
+}
+
+// Dark theme adjustments for holographic effects
+[data-theme="dark"] {
+  .glass-holographic,
+  .glass-holographic-subtle,
+  .glass-holographic-medium,
+  .glass-holographic-strong {
+    --glass-base-color: var(--glass-base-color-dark);
+    border-color: rgba(59, 130, 246, calc(var(--glass-border-alpha) * 1.2));
+    
+    box-shadow:
+      // Enhanced inner glass bevels for dark theme
+      inset 0 2px 0 rgba(96, 165, 250, calc(var(--glass-highlight-alpha) * 1.5)),
+      inset 0 -1px 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.4)),
+      inset 2px 0 0 rgba(96, 165, 250, calc(var(--glass-highlight-alpha) * 0.8)),
+      inset -1px 0 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.3)),
+      
+      // Dark theme glass thickness layers
+      0 0 0 1px rgba(96, 165, 250, calc(var(--glass-border-alpha) * 2)),
+      0 0 0 2px rgba(96, 165, 250, calc(var(--glass-border-alpha) * 1.2)),
+      0 0 0 3px rgba(96, 165, 250, calc(var(--glass-border-alpha) * 0.6)),
+      
+      // Main shadow
+      0 4px 14px -4px rgba(0, 0, 0, calc(0.25 * var(--glass-strength))),
+      
+      // Chromatic aberration
+      0 0 0 calc(var(--holo-chromatic-shift) + 3px) rgba(96, 165, 250, 0.08),
+      0 0 0 calc(var(--holo-chromatic-shift) * 2 + 3px) rgba(196, 69, 255, 0.05);
+  }
+  
+  // Dark theme holographic header
+  .holo-header {
+    // Blue-tinted glass background for dark theme
+    background: 
+      linear-gradient(135deg, 
+        rgba(30, 41, 59, 0.5) 0%,
+        rgba(15, 23, 42, 0.4) 50%, 
+        rgba(30, 41, 59, 0.45) 100%
+      ),
+      var(--glass-bg-header);
+    
+    box-shadow:
+      inset 0 2px 0 rgba(96, 165, 250, calc(var(--glass-highlight-alpha) * 1.3)),
+      inset 0 -1px 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.3)),
+      0 0 0 1px rgba(96, 165, 250, calc(var(--glass-border-alpha) * 1.0)),
+      0 0 0 2px rgba(59, 130, 246, calc(var(--glass-border-alpha) * 0.6)),
+      0 2px 8px -2px rgba(96, 165, 250, calc(0.18 * var(--glass-strength)));
+  }
+  }
+  
+  .glass-holographic::after {
+    background:
+      repeating-linear-gradient(
+        calc(0deg + var(--holo-shift-y, 0deg)),
+        rgba(96, 165, 250, calc(var(--glass-noise-alpha, 0.08) * 0.6 * var(--holo-noise-scale))) 0 1px,
+        transparent 1px 2px
+      ),
+      repeating-linear-gradient(
+        calc(90deg + var(--holo-shift-x, 0deg)),
+        rgba(139, 69, 196, calc(var(--glass-noise-alpha, 0.08) * 0.4 * var(--holo-noise-scale))) 0 1px,
+        transparent 1px 2px
+      ),
+      repeating-linear-gradient(
+        calc(45deg + var(--holo-shift-x, 0deg)),
+        rgba(0, 0, 0, calc(var(--glass-noise-alpha, 0.08) * 0.2 * var(--holo-noise-scale))) 0 1px,
+        transparent 1px 3px
+      );
+  }
+}
+
+// High contrast mode - reduce holographic effects
+@media (prefers-contrast: high) {
+  .glass-holographic,
+  .glass-holographic-subtle,
+  .glass-holographic-medium,
+  .glass-holographic-strong {
+    --holo-intensity: 0.1;
+    --holo-rainbow-opacity: 0.05;
+    border-width: 2px;
+  }
+  
+  .glass-holographic-focus:focus {
+    box-shadow: 0 0 0 3px dashed currentColor;
+  }
+}
+
+// Reduced motion - disable holographic animations
+@media (prefers-reduced-motion: reduce) {
+  .glass-holographic::before,
+  .glass-holographic::after,
+  .glass-holographic-prism::before {
+    animation: none;
+  }
+  
+  .glass-holographic-interactive {
+    transition: none;
+    
+    &:hover,
+    &:active {
+      transform: none;
+      --holo-speed: 60s;
+    }
+  }
+}
+
+// Print styles - disable holographic effects
+@media print {
+  .glass-holographic,
+  .glass-holographic-subtle,
+  .glass-holographic-medium,
+  .glass-holographic-strong {
+    background: white !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+  }
+  
+  .glass-holographic::before,
+  .glass-holographic::after {
+    display: none !important;
+  }
+}
+
+// WebGL-Enhanced Glass Utilities with GLSL Integration
+.glass-webgl-enhanced {
+  position: relative;
+  overflow: hidden;
+  
+  // Create space for WebGL aberration overlay
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  // Enhanced glass base with WebGL readiness
+  background: linear-gradient(135deg, 
+    rgba(240, 248, 255, 0.25) 0%,
+    rgba(239, 246, 255, 0.15) 50%, 
+    rgba(240, 248, 255, 0.2) 100%
+  );
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  
+  // Multi-layered glass thickness with chromatic separation
+  box-shadow:
+    // RGB separation layers (simulating chromatic aberration)
+    inset 1px 0 0 rgba(255, 0, 0, 0.05),
+    inset 0 1px 0 rgba(0, 255, 0, 0.03),
+    inset -1px 0 0 rgba(0, 0, 255, 0.07),
+    
+    // Glass thickness layers
+    0 0 0 1px rgba(59, 130, 246, 0.2),
+    0 0 0 2px rgba(96, 165, 250, 0.15),
+    0 0 0 3px rgba(59, 130, 246, 0.1),
+    0 0 0 4px rgba(96, 165, 250, 0.05),
+    
+    // Depth shadows
+    0 4px 16px -4px rgba(59, 130, 246, 0.2),
+    0 8px 32px -8px rgba(59, 130, 246, 0.1);
+}
+
+// Utility classes for easy application
+.holo-card {
+  @extend .glass-holographic-medium;
+  @extend .glass-holographic-interactive;
+  @extend .glass-holographic-focus;
+  @extend .glass-thick-border;
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.holo-header {
+  @extend .glass-holographic-subtle;
+  @extend .glass-chunky-header;
+  backdrop-filter: blur(32px) saturate(1.5);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5);
+}
+
+.holo-button {
+  @extend .glass-holographic-medium;
+  @extend .glass-holographic-interactive;
+  @extend .glass-holographic-focus;
+  @extend .glass-thick-border;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.holo-modal {
+  @extend .glass-holographic-strong;
+  @extend .glass-ultra-thick;
+  border-radius: var(--radius-lg);
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.holo-prism-accent {
+  @extend .glass-holographic-prism;
+  @extend .glass-massive-border;
+  --holo-intensity: 0.8;
+  --holo-speed: 6s;
+}
+
+// High-impact glass variants
+.glass-dramatic {
+  @extend .glass-ultra-thick;
+}
+
+.glass-extreme {
+  @extend .glass-massive-border;
+}
+
+.glass-header-chunky {
+  @extend .glass-chunky-header;
+}
+
+// THICK GLASS BORDER SYSTEM - Bold and Visible
+.glass-thick-border {
+  position: relative;
+  border: 8px solid transparent;
+  background-clip: padding-box;
+  
+  // Dramatic thick glass effect with strong chromatic aberration
+  background-image: 
+    linear-gradient(var(--glass-bg-header), var(--glass-bg-header)),
+    linear-gradient(135deg, 
+      rgba(255, 50, 50, 0.6) 0%,    // Strong red
+      rgba(50, 255, 50, 0.5) 25%,   // Strong green  
+      rgba(50, 50, 255, 0.7) 50%,   // Strong blue
+      rgba(255, 50, 255, 0.6) 75%,  // Strong magenta
+      rgba(50, 255, 255, 0.5) 100%  // Strong cyan
+    );
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  
+  // Massive glass thickness layers
+  box-shadow:
+    // Inner glass highlights (thick)
+    inset 0 4px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2),
+    inset 4px 0 0 rgba(255, 255, 255, 0.3),
+    inset -2px 0 0 rgba(0, 0, 0, 0.15),
+    
+    // Outer thick glass layers (12px total thickness)
+    0 0 0 2px rgba(255, 255, 255, 0.4),
+    0 0 0 4px rgba(59, 130, 246, 0.3),
+    0 0 0 6px rgba(96, 165, 250, 0.25),
+    0 0 0 8px rgba(59, 130, 246, 0.2),
+    0 0 0 10px rgba(96, 165, 250, 0.15),
+    0 0 0 12px rgba(59, 130, 246, 0.1),
+    
+    // Large dramatic shadows
+    0 8px 32px rgba(59, 130, 246, 0.3),
+    0 16px 64px rgba(59, 130, 246, 0.2);
+}
+
+// ULTRA THICK GLASS for headers - Maximum impact
+.glass-ultra-thick {
+  position: relative;
+  border: 12px solid transparent;
+  background-clip: padding-box;
+  
+  // Ultra-dramatic aberration with animation
+  background-image: 
+    linear-gradient(var(--glass-bg-header), var(--glass-bg-header)),
+    linear-gradient(var(--holo-shift-x, 45deg), 
+      rgba(255, 0, 0, 0.8) 0%,      // Intense red
+      rgba(255, 128, 0, 0.7) 16%,   // Orange
+      rgba(255, 255, 0, 0.6) 33%,   // Yellow
+      rgba(0, 255, 0, 0.7) 50%,     // Green
+      rgba(0, 255, 255, 0.6) 66%,   // Cyan
+      rgba(0, 0, 255, 0.8) 83%,     // Blue
+      rgba(255, 0, 255, 0.7) 100%   // Magenta
+    );
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  background-size: 100% 100%, 200% 200%;
+  
+  // Massive 16px glass thickness
+  box-shadow:
+    // Inner beveled glass (thick bevels)
+    inset 0 6px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.3),
+    inset 6px 0 0 rgba(255, 255, 255, 0.4),
+    inset -3px 0 0 rgba(0, 0, 0, 0.2),
+    
+    // Ultra-thick outer layers (16px total)
+    0 0 0 2px rgba(255, 255, 255, 0.5),
+    0 0 0 4px rgba(59, 130, 246, 0.4),
+    0 0 0 6px rgba(96, 165, 250, 0.35),
+    0 0 0 8px rgba(59, 130, 246, 0.3),
+    0 0 0 10px rgba(96, 165, 250, 0.25),
+    0 0 0 12px rgba(59, 130, 246, 0.2),
+    0 0 0 14px rgba(96, 165, 250, 0.15),
+    0 0 0 16px rgba(59, 130, 246, 0.1),
+    
+    // Massive dramatic shadows
+    0 12px 48px rgba(59, 130, 246, 0.4),
+    0 24px 96px rgba(59, 130, 246, 0.3),
+    0 0 120px rgba(96, 165, 250, 0.2);
+  
+  // Animate the chromatic aberration
+  animation: ultraThickGlassShift 8s ease-in-out infinite;
+}
+
+@keyframes ultraThickGlassShift {
+  0% {
+    --holo-shift-x: 45deg;
+    background-size: 100% 100%, 200% 200%;
+  }
+  25% {
+    --holo-shift-x: 135deg;
+    background-size: 100% 100%, 250% 250%;
+  }
+  50% {
+    --holo-shift-x: 225deg;
+    background-size: 100% 100%, 300% 300%;
+  }
+  75% {
+    --holo-shift-x: 315deg;
+    background-size: 100% 100%, 250% 250%;
+  }
+  100% {
+    --holo-shift-x: 45deg;
+    background-size: 100% 100%, 200% 200%;
+  }
+}
+
+// CHUNKY GLASS HEADER - Perfect for headers
+.glass-chunky-header {
+  @extend .glass-ultra-thick;
+  
+  // Additional header-specific enhancements
+  backdrop-filter: blur(32px) saturate(1.5) contrast(1.2);
+  -webkit-backdrop-filter: blur(32px) saturate(1.5) contrast(1.2);
+  
+  // Stronger blue tinting for headers
+  background-image: 
+    linear-gradient(135deg, 
+      rgba(240, 248, 255, 0.6) 0%,
+      rgba(230, 245, 255, 0.4) 50%, 
+      rgba(240, 248, 255, 0.5) 100%
+    ),
+    linear-gradient(var(--holo-shift-x, 45deg), 
+      rgba(255, 0, 0, 0.9) 0%,      
+      rgba(255, 128, 0, 0.8) 16%,   
+      rgba(255, 255, 0, 0.7) 33%,   
+      rgba(0, 255, 0, 0.8) 50%,     
+      rgba(0, 255, 255, 0.7) 66%,   
+      rgba(0, 0, 255, 0.9) 83%,     
+      rgba(255, 0, 255, 0.8) 100%   
+    );
+  
+  // Enhanced for dark theme
+  [data-theme="dark"] & {
+    background-image: 
+      linear-gradient(135deg, 
+        rgba(30, 41, 59, 0.7) 0%,
+        rgba(15, 23, 42, 0.5) 50%, 
+        rgba(30, 41, 59, 0.6) 100%
+      ),
+      linear-gradient(var(--holo-shift-x, 45deg), 
+        rgba(255, 100, 100, 0.8) 0%,      
+        rgba(255, 180, 100, 0.7) 16%,   
+        rgba(255, 255, 100, 0.6) 33%,   
+        rgba(100, 255, 100, 0.7) 50%,     
+        rgba(100, 255, 255, 0.6) 66%,   
+        rgba(100, 100, 255, 0.8) 83%,     
+        rgba(255, 100, 255, 0.7) 100%   
+      );
+  }
+}
+
+// MASSIVE BORDER EFFECT - For maximum visual impact
+.glass-massive-border {
+  position: relative;
+  border: 16px solid transparent;
+  background-clip: padding-box;
+  
+  // Extreme chromatic aberration
+  background-image: 
+    linear-gradient(var(--glass-bg-header), var(--glass-bg-header)),
+    repeating-conic-gradient(from var(--holo-shift-x, 0deg),
+      rgba(255, 0, 0, 0.9) 0deg 30deg,
+      rgba(255, 255, 0, 0.8) 30deg 60deg,
+      rgba(0, 255, 0, 0.9) 60deg 90deg,
+      rgba(0, 255, 255, 0.8) 90deg 120deg,
+      rgba(0, 0, 255, 0.9) 120deg 150deg,
+      rgba(255, 0, 255, 0.8) 150deg 180deg
+    );
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  background-size: 100% 100%, 400% 400%;
+  
+  // 20px total glass thickness
+  box-shadow:
+    // Massive inner bevels
+    inset 0 8px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.4),
+    inset 8px 0 0 rgba(255, 255, 255, 0.5),
+    inset -4px 0 0 rgba(0, 0, 0, 0.3),
+    
+    // 20 layers of glass thickness
+    0 0 0 2px rgba(255, 255, 255, 0.6),
+    0 0 0 4px rgba(59, 130, 246, 0.5),
+    0 0 0 6px rgba(96, 165, 250, 0.45),
+    0 0 0 8px rgba(59, 130, 246, 0.4),
+    0 0 0 10px rgba(96, 165, 250, 0.35),
+    0 0 0 12px rgba(59, 130, 246, 0.3),
+    0 0 0 14px rgba(96, 165, 250, 0.25),
+    0 0 0 16px rgba(59, 130, 246, 0.2),
+    0 0 0 18px rgba(96, 165, 250, 0.15),
+    0 0 0 20px rgba(59, 130, 246, 0.1),
+    
+    // Extreme shadows
+    0 16px 64px rgba(59, 130, 246, 0.5),
+    0 32px 128px rgba(59, 130, 246, 0.4),
+    0 0 200px rgba(96, 165, 250, 0.3);
+  
+  animation: massiveBorderShift 6s linear infinite;
+}
+
+@keyframes massiveBorderShift {
+  0% { --holo-shift-x: 0deg; }
+  100% { --holo-shift-x: 360deg; }
+}
+
+.holo-header {
+  @extend .glass-holographic-subtle;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  
+  // Blue-tinted glass background for light theme
+  background: 
+    linear-gradient(135deg, 
+      rgba(240, 248, 255, 0.4) 0%,
+      rgba(239, 246, 255, 0.3) 50%, 
+      rgba(240, 248, 255, 0.35) 100%
+    ),
+    var(--glass-bg-header);
+  
+  // Enhanced glass thickness for headers
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, calc(var(--glass-highlight-alpha) * 1.1)),
+    inset 0 -1px 0 rgba(0, 0, 0, calc(var(--glass-highlight-alpha) * 0.2)),
+    0 0 0 1px rgba(59, 130, 246, calc(var(--glass-border-alpha) * 0.8)),
+    0 0 0 2px rgba(96, 165, 250, calc(var(--glass-border-alpha) * 0.4)),
+    0 2px 8px -2px rgba(59, 130, 246, calc(0.15 * var(--glass-strength)));
+}
+
+.holo-button {
+  @extend .glass-holographic-medium;
+  @extend .glass-holographic-interactive;
+  @extend .glass-holographic-focus;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.holo-modal {
+  @extend .glass-holographic-strong;
+  border-radius: var(--radius-lg);
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.holo-prism-accent {
+  @extend .glass-holographic-prism;
+  --holo-intensity: 0.8;
+  --holo-speed: 6s;
+}
