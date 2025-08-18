@@ -24,5 +24,11 @@
     "constants": "@/constants",
     "styles": "@/styles"
   },
-  "iconLibrary": "lucide"
+  "iconLibrary": "lucide",
+  "flags": {
+    "glassOverlay": {
+      "enabled": false,
+      "env": "NEXT_PUBLIC_GLASS_OVERLAY_ENABLED"
+    }
+  }
 }

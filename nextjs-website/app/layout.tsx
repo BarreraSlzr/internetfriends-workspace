@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/hooks/use-theme";
 import { AccentInitializer } from "@/components/theme/accent-initializer";
 import { I18nProvider } from "@/i18n/provider";
 import { InternetFriendsPermissionsProvider } from "@/lib/permissions/provider";
+import { GlassProvider } from "@/lib/background-canvas/react/GlassProvider";
 
 // Import default translations to avoid loading states during SSR
 import defaultTranslations from "@/i18n/locales/en/common.json";
@@ -49,8 +50,10 @@ export default function RootLayout({
             initialTranslations={defaultTranslations}
           >
             <InternetFriendsPermissionsProvider>
-              <AccentInitializer />
-              {children}
+              <GlassProvider preferredMode="auto">
+                <AccentInitializer />
+                {children}
+              </GlassProvider>
             </InternetFriendsPermissionsProvider>
           </I18nProvider>
         </ThemeProvider>
